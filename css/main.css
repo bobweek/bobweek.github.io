@@ -351,10 +351,10 @@ only screen and (max-width: 600px) {
 }
 
 section{
-	background-image: url('/images/18asaigon-hero.jpg');
+	background-image: url('/images/banner.jpg');
 	background-size: cover;
 background-position: center;
-	height:100px;
+	height:200px;
 	width:100%;
 	margin-bottom: 40px;
 }
