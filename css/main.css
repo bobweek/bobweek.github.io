@@ -245,7 +245,7 @@ blockquote{
 
 .tag { background-color: #008080}
 
-
+/*
 /****** Media Queries For Adaptive Layouts******/
 
 @media only screen and (min-width: 1367) {
@@ -405,4 +405,4 @@ section#home-hero{
 		margin-top: 40px;
 		color: #555!important;
 		}
-}
+}*/
