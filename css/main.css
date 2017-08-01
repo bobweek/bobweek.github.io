@@ -143,7 +143,7 @@ h1 {
 #posts ul li {
     margin: 0px 20px 20px 0px;
     width: 250px;
-    height: 250px;
+    height: 450px;
     float: left;
     border-radius: 3px;
     border: 0px solid #eee;
@@ -159,7 +159,7 @@ h1 {
 
 .post-title {
 	margin: 0px 0px 8px 0px;
-	line-height: 20px;
+	line-height: 0px;
 	font-size: 20px;padding: 10px;
 }
 
@@ -178,7 +178,6 @@ h1 {
 .post-content {
 	margin-top: 10px;
 	font-size: 13px;
-
 	padding: 20px 30px;
 	background: url('http://wpexplorer-demos.com/fabulous/wp-content/themes/wpex-fabulous/images/entry-meta-shadow.png') no-repeat scroll center top #E1E1E1;
 	border-radius: 0px 0px 3px 3px;
