@@ -142,8 +142,8 @@ h1 {
 
 #posts ul li {
     margin: 0px 20px 20px 0px;
-    width: 250px;
-    height: 450px;
+    width:  250px;
+    height: 350px;
     float: left;
     border-radius: 3px;
     border: 0px solid #eee;
@@ -176,7 +176,7 @@ h1 {
 }
 
 .post-content {
-	margin-top: 10px;
+	margin-top: 0px;
 	font-size: 13px;
 	padding: 20px 30px;
 	background: url('http://wpexplorer-demos.com/fabulous/wp-content/themes/wpex-fabulous/images/entry-meta-shadow.png') no-repeat scroll center top #E1E1E1;
