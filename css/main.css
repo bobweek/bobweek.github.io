@@ -160,11 +160,12 @@ h1 {
 
 .post-date {
 	font-size: 11px;
-	color: #E1E1E1;padding: 1em;
+	color: #E1E1E1;
+	padding: 1em;
 }
 
 .post-content {
-	margin-top: 10px;
+	margin-top: 1em;
 	font-size: 13px;
 	padding: 1em 1em;
 	border-radius: 0px 0px 3px 3px;
