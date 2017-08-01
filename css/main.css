@@ -18,13 +18,6 @@ body {
 	padding: 0px 20px 0px 20px;
 	border-top: 4px solid #333;
 	background: #111;
-
-/*
-background-color: #F7F7F7;
-background-image: url('http://wpexplorer-demos.com/fabulous/wp-content/themes/wpex-fabulous/images/noise.png');
-background-image: url('http://cdn.elegantthemes.com/preview/Notebook/wp-content/themes/Notebook/images/body-bg.png');
-background-repeat: repeat;*/
-
 }
 
 body, div, a, input, select, button, textarea {
@@ -47,9 +40,6 @@ pre code {
 }
 
 a {
-/*
-	color: rgba(80, 160, 228);
-	font-size: 100%;*/
 	color: #9B9B9B;
 	text-decoration: none;
 }
@@ -73,8 +63,6 @@ h1 {
 
 
 #layout {
-	/width: 90%;
-	margin: auto;
 	text-align: left;
 }
 
