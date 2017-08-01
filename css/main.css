@@ -50,7 +50,7 @@ a {
 /*
 	color: rgba(80, 160, 228);
 	font-size: 100%;*/
-	color: ##E1E1E1;
+	color: #E1E1E1;
 	text-decoration: none;
 }
 
@@ -151,6 +151,7 @@ h1 {
     border-radius: 0;
     box-shadow: none;
 }
+
 #posts ul li img {
 	//width: 95%;
 }
