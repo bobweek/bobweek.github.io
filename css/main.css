@@ -317,6 +317,18 @@ only screen and (max-width: 1200px) {
 	#links {
 		margin: 0 0 0 0;
 	}
+	
+	#posts ul li {
+    	margin: 0px 20px 20px 0px;
+    	width: 100px;
+    	float: left;
+    	border-radius: 3px;
+    	border: 0px solid #eee;
+    	background: #222!important;
+    	background: none repeat scroll 0% 0% #FFF;
+   		border-radius: 0;
+    	box-shadow: none;
+	}
 
 	#posts ul li {
 		width: 50%;
