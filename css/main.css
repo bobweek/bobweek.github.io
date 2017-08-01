@@ -83,6 +83,7 @@ h1 {
 	position: relative;
 	padding: 0px 0px 15px 0px;
 	border-bottom: 0px solid #eee;
+	text-align: center;
 }
 
 #logo {
@@ -147,7 +148,7 @@ h1 {
     border: 0px solid #eee;
     background: #222!important;
     background: none repeat scroll 0% 0% #FFF;
-    border-radius: 20;
+    border-radius: 0;
     box-shadow: none;
 }
 #posts ul li img {
