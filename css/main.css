@@ -130,8 +130,8 @@ h1 {
 
 #posts ul li {
     margin: 0px 20px 20px 0px;
-    width:  3em;
-    height: 5em;
+    width:  30em;
+    height: 50em;
     float: left;
     border-radius: 3px;
     border: 0px solid #eee;
@@ -152,7 +152,8 @@ h1 {
 }
 
 .post-image{
-	width: 250px;
+	width: 30em;
+	height: 30em;	
 	box-shadow: 0 0px 0px #cccccc;
 	border-radius: 0px;
     margin: 10px 0px 10px 0px;
