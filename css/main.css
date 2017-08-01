@@ -130,8 +130,8 @@ h1 {
 
 #posts ul li {
     margin: 0px 20px 20px 0px;
-    width:  30em;
-    height: 50em;
+    width:  15em;
+    height: 20em;
     float: left;
     border-radius: 3px;
     border: 0px solid #eee;
@@ -142,7 +142,7 @@ h1 {
 }
 
 #posts ul li img {
-	width: 95%;
+	width: 100%;
 }
 
 .post-title {
@@ -152,8 +152,8 @@ h1 {
 }
 
 .post-image{
-	width: 30em;
-	height: 30em;	
+	width: 15em;
+	height: 15em;	
 	box-shadow: 0 0px 0px #cccccc;
 	border-radius: 0px;
 }
@@ -167,7 +167,6 @@ h1 {
 	margin-top: 10px;
 	font-size: 13px;
 	padding: 1em 1em;
-	background: url('http://wpexplorer-demos.com/fabulous/wp-content/themes/wpex-fabulous/images/entry-meta-shadow.png') no-repeat scroll center top #E1E1E1;
 	border-radius: 0px 0px 3px 3px;
 }
 
