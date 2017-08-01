@@ -166,7 +166,7 @@ h1 {
 .post-content {
 	margin-top: 10px;
 	font-size: 13px;
-	padding: 20px 30px;
+	padding: 1em 1em;
 	background: url('http://wpexplorer-demos.com/fabulous/wp-content/themes/wpex-fabulous/images/entry-meta-shadow.png') no-repeat scroll center top #E1E1E1;
 	border-radius: 0px 0px 3px 3px;
 }
