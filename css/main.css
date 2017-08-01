@@ -148,19 +148,19 @@ h1 {
 .post-title {
 	margin: 0px 0px 8px 0px;
 	line-height: 0px;
-	font-size: 20px;padding: 10px;
+	font-size: 20px;padding: 1em;
 }
 
 .post-image{
 	width: 250px;
 	box-shadow: 0 0px 0px #cccccc;
 	border-radius: 0px;
-    //margin: 10px 0px 10px 0px;
+    margin: 10px 0px 10px 0px;
 }
 
 .post-date {
 	font-size: 11px;
-	color: #E1E1E1;padding: 10px;
+	color: #E1E1E1;padding: 1em;
 }
 
 .post-content {
