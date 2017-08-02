@@ -129,7 +129,7 @@ h1 {
 #posts ul li {
     width:  20em;
     height: 25em;
-    float: left;
+    float: center;
     border-radius: 3px;
     border: 0px solid #eee;
     background: #222!important;
