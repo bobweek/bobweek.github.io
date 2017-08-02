@@ -143,9 +143,10 @@ h1 {
 }
 
 .post-title {
-	margin-top: 1em;
+	margin-top: 0px;
 	line-height: 0px;
-	font-size: 20px;padding: 1em;
+	font-size: 0px;
+	padding: 0px;
 }
 
 .post-image{
