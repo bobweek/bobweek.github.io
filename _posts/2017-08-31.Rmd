@@ -1,6 +1,7 @@
 ---
 title: "Notes"
 output: html_document
+category: blog
 ---
 
 ```{r setup, include=FALSE}
