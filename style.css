@@ -4,8 +4,8 @@ body {
 	text-align: left;
 	padding: 0 50px 0 50px;
 	background: #222!important;
-  border-top: 40px solid #222;
-  border-bottom: 40px solid #222;
+	border-top: 40px solid #222;
+	border-bottom: 40px solid #222;
 }
 
 body, div, a, input, select, button, textarea {
@@ -13,4 +13,10 @@ body, div, a, input, select, button, textarea {
 	font-size: 14px;
 	color: #000000;
 	background: #d1d1d1;
+}
+
+links {
+	float: right;
+	margin: 20px 0 0 0;
+	color: #3B3B3B;
 }
