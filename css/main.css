@@ -8,6 +8,10 @@ img, embed, object{
 }
 
 
+.postcontent{
+	padding : -5px;
+}
+
 body {
 	margin: 0px;
 	text-align: center;
