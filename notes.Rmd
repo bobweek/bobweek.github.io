@@ -57,7 +57,7 @@ $$\mathbb{E}\frac{dN_t}{dt}=\left(\int_0^ta(s)ds+e^{\int_0^tb(s)ds-t}+c\right)N_
 
 ## Calculating the Response in Mean Phenotype to Selection
 
-Briefly, the normal distribution is the most important distribution due to various theorems and properties such as the central limit theorems and it's maximum entropy property. It's known for its mathematical elegance and empirical ubiquity and, like all distributions, can be identified by it's density and characteristic functions, both of which are Gaussian. In what follows I will use the terms Gaussian and normal interchangebally.
+The normal distribution is the most important distribution due to various theorems and properties such as the central limit theorems and it's maximum entropy property. It's known for its mathematical elegance and empirical ubiquity and, like all distributions, can be identified by it's density and characteristic functions, both of which are Gaussian. In what follows I will use the terms Gaussian and normal interchangebally.
 
 Gaussian functions play a central role in evolutionary theory. Arguably the most successful equation describing the evolution of a population, the breeder's equation, requires a normal phenotypic distribution. Typical notation is $z$ for the phenotype of an individual, $\bar z$ for the mean phenotype of the population, $\sigma^2$ for the phenotypic variance and $\phi$ for the phenotypic density. This provides
 
