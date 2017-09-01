@@ -1,0 +1,9 @@
+name: "Bob Week | Evolution - Ecology - Math"
+output_dir: "."
+navbar:
+  title: "Bob Week"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Notes"
+      href: notes.html
