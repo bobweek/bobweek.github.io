@@ -4,7 +4,7 @@
 		<link rel="stylesheet" type="text/css" href="/css/socialicious.css">
 		<link rel="stylesheet" type="text/css" href="/css/main.css">
 		<link rel="stylesheet" type="text/css" href="/css/monokai.css">
-		<link href="/blog/rss.xml" rel="alternate" type="application/rss+xml" title="{{site.blog_title}}" />
+		<link href="/rss.xml" rel="alternate" type="application/rss+xml" title="{{site.blog_title}}" />
 		<title>{{site.blog_title}}</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<script type="text/javascript" src="/js/LaTeXMathML.js"></script>
 		<script type="text/javascript" src='/js/jquery.min.js'></script>
@@ -38,7 +38,7 @@
 		<div id='content' class="hp">
 			<div id='posts' class="leftblock">
 				<ul>
-					{% for post in site.categories.blog %}
+					{% for post  in site.categories.blog %}
 						<li class='post'>
 							{% if post.image %}
 								<a href='{{post.url}}'><img class='post-image' src="{{post.image}}" /></a>
