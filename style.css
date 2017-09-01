@@ -20,3 +20,7 @@ links {
 	margin: 20px 0 0 0;
 	color: #3B3B3B;
 }
+
+.nav.navbar-nav li a {
+  color: black;
+}

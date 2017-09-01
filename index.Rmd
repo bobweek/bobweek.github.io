@@ -4,11 +4,14 @@ output:
   html_document: 
     theme: cosmo
     css: style.css
-
+footer: "tester"
 ---
+
+
 
 I am a student at the University of Idaho working on a PhD under professor <a href="http://www.webpages.uidaho.edu/~snuismer/Nuismer_Lab/"><font color=#303030>Scott Nuismer</font></a>. My degree program is <a href="http://www.uidaho.edu/sci/bcb"><font color=#303030>Bioinformatics and Computational Biology (BCB)</font></a> which is housed within <a href="http://www.ibest.uidaho.edu/"><font color=#303030>The Institute for Bioinformatics and Evolutionary Studies (<u>IBEST</u>)</font></a>. 
 
 My research focuses on using quantitative genetic theory to investigate the evolutionary stability of biological communities. To do this I develop rigorous mathematical models of phenotypic evolution that incorporate species interactions and methods for inferring parameters of these models.
 
 My CV is available <a href="files/cv.pdf" target="_blank"><font color=#303030>here</font></a>.
+

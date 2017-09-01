@@ -1,8 +1,12 @@
 name: "Bob Week | Evolution - Ecology - Math"
 output_dir: "."
-navbar:
+navbar: 
   left:
     - text: "Home"
       href: index.html
     - text: "Notes"
       href: notes.html
+output:
+  html_document:
+    theme: cosmo
+    css: styles.css
