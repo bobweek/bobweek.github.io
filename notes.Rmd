@@ -31,10 +31,10 @@ Let's suppose there are $N_t$ different individuals in the population at time $t
 
 insert stuff about stochastic population dynamics here
 
-If we assume that selection is absent and mean fitness is constant with respect to time, we can derive continuous time mean dynamics of $N_t$. To do so, suppose that for $0<\delta<1$, $\mathbb{E}N_{t+\delta}=W^\delta N_t$. Then $\mathbb{E}N_{t+0}=N_t$ and $\mathbb{E}N_{t+1}=WN_t$. Hence
+If we assume that selection is absent and mean fitness is constant with respect to time, we can derive continuous time mean dynamics of $N_t$. To do so, suppose that for $0<\delta<1$, $\mathbb{E}N_{t+\delta}=W^\mathbb{E}\delta N_t$. Then $\mathbb{E}N_{t+0}=\mathbb{E}N_t$ and $\mathbb{E}N_{t+1}=W\mathbb{E}N_t$. Hence
 
-$$\mathbb{E}\frac{dN_t}{dt}=\frac{d}{dt}\mathbb{E}N_t=\lim_{\delta\rightarrow0}\frac{\mathbb{E}N_{t+\delta}-N_t}{\delta}=\lim_{\delta\rightarrow0}\frac{(W^\delta-1)}{\delta}N_t=\ln(W)N_t.$$
-Note that switching the derivative and the expectation must be formally justified.
+$$\mathbb{E}\frac{dN_t}{dt}=\frac{d}{dt}\mathbb{E}N_t=\lim_{\delta\rightarrow0}\frac{\mathbb{E}N_{t+\delta}-\mathbb{E}N_t}{\delta}=\lim_{\delta\rightarrow0}\frac{(W^\delta-1)}{\delta}\mathbb{E}N_t=\ln(W)\mathbb{E}N_t.$$
+Note that switching the derivative and the expectation must be formally justified. In what follows, we won't drag the annoying expectation symbol along with us. Instead we will adopt the convention that $N_t$ is actually an expected value.
 
 In typical notation one would write $r$ in place of $\ln(W)$. This exposes an interesting connection between two very distinct notions of fitness. The notion of fitness that I've been working with, $W$, is called the Wrightian, or, multiplicative fitness. It is a non-negative number that corresponds to the number of offspring produced for some category. It's been called multiplicative fitness because the multiplication of any two Wrightian fitnesses is yet another Wrightian fitness. The natural log of this value is known as the Malthusian, or, additive fitness. Its value can be any real number and, depending on its use, can also be infinitely negative. Note that the log of a product is the sum of the logs. It's this basic log rule that provides the Malthusian fitness its additivity. The sum of any two Malthusian fitnesses is again a Malthusian fitness. Artem Kaznatcheev has a nice discussion of this topic <a href="https://egtheory.wordpress.com/2016/08/17/weak-selection">here</a>. To solidify the connection between these two notions of fitness, consider a population that maintains a constant size of 100 but becomes extinct instantaneously (as shown below). This  corresponds to each individual having a fitness of 1 (remember we're assuming fitness is constant trhoughout the population) making the Malthusian fitness of the population zero. Then when the population drops each individual must suddenly have a Wrightian fitness of zero. The Malthusian fitness of the population will then be $\ln(0)$ which is $-\infty$, corresponding to the discontinuous drop in the population size. 
 
@@ -44,20 +44,20 @@ N <- c(rep(100,800),rep(0,200))
 plot(time,N)
 ```
 
-However, this result is a bit of an abuse of the above derivation as we had made the assumption that fitness is constant with respect to time. If we assume that $\mathbb{E}\frac{dN_t}{dt}=\ln(W_t)N_t$, where now $W_t$ is allowed to change with respect to time, then for consistency it would be good to reconcile this equation with the above assumption that $\mathbb{E}\Delta N_t=\mathbb{E}N_{t+1}-N_t=(W_t-1)N_t$. Doing so restricts the nature of $W_t$, specifically $\frac{dW_t}{dt}=W_t\ln\left(\frac{W_{t+1}}{W_t}\right)$. This states that if $W_t=0$ for some $t$, then $W_s=0$ for $s>t$. That is to say, if the population goes extinct, it remains extinct. This makes perfect sense in the absence of immigration. But there's another implication in this equation and to explore it I will assume that the general form of $W_t$ is $W_t=e^{r(t)}$ for some function $r(t)$. Note that this implies $\mathbb{E}\frac{dN_t}{dt}=r(t)N_t$. Then we can use the previously derived equation to show that $\frac{d}{dt}r(t)=r(t+1)-r(t)$. In the case that $r(t+1)=k+r(t)$ for some constant $k$, we get $r(t)=kt+c$, making $W_t=e^{kt+c}$ and hence $\mathbb{E}\frac{dN_t}{dt}=(kt+c)N_t$. But we can also make $k(t)$ a function $t$. Here we get 
+However, this result is a bit of an abuse of the above derivation as we had made the assumption that fitness is constant with respect to time. If we assume that $\frac{dN_t}{dt}=\ln(W_t)N_t$, where now $W_t$ is allowed to change with respect to time, then for consistency it would be good to reconcile this equation with the above assumption that $\Delta N_t=N_{t+1}-N_t=(W_t-1)N_t$. Doing so restricts the nature of $W_t$, specifically $\frac{dW_t}{dt}=W_t\ln\left(\frac{W_{t+1}}{W_t}\right)$. This states that if $W_t=0$ for some $t$, then $W_s=0$ for $s>t$. That is to say, if the population goes extinct, it remains extinct. This makes perfect sense in the absence of immigration. But there's another implication in this equation and to explore it I will assume that the general form of $W_t$ is $W_t=e^{r(t)}$ for some function $r(t)$. Note that this implies $\frac{dN_t}{dt}=r(t)N_t$. Then we can use the previously derived equation to show that $\frac{d}{dt}r(t)=r(t+1)-r(t)$. In the case that $r(t+1)=k+r(t)$ for some constant $k$, we get $r(t)=kt+c$, making $W_t=e^{kt+c}$ and hence $\frac{dN_t}{dt}=(kt+c)N_t$. But we can also make $k(t)$ a function $t$. Here we get 
 
-$$r(t)=\int_0^tk(s)ds+c\implies\mathbb{E}\frac{dN_t}{dt}=\left(\int_0^tk(s)ds+c\right)N_t$$
-This might be handy if, say, you wanted to incorporate the effects of population dynamics of another species that interacts with this one. In that case $k(t)$ would likely be a function of the other species' population size at time $t$. But there are other possibilities. For example, we can set $r(t+1)=kr(t)$ to get $r(t)=e^{(k-1)t}+c$ and hence $\mathbb{E}\frac{dN_t}{dt}=\left(e^{(k-1)t}+c\right)N_t$ or, of course, $r(t+1)=k(t)r(t)$ to get 
+$$r(t)=\int_0^tk(s)ds+c\implies\frac{dN_t}{dt}=\left(\int_0^tk(s)ds+c\right)N_t$$
+This might be handy if, say, you wanted to incorporate the effects of population dynamics of another species that interacts with this one. In that case $k(t)$ would likely be a function of the other species' population size at time $t$. But there are other possibilities. For example, we can set $r(t+1)=kr(t)$ to get $r(t)=e^{(k-1)t}+c$ and hence $\frac{dN_t}{dt}=\left(e^{(k-1)t}+c\right)N_t$ or, of course, $r(t+1)=k(t)r(t)$ to get 
 
-$$\mathbb{E}\frac{dN_t}{dt}=\left(e^{\int_0^tk(s)ds-t}+c\right)N_t.$$
+$$\frac{dN_t}{dt}=\left(e^{\int_0^tk(s)ds-t}+c\right)N_t.$$
 
 Regardless of what is chosen for $r(t+1)$, this trick will be assured to work when $r(t+1)$ is a linear function of $r(t)$. That is, $r(t+1)=a(t)+b(t)r(t)$. In this general case we get $r(t)=\int_0^ta(s)ds+e^{\int_0^tb(s)ds-t}+c$ and hence
 
-$$\mathbb{E}\frac{dN_t}{dt}=r(t)N_t=\left(\int_0^ta(s)ds+e^{\int_0^tb(s)ds-t}+c\right)N_t.$$
+$$\frac{dN_t}{dt}=r(t)N_t=\left(\int_0^ta(s)ds+e^{\int_0^tb(s)ds-t}+c\right)N_t.$$
 
 We can then solve for the mean population size as a function of time to get
 
-$$\mathbb{E}N_t=\left(\mathbb{E}N_0\right)e^{\int_0^tr(s)ds}.$$
+$$N_t=N_0e^{\int_0^tr(s)ds}.$$
 
 ## Calculating the Response in Mean Phenotype to Selection
 
