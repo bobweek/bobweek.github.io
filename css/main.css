@@ -248,6 +248,7 @@ blockquote{
 @media only screen and (min-width: 1367) {
 
 	#posts ul li {
+		height: 220px;
 		width: 220px;
 	}
 }
@@ -255,6 +256,7 @@ blockquote{
 @media only screen and (max-width: 1366) {
 
 	#posts ul li {
+		height: 273px;
 		width: 273px;
 	}
 }
@@ -263,6 +265,7 @@ blockquote{
 @media only screen and (max-width: 1280) {
 
 	#posts ul li {
+		height: 252px;	
 		width: 252px;
 	}
 
@@ -274,6 +277,7 @@ only screen and (max-device-width:1024px),
 only screen and (max-width: 1024px) {
 
 	#posts ul li {
+		height: 265px;	
 		width: 265px;
 	}
 
@@ -305,6 +309,7 @@ only screen and (max-width: 1200px) {
 	
 	#posts ul li {
     	margin: 0px 20px 20px 0px;
+		height: 100px;
     	width: 100px;
     	float: left;
     	border-radius: 3px;
@@ -316,6 +321,7 @@ only screen and (max-width: 1200px) {
 	}
 
 	#posts ul li {
+		height: 50%;
 		width: 50%;
 	}
 
@@ -325,12 +331,14 @@ only screen and (max-width: 1200px) {
 
 	#page {
 		border-left: 0px;
+		height: 100%;
 		width: 100%;
 		margin: 0 0 0 0 ;
 		padding: 0 0 0 0 ;
 	}
 
 	#page img {
+		height: 100%;
 		width: 100%;
 	}
 }
