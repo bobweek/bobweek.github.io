@@ -27,7 +27,7 @@ We denote expectation by $\mathbb{E}$ and $W\equiv\mathbb{E}\mathcal{W}$ so that
 
 ## Fitness and Population Dynamics
 
-Let's suppose there are $N_t$ different individuals in the population at time $t$, with each individual $i$ having fitness $\mathcal{W_t}(i)$. If we further suppose that generations are non-overlapping, then we obtain the population size in the next generation as $N_{t+1}=\sum_{i=1}^{N_t}\mathcal{W_t}(i)$. If each $\mathcal{W_t}(i)$ is a Poisson random variable with mean $W_t(i)$ (in symbols this is written $\mathcal{W_t}(i)\sim\mathcal{P}(W_t(i))$), then by the additive property of Poisson random variables we have $N_{t+1}\sim\mathcal{P}\left(\sum_{i=1}^{N_t}W_t(i)\right)$. If selection is absent so that each $\mathcal{W_t}(i)$ is identically distributed with mean $W_t$, then $N_{t+1}\sim\mathcal{P}(W_tN_t)$. 
+Let's suppose there are $N_t$ different individuals in the population at time $t$, with each individual $i$ having fitness $\mathcal{W_t}(i)$. If we further suppose that generations are non-overlapping, then we obtain the population size in the next generation as $N_{t+1}=\sum_{i=1}^{N_t}\mathcal{W_t}(i)$. If each $\mathcal{W_t}(i)$ is a Poisson random variable with mean $W_t(i)$ (in symbols $\mathcal{W_t}(i)\sim\mathcal{P}(W_t(i))$), then by the additive property of Poisson random variables we have $N_{t+1}\sim\mathcal{P}\left(\sum_{i=1}^{N_t}W_t(i)\right)$. If selection is absent so that each $\mathcal{W_t}(i)$ is identically distributed with mean $W_t$, then $N_{t+1}\sim\mathcal{P}(W_tN_t)$. 
 
 insert stuff about stochastic population dynamics here
 
