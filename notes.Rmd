@@ -31,7 +31,7 @@ Let's suppose there are $N_t$ different individuals in the population at time $t
 
 insert stuff about stochastic population dynamics here
 
-If we assume that selection is absent and mean fitness is constant with respect to time, we can derive continuous time mean dynamics of $N_t$. To do so, suppose that for $0<\delta<1$, $\mathbb{E}N_{t+\delta}=W^\mathbb{E}\delta N_t$. Then $\mathbb{E}N_{t+0}=\mathbb{E}N_t$ and $\mathbb{E}N_{t+1}=W\mathbb{E}N_t$. Hence
+If we assume that selection is absent and mean fitness is constant with respect to time, we can derive continuous time mean dynamics of $N_t$. To do so, suppose that for $0<\delta<1$, $\mathbb{E}N_{t+\delta}=W^\delta\mathbb{E} N_t$. Then $\mathbb{E}N_{t+0}=\mathbb{E}N_t$ and $\mathbb{E}N_{t+1}=W\mathbb{E}N_t$. Hence
 
 $$\mathbb{E}\frac{dN_t}{dt}=\frac{d}{dt}\mathbb{E}N_t=\lim_{\delta\rightarrow0}\frac{\mathbb{E}N_{t+\delta}-\mathbb{E}N_t}{\delta}=\lim_{\delta\rightarrow0}\frac{(W^\delta-1)}{\delta}\mathbb{E}N_t=\ln(W)\mathbb{E}N_t.$$
 Note that switching the derivative and the expectation must be formally justified. In what follows, we won't drag the annoying expectation symbol along with us. Instead we will adopt the convention that $N_t$ is actually an expected value.
