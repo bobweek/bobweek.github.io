@@ -1,3 +1,24 @@
+
+.nav.navbar-nav li a {
+  color: #888;
+}
+
+body {
+	background: #222!important;
+}
+
+div, a, input, select, button, textarea {
+	color: #d1d1d1;
+}
+
+.list-group-item.unactive, .list-group-item.unactive:focus, .list-group-item.unactive:hover {
+    color: #000;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    background-color: #222;
+}
+
 /*
 body {
 	text-align: left;
@@ -20,10 +41,6 @@ links {
 	color: #3B3B3B;
 }
 
-.nav.navbar-nav li a {
-  color: black;
-}
-
 code.r{
   font-size: 14px;
   background-color:#d1d1d1
@@ -42,7 +59,4 @@ post.r{
   background-color:#d1d1d1;
 }
 
-.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
-    background-color: #222;
-}
 */
