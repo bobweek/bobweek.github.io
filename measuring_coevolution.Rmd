@@ -1,0 +1,34 @@
+---
+title: "Measuring Coevolution"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+```{r}
+1:30
+
+```
+
+## Phenotypic data
+
+## Background parameters
+
+### $n_i$
+
+### $G_i$
+
+### $\theta_i$
+
+## Estimating Selection
+
+## Hypothesis Testing

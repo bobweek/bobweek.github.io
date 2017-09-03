@@ -1,6 +1,5 @@
-
+/*
 body {
-	margin: auto;
 	text-align: left;
 	padding: 0 50px 0 50px;
 	background: #222!important;
@@ -8,7 +7,7 @@ body {
 	border-bottom: 40px solid #222;
 }
 
-body, div, a, input, select, button, textarea {
+div, a, input, select, button {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 14px;
 	color: #000000;
@@ -24,3 +23,26 @@ links {
 .nav.navbar-nav li a {
   color: black;
 }
+
+code.r{
+  font-size: 14px;
+  background-color:#d1d1d1
+}
+
+pre { 
+  background-color:#d1d1d1;
+}
+
+
+pre.r { 
+  background-color:#d1d1d1;
+}
+
+post.r{ 
+  background-color:#d1d1d1;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    background-color: #222;
+}
+*/
