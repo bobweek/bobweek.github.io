@@ -11,7 +11,7 @@ I made some applications to visualize and interact with (co)evolutionary theory.
 ## 1-D Migration and Drift
 
 <div align="middle">
-<a href="https://www.openprocessing.org/sketch/386248"><img src="images/driftMig.png" height="300" width="300"/></a>
+<a href="https://www.openprocessing.org/sketch/386248"><img src="images/driftMig.png" height="300" width="500"/></a>
 </div>
 
 This application simulates the evolution of a trait for a species on a single spatial axis, the horizontal axis. Migration is modeled with a stepping stone model where migrants can move to neighboring sites only. The vertical displacement of the white dots shown represents trait values at each site. Two sliders are provided to allow the user to manipulate the migration rate and the variance of drift.
@@ -19,7 +19,7 @@ This application simulates the evolution of a trait for a species on a single sp
 ## 1-D Migration, Drift and Coevolution
 
 <div align="middle">
-<a href="https://www.openprocessing.org/sketch/401086"><img src="images/coev.png" height="300" width="500"/></a>
+<a href="https://www.openprocessing.org/sketch/401086"><img src="images/coev.png" height="300" width="600"/></a>
 </div>
 
 This application simulates the coevolution of two species on a single spatial axis as a generalization of the above application. The traits involved for each species are colored red and green.  At the bottom of the application is a time-series plot of the instantaneous correlation between traits and the running average of correlation. Correlations have historically been used to determine support for a coevolutionary hypothesis, so it is an interesting quantity to track. For details about the theory see [Nuismer et. al. 2010](https://www.ncbi.nlm.nih.gov/pubmed/20307203).
