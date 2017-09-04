@@ -17,7 +17,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-These notes are the result of the interplay between my mathematical upbringing and my development as a theoretical biologist. I have placed them here primarily for my own reference. As I continue to learn and explore I will update these notes with my findings.
+These notes are the result of the interplay between my background in mathematics and my development as a theoretical biologist. I have placed them here primarily for my own reference. As I continue to learn and explore I will update these notes with my findings.
 
 ## Fitness
 
