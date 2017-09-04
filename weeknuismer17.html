@@ -11,7 +11,7 @@
 
 
 
-<title>Interactive Theory</title>
+<title>We haven’t been published yet!</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-1.1/highlight.js"></script>
@@ -162,6 +165,101 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
@@ -190,36 +288,17 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Interactive Theory</h1>
+<h1 class="title toc-ignore">We haven’t been published yet!</h1>
 
 </div>
 
 
-<p>I made some applications to visualize and interact with (co)evolutionary theory.</p>
-<div id="d-migration-and-drift" class="section level2">
-<h2>1-D Migration and Drift</h2>
-<div align="middle">
-<p><a href="https://www.openprocessing.org/sketch/386248"><img src="images/driftMig.png" height="300" width="500"/></a></p>
-</div>
-<p>This application simulates the evolution of a trait for a species on a single spatial axis, the horizontal axis. Migration is modeled with a stepping stone model where migrants can move to neighboring sites only. The vertical displacement of the white dots shown represents trait values at each site. Two sliders are provided to allow the user to manipulate the migration rate and the variance of drift.</p>
-</div>
-<div id="d-migration-drift-and-coevolution" class="section level2">
-<h2>1-D Migration, Drift and Coevolution</h2>
-<div align="middle">
-<p><a href="https://www.openprocessing.org/sketch/401086"><img src="images/coev.png" height="300" width="600"/></a></p>
-</div>
-<p>This application simulates the coevolution of two species on a single spatial axis as a generalization of the above application. The traits involved for each species are colored red and green. At the bottom of the application is a time-series plot of the instantaneous correlation between traits and the running average of correlation. Correlations have historically been used to determine support for a coevolutionary hypothesis, so it is an interesting quantity to track. For details about the theory see <a href="https://www.ncbi.nlm.nih.gov/pubmed/20307203">Nuismer et. al. 2010</a>.</p>
-</div>
-<div id="d-migration-drift-and-coevolution-1" class="section level2">
-<h2>2-D Migration, Drift and Coevolution</h2>
-<div align="middle">
-<p><a href="https://www.openprocessing.org/sketch/396443"><img src="images/three.png" height="300" width="500"/></a></p>
-</div>
-<p>Here three species coevolve across a two dimensional grid. One species is colored blue, one red and one green. The trait values that evolve are brightness. To summarize these properties within each pixel, a weighted average of red, blue and green is computed, weighted by the mean brightness of each species within that pixel. The result is a colorful, evolving grid. The interactions between the three species can be thought of as a circular trophic system where each level consumes the next level and is consumed by the previous level. Because the three color values are bounded above and below, this induces an oscillating coevolutionary chase.</p>
-</div>
 
 
 
+
+</div>
+</div>
 
 </div>
 

@@ -1,5 +1,5 @@
 ---
-title: "Measuring Coevolution"
+title: "Measuring Coevolution - UNDER CONSTUCTION!!"
 output: 
   html_document:
     toc: true
@@ -14,12 +14,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-This is a tutorial for employing the method of coevolutionary inference described in [Week & Nuismer 2017](http://www.nature.com/nature/authors/gta/index.html#a5.9). 
+This is a tutorial for employing the method of coevolutionary inference described in [Week & Nuismer 2017](weeknuismer17.html). Data used in this tutorial is available [here](https://github.com/bobweek/the.measurement.of.coevolution).
 
-```{r}
-1:30
 
-```
 
 ## Phenotypic data
 
