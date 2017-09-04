@@ -4,7 +4,6 @@ output:
   html_document: 
     theme: cosmo
     css: style.css
-footer: "tester"
 ---
 
 <!--<img src="images/users/meprof.jpg" height="150" width="150" border="0"/>-->

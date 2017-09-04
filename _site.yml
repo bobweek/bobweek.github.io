@@ -4,6 +4,10 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+    - text: "Interactive Theory"
+      href: interactive_theory.html
+    - text: "Measuring Coevolution"
+      href: measuring_coevolution.html
     - text: "Notes"
       href: notes.html
 output:
