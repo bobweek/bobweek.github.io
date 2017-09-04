@@ -110,9 +110,11 @@ $$\overline W=\int_{-\infty}^\infty\phi(z)W(z)dz=(\phi_0*W_0)(\bar z)$$
 
 $$=\frac{1}{\sqrt{2\pi(\sigma^2+\omega^2)}}\exp\left(-\frac{(\bar z-\theta)^2}{2(\sigma^2+\omega^2)}\right).$$
 
-Finally, we obtain the response in mean phenotype to $W$ using the breeder's equation
+Denoting the additive genetic variance by $G$, we obtain the response in mean phenotype to $W$ using the breeder's equation
 
-$$\Delta\bar z=G\frac{\partial\ln\overline W}{\partial \bar z}=G\frac{\partial}{\partial\bar z}\left[\ln\left(\frac{1}{\sqrt{2\pi(\sigma^2+\omega^2)}}\right)-\frac{(\bar z-\theta)^2}{2(\sigma^2+\omega^2)}\right]$$
+$$\Delta\bar z=G\frac{\partial\ln\overline W}{\partial \bar z}$$
+
+$$=G\frac{\partial}{\partial\bar z}\left[\ln\left(\frac{1}{\sqrt{2\pi(\sigma^2+\omega^2)}}\right)-\frac{(\bar z-\theta)^2}{2(\sigma^2+\omega^2)}\right]$$
 
 $$=G\frac{\theta-\bar z}{\sigma^2+\omega^2}.$$
 
