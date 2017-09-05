@@ -295,21 +295,46 @@ div.tocify {
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>This is a tutorial for employing the method of coevolutionary inference described in <a href="weeknuismer17.html">Week &amp; Nuismer 2017</a>. Data used in this tutorial is available <a href="https://github.com/bobweek/inferring.coevolution">here</a>.</p>
+<p>This is a tutorial for employing the method of coevolutionary inference described in <a href="weeknuismer17.html">Week &amp; Nuismer 2017</a>. Data used in this tutorial is available <a href="https://github.com/bobweek/inferring.coevolution">here</a>. All analysis is done in the statistal programming language R.</p>
 </div>
 <div id="phenotypic-data" class="section level2">
 <h2>Phenotypic data</h2>
 </div>
 <div id="background-parameters" class="section level2">
 <h2>Background parameters</h2>
-<div id="n_i" class="section level3">
-<h3><span class="math inline">\(n_i\)</span></h3>
+<p>Before we can infer the strengths of biotic selection we need to infer some key background parameters. Specifically, we need to know what the optimal offset is for each species, the abiotic optima, the effective population sizes and additive genetic variances.</p>
+<div id="rightarrow-delta_i" class="section level3">
+<h3><span class="math inline">\(\rightarrow \delta_i\)</span></h3>
+<p>To infer the optimal offset for both species we need data that measures a proxy for interaction performance for each species alongside trait differences. For the plant-pollinator system data has been collected that captures the percent of nectar consumed by the fly, the number of pollen grains deposited by the flower and the difference in fly proboscis length and flower tube length. We will fit curves to these data that relate the difference in traits to performance for both the fly and flower. We then find the trait differences associated with the maximum of these curves and use these values for the optimal offsets.</p>
+<p>To begin we read in the offset data to a data frame in R.</p>
+<pre class="r"><code>library(gdata)
+
+# read in data
+offset.data &lt;- read.xls(&quot;PlantPollinatorOffset.xlsx&quot;)
+head(offset.data)</code></pre>
+<pre><code>##   TONGUE.TUBE POLLEN_GRAINS_DEPOSITED NECTAR_VOLUME_CONSUMED
+## 1     -1.1037                      10                  0.480
+## 2     -1.6037                       8                  1.702
+## 3     -3.1037                       7                  1.344
+## 4     -7.6037                       6                  0.528
+## 5    -11.6037                       2                  0.000
+## 6     -4.9792                       6                  0.066
+##   NECTAR_VOLUME_BEFORE
+## 1                0.544
+## 2                1.766
+## 3                1.648
+## 4                1.216
+## 5                1.118
+## 6                0.544</code></pre>
 </div>
-<div id="g_i" class="section level3">
-<h3><span class="math inline">\(G_i\)</span></h3>
+<div id="rightarrow-theta_i" class="section level3">
+<h3><span class="math inline">\(\rightarrow \theta_i\)</span></h3>
 </div>
-<div id="theta_i" class="section level3">
-<h3><span class="math inline">\(\theta_i\)</span></h3>
+<div id="rightarrow-n_i" class="section level3">
+<h3><span class="math inline">\(\rightarrow n_i\)</span></h3>
+</div>
+<div id="rightarrow-g_i" class="section level3">
+<h3><span class="math inline">\(\rightarrow G_i\)</span></h3>
 </div>
 </div>
 <div id="estimating-selection" class="section level2">

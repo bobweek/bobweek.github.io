@@ -14,19 +14,37 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-This is a tutorial for employing the method of coevolutionary inference described in [Week & Nuismer 2017](weeknuismer17.html). Data used in this tutorial is available [here](https://github.com/bobweek/inferring.coevolution).
-
+This is a tutorial for employing the method of coevolutionary inference described in [Week & Nuismer 2017](weeknuismer17.html). Data used in this tutorial is available [here](https://github.com/bobweek/inferring.coevolution). All analysis is done in the statistal programming language R.
 
 
 ## Phenotypic data
 
 ## Background parameters
 
-### $n_i$
+Before we can infer the strengths of biotic selection we need to infer some key background parameters. Specifically, we need to know what the optimal offset is for each species, the abiotic optima, the effective population sizes and additive genetic variances.
 
-### $G_i$
+### $\rightarrow \delta_i$
 
-### $\theta_i$
+To infer the optimal offset for both species we need data that measures a proxy for interaction performance for each species alongside trait differences. For the plant-pollinator system data has been collected that captures the percent of nectar consumed by the fly, the number of pollen grains deposited by the flower and the difference in fly proboscis length and flower tube length. We will fit curves to these data that relate the difference in traits to performance for both the fly and flower. We then find the trait differences associated with the maximum of these curves and use these values for the optimal offsets.
+
+To begin we read in the offset data to a data frame in R.
+
+```{r, message=FALSE, warning=FALSE}
+
+library(gdata)
+
+# read in data
+offset.data <- read.xls("PlantPollinatorOffset.xlsx")
+head(offset.data)
+
+```
+
+
+### $\rightarrow \theta_i$
+
+### $\rightarrow n_i$
+
+### $\rightarrow G_i$
 
 ## Estimating Selection
 
