@@ -97,7 +97,7 @@ As you can see, we run into a bit of a snag here as the parabola is convex with 
 
 $$g(x)=m\exp\left(-\frac{(x-c)^2}{2w}\right)$$
 
-Implementing the Gaussian fit is a matter of setting up a non-linear least squares problem. As with linear and quadratic regression, our goal is to minimize the sum of the squared differences between our data and the resulting curve. The Gaussian curve has three parameters, a maximum, a center and a width. We can solve for the maximum, center and width parameters that minimize the sum of the squares numerically. Because the maximum and width parameters are positive numbers, we have to take care to ensure we don't get negative results.
+Implementing the Gaussian fit is a matter of setting up a non-linear least squares problem. As with linear and quadratic regression, our goal is to minimize the sum of the squared differences between our data and the resulting curve. The Gaussian curve has three parameters, a maximum ($m$), a center ($c$) and a width ($w$). We can solve for the maximum, center and width parameters that minimize the sum of the squares numerically. Because the maximum and width parameters are positive numbers, we have to take care to ensure we don't get negative results.
 
 ```{r}
 # fitting a gaussian curve
