@@ -95,26 +95,28 @@ coeffs <- opt.off.flower.model$coefficients
 
 As you can see, we run into a bit of a snag here as the parabola is convex with the quadratic coefficient `r coeffs[3]`. This means it opens up and therefore has no maximum. If we want to find an optimal offset, we need to fit a curve that __always__ has a maximum. Gaussian curves not only satisfy this need, but they also approximate concave parabolas quite well near their maxima, making them ideal candidates to solve this problem. 
 
-Implementing the Gaussian fit is a matter of setting up a non-linear least squares problem. As with linear and quadratic regression, our goal is to minimize the sum of the squared differences between our data and the Gaussian curve. The Gaussian curve has three parameters, a maximum, a center and a width. We can solve for the maximum, center and width parameters that minimize the sum of the squares as follows.
+Implementing the Gaussian fit is a matter of setting up a non-linear least squares problem. As with linear and quadratic regression, our goal is to minimize the sum of the squared differences between our data and the Gaussian curve. The Gaussian curve has three parameters, a maximum, a center and a width. We can solve for the maximum, center and width parameters that minimize the sum of the squares numerically. Because the maximum and width parameters are positive numbers, we have to take care to ensure we don't get negative results.
 
 ```{r}
 # fitting a gaussian curve
 gaussianfit <- function(c){
   sum((offset.data$POLLEN_GRAINS_DEPOSITED - 
-         c[1]*exp(-(offset.data$TONGUE.TUBE-c[2])^2/2*c[3]^2))^2)
+         exp(c[1])*exp(-(offset.data$TONGUE.TUBE-c[2])^2/2*exp(c[3])))^2)
 }
 sol <- optim( runif(3,0,1), gaussianfit )
+
+# attempt many fits and choose the best one
 for(i in 1:50){
   try <- optim( runif(3,0,1), gaussianfit )
   if(try$value < sol$value) sol <- try
 }
-c1 <- sol$par[1]
-c2 <- sol$par[2]
-c3 <- sol$par[3]
+max    <- exp(sol$par[1])
+center <- sol$par[2]
+width  <- exp(sol$par[3])
 
 # plotting the results
 fitted_gaussian <- function(x){
-  c1*exp(-(x-c2)^2/2*c3^2)
+  max*exp(-(x-center)^2/2*width)
 }
 ggplot(offset.data,aes(x=TONGUE.TUBE,y=POLLEN_GRAINS_DEPOSITED))+
   geom_point()+stat_smooth(method = lm, formula=y~fitted_gaussian(x))
