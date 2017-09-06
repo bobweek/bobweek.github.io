@@ -312,20 +312,77 @@ div.tocify {
 # read in data
 offset.data &lt;- read.xls(&quot;PlantPollinatorOffset.xlsx&quot;)
 head(offset.data)</code></pre>
-<pre><code>##   TONGUE.TUBE POLLEN_GRAINS_DEPOSITED NECTAR_VOLUME_CONSUMED
-## 1     -1.1037                      10                  0.480
-## 2     -1.6037                       8                  1.702
-## 3     -3.1037                       7                  1.344
-## 4     -7.6037                       6                  0.528
-## 5    -11.6037                       2                  0.000
-## 6     -4.9792                       6                  0.066
-##   NECTAR_VOLUME_BEFORE
-## 1                0.544
-## 2                1.766
-## 3                1.648
-## 4                1.216
-## 5                1.118
-## 6                0.544</code></pre>
+<pre><code>##   TONGUE.TUBE POLLEN_GRAINS_DEPOSITED PERCENT_NECTAR_CONSUMED  X
+## 1     -1.1037                      10               0.8823529 NA
+## 2     -1.6037                       8               0.9637599 NA
+## 3     -3.1037                       7               0.8155340 NA
+## 4     -7.6037                       6               0.4342105 NA
+## 5    -11.6037                       2               0.0000000 NA
+## 6     -4.9792                       6               0.1213235 NA</code></pre>
+<p>Note the column names in this data frame. The column TONGUE.TUBE denotes the length of the proboscis minus the length of tube for the interacting fly and flower individuals. POLLEN_GRAINS_DEPOSITED contains the number of pollen grains deposited onto the fly by the flower for each recorded interaction. Likewise PERCENT_NECTAR_CONSUMED contains the percentage of nectar consumed by the fly for each interaction. This percentage has been calculated by dividing the volume of nectar within the flower tube after the interaction by the volume of nectar within the tube before the interaction.</p>
+<p>Now that we have our data, let’s prepare to do some inference. I’ll start by performing a quadratic regression of TONGUE.TUBE onto PERCENT_NECTAR_CONSUMED. This will return a parabola that we can use to find the optimal offset for the fly.</p>
+<pre class="r"><code># setting up the variables
+off1 &lt;- offset.data$TONGUE.TUBE
+off2 &lt;- offset.data$TONGUE.TUBE^2
+
+# performing the regression
+opt.off.fly.model &lt;- 
+  lm(offset.data$PERCENT_NECTAR_CONSUMED ~ off1 + off2)
+
+# plotting the results
+library(ggplot2)
+ggplot(offset.data,aes(x=TONGUE.TUBE,y=PERCENT_NECTAR_CONSUMED))+
+  geom_point()+stat_smooth(method = lm, formula=y~poly(x,2))</code></pre>
+<p><img src="inferring_coevolution_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>We can now use algebra to solve for the peak of the above parabola, or solve for it numerically as shown below.</p>
+<pre class="r"><code># pulling the coefficients out of the quadratic fit
+coeffs &lt;- opt.off.fly.model$coefficients
+
+# solving with algebra
+-coeffs[2]/(2*coeffs[3])</code></pre>
+<pre><code>##     off1 
+## 16.96538</code></pre>
+<pre class="r"><code># solving numerically
+getOffset &lt;- function(x){
+  y &lt;- as.numeric(coeffs[2]*x + coeffs[3]*x^2)
+  return(-y)
+}
+optim(0,getOffset)$par</code></pre>
+<pre><code>## [1] 16.96538</code></pre>
+<p>Let’s repeat this analysis to find the optimal offset for the flower.</p>
+<pre class="r"><code># performing the regression
+opt.off.flower.model &lt;- 
+  lm(offset.data$POLLEN_GRAINS_DEPOSITED ~ off1 + off2)
+
+# plotting the results
+library(ggplot2)
+ggplot(offset.data,aes(x=TONGUE.TUBE,y=POLLEN_GRAINS_DEPOSITED))+
+  geom_point()+stat_smooth(method = lm, formula=y~poly(x,2))</code></pre>
+<p><img src="inferring_coevolution_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>As you can see, we run into a bit of a snag here as the parabola is convex with the quadratic coefficient 0.032353. This means it opens up and therefore has no maximum. If we want to find an optimal offset, we need to fit a curve that <strong>always</strong> has a maximum. Gaussian curves not only satisfy this need, but they also approximate concave parabolas quite well near their maxima, making them ideal candidates to solve this problem.</p>
+<p>Implementing the Gaussian fit is a matter of setting up a non-linear least squares problem. As with linear and quadratic regression, our goal is to minimize the sum of the squared differences between our data and the Gaussian curve. The Gaussian curve has three parameters, a maximum, a center and a width. We can solve for the maximum, center and width parameters that minimize the sum of the squares as follows.</p>
+<pre class="r"><code># fitting a gaussian curve
+gaussianfit &lt;- function(c){
+  sum((offset.data$POLLEN_GRAINS_DEPOSITED - 
+         c[1]*exp(-(offset.data$TONGUE.TUBE-c[2])^2/2*c[3]^2))^2)
+}
+sol &lt;- optim( runif(3,0,1), gaussianfit )
+for(i in 1:50){
+  try &lt;- optim( runif(3,0,1), gaussianfit )
+  if(try$value &lt; sol$value) sol &lt;- try
+}
+c1 &lt;- sol$par[1]
+c2 &lt;- sol$par[2]
+c3 &lt;- sol$par[3]
+
+# plotting the results
+fitted_gaussian &lt;- function(x){
+  c1*exp(-(x-c2)^2/2*c3^2)
+}
+ggplot(offset.data,aes(x=TONGUE.TUBE,y=POLLEN_GRAINS_DEPOSITED))+
+  geom_point()+stat_smooth(method = lm, formula=y~fitted_gaussian(x))</code></pre>
+<p><img src="inferring_coevolution_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>This provides an optimal offset for the flower of 4.6907105.</p>
 </div>
 <div id="rightarrow-theta_i" class="section level3">
 <h3><span class="math inline">\(\rightarrow \theta_i\)</span></h3>
