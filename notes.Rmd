@@ -43,7 +43,7 @@ $$=\lim_{\delta\rightarrow0}\frac{(W^\delta-1)}{\delta}\mathbb{E}N_t=\ln(W)\math
 
 Note that switching the derivative and the expectation must be formally justified. In what follows, we won't drag the annoying expectation symbol along with us. Instead we will adopt the convention that $N_t$ is actually an expected value.
 
-In typical notation one would write $r$ in place of $\ln(W)$. This exposes an interesting connection between two very distinct notions of fitness. The notion of fitness that I've been working with, $W$, is called the Wrightian, or, multiplicative fitness. It is a non-negative number that corresponds to the expected number of offspring produced for some category. It's been called multiplicative fitness because the multiplication of any two Wrightian fitnesses is yet another Wrightian fitness. The natural log of this value is known as the Malthusian, or, additive fitness. Its value can be any real number and, depending on its use, can also be infinitely negative. Note that the log of a product is the sum of the logs. It's this basic log rule that provides the Malthusian fitness its additivity. The sum of any two Malthusian fitnesses is again a Malthusian fitness. Artem Kaznatcheev has a nice discussion of this topic [here](https://egtheory.wordpress.com/2016/08/17/weak-selection). To solidify the connection between these two notions of fitness, consider a population that maintains a constant size of 100 but becomes extinct instantaneously (as shown below). This  corresponds to each individual having a fitness of 1 (remember we're assuming fitness is constant trhoughout the population) making the Malthusian fitness of the population zero. Then when the population drops each individual must suddenly have a Wrightian fitness of zero. The Malthusian fitness of the population will then be $\ln(0)$ which is $-\infty$, corresponding to the discontinuous drop in the population size. 
+In typical notation one would write $r$ in place of $\ln(W)$. This exposes an interesting connection between two very distinct notions of fitness. The notion of fitness that I've been working with, $W$, is called the Wrightian, or, multiplicative fitness. It is a non-negative number that corresponds to the expected number of offspring produced for some category. It's been called multiplicative fitness because the multiplication of any two Wrightian fitnesses is yet another Wrightian fitness. The natural log of this value is known as the Malthusian, or, additive fitness. Its value can be positive or negative and corresponds to the expected rate at which the abundance of some category fluctuates. Note that the log of a product is the sum of the logs. It's this basic log rule that provides the Malthusian fitness its additivity. The sum of any two Malthusian fitnesses is again a Malthusian fitness. Artem Kaznatcheev has a nice discussion of this topic [here](https://egtheory.wordpress.com/2016/08/17/weak-selection). To solidify the connection between these two notions of fitness, consider a population that maintains a constant size of 100 but becomes extinct instantaneously (as shown below). This  corresponds to each individual having a fitness of 1 (remember we're assuming fitness is constant trhoughout the population) making the Malthusian fitness of the population zero. Then when the population drops each individual must suddenly have a Wrightian fitness of zero. The Malthusian fitness of the population will then be $\ln(0)$ which is $-\infty$, corresponding to the discontinuous drop in the population size. 
 
 ```{r, echo=F, fig.height = 3, fig.width = 5, fig.align='center'}
 time <- 1:1000
@@ -93,24 +93,24 @@ and $C$ is some constant. What's interesting here is to note that the new parame
 
 The concept of a convolution can be readily captured graphically by visualizing the graphs of two functions $g_1(z)$ and $g_2(z)$ sliding across each other horizontally. We parameterize this sliding by $\tau$ which lives on the real number line. We'll let $g_2$ remain still and slide $g_1$. As $\tau$ runs from each end of the number line visualize the graph of $g_1$ sliding across $g_2$. As this sliding occurs, we accumulate the product of these two functions with an integral in such a way that we integrate out $\tau$. At this point I recommend taking a peek at the <a href="https://en.wikipedia.org/wiki/Convolution">wikipedia</a>. In symbols we denote the convolution between $g_1$ and $g_2$ by $$g_1 \ast g_2$$ and define it as
 
-$$(g_1*g_2)(z)\equiv\int_{-\infty}^\infty g_1(\tau-z)g_2(z)d\tau.$$
+$$(g_1*g_2)(z)\equiv\int g_1(\tau-z)g_2(z)d\tau.$$
 
 It turns out that $\overline W$ can be seen as the convolution of two functions. Namely $\phi_0(\bar z)\equiv\phi(0)$ and $W_0(\bar z)\equiv W(\bar z)$, the phenotypic density evaluated at zero and the fitness function evaluated at the population mean phenotype respectively. Although $\phi(0)$ and $W(\bar z)$ are technically constants, both of the resulting functions are sensitive to the value of $\bar z$. We could take care by rigorously defining these objects but I'll leave the mathematical formalities out of this discussion. Instead, observe
 
-$$\phi_0*W_0=\int_{-\infty}^\infty\phi_0(\bar z-\tau)W_0(\tau)d\tau=\star.$$
+$$\phi_0*W_0=\int\phi_0(\bar z-\tau)W_0(\tau)d\tau=\star.$$
 
 If we use $z$ instead of $\tau$, this gives
 
-$$\star=\int_{-\infty}^\infty\phi_0(\bar z-z)W_0(z)dz$$
+$$\star=\int\phi_0(\bar z-z)W_0(z)dz$$
 
-$$=\int_{-\infty}^\infty\left[\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(\bar z-z)^2}{2\sigma^2}\right)\right]
+$$=\int\left[\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(\bar z-z)^2}{2\sigma^2}\right)\right]
 \left[\frac{1}{\sqrt{2\pi\omega^2}}\exp\left(-\frac{(z-\theta)^2}{2\omega^2}\right)\right]dz$$
 
 $$=\int_{-\infty}^{\infty}\varphi(z)W(z)dz=\overline W.$$
 
 Okay, so $\overline W$ can be written as a convolution, so what? Well it turns out that Gaussian probability densities are closed under convolutions, which is to say that a convolution of two Gaussian densities is yet another Gaussian density. Specifically, if $g_1(z)$ is a Gaussian probability density with mean $\mu_1$ and variance $\sigma_1^2$ and similarly with $g_2(z)$, then $$(g_1 \ast g_2)(z)=g_3(z)$$ is another Gaussian probability density with the mean $\mu_3=\mu_1+\mu_2$ and variance $\sigma_3^2=\sigma_1^2+\sigma_2^2.$ Noting that, as probability densities, $\phi_0$ has mean zero and variance $\sigma^2$ and $W_0$ has mean $\theta$ and variance $\omega^2$, we now calculate $\overline W$ as
 
-$$\overline W=\int_{-\infty}^\infty\phi(z)W(z)dz=(\phi_0*W_0)(\bar z)$$
+$$\overline W=\int\phi(z)W(z)dz=(\phi_0*W_0)(\bar z)$$
 
 $$=\frac{1}{\sqrt{2\pi(\sigma^2+\omega^2)}}\exp\left(-\frac{(\bar z-\theta)^2}{2(\sigma^2+\omega^2)}\right).$$
 
