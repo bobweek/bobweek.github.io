@@ -264,9 +264,10 @@ output:
 <p>For readability, we adopt the notation <span class="math inline">\(D_t\)</span> in place of <span class="math inline">\(\frac{d}{dt}\)</span>.</p>
 <p><span class="math display">\[D_t\phi_t(i)=D_t\frac{n_t(i)}{N_t}=\frac{N_tD_tn_t(i)-n_t(i)D_tN_t}{N_t^2}\]</span></p>
 <p><span class="math display">\[=\frac{\ln(W_t(i))n_t(i)-n_t(i)\ln(\overline{W}_t)}{N_t}=\phi_t(i){\left( \ln(W_t(i))-\ln(\overline W_t) \right)}.\]</span></p>
-<p>Defining <span class="math inline">\(\bar r_t\equiv\ln(\overline W_t)\)</span> the above results imply <span class="math inline">\(W_t(i)=e^{r_t(i)}\)</span>, <span class="math inline">\(D_tr_t(i)=r_{t+1}(i)-r_t(i)\)</span> and <span class="math inline">\(D_t\bar r_t(i)=\bar r_{t+1}(i)-\bar r_t(i)\)</span>. Hence, this coincides with <span class="math inline">\(D_t\rho_t(i)=\rho_{t+1}(i)-\rho_t(i)\)</span>.</p>
+<p>Defining <span class="math inline">\(\bar r_t\equiv\ln(\overline W_t)\)</span> and <span class="math inline">\(r_t(i)\equiv\ln(W_t(i))\)</span> the above results imply <span class="math inline">\(D_tr_t(i)=r_{t+1}(i)-r_t(i)\)</span> and <span class="math inline">\(D_t\bar r_t=\bar r_{t+1}-\bar r_t\)</span>. Hence, this coincides with <span class="math inline">\(D_t\rho_t(i)=\rho_{t+1}(i)-\rho_t(i)\)</span>.</p>
 <p>We can solve for <span class="math inline">\(\phi_t(i)\)</span> to get</p>
 <p><span class="math display">\[\phi_t(i)=\phi_0(i)e^{\int_0^t\rho_s(i)ds}\]</span></p>
+<p>We could, of course, continue on to produce results for the stochastic case.</p>
 </div>
 <div id="calculating-the-response-in-mean-phenotype-to-selection" class="section level2">
 <h2>Calculating the Response in Mean Phenotype to Selection</h2>

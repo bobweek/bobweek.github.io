@@ -136,11 +136,13 @@ $$D_t\phi_t(i)=D_t\frac{n_t(i)}{N_t}=\frac{N_tD_tn_t(i)-n_t(i)D_tN_t}{N_t^2}$$
 
 $$=\frac{\ln(W_t(i))n_t(i)-n_t(i)\ln(\overline{W}_t)}{N_t}=\phi_t(i)\para{\ln(W_t(i))-\ln(\overline W_t)}.$$
 
-Defining $\bar r_t\equiv\ln(\overline W_t)$ the above results imply $W_t(i)=e^{r_t(i)}$, $D_tr_t(i)=r_{t+1}(i)-r_t(i)$ and $D_t\bar r_t(i)=\bar r_{t+1}(i)-\bar r_t(i)$. Hence, this coincides with $D_t\rho_t(i)=\rho_{t+1}(i)-\rho_t(i)$.
+Defining $\bar r_t\equiv\ln(\overline W_t)$ and $r_t(i)\equiv\ln(W_t(i))$ the above results imply $D_tr_t(i)=r_{t+1}(i)-r_t(i)$ and $D_t\bar r_t=\bar r_{t+1}-\bar r_t$. Hence, this coincides with $D_t\rho_t(i)=\rho_{t+1}(i)-\rho_t(i)$.
 
 We can solve for $\phi_t(i)$ to get
 
 $$\phi_t(i)=\phi_0(i)e^{\int_0^t\rho_s(i)ds}$$
+
+We could, of course, continue on to produce results for the stochastic case.
 
 ## Calculating the Response in Mean Phenotype to Selection
 
