@@ -10,7 +10,7 @@ output:
 
 I am a student at the University of Idaho working on a PhD under professor [Scott Nuismer](http://www.webpages.uidaho.edu/~snuismer/Nuismer_Lab/). My degree program is [Bioinformatics and Computational Biology](http://www.uidaho.edu/sci/bcb) (BCB) which is housed within [The Institute for Bioinformatics and Evolutionary Studies](http://www.ibest.uidaho.edu/) (IBEST). 
 
-My research focuses on using quantitative genetic theory to investigate the evolutionary stability of biological communities. To do this I develop rigorous mathematical models of phenotypic evolution that incorporate species interactions and methods for inferring parameters of these models.
+I am currently working on a method for detecting pairwise coevolution in nature.
 
 My CV is available [here](files/cv.pdf).
 
