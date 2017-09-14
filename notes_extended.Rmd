@@ -1,6 +1,9 @@
 ---
 title: "Notes"
-output: html_document
+output:: 
+  html_document: 
+    theme: cosmo
+    css: style.css
 ---
 
 ```{r setup, include=FALSE}

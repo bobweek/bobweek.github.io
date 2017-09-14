@@ -100,19 +100,37 @@ $$\E(N_t)=\para{\prod_{i=1}^tW_i}N_0 \text{ and } \Var(N_t)=\para{1+\sum_{i=1}^{
 
 and for continuous time 
 
-$$\E(N_t)=\para{\oint_0^tW_s^{ds}}N_0 \text{ and } \Var(N_t)=\para{1+\int_0^{t-1}W_sds}\para{\oint_0^tW_s^{ds}}N_0$$
+$$\E(N_t)=\para{\bigwedge_0^tW_s^{ds}}N_0 \text{ and } \Var(N_t)=\para{1+\int_0^{t-1}W_sds}\para{\bigwedge_0^tW_s^{ds}}N_0$$
 
-where $\oint$ represents type 1 product integration. Note that 
+where $\bigwedge$ represents type-1 product integration and is defined by
 
-$$\oint_0^tW_s^{ds}\equiv e^{\int_0^t\ln(W_s)ds}=e^{\int_0^t r(s)ds}.$$
+$$\bigwedge_0^tW_s^{ds}\equiv e^{\int_0^t\ln(W_s)ds}.$$
 
 Hence, this returns the same expected dynamics as above when $\ln(W_t)=r(t)$.
 
-Continuing our $NB$ fit we would set $p_t=1-\para{1+\int_0^{t-1}W_sds}^{-1}$ and $n_t=\frac{1-p_t}{p_t}\para{\oint_0^tW_s^{ds}}N_0=\para{\int_0^{t-1}W_sds}^{-1}\para{\oint_0^tW_s^{ds}}N_0$.
+Continuing our $NB$ fit we would set $p_t=1-\para{1+\int_0^{t-1}W_sds}^{-1}$ and $n_t=\frac{1-p_t}{p_t}\para{\bigwedge_0^tW_s^{ds}}N_0=\para{\int_0^{t-1}W_sds}^{-1}\para{\bigwedge_0^tW_s^{ds}}N_0$.
 
 ## Populations of Types
 
-In terms of modelling, a population can be very abstract. Its concept is not restricted to a set of living things, as in the biological concept of a population. Here a population can be a set of biological populations, a set of species, and so on. The members of the population may not be uniform, but can consist of various different types. For example, we can consider populations of individuals categorized by their phenotype or populations of species categorized by clades. We derive the Price equation to obtain how the distribution of types within a population fluctuates due to their fitness'.
+In terms of modelling, a population can be very abstract. Its concept is not restricted to a set of living things, as in the biological concept of a population. Here a population can be a set of biological populations, a set of species, and so on. The members of the population may not be uniform, but can consist of various different types. For example, we can consider populations of individuals categorized by their phenotype or populations of species categorized by clades. We now derive how the distribution of types within a population fluctuates due to differential fitness, ie, selection.
+
+Consider a population of $T$ different types, each type $i$ with $n_i(t)$ individuals at time $t$. If we denote $\phi_i(t)$ to be the proportion of individuals within type $i$ at time $t$ among the population, we have $\phi_i(t)=\frac{n_i(t)}{N_t}$ where $N_t=\sum_{i=1}^Tn_i(t)$. Denote the expected fitness of each individual within type $i$ as $W_i$. Then
+
+$$\phi_i(t+1)=\frac{n_i(t)W_i}{\sum_{i=1}^Tn_i(t)W_i}=\frac{\phi_i(t)W_i}{\sum_{i=1}^T\phi_i(t)W_i}=\para{\frac{W_i}{\overline{W}_t}}\phi_i(t)$$
+
+Using the same approach as above for the continuous time expected population dynamics, we can easily get the continuous time dynamics of $\phi_i$. We suppose that for $0<\delta<1$, $\phi_i(t+\delta)=\para{\frac{W_i}{\overline W(t)}}^\delta\phi_i(t)$. Then
+
+$$\frac{d}{dt}\phi_i(t)=\lim_{\delta\rightarrow0}\frac{\phi_i(t+\delta)-\phi_i(t)}{\delta}=\phi_i(t)\para{\ln(W_i)-\ln(\overline W_t)}.$$
+
+There's another approach to this and it agrees with the above result. We instead differentiate the definition of $\phi_i$ and use our results about population dynamics. Along the way, we'll need the result $\frac{dN_t}{dt}=\ln(\overline W_t)N_t$. To see this examine the following string of equalities:
+
+$$N_{t+1}=\sum_{i=1}^Tn_i(t+1)=\sum_{i=1}^Tn_i(t)W_i=\frac{N_t}{N_t}\sum_{i=1}^Tn_i(t)W_i=N_t\sum_{i=1}^T\phi_i(t)W_i=\overline{W_t}N_t.$$
+
+For readability, we adopt the notation $D_t$ in place of $\frac{d}{dt}$.
+
+$$D_t\phi_i(t)=D_t\frac{n_i(t)}{N_t}=\frac{N_tD_tn_i(t)-n_i(t)D_tN_t}{N_t^2}$$
+
+$$=\frac{\ln(W_i)n_i(t)-n_i(t)\ln(\overline{W}_t)}{N_t}=\phi_i(t)\para{\ln(W_i)-\ln(\overline W_t)}.$$
 
 ## Calculating the Response in Mean Phenotype to Selection
 
@@ -134,7 +152,7 @@ $$\text{where} \ \tilde\sigma^2=\frac{\sigma^2\omega^2}{\sigma^2+\omega^2}, \ \t
 
 and $C$ is some constant. What's interesting here is to note that the new parameter $\tilde z$ is a weighted average of $\theta$ and $\bar z$, weighted by the tolerance and variance. It should also be noted that $\tilde\sigma^2<\sigma^2$. One can show that as $\omega^2\rightarrow\infty$, $\tilde z\rightarrow\bar z$ and $\tilde\sigma^2\rightarrow\sigma^2$, in agreement with the concept of $\omega^2$ being the inverse of the strength of selection. With this result we see that $\overline W$ is just the integral of the above product over the whole real line. However, this product is just a scaled version of a probability density, scaled by $C$. Hence, $\overline W=C$. Then we need to calculate $C$, and for this I very briefly introduce the binary operation known as convolution.
 
-The concept of a convolution can be readily captured graphically by visualizing the graphs of two functions $g_1(z)$ and $g_2(z)$ sliding across each other horizontally. We parameterize this sliding by $\tau$ which lives on the real number line. We'll let $g_2$ remain still and slide $g_1$. As $\tau$ runs from each end of the number line visualize the graph of $g_1$ sliding across $g_2$. As this sliding occurs, we accumulate the product of these two functions with an integral in such a way that we integrate out $\tau$. At this point I recommend taking a peek at the <a href="https://en.wikipedia.org/wiki/Convolution">wikipedia</a>. In symbols we denote the convolution between $g_1$ and $g_2$ by $$g_1 \ast g_2$$ and define it as
+The concept of a convolution can be readily captured graphically by visualizing the graphs of two functions $g_1(z)$ and $g_2(z)$ sliding across each other horizontally. We parameterize this sliding by $\tau$ which lives on the real number line. We'll let $g_2$ remain still and slide $g_1$. As $\tau$ runs from each end of the number line visualize the graph of $g_1$ sliding across $g_2$. As this sliding occurs, we accumulate the product of these two functions with an integral in such a way that we integrate out $\tau$. At this pbigwedge I recommend taking a peek at the <a href="https://en.wikipedia.org/wiki/Convolution">wikipedia</a>. In symbols we denote the convolution between $g_1$ and $g_2$ by $$g_1 \ast g_2$$ and define it as
 
 $$(g_1*g_2)(z)\equiv\int g_1(\tau-z)g_2(z)d\tau.$$
 
