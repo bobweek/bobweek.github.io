@@ -17,6 +17,13 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+
+
 These notes are the result of the interplay between my background in mathematics and my development as a theoretical biologist. I have placed them here primarily for my own reference. As I continue to learn and explore I will update these notes with my findings.
 
 ## Fitness
@@ -25,7 +32,7 @@ I denote the fitness of an individual by $\mathcal{W}$, a [Poisson](https://en.w
 
 We denote expectation by $\mathbb{E}$ and $W\equiv\mathbb{E}\mathcal{W}$ so that $W$ represents the mean fitness of an individual ($\equiv$ is used for definitions). This individual mean fitness may depend on its genotype ($\gamma$) or, more mechanistically, its phenotype ($z$). In general genotypes will be modelled as elements of some discrete space, usually finite, and phenotypes will usually be modelled as elements of the real line $\mathbb{R}$, although at times we will restrict the range of phenotypes to be a countable or even finite subset of $\mathbb{R}$. In the case of a random phenotype $Z$ we write $W(z)\equiv\mathbb{E}(\mathcal{W}(Z)|Z=z)$, that is $W(z)$ is a conditional mean, conditioned on the phenotype $Z$ taking a particular value $z$. In the case of a continuously distributed trait, we will use $\phi(z)$ for the density function of the populations phenotypic distribution. Then the total expectation of fitness, or, population mean fitness is 
 
-$$\overline W=\mathbb{E}\mathcal{W}(Z)=\int W(z)\phi(z)dz.$$
+$$\overline W=\E\W(Z)=\int W(z)\phi(z)dz.$$
 
 For discrete traits that take the values $z_1,z_2,\dots$, we write $\phi_i$ and $W_i$ for the frequency and mean fitness of trait $z_i$ in the population. Population mean fitness is then calculated as $\overline W=\sum_iW_i\phi_i$.
 
@@ -33,7 +40,15 @@ For discrete traits that take the values $z_1,z_2,\dots$, we write $\phi_i$ and 
 
 Let's suppose there are $N_t$ different individuals in the population at time $t$, with each individual $i$ having fitness $\mathcal{W_t}(i)$. If we further suppose that generations are non-overlapping, then we obtain the population size in the next generation as $N_{t+1}=\sum_{i=1}^{N_t}\mathcal{W_t}(i)$. If each $\mathcal{W_t}(i)$ is a Poisson random variable with mean $W_t(i)$ (in symbols $\mathcal{W_t}(i)\sim\mathcal{P}(W_t(i))$), then by the additive property of Poisson random variables we have $N_{t+1}\sim\mathcal{P}\left(\sum_{i=1}^{N_t}W_t(i)\right)$. If selection is absent so that each $\mathcal{W_t}(i)$ is identically distributed with mean $W_t$, then $N_{t+1}\sim\mathcal{P}(W_tN_t)$. 
 
-insert stuff about stochastic population dynamics here
+Let's now suppose we know the value of $N_0$ exactly and that $W_t=W$ for each $t$. Then $N_1\sim\mathcal{P}(WN_0)$ and $N_2\sim\mathcal{P}(WN_1)=\mathcal{P}(W^2N_0)$, right? We need to be careful here as $N_1$ is a random variable making $N_2$ a random variable with a compound distribution, that is, a parameter controlling the distribution is itself a random variable. We can use the laws of total expectation and variance to find out if $N_1$ is Poisson. If it is, then the expectation and variance will be equivalent. Otherwise it is not a Poisson random variable.
+
+$$\E(N_2)=\E(\W)\E(N_1)=W^2N_0$$
+
+$$\mathrm{Var}(N_2)=(\mathrm{Var}(\mathcal{W})+\mathbb{E}(\mathcal{W})^2)\mathbb{E}(N_1)=(1+W)W^2N_0\neq\mathbb{E}(N_2)$$
+
+For now, let's settle for deterministic dynamics. We'll return to the stochastics after we get a feel for the simplier situation.
+
+### Deterministic Population Dynamics in Continuous Time
 
 If we assume that selection is absent and mean fitness is constant with respect to time, we can derive continuous time mean dynamics of $N_t$. To do so, suppose that for $0<\delta<1$, $\mathbb{E}N_{t+\delta}=W^\delta\mathbb{E} N_t$. Then $\mathbb{E}N_{t+0}=\mathbb{E}N_t$ and $\mathbb{E}N_{t+1}=W\mathbb{E}N_t$. Hence
 
@@ -70,6 +85,18 @@ $$\frac{dN_t}{dt}=\left(\int_0^ta(s)ds+e^{\int_0^tb(s)ds-t}+c\right)N_t.$$
 We can then solve for the mean population size as a function of time to get
 
 $$N_t=N_0e^{\int_0^tr(s)ds}.$$
+### Returning to Stochastics
+
+Picking up where we left off, the variance has now been decoupled from the expectation forcing future generations population size distributions to be non-Poisson. This can be rectified if we choose the next best option$\dots$ the negative binomial $\mathrm{NB}(r,p)$. By setting $r=WN_0$ and $p=1-\frac{1}{1+W}$ this provides the expectation and variance derived above, but is $\mathrm{NB}$ the actual distribution of $N_2$? Regardless, we can continue this program to derive distributions for future population sizes. In general, we get 
+
+$$\E(N_t)=W^tN_0 \text{ and } \Var(N_t)=\para{\sum_{i=0}^{t-1}W^i}W^tN_0=\frac{1-W^t}{1-W}W^tN_0.$$
+
+Our negative binomial for each time $t$ can be accordingly parameterized by $r_t=\frac{1-W}{W-W^t}W^tN_0$ and $p_t=\frac{W-W^t}{1-W^t}$
+
+HYPOTHESIS: For $W_t\neq W$, $\E(N_t)=N_0\prod_{i=1}^tW_i$ and $\Var(N_t)=N_0\para{\prod_{i=1}^tW_i}\para{1+\sum_{i=1}^{t-1}W_i}$
+
+and for continuous time $\E(N_t)=N_0\oint_0^tW_s^{ds}$ and $\Var(N_t)=N_0\para{\oint_0^tW_s^{ds}}\para{1+\int_0^{t-1}W_sds}$ where $\oint$ represents type 1 product integration. Note that $\oint_0^tW_s^{ds}=e^{\int_0^t\ln W_sds}=e^{\int_0^t r(s)ds}$
+
 
 ## Calculating the Response in Mean Phenotype to Selection
 
