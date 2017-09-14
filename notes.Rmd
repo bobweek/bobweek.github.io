@@ -85,18 +85,34 @@ $$\frac{dN_t}{dt}=\left(\int_0^ta(s)ds+e^{\int_0^tb(s)ds-t}+c\right)N_t.$$
 We can then solve for the mean population size as a function of time to get
 
 $$N_t=N_0e^{\int_0^tr(s)ds}.$$
+
 ### Returning to Stochastics
 
-Picking up where we left off, the variance has now been decoupled from the expectation forcing future generations population size distributions to be non-Poisson. This can be rectified if we choose the next best option$\dots$ the negative binomial $\mathrm{NB}(r,p)$. By setting $r=WN_0$ and $p=1-\frac{1}{1+W}$ this provides the expectation and variance derived above, but is $\mathrm{NB}$ the actual distribution of $N_2$? Regardless, we can continue this program to derive distributions for future population sizes. In general, we get 
+Picking up where we left off, the variance has now been decoupled from the expectation forcing future generation population size distributions to be non-Poisson. This can be delt with if we choose the next best option$\dots$ the negative binomial $\mathrm{NB}(n,p)$. By setting $n=WN_0$ and $p=1-\frac{1}{1+W}$ this provides the expectation and variance derived above, but is $\mathrm{NB}$ the actual distribution of $N_2$? Regardless, we can continue this program to derive distributions for future population sizes. In general, we get 
 
 $$\E(N_t)=W^tN_0 \text{ and } \Var(N_t)=\para{\sum_{i=0}^{t-1}W^i}W^tN_0=\frac{1-W^t}{1-W}W^tN_0.$$
 
-Our negative binomial for each time $t$ can be accordingly parameterized by $r_t=\frac{1-W}{W-W^t}W^tN_0$ and $p_t=\frac{W-W^t}{1-W^t}$
+Our negative binomial for each time $t$ can be accordingly parameterized by $n_t=\frac{1-W}{W-W^t}W^tN_0$ and $p_t=\frac{W-W^t}{1-W^t}$.
 
-HYPOTHESIS: For $W_t\neq W$, $\E(N_t)=N_0\prod_{i=1}^tW_i$ and $\Var(N_t)=N_0\para{\prod_{i=1}^tW_i}\para{1+\sum_{i=1}^{t-1}W_i}$
+HYPOTHESIS: For $W_t\neq W$, 
 
-and for continuous time $\E(N_t)=N_0\oint_0^tW_s^{ds}$ and $\Var(N_t)=N_0\para{\oint_0^tW_s^{ds}}\para{1+\int_0^{t-1}W_sds}$ where $\oint$ represents type 1 product integration. Note that $\oint_0^tW_s^{ds}=e^{\int_0^t\ln W_sds}=e^{\int_0^t r(s)ds}$
+$$\E(N_t)=\para{\prod_{i=1}^tW_i}N_0 \text{ and } \Var(N_t)=\para{1+\sum_{i=1}^{t-1}W_i}\para{\prod_{i=1}^tW_i}N_0$$
 
+and for continuous time 
+
+$$\E(N_t)=\para{\oint_0^tW_s^{ds}}N_0 \text{ and } \Var(N_t)=\para{1+\int_0^{t-1}W_sds}\para{\oint_0^tW_s^{ds}}N_0$$
+
+where $\oint$ represents type 1 product integration. Note that 
+
+$$\oint_0^tW_s^{ds}\equiv e^{\int_0^t\ln(W_s)ds}=e^{\int_0^t r(s)ds}.$$
+
+Hence, this returns the same expected dynamics as above when $\ln(W_t)=r(t)$.
+
+Continuing our $NB$ fit we would set $p_t=1-\para{1+\int_0^{t-1}W_sds}^{-1}$ and $n_t=\frac{1-p_t}{p_t}\para{\oint_0^tW_s^{ds}}N_0=\para{\int_0^{t-1}W_sds}^{-1}\para{\oint_0^tW_s^{ds}}N_0$.
+
+## Populations of Types
+
+In terms of modelling, a population can be very abstract. Its concept is not restricted to a set of living things, as in the biological concept of a population. Here a population can be a set of biological populations, a set of species, and so on. The members of the population may not be uniform, but can consist of various different types. For example, we can consider populations of individuals categorized by their phenotype or populations of species categorized by clades. We derive the Price equation to obtain how the distribution of types within a population fluctuates due to their fitness'.
 
 ## Calculating the Response in Mean Phenotype to Selection
 
