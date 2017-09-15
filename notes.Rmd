@@ -114,8 +114,9 @@ Continuing our $NB$ fit we would set $p_t=1-\para{1+\int_0^{t-1}W_sds}^{-1}$ and
 
 In terms of modelling, a population can be very abstract. Its concept is not restricted to a set of living things, as in the biological concept of a population. Here a population can be a set of biological populations, a set of species, and so on. The members of the population may not be uniform, but can consist of various different types. For example, we can consider populations of individuals categorized by their phenotype or populations of species categorized by clades. We now derive how the distribution of types within a population fluctuates due to differential fitness, ie, selection.
 
-Consider a population of $T$ different types, each type $i$ with $n_t(i)$ individuals at time $t$. If we denote $\phi_t(i)$ to be the proportion of individuals within type $i$ at time $t$ among the population, we have $\phi_t(i)=\frac{n_t(i)}{N_t}$ where $N_t=\sum_{i=1}^Tn_t(i)$. Denote the expected fitness of each individual within type $i$ as $W_t(i)$. Then committing ourselves to be content with expected dynamics, we have
+Consider a population of $T$ different types, each type $i$ with $n_t(i)$ individuals at time $t$. If we denote $\phi_t(i)$ to be the proportion of individuals within type $i$ at time $t$ among the population, we have $\phi_t(i)=\frac{n_t(i)}{N_t}$ where $N_t=\sum_{i=1}^Tn_t(i)$. Denote the expected fitness of each individual within type $i$ as $W_t(i)$. Then committing ourselves to be content with expected dynamics and adopting the notation $D_t$ in place of $\frac{d}{dt}$, we have
 
+<!--
 $$\phi_i(t+1)=\frac{n_t(i)W_t(i)}{\sum_{i=1}^Tn_t(i)W_t(i)}=\frac{\phi_t(i)W_t(i)}{\sum_{i=1}^T\phi_t(i)W_t(i)}=\para{\frac{W_t(i)}{\overline{W}_t}}\phi_t(i)$$
 
 Using the same approach as above for the continuous time expected population dynamics, we can easily get the continuous time dynamics of $\phi_t$. We suppose that for $0<\delta<1$, $\phi_{t+\delta}(i)=\para{\frac{W_t(i)}{\overline W_t(i)}}^\delta\phi_t(i)$. Then
@@ -130,17 +131,13 @@ There's another approach to this and it agrees with the above result. We instead
 
 $$N_{t+1}=\sum_{i=1}^Tn_i(t+1)=\sum_{i=1}^Tn_t(i)W_t(i)=\frac{N_t}{N_t}\sum_{i=1}^Tn_t(i)W_t(i)=N_t\sum_{i=1}^T\phi_t(i)W_t(i)=\overline{W_t}N_t.$$
 
-For readability, we adopt the notation $D_t$ in place of $\frac{d}{dt}$.
+The part I need to check: $\overline W_{\delta}=\overline W_1^\delta$
 
-$$D_t\phi_t(i)=D_t\frac{n_t(i)}{N_t}=\frac{N_tD_tn_t(i)-n_t(i)D_tN_t}{N_t^2}$$
+$$\frac{d\overline W_t}{dt}=\sum_{i=1}^T\para{W_t(i)\frac{d}{dt}\phi_t(i)+\phi_t(i)\frac{d}{dt}W_t(i)}=\dots$$
+$$\overline W_t\ln\para{\frac{\overline W_{t+1}}{\overline W_t}}=\dots$$
 
-$$=\frac{\ln(W_t(i))n_t(i)-n_t(i)\ln(\overline{W}_t)}{N_t}=\phi_t(i)\para{\ln(W_t(i))-\ln(\overline W_t)}.$$
 
 Defining $\bar r_t\equiv\ln(\overline W_t)$ and $r_t(i)\equiv\ln(W_t(i))$ the above results imply $D_tr_t(i)=r_{t+1}(i)-r_t(i)$ and $D_t\bar r_t=\bar r_{t+1}-\bar r_t$. Hence, this coincides with $D_t\rho_t(i)=\rho_{t+1}(i)-\rho_t(i)$.
-
-We can solve for $\phi_t(i)$ to get
-
-$$\phi_t(i)=\phi_0(i)e^{\int_0^t\rho_s(i)ds}$$
 
 Unfortunately I now have to admit that the above results are slightly wrong. I'm not sure what went wrong, but I have a hunch it comes from rederiving the derivatives and the supposision involved. To see why the above is wrong note that $\sum_i\phi_t(i)=1$ for each $t$. Then
 
@@ -148,13 +145,27 @@ $$D_t\sum_{i=1}^T\phi_t(i)=\sum_{i=1}^TD_t\phi_t(i)=\sum_{i=1}^T\phi_t(i)\rho_t(
 
 Hence, $\overline{\ln(W_t)}=\ln(\overline{W}_t)$. But this is only true if $W_t(i)=W_t(j)$ for each $i,j=1,2,\dots,T$. We could instead proceed slightly differently by just using previously derived derivatives instead of deriving any new derivatives. I think that rederiving the derivatives had incorporating a little too much structure for consistency.
 
-$$D_tN_t=D_t\sum_in_t(i)=\sum_i\ln(W_t(i))n_t(i)=\overline{\ln(W_t)}N_t.$$
-
-$$D_t\phi_t(i)=\phi_t(i)\para{\ln(W_t(i))-\overline{\ln(W_t)}}$$
-
 Should try to show that if each $W_t(i)$ satisfies the $\delta$ supposition, then $\overline W_t$ cannot satisfy the $\delta$ supposition.
 
-We could, of course, continue on to produce results for the stochastic case.
+-->
+
+$$D_tN_t=D_t\sum_in_t(i)=\sum_i\ln(W_t(i))n_t(i)=\overline{\ln(W_t)}N_t.$$
+
+$$D_t\phi_t(i)=D_t\frac{n_t(i)}{N_t}=\frac{N_tD_tn_t(i)-n_t(i)D_tN_t}{N_t^2}$$
+
+$$=\frac{\ln(W_t(i))n_t(i)-n_t(i)\overline{\ln(W_t)}}{N_t}=\phi_t(i)\para{\ln(W_t(i))-\overline{\ln(W_t)}}.$$
+
+Setting $\rho_t(i)=\ln(W_t(i))-\overline{\ln(W_t)}$ (what I refer to as the "relative" Malthusian fitness) we can solve for $\phi_t(i)$ to get
+
+$$\phi_t(i)=\phi_0(i)e^{\int_0^t\rho_s(i)ds}$$
+
+We could, of course, continue on with the stochastic case to get
+
+$$\E(\phi_t(i))=\phi_0(i)e^{\int_0^t\rho_s(i)ds} \text{ and } \Var(\phi_t(i))=\para{1+\int_0^{t-1}e^{\rho_s(i)}ds}\phi_0(i)e^{\int_0^t\rho_s(i)ds}.$$
+
+Setting $\Box=\phi_0(i)e^{\int_0^t\rho_s(i)ds}$ and $\triangle=\int_0^1e^{\rho_s}ds$ we could try to fit a $\mathrm{Beta}(\alpha,\beta)$ distribution with
+
+$$\alpha=\frac{1-\Box}{1+\triangle}-\Box \ \text{ and } \ \beta=\frac{(1-\Box)^2}{1+\triangle}+\Box-1.$$
 
 ## Calculating the Response in Mean Phenotype to Selection
 
