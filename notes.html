@@ -433,8 +433,8 @@ Should try to show that if each $W_t(i)$ satisfies the $\delta$ supposition, the
 <p><span class="math display">\[W(z|z_i)=W_1^{\pi_1}W_2^{\pi_2}\implies W(z|z_1,\dots,z_K)=W_1^{K\pi_1}W_2^{K\pi_2}\implies W(z)=W_1^{pN_t\pi_1}W_2^{pN_t\pi_2}
 =W_1^{p\frac{N_t}{N_t+1}}W_2^{p\frac{N_t^2}{N_t+1}}\]</span></p>
 <p><span class="math display">\[\frac{dN_t}{dt}=p\frac{N_t}{N_t+1}\ln W_1+p\frac{N_t^2}{N_t+1}\ln W_2\implies N_\infty=-\frac{\ln W_1}{\ln W_2}\]</span></p>
-<p><img src="notes_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p><img src="notes_files/figure-html/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-5-1.png" width="288" style="display: block; margin: auto;" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-7-1.png" width="288" style="display: block; margin: auto;" /></p>
 <p>Returning to evolution, we might assume the Gaussian term used above represents the effectiveness of an individual in helping or hindering another individual based on how similar they are. In this case we get</p>
 <p><span class="math display">\[W(z|z_i)=W_1^{\pi_1}W_2^{\pi_2}\exp{\left( -\frac{(z_i-z)^2}{2\omega^2} \right)}\implies W(z|z_1,\dots,z_K)=W_1^{K\pi_1}W_2^{K\pi_2}\exp{\left( -K\frac{(z_i-z)^2}{2\omega^2} \right)}\]</span></p>
 <p><span class="math display">\[\implies W(z)=W_1^{pN_t\pi_1}W_2^{pN_t\pi_2}\exp{\left( -pN_t\frac{(\bar z_t-z)^2}{2(\omega^2+\sigma_t^2)} \right)}
@@ -474,29 +474,68 @@ Should try to show that if each $W_t(i)$ satisfies the $\delta$ supposition, the
 <li><span class="math inline">\(\sigma_{1,0}^2=\sigma_{2,0}^2=100\)</span></li>
 <li><span class="math inline">\(N_{1,0}=N_{2,0}=100\)</span></li>
 </ul>
-<p><img src="notes_files/figure-html/unnamed-chunk-11-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-11-1.png" width="288" style="display: block; margin: auto;" /></p>
 </div>
 <div id="increasing-the-strength-of-selection" class="section level4">
 <h4>Increasing the Strength of Selection:</h4>
 <ul>
 <li><span class="math inline">\(\omega_1^2=\omega_2^2=100\)</span></li>
 </ul>
-<p><img src="notes_files/figure-html/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-12-1.png" width="288" style="display: block; margin: auto;" /></p>
 </div>
 <div id="asymmetric-strengths-of-selection" class="section level4">
 <h4>Asymmetric Strengths of Selection:</h4>
 <ul>
 <li><span class="math inline">\(\omega_1^2=100, \ \omega_2^2=1000\)</span></li>
 </ul>
-<p><img src="notes_files/figure-html/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-13-1.png" width="288" style="display: block; margin: auto;" /></p>
 </div>
 <div id="incorporating-density-regulation-and-other-stuff" class="section level4">
 <h4>Incorporating Density Regulation and Other Stuff</h4>
-<p><img src="notes_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-15-1.png" width="288" style="display: block; margin: auto;" /></p>
 </div>
 <div id="now-all-that-with-asymmetry" class="section level4">
 <h4>Now all that with Asymmetry</h4>
-<p><img src="notes_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-17-1.png" width="288" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="a-non-gaussian-example" class="section level3">
+<h3>A Non-Gaussian Example</h3>
+<p>The reason why we only needed to track the mean variance of phenotypes in order to capture the whole distribution was due to our choice of initial phenotypic distribution and selection function. They were both Gaussian for all of the above examples. If either is not Gaussian, then the resulting trajectory of phenotypic distributions will not fall within a Gaussian realm, but may converge to one asymptotically.</p>
+<div id="bimodal-selection" class="section level4">
+<h4>Bimodal Selection</h4>
+<p>Our selection surface will be the following.</p>
+<p><img src="notes_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>The resulting phenotypic density takes the following trajectory.</p>
+<p><img src="notes_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+<div id="stochastic-selection" class="section level4">
+<h4>Stochastic Selection</h4>
+<p>Our selection surface across time will be the following.</p>
+<p><img src="notes_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>The resulting phenotypic density takes the following trajectory.</p>
+<p><img src="notes_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+<div id="stochastic-bimodal-selection" class="section level4">
+<h4>Stochastic Bimodal Selection</h4>
+<p>Our selection surface across time will be the following.</p>
+<p><img src="notes_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>The resulting phenotypic density takes the following trajectory.</p>
+<p><img src="notes_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+</div>
+<div id="spate" class="section level4">
+<h4>Spate</h4>
+<pre class="r"><code>require(spate)</code></pre>
+<pre><code>## Loading required package: spate</code></pre>
+<pre><code>## Loading required package: mvtnorm</code></pre>
+<pre><code>## Loading required package: truncnorm</code></pre>
+<pre class="r"><code># might need &gt; sudo apt-get install fftw3 fftw3-dev pkg-config
+StartVal &lt;- rep(0,100^2)
+StartVal[75*100+75] &lt;- 1000
+par &lt;- c(rho0=0.05,sigma2=0.7^2,zeta=-log(0.99),rho1=0.06,gamma=3,alpha=pi/4,muX=-0.1,muY=-0.1,tau2=0.00001)
+spateSim &lt;- spate.sim(par=par,n=100,T=5,StartVal=StartVal,seed=1)
+plot(spateSim,mfrow=c(1,5),mar=c(2,2,2,2),indScale=TRUE,cex.axis=1.5,cex.main=2)</code></pre>
+<p><img src="notes_files/figure-html/unnamed-chunk-27-1.png" width="960" /></p>
 </div>
 </div>
 </div>
