@@ -115,7 +115,7 @@ Continuing our $NB$ fit we would set $p_t=1-\para{1+\int_0^{t-1}W_sds}^{-1}$ and
 
 ## Populations of Types
 
-In terms of modelling, a population can be very abstract. Its concept is not restricted to a set of living things, as in the biological concept of a population. Here a population can be a set of biological populations, a set of species, and so on. The members of the population may not be uniform, but can consist of various different types. For example, we can consider populations of individuals categorized by their phenotype or populations of species categorized by clades. We now derive how the distribution of types within a population fluctuates due to differential fitness, ie, selection.
+In terms of modelling, a population can be very abstract. Its concept is not restricted to a set of living things, as in the biological concept of a population. Here a population can be a set of biological populations, a set of species, replicating molecules, franchises, languages and so on. The members of the population may not be uniform, but can consist of various different types. For example, we can consider populations of individuals categorized by their phenotype or populations of species categorized by clades. We now derive how the distribution of types within a population fluctuates due to differential fitness, ie, selection.
 
 Consider a population of $T$ different types, each type $i$ with $n_t(i)$ individuals at time $t$. If we denote $\phi_t(i)$ to be the proportion of individuals within type $i$ at time $t$ among the population, we have $\phi_t(i)=\frac{n_t(i)}{N_t}$ where $N_t=\sum_{i=1}^Tn_t(i)$. Denote the expected fitness of each individual within type $i$ as $W_t(i)$. Then committing ourselves to be content with expected dynamics and adopting the notation $D_t$ in place of $\frac{d}{dt}$, we have
 
@@ -152,13 +152,13 @@ Should try to show that if each $W_t(i)$ satisfies the $\delta$ supposition, the
 
 -->
 
-$$D_tN_t=D_t\sum_in_t(i)=\sum_i\ln(W_t(i))n_t(i)=\overline{\ln(W_t)}N_t.$$
+$$D_tN_t=D_t\sum_in_t(i)=\sum_in_t(i)\ln W_t(i)=\overline{\ln W}_tN_t.$$
 
 $$D_t\phi_t(i)=D_t\frac{n_t(i)}{N_t}=\frac{N_tD_tn_t(i)-n_t(i)D_tN_t}{N_t^2}$$
 
-$$=\frac{\ln(W_t(i))n_t(i)-n_t(i)\overline{\ln(W_t)}}{N_t}=\phi_t(i)\para{\ln(W_t(i))-\overline{\ln(W_t)}}.$$
+$$=\frac{n_t(i)\ln W_t(i)-n_t(i)\overline{\ln W}_t}{N_t}=\phi_t(i)\para{\ln W_t(i)-\overline{\ln W}_t}.$$
 
-Setting $\rho_t(i)=\ln(W_t(i))-(\overline{\ln W})_t$ (what I refer to as the "relative" Malthusian fitness) we can solve for $\phi_t(i)$ to get
+Setting $\rho_t(i)=\ln W_t(i)-\overline{\ln W}_t$ (what I refer to as the "relative" Malthusian fitness) we can solve for $\phi_t(i)$ to get
 
 $$\phi_t(i)=\phi_0(i)e^{\int_0^t\rho_s(i)ds}$$
 
@@ -274,15 +274,7 @@ Evolve     <- function(t,state,parameters){
 times <- seq(0,100000,by=1000)
 out <- ode(y=state,times=times,func=Evolve,parms=parameters)
 times <- out[,"time"]
-```
 
-```{r, echo=F, fig.align='center', fig.height=3, fig.width=3}
-par(mfrow=c(1,1))
-plot(times,out[,"N"],xlab="time",ylab="population size")
-```
-
-```{r, include=F}
-require(deSolve)
 parameters <- c(p=1,lnW1=0.01,lnW2=-0.0001)
 state      <- c(N=150)
 Evolve     <- function(t,state,parameters){
@@ -292,14 +284,15 @@ Evolve     <- function(t,state,parameters){
     list(c(dN))
   })
 }
-times <- seq(0,100000,by=1000)
-out <- ode(y=state,times=times,func=Evolve,parms=parameters)
-times <- out[,"time"]
+times2 <- seq(0,100000,by=1000)
+out2 <- ode(y=state,times=times,func=Evolve,parms=parameters)
+times2 <- out2[,"time"]
 ```
 
-```{r, echo=F, fig.align='center', fig.height=3, fig.width=3}
-par(mfrow=c(1,1))
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=6}
+par(mfrow=c(1,2))
 plot(times,out[,"N"],xlab="time",ylab="population size")
+plot(times2,out2[,"N"],xlab="time",ylab="population size")
 ```
 
 Returning to evolution, we might assume the Gaussian term used above represents the effectiveness of an individual in helping or hindering another individual based on how similar they are. In this case we get
@@ -356,7 +349,7 @@ $$=W_{1,max}^{K_1}\exp\para{-K_1\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^
 
 Finally, to get the total expected fitness $W_1(x)$, we average over all possible values of $K_1$ to get
 
-$$W_1(x)=\sum_{i=0}^{N_{2,t}}W_1(x|K_1=i)P(K_1=i)=\sum_{i=0}^{N_{2,t}}W_1(x|i){N_{2,t}\choose i}p_1^i(1-p_1)^{N_{2,t}-i}.$$
+$$W_1(x)=\sum_{i=0}^{N_{2,t}}W_1(x|K_1=i)P(K_1=i)=\sum_{i=0}^{N_{2,t}}W_1(x|K_1=i){N_{2,t}\choose i}p_1^i(1-p_1)^{N_{2,t}-i}.$$
 
 Can it make more sense if
 
@@ -405,8 +398,8 @@ out <- ode(y=state,times=times,func=Evolve,parms=parameters)
 times <- out[,"time"]
 ```
 
-```{r, echo=F, fig.align='center', fig.height=6, fig.width=3}
-par(mfrow=c(3,1))
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=10}
+par(mfrow=c(1,3))
 plot(c(times,times),out[,c("x","y")],xlab="time",ylab="mean phenotypes")
 plot(c(times,times),out[,c("sigma1","sigma2")]^2,xlab="time",ylab="phenotypic variances")
 plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
@@ -416,12 +409,12 @@ plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
 
 - $\omega_1^2=\omega_2^2=100$
 
-```{r, echo=F, fig.align='center', fig.height=6, fig.width=3}
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=10}
 parameters <- c(p1=0.01,p2=0.01,lnW1max=0.001,lnW2max=0.001,omega1=100,omega2=100)
 times <- seq(0,10000,by=10)
 out <- ode(y=state,times=times,func=Evolve,parms=parameters)
 times <- out[,"time"]
-par(mfrow=c(3,1))
+par(mfrow=c(1,3))
 plot(c(times,times),out[,c("x","y")],xlab="time",ylab="mean phenotypes")
 plot(c(times,times),out[,c("sigma1","sigma2")]^2,xlab="time",ylab="phenotypic variances")
 plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
@@ -431,12 +424,12 @@ plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
 
 - $\omega_1^2=100, \ \omega_2^2=1000$
 
-```{r, echo=F, fig.align='center', fig.height=6, fig.width=3}
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=10}
 parameters <- c(p1=0.01,p2=0.01,lnW1max=0.001,lnW2max=0.001,omega1=100,omega2=1000)
 times <- seq(0,10000,by=10)
 out <- ode(y=state,times=times,func=Evolve,parms=parameters)
 times <- out[,"time"]
-par(mfrow=c(3,1))
+par(mfrow=c(1,3))
 plot(c(times,times),out[,c("x","y")],xlab="time",ylab="mean phenotypes")
 plot(c(times,times),out[,c("sigma1","sigma2")]^2,xlab="time",ylab="phenotypic variances")
 plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
@@ -467,8 +460,8 @@ out <- ode(y=state,times=times,func=Evolve,parms=parameters)
 times <- out[,"time"]
 ```
 
-```{r, echo=F, fig.align='center', fig.height=6, fig.width=3}
-par(mfrow=c(3,1))
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=10}
+par(mfrow=c(1,3))
 plot(c(times,times),out[,c("x","y")],xlab="time",ylab="mean phenotypes")
 plot(c(times,times),out[,c("sigma1","sigma2")],xlab="time",ylab="phenotypic variances")
 plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
@@ -499,8 +492,8 @@ out <- ode(y=state,times=times,func=Evolve,parms=parameters)
 times <- out[,"time"]
 ```
 
-```{r, echo=F, fig.align='center', fig.height=6, fig.width=3}
-par(mfrow=c(3,1))
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=10}
+par(mfrow=c(1,3))
 plot(c(times,times),out[,c("x","y")],xlab="time",ylab="mean phenotypes")
 plot(c(times,times),out[,c("sigma1","sigma2")],xlab="time",ylab="phenotypic variances")
 plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
