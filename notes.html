@@ -510,36 +510,57 @@ Should try to show that if each $W_t(i)$ satisfies the $\delta$ supposition, the
 </div>
 <div id="stochastic-selection" class="section level4">
 <h4>Stochastic Selection</h4>
-<p>Our selection surface across time will be the following.</p>
+<p>Our selection surface is modelled as space-time white noise. At every time step, a random discontinuous surface is generated, taking the following general appearance:</p>
 <p><img src="notes_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
-<p>The resulting phenotypic density takes the following trajectory.</p>
+<p>Across time, this random surface can be visualized as a contour plot where hot colors correspond to high fitness and cool colors correspond to low fitness.</p>
 <p><img src="notes_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>The resulting phenotypic density takes the following trajectory.</p>
+<p><img src="notes_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 </div>
 <div id="stochastic-bimodal-selection" class="section level4">
 <h4>Stochastic Bimodal Selection</h4>
 <p>Our selection surface across time will be the following.</p>
-<p><img src="notes_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
-<p>The resulting phenotypic density takes the following trajectory.</p>
 <p><img src="notes_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>The resulting phenotypic density takes the following trajectory.</p>
+<p><img src="notes_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<!--
+
+#### Spate
+
+
+```r
+require(spate)
+```
+
+```
+## Loading required package: spate
+```
+
+```
+## Loading required package: mvtnorm
+```
+
+```
+## Loading required package: truncnorm
+```
+
+```r
+# might need > sudo apt-get install fftw3 fftw3-dev pkg-config
+StartVal <- rep(0,100^2)
+StartVal[75*100+75] <- 1000
+par <- c(rho0=0.05,sigma2=0.7^2,zeta=-log(0.99),rho1=0.06,gamma=3,alpha=pi/4,muX=-0.1,muY=-0.1,tau2=0.00001)
+spateSim <- spate.sim(par=par,n=100,T=5,StartVal=StartVal,seed=1)
+plot(spateSim,mfrow=c(1,5),mar=c(2,2,2,2),indScale=TRUE,cex.axis=1.5,cex.main=2)
+```
+
+<img src="notes_files/figure-html/unnamed-chunk-26-1.png" width="960" />
+
+-->
 </div>
-<div id="spate" class="section level4">
-<h4>Spate</h4>
-<pre class="r"><code>require(spate)</code></pre>
-<pre><code>## Loading required package: spate</code></pre>
-<pre><code>## Loading required package: mvtnorm</code></pre>
-<pre><code>## Loading required package: truncnorm</code></pre>
-<pre class="r"><code># might need &gt; sudo apt-get install fftw3 fftw3-dev pkg-config
-StartVal &lt;- rep(0,100^2)
-StartVal[75*100+75] &lt;- 1000
-par &lt;- c(rho0=0.05,sigma2=0.7^2,zeta=-log(0.99),rho1=0.06,gamma=3,alpha=pi/4,muX=-0.1,muY=-0.1,tau2=0.00001)
-spateSim &lt;- spate.sim(par=par,n=100,T=5,StartVal=StartVal,seed=1)
-plot(spateSim,mfrow=c(1,5),mar=c(2,2,2,2),indScale=TRUE,cex.axis=1.5,cex.main=2)</code></pre>
-<p><img src="notes_files/figure-html/unnamed-chunk-25-1.png" width="960" /></p>
 </div>
 </div>
-</div>
-<div id="calculating-the-response-in-mean-phenotype-to-selection" class="section level2">
-<h2>Calculating the Response in Mean Phenotype to Selection</h2>
+<div id="calculating-the-response-in-mean-phenotype-to-selection-via-classic-quant-gen" class="section level2">
+<h2>Calculating the Response in Mean Phenotype to Selection Via Classic Quant Gen</h2>
 <p>The normal distribution is the most important distribution due to various theorems and properties such as the central limit theorems and it’s maximum entropy property. It’s known for its mathematical elegance and empirical ubiquity and, like all distributions, can be identified by it’s density and characteristic functions, both of which are Gaussian. In what follows I will use the terms Gaussian and normal interchangebally.</p>
 <p>Gaussian functions play a central role in evolutionary theory. Arguably the most successful equation describing the evolution of a population, the breeder’s equation, requires a normal phenotypic distribution. Typical notation is <span class="math inline">\(z\)</span> for the phenotype of an individual, <span class="math inline">\(\bar z\)</span> for the mean phenotype of the population, <span class="math inline">\(\sigma^2\)</span> for the phenotypic variance and <span class="math inline">\(\phi\)</span> for the phenotypic density. This provides</p>
 <p><span class="math display">\[\phi(z)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(z-\bar z)^2}{2\sigma^2}\right).\]</span></p>
@@ -584,6 +605,16 @@ plot(spateSim,mfrow=c(1,5),mar=c(2,2,2,2),indScale=TRUE,cex.axis=1.5,cex.main=2)
 <p><span class="math display">\[=\frac{\overline W+qD_p\overline W}{\overline W-pD_p\overline W}=\frac{\overline W+(1-p)\left(W_1-W_2\right)}{\overline W-p\left(W_1-W_2\right)}=\frac{W_1}{W_2}\]</span></p>
 <p><span class="math display">\[\implies \Delta x=\ln\left(\frac{W_1}{W_2}\right).\]</span></p>
 <p>Hence, the dynamics stretched onto the whole real line are not only linear, but constant! I have yet to investigate whether this can be done for models involving higher ploidy.</p>
+</div>
+<div id="likelihood-ratio" class="section level2">
+<h2>Likelihood Ratio</h2>
+<p><span class="math display">\[\Lambda = 2(l_{alt}-l_{null})\]</span> <span class="math display">\[\Lambda = 2(l_{ML}-l_{model})\]</span></p>
+<p><span class="math display">\[l_{ML}=\ln\prod_{i=1}^Nf(X_i|\mu_{ML},\Sigma_{ML}), \ \mu_{ML}=\frac{1}{N}\sum_iX_i, \ \Sigma_{ML}=\frac{1}{N^2}\sum_i{\left( X_i-\mu_{ML} \right)}^\top{\left( X_i-\mu_{ML} \right)}\]</span></p>
+<p><span class="math display">\[f(X_i|\mu,\Sigma)={\left( |2\pi\Sigma| \right)}^{-1/2}\exp{\left( -\frac{1}{2}(X_i-\mu)^\top\Sigma^{-1}(X_i-\mu) \right)}\]</span></p>
+<p><span class="math display">\[\ln f(X_i|\mu,\Sigma)=-\frac{1}{2}{\left( \ln|2\pi\Sigma|+(X_i-\mu)^\top\Sigma^{-1}(X_i-\mu) \right)}\]</span></p>
+<p><span class="math display">\[\Lambda={\left( N\ln|2\pi\Sigma_{model}|+\sum_i(X_i-\mu_{model})^\top\Sigma_{model}^{-1}(X_i-\mu_{model}) \right)}-{\left( N\ln|2\pi\Sigma_{ML}|+\sum_i(X_i-\mu_{ML})^\top\Sigma_{ML}^{-1}(X_i-\mu_{ML}) \right)}\]</span></p>
+<p><span class="math display">\[=N\ln{\left( \frac{|\Sigma_{model}|}{|\Sigma_{ML}|} \right)}+\sum_i(X_i-\mu_{model})^\top\Sigma_{model}^{-1}(X_i-\mu_{model})-\sum_i(X_i-\mu_{ML})^\top\Sigma_{ML}^{-1}(X_i-\mu_{ML})\]</span></p>
+<p><span class="math display">\[\Lambda = 2(l_{model}-l_{null})\]</span></p>
 </div>
 
 

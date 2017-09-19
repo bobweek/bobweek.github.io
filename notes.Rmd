@@ -551,7 +551,7 @@ print(system.time(
 Our selection surface will be the following.
 
 ```{r, echo=F}
-plot(Phenotype,Fit(Phenotype))
+plot(Phenotype,Fit(Phenotype),ylab="Fitness")
 ```
 
 The resulting phenotypic density takes the following trajectory.
@@ -622,7 +622,13 @@ print(system.time(
 ))
 ```
 
-Our selection surface across time will be the following.
+Our selection surface is modelled as space-time white noise. At every time step, a random discontinuous surface is generated, taking the following general appearance:
+
+```{r, echo=F}
+plot(Phenotype,bumps,ylab="Fitness")
+```
+
+Across time, this random surface can be visualized as a contour plot where hot colors correspond to high fitness and cool colors correspond to low fitness.
 
 ```{r, echo=F}
 stuff <- cbind(0:50,smooth)
@@ -704,6 +710,8 @@ The resulting phenotypic density takes the following trajectory.
 image(out,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density")
 ```
 
+<!--
+
 #### Spate
 
 ```{r, fig.width=10, fig.height=3}
@@ -716,7 +724,9 @@ spateSim <- spate.sim(par=par,n=100,T=5,StartVal=StartVal,seed=1)
 plot(spateSim,mfrow=c(1,5),mar=c(2,2,2,2),indScale=TRUE,cex.axis=1.5,cex.main=2)
 ```
 
-## Calculating the Response in Mean Phenotype to Selection
+-->
+
+## Calculating the Response in Mean Phenotype to Selection Via Classic Quant Gen
 
 The normal distribution is the most important distribution due to various theorems and properties such as the central limit theorems and it's maximum entropy property. It's known for its mathematical elegance and empirical ubiquity and, like all distributions, can be identified by it's density and characteristic functions, both of which are Gaussian. In what follows I will use the terms Gaussian and normal interchangebally.
 
@@ -788,7 +798,7 @@ Here we cover a way to linearize the most simple model of genetic selection. We 
 
 $$\Delta p=pq\frac{\partial\ln\overline W}{\partial p}, \ \text{with} \ \overline W=pW_1+qW_2$$
 
-The resulting dynamics are clearly nonlinear, but are they truly nonlinear or is this due to the fact that the state space is restricted to the open unit interval? If we stretch the unit interval across the whole real line, maybe the dynamics will become linear. To find out we define $x\equiv\ln\left(\frac{p}{q}\right)$ and calculate $\Delta x$. For clarity I will write $D_p$ in place of $\frac{\partial}{\partial p}$.
+The resulting dynamics are clearly nonlinear, but are they truly nonlinear or is this due to the fact that the state space is restricted to the open unit interval? If we stretch the unit interval across the whole real line, maybe the dynamics will become linear. To find out we define $x\equiv\ln\left(\frac{p}{q}\right)$ ($x$ is called the __logit__ of $p$) and calculate $\Delta x$. For clarity I will write $D_p$ in place of $\frac{\partial}{\partial p}$.
 
 $$\Delta x=x'-x=\ln\left(\frac{p'}{q'}\right)-\ln\left(\frac{p}{q}\right)=\ln\left(\frac{p'q}{q'p}\right)$$
 
@@ -799,3 +809,18 @@ $$=\frac{\overline W+qD_p\overline W}{\overline W-pD_p\overline W}=\frac{\overli
 $$\implies \Delta x=\ln\left(\frac{W_1}{W_2}\right).$$
 
 Hence, the dynamics stretched onto the whole real line are not only linear, but constant! I have yet to investigate whether this can be done for models involving higher ploidy.
+
+## Likelihood Ratio
+
+$$\Lambda = 2(l_{alt}-l_{null})$$
+$$\Lambda = 2(l_{ML}-l_{model})$$
+
+$$l_{ML}=\ln\prod_{i=1}^Nf(X_i|\mu_{ML},\Sigma_{ML}), \ \mu_{ML}=\frac{1}{N}\sum_iX_i, \ \Sigma_{ML}=\frac{1}{N^2}\sum_i\para{X_i-\mu_{ML}}^\top\para{X_i-\mu_{ML}}$$
+
+$$f(X_i|\mu,\Sigma)=\para{|2\pi\Sigma|}^{-1/2}\exp\para{-\frac{1}{2}(X_i-\mu)^\top\Sigma^{-1}(X_i-\mu)}$$
+
+$$\ln f(X_i|\mu,\Sigma)=-\frac{1}{2}\para{\ln|2\pi\Sigma|+(X_i-\mu)^\top\Sigma^{-1}(X_i-\mu)}$$
+
+$$\Lambda=\para{N\ln|2\pi\Sigma_{model}|+\sum_i(X_i-\mu_{model})^\top\Sigma_{model}^{-1}(X_i-\mu_{model})}-\para{N\ln|2\pi\Sigma_{ML}|+\sum_i(X_i-\mu_{ML})^\top\Sigma_{ML}^{-1}(X_i-\mu_{ML})}$$
+
+$$=N\ln\para{\frac{|\Sigma_{model}|}{|\Sigma_{ML}|}}+\sum_i(X_i-\mu_{model})^\top\Sigma_{model}^{-1}(X_i-\mu_{model})-\sum_i(X_i-\mu_{ML})^\top\Sigma_{ML}^{-1}(X_i-\mu_{ML})$$
