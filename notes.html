@@ -461,7 +461,7 @@ Should try to show that if each $W_t(i)$ satisfies the $\delta$ supposition, the
 <p><span class="math inline">\(\dots\)</span></p>
 <p><span class="math display">\[\frac{d\bar x_t}{dt}=\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^2(\bar y_t-\bar x_t) \ \text{and} \
 \frac{d\sigma_{1,t}^2}{dt}=-\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^4\]</span></p>
-<p><span class="math display">\[\frac{dN_{1,t}}{dt}=\overline{\ln W_1}N_{1,t}=p_1{\left( \ln W_{1,max}-\frac{(\bar y_t-\bar x_2)^2+\sigma_{1,t}^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}N_{2,t}N_{1,t}\]</span></p>
+<p><span class="math display">\[\frac{dN_{1,t}}{dt}=\overline{\ln W_t}N_{1,t}=p_1{\left( \ln W_{1,max}-\frac{(\bar y_t-\bar x_t)^2+\sigma_{1,t}^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}N_{2,t}N_{1,t}\]</span></p>
 <p>To solve this, we have to solve a system of six nonlinear differential equations simultaneously. Wouldn’t it be nice to just get rid of the population dynamics? If we assumed that each individual interacts with the same number of individuals from the opposing population every generation, this would be equivalent to assuming the population sizes are constant. But then we would need some combination of extinction, zero interaction, or zero selection. Any of those three possibilities defeats the purpose of this investigation, so it cannot be logically reduced to a simpler problem. However, it’s this added complexity that we were interested in to begin with, so this is not an issue. Let’s begin with a numerical exploration.</p>
 <div id="parameters" class="section level4">
 <h4>Parameters:</h4>
@@ -501,59 +501,53 @@ Should try to show that if each $W_t(i)$ satisfies the $\delta$ supposition, the
 <div id="a-non-gaussian-example" class="section level3">
 <h3>A Non-Gaussian Example</h3>
 <p>The reason why we only needed to track the mean variance of phenotypes in order to capture the whole distribution was due to our choice of initial phenotypic distribution and selection function. They were both Gaussian for all of the above examples. If either is not Gaussian, then the resulting trajectory of phenotypic distributions will not fall within a Gaussian realm, but may converge to one asymptotically.</p>
+<div id="just-mutation" class="section level4">
+<h4>Just Mutation</h4>
+<p><img src="notes_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="mutation-and-random-mating" class="section level4">
+<h4>Mutation and Random Mating</h4>
+<p><img src="notes_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+</div>
 <div id="bimodal-selection" class="section level4">
 <h4>Bimodal Selection</h4>
 <p>Our selection surface will be the following.</p>
-<p><img src="notes_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>The resulting phenotypic density takes the following trajectory.</p>
-<p><img src="notes_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>Adding weak random mating:</p>
+<p>The resulting phenotypic density takes the following trajectory.</p>
+<p><img src="notes_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 </div>
 <div id="stochastic-selection" class="section level4">
 <h4>Stochastic Selection</h4>
 <p>Our selection surface is modelled as space-time white noise. At every time step, a random discontinuous surface is generated, taking the following general appearance:</p>
-<p><img src="notes_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Across time, this random surface can be visualized as a contour plot where hot colors correspond to high fitness and cool colors correspond to low fitness.</p>
-<p><img src="notes_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>The resulting phenotypic density takes the following trajectory.</p>
-<p><img src="notes_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 <div id="stochastic-bimodal-selection" class="section level4">
 <h4>Stochastic Bimodal Selection</h4>
 <p>Our selection surface across time will be the following.</p>
-<p><img src="notes_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p>The resulting phenotypic density takes the following trajectory.</p>
-<p><img src="notes_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="notes_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <!--
 
 #### Spate
 
 
 ```r
-require(spate)
+# require(spate)
+# # might need > sudo apt-get install fftw3 fftw3-dev pkg-config
+# StartVal <- rep(0,100^2)
+# StartVal[75*100+75] <- 1000
+# par <- c(rho0=0.05,sigma2=0.7^2,zeta=-log(0.99),rho1=0.06,gamma=3,alpha=pi/4,muX=-0.1,muY=-0.1,tau2=0.00001)
+# spateSim <- spate.sim(par=par,n=100,T=5,StartVal=StartVal,seed=1)
+# plot(spateSim,mfrow=c(1,5),mar=c(2,2,2,2),indScale=TRUE,cex.axis=1.5,cex.main=2)
 ```
-
-```
-## Loading required package: spate
-```
-
-```
-## Loading required package: mvtnorm
-```
-
-```
-## Loading required package: truncnorm
-```
-
-```r
-# might need > sudo apt-get install fftw3 fftw3-dev pkg-config
-StartVal <- rep(0,100^2)
-StartVal[75*100+75] <- 1000
-par <- c(rho0=0.05,sigma2=0.7^2,zeta=-log(0.99),rho1=0.06,gamma=3,alpha=pi/4,muX=-0.1,muY=-0.1,tau2=0.00001)
-spateSim <- spate.sim(par=par,n=100,T=5,StartVal=StartVal,seed=1)
-plot(spateSim,mfrow=c(1,5),mar=c(2,2,2,2),indScale=TRUE,cex.axis=1.5,cex.main=2)
-```
-
-<img src="notes_files/figure-html/unnamed-chunk-26-1.png" width="960" />
 
 -->
 </div>
@@ -599,7 +593,7 @@ plot(spateSim,mfrow=c(1,5),mar=c(2,2,2,2),indScale=TRUE,cex.axis=1.5,cex.main=2)
 <h2>Linearization of a Haploid Model of Selection</h2>
 <p>Here we cover a way to linearize the most simple model of genetic selection. We assume two genotypes, <span class="math inline">\(A_1\)</span> and <span class="math inline">\(A_2\)</span>, with the frequencies <span class="math inline">\(p\)</span> and <span class="math inline">\(q=1-p\)</span> and fitnesses <span class="math inline">\(W_1\)</span> and <span class="math inline">\(W_2\)</span> respectively. Then <span class="math inline">\(\overline W=pW_1+qW_2\)</span> and the change in genotype frequency of <span class="math inline">\(A_1\)</span> is (ignoring all other processes)</p>
 <p><span class="math display">\[\Delta p=pq\frac{\partial\ln\overline W}{\partial p}, \ \text{with} \ \overline W=pW_1+qW_2\]</span></p>
-<p>The resulting dynamics are clearly nonlinear, but are they truly nonlinear or is this due to the fact that the state space is restricted to the open unit interval? If we stretch the unit interval across the whole real line, maybe the dynamics will become linear. To find out we define <span class="math inline">\(x\equiv\ln\left(\frac{p}{q}\right)\)</span> and calculate <span class="math inline">\(\Delta x\)</span>. For clarity I will write <span class="math inline">\(D_p\)</span> in place of <span class="math inline">\(\frac{\partial}{\partial p}\)</span>.</p>
+<p>The resulting dynamics are clearly nonlinear, but are they truly nonlinear or is this due to the fact that the state space is restricted to the open unit interval? If we stretch the unit interval across the whole real line, maybe the dynamics will become linear. To find out we define <span class="math inline">\(x\equiv\ln\left(\frac{p}{q}\right)\)</span> (<span class="math inline">\(x\)</span> is called the <strong>logit</strong> of <span class="math inline">\(p\)</span>) and calculate <span class="math inline">\(\Delta x\)</span>. For clarity I will write <span class="math inline">\(D_p\)</span> in place of <span class="math inline">\(\frac{\partial}{\partial p}\)</span>.</p>
 <p><span class="math display">\[\Delta x=x&#39;-x=\ln\left(\frac{p&#39;}{q&#39;}\right)-\ln\left(\frac{p}{q}\right)=\ln\left(\frac{p&#39;q}{q&#39;p}\right)\]</span></p>
 <p><span class="math display">\[\implies\exp(\Delta x)=\frac{p+\Delta p}{q-\Delta p}\frac{q}{p}=\frac{1+qD_p\ln\overline W}{1-pD_p\ln\overline W}\]</span></p>
 <p><span class="math display">\[=\frac{\overline W+qD_p\overline W}{\overline W-pD_p\overline W}=\frac{\overline W+(1-p)\left(W_1-W_2\right)}{\overline W-p\left(W_1-W_2\right)}=\frac{W_1}{W_2}\]</span></p>
@@ -614,7 +608,6 @@ plot(spateSim,mfrow=c(1,5),mar=c(2,2,2,2),indScale=TRUE,cex.axis=1.5,cex.main=2)
 <p><span class="math display">\[\ln f(X_i|\mu,\Sigma)=-\frac{1}{2}{\left( \ln|2\pi\Sigma|+(X_i-\mu)^\top\Sigma^{-1}(X_i-\mu) \right)}\]</span></p>
 <p><span class="math display">\[\Lambda={\left( N\ln|2\pi\Sigma_{model}|+\sum_i(X_i-\mu_{model})^\top\Sigma_{model}^{-1}(X_i-\mu_{model}) \right)}-{\left( N\ln|2\pi\Sigma_{ML}|+\sum_i(X_i-\mu_{ML})^\top\Sigma_{ML}^{-1}(X_i-\mu_{ML}) \right)}\]</span></p>
 <p><span class="math display">\[=N\ln{\left( \frac{|\Sigma_{model}|}{|\Sigma_{ML}|} \right)}+\sum_i(X_i-\mu_{model})^\top\Sigma_{model}^{-1}(X_i-\mu_{model})-\sum_i(X_i-\mu_{ML})^\top\Sigma_{ML}^{-1}(X_i-\mu_{ML})\]</span></p>
-<p><span class="math display">\[\Lambda = 2(l_{model}-l_{null})\]</span></p>
 </div>
 
 

@@ -364,7 +364,7 @@ $\dots$
 $$\frac{d\bar x_t}{dt}=\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^2(\bar y_t-\bar x_t) \ \text{and} \
 \frac{d\sigma_{1,t}^2}{dt}=-\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^4$$
 
-$$\frac{dN_{1,t}}{dt}=\overline{\ln W_1}N_{1,t}=p_1\para{\ln W_{1,max}-\frac{(\bar y_t-\bar x_2)^2+\sigma_{1,t}^2}{2(\omega_1^2+\sigma_{2,t}^2)}}N_{2,t}N_{1,t}$$
+$$\frac{dN_{1,t}}{dt}=\overline{\ln W_t}N_{1,t}=p_1\para{\ln W_{1,max}-\frac{(\bar y_t-\bar x_t)^2+\sigma_{1,t}^2}{2(\omega_1^2+\sigma_{2,t}^2)}}N_{2,t}N_{1,t}$$
 
 To solve this, we have to solve a system of six nonlinear differential equations simultaneously. Wouldn't it be nice to just get rid of the population dynamics? If we assumed that each individual interacts with the same number of individuals from the opposing population every generation, this would be equivalent to assuming the population sizes are constant. But then we would need some combination of extinction, zero interaction, or zero selection. Any of those three possibilities defeats the purpose of this investigation, so it cannot be logically reduced to a simpler problem. However, it's this added complexity that we were interested in to begin with, so this is not an issue. Let's begin with a numerical exploration.
 
@@ -503,6 +503,93 @@ plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
 
 The reason why we only needed to track the mean variance of phenotypes in order to capture the whole distribution was due to our choice of initial phenotypic distribution and selection function. They were both Gaussian for all of the above examples. If either is not Gaussian, then the resulting trajectory of phenotypic distributions will not fall within a Gaussian realm, but may converge to one asymptotically.
 
+#### Just Mutation
+
+```{r, include=F}
+Fit <- function(x){
+  Wmax <- 1.001
+  fit <- Wmax*(dnorm(x,-10,6) +  dnorm(x,10,6))
+  return(fit)
+}
+
+Model <- function(t,phi,parameters){
+  deltax <- c(0.5,rep(1,numboxes-1),0.5)
+  Flux   <- eta^2*diff(c(0,phi,0))/deltax
+  lnW    <- log(Fit(Phenotype))
+  rho    <- lnW    - sum(phi*lnW)/sum(phi)
+  lng    <- dnorm(Phenotype,Phenotype*phi/sum(phi),s,log=T)
+  rnd    <- lng    - sum(phi*lng)/sum(phi)
+  dphi   <- diff(Flux)/delx + phi*(0*rho+0*rnd)
+  
+  list(dphi)
+}
+
+eta <- 2
+s <- 7
+r <- 0.01
+delx <- .1
+numboxes <- 300
+maxT <- 50
+Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
+
+phi <- dnorm(Phenotype,0,2)
+state <- c(phi=phi)
+times <- seq(0,maxT,by=1)
+
+print(system.time(
+  out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
+))
+```
+
+```{r, echo=F}
+image(out,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density")
+```
+
+#### Mutation and Random Mating
+
+```{r, include=F}
+Fit <- function(x){
+  Wmax <- 1.001
+  fit <- Wmax*(dnorm(x,-10,6) +  dnorm(x,10,6))
+  return(fit)
+}
+
+Model <- function(t,phi,parameters){
+  deltax <- c(0.5,rep(1,numboxes-1),0.5)
+  Flux   <- eta^2*diff(c(0,phi,0))/deltax
+  lnW    <- log(Fit(Phenotype))
+  rho    <- lnW - sum(phi*lnW)/sum(phi)
+  m      <- sum(phi*Phenotype)/sum(phi)
+  s      <- sum(phi)/sum(phi*(Phenotype-m)^2)
+  lng    <- dnorm(Phenotype,sum(Phenotype*phi)/sum(phi),s,log=T)
+  rnd    <- lng - sum(phi*lng)/sum(phi)
+  dphi   <- diff(Flux)/delx + phi*(0*rho+rnd)
+  
+  list(dphi)
+}
+
+eta <- 5
+s <- 7
+r <- 0.01
+delx <- .1
+numboxes <- 300
+maxT <- 100
+Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
+
+phi <- dnorm(Phenotype,0,2)
+state <- c(phi=phi)
+times <- seq(0,maxT,by=1)
+
+print(system.time(
+  out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
+))
+```
+
+```{r, echo=F}
+image(out,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density")
+```
+
+
 #### Bimodal Selection
 
 ```{r, include=F}
@@ -552,6 +639,59 @@ Our selection surface will be the following.
 
 ```{r, echo=F}
 plot(Phenotype,Fit(Phenotype),ylab="Fitness")
+```
+
+The resulting phenotypic density takes the following trajectory.
+
+```{r, echo=F}
+image(out,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density")
+```
+
+Adding weak random mating:
+
+```{r, include=F}
+Fit <- function(x){
+  Wmax <- 1.01
+  fit <- Wmax*(dnorm(x,-10,6) +  dnorm(x,10,6))
+  return(fit)
+}
+
+MeanMalth <- function(phi){
+  lnW <- log(Fit(Phenotype))
+  rBar <- sum(phi*lnW)/sum(phi)
+  return(rBar)
+}
+
+Model <- function(t,phi,parameters){
+  deltax <- c(0.5,rep(1,numboxes-1),0.5)
+  Flux   <- eta^2*diff(c(0,phi,0))/deltax
+  lnW    <- log(Fit(Phenotype))
+  rho    <- lnW    - sum(phi*lnW)/sum(phi)
+  m      <- sum(phi*Phenotype)/sum(phi)
+  s      <- 1000*sum(phi)/sum(phi*(Phenotype-m)^2)
+  lng    <- dnorm(Phenotype,sum(Phenotype*phi)/sum(phi),s,log=T)
+  rnd    <- lng - sum(phi*lng)/sum(phi)
+  dphi   <- diff(Flux)/delx + phi*(rho+rnd)
+  
+  list(dphi)
+}
+
+eta <- 2
+s <- 7
+r <- 0.01
+delx <- .1
+numboxes <- 300
+maxT <- 100
+Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
+
+phi <- dnorm(Phenotype,0,2)
+state <- c(phi=phi)
+times <- seq(0,maxT,by=1)
+
+print(system.time(
+  out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
+))
+
 ```
 
 The resulting phenotypic density takes the following trajectory.
@@ -715,13 +855,13 @@ image(out,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",ma
 #### Spate
 
 ```{r, fig.width=10, fig.height=3}
-require(spate)
-# might need > sudo apt-get install fftw3 fftw3-dev pkg-config
-StartVal <- rep(0,100^2)
-StartVal[75*100+75] <- 1000
-par <- c(rho0=0.05,sigma2=0.7^2,zeta=-log(0.99),rho1=0.06,gamma=3,alpha=pi/4,muX=-0.1,muY=-0.1,tau2=0.00001)
-spateSim <- spate.sim(par=par,n=100,T=5,StartVal=StartVal,seed=1)
-plot(spateSim,mfrow=c(1,5),mar=c(2,2,2,2),indScale=TRUE,cex.axis=1.5,cex.main=2)
+# require(spate)
+# # might need > sudo apt-get install fftw3 fftw3-dev pkg-config
+# StartVal <- rep(0,100^2)
+# StartVal[75*100+75] <- 1000
+# par <- c(rho0=0.05,sigma2=0.7^2,zeta=-log(0.99),rho1=0.06,gamma=3,alpha=pi/4,muX=-0.1,muY=-0.1,tau2=0.00001)
+# spateSim <- spate.sim(par=par,n=100,T=5,StartVal=StartVal,seed=1)
+# plot(spateSim,mfrow=c(1,5),mar=c(2,2,2,2),indScale=TRUE,cex.axis=1.5,cex.main=2)
 ```
 
 -->
