@@ -73,17 +73,17 @@ However, this result is a bit of an abuse of the above derivation as we had made
 
 $$\frac{dW_t}{dt}=W_t\ln\left(\frac{W_{t+1}}{W_t}\right).$$
 
-This states that if $W_t=0$ for some $t$, then $W_s=0$ for $s>t$. That is to say, if the population goes extinct, it remains extinct. This makes perfect sense in the absence of immigration, but there's another implication in this equation and to explore it I will assume that the general form of $W_t$ is $W_t=e^{r(t)}$ for some function $r(t)$. Note that this implies $\frac{dN_t}{dt}=r(t)N_t$. Then we can use the previously derived equation to show that $\frac{d}{dt}r(t)=r(t+1)-r(t)$. In the case that $r(t+1)=k+r(t)$ for some constant $k$, we get $r(t)=kt+c$, making $\frac{dN_t}{dt}=(kt+c)N_t$. But we can also make $k(t)$ a function $t$. Here we get 
+This states that if $W_t=0$ for some $t$, then $W_s=0$ for $s>t$. That is to say, if the population goes extinct, it remains extinct. This makes perfect sense in the absence of immigration, but there's another implication in this equation and to explore it I will assume that the general form of $W_t$ is $W_t=e^{r_t}$ for some function $r_t$. Note that this implies $\frac{dN_t}{dt}=r_tN_t$. Then we can use the previously derived equation to show that $\frac{d}{dt}r_t=r_{t+1}-r_t$. In the case that $r_{t+1}=k+r_t$ for some constant $k$, we get $r_t=kt+c$, making $\frac{dN_t}{dt}=(kt+c)N_t$. But we can also make $k_t$ a function $t$. Here we get 
 
-$$\frac{dN_t}{dt}=\left(\int_0^tk(s)ds+c\right)N_t$$
+$$\frac{dN_t}{dt}=\left(\int_0^tk_sds+c\right)N_t$$
 
-This might be handy if, say, you wanted to incorporate the effects of population dynamics of another species that interacts with this one. In that case $k(t)$ would likely be a function of the other species' population size at time $t$. But there are other possibilities. For example, we can set $r(t+1)=k(t)r(t)$ to get 
+This might be handy if, say, you wanted to incorporate the effects of population dynamics of another species that interacts with this one. In that case $k_t$ would likely be a function of the other species' population size at time $t$. But there are other possibilities. For example, we can set $r_{t+1}=k_tr_t$ to get 
 
-$$\frac{dN_t}{dt}=\left(e^{\int_0^tk(s)ds-t}+c\right)N_t.$$
+$$\frac{dN_t}{dt}=\left(e^{\int_0^tk_sds-t}+c\right)N_t.$$
 
-Regardless of what is chosen for $r(t+1)$, this trick will be assured to work when $r(t+1)$ is a linear function of $r(t)$. That is, $r(t+1)=a(t)+b(t)r(t)$. In this general case we get
+Regardless of what is chosen for $r_{t+1}$, this trick will be assured to work when $r_{t+1}$ is a linear function of $r_t$. That is, $r_{t+1}=a_t+b_tr_t$. In this general case we get
 
-$$\frac{dN_t}{dt}=\left(\int_0^ta(s)ds+e^{\int_0^tb(s)ds-t}+c\right)N_t.$$
+$$\frac{dN_t}{dt}=\left(\int_0^ta_sds+e^{\int_0^tb_sds-t}+c\right)N_t.$$
 
 We can then solve for the mean population size as a function of time to get
 
@@ -97,21 +97,21 @@ $$\E(N_t)=W^tN_0 \text{ and } \Var(N_t)=\para{\sum_{i=0}^{t-1}W^i}W^tN_0=\frac{1
 
 Our negative binomial for each time $t$ can be accordingly parameterized by $n_t=\frac{1-W}{W-W^t}W^tN_0$ and $p_t=\frac{W-W^t}{1-W^t}$.
 
-HYPOTHESIS: For $W_t\neq W$, 
+HYPOTHESIS: For $W_t\neq W$, define $W_0\equiv1$ and $W_s=0$ for $s<0$. Then I think the following is true:
 
-$$\E(N_t)=\para{\prod_{i=1}^tW_i}N_0 \text{ and } \Var(N_t)=\para{1+\sum_{i=1}^{t-1}W_i}\para{\prod_{i=1}^tW_i}N_0$$
+$$\E(N_t)=\para{\prod_{i=1}^tW_i}N_0 \text{ and } \Var(N_t)=\para{\sum_{i=0}^{t-1}W_i}\para{\prod_{i=1}^tW_i}N_0$$
 
-and for continuous time 
+For continuous time consider the measure $W$ that measures the expected number of individuals produced over a set of time. This notation may seem to conflict with the above use of $W$, but this is not so. For example, $W([t-1,t])=W_t$ for $t=1,2,\dots$. So $W_t$ as it has been used is really a measure. It makes sense to assume $W(\{t\})=0$ for any $t\in\R$. Hence $W$ is absolutely continuous wrt the Lebesgue measure on $\R$. So it has a density, that is $W([t,t+c])=\int_t^{t+c}w(s)ds$ for some non-negative continuous function $w:\R\rightarrow\R$. From this we can forge continuous time summations (ie, integrals) that coincide with the above discrete time summations such as $\sum_{i=0}^{t-1}W_i=\int_0^{t-1}w(s)ds$. However, we see that a
 
-$$\E(N_t)=\para{\bigwedge_0^tW_s^{ds}}N_0 \text{ and } \Var(N_t)=\para{1+\int_0^{t-1}W_sds}\para{\bigwedge_0^tW_s^{ds}}N_0$$
+$$\E(N_t)=\para{\bigwedge_0^tw(s)^{ds}}N_0 \text{ and } \Var(N_t)=\para{\int_0^{t-1}w(s)ds}\para{\bigwedge_0^tw(s)^{ds}}N_0$$
 
 where $\bigwedge$ represents type-1 product integration and is defined by
 
-$$\bigwedge_0^tW_s^{ds}\equiv e^{\int_0^t\ln(W_s)ds}.$$
+$$\bigwedge_0^tw(s)^{ds}\equiv e^{\int_0^t\ln w(s)ds}.$$
 
-Hence, this returns the same expected dynamics as above when $\ln(W_t)=r(t)$.
+Hence, this returns the same expected dynamics as above when $\ln w(t)=r_t$.
 
-Continuing our $NB$ fit we would set $p_t=1-\para{1+\int_0^{t-1}W_sds}^{-1}$ and $n_t=\frac{1-p_t}{p_t}\para{\bigwedge_0^tW_s^{ds}}N_0=\para{\int_0^{t-1}W_sds}^{-1}\para{\bigwedge_0^tW_s^{ds}}N_0$.
+Continuing our $NB$ fit we would set $p_t=1-\para{\int_0^{t-1}w(s)ds}^{-1}$ and $n_t=\frac{1-p_t}{p_t}\para{\bigwedge_0^tw(s)^{ds}}N_0=\para{\int_0^{t-1}w(s)ds}^{-1}\para{\bigwedge_0^tw(s)^{ds}}N_0$.
 
 ## Populations of Types
 
