@@ -536,13 +536,11 @@ phi <- dnorm(Phenotype,0,2)
 state <- c(phi=phi)
 times <- seq(0,maxT,by=1)
 
-print(system.time(
-  out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
-))
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
 ```
 
 ```{r, echo=F}
-image(out,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density")
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
 ```
 
 #### Mutation and Random Mating
@@ -586,7 +584,7 @@ print(system.time(
 ```
 
 ```{r, echo=F}
-image(out,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density")
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
 ```
 
 
@@ -629,10 +627,7 @@ phi <- dnorm(Phenotype,0,2)
 state <- c(phi=phi)
 times <- seq(0,maxT,by=1)
 
-print(system.time(
-  out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
-))
-
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
 ```
 
 Our selection surface will be the following.
@@ -644,7 +639,7 @@ plot(Phenotype,Fit(Phenotype),ylab="Fitness")
 The resulting phenotypic density takes the following trajectory.
 
 ```{r, echo=F}
-image(out,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density")
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
 ```
 
 Adding weak random mating:
@@ -654,12 +649,6 @@ Fit <- function(x){
   Wmax <- 1.01
   fit <- Wmax*(dnorm(x,-10,6) +  dnorm(x,10,6))
   return(fit)
-}
-
-MeanMalth <- function(phi){
-  lnW <- log(Fit(Phenotype))
-  rBar <- sum(phi*lnW)/sum(phi)
-  return(rBar)
 }
 
 Model <- function(t,phi,parameters){
@@ -688,14 +677,11 @@ phi <- dnorm(Phenotype,0,2)
 state <- c(phi=phi)
 times <- seq(0,maxT,by=1)
 
-print(system.time(
-  out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
-))
-
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
 ```
 
 ```{r, echo=F}
-image(out,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density")
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
 ```
 
 
@@ -755,9 +741,7 @@ phi <- dnorm(Phenotype,0,2)
 state <- c(phi=phi)
 times <- seq(0,maxT,by=1)
 
-print(system.time(
-  out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
-))
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
 ```
 
 Our selection surface is modelled as space-time white noise. At every time step a random discontinuous surface is generated, each one taking the following general appearance:
@@ -769,15 +753,24 @@ plot(Phenotype,bumps,ylab="Fitness")
 Across time, this random surface can be visualized as a contour plot where hot colors correspond to high fitness and cool colors correspond to low fitness.
 
 ```{r, echo=F}
-stuff <- cbind(0:50,smooth)
-rownames(stuff) <- NULL
-image(stuff,zlim=c(min(smooth),max(smooth)),col=rainbow(n=100,s=.9,v=1,alpha=.9),xlab="Time",ylab="Phenotype",main="Stochastic Selection")
+stuff <- out
+stuff[,2:(numboxes+1)] <- smooth
+
+image(stuff,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Fitness")
+
+#image(stuff,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
 ```
 
 The resulting phenotypic density takes the following trajectory.
 
 ```{r, echo=F}
-image(out,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density")
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+
+# image(out,add.contour=T,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=F)
+# 
+# image(out,method="persp",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+# 
+# image(out,method="contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density")
 ```
 
 Adding a bit of random mating:
@@ -838,19 +831,22 @@ phi <- dnorm(Phenotype,0,2)
 state <- c(phi=phi)
 times <- seq(0,maxT,by=1)
 
-print(system.time(
-  out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
-))
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
 ```
 
 ```{r, echo=F}
-image(out,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density")
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
 ```
 
 
 #### Stochastic Bimodal Selection
 
 ```{r, include=F}
+Fit <- function(x){
+  Wmax <- 1.01
+  fit <- Wmax*(dnorm(x,-10,6) +  dnorm(x,10,6))
+  return(fit)
+}
 
 Model <- function(t,phi,parameters){
   deltax <- c(0.5,rep(1,numboxes-1),0.5)
@@ -893,20 +889,184 @@ phi <- dnorm(Phenotype,0,2)
 state <- c(phi=phi)
 times <- seq(0,maxT,by=1)
 
-print(system.time(
-  out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
-))
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
 ```
 
 Our selection surface across time will be the following.
 
 ```{r, echo=F}
 together <- NULL
-for(i in 1:51){
+for(i in 1:(maxT+1)){
   together <- rbind(together,smooth[i,]*Fit(Phenotype))
 }
-stuff <- cbind(0:50,together)
-image(stuff,zlim=c(min(together),max(together)),col=rainbow(n=100,s=.9,v=1,alpha=.9),xlab="Time",ylab="Phenotype",main="Stochastic Selection")
+stuff <- out
+stuff[,2:(numboxes+1)] <- together
+
+image(stuff,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Fitness")
+
+#image(stuff,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+```
+
+The resulting phenotypic density takes the following trajectory.
+
+```{r, echo=F}
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+```
+
+
+#### Stochastic Selection That Changes Smoothly Over Time
+
+```{r, include=F}
+require(deSolve)
+Model <- function(t,phi,parameters){
+  deltax <- c(0.5,rep(1,numboxes-1),0.5)
+  Flux   <- eta^2*diff(c(phi[1],phi,phi[numboxes]))/deltax
+  # lnW    <- log(Fit(Phenotype))
+  # rho    <- lnW    - sum(phi*lnW)/sum(phi)
+  xi     <- smooth[t+1,] - sum(phi*smooth[t+1,])/sum(phi)
+  #lng    <- dnorm(Phenotype,Phenotype*phi/sum(phi),s,log=T)
+  #rnd    <- lng    - sum(phi*lng)/sum(phi)
+  dphi   <- diff(Flux)/delx + phi*xi
+  
+  list(dphi)
+}
+
+eta <- 1
+s <- 7
+r <- 0.01
+delx <- .1
+numboxes <- 300
+maxT <- 1000
+Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
+
+# bumps  <- rnorm(numboxes,0,.5)
+# smooth <- bumps
+# for(i in 1:maxT){
+#   bumps  <- rnorm(numboxes,0,.5)
+#   NEXTsmooth <- bumps
+#   smooth <- rbind(smooth,NEXTsmooth)
+# }
+
+## smooth in space
+# bumps  <- rnorm(numboxes,0,1)
+# smooth <- convolve(bumps,dnorm(Phenotype,0,1))
+# for(i in 1:maxT){
+#   bumps  <- rnorm(numboxes,0,1)
+#   NEXTsmooth <- convolve(bumps,dnorm(Phenotype,0,1))
+#   smooth <- rbind(smooth,NEXTsmooth)
+# }
+
+# SMOOTH IN TIME AS WELL
+bumps  <- rnorm(numboxes,0,.01)
+smooth <- convolve(bumps,dnorm(Phenotype,0,1))
+NEXTsmooth <- smooth+convolve(rnorm(numboxes,0,.001),dnorm(Phenotype,0,1))
+smooth <- rbind(smooth,NEXTsmooth)
+for(i in 2:maxT){
+  NEXTsmooth <- smooth[i,]+convolve(rnorm(numboxes,0,.001),dnorm(Phenotype,0,1))
+  smooth <- rbind(smooth,NEXTsmooth)
+}
+
+phi <- dnorm(Phenotype,0,10)
+state <- c(phi=phi)
+times <- seq(0,maxT,by=1)
+
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
+```
+
+Our selection surface is modelled as space-time white noise. At every time step a random discontinuous surface is generated, each one taking the following general appearance:
+
+```{r, echo=F}
+plot(Phenotype,smooth[1,],ylab="Fitness")
+```
+
+Across time, this random surface can be visualized as a contour plot where hot colors correspond to high fitness and cool colors correspond to low fitness.
+
+```{r, echo=F}
+stuff <- out
+stuff[,2:301] <- smooth
+
+#image(stuff,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Fitness")
+
+image(stuff,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Fitness",legend=T)
+```
+
+The resulting phenotypic density takes the following trajectory.
+
+```{r, echo=F}
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+```
+
+#### Selection with Many Equally Tall Peaks
+
+```{r, include=F}
+require(deSolve)
+
+Fit <- function(x){
+  Wmax <- 1.001
+  fit <- Wmax*(dnorm(x,-12,1) +  dnorm(x,-8,1) +  dnorm(x,-4,1) +  dnorm(x,0,1) +  
+                 dnorm(x,4,1) + dnorm(x,8,1) +  dnorm(x,12,1))
+  return(fit)
+}
+
+Model <- function(t,phi,parameters){
+  deltax <- c(0.5,rep(1,numboxes-1),0.5)
+  Flux   <- eta^2*diff(c(0,phi,0))/deltax
+  lnW    <- log(Fit(Phenotype))
+  rho    <- lnW    - sum(abs(phi)*lnW)/sum(abs(phi))
+  #xi     <- smooth[t+1,] - sum(phi*smooth[t+1,])/sum(phi)
+  #lng    <- dnorm(Phenotype,Phenotype*phi/sum(phi),s,log=T)
+  #rnd    <- lng    - sum(phi*lng)/sum(phi)
+  dphi   <- diff(Flux)/delx + abs(phi)*rho
+  
+  list(dphi)
+}
+
+eta <- 1
+s <- 7
+r <- 0.01
+delx <- .1
+numboxes <- 300
+maxT <- 500
+Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
+
+# bumps  <- rnorm(numboxes,0,.5)
+# smooth <- bumps
+# for(i in 1:maxT){
+#   bumps  <- rnorm(numboxes,0,.5)
+#   NEXTsmooth <- bumps
+#   smooth <- rbind(smooth,NEXTsmooth)
+# }
+
+## smooth in space
+# bumps  <- rnorm(numboxes,0,1)
+# smooth <- convolve(bumps,dnorm(Phenotype,0,1))
+# for(i in 1:maxT){
+#   bumps  <- rnorm(numboxes,0,1)
+#   NEXTsmooth <- convolve(bumps,dnorm(Phenotype,0,1))
+#   smooth <- rbind(smooth,NEXTsmooth)
+# }
+
+# SMOOTH IN TIME AS WELL
+# bumps  <- rnorm(numboxes,0,1)
+# smooth <- convolve(bumps,dnorm(Phenotype,0,1))
+# NEXTsmooth <- smooth+convolve(rnorm(numboxes,0,.1),dnorm(Phenotype,0,1))
+# smooth <- rbind(smooth,NEXTsmooth)
+# for(i in 2:maxT){
+#   NEXTsmooth <- smooth[i,]+convolve(rnorm(numboxes,0,.1),dnorm(Phenotype,0,1))
+#   smooth <- rbind(smooth,NEXTsmooth)
+# }
+
+phi <- dnorm(Phenotype,0,10)
+state <- c(phi=phi)
+times <- seq(0,maxT,by=1)
+
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
+```
+
+Our selection surface is
+
+```{r, echo=F}
+plot(Phenotype,Fit(Phenotype),ylab="Fitness")
 ```
 
 The resulting phenotypic density takes the following trajectory.
