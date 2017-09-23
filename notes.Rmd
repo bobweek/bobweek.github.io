@@ -1013,7 +1013,7 @@ Model <- function(t,phi,parameters){
   list(dphi)
 }
 
-eta <- 1
+eta <- .5
 s <- 7
 r <- 0.01
 delx <- .1
@@ -1039,12 +1039,12 @@ Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
 # }
 
 # SMOOTH IN TIME AS WELL
-bumps  <- rnorm(numboxes,0,.01)
-smooth <- convolve(bumps,dnorm(Phenotype,0,.75))
-NEXTsmooth <- smooth+convolve(rnorm(numboxes,0,.0005),dnorm(Phenotype,0,.75))
+bumps  <- rep(0,numboxes)
+smooth <- convolve(bumps,dnorm(Phenotype,0,.7))
+NEXTsmooth <- smooth+convolve(rnorm(numboxes,0,.00001),dnorm(Phenotype,0,.7))
 smooth <- rbind(smooth,NEXTsmooth)
 for(i in 2:maxT){
-  NEXTsmooth <- smooth[i,]+convolve(rnorm(numboxes,0,.0005),dnorm(Phenotype,0,.75))
+  NEXTsmooth <- smooth[i,]+convolve(rnorm(numboxes,0,.0001),dnorm(Phenotype,0,.75))
   smooth <- rbind(smooth,NEXTsmooth)
 }
 
