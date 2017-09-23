@@ -41,7 +41,7 @@ For discrete traits that take the values $z_1,z_2,\dots$, we write $\phi_i$ and 
 
 ## Population Dynamics
 
-Let's suppose there are $N_t$ different individuals in the population at time $t$, with each individual $i$ having fitness $\mathcal{W_t}(i)$. If we further suppose that generations are non-overlapping, then we obtain the population size in the next generation as $N_{t+1}=\sum_{i=1}^{N_t}\mathcal{W_t}(i)$. If each $\mathcal{W_t}(i)$ is a Poisson random variable with mean $W_t(i)$ (in symbols $\mathcal{W_t}(i)\sim\mathcal{P}(W_t(i))$), then by the additive property of Poisson random variables we have $N_{t+1}\sim\mathcal{P}\left(\sum_{i=1}^{N_t}W_t(i)\right)$. If selection is absent so that each $\mathcal{W_t}(i)$ is identically distributed with mean $W_t$, then $N_{t+1}\sim\mathcal{P}(W_tN_t)$. 
+Let's suppose there are $N_t$ different individuals in the population at time $t$, with each individual $i$ having fitness $\mathcal{W_{t+1}}(i)$. If we further suppose that generations are non-overlapping, then we obtain the population size in the next generation as $N_{t+1}=\sum_{i=1}^{N_t}\mathcal{W_{t+1}}(i)$. If each $\mathcal{W_{t+1}}(i)$ is a Poisson random variable with mean $W_{t+1}(i)$ (in symbols $\mathcal{W_{t+1}}(i)\sim\mathcal{P}(W_{t+1}(i))$), then by the additive property of Poisson random variables we have $N_{t+1}\sim\mathcal{P}\left(\sum_{i=1}^{N_t}W_{t+1}(i)\right)$. If selection is absent so that each $\mathcal{W_{t+1}}(i)$ is identically distributed with mean $W_{t+1}$, then $N_{t+1}\sim\mathcal{P}(W_{t+1}N_t)$. 
 
 Let's now suppose we know the value of $N_0$ exactly and that $W_t=W$ for each $t$. Then $N_1\sim\mathcal{P}(WN_0)$ and $N_2\sim\mathcal{P}(WN_1)=\mathcal{P}(W^2N_0)$, right? We need to be careful here as $N_1$ is a random variable making $N_2$ a random variable with a compound distribution, that is, a parameter controlling the distribution is itself a random variable. We can use the laws of total expectation and variance to find out if $N_1$ is Poisson. If it is, then the expectation and variance will be equivalent. Otherwise it is not a Poisson random variable.
 
@@ -82,7 +82,7 @@ $$\frac{dW_{t+1}}{dt}=W_{t+1}\ln W_{t+1}-\ln W_t-W_{t+1}\ln W_t+\ln W_t.$$
 
 Shifting the time index and simplifying provides
 
-$$\frac{d\ln W_t}{dt}=\ln\left(W_t\right)-\ln\left(W_{t-1}\right).$$
+$$\frac{d\ln W_t}{dt}=\ln W_t - \ln W_{t-1}.$$
 
 This states that if $W_t=0$ for some $t$, then $W_s=0$ for $s>t$. That is to say, if the population goes extinct, it remains extinct. This makes perfect sense in the absence of immigration, but there's another implication in this equation and to explore it I will assume that the general form of $W_t$ is $W_t=e^{r_t}$ for some function $r_t$. Note that this implies $\frac{dN_t}{dt}=r_tN_t$. Then the previously derived equation is equivalent to $\frac{dr_t}{dt}=r_t-r_{t-1}$. In the case that $r_t=k+r_{t-1}$ for some constant $k$, we get $r_t=kt+c$, making $\frac{dN_t}{dt}=(kt+c)N_t$. But we can also make $k_t$ a function $t$. Here we get 
 
@@ -102,27 +102,37 @@ $$N_t=N_0e^{\int_0^tr(s)ds}.$$
 
 ### Returning to Stochastics
 
-Picking up where we left off, the variance has now been decoupled from the expectation forcing future generation population size distributions to be non-Poisson. This can be delt with if we choose the next best option$\dots$ the negative binomial $\mathrm{NB}(n,p)$. By setting $n=WN_0$ and $p=1-\frac{1}{1+W}$ this provides the expectation and variance derived above, but is $\mathrm{NB}$ the actual distribution of $N_2$? Regardless, we can continue this program to derive distributions for future population sizes. In general, we get 
+Picking up where we left off, the variance has now been decoupled from the expectation forcing future generation population size distributions to be non-Poisson. This can be delt with if we choose the next best option$\dots$ the negative binomial $\mathrm{NB}(\nu,p)$. By setting $\nu=WN_0$ and $p=1-\frac{1}{1+W}$ this provides the expectation and variance derived above, but is $\mathrm{NB}$ the actual distribution of $N_2$? Regardless, we can continue this program to derive distributions for future population sizes. Solutions for the expectation and variance of population sizes with fixed mean fitness are
 
 $$\E(N_t)=W^tN_0 \text{ and } \Var(N_t)=\para{\sum_{i=0}^{t-1}W^i}W^tN_0=\frac{1-W^t}{1-W}W^tN_0.$$
 
-Our negative binomial for each time $t$ can be accordingly parameterized by $n_t=\frac{1-W}{W-W^t}W^tN_0$ and $p_t=\frac{W-W^t}{1-W^t}$.
+Our negative binomial for each time $t$ can be accordingly parameterized by $\nu_t=\frac{1-W}{W-W^t}W^tN_0$ and $p_t=\frac{W-W^t}{1-W^t}$.
 
 HYPOTHESIS: For $W_t\neq W$, define $W_0\equiv1$ and $W_s=0$ for $s<0$. Using the convention $\prod_{i=1}^0W_i=1$ and $\sum_{i=0}^{-1}W_i=0$, I think the following is true:
 
-$$\E(N_t)=\para{\prod_{i=1}^tW_i}N_0 \text{ and } \Var(N_t)=\para{\sum_{i=0}^{t-1}W_i}\para{\prod_{i=1}^tW_i}N_0$$
+$$\E(N_t)=\para{\prod_{i=0}^tW_i}N_0 \text{ and } \Var(N_t)=\para{\sum_{i=0}^{t-1}W_i}\para{\prod_{i=0}^tW_i}N_0$$
 
-For continuous time consider the measure $W$ that measures the expected number of individuals produced over a set of time. This notation may seem to conflict with the above use of $W$, but this is not so. For example, $W([t-1,t])=W_t$ for $t=1,2,\dots$. So $W_t$ as it has been used is really a measure. It makes sense to assume $W(\{t\})=0$ for any $t\in\R$. Hence $W$ is absolutely continuous wrt the Lebesgue measure on $\R$. So it has a density, that is $W(U)=\int_UdW=\int_Uw_sds$ for some non-negative continuous function $w:\R\rightarrow\R$. Particularly $W_t=W([t-1,t])=\int_{t-1}^tw_sds$. From this we can forge continuous time summations (ie, integrals) that coincide with the above discrete time summations such as $\sum_{i=0}^{t-1}W_i=\int_0^{t-1}w_sds$. Note that this requires $w_s=0$ for $s<-1$ and $\int_{-1}^0w_sds=1$.
+For continuous time consider the measure $W$ that measures the expected number of individuals produced over a set of time. This notation may seem to conflict with the above use of $W$, but this is not so. For example, $W([t-1,t])=W_t$ for $t=0,1,2,\dots$. So $W_t$ as it has been used is really a measure. It makes sense to assume $W(\{t\})=0$ for any $t\in\R$. Hence $W$ is absolutely continuous wrt the Lebesgue measure on $\R$. So it has a density, that is $W(U)=\int_UdW=\int_Uw_sds$ for some non-negative continuous function $w:\R\rightarrow\R$. Particularly $W_t=W([t-1,t])=\int_{t-1}^tw_sds$. From this we can forge continuous time summations (ie, integrals) that coincide with the above discrete time summations such as $\sum_{i=0}^{t-1}W_i=\int_{-1}^{t-1}w_sds$. Note that this requires $\int_{-1}^0w_sds=1$. We now have three quantities related to fitness; Wrightian fitness $W_t$, Malthusian fitness $r_t=\ln W_t$, and the "time-density" of Wrightian fitness $w_t$. Using the previously derived equations, all three have the following relationship
 
-$$\E(N_t)=\para{\bigwedge_0^tW_s^{ds}}N_0 \text{ and } \Var(N_t)=\para{\int_0^{t-1}w_sds}\para{\bigwedge_0^tW_s^{ds}}N_0$$
+$$\frac{dr_t}{dt}=\frac{w_t-w_{t-1}}{W_t}.$$
+
+Finally
+
+$$\E(N_t)=\para{\bigwedge_0^tW_s^{ds}}N_0 \text{ and }$$ 
+
+$$\Var(N_t)=\para{\int_{-1}^{t-1}w_sds}\para{\bigwedge_0^tW_s^{ds}}N_0$$
 
 where $\bigwedge$ represents type-1 product integration and is defined by
 
-$$\bigwedge_0^tW_s^{ds}\equiv e^{\int_0^t\ln W_sds}.$$
+$$\bigwedge_0^tW_s^{ds}\equiv e^{\int_0^t\ln w_sds}.$$
 
 Hence, this returns the same expected dynamics as above when $\ln W_t=r_t$.
 
-Continuing our $NB$ fit we would set $p_t=1-\para{\int_0^{t-1}w_sds}^{-1}$ and $n_t=\frac{1-p_t}{p_t}\para{\bigwedge_0^tW_s^{ds}}N_0=\para{\int_0^{t-1}w_sds}^{-1}\para{\bigwedge_0^tW_s^{ds}}N_0$.
+Continuing our $NB$ fit (THIS IS FUBAR!) we would set $p_t=1-\para{\int_0^{t-1}w_sds}^{-1}$ and 
+
+$$\nu_t=\frac{1-p_t}{p_t}\para{\bigwedge_0^tW_s^{ds}}N_0$$
+
+$$=\para{\int_0^{t-1}w_sds}^{-1}\para{\bigwedge_0^tW_s^{ds}}N_0.$$
 
 ## Populations of Types
 
@@ -140,6 +150,8 @@ Setting $\rho_t(i)=\ln W_t(i)-\overline{\ln W}_t$ (what I refer to as the "relat
 
 $$\phi_t(i)=\phi_0(i)e^{\int_0^t\rho_s(i)ds}$$
 
+<!--
+
 We could, of course, continue on with the stochastic case to get
 
 $$\E(\phi_t(i))=\phi_0(i)e^{\int_0^t\rho_s(i)ds} \text{ and } \Var(\phi_t(i))=\para{1+\int_0^{t-1}e^{\rho_s(i)}ds}\phi_0(i)e^{\int_0^t\rho_s(i)ds}.$$
@@ -148,11 +160,13 @@ Setting $\Box=\phi_0(i)e^{\int_0^t\rho_s(i)ds}$ and $\triangle=\int_0^1e^{\rho_s
 
 $$\alpha=\frac{1-\Box}{1+\triangle}-\Box \ \text{ and } \ \beta=\frac{(1-\Box)^2}{1+\triangle}+\Box-1.$$
 
-If there is a continuum of types indexed by $z\in\R$ we write $\phi_t(z)$ for the __density__ of individuals of type $z$ in the population.  Since densities are not bounded above by 1, it does not make sense to model $\phi_t(z)$ as a $\mathrm{Beta}$ distribution. Instead, it may make more sense to try a $\mathrm{Gamma}(\alpha,\beta)$ with
+If there is a continuum of types indexed by $z\in\R$ we write $\phi_t(z)$ for the density of individuals of type $z$ in the population.  Since densities are not bounded above by 1, it does not make sense to model $\phi_t(z)$ as a $\mathrm{Beta}$ distribution. Instead, it may make more sense to try a $\mathrm{Gamma}(\alpha,\beta)$ with
 
 $$\alpha=\frac{\Box}{1+\triangle} \ \text{and} \ \beta=\frac{1}{1+\triangle}$$
 
-## Response in the Mean and Variance
+-->
+
+## Response in Mean and Variance
 
 Let's suppose each type is associated with a distinct value. If there's a finite number of types, there'll be a finite number of values. For types with a continuous index, there'll be a continuum of possible values. Let's stick with a continuum of types indexed by $\R$. Denote by $\bar z_t$ the average value of the population at time $t$ and $\sigma_t^2$ the variance of types at time $t$. Then
 
@@ -234,11 +248,27 @@ $$\mu_n=\frac{\sum_{i=1}^{n-1}\mu_j\prod_{j\neq i}\sigma_j^2}{\sum_{i=1}^{n-1}\p
  
 $$(g_1*g_2)(z)=g_3(z), \text{ where } \mu_3=\mu_2+\mu_1, \ \sigma_3^2=\sigma_1^2+\sigma_2^2.$$
 
+### Mutation
+
+Returning to a population of $T$ types, let's now suppose that there is a probability $P_{ij}$ that an individual of type $i$ produces an offspring of type $j$. Then, if $W(i)$ is the expected fitness of an individual of type $i$, this individual will on average produce $W(i)P_{ij}$ individuals of type $j$ and $W(i)(1-\sum_{j\neq i}P_{ij})$ individuals of type $i$. The expected dynamics for each population is then
+
+$$n_{t+1}(i)=\sum_{j=0}^TP_{ji}W(j)n_t(j)$$
+
+If we write $\bf{\tilde n}_t$ as a row vector denoting the sizes of each type multiplied by their fitnesses so that it's entries are $W_{t+1}(i)n_t(i)$ and $P$ a matrix whose entries are $P_{ij}$, we have
+
+$$\bf{n}_{t+1}=\bf{\tilde n}_t P.$$
+
+From here we can generate all sorts of madness by conjuring up quirky combinations of $W$ and $P$. My interest, however, lies in something more docile. I'm primarily interested in continuously varying traits. The above only works for at most a countable number of types. For a continuum we'll have to do some fancy toe work which will inevitably lead us to diffusion. The idea here is that an individual of type $z$ produces offspring that are normally distributed around this type with some variance. That variance will be our diffusion coefficient. In the end, we wind up with
+
+$$\frac{\partial\phi_t}{\partial t}=\phi_t(\ln W_t(z)-\overline{\ln W}_t)+\eta^2\frac{\partial^2\phi_t}{\partial z^2}.$$
+
+As noted above, the concept of type is most abstract. Probably the most tangible realizations of this concept are those of quantitative traits and genotypes. In the case of genotypes, the above discussion referring to $P$ is obvious and fits nicely with many classic models of mutation that are widely used throughout evolutionary biology. For continuous traits, our diffusion result may not be as widely known but still holds solid biological intuition. However one example that seems to evade many is location. The number $T$ could denote the number of demes, or discrete populations. Then $P_{ij}$ is the probability that a particular offspring of an individual in location $i$ migrates to location $j$. This example is admittedly a bit contrived. For instance, why should individuals that migrate to location $j$ suddenly have the same expected fitness as all other individuals in location $j$? Shouldn't fitness be a function of some other trait as well? Well, if this is so, we could construct another example that incorporates this. We could start be assuming that there are, say, $T'$ types for this other trait. Then the total number of combinations between location and this new trait is $T\times T'$. But then we could make an equivalent example by starting off by saying, "Suppose there are $T\times T'$ different types each with some fit$\dots$" Get the point? The goal here is to realize that theory has been developed at a sufficient level of abstraction so that many scenarios are captured. One does not need to develop a new theory based on trying to separate timescales and making other unnecessary complications. Selection, mutation, migration, drift, population dynamics and more can be captured with this approach. Typically it takes just a slight shift in perspective for all the pieces to fall into place.
+
 ## Examples
 
 ### A Continuous Time Example
 
-Let's suppose we have a continuum of types indexed by $z$. To be slightly more concrete, we can think of $z$ as a phenotype. If we set $W_t(z)=W_{max}\exp\para{-\frac{(\theta-z)^2}{2\omega^2}}$ and $\phi_0(z)=\frac{1}{\sqrt{2\pi\sigma_0^2}}\exp\para{-\frac{(\bar z_0-z)^2}{2\sigma_0^2}}$, then
+Let's suppose we have a continuum of types indexed by $z$. If we set $W_t(z)=W_{max}\exp\para{-\frac{(\theta-z)^2}{2\omega^2}}$ and $\phi_0(z)=\frac{1}{\sqrt{2\pi\sigma_0^2}}\exp\para{-\frac{(\bar z_0-z)^2}{2\sigma_0^2}}$, then
 
 $$\frac{d\bar z_t}{dt}=\frac{\sigma_t^2}{\omega^2}(\theta-\bar z_t) \ \text{and} \ \frac{d\sigma^2_t}{dt}=-\frac{\sigma_t^4}{\omega^2}.$$
 
@@ -1155,19 +1185,4 @@ $$=\frac{\overline W+qD_p\overline W}{\overline W-pD_p\overline W}=\frac{\overli
 
 $$\implies \Delta x=\ln\left(\frac{W_1}{W_2}\right).$$
 
-Hence, the dynamics stretched onto the whole real line are not only linear, but constant! I have yet to investigate whether this can be done for models involving higher ploidy.
-
-## Likelihood Ratio
-
-$$\Lambda = 2(l_{alt}-l_{null})$$
-$$\Lambda = 2(l_{ML}-l_{model})$$
-
-$$l_{ML}=\ln\prod_{i=1}^Nf(X_i|\mu_{ML},\Sigma_{ML}), \ \mu_{ML}=\frac{1}{N}\sum_iX_i, \ \Sigma_{ML}=\frac{1}{N^2}\sum_i\para{X_i-\mu_{ML}}^\top\para{X_i-\mu_{ML}}$$
-
-$$f(X_i|\mu,\Sigma)=\para{|2\pi\Sigma|}^{-1/2}\exp\para{-\frac{1}{2}(X_i-\mu)^\top\Sigma^{-1}(X_i-\mu)}$$
-
-$$\ln f(X_i|\mu,\Sigma)=-\frac{1}{2}\para{\ln|2\pi\Sigma|+(X_i-\mu)^\top\Sigma^{-1}(X_i-\mu)}$$
-
-$$\Lambda=\para{N\ln|2\pi\Sigma_{model}|+\sum_i(X_i-\mu_{model})^\top\Sigma_{model}^{-1}(X_i-\mu_{model})}-\para{N\ln|2\pi\Sigma_{ML}|+\sum_i(X_i-\mu_{ML})^\top\Sigma_{ML}^{-1}(X_i-\mu_{ML})}$$
-
-$$=N\ln\para{\frac{|\Sigma_{model}|}{|\Sigma_{ML}|}}+\sum_i(X_i-\mu_{model})^\top\Sigma_{model}^{-1}(X_i-\mu_{model})-\sum_i(X_i-\mu_{ML})^\top\Sigma_{ML}^{-1}(X_i-\mu_{ML})$$
+Hence, the dynamics stretched onto the whole real line are not only linear, but constant.
