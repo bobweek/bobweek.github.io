@@ -51,7 +51,7 @@ $$\mathrm{Var}(N_2)=(\mathrm{Var}(\mathcal{W})+\mathbb{E}(\mathcal{W})^2)\mathbb
 
 For now, let's settle for deterministic dynamics. We'll return to the stochastics after we get a feel for the simplier situation.
 
-### Deterministic Population Dynamics in Continuous Time
+### Continuous Time
 
 If we assume that selection is absent and mean fitness is constant with respect to time, we can derive continuous time mean dynamics of $N_t$. To do so, suppose that for $0<\delta<1$, $\mathbb{E}N_{t+\delta}=W^\delta\mathbb{E} N_t$. Then $\mathbb{E}N_{t+0}=\mathbb{E}N_t$ and $\mathbb{E}N_{t+1}=W\mathbb{E}N_t$. Hence
 
@@ -61,7 +61,7 @@ $$=\lim_{\delta\rightarrow0}\frac{(W^\delta-1)}{\delta}\mathbb{E}N_t=\ln(W)\math
 
 Note that switching the derivative and the expectation must be formally justified. In what follows, we won't drag the annoying expectation symbol along with us. Instead we will adopt the convention that $N_t$ is actually an expected value.
 
-In typical notation one would write $r$ in place of $\ln(W)$. This exposes an interesting connection between two very distinct notions of fitness. The notion of fitness that I've been working with, $W$, is called the Wrightian, or, multiplicative fitness. It is a non-negative number that corresponds to the expected number of offspring produced for some category. It's been called multiplicative fitness because the multiplication of any two Wrightian fitnesses is yet another Wrightian fitness. The natural log of this value is known as the Malthusian, or, additive fitness. Its value can be positive or negative and corresponds to the expected rate at which the abundance of some category fluctuates. Note that the log of a product is the sum of the logs. It's this basic log rule that provides the Malthusian fitness its additivity. The sum of any two Malthusian fitnesses is again a Malthusian fitness. Artem Kaznatcheev has a nice discussion of this topic [here](https://egtheory.wordpress.com/2016/08/17/weak-selection). To solidify the connection between these two notions of fitness, consider a population that maintains a constant size of 100 but becomes extinct instantaneously (as shown below). This  corresponds to each individual having a fitness of 1 (remember we're assuming fitness is constant throughout the population) making the Malthusian fitness of the population zero. Then when the population drops each individual must suddenly have a Wrightian fitness of zero. The Malthusian fitness of the population will then be $\ln(0)$ which is $-\infty$, corresponding to the discontinuous drop in the population size. 
+In typical notation one would write $r$ in place of $\ln(W)$. This exposes an interesting connection between two very distinct notions of fitness. The notion of fitness that I've been working with, $W$, is called the Wrightian, or, multiplicative fitness. It is a non-negative number that corresponds to the expected number of offspring produced for some category. It's been called multiplicative fitness because the multiplication of any two Wrightian fitnesses is yet another Wrightian fitness. The natural log of this value is known as the Malthusian, or, additive fitness. Its value can be positive or negative and corresponds to the expected per capita rate at which abundance fluctuates instantaneously. Note that the log of a product is the sum of the logs. It's this basic log rule that provides the Malthusian fitness its additivity. The sum of any two Malthusian fitnesses is again a Malthusian fitness. Artem Kaznatcheev has a nice discussion of this topic [here](https://egtheory.wordpress.com/2016/08/17/weak-selection). To solidify the connection between these two notions of fitness, consider a population that maintains a constant size of 100 but becomes extinct at a single instant (as shown below). This  corresponds to each individual at first having a fitness of 1 (remember we're assuming fitness is constant throughout the population) making the Malthusian fitness of the population zero (hence, constant population size). Then when the population drops each individual must suddenly have a Wrightian fitness of zero. The Malthusian fitness of the population will then be $\ln(0)$ which is $-\infty$, corresponding to the discontinuous drop in the population size. 
 
 ```{r, echo=F, fig.height = 3, fig.width = 5, fig.align='center'}
 time <- 1:1000
@@ -69,19 +69,30 @@ N <- c(rep(100,800),rep(0,200))
 plot(time,N)
 ```
 
-However, this result is a bit of an abuse of the above derivation as we had made the assumption that fitness is constant with respect to time. If we assume that $\frac{dN_t}{dt}=\ln(W_t)N_t$, where now $W_t$ is allowed to change with respect to time, then for consistency it would be good to reconcile this equation with the above assumption that $\Delta N_t=N_{t+1}-N_t=(W_t-1)N_t$. Doing so restricts the nature of $W_t$. Specifically, 
+However, this result is a bit of an abuse of the above derivation as we had made the assumption that fitness is constant with respect to time. If we assume that $\frac{dN_t}{dt}=\ln(W_t)N_t$, where now $W_t$ is allowed to change with respect to time, then for consistency it would be good to reconcile this equation with the above assumption that $N_{t+1}-N_t=(W_{t+1}-1)N_t$. Doing so restricts the nature of $W_t$. Specifically, 
 
-$$\frac{dW_t}{dt}=W_t\ln\left(\frac{W_{t+1}}{W_t}\right).$$
+$$1) \ \frac{d}{dt}(N_{t+1}-N_t)=\frac{d}{dt}(W_{t+1}-1)N_t=\frac{dW_{t+1}}{dt}N_t+(W_{t+1}-1)\frac{dN_t}{dt}$$
+$$=\para{\frac{dW_{t+1}}{dt}+(W_{t+1}-1)\ln W_t}N_t$$
 
-This states that if $W_t=0$ for some $t$, then $W_s=0$ for $s>t$. That is to say, if the population goes extinct, it remains extinct. This makes perfect sense in the absence of immigration, but there's another implication in this equation and to explore it I will assume that the general form of $W_t$ is $W_t=e^{r_t}$ for some function $r_t$. Note that this implies $\frac{dN_t}{dt}=r_tN_t$. Then we can use the previously derived equation to show that $\frac{d}{dt}r_t=r_{t+1}-r_t$. In the case that $r_{t+1}=k+r_t$ for some constant $k$, we get $r_t=kt+c$, making $\frac{dN_t}{dt}=(kt+c)N_t$. But we can also make $k_t$ a function $t$. Here we get 
+$$2) \ \frac{d}{dt}(N_{t+1}-N_t)=N_{t+1}\ln W_{t+1}-N_t\ln W_t=(W_{t+1}\ln W_{t+1}-\ln W_t)N_t.$$
+
+Dividing eqns 1) and 2) by $N_t$, then subtracting $W_{t+1}\ln W_t-\ln W_t$ from both returns
+
+$$\frac{dW_{t+1}}{dt}=W_{t+1}\ln W_{t+1}-\ln W_t-W_{t+1}\ln W_t+\ln W_t.$$
+
+Shifting the time index and simplifying provides
+
+$$\frac{d\ln W_t}{dt}=\ln\left(W_t\right)-\ln\left(W_{t-1}\right).$$
+
+This states that if $W_t=0$ for some $t$, then $W_s=0$ for $s>t$. That is to say, if the population goes extinct, it remains extinct. This makes perfect sense in the absence of immigration, but there's another implication in this equation and to explore it I will assume that the general form of $W_t$ is $W_t=e^{r_t}$ for some function $r_t$. Note that this implies $\frac{dN_t}{dt}=r_tN_t$. Then the previously derived equation is equivalent to $\frac{dr_t}{dt}=r_t-r_{t-1}$. In the case that $r_t=k+r_{t-1}$ for some constant $k$, we get $r_t=kt+c$, making $\frac{dN_t}{dt}=(kt+c)N_t$. But we can also make $k_t$ a function $t$. Here we get 
 
 $$\frac{dN_t}{dt}=\left(\int_0^tk_sds+c\right)N_t$$
 
-This might be handy if, say, you wanted to incorporate the effects of population dynamics of another species that interacts with this one. In that case $k_t$ would likely be a function of the other species' population size at time $t$. But there are other possibilities. For example, we can set $r_{t+1}=k_tr_t$ to get 
+This might be handy if, say, you wanted to incorporate the effects of population dynamics of another species that interacts with this one. In that case $k_t$ would likely be a function of the other species' population size at time $t$. But there are other possibilities. For example, we can set $r_t=k_tr_{t-1}$ to get 
 
 $$\frac{dN_t}{dt}=\left(e^{\int_0^tk_sds-t}+c\right)N_t.$$
 
-Regardless of what is chosen for $r_{t+1}$, this trick will be assured to work when $r_{t+1}$ is a linear function of $r_t$. That is, $r_{t+1}=a_t+b_tr_t$. In this general case we get
+Regardless of what is chosen for $r_t$, this trick will be assured to work when $r_t$ is a linear function of $r_{t-1}$. That is, $r_t=a_t+b_tr_{t-1}$. In this general case we get
 
 $$\frac{dN_t}{dt}=\left(\int_0^ta_sds+e^{\int_0^tb_sds-t}+c\right)N_t.$$
 
@@ -97,60 +108,27 @@ $$\E(N_t)=W^tN_0 \text{ and } \Var(N_t)=\para{\sum_{i=0}^{t-1}W^i}W^tN_0=\frac{1
 
 Our negative binomial for each time $t$ can be accordingly parameterized by $n_t=\frac{1-W}{W-W^t}W^tN_0$ and $p_t=\frac{W-W^t}{1-W^t}$.
 
-HYPOTHESIS: For $W_t\neq W$, define $W_0\equiv1$ and $W_s=0$ for $s<0$. Then I think the following is true:
+HYPOTHESIS: For $W_t\neq W$, define $W_0\equiv1$ and $W_s=0$ for $s<0$. Using the convention $\prod_{i=1}^0W_i=1$ and $\sum_{i=0}^{-1}W_i=0$, I think the following is true:
 
 $$\E(N_t)=\para{\prod_{i=1}^tW_i}N_0 \text{ and } \Var(N_t)=\para{\sum_{i=0}^{t-1}W_i}\para{\prod_{i=1}^tW_i}N_0$$
 
-For continuous time consider the measure $W$ that measures the expected number of individuals produced over a set of time. This notation may seem to conflict with the above use of $W$, but this is not so. For example, $W([t-1,t])=W_t$ for $t=1,2,\dots$. So $W_t$ as it has been used is really a measure. It makes sense to assume $W(\{t\})=0$ for any $t\in\R$. Hence $W$ is absolutely continuous wrt the Lebesgue measure on $\R$. So it has a density, that is $W([t,t+c])=\int_t^{t+c}w(s)ds$ for some non-negative continuous function $w:\R\rightarrow\R$. From this we can forge continuous time summations (ie, integrals) that coincide with the above discrete time summations such as $\sum_{i=0}^{t-1}W_i=\int_0^{t-1}w(s)ds$. However, we see that a
+For continuous time consider the measure $W$ that measures the expected number of individuals produced over a set of time. This notation may seem to conflict with the above use of $W$, but this is not so. For example, $W([t-1,t])=W_t$ for $t=1,2,\dots$. So $W_t$ as it has been used is really a measure. It makes sense to assume $W(\{t\})=0$ for any $t\in\R$. Hence $W$ is absolutely continuous wrt the Lebesgue measure on $\R$. So it has a density, that is $W(U)=\int_UdW=\int_Uw_sds$ for some non-negative continuous function $w:\R\rightarrow\R$. Particularly $W_t=W([t-1,t])=\int_{t-1}^tw_sds$. From this we can forge continuous time summations (ie, integrals) that coincide with the above discrete time summations such as $\sum_{i=0}^{t-1}W_i=\int_0^{t-1}w_sds$. Note that this requires $w_s=0$ for $s<-1$ and $\int_{-1}^0w_sds=1$.
 
-$$\E(N_t)=\para{\bigwedge_0^tw(s)^{ds}}N_0 \text{ and } \Var(N_t)=\para{\int_0^{t-1}w(s)ds}\para{\bigwedge_0^tw(s)^{ds}}N_0$$
+$$\E(N_t)=\para{\bigwedge_0^tW_s^{ds}}N_0 \text{ and } \Var(N_t)=\para{\int_0^{t-1}w_sds}\para{\bigwedge_0^tW_s^{ds}}N_0$$
 
 where $\bigwedge$ represents type-1 product integration and is defined by
 
-$$\bigwedge_0^tw(s)^{ds}\equiv e^{\int_0^t\ln w(s)ds}.$$
+$$\bigwedge_0^tW_s^{ds}\equiv e^{\int_0^t\ln W_sds}.$$
 
-Hence, this returns the same expected dynamics as above when $\ln w(t)=r_t$.
+Hence, this returns the same expected dynamics as above when $\ln W_t=r_t$.
 
-Continuing our $NB$ fit we would set $p_t=1-\para{\int_0^{t-1}w(s)ds}^{-1}$ and $n_t=\frac{1-p_t}{p_t}\para{\bigwedge_0^tw(s)^{ds}}N_0=\para{\int_0^{t-1}w(s)ds}^{-1}\para{\bigwedge_0^tw(s)^{ds}}N_0$.
+Continuing our $NB$ fit we would set $p_t=1-\para{\int_0^{t-1}w_sds}^{-1}$ and $n_t=\frac{1-p_t}{p_t}\para{\bigwedge_0^tW_s^{ds}}N_0=\para{\int_0^{t-1}w_sds}^{-1}\para{\bigwedge_0^tW_s^{ds}}N_0$.
 
 ## Populations of Types
 
 In terms of modelling, a population can be very abstract. Its concept is not restricted to a set of living things, as in the biological concept of a population. Here a population can be a set of biological populations, a set of species, replicating molecules, franchises, languages and so on. The members of the population may not be uniform, but can consist of various different types. For example, we can consider populations of individuals categorized by their phenotype or populations of species categorized by clades. We now derive how the distribution of types within a population fluctuates due to differential fitness, ie, selection.
 
 Consider a population of $T$ different types, each type $i$ with $n_t(i)$ individuals at time $t$. If we denote $\phi_t(i)$ to be the proportion of individuals within type $i$ at time $t$ among the population, we have $\phi_t(i)=\frac{n_t(i)}{N_t}$ where $N_t=\sum_{i=1}^Tn_t(i)$. Denote the expected fitness of each individual within type $i$ as $W_t(i)$. Then committing ourselves to be content with expected dynamics and adopting the notation $D_t$ in place of $\frac{d}{dt}$, we have
-
-<!--
-$$\phi_i(t+1)=\frac{n_t(i)W_t(i)}{\sum_{i=1}^Tn_t(i)W_t(i)}=\frac{\phi_t(i)W_t(i)}{\sum_{i=1}^T\phi_t(i)W_t(i)}=\para{\frac{W_t(i)}{\overline{W}_t}}\phi_t(i)$$
-
-Using the same approach as above for the continuous time expected population dynamics, we can easily get the continuous time dynamics of $\phi_t$. We suppose that for $0<\delta<1$, $\phi_{t+\delta}(i)=\para{\frac{W_t(i)}{\overline W_t(i)}}^\delta\phi_t(i)$. Then
-
-$$\frac{d}{dt}\phi_t(i)=\lim_{\delta\rightarrow0}\frac{\phi_i(t+\delta)-\phi_t(i)}{\delta}=\phi_t(i)\para{\ln(W_t(i))-\ln(\overline W_t)}.$$
-
-Denoting $\rho_t(i)=\ln(W_t(i))-\ln(\overline W_t)$ to be the "relative" Malthusian fitness for type $i$, the above implies
-
-$$\frac{d}{dt}\frac{W_t(i)}{\overline W_t}=\frac{W_t(i)}{\overline W_t}\ln\para{\frac{W_{t+1}(i)\overline W_t}{W_t(i)\overline W_{t+1}}}\implies\frac{d\rho_{t}}{dt}(i)=\rho_{t+1}(i)-\rho_t(i).$$
-
-There's another approach to this and it agrees with the above result. We instead differentiate the definition of $\phi_i$ and use our results about population dynamics. Along the way, we'll need the result $\frac{dN_t}{dt}=\ln(\overline W_t)N_t$. To see this examine the following string of equalities:
-
-$$N_{t+1}=\sum_{i=1}^Tn_i(t+1)=\sum_{i=1}^Tn_t(i)W_t(i)=\frac{N_t}{N_t}\sum_{i=1}^Tn_t(i)W_t(i)=N_t\sum_{i=1}^T\phi_t(i)W_t(i)=\overline{W_t}N_t.$$
-
-The part I need to check: $\overline W_{\delta}=\overline W_1^\delta$
-
-$$\frac{d\overline W_t}{dt}=\sum_{i=1}^T\para{W_t(i)\frac{d}{dt}\phi_t(i)+\phi_t(i)\frac{d}{dt}W_t(i)}=\dots$$
-$$\overline W_t\ln\para{\frac{\overline W_{t+1}}{\overline W_t}}=\dots$$
-
-
-Defining $\bar r_t\equiv\ln(\overline W_t)$ and $r_t(i)\equiv\ln(W_t(i))$ the above results imply $D_tr_t(i)=r_{t+1}(i)-r_t(i)$ and $D_t\bar r_t=\bar r_{t+1}-\bar r_t$. Hence, this coincides with $D_t\rho_t(i)=\rho_{t+1}(i)-\rho_t(i)$.
-
-Unfortunately I now have to admit that the above results are slightly wrong. I'm not sure what went wrong, but I have a hunch it comes from rederiving the derivatives and the supposision involved. To see why the above is wrong note that $\sum_i\phi_t(i)=1$ for each $t$. Then
-
-$$D_t\sum_{i=1}^T\phi_t(i)=\sum_{i=1}^TD_t\phi_t(i)=\sum_{i=1}^T\phi_t(i)\rho_t(i).$$
-
-Hence, $\overline{\ln(W_t)}=\ln(\overline{W}_t)$. But this is only true if $W_t(i)=W_t(j)$ for each $i,j=1,2,\dots,T$. We could instead proceed slightly differently by just using previously derived derivatives instead of deriving any new derivatives. I think that rederiving the derivatives had incorporating a little too much structure for consistency.
-
-Should try to show that if each $W_t(i)$ satisfies the $\delta$ supposition, then $\overline W_t$ cannot satisfy the $\delta$ supposition.
-
--->
 
 $$D_tN_t=D_t\sum_in_t(i)=\sum_in_t(i)\ln W_t(i)=\overline{\ln W}_tN_t.$$
 
@@ -174,7 +152,7 @@ If there is a continuum of types indexed by $z\in\R$ we write $\phi_t(z)$ for th
 
 $$\alpha=\frac{\Box}{1+\triangle} \ \text{and} \ \beta=\frac{1}{1+\triangle}$$
 
-### Response in the Mean and Variance of Types
+## Response in the Mean and Variance
 
 Let's suppose each type is associated with a distinct value. If there's a finite number of types, there'll be a finite number of values. For types with a continuous index, there'll be a continuum of possible values. Let's stick with a continuum of types indexed by $\R$. Denote by $\bar z_t$ the average value of the population at time $t$ and $\sigma_t^2$ the variance of types at time $t$. Then
 
@@ -188,7 +166,77 @@ $$\frac{d\sigma_t^2}{dt}=\frac{d}{dt}\int_\R (\bar z_t-z)^2\phi_t(z)dz=\int_\R 2
 
 $$=\Cov((\bar z_t-z)^2,\ln W)$$
 
-### An Example
+Doing this for discrete time returns
+
+$$\Delta\bar z_t=\Cov(z,W), \ \Delta\sigma_t^2=\Cov((\bar z_t-z)^2,W)$$
+
+## Response in Mean via Quant Gen
+
+Gaussian functions play a central role in evolutionary theory. Arguably the most successful equation describing the evolution of a population, the breeder's equation, requires a normal phenotypic distribution. Typical notation is $z$ for the phenotype of an individual, $\bar z$ for the mean phenotype of the population, $\sigma^2$ for the phenotypic variance and $\phi$ for the phenotypic density. This provides
+
+$$\phi(z)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(z-\bar z)^2}{2\sigma^2}\right).$$
+
+If there's selection being imposed on the trait then the fitness $W(z)$, which denotes the average fitness of an individual with trait $z$, will not be identically constant. To find the response in mean phenotype to an episode of selection we use the breeder's equation $\Delta\bar z=G\frac{\partial\ln\overline W}{\partial\bar z}$ where $G$ is the additive genetic variance and $\overline W=\int\phi(z)W(z)dz$ is the mean fitness of the population. However, in order to do so we must first calculate $\overline W$. In the case of stabilizing selection, this can be done quite nicely by assuming $W$ is also a Gaussian function of $z$. That is
+
+$$W(z)=\frac{1}{\sqrt{2\pi\omega^2}}\exp\left(-\frac{(z-\theta)^2}{2\omega^2}\right)$$
+
+with $\theta$ being the phenotypic optimum and $\omega^2$ the phenotypic tolerance of selection, which should be thought of as the inverse of the strength of selection. The reason why this calculation is easier with a Gaussian fitness is due to the algebra that Gaussian functions obey. Specifically, the product of two Gaussians is yet another Gaussian. For example
+
+$$W(z)\phi(z)=\frac{C}{\sqrt{2\pi\tilde\sigma^2}}\exp\left(-\frac{(z-\tilde z)^2}{2\tilde\sigma^2}\right),$$
+
+$$\text{where} \ \tilde\sigma^2=\frac{\sigma^2\omega^2}{\sigma^2+\omega^2}, \ \tilde z=\frac{\sigma^2\theta+\omega^2\bar z}{\sigma^2+\omega^2}$$
+
+and $C$ is some constant. What's interesting here is to note that the new parameter $\tilde z$ is a weighted average of $\theta$ and $\bar z$, weighted by the tolerance and variance. It should also be noted that $\tilde\sigma^2<\sigma^2$. One can show that as $\omega^2\rightarrow\infty$, $\tilde z\rightarrow\bar z$ and $\tilde\sigma^2\rightarrow\sigma^2$, in agreement with the concept of $\omega^2$ being the inverse of the strength of selection. With this result we see that $\overline W$ is just the integral of the above product over the whole real line. However, this product is just a scaled version of a probability density, scaled by $C$. Hence, $\overline W=C$. Then we need to calculate $C$, and for this I very briefly introduce the binary operation known as convolution.
+
+The concept of a convolution can be readily captured graphically by visualizing the graphs of two functions $g_1(z)$ and $g_2(z)$ sliding across each other horizontally. We parameterize this sliding by $\tau$ which lives on the real number line. We'll let $g_2$ remain still and slide $g_1$. As $\tau$ runs from each end of the number line visualize the graph of $g_1$ sliding across $g_2$. As this sliding occurs, we accumulate the product of these two functions with an integral in such a way that we integrate out $\tau$. At this pbigwedge I recommend taking a peek at the <a href="https://en.wikipedia.org/wiki/Convolution">wikipedia</a>. In symbols we denote the convolution between $g_1$ and $g_2$ by $$g_1 \ast g_2$$ and define it as
+
+$$(g_1*g_2)(z)\equiv\int g_1(\tau-z)g_2(z)d\tau.$$
+
+It turns out that $\overline W$ can be seen as the convolution of two functions. Namely $\phi_0(\bar z)\equiv\phi(0)$ and $W_0(\bar z)\equiv W(\bar z)$, the phenotypic density evaluated at zero and the fitness function evaluated at the population mean phenotype respectively. Although $\phi(0)$ and $W(\bar z)$ are technically constants, both of the resulting functions are sensitive to the value of $\bar z$. We could take care by rigorously defining these objects but I'll leave the mathematical formalities out of this discussion. Instead, observe
+
+$$\phi_0*W_0=\int\phi_0(\bar z-\tau)W_0(\tau)d\tau=\star.$$
+
+If we use $z$ instead of $\tau$, this gives
+
+$$\star=\int\phi_0(\bar z-z)W_0(z)dz$$
+
+$$=\int\left[\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(\bar z-z)^2}{2\sigma^2}\right)\right]
+\left[\frac{1}{\sqrt{2\pi\omega^2}}\exp\left(-\frac{(z-\theta)^2}{2\omega^2}\right)\right]dz$$
+
+$$=\int_{-\infty}^{\infty}\varphi(z)W(z)dz=\overline W.$$
+
+Okay, so $\overline W$ can be written as a convolution, so what? Well it turns out that Gaussian probability densities are closed under convolutions, which is to say that a convolution of two Gaussian densities is yet another Gaussian density. Specifically, if $g_1(z)$ is a Gaussian probability density with mean $\mu_1$ and variance $\sigma_1^2$ and similarly with $g_2(z)$, then $$(g_1 \ast g_2)(z)=g_3(z)$$ is another Gaussian probability density with the mean $\mu_3=\mu_1+\mu_2$ and variance $\sigma_3^2=\sigma_1^2+\sigma_2^2.$ Noting that, as probability densities, $\phi_0$ has mean zero and variance $\sigma^2$ and $W_0$ has mean $\theta$ and variance $\omega^2$, we now calculate $\overline W$ as
+
+$$\overline W=\int\phi(z)W(z)dz=(\phi_0*W_0)(\bar z)$$
+
+$$=\frac{1}{\sqrt{2\pi(\sigma^2+\omega^2)}}\exp\left(-\frac{(\bar z-\theta)^2}{2(\sigma^2+\omega^2)}\right).$$
+
+Denoting the additive genetic variance by $G$, we obtain the response in mean phenotype to $W$ using the breeder's equation
+
+$$\Delta\bar z=G\frac{\partial\ln\overline W}{\partial \bar z}$$
+
+$$=G\frac{\partial}{\partial\bar z}\left[\ln\left(\frac{1}{\sqrt{2\pi(\sigma^2+\omega^2)}}\right)-\frac{(\bar z-\theta)^2}{2(\sigma^2+\omega^2)}\right]$$
+
+$$=G\frac{\theta-\bar z}{\sigma^2+\omega^2}.$$
+
+To summarize the properties of products and convolutions of Gaussians:
+
+$$g_1(z)g_2(z)=Cg_3(z), \text{ where } \mu_3=\frac{\sigma_1^2\mu_2+\sigma_2^2\mu_1}{\sigma_1^2+\sigma_2^2},
+ \ \sigma_3^2=\frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2},$$ 
+ 
+$$C=\int g_1g_2dz=\frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}}\exp\left(-\frac{(\mu_1-\mu_2)^2}{2(\sigma_1^2+\sigma_2^2)}\right).$$
+
+ 
+$$\prod_{i=1}^{n-1}g_i(z)=C'g_n(z), \text{ where } C'=\int\prod_{i=1}^{n-1}g_idz,$$
+
+$$\mu_n=\frac{\sum_{i=1}^{n-1}\mu_j\prod_{j\neq i}\sigma_j^2}{\sum_{i=1}^{n-1}\prod_{j\neq i}\sigma_j^2}, \ 
+\sigma_n^2=\frac{\prod_{i=1}^{n-1}\sigma_i^2}{\sum_{i=1}^{n-1}\prod_{j\neq i}\sigma_j^2}$$
+ 
+$$(g_1*g_2)(z)=g_3(z), \text{ where } \mu_3=\mu_2+\mu_1, \ \sigma_3^2=\sigma_1^2+\sigma_2^2.$$
+
+## Examples
+
+### A Continuous Time Example
 
 Let's suppose we have a continuum of types indexed by $z$. To be slightly more concrete, we can think of $z$ as a phenotype. If we set $W_t(z)=W_{max}\exp\para{-\frac{(\theta-z)^2}{2\omega^2}}$ and $\phi_0(z)=\frac{1}{\sqrt{2\pi\sigma_0^2}}\exp\para{-\frac{(\bar z_0-z)^2}{2\sigma_0^2}}$, then
 
@@ -1091,73 +1139,7 @@ image(out,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",ma
 
 -->
 
-## Calculating the Response in Mean Phenotype to Selection Via Classic Quant Gen
-
-The normal distribution is the most important distribution due to various theorems and properties such as the central limit theorems and it's maximum entropy property. It's known for its mathematical elegance and empirical ubiquity and, like all distributions, can be identified by it's density and characteristic functions, both of which are Gaussian. In what follows I will use the terms Gaussian and normal interchangebally.
-
-Gaussian functions play a central role in evolutionary theory. Arguably the most successful equation describing the evolution of a population, the breeder's equation, requires a normal phenotypic distribution. Typical notation is $z$ for the phenotype of an individual, $\bar z$ for the mean phenotype of the population, $\sigma^2$ for the phenotypic variance and $\phi$ for the phenotypic density. This provides
-
-$$\phi(z)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(z-\bar z)^2}{2\sigma^2}\right).$$
-
-If there's selection being imposed on the trait then the fitness $W(z)$, which denotes the average fitness of an individual with trait $z$, will not be identically constant. To find the response in mean phenotype to an episode of selection we use the breeder's equation $\Delta\bar z=G\frac{\partial\ln\overline W}{\partial\bar z}$ where $G$ is the additive genetic variance and $\overline W=\int\phi(z)W(z)dz$ is the mean fitness of the population. However, in order to do so we must first calculate $\overline W$. In the case of stabilizing selection, this can be done quite nicely by assuming $W$ is also a Gaussian function of $z$. That is
-
-$$W(z)=\frac{1}{\sqrt{2\pi\omega^2}}\exp\left(-\frac{(z-\theta)^2}{2\omega^2}\right)$$
-
-with $\theta$ being the phenotypic optimum and $\omega^2$ the phenotypic tolerance of selection, which should be thought of as the inverse of the strength of selection. The reason why this calculation is easier with a Gaussian fitness is due to the algebra that Gaussian functions obey. Specifically, the product of two Gaussians is yet another Gaussian. For example
-
-$$W(z)\phi(z)=\frac{C}{\sqrt{2\pi\tilde\sigma^2}}\exp\left(-\frac{(z-\tilde z)^2}{2\tilde\sigma^2}\right),$$
-
-$$\text{where} \ \tilde\sigma^2=\frac{\sigma^2\omega^2}{\sigma^2+\omega^2}, \ \tilde z=\frac{\sigma^2\theta+\omega^2\bar z}{\sigma^2+\omega^2}$$
-
-and $C$ is some constant. What's interesting here is to note that the new parameter $\tilde z$ is a weighted average of $\theta$ and $\bar z$, weighted by the tolerance and variance. It should also be noted that $\tilde\sigma^2<\sigma^2$. One can show that as $\omega^2\rightarrow\infty$, $\tilde z\rightarrow\bar z$ and $\tilde\sigma^2\rightarrow\sigma^2$, in agreement with the concept of $\omega^2$ being the inverse of the strength of selection. With this result we see that $\overline W$ is just the integral of the above product over the whole real line. However, this product is just a scaled version of a probability density, scaled by $C$. Hence, $\overline W=C$. Then we need to calculate $C$, and for this I very briefly introduce the binary operation known as convolution.
-
-The concept of a convolution can be readily captured graphically by visualizing the graphs of two functions $g_1(z)$ and $g_2(z)$ sliding across each other horizontally. We parameterize this sliding by $\tau$ which lives on the real number line. We'll let $g_2$ remain still and slide $g_1$. As $\tau$ runs from each end of the number line visualize the graph of $g_1$ sliding across $g_2$. As this sliding occurs, we accumulate the product of these two functions with an integral in such a way that we integrate out $\tau$. At this pbigwedge I recommend taking a peek at the <a href="https://en.wikipedia.org/wiki/Convolution">wikipedia</a>. In symbols we denote the convolution between $g_1$ and $g_2$ by $$g_1 \ast g_2$$ and define it as
-
-$$(g_1*g_2)(z)\equiv\int g_1(\tau-z)g_2(z)d\tau.$$
-
-It turns out that $\overline W$ can be seen as the convolution of two functions. Namely $\phi_0(\bar z)\equiv\phi(0)$ and $W_0(\bar z)\equiv W(\bar z)$, the phenotypic density evaluated at zero and the fitness function evaluated at the population mean phenotype respectively. Although $\phi(0)$ and $W(\bar z)$ are technically constants, both of the resulting functions are sensitive to the value of $\bar z$. We could take care by rigorously defining these objects but I'll leave the mathematical formalities out of this discussion. Instead, observe
-
-$$\phi_0*W_0=\int\phi_0(\bar z-\tau)W_0(\tau)d\tau=\star.$$
-
-If we use $z$ instead of $\tau$, this gives
-
-$$\star=\int\phi_0(\bar z-z)W_0(z)dz$$
-
-$$=\int\left[\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(\bar z-z)^2}{2\sigma^2}\right)\right]
-\left[\frac{1}{\sqrt{2\pi\omega^2}}\exp\left(-\frac{(z-\theta)^2}{2\omega^2}\right)\right]dz$$
-
-$$=\int_{-\infty}^{\infty}\varphi(z)W(z)dz=\overline W.$$
-
-Okay, so $\overline W$ can be written as a convolution, so what? Well it turns out that Gaussian probability densities are closed under convolutions, which is to say that a convolution of two Gaussian densities is yet another Gaussian density. Specifically, if $g_1(z)$ is a Gaussian probability density with mean $\mu_1$ and variance $\sigma_1^2$ and similarly with $g_2(z)$, then $$(g_1 \ast g_2)(z)=g_3(z)$$ is another Gaussian probability density with the mean $\mu_3=\mu_1+\mu_2$ and variance $\sigma_3^2=\sigma_1^2+\sigma_2^2.$ Noting that, as probability densities, $\phi_0$ has mean zero and variance $\sigma^2$ and $W_0$ has mean $\theta$ and variance $\omega^2$, we now calculate $\overline W$ as
-
-$$\overline W=\int\phi(z)W(z)dz=(\phi_0*W_0)(\bar z)$$
-
-$$=\frac{1}{\sqrt{2\pi(\sigma^2+\omega^2)}}\exp\left(-\frac{(\bar z-\theta)^2}{2(\sigma^2+\omega^2)}\right).$$
-
-Denoting the additive genetic variance by $G$, we obtain the response in mean phenotype to $W$ using the breeder's equation
-
-$$\Delta\bar z=G\frac{\partial\ln\overline W}{\partial \bar z}$$
-
-$$=G\frac{\partial}{\partial\bar z}\left[\ln\left(\frac{1}{\sqrt{2\pi(\sigma^2+\omega^2)}}\right)-\frac{(\bar z-\theta)^2}{2(\sigma^2+\omega^2)}\right]$$
-
-$$=G\frac{\theta-\bar z}{\sigma^2+\omega^2}.$$
-
-To summarize the properties of products and convolutions of Gaussians:
-
-$$g_1(z)g_2(z)=Cg_3(z), \text{ where } \mu_3=\frac{\sigma_1^2\mu_2+\sigma_2^2\mu_1}{\sigma_1^2+\sigma_2^2},
- \ \sigma_3^2=\frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2},$$ 
- 
-$$C=\int g_1g_2dz=\frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}}\exp\left(-\frac{(\mu_1-\mu_2)^2}{2(\sigma_1^2+\sigma_2^2)}\right).$$
-
- 
-$$\prod_{i=1}^{n-1}g_i(z)=C'g_n(z), \text{ where } C'=\int\prod_{i=1}^{n-1}g_idz,$$
-
-$$\mu_n=\frac{\sum_{i=1}^{n-1}\mu_j\prod_{j\neq i}\sigma_j^2}{\sum_{i=1}^{n-1}\prod_{j\neq i}\sigma_j^2}, \ 
-\sigma_n^2=\frac{\prod_{i=1}^{n-1}\sigma_i^2}{\sum_{i=1}^{n-1}\prod_{j\neq i}\sigma_j^2}$$
- 
-$$(g_1*g_2)(z)=g_3(z), \text{ where } \mu_3=\mu_2+\mu_1, \ \sigma_3^2=\sigma_1^2+\sigma_2^2.$$
-
-## Linearization of a Haploid Model of Selection
+## Linearization of a Pop Gen Model
 
 Here we cover a way to linearize the most simple model of genetic selection. We assume two genotypes, $A_1$ and $A_2$, with the frequencies $p$ and $q=1-p$ and fitnesses $W_1$ and $W_2$ respectively. Then $\overline W=pW_1+qW_2$ and the change in genotype frequency of $A_1$ is (ignoring all other processes)
 
