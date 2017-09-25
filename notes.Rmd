@@ -121,24 +121,33 @@ where $\bigwedge$ represents type-1 product integration and is defined by
 
 $$\bigwedge_0^tW_s^{ds}\equiv e^{\int_0^t\ln W_sds}.$$
 
-Hence, this returns the same expected dynamics as above when $\ln W_t=r_t$. As for the variance we have
+Hence, this returns the same expected dynamics as above when $\ln W_t=r_t$. 
 
-$$\Var(N_{t+\delta})-\Var(N_t)
-=\para{\delta W^t+\sum_{i=0}^{t-1}W^i}\E(N_{t+\delta})-\para{\sum_{i=0}^{t-1}W^i}\E(N_t)$$
+Let's now find the dynamics of the variance of population size across time using the same approach that we took to obtain the dynamics of the mean. Using our solution for constant fitness across time, we can obtain a derivative by making the following additional assumption
 
-$$=\para{W^\delta\para{\delta W^t+\sum W^i}-\sum W^i}\E(N_t)$$
+$$\Var(N_{t+\delta})=\para{\delta W^t+\sum_{i=0}^{t-1}W^i}\E(N_{t+\delta}).$$
 
-$$=\para{\delta W^{t+\delta}+(W^\delta-1)\sum_i W^i}\E(N_t)$$
+Hence
 
-this implies $D_t\Var(N_t)=\para{W^t+\ln(W)\sum_i W^i}\E(N_t)$. For time-variant fitness I hypothesize the following for discrete and continuous time:
+$$\frac{d}{dt}\Var(N_t)=\lim_{\delta\rightarrow0}\frac{\Var(N_{t+\delta})-\Var(N_t)}{\delta}$$
 
-$$D_t\Var(N_t)=\para{\prod_{i=1}^t W_i+
-\ln(W_t)\sum_{i=0}^{t-1}\prod_{j=1}^iW_j}\E(N_t)$$
+$$=\lim_{\delta\rightarrow0}\frac{\para{\delta W^t+\sum_{i=0}^{t-1}W^i}\E(N_{t+\delta})-\para{\sum_{i=0}^{t-1}W^i}\E(N_t)}{\delta}$$
+
+$$=\lim_{\delta\rightarrow0}\frac{\para{W^\delta\para{\delta W^t+\sum W^i}-\sum W^i}\E(N_t)}{\delta}$$
+
+$$=\lim_{\delta\rightarrow0}\para{W^{t+\delta}+\frac{(W^\delta-1)}{\delta}\sum_i W^i}\E(N_t)$$
+
+$$=\para{W^t+\ln(W)\sum_i W^i}\E(N_t)$$
+
+For fitness that varies across time I hypothesize the following:
 
 $$D_t\Var(N_t)=\para{\bigwedge_0^t W_s^{ds}+
 \ln(W_t)\int_0^t\bigwedge_0^s W_u^{du}ds}\E(N_t).$$
 
-Also note this implies that at $t=0$ the rate of increase in the variance is equal to the number of initial individuals. This makes such perfect sense. For instance, if there's no individuals, the variance will be zero because we are certain there will be no offspring. Since each individual contributes uncertainty to the number of offspring the variance should increase faster with larger initial populations. However, if the fitness is less than one, the log will act to reduce the variance, most likeley because extinction would happen quickly if the fitness is less than one long enough. 
+Differentiating the above hypothesized solution for $\Var(N_t)$ shows that these results are copacetic.
+
+Also note this implies that at $t=0$ the rate of increase in the variance is equal to the number of initial individuals. For instance, if there's no individuals, the variance will be zero because we are certain there will be no offspring. Since each individual contributes uncertainty to the number of offspring the variance should increase faster with larger initial populations. However, if the fitness is less than one, the log will act to reduce the variance, most likeley because extinction would happen quickly if the fitness is less than one long enough. 
+
 <!--
 
 Continuing our $NB$ fit (THIS IS FUBAR!) we would set $p_t=1-\para{\int_0^{t-1}w_sds}^{-1}$ and 
@@ -1025,13 +1034,13 @@ Model <- function(t,phi,parameters){
   list(dphi)
 }
 
-eta <- .5
+eta <- .1
 s <- 7
 r <- 0.01
 delx <- .1
-numboxes <- 300
+numboxes <- 600
 maxT <- 10000
-Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
+Phenotype <- seq(from = -30, by = delx, length.out = numboxes)
 
 # bumps  <- rnorm(numboxes,0,.5)
 # smooth <- bumps
@@ -1053,10 +1062,10 @@ Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
 # SMOOTH IN TIME AS WELL
 bumps  <- rep(0,numboxes)
 smooth <- convolve(bumps,dnorm(Phenotype,0,.7))
-NEXTsmooth <- smooth+convolve(rnorm(numboxes,0,.00001),dnorm(Phenotype,0,.7))
+NEXTsmooth <- smooth+convolve(rnorm(numboxes,0,.000001),dnorm(Phenotype,0,.7))
 smooth <- rbind(smooth,NEXTsmooth)
 for(i in 2:maxT){
-  NEXTsmooth <- smooth[i,]+convolve(rnorm(numboxes,0,.00001),dnorm(Phenotype,0,.75))
+  NEXTsmooth <- smooth[i,]+convolve(rnorm(numboxes,0,.000001),dnorm(Phenotype,0,.7))
   smooth <- rbind(smooth,NEXTsmooth)
 }
 
@@ -1077,7 +1086,7 @@ Across time, this random surface can be visualized as a contour plot where hot c
 
 ```{r, echo=F}
 stuff <- out
-stuff[,2:301] <- smooth
+stuff[,2:(numboxes+1)] <- smooth
 
 #image(stuff,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Fitness")
 
