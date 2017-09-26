@@ -199,17 +199,23 @@ $$\bar z_t=\int_\R z\phi_t(z)dz, \ \text{and} \ \sigma_t^2=\int_\R(\bar z_t-z)^2
 
 Using the above results we can derive dynamics for these quantities as follows
 
-$$\frac{d\bar z_t}{dt}=\frac{d}{dt}\int_\R z\phi_t(z)dz=\int_\R z\frac{d}{dt}\phi_t(z)dz=\Cov(z,\ln W)$$
+$$\frac{d\bar z_t}{dt}=\frac{d}{dt}\int_\R z\phi_t(z)dz=\int_\R z\frac{d}{dt}\phi_t(z)dz=\int_\R z(\ln W_t(z)-\overline{\ln W}_t)\phi_t(z)dz$$
+
+$$=\int_\R (z-\bar z_t+\bar z_t)(\ln W_t(z)-\overline{\ln W}_t)\phi_t(z)dz=\int_\R(z-\bar z_t)(\ln W_t(z)-\overline{\ln W}_t)\phi_t(z)dz$$
+
+$$=\Cov(z,\ln W)$$
 
 $$\frac{d\sigma_t^2}{dt}=\frac{d}{dt}\int_\R (\bar z_t-z)^2\phi_t(z)dz=\int_\R 2(\bar z_t-z)\phi_t(z)\frac{d\bar z_t}{dt}+(\bar z_t-z)^2\frac{d\phi_t(z)}{dt}dz$$
 
-$$=\Cov((\bar z_t-z)^2,\ln W)$$
+$$=\int_\R(\bar z_t-z)^2(\ln W_t(z)-\overline{\ln W}_t)\phi_t(i)dz=\int_\R\para{(\bar z_t-z)^2-\sigma_t^2+\sigma_t^2}(\ln W_t(z)-\overline{\ln W}_t)\phi_t(z)dz$$
+
+$$=\int_\R\para{(\bar z_t-z)^2-\sigma_t^2}(\ln W_t(z)-\overline{\ln W}_t)\phi_t(z)dz=\Cov((\bar z_t-z)^2,\ln W_t)$$
 
 Doing this for discrete time returns
 
-$$\Delta\bar z_t=\Cov(z,W), \ \Delta\sigma_t^2=\Cov((\bar z_t-z)^2,W)$$
+$$\Delta\bar z_t=\Cov(z,W_t), \ \Delta\sigma_t^2=\Cov((\bar z_t-z)^2,W_t)$$
 
-## Response in Mean via Quant Gen
+## Some Quantitative Genetics
 
 Gaussian functions play a central role in evolutionary theory. Arguably the most successful equation describing the evolution of a population, the breeder's equation, requires a normal phenotypic distribution. Typical notation is $z$ for the phenotype of an individual, $\bar z$ for the mean phenotype of the population, $\sigma^2$ for the phenotypic variance and $\phi$ for the phenotypic density. This provides
 
@@ -273,21 +279,27 @@ $$\mu_n=\frac{\sum_{i=1}^{n-1}\mu_j\prod_{j\neq i}\sigma_j^2}{\sum_{i=1}^{n-1}\p
  
 $$(g_1*g_2)(z)=g_3(z), \text{ where } \mu_3=\mu_2+\mu_1, \ \sigma_3^2=\sigma_1^2+\sigma_2^2.$$
 
-### Mutation
+## Mutation
+
+From my perspective, mutation is a force that causes imperfect replication. That is, the offspring of an individual may not resemble their parent perfectly and this difference is called mutation. This makes sense in the general sense of the word mutation, which is alteration, change, or to vary. However, in biology the word mutation refers to a very specific process involving the permament substitution of nucleotide base-pairs. Since I operate at a more abstract level, I will abuse this custom and use the word mutation as described above, referring to imperfect replication. My goal is not to reproduce the minutiae of molecular detail, but to capture the process of imperfect heritability in a tractable way. I believe this will lead me to a leaner, more general theory.
+
+Finally, before we dive in, I just would like to remind myself that the following is not restricted to common phenotypes such as genotype, height, toxicity, etc, but also to location. We can think of the different types as either discrete locations or a continuum of geographical space. In this case mutation is nothing more that dispersion.
 
 Returning to a population of $T$ types, let's now suppose that there is a probability $P_{ij}$ that an individual of type $i$ produces an offspring of type $j$. Then, if $W(i)$ is the expected fitness of an individual of type $i$, this individual will on average produce $W(i)P_{ij}$ individuals of type $j$ and $W(i)(1-\sum_{j\neq i}P_{ij})$ individuals of type $i$. The expected dynamics for each type is then
 
 $$n_{t+1}(i)=\sum_{j=0}^TP_{ji}W(j)n_t(j)$$
 
-If we write $\tilde n_t$ as a row vector denoting the sizes of each type multiplied by their fitnesses so that it's entries are $W_{t+1}(i)n_t(i), \ n_t$ for a row vector containing just the population sizes and $P$ for a matrix whose entries are $P_{ij}$, we have
+If we write $\mathbf{\tilde n}_t$ as a row vector denoting the sizes of each type multiplied by their fitnesses so that it's entries are $W_{t+1}(i)n_t(i), \ \mathbf{n}_t$ for a row vector containing just the population sizes and $P$ for a matrix whose entries are $P_{ij}$, we have
 
-$$n_{t+1}=\tilde n_t P.$$
+$$\mathbf{n}_{t+1}=\mathbf{\tilde n}_t P.$$
 
-From here we can generate all sorts of madness by conjuring up quirky combinations of $W$ and $P$. My interest, however, lies in something more docile. I'm primarily interested in continuously varying traits. The above only works for at most a countable number of types. For a continuum we'll have to do some fancy toe work which will inevitably lead us to diffusion. The idea here is that an individual of type $z$ produces offspring that are normally distributed around this type with some variance. That variance will be our diffusion coefficient. In the end, we wind up with
+From here we can generate all sorts of madness by conjuring up quirky combinations of $W$ and $P$. My interest, however, lies in something more docile. I'm primarily interested in continuously varying traits. The above only works for at most a countable number of types. For a continuum we'll have to do some fancy foot work which will inevitably lead us to diffusion. The idea here is that an individual of type $z$ produces offspring that are normally distributed around this type with some variance. That variance will be our diffusion coefficient. In the end, we wind up with
 
-$$\frac{\partial\phi_t}{\partial t}=\phi_t(\ln W_t(z)-\overline{\ln W}_t)+\eta^2\frac{\partial^2\phi_t}{\partial z^2}.$$
+$$\frac{\partial\phi_t}{\partial t}=\phi_t(\ln W_t-\overline{\ln W}_t)+\eta^2\frac{\partial^2\phi_t}{\partial z^2}.$$
 
+<!--
 As noted above, the concept of type is most abstract. Probably the most tangible realizations of this concept are those of quantitative traits and genotypes. In the case of genotypes, the above discussion referring to $P$ is obvious and fits nicely with many classic models of mutation that are widely used throughout evolutionary biology. For continuous traits, our diffusion result may not be as widely known but still holds solid biological intuition. However one example that seems to evade many is location. The number $T$ could denote the number of demes, or discrete populations. Then $P_{ij}$ is the probability that a particular offspring of an individual in location $i$ migrates to location $j$. This example is admittedly a bit contrived. For instance, why should individuals that migrate to location $j$ suddenly have the same expected fitness as all other individuals in location $j$? Shouldn't fitness be a function of some other trait as well? Well, if this is so, we could construct another example that incorporates this. We could start be assuming that there are, say, $T'$ types for this other trait. Then the total number of combinations between location and this new trait is $T\times T'$. But then we could make an equivalent example by starting off by saying, "Suppose there are $T\times T'$ different types each with some fit$\dots$" Get the point? The goal here is to realize that theory has been developed at a sufficient level of abstraction so that many scenarios are captured. One does not need to develop a new theory based on trying to separate timescales and making other unnecessary complications. Selection, mutation, migration, drift, population dynamics and more have been captured with this approach. Typically it takes just a slight shift in perspective for all the pieces to fall into place.
+-->
 
 ## Examples
 
@@ -301,11 +313,15 @@ Thus
 
 $$\sigma_t^2=\frac{\omega^2\sigma_0^2}{\omega^2+t\sigma_0^2}, \ \bar z_t=\frac{\omega^2\bar z_0+t\sigma_0^2\theta}{\omega^2+t\sigma_0^2},$$
 
+Compare this with the quantitative genetic results above. We can then plug these solutions for the mean and variance into the expression for $\phi_t$ to solve for the evolution of the whole distribution.
+
 $$\phi_t(z)=\frac{1}{\sqrt{2\pi\sigma_t^2}}\exp\para{-\frac{(\bar z_t-z)^2}{2\sigma_t^2}}$$
 
-$$N_t=N_0W_{max}^t\sqrt{\frac{\omega^2}{t\sigma_0^2+\omega^2}}\exp\para{-t\frac{(\theta-\bar z_0)^2}{2(t\sigma_0^2+\omega^2)}}$$
+This provides the following solution for the population size:
 
-We can see that $\sigma_t^2$ will asymptotically decrease towards zero. To prevent this we can assume the existence of some process that increases variance at the rate $\eta^2$ so that $D_t\sigma_t^2=\eta^2-\sigma_t^4/\omega^2$. Our results change and become
+$$N_t=N_0W_{max}^t\sqrt{\frac{\omega^2}{t\sigma_0^2+\omega^2}}\exp\para{-t\frac{(\theta-\bar z_0)^2}{2(t\sigma_0^2+\omega^2)}}.$$
+
+We can see that $\sigma_t^2$ will asymptotically decrease towards zero, which is not very realistic since we know extant populations maintain some variance. To prevent this we can assume the existence of some process that increases variance at the rate $\eta^2$ so that $D_t\sigma_t^2=\eta^2-\sigma_t^4/\omega^2$. Our results change and become
 
 $$\bar z_t=\theta+C_2\mathrm{sech}\para{\frac{\eta}{\omega}t+C_1}, \ \sigma_t^2=\eta \ \omega \ \mathrm{tanh}\para{\frac{\eta}{\omega}t+C_1}$$
 
@@ -604,7 +620,7 @@ plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
 
 ### A Non-Gaussian Example
 
-The reason why we only needed to track the mean variance of phenotypes in order to capture the whole distribution was due to our choice of initial phenotypic distribution and selection function. They were both Gaussian for all of the above examples. If either is not Gaussian, then the resulting trajectory of phenotypic distributions will not fall within a Gaussian realm, but may converge to one asymptotically.
+The reason why we only needed to track the mean variance of phenotypes in order to capture the whole distribution was due to our choice of initial phenotypic distribution and selection function. They were both Gaussian for all of the above examples. If either is not Gaussian, then the resulting trajectory of phenotypic distributions will not fall within a Gaussian realm.
 
 #### Just Mutation
 
@@ -661,7 +677,7 @@ Model <- function(t,phi,parameters){
   lnW    <- log(Fit(Phenotype))
   rho    <- lnW - sum(phi*lnW)/sum(phi)
   m      <- sum(phi*Phenotype)/sum(phi)
-  s      <- sum(phi)/sum(phi*(Phenotype-m)^2)
+  s      <- 20*sum(phi)/sum(phi*(Phenotype-m)^2)
   lng    <- dnorm(Phenotype,sum(Phenotype*phi)/sum(phi),s,log=T)
   rnd    <- lng - sum(phi*lng)/sum(phi)
   dphi   <- diff(Flux)/delx + phi*(0*rho+rnd)
@@ -670,20 +686,18 @@ Model <- function(t,phi,parameters){
 }
 
 eta <- 5
-s <- 7
+s <- 8
 r <- 0.01
 delx <- .1
 numboxes <- 300
 maxT <- 100
 Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
 
-phi <- dnorm(Phenotype,0,2)
+phi <- dnorm(Phenotype,0,6)
 state <- c(phi=phi)
 times <- seq(0,maxT,by=1)
 
-print(system.time(
-  out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
-))
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
 ```
 
 ```{r, echo=F}
@@ -760,7 +774,7 @@ Model <- function(t,phi,parameters){
   lnW    <- log(Fit(Phenotype))
   rho    <- lnW    - sum(phi*lnW)/sum(phi)
   m      <- sum(phi*Phenotype)/sum(phi)
-  s      <- 1000*sum(phi)/sum(phi*(Phenotype-m)^2)
+  s      <- 100*sum(phi)/sum(phi*(Phenotype-m)^2)
   lng    <- dnorm(Phenotype,sum(Phenotype*phi)/sum(phi),s,log=T)
   rnd    <- lng - sum(phi*lng)/sum(phi)
   dphi   <- diff(Flux)/delx + phi*(rho+rnd)
@@ -769,7 +783,7 @@ Model <- function(t,phi,parameters){
 }
 
 eta <- 2
-s <- 7
+s <- 50
 r <- 0.01
 delx <- .1
 numboxes <- 300
@@ -995,7 +1009,6 @@ times <- seq(0,maxT,by=1)
 out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
 ```
 
-Our selection surface across time will be the following.
 
 ```{r, echo=F}
 together <- NULL
@@ -1010,7 +1023,6 @@ image(stuff,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Fit
 #image(stuff,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
 ```
 
-The resulting phenotypic density takes the following trajectory.
 
 ```{r, echo=F}
 image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
@@ -1042,30 +1054,13 @@ numboxes <- 600
 maxT <- 10000
 Phenotype <- seq(from = -30, by = delx, length.out = numboxes)
 
-# bumps  <- rnorm(numboxes,0,.5)
-# smooth <- bumps
-# for(i in 1:maxT){
-#   bumps  <- rnorm(numboxes,0,.5)
-#   NEXTsmooth <- bumps
-#   smooth <- rbind(smooth,NEXTsmooth)
-# }
-
-## smooth in space
-# bumps  <- rnorm(numboxes,0,1)
-# smooth <- convolve(bumps,dnorm(Phenotype,0,1))
-# for(i in 1:maxT){
-#   bumps  <- rnorm(numboxes,0,1)
-#   NEXTsmooth <- convolve(bumps,dnorm(Phenotype,0,1))
-#   smooth <- rbind(smooth,NEXTsmooth)
-# }
-
 # SMOOTH IN TIME AS WELL
 bumps  <- rep(0,numboxes)
 smooth <- convolve(bumps,dnorm(Phenotype,0,.7))
-NEXTsmooth <- smooth+convolve(rnorm(numboxes,0,.000001),dnorm(Phenotype,0,.7))
+NEXTsmooth <- smooth+convolve(rnorm(numboxes,0,.000005),dnorm(Phenotype,0,.7))
 smooth <- rbind(smooth,NEXTsmooth)
 for(i in 2:maxT){
-  NEXTsmooth <- smooth[i,]+convolve(rnorm(numboxes,0,.000001),dnorm(Phenotype,0,.7))
+  NEXTsmooth <- smooth[i,]+convolve(rnorm(numboxes,0,.000005),dnorm(Phenotype,0,.7))
   smooth <- rbind(smooth,NEXTsmooth)
 }
 
@@ -1076,13 +1071,11 @@ times <- seq(0,maxT,by=1)
 out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
 ```
 
-Our selection surface is modelled as space-time white noise. At every time step a random discontinuous surface is generated, each one taking the following general appearance:
+Our selection surface will be random, but smooth in both space and time. At an instant, it will generally look something like the following.
 
 ```{r, echo=F}
 plot(Phenotype,smooth[2,],ylab="Fitness")
 ```
-
-Across time, this random surface can be visualized as a contour plot where hot colors correspond to high fitness and cool colors correspond to low fitness.
 
 ```{r, echo=F}
 stuff <- out
@@ -1093,13 +1086,9 @@ stuff[,2:(numboxes+1)] <- smooth
 image(stuff,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Fitness",legend=T)
 ```
 
-The resulting phenotypic density takes the following trajectory.
-
 ```{r, echo=F}
 image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
 ```
-
--->
 
 <!--
 
@@ -1119,7 +1108,7 @@ image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotyp
 
 ## Linearization of a Pop Gen Model
 
-Here we cover a way to linearize the most simple model of genetic selection. We assume two genotypes, $A_1$ and $A_2$, with the frequencies $p$ and $q=1-p$ and fitnesses $W_1$ and $W_2$ respectively. Then $\overline W=pW_1+qW_2$ and the change in genotype frequency of $A_1$ is (ignoring all other processes)
+Here I cover a way to linearize the most simple model of genetic selection. We assume two genotypes, $A_1$ and $A_2$, with the frequencies $p$ and $q=1-p$ and fitnesses $W_1$ and $W_2$ respectively. Then $\overline W=pW_1+qW_2$ and the change in genotype frequency of $A_1$ is (ignoring all other processes)
 
 $$\Delta p=pq\frac{\partial\ln\overline W}{\partial p}, \ \text{with} \ \overline W=pW_1+qW_2$$
 
