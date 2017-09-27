@@ -456,7 +456,7 @@ dx\]</span></p>
 <p>From here we can generate all sorts of madness by conjuring up quirky combinations of <span class="math inline">\(W\)</span> and <span class="math inline">\(P\)</span>. My interest, however, lies in something more docile. I’m primarily interested in continuously varying traits. The above only works for at most a countable number of types. For a continuum we’ll have to do some fancy foot work which will inevitably lead us to diffusion. The idea here is that an individual of type <span class="math inline">\(z\)</span> produces offspring that are normally distributed around this type with some variance. That variance (which I denote by <span class="math inline">\(\eta^2\)</span>) will be our diffusion coefficient. In the end, we wind up with</p>
 <p><span class="math display">\[\frac{\partial\phi_t}{\partial t}=\eta^2\frac{\partial^2\phi_t}{\partial z^2}.\]</span></p>
 <p>The above discrete time dynamics of <span class="math inline">\(\sigma^2\)</span> with random mating and mutation become <span class="math inline">\(\Delta\sigma^2=\eta^2-\frac{\sigma^2}{2}\)</span>. To show this one can take the same approach as above but assume the offpsring phenotypic density takes the form</p>
-<p><span class="math display">\[\phi_o(z)=\sum_im_iw_i\frac{1}{\sqrt{2\pi\eta^2}}\exp{\left( -\frac{(m_i-z)^2}{2\eta^2} \right)}.\]</span></p>
+<p><span class="math display">\[\phi_o(z)=\sum_iw_i\frac{1}{\sqrt{2\pi\eta^2}}\exp{\left( -\frac{(m_i-z)^2}{2\eta^2} \right)}.\]</span></p>
 <p>I leave the details to the motivated reader.</p>
 </div>
 <div id="population-dynamics-1" class="section level3">

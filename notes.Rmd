@@ -284,7 +284,7 @@ $$\frac{\partial\phi_t}{\partial t}=\eta^2\frac{\partial^2\phi_t}{\partial z^2}.
 
 The above discrete time dynamics of $\sigma^2$ with random mating and mutation become $\Delta\sigma^2=\eta^2-\frac{\sigma^2}{2}$. To show this one can take the same approach as above but assume the offpsring phenotypic density takes the form
 
-$$\phi_o(z)=\sum_im_iw_i\frac{1}{\sqrt{2\pi\eta^2}}\exp\para{-\frac{(m_i-z)^2}{2\eta^2}}.$$
+$$\phi_o(z)=\sum_iw_i\frac{1}{\sqrt{2\pi\eta^2}}\exp\para{-\frac{(m_i-z)^2}{2\eta^2}}.$$
 
 I leave the details to the motivated reader.
 
