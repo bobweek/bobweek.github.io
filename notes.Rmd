@@ -201,87 +201,72 @@ Using the above results we can derive dynamics for these quantities as follows
 
 $$\frac{d\bar z_t}{dt}=\frac{d}{dt}\int_\R z\phi_t(z)dz=\int_\R z\frac{d}{dt}\phi_t(z)dz=\int_\R z(\ln W_t(z)-\overline{\ln W}_t)\phi_t(z)dz$$
 
-$$=\int_\R (z-\bar z_t+\bar z_t)(\ln W_t(z)-\overline{\ln W}_t)\phi_t(z)dz=\int_\R(z-\bar z_t)(\ln W_t(z)-\overline{\ln W}_t)\phi_t(z)dz$$
-
-$$=\Cov(z,\ln W)$$
+$$=\overline{z\ln W_t(z)}-\bar z\overline{\ln W}_t=\Cov(z,\ln W_t)$$
 
 $$\frac{d\sigma_t^2}{dt}=\frac{d}{dt}\int_\R (\bar z_t-z)^2\phi_t(z)dz=\int_\R 2(\bar z_t-z)\phi_t(z)\frac{d\bar z_t}{dt}+(\bar z_t-z)^2\frac{d\phi_t(z)}{dt}dz$$
 
-$$=\int_\R(\bar z_t-z)^2(\ln W_t(z)-\overline{\ln W}_t)\phi_t(i)dz=\int_\R\para{(\bar z_t-z)^2-\sigma_t^2+\sigma_t^2}(\ln W_t(z)-\overline{\ln W}_t)\phi_t(z)dz$$
+$$=\int_\R(\bar z_t-z)^2(\ln W_t(z)-\overline{\ln W}_t)\phi_t(i)dz=\overline{(\bar z_t-z)^2\ln W_t(z)}-\overline{(\bar z_t-z)^2}\overline{\ln W}_t$$
 
-$$=\int_\R\para{(\bar z_t-z)^2-\sigma_t^2}(\ln W_t(z)-\overline{\ln W}_t)\phi_t(z)dz=\Cov((\bar z_t-z)^2,\ln W_t)$$
+$$=\Cov((\bar z_t-z)^2,\ln W_t)$$
 
 Doing this for discrete time returns
 
 $$\Delta\bar z_t=\Cov(z,W_t), \ \Delta\sigma_t^2=\Cov((\bar z_t-z)^2,W_t)$$
 
-## Some Quantitative Genetics
+## Reproduction
 
-Gaussian functions play a central role in evolutionary theory. Arguably the most successful equation describing the evolution of a population, the breeder's equation, requires a normal phenotypic distribution. Typical notation is $z$ for the phenotype of an individual, $\bar z$ for the mean phenotype of the population, $\sigma^2$ for the phenotypic variance and $\phi$ for the phenotypic density. This provides
+So far I have assumed that inheritance is perfect so that offspring resemble their parents exactly. The existence of sex in the above theory is ambiguous. One could hold the perspective that individuals reproduce asexually or that individuals only mate with only other individuals of their exact type, creating $2\mathcal{W}$ offspring, one set for each member of the mating pair. Yet another way to look at this theory is that it tracks just one gender so that, for example, daughters resemble their mothers perfectly and their fathers make no contribution to their type. Here I will explicitly model sexual reproduction by beginning with random mating. I will first focus on discrete time dynamics for a continuum of types indexed by $\R$. Later I will extend these results to continuous time dynamics and a more general mating strategy that encompasses everything from absolutely assortative mating to random mating to absolutely disassortative mating.
 
-$$\phi(z)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(z-\bar z)^2}{2\sigma^2}\right).$$
+### Pure Random Mating
 
-If there's selection being imposed on the trait then the fitness $W(z)$, which denotes the average fitness of an individual with trait $z$, will not be identically constant. To find the response in mean phenotype to an episode of selection we use the breeder's equation $\Delta\bar z=G\frac{\partial\ln\overline W}{\partial\bar z}$ where $G$ is the additive genetic variance and $\overline W=\int\phi(z)W(z)dz$ is the mean fitness of the population. However, in order to do so we must first calculate $\overline W$. In the case of stabilizing selection, this can be done quite nicely by assuming $W$ is also a Gaussian function of $z$. That is
+Consider a population of $N$ hermaphroditic individuals with traits $\{z_1,\dots,z_N\}$. The trait of an offspring $z_o$ will be its midparent. Because the population is finite, there is a finite number $k$ of possible midparents. Denote this set of midparents by $M=\{m_1,\dots,m_k\}$. Each midparent has a particular probability of occuring which is the probability of choosing two parents whose average is equal to that midparent. Denote $w_i$ for the probability of midparent $m_i$. Assuming perfect heritability, the offspring trait distribution will have $w_i$ as its distribution.
 
-$$W(z)=\frac{1}{\sqrt{2\pi\omega^2}}\exp\left(-\frac{(z-\theta)^2}{2\omega^2}\right)$$
+Our goal is calculate a formula for $w_i$. Let $P_i$ be the set of all parental phenotypes whose average with some parental phenotype (possibly itself) is $m_i$. If we think of $m_i$ as the result of drawing two random parents (with replacement) then the $m_i$ will be distributed as a multinomial with $N$ categories and 2 trials. Writing $\phi_p(z)$ as the frequency of trait $z$ in the parental distribution we have
 
-with $\theta$ being the phenotypic optimum and $\omega^2$ the phenotypic tolerance of selection, which should be thought of as the inverse of the strength of selection. The reason why this calculation is easier with a Gaussian fitness is due to the algebra that Gaussian functions obey. Specifically, the product of two Gaussians is yet another Gaussian. For example
+$$w_i=2\sum_{\substack{z\in P_i}}\phi_p(z)\phi_p(2m_i-z).$$
 
-$$W(z)\phi(z)=\frac{C}{\sqrt{2\pi\tilde\sigma^2}}\exp\left(-\frac{(z-\tilde z)^2}{2\tilde\sigma^2}\right),$$
+If we knew the exact set of parental phenotypes, this would not be difficult to calculate. But if we want to continue iterating this process, this calculation becomes very non-trivial. To simplify this, I will blur the exactness of each parents' phenotype. Instead of pretending that we know the exact value of each phenotype, I'll assume each parental phenotype is a random variable independent of one another and identically distributed throughout the population. With this uncertainty, the set of possible midparents becomes uncountably infinite and their distribution will become continuous instead of discrete. We will adjust our notation to reflect this so that $w(m)$ is the probability density for the offspring trait $m$ (which in this case is equivalent to the midparents, hence the $m$) whose domain is now all of $\R$. The above summation becomes the integral
 
-$$\text{where} \ \tilde\sigma^2=\frac{\sigma^2\omega^2}{\sigma^2+\omega^2}, \ \tilde z=\frac{\sigma^2\theta+\omega^2\bar z}{\sigma^2+\omega^2}$$
+$$w(m)=2\int_\R \phi_p(z)\phi_p(2m-z)dz.$$
 
-and $C$ is some constant. What's interesting here is to note that the new parameter $\tilde z$ is a weighted average of $\theta$ and $\bar z$, weighted by the tolerance and variance. It should also be noted that $\tilde\sigma^2<\sigma^2$. One can show that as $\omega^2\rightarrow\infty$, $\tilde z\rightarrow\bar z$ and $\tilde\sigma^2\rightarrow\sigma^2$, in agreement with the concept of $\omega^2$ being the inverse of the strength of selection. With this result we see that $\overline W$ is just the integral of the above product over the whole real line. However, this product is just a scaled version of a probability density, scaled by $C$. Hence, $\overline W=C$. Then we need to calculate $C$, and for this I very briefly introduce the binary operation known as convolution.
+Assuming the parental population is distributed normally with mean $\mu$ and variance $\sigma^2$, we have
 
-The concept of a convolution can be readily captured graphically by visualizing the graphs of two functions $g_1(z)$ and $g_2(z)$ sliding across each other horizontally. We parameterize this sliding by $\tau$ which lives on the real number line. We'll let $g_2$ remain still and slide $g_1$. As $\tau$ runs from each end of the number line visualize the graph of $g_1$ sliding across $g_2$. As this sliding occurs, we accumulate the product of these two functions with an integral in such a way that we integrate out $\tau$. At this pbigwedge I recommend taking a peek at the <a href="https://en.wikipedia.org/wiki/Convolution">wikipedia</a>. In symbols we denote the convolution between $g_1$ and $g_2$ by $$g_1 \ast g_2$$ and define it as
+$$w(m)=2\int_\R
+\frac{1}{\sqrt{2\pi\sigma^2}}\exp\para{-\frac{(\mu-x)^2}{2\sigma^2}}
+\frac{1}{\sqrt{2\pi\sigma^2}}\exp\para{-\frac{(\mu-(2m-x))^2}{2\sigma^2}}
+dx$$
 
-$$(g_1*g_2)(z)\equiv\int g_1(\tau-z)g_2(z)d\tau.$$
+$$=2\int_\R
+\frac{1}{\sqrt{2\pi\sigma^2}}\exp\para{-\frac{(\mu-x)^2}{2\sigma^2}}
+\frac{1}{\sqrt{2\pi\sigma^2}}\exp\para{-\frac{((2m-\mu)-x)^2}{2\sigma^2}}
+dx$$
 
-It turns out that $\overline W$ can be seen as the convolution of two functions. Namely $\phi_0(\bar z)\equiv\phi(0)$ and $W_0(\bar z)\equiv W(\bar z)$, the phenotypic density evaluated at zero and the fitness function evaluated at the population mean phenotype respectively. Although $\phi(0)$ and $W(\bar z)$ are technically constants, both of the resulting functions are sensitive to the value of $\bar z$. We could take care by rigorously defining these objects but I'll leave the mathematical formalities out of this discussion. Instead, observe
+$$=2\int_\R
+\frac{1}{\sqrt{4\pi\sigma^2}}\exp\para{-\frac{(2\mu-2m)^2}{4\sigma^2}}
+\frac{1}{\sqrt{2\pi\sigma^2}}\exp\para{-\frac{(m-x)^2}{2\sigma^2}}
+dx$$
 
-$$\phi_0*W_0=\int\phi_0(\bar z-\tau)W_0(\tau)d\tau=\star.$$
+$$=\frac{1}{\sqrt{\pi\sigma^2}}\exp\para{-\frac{(\mu-m)^2}{\sigma^2}}.$$
 
-If we use $z$ instead of $\tau$, this gives
+Hence, with just random mating $\Delta\mu=0$ and $\Delta\sigma^2=-\frac{\sigma^2}{2}$. For a general phenotypic density, the continuous time analog is
 
-$$\star=\int\phi_0(\bar z-z)W_0(z)dz$$
+$$\frac{\partial\phi_t}{\partial t}=\phi_t(\ln\phi_t-\overline{\ln\phi_t}).$$
 
-$$=\int\left[\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(\bar z-z)^2}{2\sigma^2}\right)\right]
-\left[\frac{1}{\sqrt{2\pi\omega^2}}\exp\left(-\frac{(z-\theta)^2}{2\omega^2}\right)\right]dz$$
+When $\phi_t$ is normal, we get
 
-$$=\int\phi(z)W(z)dz=\overline W.$$
+$$\frac{\partial}{\partial t}\phi_t(z)=\phi_t(z)\para{-\frac{(\bar z_t-z)^2}{2\sigma^2}+\frac{1}{2}}.$$
 
-Okay, so $\overline W$ can be written as a convolution, so what? Well it turns out that Gaussian probability densities are closed under convolutions, which is to say that a convolution of two Gaussian densities is yet another Gaussian density. Specifically, if $g_1(z)$ is a Gaussian probability density with mean $\mu_1$ and variance $\sigma_1^2$ and similarly with $g_2(z)$, then $$(g_1 \ast g_2)(z)=g_3(z)$$ is another Gaussian probability density with the mean $\mu_3=\mu_1+\mu_2$ and variance $\sigma_3^2=\sigma_1^2+\sigma_2^2.$ Noting that, as probability densities, $\phi_0$ has mean zero and variance $\sigma^2$ and $W_0$ has mean $\theta$ and variance $\omega^2$, we now calculate $\overline W$ as
+### Assortative and Disassortative Mating
 
-$$\overline W=\int\phi(z)W(z)dz=(\phi_0*W_0)(\bar z)$$
+The key here is to define assortative mating as a positive correlation between the types of mating pairs and disassortative mating as a negative correlation between the types of mating pairs. This correlation between types of mating pairs I denote by $\rho$. We will see that when $\rho=1$ we return to the situation that I have been referring to as absolutely assortative mating which is basically clonal reproduction. 
 
-$$=\frac{1}{\sqrt{2\pi(\sigma^2+\omega^2)}}\exp\left(-\frac{(\bar z-\theta)^2}{2(\sigma^2+\omega^2)}\right).$$
+### Other Mating Structures
 
-Denoting the additive genetic variance by $G$, we obtain the response in mean phenotype to $W$ using the breeder's equation
 
-$$\Delta\bar z=G\frac{\partial\ln\overline W}{\partial \bar z}$$
 
-$$=G\frac{\partial}{\partial\bar z}\left[\ln\left(\frac{1}{\sqrt{2\pi(\sigma^2+\omega^2)}}\right)-\frac{(\bar z-\theta)^2}{2(\sigma^2+\omega^2)}\right]$$
+### Mutation
 
-$$=G\frac{\theta-\bar z}{\sigma^2+\omega^2}.$$
-
-To summarize the properties of products and convolutions of Gaussians:
-
-$$g_1(z)g_2(z)=Cg_3(z), \text{ where } \mu_3=\frac{\sigma_1^2\mu_2+\sigma_2^2\mu_1}{\sigma_1^2+\sigma_2^2},
- \ \sigma_3^2=\frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2},$$ 
- 
-$$C=\int g_1g_2dz=\frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}}\exp\left(-\frac{(\mu_1-\mu_2)^2}{2(\sigma_1^2+\sigma_2^2)}\right).$$
-
- 
-$$\prod_{i=1}^{n-1}g_i(z)=C'g_n(z), \text{ where } C'=\int\prod_{i=1}^{n-1}g_idz,$$
-
-$$\mu_n=\frac{\sum_{i=1}^{n-1}\mu_j\prod_{j\neq i}\sigma_j^2}{\sum_{i=1}^{n-1}\prod_{j\neq i}\sigma_j^2}, \ 
-\sigma_n^2=\frac{\prod_{i=1}^{n-1}\sigma_i^2}{\sum_{i=1}^{n-1}\prod_{j\neq i}\sigma_j^2}$$
- 
-$$(g_1*g_2)(z)=g_3(z), \text{ where } \mu_3=\mu_2+\mu_1, \ \sigma_3^2=\sigma_1^2+\sigma_2^2.$$
-
-## Mutation
-
-From my perspective, mutation is a force that causes imperfect replication. That is, the offspring of an individual may not resemble their parent perfectly and this difference is called mutation. This makes sense in the general sense of the word mutation, which is alteration, change, or to vary. However, in biology the word mutation refers to a very specific process involving the permament substitution of nucleotide base-pairs. Since I operate at a more abstract level, I will abuse this custom and use the word mutation as described above, referring to imperfect replication. My goal is not to reproduce the minutiae of molecular detail, but to capture the process of imperfect heritability in a tractable way. I believe this will lead me to a leaner, more general theory.
+From my perspective, mutation is a force that causes imperfect replication. That is, the offspring of an individual may not resemble their parent perfectly and this difference is called mutation. This fits the general sense of the word which is alteration, change, or to vary. However, in biology the word mutation refers to a very specific process involving the permament substitution of nucleotide base-pairs. Since I operate at a more abstract level, I will abuse this custom and use the word mutation as described above, referring to imperfect replication. My goal is not to reproduce the minutiae of molecular detail, but to capture the process of imperfect heritability in a tractable way. I believe this will lead me to a leaner, more general theory.
 
 Finally, before we dive in, I just would like to remind myself that the following is not restricted to common phenotypes such as genotype, height, toxicity, etc, but also to location. We can think of the different types as either discrete locations or a continuum of geographical space. In this case mutation is nothing more that dispersion.
 
@@ -293,9 +278,23 @@ If we write $\mathbf{\tilde n}_t$ as a row vector denoting the sizes of each typ
 
 $$\mathbf{n}_{t+1}=\mathbf{\tilde n}_t P.$$
 
-From here we can generate all sorts of madness by conjuring up quirky combinations of $W$ and $P$. My interest, however, lies in something more docile. I'm primarily interested in continuously varying traits. The above only works for at most a countable number of types. For a continuum we'll have to do some fancy foot work which will inevitably lead us to diffusion. The idea here is that an individual of type $z$ produces offspring that are normally distributed around this type with some variance. That variance will be our diffusion coefficient. In the end, we wind up with
+From here we can generate all sorts of madness by conjuring up quirky combinations of $W$ and $P$. My interest, however, lies in something more docile. I'm primarily interested in continuously varying traits. The above only works for at most a countable number of types. For a continuum we'll have to do some fancy foot work which will inevitably lead us to diffusion. The idea here is that an individual of type $z$ produces offspring that are normally distributed around this type with some variance. That variance (which I denote by $\eta^2$) will be our diffusion coefficient. In the end, we wind up with
 
-$$\frac{\partial\phi_t}{\partial t}=\phi_t(\ln W_t-\overline{\ln W}_t)+\eta^2\frac{\partial^2\phi_t}{\partial z^2}.$$
+$$\frac{\partial\phi_t}{\partial t}=\eta^2\frac{\partial^2\phi_t}{\partial z^2}.$$
+
+The above discrete time dynamics of $\sigma^2$ with random mating and mutation become $\Delta\sigma^2=\eta^2-\frac{\sigma^2}{2}$. To show this one can take the same approach as above but assume the offpsring phenotypic density takes the form
+
+$$\phi_o(z)=\sum_im_i\frac{1}{\sqrt{2\pi\eta^2}}\exp\para{-\frac{(m_i-z)^2}{2\eta^2}}.$$
+
+I leave the details to the motivated reader.
+
+### Population Dynamics
+
+We need to return to considering the effects of mating on the population dynamics.
+
+## Putting it all together
+
+$$\frac{\partial\phi_t}{\partial t}=\phi(\ln W_t-\overline{\ln W}_t)+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}$$
 
 <!--
 As noted above, the concept of type is most abstract. Probably the most tangible realizations of this concept are those of quantitative traits and genotypes. In the case of genotypes, the above discussion referring to $P$ is obvious and fits nicely with many classic models of mutation that are widely used throughout evolutionary biology. For continuous traits, our diffusion result may not be as widely known but still holds solid biological intuition. However one example that seems to evade many is location. The number $T$ could denote the number of demes, or discrete populations. Then $P_{ij}$ is the probability that a particular offspring of an individual in location $i$ migrates to location $j$. This example is admittedly a bit contrived. For instance, why should individuals that migrate to location $j$ suddenly have the same expected fitness as all other individuals in location $j$? Shouldn't fitness be a function of some other trait as well? Well, if this is so, we could construct another example that incorporates this. We could start be assuming that there are, say, $T'$ types for this other trait. Then the total number of combinations between location and this new trait is $T\times T'$. But then we could make an equivalent example by starting off by saying, "Suppose there are $T\times T'$ different types each with some fit$\dots$" Get the point? The goal here is to realize that theory has been developed at a sufficient level of abstraction so that many scenarios are captured. One does not need to develop a new theory based on trying to separate timescales and making other unnecessary complications. Selection, mutation, migration, drift, population dynamics and more have been captured with this approach. Typically it takes just a slight shift in perspective for all the pieces to fall into place.
@@ -313,7 +312,7 @@ Thus
 
 $$\sigma_t^2=\frac{\omega^2\sigma_0^2}{\omega^2+t\sigma_0^2}, \ \bar z_t=\frac{\omega^2\bar z_0+t\sigma_0^2\theta}{\omega^2+t\sigma_0^2},$$
 
-Compare this with the quantitative genetic results above. We can then plug these solutions for the mean and variance into the expression for $\phi_t$ to solve for the evolution of the whole distribution.
+Compare this with the quantitative genetic results below. We can then plug these solutions for the mean and variance into the expression for $\phi_t$ to solve for the evolution of the whole distribution.
 
 $$\phi_t(z)=\frac{1}{\sqrt{2\pi\sigma_t^2}}\exp\para{-\frac{(\bar z_t-z)^2}{2\sigma_t^2}}$$
 
@@ -327,7 +326,7 @@ $$\bar z_t=\theta+C_2\mathrm{sech}\para{\frac{\eta}{\omega}t+C_1}, \ \sigma_t^2=
 
 where $C_1=\mathrm{atanh}\para{\frac{\sigma_0^2}{\eta \ \omega}}$ and $C_2=\sqrt{\frac{\eta^2\omega^2}{\eta^2\omega^2-\sigma_0^4}}(\bar z_0-\theta)$. Note that $\mathrm{sech}(\mathrm{atanh}(x))=\sqrt{1-x^2}.$
 
-$$N_t=\dots$$
+$$N_t=N_0e^{\int_0^t\overline{\ln W}_sds}=N_0W_{max}^t\exp\para{\int_0^t-\frac{(\theta-\bar z_s)^2}{2\omega^2}-\frac{1}{2}\frac{\sigma_s^2}{\omega^2}ds}=\dots$$
 
 ### Another Example
 
@@ -1057,10 +1056,10 @@ Phenotype <- seq(from = -30, by = delx, length.out = numboxes)
 # SMOOTH IN TIME AS WELL
 bumps  <- rep(0,numboxes)
 smooth <- convolve(bumps,dnorm(Phenotype,0,.7))
-NEXTsmooth <- smooth+convolve(rnorm(numboxes,0,.000005),dnorm(Phenotype,0,.7))
+NEXTsmooth <- smooth+convolve(rnorm(numboxes,0,.000005),dnorm(Phenotype,0,.6))
 smooth <- rbind(smooth,NEXTsmooth)
 for(i in 2:maxT){
-  NEXTsmooth <- smooth[i,]+convolve(rnorm(numboxes,0,.000005),dnorm(Phenotype,0,.7))
+  NEXTsmooth <- smooth[i,]+convolve(rnorm(numboxes,0,.000005),dnorm(Phenotype,0,.6))
   smooth <- rbind(smooth,NEXTsmooth)
 }
 
@@ -1105,6 +1104,71 @@ image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotyp
 ```
 
 -->
+
+## Some Quantitative Genetics
+
+Gaussian functions play a central role in evolutionary theory. Arguably the most successful equation describing the evolution of a population, the breeder's equation, requires a normal phenotypic distribution. Typical notation is $z$ for the phenotype of an individual, $\bar z$ for the mean phenotype of the population, $\sigma^2$ for the phenotypic variance and $\phi$ for the phenotypic density. This provides
+
+$$\phi(z)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(z-\bar z)^2}{2\sigma^2}\right).$$
+
+If there's selection being imposed on the trait then the fitness $W(z)$, which denotes the average fitness of an individual with trait $z$, will not be identically constant. To find the response in mean phenotype to an episode of selection we use the breeder's equation $\Delta\bar z=G\frac{\partial\ln\overline W}{\partial\bar z}$ where $G$ is the additive genetic variance and $\overline W=\int\phi(z)W(z)dz$ is the mean fitness of the population. However, in order to do so we must first calculate $\overline W$. In the case of stabilizing selection, this can be done quite nicely by assuming $W$ is also a Gaussian function of $z$. That is
+
+$$W(z)=\frac{1}{\sqrt{2\pi\omega^2}}\exp\left(-\frac{(z-\theta)^2}{2\omega^2}\right)$$
+
+with $\theta$ being the phenotypic optimum and $\omega^2$ the phenotypic tolerance of selection, which should be thought of as the inverse of the strength of selection. The reason why this calculation is easier with a Gaussian fitness is due to the algebra that Gaussian functions obey. Specifically, the product of two Gaussians is yet another Gaussian. For example
+
+$$W(z)\phi(z)=\frac{C}{\sqrt{2\pi\tilde\sigma^2}}\exp\left(-\frac{(z-\tilde z)^2}{2\tilde\sigma^2}\right),$$
+
+$$\text{where} \ \tilde\sigma^2=\frac{\sigma^2\omega^2}{\sigma^2+\omega^2}, \ \tilde z=\frac{\sigma^2\theta+\omega^2\bar z}{\sigma^2+\omega^2}$$
+
+and $C$ is some constant. What's interesting here is to note that the new parameter $\tilde z$ is a weighted average of $\theta$ and $\bar z$, weighted by the tolerance and variance. It should also be noted that $\tilde\sigma^2<\sigma^2$. One can show that as $\omega^2\rightarrow\infty$, $\tilde z\rightarrow\bar z$ and $\tilde\sigma^2\rightarrow\sigma^2$, in agreement with the concept of $\omega^2$ being the inverse of the strength of selection. With this result we see that $\overline W$ is just the integral of the above product over the whole real line. However, this product is just a scaled version of a probability density, scaled by $C$. Hence, $\overline W=C$. Then we need to calculate $C$, and for this I very briefly introduce the binary operation known as convolution.
+
+The concept of a convolution can be readily captured graphically by visualizing the graphs of two functions $g_1(z)$ and $g_2(z)$ sliding across each other horizontally. We parameterize this sliding by $\tau$ which lives on the real number line. We'll let $g_2$ remain still and slide $g_1$. As $\tau$ runs from each end of the number line visualize the graph of $g_1$ sliding across $g_2$. As this sliding occurs, we accumulate the product of these two functions with an integral in such a way that we integrate out $\tau$. At this point I recommend taking a peek at the <a href="https://en.wikipedia.org/wiki/Convolution">wikipedia</a>. In symbols we denote the convolution between $g_1$ and $g_2$ by $$g_1 \ast g_2$$ and define it as
+
+$$(g_1*g_2)(z)\equiv\int g_1(\tau-z)g_2(z)d\tau.$$
+
+It turns out that $\overline W$ can be seen as the convolution of two functions. Namely $\phi_0(\bar z)\equiv\phi(0)$ and $W_0(\bar z)\equiv W(\bar z)$, the phenotypic density evaluated at zero and the fitness function evaluated at the population mean phenotype respectively. Although $\phi(0)$ and $W(\bar z)$ are technically constants, both of the resulting functions are sensitive to the value of $\bar z$. We could take care by rigorously defining these objects but I'll leave the mathematical formalities out of this discussion. Instead, observe
+
+$$\phi_0*W_0=\int\phi_0(\bar z-\tau)W_0(\tau)d\tau=\star.$$
+
+If we use $z$ instead of $\tau$, this gives
+
+$$\star=\int\phi_0(\bar z-z)W_0(z)dz$$
+
+$$=\int\left[\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(\bar z-z)^2}{2\sigma^2}\right)\right]
+\left[\frac{1}{\sqrt{2\pi\omega^2}}\exp\left(-\frac{(z-\theta)^2}{2\omega^2}\right)\right]dz$$
+
+$$=\int\phi(z)W(z)dz=\overline W.$$
+
+Okay, so $\overline W$ can be written as a convolution, so what? Well it turns out that Gaussian probability densities are closed under convolutions, which is to say that a convolution of two Gaussian densities is yet another Gaussian density. Specifically, if $g_1(z)$ is a Gaussian probability density with mean $\mu_1$ and variance $\sigma_1^2$ and similarly with $g_2(z)$, then $$(g_1 \ast g_2)(z)=g_3(z)$$ is another Gaussian probability density with the mean $\mu_3=\mu_1+\mu_2$ and variance $\sigma_3^2=\sigma_1^2+\sigma_2^2.$ Noting that, as probability densities, $\phi_0$ has mean zero and variance $\sigma^2$ and $W_0$ has mean $\theta$ and variance $\omega^2$, we now calculate $\overline W$ as
+
+$$\overline W=\int\phi(z)W(z)dz=(\phi_0*W_0)(\bar z)$$
+
+$$=\frac{1}{\sqrt{2\pi(\sigma^2+\omega^2)}}\exp\left(-\frac{(\bar z-\theta)^2}{2(\sigma^2+\omega^2)}\right).$$
+
+Denoting the additive genetic variance by $G$, we obtain the response in mean phenotype to $W$ using the breeder's equation
+
+$$\Delta\bar z=G\frac{\partial\ln\overline W}{\partial \bar z}$$
+
+$$=G\frac{\partial}{\partial\bar z}\left[\ln\left(\frac{1}{\sqrt{2\pi(\sigma^2+\omega^2)}}\right)-\frac{(\bar z-\theta)^2}{2(\sigma^2+\omega^2)}\right]$$
+
+$$=G\frac{\theta-\bar z}{\sigma^2+\omega^2}.$$
+
+To summarize the properties of products and convolutions of Gaussians:
+
+$$g_1(z)g_2(z)=Cg_3(z), \text{ where } \mu_3=\frac{\sigma_1^2\mu_2+\sigma_2^2\mu_1}{\sigma_1^2+\sigma_2^2},
+ \ \sigma_3^2=\frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2},$$ 
+ 
+$$C=\int g_1g_2dz=\frac{1}{\sqrt{2\pi(\sigma_1^2+\sigma_2^2)}}\exp\left(-\frac{(\mu_1-\mu_2)^2}{2(\sigma_1^2+\sigma_2^2)}\right).$$
+
+ 
+$$\prod_{i=1}^{n-1}g_i(z)=C'g_n(z), \text{ where } C'=\int\prod_{i=1}^{n-1}g_idz,$$
+
+$$\mu_n=\frac{\sum_{i=1}^{n-1}\mu_j\prod_{j\neq i}\sigma_j^2}{\sum_{i=1}^{n-1}\prod_{j\neq i}\sigma_j^2}, \ 
+\sigma_n^2=\frac{\prod_{i=1}^{n-1}\sigma_i^2}{\sum_{i=1}^{n-1}\prod_{j\neq i}\sigma_j^2}$$
+ 
+$$(g_1*g_2)(z)=g_3(z), \text{ where } \mu_3=\mu_2+\mu_1, \ \sigma_3^2=\sigma_1^2+\sigma_2^2.$$
+
 
 ## Linearization of a Pop Gen Model
 
