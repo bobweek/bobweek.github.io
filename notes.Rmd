@@ -146,7 +146,7 @@ $$D_t\Var(N_t)=\para{\bigwedge_0^t W_s^{ds}+
 
 Differentiating the above hypothesized solution for $\Var(N_t)$ shows that these results are copacetic.
 
-Also note this implies that at $t=0$ the rate of increase in the variance is equal to the number of initial individuals. For instance, if there's no individuals, the variance will be zero because we are certain there will be no offspring. Since each individual contributes uncertainty to the number of offspring the variance should increase faster with larger initial populations. However, if the fitness is less than one, the log will act to reduce the variance, most likeley because extinction would happen quickly if the fitness is less than one long enough. 
+Also note this implies that at $t=0$ the rate of increase in the variance is equal to the number of initial individuals. For instance, if there's no individuals, the variance will be zero because we are certain there will be no offspring. Since each individual contributes uncertainty to the number of offspring the variance should increase faster with larger initial populations. However, if the fitness is less than one, the log will act to reduce the variance, most likely because extinction would happen quickly if the fitness is less than one long enough. 
 
 <!--
 
@@ -465,19 +465,15 @@ $$W_1(x|K_1)=\int_\R\cdots\int_\R W_1(x|y_1,\dots,y_{K_1})\phi_{2,t}(y_1)\cdots\
 
 $$=W_{1,max}^{K_1}\exp\para{-K_1\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)}}.$$
 
-Finally, to get the total expected fitness $W_1(x)$, we average over all possible values of $K_1$ to get
+Finally, to get the total expected fitness $W_1(x)$, we average over all possible values of $K_1$. However, since each component of fitness multiplies together to produce the total fitness, we shouldn't take an arithmetic average, we should take a geometric average. Doing so provides the following result
 
-$$W_1(x)=\sum_{i=0}^{N_{2,t}}W_1(x|K_1=i)P(K_1=i)=\sum_{i=0}^{N_{2,t}}W_1(x|K_1=i){N_{2,t}\choose i}p_1^i(1-p_1)^{N_{2,t}-i}.$$
+$$W_1(x)=\prod_{i=0}^{N_{2,t}}W_1(x|K_1=i)^{P(K_1=i)}=W_{1,max}^{p_1N_{2,t}}\exp\para{-p_1N_{2,t}\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)}}.$$
 
-Can it make more sense if
-
-$$W_1(x)=\prod_{i=0}^{N_{2,t}}W_1(x|K_1=i)^{P(K_1=i)}=W_{1,max}^{p_1N_{2,t}}\exp\para{-p_1N_{2,t}\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)}}?$$
-
-If so, we would get
+and
 
 $$\ln W_1(x)=\sum_{i=0}^{N_{2,t}}P(K_1=i)\ln W_1(x|K_1=i)=p_1N_{2,t}\para{\ln W_{1,max}-\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)}}$$
 
-$\dots$
+$$\dots$$
 
 $$\frac{d\bar x_t}{dt}=\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^2(\bar y_t-\bar x_t) \ \text{and} \
 \frac{d\sigma_{1,t}^2}{dt}=-\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^4$$

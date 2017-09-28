@@ -362,7 +362,7 @@ output:
 <p><span class="math display">\[D_t{\mathrm{Var}}(N_t)={\left( \bigwedge_0^t W_s^{ds}+
 \ln(W_t)\int_0^t\bigwedge_0^s W_u^{du}ds \right)}{\mathbb{E}}(N_t).\]</span></p>
 <p>Differentiating the above hypothesized solution for <span class="math inline">\({\mathrm{Var}}(N_t)\)</span> shows that these results are copacetic.</p>
-<p>Also note this implies that at <span class="math inline">\(t=0\)</span> the rate of increase in the variance is equal to the number of initial individuals. For instance, if there’s no individuals, the variance will be zero because we are certain there will be no offspring. Since each individual contributes uncertainty to the number of offspring the variance should increase faster with larger initial populations. However, if the fitness is less than one, the log will act to reduce the variance, most likeley because extinction would happen quickly if the fitness is less than one long enough.</p>
+<p>Also note this implies that at <span class="math inline">\(t=0\)</span> the rate of increase in the variance is equal to the number of initial individuals. For instance, if there’s no individuals, the variance will be zero because we are certain there will be no offspring. Since each individual contributes uncertainty to the number of offspring the variance should increase faster with larger initial populations. However, if the fitness is less than one, the log will act to reduce the variance, most likely because extinction would happen quickly if the fitness is less than one long enough.</p>
 <!--
 
 Continuing our $NB$ fit (THIS IS FUBAR!) we would set $p_t=1-\para{\int_0^{t-1}w_sds}^{-1}$ and 
@@ -523,13 +523,11 @@ As noted above, the concept of type is most abstract. Probably the most tangible
 <p>If we assume the phenotypes <span class="math inline">\(y_1,\dots,y_{K_1}\)</span> are distributed normally and are drawn at random independently of one another, we can calculate the expected fitness for an individual from population 1 with phenotype <span class="math inline">\(x\)</span> given that it interacts with <span class="math inline">\(K_1\)</span> individuals as</p>
 <p><span class="math display">\[W_1(x|K_1)=\int_{\mathbb{R}}\cdots\int_{\mathbb{R}}W_1(x|y_1,\dots,y_{K_1})\phi_{2,t}(y_1)\cdots\phi_{2,t}(y_{K_1})dy_1\cdots dy_{K_1}={\left( \int_{\mathbb{R}}W_1(x|y)\phi_{2,t}(y)dy \right)}^{K_1}\]</span></p>
 <p><span class="math display">\[=W_{1,max}^{K_1}\exp{\left( -K_1\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}.\]</span></p>
-<p>Finally, to get the total expected fitness <span class="math inline">\(W_1(x)\)</span>, we average over all possible values of <span class="math inline">\(K_1\)</span> to get</p>
-<p><span class="math display">\[W_1(x)=\sum_{i=0}^{N_{2,t}}W_1(x|K_1=i)P(K_1=i)=\sum_{i=0}^{N_{2,t}}W_1(x|K_1=i){N_{2,t}\choose i}p_1^i(1-p_1)^{N_{2,t}-i}.\]</span></p>
-<p>Can it make more sense if</p>
-<p><span class="math display">\[W_1(x)=\prod_{i=0}^{N_{2,t}}W_1(x|K_1=i)^{P(K_1=i)}=W_{1,max}^{p_1N_{2,t}}\exp{\left( -p_1N_{2,t}\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}?\]</span></p>
-<p>If so, we would get</p>
+<p>Finally, to get the total expected fitness <span class="math inline">\(W_1(x)\)</span>, we average over all possible values of <span class="math inline">\(K_1\)</span>. However, since each component of fitness multiplies together to produce the total fitness, we shouldn’t take an arithmetic average, we should take a geometric average. Doing so provides the following result</p>
+<p><span class="math display">\[W_1(x)=\prod_{i=0}^{N_{2,t}}W_1(x|K_1=i)^{P(K_1=i)}=W_{1,max}^{p_1N_{2,t}}\exp{\left( -p_1N_{2,t}\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}.\]</span></p>
+<p>and</p>
 <p><span class="math display">\[\ln W_1(x)=\sum_{i=0}^{N_{2,t}}P(K_1=i)\ln W_1(x|K_1=i)=p_1N_{2,t}{\left( \ln W_{1,max}-\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}\]</span></p>
-<p><span class="math inline">\(\dots\)</span></p>
+<p><span class="math display">\[\dots\]</span></p>
 <p><span class="math display">\[\frac{d\bar x_t}{dt}=\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^2(\bar y_t-\bar x_t) \ \text{and} \
 \frac{d\sigma_{1,t}^2}{dt}=-\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^4\]</span></p>
 <p><span class="math display">\[\frac{dN_{1,t}}{dt}=\overline{\ln W_t}N_{1,t}=p_1{\left( \ln W_{1,max}-\frac{(\bar y_t-\bar x_t)^2+\sigma_{1,t}^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}N_{2,t}N_{1,t}\]</span></p>
@@ -615,8 +613,19 @@ As noted above, the concept of type is most abstract. Probably the most tangible
 
 ## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
 ## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
 ## 25000?</code></pre>
 <p><img src="notes_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?</code></pre>
 <p><img src="notes_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <!--
 
