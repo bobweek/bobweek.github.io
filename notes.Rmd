@@ -258,11 +258,19 @@ $$\frac{\partial}{\partial t}\phi_t(z)=\phi_t(z)\para{-\frac{(\bar z_t-z)^2}{2\s
 
 ### Assortative and Disassortative Mating
 
-The key here is to define assortative mating as a positive correlation between the types of mating pairs and disassortative mating as a negative correlation between the types of mating pairs. This correlation between types of mating pairs I denote by $\rho$. We will see that when $\rho=1$ we return to the situation that I have been referring to as absolutely assortative mating which is basically clonal reproduction. 
+The key here is to define assortative mating as a positive correlation between the types of mating pairs. We might jump to disassortative mating as a negative correlation between the types of mating pairs but this is not quite right. If mating pairs are negatively correlated, then when the phenotype of one member of the pair tends to be large, the phenotype of the other member tends to be small. So this is a restricted notion of disassortative mating. I'll attempt to work out a more general picture of disassortative mating in the next section. For now, instead of referring to the situation of negative correlation disassortative mating, I'll refer to it as negative mating.
 
-### Other Mating Structures
+I'll use $\rho$ to denote the correlation between types of mating pairs. We will see that when $\rho=1$ we return to the situation that I have been referring to as absolutely assortative mating which is basically clonal reproduction. 
 
+### Other Mating Patterns
 
+### Dioecy
+
+### Polyoecy?
+
+### Particulate Inheritance
+
+So far I have been using a model of blending inheritance to 
 
 ### Mutation
 
