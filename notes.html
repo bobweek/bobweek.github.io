@@ -462,8 +462,9 @@ dx\]</span></p>
 <p><span class="math display">\[p(x,y)=p(y,x)=\frac{\text{number of individuals with genotype} \ (x,y)}{N}\]</span></p>
 <p><span class="math display">\[p(x,\cdot)=\frac{\text{number of individuals with } x \text{ in their genotype}}{N}\]</span></p>
 <p><span class="math display">\[p(x,\neg y)=\frac{\text{number of individuals with } x \text{ in their genotype and not }y}{N}\]</span></p>
-<p><span class="math display">\[P( \text{ picking genotype } (x,y) \text{ after random mating } )=p(x,y)^2+\frac{1}{2}p(x,\neg y)p(x,y)+\frac{1}{2}p(y,\neg x)p(x,y)\]</span></p>
-<p>Can further assume that the probability that gametes <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> produce a viable offspring depends on <span class="math inline">\(|x-y|\)</span>. <span class="math inline">\(\neg\)</span></p>
+<p><span class="math display">\[p&#39;(x,x)=p(x,x)^2+\frac{1}{2}p(x,\neg x)p(x,x)+\frac{1}{4}p(x,\neg x)^2={\left( p(x,x)+\frac{1}{2}p(x,\neg x) \right)}^2\]</span></p>
+<p><span class="math display">\[\Delta p(x,y)=\]</span></p>
+<p>Can further assume that the probability that gametes <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> produce a viable offspring depends on <span class="math inline">\(|x-y|\)</span>.</p>
 </div>
 <div id="mutation" class="section level3">
 <h3>Mutation</h3>
@@ -628,10 +629,6 @@ As noted above, the concept of type is most abstract. Probably the most tangible
 <p>Our selection surface will be random, but smooth in both space and time. At an instant, it will generally look something like the following.</p>
 <p><img src="notes_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?
-
-## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
 ## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
 ## 25000?
 

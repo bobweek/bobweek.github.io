@@ -287,7 +287,7 @@ $$p(x,\cdot)=\frac{\text{number of individuals with } x \text{ in their genotype
 
 $$p(x,\neg y)=\frac{\text{number of individuals with } x \text{ in their genotype and not }y}{N}$$
 
-$$p'(x,y)=P( \text{ picking genotype } (x,y) \text{ after random mating } )=p(x,y)^2+\frac{1}{2}p(x,\neg y)p(x,y)+\frac{1}{2}p(\neg x,y)p(x,y)+\frac{1}{2}p(x,\neg y)p(\neg x,y)$$
+$$p'(x,x)=p(x,x)^2+\frac{1}{2}p(x,\neg x)p(x,x)+\frac{1}{4}p(x,\neg x)^2=\para{p(x,x)+\frac{1}{2}p(x,\neg x)}^2$$
 
 $$\Delta p(x,y)=$$
 
