@@ -22,6 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 \newcommand{\para}[1]{\left( #1 \right)}
 \newcommand{\W}{\mathcal{W}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\Var}{\mathrm{Var}}
@@ -215,7 +216,7 @@ $$\Delta\bar z_t=\Cov(z,W_t), \ \Delta\sigma_t^2=\Cov((\bar z_t-z)^2,W_t)$$
 
 ## Reproduction
 
-So far I have assumed that inheritance is perfect so that offspring resemble their parents exactly. The existence of sex in the above theory is ambiguous. One could hold the perspective that individuals reproduce asexually or that individuals only mate with only other individuals of their exact type, creating $2\mathcal{W}$ offspring, one set for each member of the mating pair. Yet another way to look at this theory is that it tracks just one gender so that, for example, daughters resemble their mothers perfectly and their fathers make no contribution to their type. Here I will explicitly model sexual reproduction by beginning with random mating. I will first focus on discrete time dynamics for a continuum of types indexed by $\R$. Later I will extend these results to continuous time dynamics and a more general mating strategy that encompasses everything from absolutely assortative mating to random mating to absolutely disassortative mating.
+So far I have assumed that inheritance is perfect so that offspring resemble their parents exactly. The existence of sex in the above theory is ambiguous. One could hold the perspective that individuals reproduce asexually or that individuals only mate with only other individuals of their exact type, creating $2\mathcal{W}$ offspring, one set for each member of the mating pair. Yet another way to look at this theory is that it tracks just one gender so that, for example, daughters resemble their mothers perfectly and their fathers make no contribution to their type. Here I will explicitly model sexual reproduction by beginning with random mating. I will first focus on discrete time dynamics for a continuum of types indexed by $\R$. Later I will extend these results to continuous time dynamics and a more general mating pattern that encompasses everything from absolutely assortative mating to random mating to absolutely disassortative mating.
 
 ### Pure Random Mating
 
@@ -270,7 +271,27 @@ I'll use $\rho$ to denote the correlation between types of mating pairs. We will
 
 ### Particulate Inheritance
 
-So far I have been using a model of blending inheritance to 
+So far I have been using a model of blending inheritance to calculate the phenotype of the offspring. This model of inheritance has been argued against from it's inception going back to the days of Darwin. Yet it remains at the core of the modern evolutionary theory of continuous traits, quantitative genetics. The main issue with this model is that, under pure random mating, the variance of a phenotype in a population is halved each generation, causing rapid degradation in diversity. One can combat this decay by incorporating mutation, as done below. However, this requires a rate of mutation that is far too rapid than what has been observed empirically. This problem is said to have been solved independtly by G.H. Hardy and Wilhelm Weinberg in 1908. In their particulate theory of inheritance diversity is maintained in a randomly mating population. However, I have yet to see much theory that models simultaneously particulate inheritance and continuously valued phenotypes. It seems to me that most phenotypes can be described with a continuum and are more explicitly the target of natural selection as opposed to the genotype. On the other hand, since reproduction inevitably involves the combination of gametes, it seems that the genotype generally has more power in this realm over the phenotype. Here I'll begin my naive attempt to combine these two insights. This is a first pass, writing down my thoughts as they form, so you may wish to look away until this section has reached maturity.
+
+My efforts here will focus on diploids. Let $\Z^2$ be the index set for all possible genotypes and $\R$ for all possible phenotypes. Each individual $i$ is represented by a genotype-phenotype pair $(\gamma_i,z_i)\in\Z^2\times\R$. Note that $\gamma_i$ itself has two unordered components, which I denote by $\gamma_i^1$ and $\gamma_i^2$ and define $\dot\gamma_i\equiv\frac{\gamma_i^1+\gamma_i^2}{2}$. This allows us to capture genotype of a diploid with a single number that can then be related to the phenotype. I assume a linear genotype phenotype map such that $z_i\sim\mathcal{N}(\alpha\dot\gamma_i+\beta,\eta^2)$ for some fixed $\alpha,\beta\in\R$. Since it is certainly possible that the relationship between the phenotype and genotype can change depending on the environment (plasticity) and even evolve with time (so that $\alpha$ and $\beta$ are themselves phenotypes that may or may not be predicted by genotypes) this assumption would need to be relaxed for a more satisfying theory. But let's keep things simple for now.
+
+Denote by $(\Gamma,Z)$ a random genotype-phenotype pair distributed across the population so that $\omega$ represents the individual and $\Omega$ is the set of all individuals $(N=|\Omega|)$. If $\Gamma$ significantly correlates with $Z$, I'll say that $Z$ is a heritable trait. For the mating pair of individuals $i$ and $j$ I'll denote their offspring genotype by $\gamma_{ij}$, which will be uniformly distributed over the four possible pairs $(\gamma_i^1,\gamma_j^1)$, $(\gamma_i^1,\gamma_j^2)$, $(\gamma_i^2,\gamma_j^1)$ and $(\gamma_i^2,\gamma_j^2)$. 
+
+Now that the basic rulese have been set in place, let's play a little game. Let's pretend that we're alien scientists and on our world the genotypes of living things translate directly to elements of $\Z^2$. Suppose for some reason we know $\alpha$ and $\beta$ precisely and that genotypes tend to be easier to observe than phenotypes. Say we go out and sample a population and estimate the distribution of $\Gamma$. From this knowledge we can predict the distribution of $Z$. 
+
+$$\E(Z)=\frac{1}{N}\sum_i(\alpha\dot\gamma_i+\beta)=\frac{\alpha}{2N}\sum_{ij}\gamma_i^j+\beta$$
+
+$$p(x,y)=p(y,x)=\frac{\text{number of individuals with genotype} \ (x,y)}{N}$$
+
+$$p(x,\cdot)=\frac{\text{number of individuals with } x \text{ in their genotype}}{N}$$
+
+$$p(x,\neg y)=\frac{\text{number of individuals with } x \text{ in their genotype and not }y}{N}$$
+
+$$p'(x,y)=P( \text{ picking genotype } (x,y) \text{ after random mating } )=p(x,y)^2+\frac{1}{2}p(x,\neg y)p(x,y)+\frac{1}{2}p(\neg x,y)p(x,y)+\frac{1}{2}p(x,\neg y)p(\neg x,y)$$
+
+$$\Delta p(x,y)=$$
+
+Can further assume that the probability that gametes $x$ and $y$ produce a viable offspring depends on $|x-y|$.
 
 ### Mutation
 
@@ -1111,6 +1132,8 @@ image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotyp
 
 ## Some Quantitative Genetics
 
+Here I set out to elucidate the mathematics underlying a calculation of mean fitness. This apparently clandestine calculation is the linchpin of a landmark paper in evolutionary theory (Lande 1976). By developing a solid understanding of it will undoubtedly add a handy trick to ones toolkit. I'll admit right here that I leave out some of the finer technical details, but the motivated reader can fill this gap or find the proof elsewhere.
+
 Gaussian functions play a central role in evolutionary theory. Arguably the most successful equation describing the evolution of a population, the breeder's equation, requires a normal phenotypic distribution. Typical notation is $z$ for the phenotype of an individual, $\bar z$ for the mean phenotype of the population, $\sigma^2$ for the phenotypic variance and $\phi$ for the phenotypic density. This provides
 
 $$\phi(z)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(z-\bar z)^2}{2\sigma^2}\right).$$
@@ -1176,7 +1199,7 @@ $$(g_1*g_2)(z)=g_3(z), \text{ where } \mu_3=\mu_2+\mu_1, \ \sigma_3^2=\sigma_1^2
 
 ## Linearization of a Pop Gen Model
 
-Here I cover a way to linearize the most simple model of genetic selection. We assume two genotypes, $A_1$ and $A_2$, with the frequencies $p$ and $q=1-p$ and fitnesses $W_1$ and $W_2$ respectively. Then $\overline W=pW_1+qW_2$ and the change in genotype frequency of $A_1$ is (ignoring all other processes)
+Here I cover a way to linearize a simple model of genetic selection. We assume two genotypes, $A_1$ and $A_2$, with the frequencies $p$ and $q=1-p$ and fitnesses $W_1$ and $W_2$ respectively. Then $\overline W=pW_1+qW_2$ and the change in genotype frequency of $A_1$ is (ignoring all other processes)
 
 $$\Delta p=pq\frac{\partial\ln\overline W}{\partial p}, \ \text{with} \ \overline W=pW_1+qW_2$$
 
