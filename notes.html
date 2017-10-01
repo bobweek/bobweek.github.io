@@ -378,10 +378,10 @@ $$=\para{\int_0^{t-1}w_sds}^{-1}\para{\bigwedge_0^tW_s^{ds}}N_0.$$
 <h2>Populations of Types</h2>
 <p>In terms of modelling, a population can be very abstract. Its concept is not restricted to a set of living things, as in the biological concept of a population. Here a population can be a set of biological populations, a set of species, replicating molecules, franchises, languages and so on. The members of the population may not be uniform, but can consist of various different types. For example, we can consider populations of individuals categorized by their phenotype or populations of species categorized by clades. We now derive how the distribution of types within a population fluctuates due to differential fitness, ie, selection.</p>
 <p>Consider a population of <span class="math inline">\(T\)</span> different types, each type <span class="math inline">\(i\)</span> with <span class="math inline">\(n_t(i)\)</span> individuals at time <span class="math inline">\(t\)</span>. If we denote <span class="math inline">\(\phi_t(i)\)</span> to be the proportion of individuals within type <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span> among the population, we have <span class="math inline">\(\phi_t(i)=\frac{n_t(i)}{N_t}\)</span> where <span class="math inline">\(N_t=\sum_{i=1}^Tn_t(i)\)</span>. Denote the expected fitness of each individual within type <span class="math inline">\(i\)</span> as <span class="math inline">\(W_t(i)\)</span>. Then committing ourselves to be content with expected dynamics and adopting the notation <span class="math inline">\(D_t\)</span> in place of <span class="math inline">\(\frac{d}{dt}\)</span>, we have</p>
-<p><span class="math display">\[D_tN_t=D_t\sum_in_t(i)=\sum_in_t(i)\ln W_t(i)=\overline{\ln W}_tN_t.\]</span></p>
+<p><span class="math display">\[D_tN_t=D_t\sum_in_t(i)=\sum_in_t(i)\ln W_t(i)=\overline{\ln W_t}N_t.\]</span></p>
 <p><span class="math display">\[D_t\phi_t(i)=D_t\frac{n_t(i)}{N_t}=\frac{N_tD_tn_t(i)-n_t(i)D_tN_t}{N_t^2}\]</span></p>
-<p><span class="math display">\[=\frac{n_t(i)\ln W_t(i)-n_t(i)\overline{\ln W}_t}{N_t}=\phi_t(i){\left( \ln W_t(i)-\overline{\ln W}_t \right)}.\]</span></p>
-<p>Setting <span class="math inline">\(\rho_t(i)=\ln W_t(i)-\overline{\ln W}_t\)</span> (what I refer to as the “relative” Malthusian fitness) we can solve for <span class="math inline">\(\phi_t(i)\)</span> to get</p>
+<p><span class="math display">\[=\frac{n_t(i)\ln W_t(i)-n_t(i)\overline{\ln W_t}}{N_t}=\phi_t(i){\left( \ln W_t(i)-\overline{\ln W_t} \right)}.\]</span></p>
+<p>Setting <span class="math inline">\(\rho_t(i)=\ln W_t(i)-\overline{\ln W_t}\)</span> (what I refer to as the “relative” Malthusian fitness) we can solve for <span class="math inline">\(\phi_t(i)\)</span> to get</p>
 <p><span class="math display">\[\phi_t(i)=\phi_0(i)e^{\int_0^t\rho_s(i)ds}\]</span></p>
 <!--
 
@@ -404,10 +404,10 @@ $$\alpha=\frac{\Box}{1+\triangle} \ \text{and} \ \beta=\frac{1}{1+\triangle}$$
 <p>Let’s suppose each type is associated with a distinct value. If there’s a finite number of types, there’ll be a finite number of values. For types with a continuous index, there’ll be a continuum of possible values. Let’s stick with a continuum of types indexed by <span class="math inline">\({\mathbb{R}}\)</span>. Denote by <span class="math inline">\(\bar z_t\)</span> the average value of the population at time <span class="math inline">\(t\)</span> and <span class="math inline">\(\sigma_t^2\)</span> the variance of types at time <span class="math inline">\(t\)</span>. Then</p>
 <p><span class="math display">\[\bar z_t=\int_{\mathbb{R}}z\phi_t(z)dz, \ \text{and} \ \sigma_t^2=\int_{\mathbb{R}}(\bar z_t-z)^2\phi_t(z)dz.\]</span></p>
 <p>Using the above results we can derive dynamics for these quantities as follows</p>
-<p><span class="math display">\[\frac{d\bar z_t}{dt}=\frac{d}{dt}\int_{\mathbb{R}}z\phi_t(z)dz=\int_{\mathbb{R}}z\frac{d}{dt}\phi_t(z)dz=\int_{\mathbb{R}}z(\ln W_t(z)-\overline{\ln W}_t)\phi_t(z)dz\]</span></p>
-<p><span class="math display">\[=\overline{z\ln W_t(z)}-\bar z\overline{\ln W}_t={\mathrm{Cov}}(z,\ln W_t)\]</span></p>
+<p><span class="math display">\[\frac{d\bar z_t}{dt}=\frac{d}{dt}\int_{\mathbb{R}}z\phi_t(z)dz=\int_{\mathbb{R}}z\frac{d}{dt}\phi_t(z)dz=\int_{\mathbb{R}}z(\ln W_t(z)-\overline{\ln W_t})\phi_t(z)dz\]</span></p>
+<p><span class="math display">\[=\overline{z\ln W_t(z)}-\bar z\overline{\ln W_t}={\mathrm{Cov}}(z,\ln W_t)\]</span></p>
 <p><span class="math display">\[\frac{d\sigma_t^2}{dt}=\frac{d}{dt}\int_{\mathbb{R}}(\bar z_t-z)^2\phi_t(z)dz=\int_{\mathbb{R}}2(\bar z_t-z)\phi_t(z)\frac{d\bar z_t}{dt}+(\bar z_t-z)^2\frac{d\phi_t(z)}{dt}dz\]</span></p>
-<p><span class="math display">\[=\int_{\mathbb{R}}(\bar z_t-z)^2(\ln W_t(z)-\overline{\ln W}_t)\phi_t(i)dz=\overline{(\bar z_t-z)^2\ln W_t(z)}-\overline{(\bar z_t-z)^2}\overline{\ln W}_t\]</span></p>
+<p><span class="math display">\[=\int_{\mathbb{R}}(\bar z_t-z)^2(\ln W_t(z)-\overline{\ln W_t})\phi_t(i)dz=\overline{(\bar z_t-z)^2\ln W_t(z)}-\overline{(\bar z_t-z)^2}\overline{\ln W_t}\]</span></p>
 <p><span class="math display">\[={\mathrm{Cov}}((\bar z_t-z)^2,\ln W_t)\]</span></p>
 <p>Doing this for discrete time returns</p>
 <p><span class="math display">\[\Delta\bar z_t={\mathrm{Cov}}(z,W_t), \ \Delta\sigma_t^2={\mathrm{Cov}}((\bar z_t-z)^2,W_t)\]</span></p>
@@ -438,16 +438,19 @@ dx\]</span></p>
 <p>When <span class="math inline">\(\phi_t\)</span> is normal, we get</p>
 <p><span class="math display">\[\frac{\partial}{\partial t}\phi_t(z)=\phi_t(z){\left( -\frac{(\bar z_t-z)^2}{2\sigma^2}+\frac{1}{2} \right)}.\]</span></p>
 </div>
-<div id="assortative-and-disassortative-mating" class="section level3">
-<h3>Assortative and Disassortative Mating</h3>
-<p>The key here is to define assortative mating as a positive correlation between the types of mating pairs. We might jump to disassortative mating as a negative correlation between the types of mating pairs but this is not quite right. If mating pairs are negatively correlated, then when the phenotype of one member of the pair tends to be large, the phenotype of the other member tends to be small. So this is a restricted notion of disassortative mating. I’ll attempt to work out a more general picture of disassortative mating in the next section. For now, instead of referring to the situation of negative correlation disassortative mating, I’ll refer to it as negative mating.</p>
-<p>I’ll use <span class="math inline">\(\rho\)</span> to denote the correlation between types of mating pairs. We will see that when <span class="math inline">\(\rho=1\)</span> we return to the situation that I have been referring to as absolutely assortative mating which is basically clonal reproduction.</p>
+<div id="assortative-and-negative-mating" class="section level3">
+<h3>Assortative and Negative Mating</h3>
+<p>The key here is to define assortative mating as a positive correlation between the types of mating pairs. We might jump to disassortative mating as a negative correlation between the types of mating pairs but this is not quite right. If mating pairs are negatively correlated, then when the phenotype of one member of the pair tends to be large, the phenotype of the other member tends to be small. So this is a restricted notion of disassortative mating. I’ll attempt to work out a more general picture of disassortative mating in the next section. For now, instead of referring to the situation of negative correlation disassortative mating, I’ll refer to it as negative mating. I’ll use <span class="math inline">\(\rho\)</span> to denote the correlation between types of mating pairs.</p>
+<p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote the phenotypes of a randomly chosen mating pair. I’ll write <span class="math inline">\(\bar z\)</span> as the mean phenotype of their distribution and <span class="math inline">\(\sigma^2\)</span> for the phenotypic variance. If we assume it’s offspring <span class="math inline">\(Z\)</span> is the midparent then <span class="math inline">\(Z=\frac{X+Y}{2}\)</span>. Then the mean of offpsring population will be <span class="math inline">\({\mathbb{E}}(Z)=\frac{1}{2}({\mathbb{E}}(X)+{\mathbb{E}}(Y))=\bar z\)</span>. Hence, this model of mating does not perturb the mean phenotype. However</p>
+<p><span class="math display">\[{\mathrm{Var}}(Z)=\frac{1}{4}{\left( {\mathrm{Var}}(X)+{\mathrm{Var}}(Y)+2{\mathrm{Cov}}(X,Y) \right)}=\frac{1}{2}{\left( \sigma^2+{\mathrm{Cov}}(X,Y) \right)}\]</span></p>
+<p>Since <span class="math inline">\({\mathrm{Cov}}(X,Y)=\rho\sigma^2\)</span> we have <span class="math inline">\({\mathrm{Var}}(Z)=\frac{\sigma^2}{2}(1+\rho)\)</span>. When <span class="math inline">\(\rho=0\)</span> mating between types occurs at random and we get the same result as above. When <span class="math inline">\(\rho=1\)</span>, we have perfectly assortative mating and the phenotypic variance remains the same. When <span class="math inline">\(\rho=-1\)</span> the variance disappears as each mating pair will consist of exactly complementary types and thus all offspring will have the same phenotype.</p>
 </div>
 <div id="other-mating-patterns" class="section level3">
 <h3>Other Mating Patterns</h3>
 </div>
 <div id="mating-pattern-as-phenotype" class="section level3">
 <h3>Mating Pattern as Phenotype</h3>
+<p>Mating preference could be a trait that evolves within a population.</p>
 </div>
 <div id="dioecy" class="section level3">
 <h3>Dioecy</h3>
@@ -470,6 +473,12 @@ dx\]</span></p>
 <p>If the interest is speciation I know we need at the very least some isolating mechanism, whether temporal, spatial, behavioural, or physical. For example, in sympatry (both time and space), hybrid depression is not enough, the population must evolve behaviour that avoids hybridization or else the population will probably just crash.</p>
 <p>Can further assume that the probability that gametes <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> produce a viable offspring depends on <span class="math inline">\(|x-y|\)</span>.</p>
 </div>
+<div id="heritability-the-quick-and-dirty" class="section level3">
+<h3>Heritability, the quick and dirty</h3>
+<p>attenuate the affects of selection on fitness by heritability <span class="math inline">\(h^2\)</span></p>
+<p><span class="math display">\[W^{h^2}\]</span></p>
+<p><span class="math display">\[\frac{\partial\bar z}{\partial t}={\mathrm{Cov}}(z,\ln W^{h^2})=h^2{\mathrm{Cov}}(z,\ln W)\]</span></p>
+</div>
 <div id="mutation" class="section level3">
 <h3>Mutation</h3>
 <p>From my perspective, mutation is a force that causes imperfect replication. That is, the offspring of an individual may not resemble their parent perfectly and this difference is called mutation. This fits the general sense of the word which is alteration, change, or to vary. However, in biology the word mutation refers to a very specific process involving the permament substitution of nucleotide base-pairs. Since I operate at a more abstract level, I will abuse this custom and use the word mutation as described above, referring to imperfect replication. My goal is not to reproduce the minutiae of molecular detail, but to capture the process of imperfect heritability in a tractable way. I believe this will lead me to a leaner, more general theory.</p>
@@ -491,7 +500,7 @@ dx\]</span></p>
 </div>
 <div id="putting-it-all-together" class="section level2">
 <h2>Putting it all together</h2>
-<p><span class="math display">\[\frac{\partial\phi_t}{\partial t}=\phi(\ln W_t-\overline{\ln W}_t)+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}\]</span></p>
+<p><span class="math display">\[\frac{\partial\phi_t}{\partial t}=\phi(\ln W_t-\overline{\ln W_t})+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}\]</span></p>
 <!--
 As noted above, the concept of type is most abstract. Probably the most tangible realizations of this concept are those of quantitative traits and genotypes. In the case of genotypes, the above discussion referring to $P$ is obvious and fits nicely with many classic models of mutation that are widely used throughout evolutionary biology. For continuous traits, our diffusion result may not be as widely known but still holds solid biological intuition. However one example that seems to evade many is location. The number $T$ could denote the number of demes, or discrete populations. Then $P_{ij}$ is the probability that a particular offspring of an individual in location $i$ migrates to location $j$. This example is admittedly a bit contrived. For instance, why should individuals that migrate to location $j$ suddenly have the same expected fitness as all other individuals in location $j$? Shouldn't fitness be a function of some other trait as well? Well, if this is so, we could construct another example that incorporates this. We could start be assuming that there are, say, $T'$ types for this other trait. Then the total number of combinations between location and this new trait is $T\times T'$. But then we could make an equivalent example by starting off by saying, "Suppose there are $T\times T'$ different types each with some fit$\dots$" Get the point? The goal here is to realize that theory has been developed at a sufficient level of abstraction so that many scenarios are captured. One does not need to develop a new theory based on trying to separate timescales and making other unnecessary complications. Selection, mutation, migration, drift, population dynamics and more have been captured with this approach. Typically it takes just a slight shift in perspective for all the pieces to fall into place.
 -->
@@ -633,10 +642,6 @@ As noted above, the concept of type is most abstract. Probably the most tangible
 <p>Our selection surface will be random, but smooth in both space and time. At an instant, it will generally look something like the following.</p>
 <p><img src="notes_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?
-
-## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
 ## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
 ## 25000?
 

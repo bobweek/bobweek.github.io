@@ -165,13 +165,13 @@ In terms of modelling, a population can be very abstract. Its concept is not res
 
 Consider a population of $T$ different types, each type $i$ with $n_t(i)$ individuals at time $t$. If we denote $\phi_t(i)$ to be the proportion of individuals within type $i$ at time $t$ among the population, we have $\phi_t(i)=\frac{n_t(i)}{N_t}$ where $N_t=\sum_{i=1}^Tn_t(i)$. Denote the expected fitness of each individual within type $i$ as $W_t(i)$. Then committing ourselves to be content with expected dynamics and adopting the notation $D_t$ in place of $\frac{d}{dt}$, we have
 
-$$D_tN_t=D_t\sum_in_t(i)=\sum_in_t(i)\ln W_t(i)=\overline{\ln W}_tN_t.$$
+$$D_tN_t=D_t\sum_in_t(i)=\sum_in_t(i)\ln W_t(i)=\overline{\ln W_t}N_t.$$
 
 $$D_t\phi_t(i)=D_t\frac{n_t(i)}{N_t}=\frac{N_tD_tn_t(i)-n_t(i)D_tN_t}{N_t^2}$$
 
-$$=\frac{n_t(i)\ln W_t(i)-n_t(i)\overline{\ln W}_t}{N_t}=\phi_t(i)\para{\ln W_t(i)-\overline{\ln W}_t}.$$
+$$=\frac{n_t(i)\ln W_t(i)-n_t(i)\overline{\ln W_t}}{N_t}=\phi_t(i)\para{\ln W_t(i)-\overline{\ln W_t}}.$$
 
-Setting $\rho_t(i)=\ln W_t(i)-\overline{\ln W}_t$ (what I refer to as the "relative" Malthusian fitness) we can solve for $\phi_t(i)$ to get
+Setting $\rho_t(i)=\ln W_t(i)-\overline{\ln W_t}$ (what I refer to as the "relative" Malthusian fitness) we can solve for $\phi_t(i)$ to get
 
 $$\phi_t(i)=\phi_0(i)e^{\int_0^t\rho_s(i)ds}$$
 
@@ -200,13 +200,13 @@ $$\bar z_t=\int_\R z\phi_t(z)dz, \ \text{and} \ \sigma_t^2=\int_\R(\bar z_t-z)^2
 
 Using the above results we can derive dynamics for these quantities as follows
 
-$$\frac{d\bar z_t}{dt}=\frac{d}{dt}\int_\R z\phi_t(z)dz=\int_\R z\frac{d}{dt}\phi_t(z)dz=\int_\R z(\ln W_t(z)-\overline{\ln W}_t)\phi_t(z)dz$$
+$$\frac{d\bar z_t}{dt}=\frac{d}{dt}\int_\R z\phi_t(z)dz=\int_\R z\frac{d}{dt}\phi_t(z)dz=\int_\R z(\ln W_t(z)-\overline{\ln W_t})\phi_t(z)dz$$
 
-$$=\overline{z\ln W_t(z)}-\bar z\overline{\ln W}_t=\Cov(z,\ln W_t)$$
+$$=\overline{z\ln W_t(z)}-\bar z\overline{\ln W_t}=\Cov(z,\ln W_t)$$
 
 $$\frac{d\sigma_t^2}{dt}=\frac{d}{dt}\int_\R (\bar z_t-z)^2\phi_t(z)dz=\int_\R 2(\bar z_t-z)\phi_t(z)\frac{d\bar z_t}{dt}+(\bar z_t-z)^2\frac{d\phi_t(z)}{dt}dz$$
 
-$$=\int_\R(\bar z_t-z)^2(\ln W_t(z)-\overline{\ln W}_t)\phi_t(i)dz=\overline{(\bar z_t-z)^2\ln W_t(z)}-\overline{(\bar z_t-z)^2}\overline{\ln W}_t$$
+$$=\int_\R(\bar z_t-z)^2(\ln W_t(z)-\overline{\ln W_t})\phi_t(i)dz=\overline{(\bar z_t-z)^2\ln W_t(z)}-\overline{(\bar z_t-z)^2}\overline{\ln W_t}$$
 
 $$=\Cov((\bar z_t-z)^2,\ln W_t)$$
 
@@ -257,17 +257,21 @@ When $\phi_t$ is normal, we get
 
 $$\frac{\partial}{\partial t}\phi_t(z)=\phi_t(z)\para{-\frac{(\bar z_t-z)^2}{2\sigma^2}+\frac{1}{2}}.$$
 
-### Assortative and Disassortative Mating
+### Assortative and Negative Mating
 
-The key here is to define assortative mating as a positive correlation between the types of mating pairs. We might jump to disassortative mating as a negative correlation between the types of mating pairs but this is not quite right. If mating pairs are negatively correlated, then when the phenotype of one member of the pair tends to be large, the phenotype of the other member tends to be small. So this is a restricted notion of disassortative mating. I'll attempt to work out a more general picture of disassortative mating in the next section. For now, instead of referring to the situation of negative correlation disassortative mating, I'll refer to it as negative mating.
+The key here is to define assortative mating as a positive correlation between the types of mating pairs. We might jump to disassortative mating as a negative correlation between the types of mating pairs but this is not quite right. If mating pairs are negatively correlated, then when the phenotype of one member of the pair tends to be large, the phenotype of the other member tends to be small. So this is a restricted notion of disassortative mating. I'll attempt to work out a more general picture of disassortative mating in the next section. For now, instead of referring to the situation of negative correlation disassortative mating, I'll refer to it as negative mating. I'll use $\rho$ to denote the correlation between types of mating pairs.
 
-I'll use $\rho$ to denote the correlation between types of mating pairs. We will see that when $\rho=1$ we return to the situation that I have been referring to as absolutely assortative mating which is basically clonal reproduction. 
+Let $X$ and $Y$ denote the phenotypes of a randomly chosen mating pair. I'll write $\bar z$ as the mean phenotype of their distribution and $\sigma^2$ for the phenotypic variance. If we assume it's offspring $Z$ is the midparent then $Z=\frac{X+Y}{2}$. Then the mean of offpsring population will be $\E(Z)=\frac{1}{2}(\E(X)+\E(Y))=\bar z$. Hence, this model of mating does not perturb the mean phenotype. However 
 
+$$\Var(Z)=\frac{1}{4}\para{\Var(X)+\Var(Y)+2\Cov(X,Y)}=\frac{1}{2}\para{\sigma^2+\Cov(X,Y)}$$
 
+Since $\Cov(X,Y)=\rho\sigma^2$ we have $\Var(Z)=\frac{\sigma^2}{2}(1+\rho)$. When $\rho=0$ mating between types occurs at random and we get the same result as above. When $\rho=1$, we have perfectly assortative mating and the phenotypic variance remains the same. When $\rho=-1$ the variance disappears as each mating pair will consist of exactly complementary types and thus all offspring will have the same phenotype.
 
 ### Other Mating Patterns
 
 ### Mating Pattern as Phenotype
+
+Mating preference could be a trait that evolves within a population.
 
 ### Dioecy
 
@@ -311,7 +315,7 @@ attenuate the affects of selection on fitness by heritability $h^2$
 
 $$W^{h^2}$$
 
-$$\frac{\partial\phi}{\partial t}=\Cov(z,\ln W^{h^2})=h^2\Cov(z,\ln W)$$
+$$\frac{\partial\bar z}{\partial t}=\Cov(z,\ln W^{h^2})=h^2\Cov(z,\ln W)$$
 
 ### Mutation
 
@@ -343,7 +347,7 @@ We need to return to considering the effects of mating on the population dynamic
 
 ## Putting it all together
 
-$$\frac{\partial\phi_t}{\partial t}=\phi(\ln W_t-\overline{\ln W}_t)+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}$$
+$$\frac{\partial\phi_t}{\partial t}=\phi(\ln W_t-\overline{\ln W_t})+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}$$
 
 <!--
 As noted above, the concept of type is most abstract. Probably the most tangible realizations of this concept are those of quantitative traits and genotypes. In the case of genotypes, the above discussion referring to $P$ is obvious and fits nicely with many classic models of mutation that are widely used throughout evolutionary biology. For continuous traits, our diffusion result may not be as widely known but still holds solid biological intuition. However one example that seems to evade many is location. The number $T$ could denote the number of demes, or discrete populations. Then $P_{ij}$ is the probability that a particular offspring of an individual in location $i$ migrates to location $j$. This example is admittedly a bit contrived. For instance, why should individuals that migrate to location $j$ suddenly have the same expected fitness as all other individuals in location $j$? Shouldn't fitness be a function of some other trait as well? Well, if this is so, we could construct another example that incorporates this. We could start be assuming that there are, say, $T'$ types for this other trait. Then the total number of combinations between location and this new trait is $T\times T'$. But then we could make an equivalent example by starting off by saying, "Suppose there are $T\times T'$ different types each with some fit$\dots$" Get the point? The goal here is to realize that theory has been developed at a sufficient level of abstraction so that many scenarios are captured. One does not need to develop a new theory based on trying to separate timescales and making other unnecessary complications. Selection, mutation, migration, drift, population dynamics and more have been captured with this approach. Typically it takes just a slight shift in perspective for all the pieces to fall into place.
