@@ -113,16 +113,25 @@ HYPOTHESIS: For $W_t\neq W$, define $W_0\equiv1$ and $W_s=0$ for $s<0$. Using th
 
 $$\E(N_t)=\para{\prod_{i=1}^tW_i}N_0 \text{ and } \Var(N_t)=\para{\sum_{i=0}^{t-1}\prod_{j=1}^iW_j}\para{\prod_{i=1}^tW_i}N_0$$
 
-Finally
+and
 
 $$\E(N_t)=\para{\bigwedge_0^tW_s^{ds}}N_0 \text{ and }\Var(N_t)=\para{\int_0^t\bigwedge_0^sW_u^{du}ds}\E(N_t)$$
- 
 
 where $\bigwedge$ represents type-1 product integration and is defined by
 
 $$\bigwedge_0^tW_s^{ds}\equiv e^{\int_0^t\ln W_sds}.$$
 
-Hence, this returns the same expected dynamics as above when $\ln W_t=r_t$. 
+Hence, this returns the same expected dynamics as above when $\ln W_t=r_t$. If $W_t=W$ is constant across time we have
+
+$$\bigwedge_0^tW_s^{ds}=e^{t\ln W}$$
+
+and
+
+$$\int_0^t\bigwedge_0^s W_u^{du}ds=\frac{1}{\ln W}\para{e^{t\ln W}-1}.$$
+
+In the case where $W=1$ we have a problem. We can solve it with [l'H&ocirc;pital's rule](https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule).
+
+$$\lim_{x\rightarrow0}\frac{e^x-1}{x}=\lim_{x\rightarrow0}e^x=1.$$
 
 Let's now find the dynamics of the variance of population size across time using the same approach that we took to obtain the dynamics of the mean. Using our solution for constant fitness across time, we can obtain a derivative by making the following additional assumption
 

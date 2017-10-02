@@ -345,11 +345,16 @@ output:
 <p>Our negative binomial for each time <span class="math inline">\(t\)</span> can be accordingly parameterized by <span class="math inline">\(\nu_t=\frac{1-W}{W-W^t}W^tN_0\)</span> and <span class="math inline">\(p_t=\frac{W-W^t}{1-W^t}\)</span>.</p>
 <p>HYPOTHESIS: For <span class="math inline">\(W_t\neq W\)</span>, define <span class="math inline">\(W_0\equiv1\)</span> and <span class="math inline">\(W_s=0\)</span> for <span class="math inline">\(s&lt;0\)</span>. Using the convention <span class="math inline">\(\prod_{i=1}^0W_i=1\)</span> and <span class="math inline">\(\sum_{i=0}^{-1}W_i=0\)</span>, I think the following is true:</p>
 <p><span class="math display">\[{\mathbb{E}}(N_t)={\left( \prod_{i=1}^tW_i \right)}N_0 \text{ and } {\mathrm{Var}}(N_t)={\left( \sum_{i=0}^{t-1}\prod_{j=1}^iW_j \right)}{\left( \prod_{i=1}^tW_i \right)}N_0\]</span></p>
-<p>Finally</p>
+<p>and</p>
 <p><span class="math display">\[{\mathbb{E}}(N_t)={\left( \bigwedge_0^tW_s^{ds} \right)}N_0 \text{ and }{\mathrm{Var}}(N_t)={\left( \int_0^t\bigwedge_0^sW_u^{du}ds \right)}{\mathbb{E}}(N_t)\]</span></p>
 <p>where <span class="math inline">\(\bigwedge\)</span> represents type-1 product integration and is defined by</p>
 <p><span class="math display">\[\bigwedge_0^tW_s^{ds}\equiv e^{\int_0^t\ln W_sds}.\]</span></p>
-<p>Hence, this returns the same expected dynamics as above when <span class="math inline">\(\ln W_t=r_t\)</span>.</p>
+<p>Hence, this returns the same expected dynamics as above when <span class="math inline">\(\ln W_t=r_t\)</span>. If <span class="math inline">\(W_t=W\)</span> is constant across time we have</p>
+<p><span class="math display">\[\bigwedge_0^tW_s^{ds}=e^{t\ln W}\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\int_0^t\bigwedge_0^s W_u^{du}ds=\frac{1}{\ln W}{\left( e^{t\ln W}-1 \right)}.\]</span></p>
+<p>In the case where <span class="math inline">\(W=1\)</span> we have a problem. We can solve it with <a href="https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule">l’Hôpital’s rule</a>.</p>
+<p><span class="math display">\[\lim_{x\rightarrow0}\frac{e^x-1}{x}=\lim_{x\rightarrow0}e^x=1.\]</span></p>
 <p>Let’s now find the dynamics of the variance of population size across time using the same approach that we took to obtain the dynamics of the mean. Using our solution for constant fitness across time, we can obtain a derivative by making the following additional assumption</p>
 <p><span class="math display">\[{\mathrm{Var}}(N_{t+\delta})={\left( \delta W^t+\sum_{i=0}^{t-1}W^i \right)}{\mathbb{E}}(N_{t+\delta}).\]</span></p>
 <p>Hence</p>
@@ -682,11 +687,12 @@ Can further assume that the probability that gametes $x$ and $y$ produce a viabl
 <p><img src="notes_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
 ## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?</code></pre>
-<p><img src="notes_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
-<pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
 ## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
 ## 25000?</code></pre>
+<p><img src="notes_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p><img src="notes_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <!--
 
