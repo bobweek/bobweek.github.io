@@ -398,9 +398,15 @@ $$\frac{d\phi_t}{d t}=\phi_t\xi_t=\phi_t\frac{dW_t}{dt}\implies d\phi_t=\phi_tdW
 
 However, the $dW$ needs to be scaled appropriately to actually capture the effects of drift. This scaling is not immediately obvious to me. To develop some intuition I'm going to assume that $\phi_0$ is normal with mean $\bar z_0$ and variance $\sigma_0^2$. Then, I think,
 
-$$\phi_1=\frac{\phi_0\para{\int_0^1e^{\xi_s}ds}}{\int_\R\phi_0\para{\int_0^1e^{\xi_s}ds}dz}$$
+$$\phi_1=\frac{\phi_0\para{\int_0^1e^{\xi_s}ds}}{\int_\Omega\int_\R\phi_0\para{\int_0^1e^{\xi_s}ds}dzP(d\omega)}=\phi_0\int_0^1e^{\xi_s}ds$$
 
-Note that I'm taking exponentials due to some backwards (not badwarcks!) logic. Thinking about the relationship between a Bayesian update and its continuous time analog, it's natural to then use the exponential of white noise (assuming $\overline{\xi_t}=0$). This makes a connection to something called [Geometric Brownian Motion](http://www.randomservices.org/random/brown/Geometric.html). A classic result in evolutionary theory tell us that $\bar z_1\sim\mathcal{N}(\bar z_0,G/N_e)$. This provides a hint. At a given point in phenotypic space, we have (I think) $\E(\phi_1)=\phi_0$ and $\Var(\phi_1)=\phi_0\para{e^{?^2}-1}$. Since we don't have a deterministic component, apparently $\phi_t\rightarrow0$ a.s. This is sort of like a jagged diffusion, then.
+Note that I'm taking exponentials due to some backwards (not badwarcks!) logic. Thinking about the relationship between a Bayesian update and its continuous time analog, it's natural to then use the exponential of white noise (assuming $\overline{\xi_t}=0$). This makes a connection to something called [Geometric Brownian Motion](http://www.randomservices.org/random/brown/Geometric.html). A classic result in evolutionary theory tell us that $\E(\bar z_1)=\bar z_0$ and $\Var(\bar z_1)=G/N_e)$. This provides a hint. At a given point in phenotypic space, we have (I think) $\E(\phi_1)=\phi_0$ and $\Var(\phi_1)=\phi_0\para{e^{?^2}-1}$. Since we don't have a deterministic component, apparently $\phi_t\rightarrow0$ a.s. This is sort of like a jagged diffusion, then. Hopefully
+
+$$\int_\R z\phi_1dz=\bar z_1, \ \E(\bar z_1)=\int_\Omega\int_\R z\phi_1dzP(d\omega)=\int_\Omega\bar z_1P(d\omega)=\bar z_0,$$
+
+$$\Var(\bar z_1)=\int_\Omega(\bar z_1-\bar z_0)^2P(d\omega)=\int_\Omega\bar z_1^2 P(d\omega)-\bar z_0^2$$
+
+$$\equiv\frac{G}{N_e}.$$
 
 Note that random sampling is not the only source of stochasticiy. Consider my definition of fitness.
 
