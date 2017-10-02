@@ -433,10 +433,7 @@ dx\]</span></p>
 \frac{1}{\sqrt{2\pi\sigma^2}}\exp{\left( -\frac{(m-x)^2}{2\sigma^2} \right)}
 dx\]</span></p>
 <p><span class="math display">\[=\frac{1}{\sqrt{\pi\sigma^2}}\exp{\left( -\frac{(\mu-m)^2}{\sigma^2} \right)}.\]</span></p>
-<p>Hence, with just random mating <span class="math inline">\(\Delta\mu=0\)</span> and <span class="math inline">\(\Delta\sigma^2=-\frac{\sigma^2}{2}\)</span>. For a general phenotypic density, the continuous time analog is</p>
-<p><span class="math display">\[\frac{\partial\phi_t}{\partial t}=\phi_t(\ln\phi_t-\overline{\ln\phi_t}).\]</span></p>
-<p>When <span class="math inline">\(\phi_t\)</span> is normal, we get</p>
-<p><span class="math display">\[\frac{\partial}{\partial t}\phi_t(z)=\phi_t(z){\left( -\frac{(\bar z_t-z)^2}{2\sigma^2}+\frac{1}{2} \right)}.\]</span></p>
+<p>Hence, with just random mating <span class="math inline">\(\Delta\mu=0\)</span> and <span class="math inline">\(\Delta\sigma^2=-\frac{\sigma^2}{2}\)</span>.</p>
 </div>
 <div id="assortative-and-negative-mating" class="section level3">
 <h3>Assortative and Negative Mating</h3>
@@ -444,9 +441,27 @@ dx\]</span></p>
 <p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> denote the phenotypes of a randomly chosen mating pair. I’ll write <span class="math inline">\(\bar z\)</span> as the mean phenotype of their distribution and <span class="math inline">\(\sigma^2\)</span> for the phenotypic variance. If we assume it’s offspring <span class="math inline">\(Z\)</span> is the midparent then <span class="math inline">\(Z=\frac{X+Y}{2}\)</span>. Then the mean of offpsring population will be <span class="math inline">\({\mathbb{E}}(Z)=\frac{1}{2}({\mathbb{E}}(X)+{\mathbb{E}}(Y))=\bar z\)</span>. Hence, this model of mating does not perturb the mean phenotype. However</p>
 <p><span class="math display">\[{\mathrm{Var}}(Z)=\frac{1}{4}{\left( {\mathrm{Var}}(X)+{\mathrm{Var}}(Y)+2{\mathrm{Cov}}(X,Y) \right)}=\frac{1}{2}{\left( \sigma^2+{\mathrm{Cov}}(X,Y) \right)}\]</span></p>
 <p>Since <span class="math inline">\({\mathrm{Cov}}(X,Y)=\rho\sigma^2\)</span> we have <span class="math inline">\({\mathrm{Var}}(Z)=\frac{\sigma^2}{2}(1+\rho)\)</span>. When <span class="math inline">\(\rho=0\)</span> mating between types occurs at random and we get the same result as above. When <span class="math inline">\(\rho=1\)</span>, we have perfectly assortative mating and the phenotypic variance remains the same. When <span class="math inline">\(\rho=-1\)</span> the variance disappears as each mating pair will consist of exactly complementary types and thus all offspring will have the same phenotype.</p>
+<p>We can use this result to derive dynamics of the phenotypic distribution <span class="math inline">\(\phi_t\)</span>, but before we dive into the general case, let’s consider the case where both parental and offspring phenotypic distributions are normal. Then, knowing from statistics that the normal distribution is <a href="https://en.wikipedia.org/wiki/Conjugate_prior">self-conjugate</a>, we can hypothesize the dynamics to take the form</p>
+<p><span class="math display">\[\phi_{t+1}=\frac{\psi\phi_t}{\int_{\mathbb{R}}\psi\phi_tdz}\]</span></p>
+<p>where <span class="math inline">\(\psi\)</span> is a normal density. If <span class="math inline">\(\psi\)</span> has mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\nu^2\)</span>, then we can use the handy fact that <span class="math inline">\(\phi_{t+1}\)</span> will be a normal density with the respective mean and variance</p>
+<p><span class="math display">\[\frac{\nu^2\bar z+\sigma^2\mu}{\nu^2+\sigma^2}, \ \frac{\nu^2\sigma^2}{\nu^2+\sigma^2}.\]</span></p>
+<p>Since we know the mean doesn’t change under this model of reproduction it must be that <span class="math inline">\(\mu=\bar z\)</span>. We also know the offspring variance and setting it equal to the above result gives</p>
+<p><span class="math display">\[\frac{\sigma^2}{2}(1+\rho)=\frac{\nu^2\sigma^2}{\nu^2+\sigma^2}.\]</span></p>
+<p>Solving for <span class="math inline">\(\nu^2\)</span> provides</p>
+<p><span class="math display">\[\frac{2}{1+\rho}=1+\frac{\nu^2}{\sigma^2}\implies\frac{1-\rho}{1+\rho}\sigma^2=\nu^2.\]</span></p>
+<p>The continuous time version of the above Bayesian update is</p>
+<p><span class="math display">\[\frac{d\phi_t}{d t}=\phi_t(\ln\psi_t-\overline{\ln\psi_t}).\]</span></p>
+<div id="incorporating-heritability" class="section level4">
+<h4>Incorporating Heritability</h4>
+<p>If we want to incorporate heritability into these calculations, one way I have to do so is by assuming the result of heritability a weighted average between the parental distribution and what the offpsring distribution would be with perfect heritability. That is</p>
+<p><span class="math display">\[\phi_{t+1}=\frac{\hat\phi^{h^2}_{t+1}\phi_t^{1-h^2}}{\int_{\mathbb{R}}\hat\phi^{h^2}_{t+1}\phi_t^{1-h^2}dz}
+={\left( \int_{\mathbb{R}}{\left( \frac{\hat\phi_{t+1}}{\phi_t} \right)}^{h^2}\phi_tdz \right)}^{-1}{\left( \frac{\hat\phi_{t+1}}{\phi_t} \right)}^{h^2}\phi_t\]</span></p>
+<p>One can work out the details to show that <span class="math inline">\(\nu^2=\frac{\sigma^2}{h^2}\frac{1-\rho}{1+\rho}.\)</span></p>
+</div>
 </div>
 <div id="other-mating-patterns" class="section level3">
 <h3>Other Mating Patterns</h3>
+<p>Including disassortative mating.</p>
 </div>
 <div id="mating-pattern-as-phenotype" class="section level3">
 <h3>Mating Pattern as Phenotype</h3>
@@ -454,6 +469,7 @@ dx\]</span></p>
 </div>
 <div id="dioecy" class="section level3">
 <h3>Dioecy</h3>
+<p>I’ve been assuming these populations are hermaphroditic. Would about a two-sex system?</p>
 </div>
 <div id="particulate-inheritance" class="section level3">
 <h3>Particulate Inheritance</h3>
@@ -473,8 +489,12 @@ dx\]</span></p>
 <p><span class="math display">\[p_\infty(x,x)={\left( p_0(x,x)+\frac{1}{2}p_0(x,\neg x) \right)}^2\]</span></p>
 <p><span class="math display">\[p_\infty(x,\neg x)=2{\left( p_0(x,x)+\frac{1}{2}p_0(x,\neg x) \right)}{\left( p_0(\neg x,\neg x)+\frac{1}{2}p_0(x,\neg x) \right)}\]</span></p>
 <p><span class="math display">\[p_\infty(\neg x,\neg x)={\left( p_0(\neg x,\neg x)+\frac{1}{2}p_0(x,\neg x) \right)}^2\]</span></p>
-<p>If the interest is speciation I know we need at the very least some isolating mechanism, whether temporal, spatial, behavioural, or physical. For example, in sympatry (both time and space), hybrid depression is not enough, the population must evolve behaviour that avoids hybridization or else the population will probably just crash.</p>
-<p>Can further assume that the probability that gametes <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> produce a viable offspring depends on <span class="math inline">\(|x-y|\)</span>.</p>
+<p><span class="math display">\[\dots\]</span></p>
+<!--
+If the interest is speciation I know we need at the very least some isolating mechanism, whether temporal, spatial, behavioural, or physical. For example, in sympatry (both time and space), hybrid depression is not enough, the population must evolve behaviour that avoids hybridization or else the population will probably just crash.
+
+Can further assume that the probability that gametes $x$ and $y$ produce a viable offspring depends on $|x-y|$.
+-->
 </div>
 <div id="heritability-the-quick-and-dirty" class="section level3">
 <h3>Heritability, the quick and dirty</h3>
@@ -497,6 +517,11 @@ dx\]</span></p>
 <p>The above discrete time dynamics of <span class="math inline">\(\sigma^2\)</span> with random mating and mutation become <span class="math inline">\(\Delta\sigma^2=\eta^2-\frac{\sigma^2}{2}\)</span>. One way to show this is to take the same approach as above but assume the offpsring phenotypic density takes the form</p>
 <p><span class="math display">\[\phi_o(z)=\sum_iw_i\frac{1}{\sqrt{2\pi\eta^2}}\exp{\left( -\frac{(m_i-z)^2}{2\eta^2} \right)}.\]</span></p>
 <p>Another way would be to assume <span class="math inline">\(\phi_t\)</span> is normal and integrate the equation <span class="math inline">\(\partial_t\phi_t=\eta^2\partial_{zz}\phi_t+\phi(\ln\phi_t-\overline{\ln\phi_t})\)</span> over a single unit of time. I leave the details to the motivated reader.</p>
+<p>Returning to the perspective of dispersal as geographic mutation, we can replace <span class="math inline">\(\eta\)</span> with <span class="math inline">\(m\)</span>, where I’m now using <span class="math inline">\(m\)</span> to represent the standard deviation in location between offspring and parent.</p>
+</div>
+<div id="breeding-value-as-a-trait" class="section level3">
+<h3>Breeding Value as a Trait</h3>
+<p>What happens if the mean offspring trait of an individual is allowed to evolve so that it is not always the trait of the parental individual?</p>
 </div>
 <div id="population-dynamics-1" class="section level3">
 <h3>Population Dynamics</h3>
@@ -505,6 +530,7 @@ dx\]</span></p>
 </div>
 <div id="drift" class="section level2">
 <h2>Drift</h2>
+<p>Note that random sampling is not the only source of stochasticiy. Consider my definition of fitness.</p>
 <p><span class="math inline">\(\xi_t(z)\sim\mathcal{N}{\left( 0,\frac{G(x)}{n(x)} \right)}\)</span></p>
 </div>
 <div id="putting-it-all-together" class="section level2">
@@ -651,14 +677,6 @@ As noted above, the concept of type is most abstract. Probably the most tangible
 <p>Our selection surface will be random, but smooth in both space and time. At an instant, it will generally look something like the following.</p>
 <p><img src="notes_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?
-
-## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?
-
-## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
 ## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
 ## 25000?
 

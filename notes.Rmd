@@ -249,13 +249,7 @@ dx$$
 
 $$=\frac{1}{\sqrt{\pi\sigma^2}}\exp\para{-\frac{(\mu-m)^2}{\sigma^2}}.$$
 
-Hence, with just random mating $\Delta\mu=0$ and $\Delta\sigma^2=-\frac{\sigma^2}{2}$. For a general phenotypic density, the continuous time analog is
-
-$$\frac{\partial\phi_t}{\partial t}=\phi_t(\ln\phi_t-\overline{\ln\phi_t}).$$
-
-When $\phi_t$ is normal, we get
-
-$$\frac{\partial}{\partial t}\phi_t(z)=\phi_t(z)\para{-\frac{(\bar z_t-z)^2}{2\sigma^2}+\frac{1}{2}}.$$
+Hence, with just random mating $\Delta\mu=0$ and $\Delta\sigma^2=-\frac{\sigma^2}{2}$.
 
 ### Assortative and Negative Mating
 
@@ -267,13 +261,46 @@ $$\Var(Z)=\frac{1}{4}\para{\Var(X)+\Var(Y)+2\Cov(X,Y)}=\frac{1}{2}\para{\sigma^2
 
 Since $\Cov(X,Y)=\rho\sigma^2$ we have $\Var(Z)=\frac{\sigma^2}{2}(1+\rho)$. When $\rho=0$ mating between types occurs at random and we get the same result as above. When $\rho=1$, we have perfectly assortative mating and the phenotypic variance remains the same. When $\rho=-1$ the variance disappears as each mating pair will consist of exactly complementary types and thus all offspring will have the same phenotype.
 
+We can use this result to derive dynamics of the phenotypic distribution $\phi_t$, but before we dive into the general case, let's consider the case where both parental and offspring phenotypic distributions are normal. Then, knowing from statistics that the normal distribution is [self-conjugate](https://en.wikipedia.org/wiki/Conjugate_prior), we can hypothesize the dynamics to take the form
+
+$$\phi_{t+1}=\frac{\psi\phi_t}{\int_\R\psi\phi_tdz}$$
+
+where $\psi$ is a normal density. If $\psi$ has mean $\mu$ and variance $\nu^2$, then we can use the handy fact that $\phi_{t+1}$ will be a normal density with the respective mean and variance
+
+$$\frac{\nu^2\bar z+\sigma^2\mu}{\nu^2+\sigma^2}, \ \frac{\nu^2\sigma^2}{\nu^2+\sigma^2}.$$
+
+Since we know the mean doesn't change under this model of reproduction it must be that $\mu=\bar z$. We also know the offspring variance and setting it equal to the above result gives
+
+$$\frac{\sigma^2}{2}(1+\rho)=\frac{\nu^2\sigma^2}{\nu^2+\sigma^2}.$$
+
+Solving for $\nu^2$ provides
+
+$$\frac{2}{1+\rho}=1+\frac{\nu^2}{\sigma^2}\implies\frac{1-\rho}{1+\rho}\sigma^2=\nu^2.$$
+
+The continuous time version of the above Bayesian update is
+
+$$\frac{d\phi_t}{d t}=\phi_t(\ln\psi_t-\overline{\ln\psi_t}).$$
+
+#### Incorporating Heritability
+
+If we want to incorporate heritability into these calculations, one way I have to do so is by assuming the result of heritability a weighted average between the parental distribution and what the offpsring distribution would be with perfect heritability. That is
+
+$$\phi_{t+1}=\frac{\hat\phi^{h^2}_{t+1}\phi_t^{1-h^2}}{\int_\R\hat\phi^{h^2}_{t+1}\phi_t^{1-h^2}dz}
+=\para{\int_\R\para{\frac{\hat\phi_{t+1}}{\phi_t}}^{h^2}\phi_tdz}^{-1}\para{\frac{\hat\phi_{t+1}}{\phi_t}}^{h^2}\phi_t$$
+
+One can work out the details to show that $\nu^2=\frac{\sigma^2}{h^2}\frac{1-\rho}{1+\rho}.$
+
 ### Other Mating Patterns
+
+Including disassortative mating.
 
 ### Mating Pattern as Phenotype
 
 Mating preference could be a trait that evolves within a population.
 
 ### Dioecy
+
+I've been assuming these populations are hermaphroditic. Would about a two-sex system?
 
 ### Particulate Inheritance
 
@@ -309,9 +336,13 @@ $$p_\infty(x,\neg x)=2\para{p_0(x,x)+\frac{1}{2}p_0(x,\neg x)}\para{p_0(\neg x,\
 
 $$p_\infty(\neg x,\neg x)=\para{p_0(\neg x,\neg x)+\frac{1}{2}p_0(x,\neg x)}^2$$
 
+$$\dots$$
+
+<!--
 If the interest is speciation I know we need at the very least some isolating mechanism, whether temporal, spatial, behavioural, or physical. For example, in sympatry (both time and space), hybrid depression is not enough, the population must evolve behaviour that avoids hybridization or else the population will probably just crash.
 
 Can further assume that the probability that gametes $x$ and $y$ produce a viable offspring depends on $|x-y|$.
+-->
 
 ### Heritability, the quick and dirty
 
@@ -351,11 +382,17 @@ Another way would be to assume $\phi_t$ is normal and integrate the equation $\p
 
 Returning to the perspective of dispersal as geographic mutation, we can replace $\eta$ with $m$, where I'm now using $m$ to represent the standard deviation in location between offspring and parent.
 
+### Breeding Value as a Trait
+
+What happens if the mean offspring trait of an individual is allowed to evolve so that it is not always the trait of the parental individual?
+
 ### Population Dynamics
 
 We need to return to considering the effects of mating on the population dynamics.
 
 ## Drift
+
+Note that random sampling is not the only source of stochasticiy. Consider my definition of fitness.
 
 $\xi_t(z)\sim\mathcal{N}\para{0,\frac{G(x)}{n(x)}}$
 
