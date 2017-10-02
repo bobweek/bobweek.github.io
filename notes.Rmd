@@ -283,12 +283,12 @@ $$\frac{d\phi_t}{d t}=\phi_t(\ln\psi_t-\overline{\ln\psi_t}).$$
 
 #### Incorporating Heritability
 
-If we want to incorporate heritability into these calculations, one way I have to do so is by assuming the result of heritability a weighted average between the parental distribution and what the offpsring distribution would be with perfect heritability. That is
+If we want to incorporate heritability into these calculations, one way I have thought to do so is by assuming that the result of heritability will be a weighted average between the parental distribution and what the offpsring distribution would be with perfect heritability. That is
 
 $$\phi_{t+1}=\frac{\hat\phi^{h^2}_{t+1}\phi_t^{1-h^2}}{\int_\R\hat\phi^{h^2}_{t+1}\phi_t^{1-h^2}dz}
 =\para{\int_\R\para{\frac{\hat\phi_{t+1}}{\phi_t}}^{h^2}\phi_tdz}^{-1}\para{\frac{\hat\phi_{t+1}}{\phi_t}}^{h^2}\phi_t$$
 
-One can work out the details to show that $\nu^2=\frac{\sigma^2}{h^2}\frac{1-\rho}{1+\rho}.$
+One can work out the details to show that $\nu^2=h^2\sigma^2\frac{1-\rho}{1+\rho}.$
 
 ### Other Mating Patterns
 
@@ -326,9 +326,9 @@ $$p(x,\neg y)=\frac{\text{ number of individuals with } x \text{ as one haplotyp
 
 $$p'(x,x)=p(x,x)^2+\frac{1}{2}p(x,\neg x)p(x,x)+\frac{1}{4}p(x,\neg x)^2=\para{p(x,x)+\frac{1}{2}p(x,\neg x)}^2$$
 
-$$\E(z)=\E(\dot \gamma)=\sum_{i\in\Z}i\sum_{j\in\Z}p(i,2j-i)$$
+$$\E(z)=\alpha\E(\dot \gamma)+\beta=\alpha\para{\sum_{i\in\Z}i\sum_{j\in\Z}p(i,2j-i)}+\beta$$
 
-$$\phi(z)=\sum_{i\in\Z}\frac{\exp\para{-\frac{(z-i)^2}{2\eta^2}}}{\sqrt{2\pi\eta^2}}\sum_{j\in\Z}p(i,2j-i)$$
+$$\phi(z)=\sum_{i\in\Z}\frac{\exp\para{-\frac{(z-\alpha i-\beta)^2}{2\eta^2}}}{\sqrt{2\pi\eta^2}}\sum_{j\in\Z}p(i,2j-i)$$
 
 $$p_\infty(x,x)=\para{p_0(x,x)+\frac{1}{2}p_0(x,\neg x)}^2$$
 
@@ -370,7 +370,7 @@ From here we can generate all sorts of madness by conjuring up quirky combinatio
 
 $$\phi_{t+1}(z)=\int_\R\phi_t(z)\frac{\exp\para{-\frac{(z-\zeta)^2}{2\eta^2}}}{\sqrt{2\pi\eta^2}}d\zeta.$$
 
-In the language of math, we say that mutation acts as a [mollifier](https://en.wikipedia.org/wiki/Mollifier) on the phenotypic density. The equivalent continuous time version of this is
+In the language of math, we say that mutation acts as a [mollifier](https://en.wikipedia.org/wiki/Mollifier) on the phenotypic density. The equivalent continuous time version of this is diffusion, that is,
 
 $$\frac{\partial\phi_t}{\partial t}=\eta^2\frac{\partial^2\phi_t}{\partial z^2}.$$
 
@@ -392,17 +392,21 @@ We need to return to considering the effects of mating on the population dynamic
 
 ## Drift
 
-Note that random sampling is not the only source of stochasticiy. Consider my definition of fitness.
+Drift is modelled as a stochastic effect due to assembling the gene pool via random sampling of the population. The number of individuals drawn is called the effective population size, $N_e$. Hence drift transforms a possibly continuous distribution into a discrete one. However, the resulting distribution is uncertain. Let's denote the mass function of this random probability distribution by $\Xi$. Each point with positive mass $Z_i$ is drawn independently of one another, a basic assumption of the drifting process. Assuming that the population being sampled from has a continuous distribution we get $P(Z_i=Z_j)=0$ for each pair of points in the gene pool. If there's no diffusive mutation, then the next generations distribution will also be discrete and hence the disctribution will remain discrete for finite time. Random mating will create new point masses and depending on other processes these point masses can accumulate over time, causing the distribution to converge to some continuous distribution asymptotically. However, with diffusive mutation the populations distribution will remain continuous. How do we capture the effects of drift in continuous time? I think the answer lies in Gaussian processes. In particular, space-time white noise seems to be the most obvious candidate. Intuitively, white noise can be thought of as the time-derivative of Brownian motion, $\frac{dW_t}{dt}$. Space-time white noise can then be thought of as a line of points each following a white noise process. Denoting white noise by $\xi_t$ I am tempted to write the stochastic differential equation
 
-$\xi_t(z)\sim\mathcal{N}\para{0,\frac{G(x)}{n(x)}}$
+$$\frac{d\phi_t}{d t}=\phi_t\xi_t=\phi_t\frac{dW_t}{dt}\implies d\phi_t=\phi_tdW_t\overset{?}{\implies}\phi_t=\frac{\phi_0\exp\para{W_t-\frac{t}{2}}}{\int_\R\phi_0\exp\para{W_t-\frac{t}{2}}dz}.$$
+
+However, the $dW$ needs to be scaled appropriately to actually capture the effects of drift. This scaling is not immediately obvious to me. To develop some intuition I'm going to assume that $\phi_0$ is normal with mean $\bar z_0$ and variance $\sigma_0^2$. Then, I think,
+
+$$\phi_1=\frac{\phi_0\para{\int_0^1e^{\xi_s}ds}}{\int_\R\phi_0\para{\int_0^1e^{\xi_s}ds}dz}$$
+
+Note that I'm taking exponentials due to some backwards (not badwarcks!) logic. Thinking about the relationship between a Bayesian update and its continuous time analog, it's natural to then use the exponential of white noise (assuming $\overline{\xi_t}=0$). This makes a connection to something called [Geometric Brownian Motion](http://www.randomservices.org/random/brown/Geometric.html). A classic result in evolutionary theory tell us that $\bar z_1\sim\mathcal{N}(\bar z_0,G/N_e)$. This provides a hint. At a given point in phenotypic space, we have (I think) $\E(\phi_1)=\phi_0$ and $\Var(\phi_1)=\phi_0\para{e^{?^2}-1}$. Since we don't have a deterministic component, apparently $\phi_t\rightarrow0$ a.s. This is sort of like a jagged diffusion, then.
+
+Note that random sampling is not the only source of stochasticiy. Consider my definition of fitness.
 
 ## Putting it all together
 
-$$\frac{\partial\phi_t}{\partial t}=h^2\phi(\ln W_t-\overline{\ln W_t})+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}+m^2\frac{\partial^2\phi_t}{\partial x^2}+\xi_t$$
-
-<!--
-As noted above, the concept of type is most abstract. Probably the most tangible realizations of this concept are those of quantitative traits and genotypes. In the case of genotypes, the above discussion referring to $P$ is obvious and fits nicely with many classic models of mutation that are widely used throughout evolutionary biology. For continuous traits, our diffusion result may not be as widely known but still holds solid biological intuition. However one example that seems to evade many is location. The number $T$ could denote the number of demes, or discrete populations. Then $P_{ij}$ is the probability that a particular offspring of an individual in location $i$ migrates to location $j$. This example is admittedly a bit contrived. For instance, why should individuals that migrate to location $j$ suddenly have the same expected fitness as all other individuals in location $j$? Shouldn't fitness be a function of some other trait as well? Well, if this is so, we could construct another example that incorporates this. We could start be assuming that there are, say, $T'$ types for this other trait. Then the total number of combinations between location and this new trait is $T\times T'$. But then we could make an equivalent example by starting off by saying, "Suppose there are $T\times T'$ different types each with some fit$\dots$" Get the point? The goal here is to realize that theory has been developed at a sufficient level of abstraction so that many scenarios are captured. One does not need to develop a new theory based on trying to separate timescales and making other unnecessary complications. Selection, mutation, migration, drift, population dynamics and more have been captured with this approach. Typically it takes just a slight shift in perspective for all the pieces to fall into place.
--->
+$$\frac{\partial\phi_t}{\partial t}=h^2\phi(\ln W_t-\overline{\ln W_t})+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}+m^2\frac{\partial^2\phi_t}{\partial x^2}+\phi_t\xi_t$$
 
 ## Examples
 
