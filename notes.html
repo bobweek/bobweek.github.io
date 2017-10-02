@@ -533,8 +533,11 @@ Can further assume that the probability that gametes $x$ and $y$ produce a viabl
 <p>Drift is modelled as a stochastic effect due to assembling the gene pool via random sampling of the population. The number of individuals drawn is called the effective population size, <span class="math inline">\(N_e\)</span>. Hence drift transforms a possibly continuous distribution into a discrete one. However, the resulting distribution is uncertain. Let’s denote the mass function of this random probability distribution by <span class="math inline">\(\Xi\)</span>. Each point with positive mass <span class="math inline">\(Z_i\)</span> is drawn independently of one another, a basic assumption of the drifting process. Assuming that the population being sampled from has a continuous distribution we get <span class="math inline">\(P(Z_i=Z_j)=0\)</span> for each pair of points in the gene pool. If there’s no diffusive mutation, then the next generations distribution will also be discrete and hence the disctribution will remain discrete for finite time. Random mating will create new point masses and depending on other processes these point masses can accumulate over time, causing the distribution to converge to some continuous distribution asymptotically. However, with diffusive mutation the populations distribution will remain continuous. How do we capture the effects of drift in continuous time? I think the answer lies in Gaussian processes. In particular, space-time white noise seems to be the most obvious candidate. Intuitively, white noise can be thought of as the time-derivative of Brownian motion, <span class="math inline">\(\frac{dW_t}{dt}\)</span>. Space-time white noise can then be thought of as a line of points each following a white noise process. Denoting white noise by <span class="math inline">\(\xi_t\)</span> I am tempted to write the stochastic differential equation</p>
 <p><span class="math display">\[\frac{d\phi_t}{d t}=\phi_t\xi_t=\phi_t\frac{dW_t}{dt}\implies d\phi_t=\phi_tdW_t\overset{?}{\implies}\phi_t=\frac{\phi_0\exp{\left( W_t-\frac{t}{2} \right)}}{\int_{\mathbb{R}}\phi_0\exp{\left( W_t-\frac{t}{2} \right)}dz}.\]</span></p>
 <p>However, the <span class="math inline">\(dW\)</span> needs to be scaled appropriately to actually capture the effects of drift. This scaling is not immediately obvious to me. To develop some intuition I’m going to assume that <span class="math inline">\(\phi_0\)</span> is normal with mean <span class="math inline">\(\bar z_0\)</span> and variance <span class="math inline">\(\sigma_0^2\)</span>. Then, I think,</p>
-<p><span class="math display">\[\phi_1=\frac{\phi_0{\left( \int_0^1e^{\xi_s}ds \right)}}{\int_{\mathbb{R}}\phi_0{\left( \int_0^1e^{\xi_s}ds \right)}dz}\]</span></p>
-<p>Note that I’m taking exponentials due to some backwards (not badwarcks!) logic. Thinking about the relationship between a Bayesian update and its continuous time analog, it’s natural to then use the exponential of white noise (assuming <span class="math inline">\(\overline{\xi_t}=0\)</span>). This makes a connection to something called <a href="http://www.randomservices.org/random/brown/Geometric.html">Geometric Brownian Motion</a>. A classic result in evolutionary theory tell us that <span class="math inline">\(\bar z_1\sim\mathcal{N}(\bar z_0,G/N_e)\)</span>. This provides a hint. At a given point in phenotypic space, we have (I think) <span class="math inline">\({\mathbb{E}}(\phi_1)=\phi_0\)</span> and <span class="math inline">\({\mathrm{Var}}(\phi_1)=\phi_0{\left( e^{?^2}-1 \right)}\)</span>. Since we don’t have a deterministic component, apparently <span class="math inline">\(\phi_t\rightarrow0\)</span> a.s. This is sort of like a jagged diffusion, then.</p>
+<p><span class="math display">\[\phi_1=\frac{\phi_0{\left( \int_0^1e^{\xi_s}ds \right)}}{\int_\Omega\int_{\mathbb{R}}\phi_0{\left( \int_0^1e^{\xi_s}ds \right)}dzP(d\omega)}=\phi_0\int_0^1e^{\xi_s}ds\]</span></p>
+<p>Note that I’m taking exponentials due to some backwards (not badwarcks!) logic. Thinking about the relationship between a Bayesian update and its continuous time analog, it’s natural to then use the exponential of white noise (assuming <span class="math inline">\(\overline{\xi_t}=0\)</span>). This makes a connection to something called <a href="http://www.randomservices.org/random/brown/Geometric.html">Geometric Brownian Motion</a>. A classic result in evolutionary theory tell us that <span class="math inline">\({\mathbb{E}}(\bar z_1)=\bar z_0\)</span> and <span class="math inline">\({\mathrm{Var}}(\bar z_1)=G/N_e)\)</span>. This provides a hint. At a given point in phenotypic space, we have (I think) <span class="math inline">\({\mathbb{E}}(\phi_1)=\phi_0\)</span> and <span class="math inline">\({\mathrm{Var}}(\phi_1)=\phi_0{\left( e^{?^2}-1 \right)}\)</span>. Since we don’t have a deterministic component, apparently <span class="math inline">\(\phi_t\rightarrow0\)</span> a.s. This is sort of like a jagged diffusion, then. Hopefully</p>
+<p><span class="math display">\[\int_{\mathbb{R}}z\phi_1dz=\bar z_1, \ {\mathbb{E}}(\bar z_1)=\int_\Omega\int_{\mathbb{R}}z\phi_1dzP(d\omega)=\int_\Omega\bar z_1P(d\omega)=\bar z_0,\]</span></p>
+<p><span class="math display">\[{\mathrm{Var}}(\bar z_1)=\int_\Omega(\bar z_1-\bar z_0)^2P(d\omega)=\int_\Omega\bar z_1^2 P(d\omega)-\bar z_0^2\]</span></p>
+<p><span class="math display">\[\equiv\frac{G}{N_e}.\]</span></p>
 <p>Note that random sampling is not the only source of stochasticiy. Consider my definition of fitness.</p>
 </div>
 <div id="putting-it-all-together" class="section level2">
@@ -679,24 +682,11 @@ Can further assume that the probability that gametes $x$ and $y$ produce a viabl
 <p><img src="notes_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
 ## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?
-
-## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?
-
-## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?
-
-## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?
-
-## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
 ## 25000?</code></pre>
 <p><img src="notes_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?</code></pre>
 <p><img src="notes_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <!--
 
