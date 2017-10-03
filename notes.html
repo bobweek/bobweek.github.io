@@ -354,7 +354,8 @@ output:
 <p>and</p>
 <p><span class="math display">\[\int_0^t\bigwedge_0^s W_u^{du}ds=\frac{1}{\ln W}{\left( e^{t\ln W}-1 \right)}.\]</span></p>
 <p>In the case where <span class="math inline">\(W=1\)</span> we have a problem. We can solve it with <a href="https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule">l’Hôpital’s rule</a>.</p>
-<p><span class="math display">\[\lim_{x\rightarrow0}\frac{e^x-1}{x}=\lim_{x\rightarrow0}e^x=1.\]</span></p>
+<p><span class="math display">\[\lim_{x\rightarrow0}\frac{e^{tx}-1}{x}=\lim_{x\rightarrow0}te^{tx}=t.\]</span></p>
+<p>Note that when <span class="math inline">\(W=1\)</span> there is no bias for the population to grow or shrink, sort of like a symmetric random walk. We also see that <span class="math inline">\({\mathbb{E}}(N_t)=N_0\)</span> for all <span class="math inline">\(t\)</span>, implying that the process <span class="math inline">\(N_t\)</span> is a martingale when <span class="math inline">\(W=1\)</span>.</p>
 <p>Let’s now find the dynamics of the variance of population size across time using the same approach that we took to obtain the dynamics of the mean. Using our solution for constant fitness across time, we can obtain a derivative by making the following additional assumption</p>
 <p><span class="math display">\[{\mathrm{Var}}(N_{t+\delta})={\left( \delta W^t+\sum_{i=0}^{t-1}W^i \right)}{\mathbb{E}}(N_{t+\delta}).\]</span></p>
 <p>Hence</p>
@@ -461,7 +462,7 @@ dx\]</span></p>
 <p>If we want to incorporate heritability into these calculations, one way I have thought to do so is by assuming that the result of heritability will be a weighted average between the parental distribution and what the offpsring distribution would be with perfect heritability. That is</p>
 <p><span class="math display">\[\phi_{t+1}=\frac{\hat\phi^{h^2}_{t+1}\phi_t^{1-h^2}}{\int_{\mathbb{R}}\hat\phi^{h^2}_{t+1}\phi_t^{1-h^2}dz}
 ={\left( \int_{\mathbb{R}}{\left( \frac{\hat\phi_{t+1}}{\phi_t} \right)}^{h^2}\phi_tdz \right)}^{-1}{\left( \frac{\hat\phi_{t+1}}{\phi_t} \right)}^{h^2}\phi_t\]</span></p>
-<p>One can work out the details to show that <span class="math inline">\(\nu^2=h^2\sigma^2\frac{1-\rho}{1+\rho}.\)</span></p>
+<p>One can work out the details to show that <span class="math inline">\(\nu^2=\frac{\sigma^2}{h^2}\frac{1-\rho}{1+\rho}.\)</span></p>
 </div>
 </div>
 <div id="other-mating-patterns" class="section level3">
@@ -505,7 +506,7 @@ Can further assume that the probability that gametes $x$ and $y$ produce a viabl
 <h3>Heritability, the quick and dirty</h3>
 <p>attenuate the affects of selection on fitness by heritability <span class="math inline">\(h^2\)</span></p>
 <p><span class="math display">\[W^{h^2}\]</span></p>
-<p><span class="math display">\[\frac{\partial\bar z}{\partial t}={\mathrm{Cov}}(z,\ln W^{h^2})=h^2{\mathrm{Cov}}(z,\ln W)\]</span></p>
+<p><span class="math display">\[\frac{d\bar z}{dt}={\mathrm{Cov}}(z,\ln W^{h^2})=h^2{\mathrm{Cov}}(z,\ln W)\]</span></p>
 </div>
 <div id="mutation" class="section level3">
 <h3>Mutation</h3>
@@ -686,6 +687,14 @@ Can further assume that the probability that gametes $x$ and $y$ produce a viabl
 <p>Our selection surface will be random, but smooth in both space and time. At an instant, it will generally look something like the following.</p>
 <p><img src="notes_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
 ## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
 ## 25000?
 

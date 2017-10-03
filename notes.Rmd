@@ -131,7 +131,9 @@ $$\int_0^t\bigwedge_0^s W_u^{du}ds=\frac{1}{\ln W}\para{e^{t\ln W}-1}.$$
 
 In the case where $W=1$ we have a problem. We can solve it with [l'H&ocirc;pital's rule](https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule).
 
-$$\lim_{x\rightarrow0}\frac{e^x-1}{x}=\lim_{x\rightarrow0}e^x=1.$$
+$$\lim_{x\rightarrow0}\frac{e^{tx}-1}{x}=\lim_{x\rightarrow0}te^{tx}=t.$$
+
+Note that when $W=1$ there is no bias for the population to grow or shrink, sort of like a symmetric random walk. We also see that $\E(N_t)=N_0$ for all $t$, implying that the process $N_t$ is a martingale when $W=1$.
 
 Let's now find the dynamics of the variance of population size across time using the same approach that we took to obtain the dynamics of the mean. Using our solution for constant fitness across time, we can obtain a derivative by making the following additional assumption
 
@@ -297,7 +299,7 @@ If we want to incorporate heritability into these calculations, one way I have t
 $$\phi_{t+1}=\frac{\hat\phi^{h^2}_{t+1}\phi_t^{1-h^2}}{\int_\R\hat\phi^{h^2}_{t+1}\phi_t^{1-h^2}dz}
 =\para{\int_\R\para{\frac{\hat\phi_{t+1}}{\phi_t}}^{h^2}\phi_tdz}^{-1}\para{\frac{\hat\phi_{t+1}}{\phi_t}}^{h^2}\phi_t$$
 
-One can work out the details to show that $\nu^2=h^2\sigma^2\frac{1-\rho}{1+\rho}.$
+One can work out the details to show that $\nu^2=\frac{\sigma^2}{h^2}\frac{1-\rho}{1+\rho}.$
 
 ### Other Mating Patterns
 
@@ -359,7 +361,7 @@ attenuate the affects of selection on fitness by heritability $h^2$
 
 $$W^{h^2}$$
 
-$$\frac{\partial\bar z}{\partial t}=\Cov(z,\ln W^{h^2})=h^2\Cov(z,\ln W)$$
+$$\frac{d\bar z}{dt}=\Cov(z,\ln W^{h^2})=h^2\Cov(z,\ln W)$$
 
 ### Mutation
 
