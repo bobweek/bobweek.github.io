@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Austins Data</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="interactive_theory.html">Interactive Theory</a></li>
+        <li><a href="inferring_coevolution.html">Inferring Coevolution</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="austins_data.html">PCM Class Exercise</a></li>
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Austins Data</h1>
+
+</div>
+
+
+<div id="load-em-in-an-butter-em-up" class="section level1">
+<h1>load em in an butter em up!!!</h1>
+<pre class="r"><code>require(ape)
+raw_data&lt;-read.csv(&quot;~/Classes/fa17/pcm/Caud/Caudata_PhyloComp_Data.csv&quot;)
+cd&lt;-raw_data[,-1]
+rownames(cd)&lt;-raw_data[,1]
+
+ct&lt;-read.nexus(&quot;~/Classes/fa17/pcm/Caud/caud.ultra.nexus&quot;)
+require(geiger)
+name.check(ct, cd)</code></pre>
+<pre><code>## $tree_not_data
+##  [1] &quot;Ambystoma_tigrinum&quot;          &quot;Desmognathus_conanti&quot;       
+##  [3] &quot;Desmognathus_planiceps&quot;      &quot;Eurycea_aquatica&quot;           
+##  [5] &quot;Haideotriton_wallacei&quot;       &quot;Hydromantes_ambrosii&quot;       
+##  [7] &quot;Hydromantes_flavus&quot;          &quot;Hydromantes_genei&quot;          
+##  [9] &quot;Hydromantes_imperialis&quot;      &quot;Hydromantes_italicus&quot;       
+## [11] &quot;Hydromantes_strinatii&quot;       &quot;Hydromantes_supramontis&quot;    
+## [13] &quot;Hynobius_fuca&quot;               &quot;Hynobius_glacialis&quot;         
+## [15] &quot;Ixalotriton_niger&quot;           &quot;Ixalotriton_parvus&quot;         
+## [17] &quot;Lineatriton_lineolus&quot;        &quot;Lineatriton_orchileucos&quot;    
+## [19] &quot;Oedipina_kasios&quot;             &quot;Oedipina_leptopoda&quot;         
+## [21] &quot;Oedipina_quadra&quot;             &quot;Pachytriton_labiatus&quot;       
+## [23] &quot;Paradactylodon_gorganensis&quot;  &quot;Paradactylodon_mustersi&quot;    
+## [25] &quot;Paradactylodon_persicus&quot;     &quot;Paramesotriton_guangxiensis&quot;
+## [27] &quot;Paramesotriton_zhijinensis&quot;  &quot;Plethodon_chattahoochee&quot;    
+## [29] &quot;Plethodon_chlorobryonis&quot;     &quot;Plethodon_grobmani&quot;         
+## [31] &quot;Plethodon_mississippi&quot;       &quot;Plethodon_ocmulgee&quot;         
+## [33] &quot;Plethodon_savannah&quot;          &quot;Plethodon_variolatus&quot;       
+## [35] &quot;Pleurodeles_nebulosus&quot;      
+## 
+## $data_not_tree
+## character(0)</code></pre>
+<pre class="r"><code>pruning&lt;-treedata(ct, cd)</code></pre>
+<pre><code>## Warning in treedata(ct, cd): The following tips were not found in &#39;data&#39; and were dropped from &#39;phy&#39;:
+##  Ambystoma_tigrinum
+##  Desmognathus_conanti
+##  Desmognathus_planiceps
+##  Eurycea_aquatica
+##  Haideotriton_wallacei
+##  Hydromantes_ambrosii
+##  Hydromantes_flavus
+##  Hydromantes_genei
+##  Hydromantes_imperialis
+##  Hydromantes_italicus
+##  Hydromantes_strinatii
+##  Hydromantes_supramontis
+##  Hynobius_fuca
+##  Hynobius_glacialis
+##  Ixalotriton_niger
+##  Ixalotriton_parvus
+##  Lineatriton_lineolus
+##  Lineatriton_orchileucos
+##  Oedipina_kasios
+##  Oedipina_leptopoda
+##  Oedipina_quadra
+##  Pachytriton_labiatus
+##  Paradactylodon_gorganensis
+##  Paradactylodon_mustersi
+##  Paradactylodon_persicus
+##  Paramesotriton_guangxiensis
+##  Paramesotriton_zhijinensis
+##  Plethodon_chattahoochee
+##  Plethodon_chlorobryonis
+##  Plethodon_grobmani
+##  Plethodon_mississippi
+##  Plethodon_ocmulgee
+##  Plethodon_savannah
+##  Plethodon_variolatus
+##  Pleurodeles_nebulosus</code></pre>
+<pre class="r"><code>pct&lt;-pruning$phy
+name.check(pct, cd)</code></pre>
+<pre><code>## [1] &quot;OK&quot;</code></pre>
+<pre class="r"><code>head(cd)</code></pre>
+<pre><code>##                         iucn_status.category population_trend.category
+## Ambystoma_andersoni                       CR                decreasing
+## Ambystoma_barbouri                        NT                decreasing
+## Ambystoma_californiense                   VU                decreasing
+## Ambystoma_cingulatum                      VU                decreasing
+## Ambystoma_dumerilii                       CR                decreasing
+## Ambystoma_gracile                         LC                    stable
+##                         TOTL_mm.totallength.quant SnoutVentLength.Mean
+## Ambystoma_andersoni                           235                  140
+## Ambystoma_barbouri                            170               75.267
+## Ambystoma_californiense                       220                102.5
+## Ambystoma_cingulatum                          135               51.415
+## Ambystoma_dumerilii                           205                  122
+## Ambystoma_gracile                             220              79.9335
+##                         BW_mm.bodywidth.quant
+## Ambystoma_andersoni                        NA
+## Ambystoma_barbouri                      8.133
+## Ambystoma_californiense                14.100
+## Ambystoma_cingulatum                    5.900
+## Ambystoma_dumerilii                        NA
+## Ambystoma_gracile                      11.900
+##                         elevation_m.maxaltitude.quant cvalue.quant
+## Ambystoma_andersoni                              2000           NA
+## Ambystoma_barbouri                                300           NA
+## Ambystoma_californiense                          1200         32.0
+## Ambystoma_cingulatum                              100         29.5
+## Ambystoma_dumerilii                              1920           NA
+## Ambystoma_gracile                                3110         42.0
+##                         ndiploid.count         area      frag        lon
+## Ambystoma_andersoni                 NA 5.257860e-04 1.0000000 -102.20972
+## Ambystoma_barbouri                  NA 2.769358e+00 0.4486713  -85.56420
+## Ambystoma_californiense             NA 6.792483e-01 0.2377771 -121.45388
+## Ambystoma_cingulatum                NA 3.119059e+00 0.6656023  -82.52289
+## Ambystoma_dumerilii                 NA 1.539524e-04 1.0000000 -101.63012
+## Ambystoma_gracile                   28 1.939970e+01 0.4550897 -126.88784
+##                              lat         DR Abs.Mol.Rate    Volume
+## Ambystoma_andersoni     19.75502 0.13946406 0.0004762878        NA
+## Ambystoma_barbouri      37.47118 0.04704303 0.0016358247  3910.174
+## Ambystoma_californiense 37.15783 0.03472722 0.0015071699 16004.863
+## Ambystoma_cingulatum    31.21996 0.01019219 0.0011079862  1405.671
+## Ambystoma_dumerilii     19.57350 0.06944087 0.0013591474        NA
+## Ambystoma_gracile       50.96355 0.01492638 0.0014371805  8890.223</code></pre>
+<pre class="r"><code>plot(pct,show.tip.label=F,type=&#39;fan&#39;)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>cd$SnoutVentLength.Mean &lt;- as.numeric(cd$SnoutVentLength.Mean)</code></pre>
+<div id="standard-linear-regression-no-phylo" class="section level2">
+<h2>Standard linear regression, no phylo</h2>
+<p>Need to find a pattern.</p>
+<p>Does SVL correlate to Geographic Range?</p>
+<pre class="r"><code>plot(area~SnoutVentLength.Mean,data=cd)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>NOPE!</p>
+<p>What about about Latitude and GeoRange?</p>
+<pre class="r"><code>plot(area~lat,data=cd)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Meh…</p>
+<p>Absolute Rate of Molecular Evolution vs Genome Size?</p>
+<pre class="r"><code>plot(cvalue.quant~Abs.Mol.Rate,data=cd)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Possibly…</p>
+<p>Elevation Area?</p>
+<pre class="r"><code>plot(elevation_m.maxaltitude.quant~area,data=cd)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Nope.</p>
+<p>Elevation SVL?</p>
+<pre class="r"><code>plot(elevation_m.maxaltitude.quant~SnoutVentLength.Mean,data=cd)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Nope.</p>
+<p>SVL MolRate?</p>
+<pre class="r"><code>plot(SnoutVentLength.Mean~Abs.Mol.Rate,data=cd)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Nope.</p>
+<p>SVL vs Body Width?</p>
+<pre class="r"><code>plot(SnoutVentLength.Mean~log(BW_mm.bodywidth.quant),data=cd)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Good enough!! Let’s try to do something neat.</p>
+<pre class="r"><code>nonPhyloModel &lt;- lm(SnoutVentLength.Mean~log(BW_mm.bodywidth.quant),data=cd)
+summary(nonPhyloModel)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = SnoutVentLength.Mean ~ log(BW_mm.bodywidth.quant), 
+##     data = cd)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -159.590  -38.710    4.808   50.757  137.037 
+## 
+## Coefficients:
+##                            Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                  67.026     14.131   4.743 3.41e-06 ***
+## log(BW_mm.bodywidth.quant)   35.312      7.441   4.746 3.37e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 64.58 on 270 degrees of freedom
+##   (129 observations deleted due to missingness)
+## Multiple R-squared:  0.07699,    Adjusted R-squared:  0.07357 
+## F-statistic: 22.52 on 1 and 270 DF,  p-value: 3.373e-06</code></pre>
+<pre class="r"><code>anova(nonPhyloModel)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: SnoutVentLength.Mean
+##                             Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## log(BW_mm.bodywidth.quant)   1   93932   93932  22.522 3.373e-06 ***
+## Residuals                  270 1126095    4171                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Getting rid of NA’s</p>
+<pre class="r"><code>getridof &lt;- which(is.na(cd$BW_mm.bodywidth.quant))
+pcd &lt;- log(cd$BW_mm.bodywidth.quant)[-getridof]
+pcd &lt;- cbind(pcd,cd$SnoutVentLength.Mean[-getridof])
+rownames(pcd) &lt;- rownames(cd)[-getridof]
+ppruning&lt;-treedata(pct, pcd)</code></pre>
+<pre><code>## Warning in treedata(pct, pcd): The following tips were not found in &#39;data&#39; and were dropped from &#39;phy&#39;:
+##  Ambystoma_andersoni
+##  Ambystoma_dumerilii
+##  Ambystoma_mexicanum
+##  Andrias_japonicus
+##  Batrachoseps_campi
+##  Batrachoseps_diabolicus
+##  Batrachoseps_gabrieli
+##  Batrachoseps_gavilanensis
+##  Batrachoseps_gregarius
+##  Batrachoseps_kawia
+##  Batrachoseps_nigriventris
+##  Batrachoseps_pacificus
+##  Batrachoseps_regius
+##  Batrachoseps_relictus
+##  Batrachoseps_simatus
+##  Batrachuperus_karlschmidti
+##  Batrachuperus_londongensis
+##  Batrachuperus_tibetanus
+##  Bolitoglossa_alvaradoi
+##  Bolitoglossa_epimela
+##  Bolitoglossa_equatoriana
+##  Bolitoglossa_flavimembris
+##  Bolitoglossa_mombachoensis
+##  Bolitoglossa_oaxacensis
+##  Bolitoglossa_sooyorum
+##  Bolitoglossa_zapoteca
+##  Calotriton_arnoldi
+##  Chiropterotriton_cracens
+##  Chiropterotriton_orculus
+##  Chiropterotriton_terrestris
+##  Cryptotriton_veraepacis
+##  Cynops_cyanurus
+##  Cynops_orientalis
+##  Cynops_orphicus
+##  Desmognathus_carolinensis
+##  Desmognathus_ocoee
+##  Dicamptodon_aterrimus
+##  Echinotriton_chinhaiensis
+##  Euproctus_montanus
+##  Euproctus_platycephalus
+##  Eurycea_chisholmensis
+##  Eurycea_naufragia
+##  Eurycea_pterophila
+##  Eurycea_tonkawae
+##  Eurycea_troglodytes
+##  Gyrinophilus_gulolineatus
+##  Gyrinophilus_palleucus
+##  Hydromantes_brunus
+##  Hydromantes_shastae
+##  Hynobius_amjiensis
+##  Hynobius_arisanensis
+##  Hynobius_boulengeri
+##  Hynobius_chinensis
+##  Hynobius_formosanus
+##  Hynobius_guabangshanensis
+##  Hynobius_hidamontanus
+##  Hynobius_katoi
+##  Hynobius_kimurae
+##  Hynobius_lichenatus
+##  Hynobius_maoershanensis
+##  Hynobius_okiensis
+##  Hynobius_quelpaertensis
+##  Hynobius_retardatus
+##  Hynobius_sonani
+##  Hynobius_takedai
+##  Hynobius_tokyoensis
+##  Hynobius_yangi
+##  Hynobius_yiwuensis
+##  Laotriton_laoensis
+##  Lissotriton_italicus
+##  Liua_tsinpaensis
+##  Lyciasalamandra_antalyana
+##  Lyciasalamandra_atifi
+##  Lyciasalamandra_billae
+##  Lyciasalamandra_fazilae
+##  Lyciasalamandra_flavimembris
+##  Lyciasalamandra_helverseni
+##  Lyciasalamandra_luschani
+##  Necturus_lewisi
+##  Neurergus_kaiseri
+##  Neurergus_microspilotus
+##  Nototriton_brodiei
+##  Nototriton_gamezi
+##  Nototriton_lignicola
+##  Nototriton_limnospectator
+##  Oedipina_alleni
+##  Oedipina_carablanca
+##  Oedipina_collaris
+##  Oedipina_gracilis
+##  Oedipina_grandis
+##  Oedipina_maritima
+##  Oedipina_stenopodia
+##  Ommatotriton_ophryticus
+##  Onychodactylus_fischeri
+##  Paramesotriton_deloustali
+##  Paramesotriton_fuzhongensis
+##  Plethodon_asupak
+##  Plethodon_aureolus
+##  Plethodon_electromorphus
+##  Plethodon_fourchensis
+##  Plethodon_kiamichi
+##  Plethodon_kisatchie
+##  Plethodon_larselli
+##  Plethodon_petraeus
+##  Plethodon_sequoyah
+##  Plethodon_stormi
+##  Plethodon_virginia
+##  Plethodon_websteri
+##  Pleurodeles_poireti
+##  Pseudobranchus_striatus
+##  Pseudoeurycea_conanti
+##  Pseudoeurycea_obesa
+##  Pseudoeurycea_papenfussi
+##  Pseudohynobius_flavomaculatus
+##  Pseudohynobius_shuichengensis
+##  Salamandra_algira
+##  Salamandra_corsica
+##  Salamandra_infraimmaculata
+##  Salamandra_lanzai
+##  Salamandrina_perspicillata
+##  Thorius_minutissimus
+##  Triturus_carnifex
+##  Triturus_dobrogicus
+##  Triturus_karelinii
+##  Triturus_marmoratus
+##  Tylototriton_asperrimus
+##  Tylototriton_shanjing
+##  Tylototriton_taliangensis
+##  Tylototriton_wenxianensis</code></pre>
+<pre class="r"><code>ppct&lt;-ppruning$phy
+name.check(ppct, pcd)</code></pre>
+<pre><code>## [1] &quot;OK&quot;</code></pre>
+<p>All better</p>
+<pre class="r"><code>colnames(pcd) &lt;- c(&quot;Width&quot;,&quot;Length&quot;)
+plot(Width~Length,data=pcd)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code>nonPhyloModel &lt;- lm(pcd[,1]~pcd[,2])
+plot(nonPhyloModel)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-11-2.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-11-3.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-11-4.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-11-5.png" width="672" /></p>
+<pre class="r"><code>summary(nonPhyloModel)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = pcd[, 1] ~ pcd[, 2])
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.93853 -0.30627 -0.04948  0.15606  2.26997 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 1.5380740  0.0677826  22.691  &lt; 2e-16 ***
+## pcd[, 2]    0.0021803  0.0004594   4.746 3.37e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5075 on 270 degrees of freedom
+## Multiple R-squared:  0.07699,    Adjusted R-squared:  0.07357 
+## F-statistic: 22.52 on 1 and 270 DF,  p-value: 3.373e-06</code></pre>
+<pre class="r"><code>anova(nonPhyloModel)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: pcd[, 1]
+##            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## pcd[, 2]    1   5.80  5.7998  22.522 3.373e-06 ***
+## Residuals 270  69.53  0.2575                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>require(phytools)
+phylomorphospace(ppct,pcd,label=&quot;off&quot;,node.size=c(0.5,0.7))</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-11-6.png" width="672" /></p>
+<pre class="r"><code>width_pic &lt;- pic(pcd[,1],ppct)
+length_pic &lt;- pic(pcd[,2],ppct)
+plot(width_pic,length_pic)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-11-7.png" width="672" /></p>
+<pre class="r"><code>shapiro.test(cbind(width_pic,length_pic))</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  cbind(width_pic, length_pic)
+## W = 0.69744, p-value &lt; 2.2e-16</code></pre>
+<p>Our PIC’s are super non-normal, wuteva!</p>
+<pre class="r"><code>picModel &lt;- lm(width_pic~length_pic+0)
+summary(picModel)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = width_pic ~ length_pic + 0)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.20565 -0.02726 -0.00216  0.03367  0.33090 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## length_pic 0.0009838  0.0002857   3.443 0.000667 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.06374 on 270 degrees of freedom
+## Multiple R-squared:  0.04206,    Adjusted R-squared:  0.03851 
+## F-statistic: 11.85 on 1 and 270 DF,  p-value: 0.0006669</code></pre>
+<pre class="r"><code>plot(width_pic~length_pic+0)
+abline(picModel,col=&quot;blue&quot;)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>PGLS!</p>
+<pre class="r"><code>require(nlme)
+pcd &lt;- data.frame(pcd)
+pglsModel &lt;- gls(Width~Length,
+                 correlation=corBrownian(phy=ppct),data=pcd)
+summary(pglsModel)</code></pre>
+<pre><code>## Generalized least squares fit by REML
+##   Model: Width ~ Length 
+##   Data: pcd 
+##        AIC      BIC    logLik
+##   266.0575 276.8527 -130.0287
+## 
+## Correlation Structure: corBrownian
+##  Formula: ~1 
+##  Parameter estimate(s):
+## numeric(0)
+## 
+## Coefficients:
+##                 Value Std.Error  t-value p-value
+## (Intercept) 2.2163701 0.3484214 6.361177   0e+00
+## Length      0.0009838 0.0002857 3.442906   7e-04
+## 
+##  Correlation: 
+##        (Intr)
+## Length -0.084
+## 
+## Standardized residuals:
+##        Min         Q1        Med         Q3        Max 
+## -1.7142466 -0.9287144 -0.6050857 -0.3352227  1.7950286 
+## 
+## Residual standard error: 0.9180434 
+## Degrees of freedom: 272 total; 270 residual</code></pre>
+<pre class="r"><code>plot(Width~Length,data=pcd,pch=19,cex=0.5)
+abline(nonPhyloModel,col=&quot;red&quot;)
+abline(pglsModel,col=&quot;blue&quot;)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre class="r"><code>coefficients(picModel)</code></pre>
+<pre><code>##   length_pic 
+## 0.0009837804</code></pre>
+<pre class="r"><code>coefficients(pglsModel)</code></pre>
+<pre><code>##  (Intercept)       Length 
+## 2.2163701456 0.0009837802</code></pre>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

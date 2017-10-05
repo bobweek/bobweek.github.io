@@ -1,0 +1,156 @@
+---
+title: "Austins Data"
+output: 
+  html_document: 
+    toc: true
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# load em in an butter em up!!!
+
+```{r}
+require(ape)
+raw_data<-read.csv("~/Classes/fa17/pcm/Caud/Caudata_PhyloComp_Data.csv")
+cd<-raw_data[,-1]
+rownames(cd)<-raw_data[,1]
+
+ct<-read.nexus("~/Classes/fa17/pcm/Caud/caud.ultra.nexus")
+require(geiger)
+name.check(ct, cd)
+pruning<-treedata(ct, cd)
+pct<-pruning$phy
+name.check(pct, cd)
+head(cd)
+plot(pct,show.tip.label=F,type='fan')
+cd$SnoutVentLength.Mean <- as.numeric(cd$SnoutVentLength.Mean)
+```
+
+
+## Standard linear regression, no phylo
+
+Need to find a pattern.
+
+Does SVL correlate to Geographic Range?
+
+```{r}
+plot(area~SnoutVentLength.Mean,data=cd)
+```
+
+NOPE!
+
+What about about Latitude and GeoRange?
+
+```{r}
+plot(area~lat,data=cd)
+```
+
+Meh...
+
+Absolute Rate of Molecular Evolution vs Genome Size?
+
+```{r}
+plot(cvalue.quant~Abs.Mol.Rate,data=cd)
+```
+
+Possibly...
+
+Elevation Area?
+
+```{r}
+plot(elevation_m.maxaltitude.quant~area,data=cd)
+```
+
+Nope.
+
+Elevation SVL?
+
+```{r}
+plot(elevation_m.maxaltitude.quant~SnoutVentLength.Mean,data=cd)
+```
+
+Nope.
+
+
+SVL MolRate?
+
+```{r}
+plot(SnoutVentLength.Mean~Abs.Mol.Rate,data=cd)
+```
+
+Nope.
+
+SVL vs Body Width?
+
+```{r}
+plot(SnoutVentLength.Mean~log(BW_mm.bodywidth.quant),data=cd)
+```
+
+Good enough!! Let's try to do something neat.
+
+```{r}
+nonPhyloModel <- lm(SnoutVentLength.Mean~log(BW_mm.bodywidth.quant),data=cd)
+summary(nonPhyloModel)
+anova(nonPhyloModel)
+```
+
+Getting rid of NA's
+
+```{r}
+getridof <- which(is.na(cd$BW_mm.bodywidth.quant))
+pcd <- log(cd$BW_mm.bodywidth.quant)[-getridof]
+pcd <- cbind(pcd,cd$SnoutVentLength.Mean[-getridof])
+rownames(pcd) <- rownames(cd)[-getridof]
+ppruning<-treedata(pct, pcd)
+ppct<-ppruning$phy
+name.check(ppct, pcd)
+```
+
+All better
+
+```{r}
+colnames(pcd) <- c("Width","Length")
+plot(Width~Length,data=pcd)
+nonPhyloModel <- lm(pcd[,1]~pcd[,2])
+plot(nonPhyloModel)
+summary(nonPhyloModel)
+anova(nonPhyloModel)
+
+require(phytools)
+phylomorphospace(ppct,pcd,label="off",node.size=c(0.5,0.7))
+width_pic <- pic(pcd[,1],ppct)
+length_pic <- pic(pcd[,2],ppct)
+plot(width_pic,length_pic)
+shapiro.test(cbind(width_pic,length_pic))
+```
+
+Our PIC's are super non-normal, wuteva!
+
+```{r}
+picModel <- lm(width_pic~length_pic+0)
+summary(picModel)
+plot(width_pic~length_pic+0)
+abline(picModel,col="blue")
+```
+
+PGLS!
+
+```{r}
+require(nlme)
+pcd <- data.frame(pcd)
+pglsModel <- gls(Width~Length,
+                 correlation=corBrownian(phy=ppct),data=pcd)
+summary(pglsModel)
+plot(Width~Length,data=pcd,pch=19,cex=0.5)
+abline(nonPhyloModel,col="red")
+abline(pglsModel,col="blue")
+coefficients(picModel)
+coefficients(pglsModel)
+```
+
+
