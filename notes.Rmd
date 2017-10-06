@@ -160,6 +160,49 @@ Differentiating the above hypothesized solution for $\Var(N_t)$ shows that these
 
 Also note this implies that at $t=0$ the rate of increase in the variance is equal to the number of initial individuals. For instance, if there's no individuals, the variance will be zero because we are certain there will be no offspring. Since each individual contributes uncertainty to the number of offspring the variance should increase faster with larger initial populations. However, if the fitness is less than one, the log will act to reduce the variance, most likely because extinction would happen quickly if the fitness is less than one long enough. 
 
+#### Testing the results
+
+Let's start off simple and assume $W_t=W=1$ for all $t$. Then we expect $\E(N_t)=N_0$ and $\Var(N_t)=tN_0$. I'll set $N_0=300$ and run 2000 replicates. Overlaying the trajectories for these replicates on the same scatter plot results in:
+
+```{r, echo=F}
+N <- NULL
+N2 <- NULL
+W <- 1
+t <- 1:30
+for(j in 1:2000){
+  NN <- 300
+  for(i in t){
+    Np <- rpois(1,NN[i]*W)
+    NN <- c(NN,Np)
+  }
+  N <- rbind(N,NN)
+  N2 <- c(N2,NN)
+}
+require(ggplot2)
+t <- 0:30
+data <- data.frame(rep(t,100),N2)
+colnames(data) <- c("t","N")
+ggplot(data,aes(x=t,y=N))+geom_point()
+```
+
+Taking the means and variances of these replicates at each time step, we can compare the resulting trajectories of simulating population dynamics (represented by the dots) to the analytical results (represented by the solid lines).
+
+```{r, echo=F}
+mN <- NULL
+for(i in t){
+  mN <- c(mN,mean(N[,i]))
+}
+vN <- NULL
+for(i in t){
+  vN <- c(vN,var(N[,i]))
+}
+dm <- data.frame(t,mN)
+dv <- data.frame(t,vN)
+ggplot(dm,aes(x=t,y=mN))+geom_point()+ylim(200,400)+ylab("mean(N)")+geom_abline(slope=0,intercept=300)
+ggplot(dv,aes(x=t,y=vN))+geom_point()+ylab("var(N)")+geom_abline(slope=300,intercept=0)
+```
+
+
 <!--
 
 Continuing our $NB$ fit (THIS IS FUBAR!) we would set $p_t=1-\para{\int_0^{t-1}w_sds}^{-1}$ and 
