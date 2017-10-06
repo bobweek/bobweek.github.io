@@ -12,7 +12,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# load em in an butter em up!!!
+# Load in and prep data
 
 ```{r}
 require(ape)
@@ -32,9 +32,7 @@ cd$SnoutVentLength.Mean <- as.numeric(cd$SnoutVentLength.Mean)
 ```
 
 
-## Standard linear regression, no phylo
-
-Need to find a pattern.
+# Look for a a pair of columns to focus on
 
 Does SVL correlate to Geographic Range?
 
@@ -93,11 +91,15 @@ plot(SnoutVentLength.Mean~log(BW_mm.bodywidth.quant),data=cd)
 
 Good enough!! Let's try to do something neat.
 
+# Standard Regression
+
 ```{r}
 nonPhyloModel <- lm(SnoutVentLength.Mean~log(BW_mm.bodywidth.quant),data=cd)
 summary(nonPhyloModel)
 anova(nonPhyloModel)
 ```
+
+# PIC
 
 Getting rid of NA's
 
@@ -129,7 +131,7 @@ plot(width_pic,length_pic)
 shapiro.test(cbind(width_pic,length_pic))
 ```
 
-Our PIC's are super non-normal, wuteva!
+Our PIC's are super non-normal, oh well!
 
 ```{r}
 picModel <- lm(width_pic~length_pic+0)
@@ -138,7 +140,7 @@ plot(width_pic~length_pic+0)
 abline(picModel,col="blue")
 ```
 
-PGLS!
+# PGLS
 
 ```{r}
 require(nlme)
@@ -152,5 +154,4 @@ abline(pglsModel,col="blue")
 coefficients(picModel)
 coefficients(pglsModel)
 ```
-
 

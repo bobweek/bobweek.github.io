@@ -336,6 +336,8 @@ A little excerpt from [Warren J. Ewens](http://www.springer.com/us/book/97803872
 
 "It is the the 'quantal' nature of the gene that leads to the stability behavior described by the Hardy-Weinberg law. It is thus interesting that the year in which the Mendelia theory was rediscovered, 1900, was the same year as the introduction of the quantum theory in physics. Both theories have been fundamental and crucial in their respective spheres. One can even claim that if there is intelligent life, that is, life that has evolved via natural selection, elsewhere in the universe, the hereditary mechanism involve must be a quantal, maybe a Mendelian, one, since otherwise it is not clear how the variation necessary for evolution by natural selection can be maintained."
 
+<!--
+
 So far I have been using a model of blending inheritance to calculate the phenotype of the offspring. This model of inheritance has been argued against from it's inception going back to the days of Darwin. Yet it remains at the core of the modern evolutionary theory of continuous traits, quantitative genetics. The main issue with this model is that, under pure random mating, the variance of a phenotype in a population is halved each generation, causing rapid degradation in diversity. One can combat this decay by incorporating mutation, as done below. However, this requires a rate of mutation that is far too rapid than what has been observed empirically. This problem is said to have been solved independtly by G.H. Hardy and Wilhelm Weinberg in 1908. In their particulate theory of inheritance diversity is maintained in a randomly mating population. It seems to me that most phenotypes can be described with a continuum and are more explicitly the target of natural selection as opposed to the genotype. On the other hand, since sexual reproduction inevitably involves the combination of gametes, it seems that the genotype generally has more power in this realm over the phenotype. Here I'll begin my naive attempt to combine these two insights. This is a first pass, writing down my thoughts as they form, so you may wish to look away until this section has reached maturity.
 
 My efforts here will focus on diploids. Let $\Z^2$ be the index set for all possible genotypes and $\R$ for all possible phenotypes. Each individual $i$ is represented by a genotype-phenotype pair $(\gamma_i,z_i)\in\Z^2\times\R$. Note that $\gamma_i$ itself has two unordered components, which I denote by $\gamma_i^1$ and $\gamma_i^2$ and define $\dot\gamma_i\equiv\frac{\gamma_i^1+\gamma_i^2}{2}$. This allows us to capture genotype of a diploid with a single number that can then be related to the phenotype. I assume a linear genotype phenotype map such that $z_i\sim\mathcal{N}(\alpha\dot\gamma_i+\beta,\eta^2)$ for some fixed $\alpha,\beta\in\R$. Since it is certainly possible that the relationship between the phenotype and genotype can change depending on the environment (plasticity) and even evolve with time (so that $\alpha$ and $\beta$ are themselves phenotypes that may or may not be predicted by genotypes) this assumption would need to be relaxed for a more satisfying theory. But let's keep things simple for now.
@@ -366,19 +368,13 @@ $$p_\infty(\neg x,\neg x)=\para{p_0(\neg x,\neg x)+\frac{1}{2}p_0(x,\neg x)}^2$$
 
 $$\dots$$
 
+-->
+
 <!--
 If the interest is speciation I know we need at the very least some isolating mechanism, whether temporal, spatial, behavioural, or physical. For example, in sympatry (both time and space), hybrid depression is not enough, the population must evolve behaviour that avoids hybridization or else the population will probably just crash.
 
 Can further assume that the probability that gametes $x$ and $y$ produce a viable offspring depends on $|x-y|$.
 -->
-
-### Heritability, the quick and dirty
-
-attenuate the affects of selection on fitness by heritability $h^2$
-
-$$W^{h^2}$$
-
-$$\frac{d\bar z}{dt}=\Cov(z,\ln W^{h^2})=h^2\Cov(z,\ln W)$$
 
 ### Mutation
 
@@ -440,7 +436,7 @@ Note that random sampling is not the only source of stochasticiy. Consider my de
 
 ## Putting it all together
 
-$$\frac{\partial\phi_t}{\partial t}=h^2\phi(\ln W_t-\overline{\ln W_t})+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}+m^2\frac{\partial^2\phi_t}{\partial x^2}+\phi_t\xi_t$$
+$$\frac{\partial\phi_t}{\partial t}=h^2 \phi(\ln W_t-\overline{\ln W_t})+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}+m^2\frac{\partial^2\phi_t}{\partial x^2}+\phi_t\xi_t$$
 
 ## Examples
 
