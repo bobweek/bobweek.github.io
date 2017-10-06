@@ -164,7 +164,7 @@ Also note this implies that at $t=0$ the rate of increase in the variance is equ
 
 Let's start off simple and assume $W_t=W=1$ for all $t$. Then we expect $\E(N_t)=N_0$ and $\Var(N_t)=tN_0$. I'll set $N_0=300$ and run 2000 replicates. Overlaying the trajectories for these replicates on the same scatter plot results in:
 
-```{r, echo=F}
+```{r, fig.height = 3, fig.width = 5, fig.align='center'}
 N <- NULL
 N2 <- NULL
 W <- 1
@@ -178,28 +178,30 @@ for(j in 1:2000){
   N <- rbind(N,NN)
   N2 <- c(N2,NN)
 }
-require(ggplot2)
 t <- 0:30
-data <- data.frame(rep(t,100),N2)
+data <- data.frame(rep(t,2000),N2)
 colnames(data) <- c("t","N")
+require(ggplot2)
 ggplot(data,aes(x=t,y=N))+geom_point()
 ```
 
-Taking the means and variances of these replicates at each time step, we can compare the resulting trajectories of simulating population dynamics (represented by the dots) to the analytical results (represented by the solid lines).
+Taking the means and variances of these replicates at each time step, we can compare the resulting trajectories of simulated population dynamics (represented by the dots) to the analytical results (represented by the solid lines).
 
-```{r, echo=F}
+```{r, fig.height = 3, fig.width = 10, fig.align='center'}
 mN <- NULL
-for(i in t){
+for(i in (t+1)){
   mN <- c(mN,mean(N[,i]))
 }
 vN <- NULL
-for(i in t){
+for(i in (t+1)){
   vN <- c(vN,var(N[,i]))
 }
 dm <- data.frame(t,mN)
 dv <- data.frame(t,vN)
-ggplot(dm,aes(x=t,y=mN))+geom_point()+ylim(200,400)+ylab("mean(N)")+geom_abline(slope=0,intercept=300)
-ggplot(dv,aes(x=t,y=vN))+geom_point()+ylab("var(N)")+geom_abline(slope=300,intercept=0)
+plm <- ggplot(dm,aes(x=t,y=mN))+geom_point()+ylim(200,400)+ylab("mean(N)")+geom_abline(slope=0,intercept=300)
+plv <- ggplot(dv,aes(x=t,y=vN))+geom_point()+ylab("var(N)")+geom_abline(slope=300,intercept=0)
+require(gridExtra)
+grid.arrange(plm,plv,ncol=2)
 ```
 
 
@@ -236,14 +238,6 @@ $$\overline{\ln W_t}=\sum_j\phi_t(j)\ln W_t(j)=\sum_j\ln W_t(j)^{\phi_t(j)}=\ln\
 $$\E(\ln \W)=\sum_{k=0}^\infty(\ln k)\frac{W^ke^{-W}}{k!}=\ln\para{\prod_{k=0}^\infty k^{\frac{W^ke^{-W}}{k!}}}=\ln0=-\infty$$
 
 This suggests that we need to work our way from the discrete time situation to the continuous time situation instead of jumping the gun.
-
-
-
-$$\E(D_t\phi_t(i))=\E\para{ \phi_t(i)(\ln\W_t(i)-\sum_{j=1}^T\phi_t(j)\ln\W_t(j)) }=\phi_t(i)(\ln W_t-\overline{\ln W_t})$$
-
-$$\Var(D_t\phi_t)=\E\para{ \phi_t(\ln\W_t-\overline{\ln\W_t})-\phi_t(\ln W_t-\overline{\ln W_t}) }^2=\phi_t^2\Var(\ln \W_t-\overline{\ln \W_t})$$
-
-$$=\phi^2_t\Var()$$
 
 
 <!--
@@ -1284,7 +1278,7 @@ image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotyp
 
 ## Some Quantitative Genetics
 
-Here I set out to elucidate the mathematics underlying a calculation of mean fitness. This apparently clandestine calculation is the linchpin of a landmark paper in evolutionary theory (Lande 1976). By developing a solid understanding of it will undoubtedly add a handy trick to ones toolkit. I'll admit right here that I leave out some of the finer technical details, but the motivated reader can fill this gap or find the proof elsewhere.
+Here I set out to elucidate the mathematics underlying a calculation of mean fitness. This apparently clandestine calculation is the linchpin of a landmark paper in evolutionary theory (Lande 1976). Developing a solid understanding of it will undoubtedly add a handy trick to ones toolkit. I'll admit right here that I leave out some of the finer technical details, but the motivated reader can fill this gap or find the proof elsewhere.
 
 Gaussian functions play a central role in evolutionary theory. Arguably the most successful equation describing the evolution of a population, the breeder's equation, requires a normal phenotypic distribution. Typical notation is $z$ for the phenotype of an individual, $\bar z$ for the mean phenotype of the population, $\sigma^2$ for the phenotypic variance and $\phi$ for the phenotypic density. This provides
 

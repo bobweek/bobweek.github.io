@@ -373,10 +373,43 @@ output:
 <div id="testing-the-results" class="section level4">
 <h4>Testing the results</h4>
 <p>Let’s start off simple and assume <span class="math inline">\(W_t=W=1\)</span> for all <span class="math inline">\(t\)</span>. Then we expect <span class="math inline">\({\mathbb{E}}(N_t)=N_0\)</span> and <span class="math inline">\({\mathrm{Var}}(N_t)=tN_0\)</span>. I’ll set <span class="math inline">\(N_0=300\)</span> and run 2000 replicates. Overlaying the trajectories for these replicates on the same scatter plot results in:</p>
+<pre class="r"><code>N &lt;- NULL
+N2 &lt;- NULL
+W &lt;- 1
+t &lt;- 1:30
+for(j in 1:2000){
+  NN &lt;- 300
+  for(i in t){
+    Np &lt;- rpois(1,NN[i]*W)
+    NN &lt;- c(NN,Np)
+  }
+  N &lt;- rbind(N,NN)
+  N2 &lt;- c(N2,NN)
+}
+t &lt;- 0:30
+data &lt;- data.frame(rep(t,100),N2)
+colnames(data) &lt;- c(&quot;t&quot;,&quot;N&quot;)
+require(ggplot2)</code></pre>
 <pre><code>## Loading required package: ggplot2</code></pre>
-<p><img src="notes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>Taking the means and variances of these replicates at each time step, we can compare the resulting trajectories of simulating population dynamics (represented by the dots) to the analytical results (represented by the solid lines).</p>
-<p><img src="notes_files/figure-html/unnamed-chunk-3-1.png" width="672" /><img src="notes_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<pre class="r"><code>ggplot(data,aes(x=t,y=N))+geom_point()</code></pre>
+<p><img src="notes_files/figure-html/unnamed-chunk-2-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>Taking the means and variances of these replicates at each time step, we can compare the resulting trajectories of simulated population dynamics (represented by the dots) to the analytical results (represented by the solid lines).</p>
+<pre class="r"><code>mN &lt;- NULL
+for(i in (t+1)){
+  mN &lt;- c(mN,mean(N[,i]))
+}
+vN &lt;- NULL
+for(i in (t+1)){
+  vN &lt;- c(vN,var(N[,i]))
+}
+dm &lt;- data.frame(t,mN)
+dv &lt;- data.frame(t,vN)
+plm &lt;- ggplot(dm,aes(x=t,y=mN))+geom_point()+ylim(200,400)+ylab(&quot;mean(N)&quot;)+geom_abline(slope=0,intercept=300)
+plv &lt;- ggplot(dv,aes(x=t,y=vN))+geom_point()+ylab(&quot;var(N)&quot;)+geom_abline(slope=300,intercept=0)
+require(gridExtra)</code></pre>
+<pre><code>## Loading required package: gridExtra</code></pre>
+<pre class="r"><code>grid.arrange(plm,plv,ncol=2)</code></pre>
+<p><img src="notes_files/figure-html/unnamed-chunk-3-1.png" width="960" style="display: block; margin: auto;" /></p>
 <!--
 
 Continuing our $NB$ fit (THIS IS FUBAR!) we would set $p_t=1-\para{\int_0^{t-1}w_sds}^{-1}$ and 
@@ -402,9 +435,6 @@ $$=\para{\int_0^{t-1}w_sds}^{-1}\para{\bigwedge_0^tW_s^{ds}}N_0.$$
 <p><span class="math display">\[\overline{\ln W_t}=\sum_j\phi_t(j)\ln W_t(j)=\sum_j\ln W_t(j)^{\phi_t(j)}=\ln{\left( \prod_jW_t(j)^{\phi_t(j)} \right)}\]</span></p>
 <p><span class="math display">\[{\mathbb{E}}(\ln {\mathcal{W}})=\sum_{k=0}^\infty(\ln k)\frac{W^ke^{-W}}{k!}=\ln{\left( \prod_{k=0}^\infty k^{\frac{W^ke^{-W}}{k!}} \right)}=\ln0=-\infty\]</span></p>
 <p>This suggests that we need to work our way from the discrete time situation to the continuous time situation instead of jumping the gun.</p>
-<p><span class="math display">\[{\mathbb{E}}(D_t\phi_t(i))={\mathbb{E}}{\left(  \phi_t(i)(\ln{\mathcal{W}}_t(i)-\sum_{j=1}^T\phi_t(j)\ln{\mathcal{W}}_t(j))  \right)}=\phi_t(i)(\ln W_t-\overline{\ln W_t})\]</span></p>
-<p><span class="math display">\[{\mathrm{Var}}(D_t\phi_t)={\mathbb{E}}{\left(  \phi_t(\ln{\mathcal{W}}_t-\overline{\ln{\mathcal{W}}_t})-\phi_t(\ln W_t-\overline{\ln W_t})  \right)}^2=\phi_t^2{\mathrm{Var}}(\ln {\mathcal{W}}_t-\overline{\ln {\mathcal{W}}_t})\]</span></p>
-<p><span class="math display">\[=\phi^2_t{\mathrm{Var}}()\]</span></p>
 <!--
 
 We could, of course, continue on with the stochastic case to get
@@ -716,6 +746,18 @@ Can further assume that the probability that gametes $x$ and $y$ produce a viabl
 <p><img src="notes_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
 ## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
 ## 25000?</code></pre>
 <p><img src="notes_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p><img src="notes_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
@@ -740,7 +782,7 @@ Can further assume that the probability that gametes $x$ and $y$ produce a viabl
 </div>
 <div id="some-quantitative-genetics" class="section level2">
 <h2>Some Quantitative Genetics</h2>
-<p>Here I set out to elucidate the mathematics underlying a calculation of mean fitness. This apparently clandestine calculation is the linchpin of a landmark paper in evolutionary theory (Lande 1976). By developing a solid understanding of it will undoubtedly add a handy trick to ones toolkit. I’ll admit right here that I leave out some of the finer technical details, but the motivated reader can fill this gap or find the proof elsewhere.</p>
+<p>Here I set out to elucidate the mathematics underlying a calculation of mean fitness. This apparently clandestine calculation is the linchpin of a landmark paper in evolutionary theory (Lande 1976). Developing a solid understanding of it will undoubtedly add a handy trick to ones toolkit. I’ll admit right here that I leave out some of the finer technical details, but the motivated reader can fill this gap or find the proof elsewhere.</p>
 <p>Gaussian functions play a central role in evolutionary theory. Arguably the most successful equation describing the evolution of a population, the breeder’s equation, requires a normal phenotypic distribution. Typical notation is <span class="math inline">\(z\)</span> for the phenotype of an individual, <span class="math inline">\(\bar z\)</span> for the mean phenotype of the population, <span class="math inline">\(\sigma^2\)</span> for the phenotypic variance and <span class="math inline">\(\phi\)</span> for the phenotypic density. This provides</p>
 <p><span class="math display">\[\phi(z)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(z-\bar z)^2}{2\sigma^2}\right).\]</span></p>
 <p>If there’s selection being imposed on the trait then the fitness <span class="math inline">\(W(z)\)</span>, which denotes the average fitness of an individual with trait <span class="math inline">\(z\)</span>, will not be identically constant. To find the response in mean phenotype to an episode of selection we use the breeder’s equation <span class="math inline">\(\Delta\bar z=G\frac{\partial\ln\overline W}{\partial\bar z}\)</span> where <span class="math inline">\(G\)</span> is the additive genetic variance and <span class="math inline">\(\overline W=\int\phi(z)W(z)dz\)</span> is the mean fitness of the population. However, in order to do so we must first calculate <span class="math inline">\(\overline W\)</span>. In the case of stabilizing selection, this can be done quite nicely by assuming <span class="math inline">\(W\)</span> is also a Gaussian function of <span class="math inline">\(z\)</span>. That is</p>

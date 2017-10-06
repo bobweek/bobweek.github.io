@@ -60,10 +60,17 @@ ppct<-ppruning$phy
 name.check(ppct, pcd)
 ```
 
-All better
+All better. Now I'm going to partition the data into two groups and test to see the members of each group are monophyletic.
 
 ```{r}
 colnames(pcd) <- c("Width","Length")
+slope <- 125
+yint  <- 1
+which(pcd$Width>(yint+slope*pcd$Length))
+```
+
+
+```{r}
 plot(Width~Length,data=pcd)
 nonPhyloModel <- lm(pcd[,1]~pcd[,2])
 plot(nonPhyloModel)
