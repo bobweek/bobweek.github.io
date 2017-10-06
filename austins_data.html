@@ -294,16 +294,18 @@ div.tocify {
 </div>
 
 
-<div id="load-em-in-an-butter-em-up" class="section level1">
-<h1>load em in an butter em up!!!</h1>
-<pre class="r"><code>require(ape)
-raw_data&lt;-read.csv(&quot;~/Classes/fa17/pcm/Caud/Caudata_PhyloComp_Data.csv&quot;)
+<div id="load-in-and-prep-data" class="section level1">
+<h1>Load in and prep data</h1>
+<pre class="r"><code>require(ape)</code></pre>
+<pre><code>## Loading required package: ape</code></pre>
+<pre class="r"><code>raw_data&lt;-read.csv(&quot;~/Classes/fa17/pcm/Caud/Caudata_PhyloComp_Data.csv&quot;)
 cd&lt;-raw_data[,-1]
 rownames(cd)&lt;-raw_data[,1]
 
 ct&lt;-read.nexus(&quot;~/Classes/fa17/pcm/Caud/caud.ultra.nexus&quot;)
-require(geiger)
-name.check(ct, cd)</code></pre>
+require(geiger)</code></pre>
+<pre><code>## Loading required package: geiger</code></pre>
+<pre class="r"><code>name.check(ct, cd)</code></pre>
 <pre><code>## $tree_not_data
 ##  [1] &quot;Ambystoma_tigrinum&quot;          &quot;Desmognathus_conanti&quot;       
 ##  [3] &quot;Desmognathus_planiceps&quot;      &quot;Eurycea_aquatica&quot;           
@@ -412,37 +414,12 @@ name.check(pct, cd)</code></pre>
 <pre class="r"><code>plot(pct,show.tip.label=F,type=&#39;fan&#39;)</code></pre>
 <p><img src="austins_data_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <pre class="r"><code>cd$SnoutVentLength.Mean &lt;- as.numeric(cd$SnoutVentLength.Mean)</code></pre>
-<div id="standard-linear-regression-no-phylo" class="section level2">
-<h2>Standard linear regression, no phylo</h2>
-<p>Need to find a pattern.</p>
-<p>Does SVL correlate to Geographic Range?</p>
-<pre class="r"><code>plot(area~SnoutVentLength.Mean,data=cd)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>NOPE!</p>
-<p>What about about Latitude and GeoRange?</p>
-<pre class="r"><code>plot(area~lat,data=cd)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>Meh…</p>
-<p>Absolute Rate of Molecular Evolution vs Genome Size?</p>
-<pre class="r"><code>plot(cvalue.quant~Abs.Mol.Rate,data=cd)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>Possibly…</p>
-<p>Elevation Area?</p>
-<pre class="r"><code>plot(elevation_m.maxaltitude.quant~area,data=cd)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>Nope.</p>
-<p>Elevation SVL?</p>
-<pre class="r"><code>plot(elevation_m.maxaltitude.quant~SnoutVentLength.Mean,data=cd)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>Nope.</p>
-<p>SVL MolRate?</p>
-<pre class="r"><code>plot(SnoutVentLength.Mean~Abs.Mol.Rate,data=cd)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>Nope.</p>
-<p>SVL vs Body Width?</p>
+<p>Let’s try SVL and body width.</p>
 <pre class="r"><code>plot(SnoutVentLength.Mean~log(BW_mm.bodywidth.quant),data=cd)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p>Good enough!! Let’s try to do something neat.</p>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="standard-regression" class="section level1">
+<h1>Standard Regression</h1>
 <pre class="r"><code>nonPhyloModel &lt;- lm(SnoutVentLength.Mean~log(BW_mm.bodywidth.quant),data=cd)
 summary(nonPhyloModel)</code></pre>
 <pre><code>## 
@@ -474,6 +451,9 @@ summary(nonPhyloModel)</code></pre>
 ## Residuals                  270 1126095    4171                      
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="pic" class="section level1">
+<h1>PIC</h1>
 <p>Getting rid of NA’s</p>
 <pre class="r"><code>getridof &lt;- which(is.na(cd$BW_mm.bodywidth.quant))
 pcd &lt;- log(cd$BW_mm.bodywidth.quant)[-getridof]
@@ -616,10 +596,10 @@ name.check(ppct, pcd)</code></pre>
 <p>All better</p>
 <pre class="r"><code>colnames(pcd) &lt;- c(&quot;Width&quot;,&quot;Length&quot;)
 plot(Width~Length,data=pcd)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>nonPhyloModel &lt;- lm(pcd[,1]~pcd[,2])
 plot(nonPhyloModel)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-11-2.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-11-3.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-11-4.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-11-5.png" width="672" /></p>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-5-2.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-5-3.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-5-4.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-5-5.png" width="672" /></p>
 <pre class="r"><code>summary(nonPhyloModel)</code></pre>
 <pre><code>## 
 ## Call:
@@ -648,20 +628,22 @@ plot(nonPhyloModel)</code></pre>
 ## Residuals 270  69.53  0.2575                      
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<pre class="r"><code>require(phytools)
-phylomorphospace(ppct,pcd,label=&quot;off&quot;,node.size=c(0.5,0.7))</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-11-6.png" width="672" /></p>
+<pre class="r"><code>require(phytools)</code></pre>
+<pre><code>## Loading required package: phytools</code></pre>
+<pre><code>## Loading required package: maps</code></pre>
+<pre class="r"><code>phylomorphospace(ppct,pcd,label=&quot;off&quot;,node.size=c(0.5,0.7))</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-5-6.png" width="672" /></p>
 <pre class="r"><code>width_pic &lt;- pic(pcd[,1],ppct)
 length_pic &lt;- pic(pcd[,2],ppct)
 plot(width_pic,length_pic)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-11-7.png" width="672" /></p>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-5-7.png" width="672" /></p>
 <pre class="r"><code>shapiro.test(cbind(width_pic,length_pic))</code></pre>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
 ## data:  cbind(width_pic, length_pic)
 ## W = 0.69744, p-value &lt; 2.2e-16</code></pre>
-<p>Our PIC’s are super non-normal, wuteva!</p>
+<p>Our PIC’s are super non-normal, oh well!</p>
 <pre class="r"><code>picModel &lt;- lm(width_pic~length_pic+0)
 summary(picModel)</code></pre>
 <pre><code>## 
@@ -683,10 +665,13 @@ summary(picModel)</code></pre>
 ## F-statistic: 11.85 on 1 and 270 DF,  p-value: 0.0006669</code></pre>
 <pre class="r"><code>plot(width_pic~length_pic+0)
 abline(picModel,col=&quot;blue&quot;)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>PGLS!</p>
-<pre class="r"><code>require(nlme)
-pcd &lt;- data.frame(pcd)
+<p><img src="austins_data_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="pgls" class="section level1">
+<h1>PGLS</h1>
+<pre class="r"><code>require(nlme)</code></pre>
+<pre><code>## Loading required package: nlme</code></pre>
+<pre class="r"><code>pcd &lt;- data.frame(pcd)
 pglsModel &lt;- gls(Width~Length,
                  correlation=corBrownian(phy=ppct),data=pcd)
 summary(pglsModel)</code></pre>
@@ -719,14 +704,13 @@ summary(pglsModel)</code></pre>
 <pre class="r"><code>plot(Width~Length,data=pcd,pch=19,cex=0.5)
 abline(nonPhyloModel,col=&quot;red&quot;)
 abline(pglsModel,col=&quot;blue&quot;)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <pre class="r"><code>coefficients(picModel)</code></pre>
 <pre><code>##   length_pic 
 ## 0.0009837804</code></pre>
 <pre class="r"><code>coefficients(pglsModel)</code></pre>
 <pre><code>##  (Intercept)       Length 
 ## 2.2163701456 0.0009837802</code></pre>
-</div>
 </div>
 
 

@@ -32,64 +32,11 @@ cd$SnoutVentLength.Mean <- as.numeric(cd$SnoutVentLength.Mean)
 ```
 
 
-# Look for a a pair of columns to focus on
-
-Does SVL correlate to Geographic Range?
-
-```{r}
-plot(area~SnoutVentLength.Mean,data=cd)
-```
-
-NOPE!
-
-What about about Latitude and GeoRange?
-
-```{r}
-plot(area~lat,data=cd)
-```
-
-Meh...
-
-Absolute Rate of Molecular Evolution vs Genome Size?
-
-```{r}
-plot(cvalue.quant~Abs.Mol.Rate,data=cd)
-```
-
-Possibly...
-
-Elevation Area?
-
-```{r}
-plot(elevation_m.maxaltitude.quant~area,data=cd)
-```
-
-Nope.
-
-Elevation SVL?
-
-```{r}
-plot(elevation_m.maxaltitude.quant~SnoutVentLength.Mean,data=cd)
-```
-
-Nope.
-
-
-SVL MolRate?
-
-```{r}
-plot(SnoutVentLength.Mean~Abs.Mol.Rate,data=cd)
-```
-
-Nope.
-
-SVL vs Body Width?
+Let's try SVL and body width.
 
 ```{r}
 plot(SnoutVentLength.Mean~log(BW_mm.bodywidth.quant),data=cd)
 ```
-
-Good enough!! Let's try to do something neat.
 
 # Standard Regression
 
