@@ -64,9 +64,11 @@ All better. Now I'm going to partition the data into two groups and test to see 
 
 ```{r}
 colnames(pcd) <- c("Width","Length")
-slope <- 125
+plot(Width~Length+0,pcd)
+slope <- 1/125
 yint  <- 1
-which(pcd$Width>(yint+slope*pcd$Length))
+grp1 <- which(pcd[,1]>(yint+slope*pcd[,2]))
+grp2 <- which(pcd[,1]<=(yint+slope*pcd[,2]))
 ```
 
 
@@ -77,8 +79,8 @@ plot(nonPhyloModel)
 summary(nonPhyloModel)
 anova(nonPhyloModel)
 
-require(phytools)
-phylomorphospace(ppct,pcd,label="off",node.size=c(0.5,0.7))
+# require(phytools)
+# phylomorphospace(ppct,pcd,label="off",node.size=c(0.5,0.7))
 width_pic <- pic(pcd[,1],ppct)
 length_pic <- pic(pcd[,2],ppct)
 plot(width_pic,length_pic)

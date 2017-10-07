@@ -593,13 +593,19 @@ ppruning&lt;-treedata(pct, pcd)</code></pre>
 <pre class="r"><code>ppct&lt;-ppruning$phy
 name.check(ppct, pcd)</code></pre>
 <pre><code>## [1] &quot;OK&quot;</code></pre>
-<p>All better</p>
+<p>All better. Now I’m going to partition the data into two groups and test to see the members of each group are monophyletic.</p>
 <pre class="r"><code>colnames(pcd) &lt;- c(&quot;Width&quot;,&quot;Length&quot;)
-plot(Width~Length,data=pcd)</code></pre>
+plot(Width~Length+0,pcd)</code></pre>
 <p><img src="austins_data_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>slope &lt;- 1/125
+yint  &lt;- 1
+grp1 &lt;- which(pcd[,1]&gt;(yint+slope*pcd[,2]))
+grp2 &lt;- which(pcd[,1]&lt;=(yint+slope*pcd[,2]))</code></pre>
+<pre class="r"><code>plot(Width~Length,data=pcd)</code></pre>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code>nonPhyloModel &lt;- lm(pcd[,1]~pcd[,2])
 plot(nonPhyloModel)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-5-2.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-5-3.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-5-4.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-5-5.png" width="672" /></p>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-6-2.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-6-3.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-6-4.png" width="672" /><img src="austins_data_files/figure-html/unnamed-chunk-6-5.png" width="672" /></p>
 <pre class="r"><code>summary(nonPhyloModel)</code></pre>
 <pre><code>## 
 ## Call:
@@ -628,15 +634,12 @@ plot(nonPhyloModel)</code></pre>
 ## Residuals 270  69.53  0.2575                      
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<pre class="r"><code>require(phytools)</code></pre>
-<pre><code>## Loading required package: phytools</code></pre>
-<pre><code>## Loading required package: maps</code></pre>
-<pre class="r"><code>phylomorphospace(ppct,pcd,label=&quot;off&quot;,node.size=c(0.5,0.7))</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-5-6.png" width="672" /></p>
-<pre class="r"><code>width_pic &lt;- pic(pcd[,1],ppct)
+<pre class="r"><code># require(phytools)
+# phylomorphospace(ppct,pcd,label=&quot;off&quot;,node.size=c(0.5,0.7))
+width_pic &lt;- pic(pcd[,1],ppct)
 length_pic &lt;- pic(pcd[,2],ppct)
 plot(width_pic,length_pic)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-5-7.png" width="672" /></p>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-6-6.png" width="672" /></p>
 <pre class="r"><code>shapiro.test(cbind(width_pic,length_pic))</code></pre>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
@@ -665,7 +668,7 @@ summary(picModel)</code></pre>
 ## F-statistic: 11.85 on 1 and 270 DF,  p-value: 0.0006669</code></pre>
 <pre class="r"><code>plot(width_pic~length_pic+0)
 abline(picModel,col=&quot;blue&quot;)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="pgls" class="section level1">
 <h1>PGLS</h1>
@@ -704,7 +707,7 @@ summary(pglsModel)</code></pre>
 <pre class="r"><code>plot(Width~Length,data=pcd,pch=19,cex=0.5)
 abline(nonPhyloModel,col=&quot;red&quot;)
 abline(pglsModel,col=&quot;blue&quot;)</code></pre>
-<p><img src="austins_data_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="austins_data_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre class="r"><code>coefficients(picModel)</code></pre>
 <pre><code>##   length_pic 
 ## 0.0009837804</code></pre>
