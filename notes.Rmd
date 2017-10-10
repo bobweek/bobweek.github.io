@@ -265,6 +265,8 @@ $$\bar z_t=\int_\R z\phi_t(z)dz, \ \text{and} \ \sigma_t^2=\int_\R(\bar z_t-z)^2
 
 Using the above results we can derive dynamics for these quantities as follows
 
+#### Continuous Time
+
 $$\frac{d\bar z_t}{dt}=\frac{d}{dt}\int_\R z\phi_t(z)dz=\int_\R z\frac{d}{dt}\phi_t(z)dz=\int_\R z(\ln W_t(z)-\overline{\ln W_t})\phi_t(z)dz$$
 
 $$=\overline{z\ln W_t(z)}-\bar z\overline{\ln W_t}=\Cov(z,\ln W_t)$$
@@ -287,11 +289,11 @@ $$(z-\bar z_t-\Delta\bar z_t)^2\frac{W_t(z)}{\overline{W}}-(z-\bar z_t)^2$$
 
 $$=(z-\bar z_t)^2\para{\frac{W_t(z)}{\overline{W}_t}-1}+\para{(\Delta\bar z_t)^2-2(z-\bar z_t)\Delta\bar z_t}\frac{W_t(z)}{\overline{W}_t}$$
 
-$$\star=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\para{\frac{\overline{z W_t}}{\overline{W_t}}-\bar z_t}$$
+$$\star=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\Delta\bar z_t\para{\frac{\overline{z W_t}}{\overline{W_t}}-\bar z_t}$$
 
-$$=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\para{\frac{\Cov(z,W_t)+\bar z_t\overline{W}_t}{\overline{W_t}}-\bar z_t}$$
+$$=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\Delta\bar z_t\para{\frac{\Cov(z,W_t)+\bar z_t\overline{W}_t}{\overline{W_t}}-\bar z_t}$$
 
-$$=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\Delta\bar z_t$$
+$$=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)-(\Delta\bar z_t)^2$$
 
 ## Reproduction
 

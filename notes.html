@@ -278,7 +278,6 @@ div.tocify {
         <li><a href="interactive_theory.html">Interactive Theory</a></li>
         <li><a href="inferring_coevolution.html">Inferring Coevolution</a></li>
         <li><a href="notes.html">Notes</a></li>
-        <li><a href="austins_data.html">PCM Class Exercise</a></li>
         
       </ul>
     </div><!--/.nav-collapse -->
@@ -456,11 +455,14 @@ $$\alpha=\frac{\Box}{1+\triangle} \ \text{and} \ \beta=\frac{1}{1+\triangle}$$
 <p>Let’s suppose each type is associated with a distinct value. If there’s a finite number of types, there’ll be a finite number of values. For types with a continuous index, there’ll be a continuum of possible values. Let’s stick with a continuum of types indexed by <span class="math inline">\({\mathbb{R}}\)</span>. Denote by <span class="math inline">\(\bar z_t\)</span> the average value of the population at time <span class="math inline">\(t\)</span> and <span class="math inline">\(\sigma_t^2\)</span> the variance of types at time <span class="math inline">\(t\)</span>. Then</p>
 <p><span class="math display">\[\bar z_t=\int_{\mathbb{R}}z\phi_t(z)dz, \ \text{and} \ \sigma_t^2=\int_{\mathbb{R}}(\bar z_t-z)^2\phi_t(z)dz.\]</span></p>
 <p>Using the above results we can derive dynamics for these quantities as follows</p>
+<div id="continuous-time-1" class="section level4">
+<h4>Continuous Time</h4>
 <p><span class="math display">\[\frac{d\bar z_t}{dt}=\frac{d}{dt}\int_{\mathbb{R}}z\phi_t(z)dz=\int_{\mathbb{R}}z\frac{d}{dt}\phi_t(z)dz=\int_{\mathbb{R}}z(\ln W_t(z)-\overline{\ln W_t})\phi_t(z)dz\]</span></p>
 <p><span class="math display">\[=\overline{z\ln W_t(z)}-\bar z\overline{\ln W_t}={\mathrm{Cov}}(z,\ln W_t)\]</span></p>
 <p><span class="math display">\[\frac{d\sigma_t^2}{dt}=\frac{d}{dt}\int_{\mathbb{R}}(\bar z_t-z)^2\phi_t(z)dz=\int_{\mathbb{R}}2(\bar z_t-z)\phi_t(z)\frac{d\bar z_t}{dt}+(\bar z_t-z)^2\frac{d\phi_t(z)}{dt}dz\]</span></p>
 <p><span class="math display">\[=\int_{\mathbb{R}}(\bar z_t-z)^2(\ln W_t(z)-\overline{\ln W_t})\phi_t(i)dz=\overline{(\bar z_t-z)^2\ln W_t(z)}-\overline{(\bar z_t-z)^2}\overline{\ln W_t}\]</span></p>
 <p><span class="math display">\[={\mathrm{Cov}}((\bar z_t-z)^2,\ln W_t)\]</span></p>
+</div>
 <div id="discrete-time" class="section level4">
 <h4>Discrete Time</h4>
 <p><span class="math display">\[\Delta\bar z_t=\bar z_{t+1}-\bar z_t=\int_{\mathbb{R}}z\phi_{t+1}(z)dz-\int_{\mathbb{R}}z\phi_t(z)dz=\int_{\mathbb{R}}z{\left( \frac{W_t(z)}{\overline{W}_t}-1 \right)}\phi_t(z)dz=\frac{1}{\overline {W}_t}{\mathrm{Cov}}(z,W_t)\]</span></p>
@@ -468,9 +470,9 @@ $$\alpha=\frac{\Box}{1+\triangle} \ \text{and} \ \beta=\frac{1}{1+\triangle}$$
 <p><span class="math display">\[=\int_{\mathbb{R}}{\left( (z-\bar z_t-\Delta\bar z_t)^2\frac{W_t(z)}{\overline{W}}-(z-\bar z_t)^2 \right)}\phi_t(z)dz=\star\]</span></p>
 <p><span class="math display">\[(z-\bar z_t-\Delta\bar z_t)^2\frac{W_t(z)}{\overline{W}}-(z-\bar z_t)^2\]</span></p>
 <p><span class="math display">\[=(z-\bar z_t)^2{\left( \frac{W_t(z)}{\overline{W}_t}-1 \right)}+{\left( (\Delta\bar z_t)^2-2(z-\bar z_t)\Delta\bar z_t \right)}\frac{W_t(z)}{\overline{W}_t}\]</span></p>
-<p><span class="math display">\[\star=\frac{1}{\overline W}{\mathrm{Cov}}((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2{\left( \frac{\overline{z W_t}}{\overline{W_t}}-\bar z_t \right)}\]</span></p>
-<p><span class="math display">\[=\frac{1}{\overline W}{\mathrm{Cov}}((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2{\left( \frac{{\mathrm{Cov}}(z,W_t)+\bar z_t\overline{W}_t}{\overline{W_t}}-\bar z_t \right)}\]</span></p>
-<p><span class="math display">\[=\frac{1}{\overline W}{\mathrm{Cov}}((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\Delta\bar z_t\]</span></p>
+<p><span class="math display">\[\star=\frac{1}{\overline W}{\mathrm{Cov}}((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\Delta\bar z_t{\left( \frac{\overline{z W_t}}{\overline{W_t}}-\bar z_t \right)}\]</span></p>
+<p><span class="math display">\[=\frac{1}{\overline W}{\mathrm{Cov}}((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\Delta\bar z_t{\left( \frac{{\mathrm{Cov}}(z,W_t)+\bar z_t\overline{W}_t}{\overline{W_t}}-\bar z_t \right)}\]</span></p>
+<p><span class="math display">\[=\frac{1}{\overline W}{\mathrm{Cov}}((\bar z_t-z)^2,W_t)-(\Delta\bar z_t)^2\]</span></p>
 </div>
 </div>
 <div id="reproduction" class="section level2">
@@ -759,8 +761,19 @@ Can further assume that the probability that gametes $x$ and $y$ produce a viabl
 
 ## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
 ## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
 ## 25000?</code></pre>
 <p><img src="notes_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?</code></pre>
 <p><img src="notes_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <!--
 
