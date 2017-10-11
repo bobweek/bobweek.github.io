@@ -32,13 +32,13 @@ These notes are the result of the interplay between my background in mathematics
 
 ## Fitness
 
-I denote the fitness of an individual by $\W$, a [Poisson](https://en.wikipedia.org/wiki/Poisson_distribution) distributed random variable. Why Poisson? Firstly, the fitness of an individual is the number of offspring it leaves, which is a non-negative integer. This coincides precisely with the support of the Poisson distribution. Secondly, the Poisson distribution has the property of maximizing entropy for all distributions that share its support under the constraint of having some specified mean. This is another of way stating that, aside from the first [statistical moment](https://en.wikipedia.org/wiki/Moment_(mathematics)), the Poisson distribution assumes the least information about the random variable it is modelling. If more information is known, a more precise distribution can be invoked. However, this would also make the resulting model less general.
+I denote the fitness of an individual by $\W$, a [Poisson](https://en.wikipedia.org/wiki/Poisson_distribution) distributed random variable. Why Poisson? Firstly, the fitness of an individual is the number of offspring it leaves, which is a non-negative integer. This coincides precisely with the support of the Poisson distribution. Secondly, the Poisson distribution has the property of maximizing [entropy](https://en.wikipedia.org/wiki/Principle_of_maximum_entropy) for all distributions that share its support under the constraint of having some specified mean. This is another of way stating that, aside from the first [statistical moment](https://en.wikipedia.org/wiki/Moment_(mathematics)), the Poisson distribution assumes the least information about the random variable it is modelling. If more information is known, a more precise distribution can be invoked. However, this would also make the resulting model less general.
 
 We denote expectation by $\mathbb{E}$ and $W\equiv\mathbb{E}\W$ so that $W$ represents the mean fitness of an individual ($\equiv$ is used for definitions). This individual mean fitness may depend on its genotype ($\gamma$) or, more mechanistically, its phenotype ($z$). In general genotypes will be modelled as elements of some discrete space, usually finite, and phenotypes will usually be modelled as elements of the real line $\mathbb{R}$, although at times we will restrict the range of phenotypes to be a countable or even finite subset of $\mathbb{R}$. In the case of a random phenotype $Z$ we write $W(z)\equiv\mathbb{E}(\W(Z)|Z=z)$, that is $W(z)$ is a conditional mean, conditioned on the phenotype $Z$ taking a particular value $z$. In the case of a continuously distributed trait, we will use $\phi(z)$ for the density function of the populations phenotypic distribution. Then the total expectation of fitness, or, population mean fitness is 
 
 $$\overline W=\E\W(Z)=\int W(z)\phi(z)dz.$$
 
-For discrete traits that take the values $z_1,z_2,\dots$, we write $\phi_i$ and $W_i$ for the frequency and mean fitness of trait $z_i$ in the population. Population mean fitness is then calculated as $\overline W=\sum_iW(i)\phi(i)$.
+For discrete traits we write $\phi(i)$ and $W(i)$ for the frequency and mean fitness of trait $i$ in the population. Population mean fitness is then calculated as $\overline W=\sum_iW(i)\phi(i)$.
 
 ## Population Dynamics
 
@@ -219,6 +219,8 @@ $$=\para{\int_0^{t-1}w_sds}^{-1}\para{\bigwedge_0^tW_s^{ds}}N_0.$$
 
 In terms of modelling, a population can be very abstract. Its concept is not restricted to a set of living things, as in the biological concept of a population. Here a population can be a set of biological populations, a set of species, replicating molecules, franchises, languages and so on. The members of the population may not be uniform, but can consist of various different types. For example, we can consider populations of individuals categorized by their phenotype or populations of species categorized by clades. We now derive how the distribution of types within a population fluctuates due to differential fitness, ie, selection.
 
+#### Continuous Time
+
 Consider a population of $T$ different types, each type $i$ with $n_t(i)$ individuals at time $t$. If we denote $\phi_t(i)$ to be the proportion of individuals within type $i$ at time $t$ among the population, we have $\phi_t(i)=\frac{n_t(i)}{N_t}$ where $N_t=\sum_{i=1}^Tn_t(i)$. Denote the expected fitness of each individual within type $i$ as $W_t(i)$. Then committing ourselves to be content with expected dynamics and adopting the notation $D_t$ in place of $\frac{d}{dt}$, we have
 
 $$D_tN_t=D_t\sum_in_t(i)=\sum_in_t(i)\ln W_t(i)=\overline{\ln W_t}N_t.$$
@@ -231,14 +233,37 @@ Setting $\rho_t(i)=\ln W_t(i)-\overline{\ln W_t}$ (what I refer to as the "relat
 
 $$\phi_t(i)=\phi_0(i)e^{\int_0^t\rho_s(i)ds}$$
 
-What about the stochastic theory of $\phi_t$? Our state space would be the set or a subset of $\{f:\R\rightarrow[0,\infty)|\int_\R f=1\}$.
+#### Discrete Time
 
-$$\overline{\ln W_t}=\sum_j\phi_t(j)\ln W_t(j)=\sum_j\ln W_t(j)^{\phi_t(j)}=\ln\para{\prod_jW_t(j)^{\phi_t(j)}}$$
+$$\phi_{t+1}(i)=\frac{n_{t+1}(i)}{N_{t+1}}=\frac{n_tW_t(i)}{N_t\overline{W}_t}=\phi_t(i)\frac{W_t(i)}{\overline{W}_t}$$
 
-$$\E(\ln \W)=\sum_{k=0}^\infty(\ln k)\frac{W^ke^{-W}}{k!}=\ln\para{\prod_{k=0}^\infty k^{\frac{W^ke^{-W}}{k!}}}=\ln0=-\infty$$
+$$\phi_{t+1}(i)-\phi_t(i)=\para{\frac{W_t(i)}{\overline{W}_t}-1}\phi_t(i)$$
 
-This suggests that we need to work our way from the discrete time situation to the continuous time situation instead of jumping the gun.
+#### Stochastic Theory?
 
+$$\phi_{t+1}(i)-\phi_t(i)=\para{\frac{\W_t(i)}{\overline{\W}_t}-1}\phi_t(i)=\frac{1}{\overline{\W}_t}(\W_t(i)-\overline{\W}_t)\phi_t(i)$$
+
+$$\overline{\W}_t=\sum_i\W_t(i)\phi_t(i)\sim?$$
+
+$$\E\overline{\W}_t=\sum_iW_t(i)\phi_t(i)=\overline{W}_t$$
+
+$$\Var(\overline{\W}_t)=\E\para{\sum_i(\W_t(i)-W_t(i))\phi_t(i)}^2$$
+
+$$=\E\para{\sum_i(\W_t(i)-W_t(i))^2\phi_t^2(i)+2\sum_i\sum_j(\W_t(i)-W_t(i))(\W_t(j)-W_t(j))\phi_t(i)\phi_t(j)}$$
+
+$$=\sum_iW_t(i)\phi_t^2(i)+2\sum_{i=1}^N\sum_{j=1}^{i-1}\Cov(\W_t(i),\W_t(j))\phi_t(i)\phi_t(j)=\overline{W_t\phi_t}+\dots$$
+
+$$\E(\ln(\W_t(i))-\ln(W_t(i)))^2$$
+
+What about the stochastic theory of $\phi_t$? Our state space would be the set or a subset of $\{f:\R\rightarrow[0,\infty)|\int_\R f=1\}$. If we assume $\W_t(i)\sim\ln\mathcal{N}(\mu_t(i),\sigma_t^2(i))$ then $\overline{\ln W_t}=\mathcal{N}(\overline{\mu_t},\overline{\sigma_t^2})$.
+
+$$\E(D_t\phi_t(i))=\E\para{ \phi_t(i)(\ln\W_t(i)-\sum_{j=1}^T\phi_t(j)\ln\W_t(j)) }=\phi_t(i)(\ln W_t-\overline{\ln W_t})$$
+
+$$\Var(D_t\phi_t)=\E_W\para{ \phi_t(\ln\W_t-\overline{\ln\W_t})-\phi_t(\ln W_t-\overline{\ln W_t}) }^2=\phi_t^2\Var(\ln \W_t-\overline{\ln \W_t})$$
+
+Hence,
+
+$$D_t\phi_t(i)\sim\mathcal{N}(\phi_t(i)(\mu_t(i)-\overline{\mu_t}),\phi_t^2(i)(\sigma_t^2(i)+\overline{\sigma_t^2})).$$
 
 <!--
 
@@ -1361,11 +1386,11 @@ $$(g_1*g_2)(z)=g_3(z), \text{ where } \mu_3=\mu_2+\mu_1, \ \sigma_3^2=\sigma_1^2
 
 ## Linearization of a Pop Gen Model
 
-Here I cover a way to linearize a simple model of genetic selection. We assume two genotypes, $A_1$ and $A_2$, with the frequencies $p$ and $q=1-p$ and fitnesses $W_1$ and $W_2$ respectively. Then $\overline W=pW_1+qW_2$ and the change in genotype frequency of $A_1$ is (ignoring all other processes)
+Here I cover a way to linearize a simple model of genetic selection. We assume a haploid population with two alleles, $A_1$ and $A_2$, having the frequencies $p$ and $q=1-p$ and fitnesses $W_1$ and $W_2$ respectively. Then $\overline W=pW_1+qW_2$ and the change in allele frequency of $A_1$ is (ignoring all other processes)
 
 $$\Delta p=pq\frac{\partial\ln\overline W}{\partial p}, \ \text{with} \ \overline W=pW_1+qW_2$$
 
-The resulting dynamics are clearly nonlinear, but are they truly nonlinear or is this due to the fact that the state space is restricted to the open unit interval? If we stretch the unit interval across the whole real line, maybe the dynamics will become linear. To find out we define $x\equiv\ln\left(\frac{p}{q}\right)$ ($x$ is called the __logit__ of $p$) and calculate $\Delta x$. For clarity I will write $D_p$ in place of $\frac{\partial}{\partial p}$.
+The resulting dynamics are clearly nonlinear, but are they truly nonlinear or is this due to the fact that the state space is restricted to the open unit interval? If we stretch the unit interval across the whole real line, maybe the dynamics will become linear. To find out we define $x\equiv\ln\left(\frac{p}{q}\right)$ ($x$ is called the [logit](https://en.wikipedia.org/wiki/Logit) of $p$) and calculate $\Delta x$. For clarity I will write $D_p$ in place of $\frac{\partial}{\partial p}$.
 
 $$\Delta x=x'-x=\ln\left(\frac{p'}{q'}\right)-\ln\left(\frac{p}{q}\right)=\ln\left(\frac{p'q}{q'p}\right)$$
 

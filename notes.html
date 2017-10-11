@@ -424,16 +424,29 @@ $$=\para{\int_0^{t-1}w_sds}^{-1}\para{\bigwedge_0^tW_s^{ds}}N_0.$$
 <div id="populations-of-types" class="section level2">
 <h2>Populations of Types</h2>
 <p>In terms of modelling, a population can be very abstract. Its concept is not restricted to a set of living things, as in the biological concept of a population. Here a population can be a set of biological populations, a set of species, replicating molecules, franchises, languages and so on. The members of the population may not be uniform, but can consist of various different types. For example, we can consider populations of individuals categorized by their phenotype or populations of species categorized by clades. We now derive how the distribution of types within a population fluctuates due to differential fitness, ie, selection.</p>
+<div id="continuous-time-1" class="section level4">
+<h4>Continuous Time</h4>
 <p>Consider a population of <span class="math inline">\(T\)</span> different types, each type <span class="math inline">\(i\)</span> with <span class="math inline">\(n_t(i)\)</span> individuals at time <span class="math inline">\(t\)</span>. If we denote <span class="math inline">\(\phi_t(i)\)</span> to be the proportion of individuals within type <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span> among the population, we have <span class="math inline">\(\phi_t(i)=\frac{n_t(i)}{N_t}\)</span> where <span class="math inline">\(N_t=\sum_{i=1}^Tn_t(i)\)</span>. Denote the expected fitness of each individual within type <span class="math inline">\(i\)</span> as <span class="math inline">\(W_t(i)\)</span>. Then committing ourselves to be content with expected dynamics and adopting the notation <span class="math inline">\(D_t\)</span> in place of <span class="math inline">\(\frac{d}{dt}\)</span>, we have</p>
 <p><span class="math display">\[D_tN_t=D_t\sum_in_t(i)=\sum_in_t(i)\ln W_t(i)=\overline{\ln W_t}N_t.\]</span></p>
 <p><span class="math display">\[D_t\phi_t(i)=D_t\frac{n_t(i)}{N_t}=\frac{N_tD_tn_t(i)-n_t(i)D_tN_t}{N_t^2}\]</span></p>
 <p><span class="math display">\[=\frac{n_t(i)\ln W_t(i)-n_t(i)\overline{\ln W_t}}{N_t}=\phi_t(i){\left( \ln W_t(i)-\overline{\ln W_t} \right)}.\]</span></p>
 <p>Setting <span class="math inline">\(\rho_t(i)=\ln W_t(i)-\overline{\ln W_t}\)</span> (what I refer to as the “relative” Malthusian fitness) we can solve for <span class="math inline">\(\phi_t(i)\)</span> to get</p>
 <p><span class="math display">\[\phi_t(i)=\phi_0(i)e^{\int_0^t\rho_s(i)ds}\]</span></p>
+</div>
+<div id="discrete-time" class="section level4">
+<h4>Discrete Time</h4>
+<p><span class="math display">\[\phi_{t+1}(i)=\frac{n_{t+1}(i)}{N_{t+1}}=\frac{n_tW_t(i)}{N_t\overline{W}_t}=\phi_t(i)\frac{W_t(i)}{\overline{W}_t}\]</span></p>
+<p><span class="math display">\[\phi_{t+1}(i)-\phi_t(i)={\left( \frac{W_t(i)}{\overline{W}_t}-1 \right)}\phi_t(i)\]</span></p>
+</div>
+<div id="stochastic-theory" class="section level4">
+<h4>Stochastic Theory?</h4>
 <p>What about the stochastic theory of <span class="math inline">\(\phi_t\)</span>? Our state space would be the set or a subset of <span class="math inline">\(\{f:{\mathbb{R}}\rightarrow[0,\infty)|\int_{\mathbb{R}}f=1\}\)</span>.</p>
 <p><span class="math display">\[\overline{\ln W_t}=\sum_j\phi_t(j)\ln W_t(j)=\sum_j\ln W_t(j)^{\phi_t(j)}=\ln{\left( \prod_jW_t(j)^{\phi_t(j)} \right)}\]</span></p>
 <p><span class="math display">\[{\mathbb{E}}(\ln {\mathcal{W}})=\sum_{k=0}^\infty(\ln k)\frac{W^ke^{-W}}{k!}=\ln{\left( \prod_{k=0}^\infty k^{\frac{W^ke^{-W}}{k!}} \right)}=\ln0=-\infty\]</span></p>
 <p>This suggests that we need to work our way from the discrete time situation to the continuous time situation instead of jumping the gun.</p>
+<p><span class="math display">\[{\mathbb{E}}(D_t\phi_t(i))={\mathbb{E}}{\left(  \phi_t(i)(\ln{\mathcal{W}}_t(i)-\sum_{j=1}^T\phi_t(j)\ln{\mathcal{W}}_t(j))  \right)}=\phi_t(i)(\ln W_t-\overline{\ln W_t})\]</span></p>
+<p><span class="math display">\[{\mathrm{Var}}(D_t\phi_t)={\mathbb{E}}{\left(  \phi_t(\ln{\mathcal{W}}_t-\overline{\ln{\mathcal{W}}_t})-\phi_t(\ln W_t-\overline{\ln W_t})  \right)}^2=\phi_t^2{\mathrm{Var}}(\ln {\mathcal{W}}_t-\overline{\ln {\mathcal{W}}_t})\]</span></p>
+<p><span class="math display">\[=\phi^2_t{\mathrm{Var}}()\]</span></p>
 <!--
 
 We could, of course, continue on with the stochastic case to get
@@ -450,12 +463,13 @@ $$\alpha=\frac{\Box}{1+\triangle} \ \text{and} \ \beta=\frac{1}{1+\triangle}$$
 
 -->
 </div>
+</div>
 <div id="response-in-mean-and-variance" class="section level2">
 <h2>Response in Mean and Variance</h2>
 <p>Let’s suppose each type is associated with a distinct value. If there’s a finite number of types, there’ll be a finite number of values. For types with a continuous index, there’ll be a continuum of possible values. Let’s stick with a continuum of types indexed by <span class="math inline">\({\mathbb{R}}\)</span>. Denote by <span class="math inline">\(\bar z_t\)</span> the average value of the population at time <span class="math inline">\(t\)</span> and <span class="math inline">\(\sigma_t^2\)</span> the variance of types at time <span class="math inline">\(t\)</span>. Then</p>
 <p><span class="math display">\[\bar z_t=\int_{\mathbb{R}}z\phi_t(z)dz, \ \text{and} \ \sigma_t^2=\int_{\mathbb{R}}(\bar z_t-z)^2\phi_t(z)dz.\]</span></p>
 <p>Using the above results we can derive dynamics for these quantities as follows</p>
-<div id="continuous-time-1" class="section level4">
+<div id="continuous-time-2" class="section level4">
 <h4>Continuous Time</h4>
 <p><span class="math display">\[\frac{d\bar z_t}{dt}=\frac{d}{dt}\int_{\mathbb{R}}z\phi_t(z)dz=\int_{\mathbb{R}}z\frac{d}{dt}\phi_t(z)dz=\int_{\mathbb{R}}z(\ln W_t(z)-\overline{\ln W_t})\phi_t(z)dz\]</span></p>
 <p><span class="math display">\[=\overline{z\ln W_t(z)}-\bar z\overline{\ln W_t}={\mathrm{Cov}}(z,\ln W_t)\]</span></p>
@@ -463,7 +477,7 @@ $$\alpha=\frac{\Box}{1+\triangle} \ \text{and} \ \beta=\frac{1}{1+\triangle}$$
 <p><span class="math display">\[=\int_{\mathbb{R}}(\bar z_t-z)^2(\ln W_t(z)-\overline{\ln W_t})\phi_t(i)dz=\overline{(\bar z_t-z)^2\ln W_t(z)}-\overline{(\bar z_t-z)^2}\overline{\ln W_t}\]</span></p>
 <p><span class="math display">\[={\mathrm{Cov}}((\bar z_t-z)^2,\ln W_t)\]</span></p>
 </div>
-<div id="discrete-time" class="section level4">
+<div id="discrete-time-1" class="section level4">
 <h4>Discrete Time</h4>
 <p><span class="math display">\[\Delta\bar z_t=\bar z_{t+1}-\bar z_t=\int_{\mathbb{R}}z\phi_{t+1}(z)dz-\int_{\mathbb{R}}z\phi_t(z)dz=\int_{\mathbb{R}}z{\left( \frac{W_t(z)}{\overline{W}_t}-1 \right)}\phi_t(z)dz=\frac{1}{\overline {W}_t}{\mathrm{Cov}}(z,W_t)\]</span></p>
 <p><span class="math display">\[\Delta\sigma_t^2=\sigma^2_{t+1}-\sigma^2_t=\int_{\mathbb{R}}(z-\bar z_{t+1})^2\phi_{t+1}(z)dz-\int_{\mathbb{R}}(z-\bar z_t)^2\phi_t(z)dz=\int_{\mathbb{R}}{\left( (z-\bar z_{t+1})^2\frac{W_t(z)}{\overline{W}}-(z-\bar z_t)^2 \right)}\phi_t(z)dz=\]</span></p>
@@ -761,19 +775,8 @@ Can further assume that the probability that gametes $x$ and $y$ produce a viabl
 
 ## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
 ## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?
-
-## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?
-
-## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
 ## 25000?</code></pre>
 <p><img src="notes_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
-<pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?</code></pre>
 <p><img src="notes_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <!--
 
@@ -832,9 +835,9 @@ Can further assume that the probability that gametes $x$ and $y$ produce a viabl
 </div>
 <div id="linearization-of-a-pop-gen-model" class="section level2">
 <h2>Linearization of a Pop Gen Model</h2>
-<p>Here I cover a way to linearize a simple model of genetic selection. We assume two genotypes, <span class="math inline">\(A_1\)</span> and <span class="math inline">\(A_2\)</span>, with the frequencies <span class="math inline">\(p\)</span> and <span class="math inline">\(q=1-p\)</span> and fitnesses <span class="math inline">\(W_1\)</span> and <span class="math inline">\(W_2\)</span> respectively. Then <span class="math inline">\(\overline W=pW_1+qW_2\)</span> and the change in genotype frequency of <span class="math inline">\(A_1\)</span> is (ignoring all other processes)</p>
+<p>Here I cover a way to linearize a simple model of genetic selection. We assume a haploid population with two alleles, <span class="math inline">\(A_1\)</span> and <span class="math inline">\(A_2\)</span>, having the frequencies <span class="math inline">\(p\)</span> and <span class="math inline">\(q=1-p\)</span> and fitnesses <span class="math inline">\(W_1\)</span> and <span class="math inline">\(W_2\)</span> respectively. Then <span class="math inline">\(\overline W=pW_1+qW_2\)</span> and the change in allele frequency of <span class="math inline">\(A_1\)</span> is (ignoring all other processes)</p>
 <p><span class="math display">\[\Delta p=pq\frac{\partial\ln\overline W}{\partial p}, \ \text{with} \ \overline W=pW_1+qW_2\]</span></p>
-<p>The resulting dynamics are clearly nonlinear, but are they truly nonlinear or is this due to the fact that the state space is restricted to the open unit interval? If we stretch the unit interval across the whole real line, maybe the dynamics will become linear. To find out we define <span class="math inline">\(x\equiv\ln\left(\frac{p}{q}\right)\)</span> (<span class="math inline">\(x\)</span> is called the <strong>logit</strong> of <span class="math inline">\(p\)</span>) and calculate <span class="math inline">\(\Delta x\)</span>. For clarity I will write <span class="math inline">\(D_p\)</span> in place of <span class="math inline">\(\frac{\partial}{\partial p}\)</span>.</p>
+<p>The resulting dynamics are clearly nonlinear, but are they truly nonlinear or is this due to the fact that the state space is restricted to the open unit interval? If we stretch the unit interval across the whole real line, maybe the dynamics will become linear. To find out we define <span class="math inline">\(x\equiv\ln\left(\frac{p}{q}\right)\)</span> (<span class="math inline">\(x\)</span> is called the <a href="https://en.wikipedia.org/wiki/Logit">logit</a> of <span class="math inline">\(p\)</span>) and calculate <span class="math inline">\(\Delta x\)</span>. For clarity I will write <span class="math inline">\(D_p\)</span> in place of <span class="math inline">\(\frac{\partial}{\partial p}\)</span>.</p>
 <p><span class="math display">\[\Delta x=x&#39;-x=\ln\left(\frac{p&#39;}{q&#39;}\right)-\ln\left(\frac{p}{q}\right)=\ln\left(\frac{p&#39;q}{q&#39;p}\right)\]</span></p>
 <p><span class="math display">\[\implies\exp(\Delta x)=\frac{p+\Delta p}{q-\Delta p}\frac{q}{p}=\frac{1+qD_p\ln\overline W}{1-pD_p\ln\overline W}\]</span></p>
 <p><span class="math display">\[=\frac{\overline W+qD_p\overline W}{\overline W-pD_p\overline W}=\frac{\overline W+(1-p)\left(W_1-W_2\right)}{\overline W-p\left(W_1-W_2\right)}=\frac{W_1}{W_2}\]</span></p>
