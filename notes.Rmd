@@ -22,6 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 \newcommand{\para}[1]{\left( #1 \right)}
 \newcommand{\W}{\mathcal{W}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\Cov}{\mathrm{Cov}}
@@ -255,7 +256,7 @@ $$=\sum_iW_t(i)\phi_t^2(i)+2\sum_{i=1}^N\sum_{j=1}^{i-1}\Cov(\W_t(i),\W_t(j))\ph
 
 $$\E(\ln(\W_t(i))-\ln(W_t(i)))^2$$
 
-What about the stochastic theory of $\phi_t$? Our state space would be the set or a subset of $\{f:\R\rightarrow[0,\infty)|\int_\R f=1\}$. If we assume $\W_t(i)\sim\ln\mathcal{N}(\mu_t(i),\sigma_t^2(i))$ then $\overline{\ln W_t}=\mathcal{N}(\overline{\mu_t},\overline{\sigma_t^2})$.
+What about the stochastic theory of $\phi_t$? If we assume $\W_t(i)\sim\ln\mathcal{N}(\mu_t(i),\sigma_t^2(i))$ then $\overline{\ln W_t}=\mathcal{N}(\overline{\mu_t},\overline{\sigma_t^2})$.
 
 $$\E(D_t\phi_t(i))=\E\para{ \phi_t(i)(\ln\W_t(i)-\sum_{j=1}^T\phi_t(j)\ln\W_t(j)) }=\phi_t(i)(\ln W_t-\overline{\ln W_t})$$
 
@@ -264,6 +265,37 @@ $$\Var(D_t\phi_t)=\E_W\para{ \phi_t(\ln\W_t-\overline{\ln\W_t})-\phi_t(\ln W_t-\
 Hence,
 
 $$D_t\phi_t(i)\sim\mathcal{N}(\phi_t(i)(\mu_t(i)-\overline{\mu_t}),\phi_t^2(i)(\sigma_t^2(i)+\overline{\sigma_t^2})).$$
+
+What is $\lim_{\delta\rightarrow0}\frac{\W^\delta-1}{\delta}$? We can try to figure this out by calculating the characteristic function. Note that $\ln\W$ can't be $\mathcal{N}$ as that would imply $\W\sim\ln\mathcal{N}$. Should try to multiply many indep $\mathcal{P}$ fitnesses together to get a $\ln\mathcal{N}$. In continuous time, we need to deal with a continuum of individuals instead of a discrete set.
+
+Pre-limit
+
+$$\chi(s)=\E\exp\para{is\frac{\W^\delta-1}{\delta}}=$$
+
+Post-limit
+
+$$\chi(s)=\E\exp(is\ln\W)=\sum_{k=0}^\infty\exp(is\ln k)\frac{W^ke^{-W}}{k!}=\sum_{k=1}^\infty k^{is}\frac{W^ke^{-W}}{k!}=e^{-W}T_{is}(W)$$
+
+Here, $T_x(y)$ is the Touchard polynomial function extended to $x\in\C$ and has the representation via contour integration
+
+$$T_x(y)=\frac{\Gamma(x+1)}{2\pi i}\oint\frac{e^{y(e^t)-1}}{t^{x+1}}dt.$$
+
+$$D_s T_{is}(W)=\frac{1}{e2\pi i}\oint D_s\frac{\Gamma(is+1)e^{W(e^t)}}{t^{is+1}}dt=\frac{1}{e2\pi i}\oint e^{W(e^t)}D_s\frac{\Gamma(is+1)}{t^{is+1}}dt$$
+
+$$D_s\frac{\Gamma(is+1)}{t^{is+1}}=\frac{t^{is+1}D_s\Gamma(is+1)-\Gamma(is+1)D_st^{is+1}}{t^{2is+2}}=\frac{t^{is+1}\psi(is+1)\Gamma(is+1)-\Gamma(is+1)i\ln(t)t^{is+1}}{t^{2is+2}}$$
+$$=i\frac{\Gamma(is+1)}{t^{is+1}}(\psi(is+1)-\ln(t))$$
+
+Do we wait to evaluate $s$ or just go for it? Seems like an issue arises if we just go for it.
+
+$$D_s\ln\chi(s)\Big|_{s=0}=\frac{D_s\chi(s)\Big|_{s=0}}{\chi(0)}=\sum_{k=0}^\infty i\ln(k)k^{is}\frac{W^ke^{-W}}{k!}\Big|_{s=0}\overset{?}{=}\sum_{k=0}^\infty i\ln(k)\frac{W^ke^{-W}}{k!}$$
+
+otherwise
+
+$$=\sum_{k=0}^\infty i\ln(k)k^{is}\frac{W^ke^{-W}}{k!}\Big|_{s=0}=\left.\sum_{k=0}^\infty i\ln(1+k)(1+k)^{is}\frac{W^ke^{-W}}{k!}\right|_{s=0}$$
+
+$$=\left.ie^{-W}\ln\prod_{k=1}^\infty k^{k^{is}\frac{W^k}{k!}}\right|_{s=0}$$
+
+$$=ie^{-W}\left.\sum_{k=0}^\infty(1+k)^{is}\frac{W^k}{k!}\sum_{j=1}^\infty\frac{k^j(-1)^{j+1}}{j}\right|_{s=0}$$
 
 <!--
 
