@@ -102,6 +102,24 @@ We can then solve for the mean population size as a function of time to get
 
 $$N_t=N_0e^{\int_0^tr(s)ds}.$$
 
+Before moving on, I just want to point out that these continuous time dynamics of $N_t$ imply that $N_t$ is not restricted to the set of non-negative integers, but can take any value that is a non-negative real number ($\R_{\geq0}$). The usual population size update
+
+$$N_{t+1}=\sum_{i=1}^{N_t}\W_t(i)$$
+
+is associated with a particular partition of $(0,N_t)$, namely $\{(0,1),(1,2),\dots,(N_t-2,N_t-1),(N_t-1,N_t)\}$. Assuming $N_t$ is a whole number this partition has $N_t$ uniform subintervals, each of width $1$. We could instead parition $(0,N_t)$ into $K$ uniform subintervals, each of width $N_t/K$. For $x\in(0,N_t)$ define
+
+$$Y_t(x)\equiv\W_t(\lceil x\rceil).$$
+
+$$N_{t+1}=\sum_{i=1}^KY_t(N_ti/K)\frac{N_t}{K}\rightarrow\int_0^{N_t}Y_t(x)dx$$
+
+$$=\sum_{i=1}^{N_t}\int_{i-1}^iY_t(i)dx=\sum_{i=0}^{N_t}Y_t(i)(i-(i-1))=\sum_{i=1}^{N_t}\W_t(i).$$
+
+For the sake of continuity we might instead decide to ignore the individual level fitnesses and just assume the population as a whole has fitness $\W_t\sim\ln\mathcal{N}(\ln W_t,V_t)$. We can still write $N_{t+1}=\W_t N_t$ and use the same limiting approach as above to obtain $\frac{dN_t}{dt}=\ln\W_t N_t$, but now $\ln\W_t\sim\mathcal{N}(\ln W_t,V_t)$ so that we are formally dealing with the stochastic differential equation
+
+$$dN_t=\ln W_tN_tdt+\sqrt{V_t}N_tdB_t$$
+
+where $B_t$ denotes the standard Brownian motion process. Note that this SDE defines [Geometric Brownian Motion](http://www.randomservices.org/random/brown/Geometric.html). This seems promising, but it would be better to derive it from the above framework instead leaving a disconnected trail of cookie crumbs.
+
 ### Returning to Stochastics
 
 Picking up where we left off, the variance has now been decoupled from the expectation forcing future generation population size distributions to be non-Poisson. This can be delt with if we choose the next best option$\dots$ the negative binomial $\mathrm{NB}(\nu,p)$. By setting $\nu=WN_0$ and $p=1-\frac{1}{1+W}$ this provides the expectation and variance derived above, but is $\mathrm{NB}$ the actual distribution of $N_2$? Regardless, we can continue this program to derive distributions for future population sizes. Solutions for the expectation and variance of population sizes with fixed mean fitness are
@@ -240,6 +258,8 @@ $$\phi_{t+1}(i)=\frac{n_{t+1}(i)}{N_{t+1}}=\frac{n_tW_t(i)}{N_t\overline{W}_t}=\
 
 $$\phi_{t+1}(i)-\phi_t(i)=\para{\frac{W_t(i)}{\overline{W}_t}-1}\phi_t(i)$$
 
+<!--
+
 #### Stochastic Theory?
 
 $$\phi_{t+1}(i)-\phi_t(i)=\para{\frac{\W_t(i)}{\overline{\W}_t}-1}\phi_t(i)=\frac{1}{\overline{\W}_t}(\W_t(i)-\overline{\W}_t)\phi_t(i)$$
@@ -296,6 +316,8 @@ $$=\sum_{k=0}^\infty i\ln(k)k^{is}\frac{W^ke^{-W}}{k!}\Big|_{s=0}=\left.\sum_{k=
 $$=\left.ie^{-W}\ln\prod_{k=1}^\infty k^{k^{is}\frac{W^k}{k!}}\right|_{s=0}$$
 
 $$=ie^{-W}\left.\sum_{k=0}^\infty(1+k)^{is}\frac{W^k}{k!}\sum_{j=1}^\infty\frac{k^j(-1)^{j+1}}{j}\right|_{s=0}$$
+
+-->
 
 <!--
 
