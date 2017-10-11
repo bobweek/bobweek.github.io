@@ -108,7 +108,7 @@ Before moving on, I just want to point out that these continuous time dynamics o
 
 $$N_{t+1}=\sum_{i=1}^{N_t}\W_t(i)$$
 
-is associated with a particular partition of $(0,N_t)$, namely $\{(0,1),(1,2),\dots,(N_t-2,N_t-1),(N_t-1,N_t)\}$. Assuming $N_t$ is a whole number this partition has $N_t$ uniform subintervals, each of width $1$. We could instead parition $(0,N_t)$ into $K$ uniform subintervals, each of width $N_t/K$. For $x\in(0,N_t)$ define
+is associated with a particular partition of the interval $(0,N_t]$, namely $\{(0,1),(1,2),\dots,(N_t-2,N_t-1),(N_t-1,N_t]\}$. Assuming $N_t$ is a whole number this partition has $N_t$ uniform subintervals, each of width $1$. We could instead parition $(0,N_t]$ into $K$ uniform subintervals, each of width $N_t/K$. For $x\in(0,N_t]$ define
 
 $$Y_t(x)\equiv\W_t(\lceil x\rceil).$$
 
