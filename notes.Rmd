@@ -102,6 +102,8 @@ We can then solve for the mean population size as a function of time to get
 
 $$N_t=N_0e^{\int_0^tr(s)ds}.$$
 
+### Aside
+
 Before moving on, I just want to point out that these continuous time dynamics of $N_t$ imply that $N_t$ is not restricted to the set of non-negative integers, but can take any value that is a non-negative real number ($\R_{\geq0}$). The usual population size update
 
 $$N_{t+1}=\sum_{i=1}^{N_t}\W_t(i)$$
@@ -258,6 +260,16 @@ $$\phi_{t+1}(i)=\frac{n_{t+1}(i)}{N_{t+1}}=\frac{n_tW_t(i)}{N_t\overline{W}_t}=\
 
 $$\phi_{t+1}(i)-\phi_t(i)=\para{\frac{W_t(i)}{\overline{W}_t}-1}\phi_t(i)$$
 
+#### Stochastics
+
+I focus on continuous time stochastic dynamics as dealing with a ratio of random variables is usually quite ugly and also because it's difficult to tell what distribution $\overline{\W}_t$ has. I'll lean on observations from the end of the [population dynamics section](https://bobweek.github.io/notes.html#aside) and assume that the $\W_t(i)$ are distributed log-normally with mean $\ln W_t(i)$ and variance $V_t(i)$. Then $\overline{\ln\W_t}\sim\mathcal{N}(\overline{\ln W_t},\overline{V_t})$ where
+
+$$\overline{\ln W_t}=\sum_i\ln W_t(i)\phi_t(i), \ \overline{V_t}=\sum_iV_t\phi_t^2(i).$$
+
+This leads to the SDE
+
+$$d\phi_t(i)=(\ln W_t(i)-\overline{\ln W_t})\phi_t(i)dt+\sqrt{V_t(i)+\overline{V_t}}\phi_t(i)dB_t.$$
+
 <!--
 
 #### Stochastic Theory?
@@ -373,6 +385,8 @@ $$\star=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\Delta
 $$=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\Delta\bar z_t\para{\frac{\Cov(z,W_t)+\bar z_t\overline{W}_t}{\overline{W_t}}-\bar z_t}$$
 
 $$=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)-(\Delta\bar z_t)^2$$
+
+Something to pay attention to in all of the above results is that they each depended on knowing how $\phi_t(i)$ changes. Here we only consider the effects of deterministic selection, but of course there are many other processes that can cause change in $\phi_t(i)$.
 
 ## Reproduction
 

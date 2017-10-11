@@ -337,6 +337,9 @@ output:
 <p><span class="math display">\[\frac{dN_t}{dt}=\left(\int_0^ta_sds+e^{\int_0^tb_sds-t}+c\right)N_t.\]</span></p>
 <p>We can then solve for the mean population size as a function of time to get</p>
 <p><span class="math display">\[N_t=N_0e^{\int_0^tr(s)ds}.\]</span></p>
+</div>
+<div id="aside" class="section level3">
+<h3>Aside</h3>
 <p>Before moving on, I just want to point out that these continuous time dynamics of <span class="math inline">\(N_t\)</span> imply that <span class="math inline">\(N_t\)</span> is not restricted to the set of non-negative integers, but can take any value that is a non-negative real number (<span class="math inline">\({\mathbb{R}}_{\geq0}\)</span>). The usual population size update</p>
 <p><span class="math display">\[N_{t+1}=\sum_{i=1}^{N_t}{\mathcal{W}}_t(i)\]</span></p>
 <p>is associated with a particular partition of <span class="math inline">\((0,N_t)\)</span>, namely <span class="math inline">\(\{(0,1),(1,2),\dots,(N_t-2,N_t-1),(N_t-1,N_t)\}\)</span>. Assuming <span class="math inline">\(N_t\)</span> is a whole number this partition has <span class="math inline">\(N_t\)</span> uniform subintervals, each of width <span class="math inline">\(1\)</span>. We could instead parition <span class="math inline">\((0,N_t)\)</span> into <span class="math inline">\(K\)</span> uniform subintervals, each of width <span class="math inline">\(N_t/K\)</span>. For <span class="math inline">\(x\in(0,N_t)\)</span> define</p>
@@ -446,6 +449,13 @@ $$=\para{\int_0^{t-1}w_sds}^{-1}\para{\bigwedge_0^tW_s^{ds}}N_0.$$
 <h4>Discrete Time</h4>
 <p><span class="math display">\[\phi_{t+1}(i)=\frac{n_{t+1}(i)}{N_{t+1}}=\frac{n_tW_t(i)}{N_t\overline{W}_t}=\phi_t(i)\frac{W_t(i)}{\overline{W}_t}\]</span></p>
 <p><span class="math display">\[\phi_{t+1}(i)-\phi_t(i)={\left( \frac{W_t(i)}{\overline{W}_t}-1 \right)}\phi_t(i)\]</span></p>
+</div>
+<div id="stochastics" class="section level4">
+<h4>Stochastics</h4>
+<p>I focus on continuous time stochastic dynamics as dealing with the fraction of random variables is usually quite ugly and also because it’s difficult to tell what distribution <span class="math inline">\(\overline{{\mathcal{W}}}_t\)</span> has. I’ll lean on observations from the end of the <a href="https://bobweek.github.io/notes.html#aside">population dynamics section</a> and assume that the <span class="math inline">\({\mathcal{W}}_t(i)\)</span> are distributed log-normally with mean <span class="math inline">\(\ln W_t(i)\)</span> and variance <span class="math inline">\(V_t(i)\)</span>. Then <span class="math inline">\(\overline{\ln{\mathcal{W}}_t}\sim\mathcal{N}(\overline{\ln W_t},\overline{V_t})\)</span> where</p>
+<p><span class="math display">\[\overline{\ln W_t}=\sum_i\ln W_t(i)\phi_t(i), \ \overline{V_t}=\sum_iV_t\phi_t^2(i).\]</span></p>
+<p>This leads to the SDE</p>
+<p><span class="math display">\[d\phi_t(i)=(\ln W_t(i)-\overline{\ln W_t})\phi_t(i)dt+\sqrt{V_t(i)+\overline{V_t}}\phi_t(i)dB_t.\]</span></p>
 <!--
 
 #### Stochastic Theory?
@@ -828,17 +838,6 @@ Can further assume that the probability that gametes $x$ and $y$ produce a viabl
 <h4>Stochastic Selection That Changes Smoothly Over Time</h4>
 <p>Our selection surface will be random, but smooth in both space and time. At an instant, it will generally look something like the following.</p>
 <p><img src="notes_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
-<pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?
-
-## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?
-
-## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
-## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
-## 25000?</code></pre>
 <p><img src="notes_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p><img src="notes_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <!--
