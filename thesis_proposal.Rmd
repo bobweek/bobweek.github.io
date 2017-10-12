@@ -26,6 +26,6 @@ Here I will take a similar approach to the metapopulation model of pairwise coev
 
 ## More
 
---All of the above models can be extended to incorporate spatial structure, either implicit or explicit, discrete or continuous.
+* All of the above models can be extended to incorporate spatial structure, either implicit or explicit, discrete or continuous.
 
---I've been thinking about extending Niche theory as treated in chapter 24 of Roughgardens' book to my "Bobelian" framework.
+* I've been thinking about extending Niche theory as treated in chapter 24 of Roughgardens' book to my "Bobelian" framework.

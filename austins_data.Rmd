@@ -31,6 +31,10 @@ plot(pct,show.tip.label=F,type='fan')
 cd$SnoutVentLength.Mean <- as.numeric(cd$SnoutVentLength.Mean)
 ```
 
+Blah blah blah. Some stuff about stuff and stuff. When the $\gamma$ is $\mathbb{R}^2$ we all know what to do:
+
+$$y=mx+b.$$
+
 
 Let's try SVL and body width.
 
