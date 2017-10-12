@@ -1,0 +1,31 @@
+---
+title: "The Coevolutionary Theory of Community Ecology"
+output: 
+  html_document: 
+    toc: true
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Pairwise Coevolution
+
+The inference method is a major aspect of this section. However, I still would like to incorporate into my framework diversifying selection and population dynamics.
+
+## Coevolutionary Community Modules
+
+This section is inspired by Bob Holt's community modules. However, instead of focusing on population dynamics, the focus will initially be on mean trait dynamics. The addition of trait variance dynamics and population dynamics would likely follow.
+
+## Diffuse Coevolution
+
+Here I will take a similar approach to the metapopulation model of pairwise coevolution but instead apply it to a large community of organisms, starting with one guild (such as the finches or anolis lizards) and later moving to multiple guilds (such as plant/pollinator communities or trophic webs such as primary producers, herbivores and carnivores).
+
+## More
+
+--All of the above models can be extended to incorporate spatial structure, either implicit or explicit, discrete or continuous.
+
+--I've been thinking about extending Niche theory as treated in chapter 24 of Roughgardens' book to my "Bobelian" framework.
