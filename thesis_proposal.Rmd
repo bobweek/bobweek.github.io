@@ -12,9 +12,20 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\tr}{\mathrm{tr}}
+
+
 ## Pairwise Coevolution
 
-The inference method is a major aspect of this section. However, I still would like to incorporate into my framework diversifying selection and population dynamics.
+The inference method is a major aspect of this section. However, I still would like to incorporate into my framework diversifying selection, variance dynamics and population dynamics.
 
 ## Coevolutionary Community Modules
 
@@ -29,3 +40,28 @@ Here I will take a similar approach to the metapopulation model of pairwise coev
 * All of the above models can be extended to incorporate spatial structure, either implicit or explicit, discrete or continuous.
 
 * I've been thinking about extending Niche theory as treated in chapter 24 of Roughgardens' book to my "Bobelian" framework.
+
+* Assembly/Succession
+
+## KL vs $\Lambda$
+
+Definition of $\Lambda$:
+
+$$\Lambda=2\ln\para{\frac{L_c}{L_0}}$$
+
+where $L_0$ is the likelihood of the null and $L_c$ is the likelihood of coevolution. For a single observation $z=(z_1,z_2)^\top$ this simplifies to
+
+$$\ln\para{\frac{|\Sigma_0|}{|\Sigma_c|}}+(z-\mu_0)^\top\Sigma_0^{-1}(z-\mu_0)-(z-\mu_c)^\top\Sigma_c^{-1}(z-\mu_c)$$
+
+where $\mu_i$ and $\Sigma_i$ are the mean vector and variance/covariance matrix of hypothesis $i$.
+
+Definition of KL:
+
+$$D_{KL}(\phi_c\|\phi_0)=\int_{\R^2}\phi_c(z)\ln\para{\frac{\phi_c(z)}{\phi_0(z)}}dz$$
+Since $\phi_c(z)$ and $\phi_0(z)$ are equivalent to $L_c$ and $L_0$ for the single observation $z$ we see that
+
+$$2D_{KL}(\phi_c\|\phi_0)=\E_{\phi_c}(\Lambda).$$
+
+That is, twice the KL-divergence is equal to the expected likelihood ratio statistic given the existence of coevolution. This expectation comes out to be:
+
+$$\ln\para{\frac{|\Sigma_0|}{|\Sigma_c|}}+(\mu_c-\mu_0)^\top\Sigma_0^{-1}(\mu_c-\mu_0)+\tr(\Sigma_0^{-1}\Sigma_c)-2$$

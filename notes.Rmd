@@ -400,7 +400,7 @@ Our goal is calculate a formula for $w_i$. Let $P_i$ be the set of all parental 
 
 $$w_i=2\sum_{\substack{z\in P_i}}\phi_p(z)\phi_p(2m_i-z).$$
 
-If we knew the exact set of parental phenotypes, this would not be difficult to calculate. But if we want to continue iterating this process, this calculation becomes very non-trivial. To simplify this, I will blur the exactness of each parents' phenotype. Instead of pretending that we know the exact value of each phenotype, I'll assume each parental phenotype is a random variable independent of one another and identically distributed throughout the population. With this uncertainty, the set of possible midparents becomes uncountably infinite and their distribution will become continuous instead of discrete. We will adjust our notation to reflect this so that $w(m)$ is the probability density for the offspring trait $m$ (which in this case is equivalent to the midparents, hence the $m$) whose domain is now all of $\R$. The above summation becomes the integral
+If we knew the exact set of parental phenotypes, this would not be difficult to calculate. But if we want to continue iterating this process, this calculation becomes very non-trivial. To simplify this, I will blur the exactness of each parents' phenotype. Instead of pretending that we know the exact value of each phenotype, I'll assume each parental phenotype is a random variable independent of one another and identically distributed throughout the population. With this uncertainty, the set of possible midparents becomes uncountably infinite and their distribution will become continuous instead of discrete. We will adjust our notation to reflect this so that $w(m)$ is the probability density for the offspring trait $m$ (which in this case is equivalent to the midparent, hence the $m$) whose domain is now all of $\R$. The above summation becomes the integral
 
 $$w(m)=2\int_\R \phi_p(z)\phi_p(2m-z)dz.$$
 
@@ -480,7 +480,7 @@ I've been assuming these populations are hermaphroditic. Would about a two-sex s
 
 A little excerpt from [Warren J. Ewens](http://www.springer.com/us/book/9780387201917):
 
-"It is the the 'quantal' nature of the gene that leads to the stability behavior described by the Hardy-Weinberg law. It is thus interesting that the year in which the Mendelia theory was rediscovered, 1900, was the same year as the introduction of the quantum theory in physics. Both theories have been fundamental and crucial in their respective spheres. One can even claim that if there is intelligent life, that is, life that has evolved via natural selection, elsewhere in the universe, the hereditary mechanism involve must be a quantal, maybe a Mendelian, one, since otherwise it is not clear how the variation necessary for evolution by natural selection can be maintained."
+"It is the the 'quantal' nature of the gene that leads to the stability behavior described by the Hardy-Weinberg law. It is thus interesting that the year in which the Mendelia theory was rediscovered, 1900, was the same year as the introduction of the quantum theory in physics. Both theories have been fundamental and crucial in their respective spheres. One can even claim that if there is intelligent life, that is, life that has evolved via natural selection, elsewhere in the universe, the hereditary mechanism involved must be a quantal, maybe a Mendelian, one, since otherwise it is not clear how the variation necessary for evolution by natural selection can be maintained."
 
 <!--
 
@@ -528,11 +528,11 @@ From my perspective, mutation is a force that causes imperfect replication. That
 
 Finally, before we dive in, I just would like to remind myself that the following is not restricted to common phenotypes such as genotype, height, toxicity, etc, but also to location. We can think of the different types as either discrete locations or a continuum of geographical space. In this case mutation is nothing more that dispersion.
 
-Returning to a population of $T$ types, let's now suppose that there is a probability $P_{ij}$ that an individual of type $i$ produces an offspring of type $j$. Then, if $W(i)$ is the expected fitness of an individual of type $i$, this individual will on average produce $W(i)P_{ij}$ individuals of type $j$ and $W(i)(1-\sum_{j\neq i}P_{ij})$ individuals of type $i$. The expected dynamics for each type is then
+Returning to a population of $T$ types, let's now suppose that there is a probability $P_t(i,j)$ that an individual of type $i$ produces an offspring of type $j$. Then, if $W(i)$ is the expected fitness of an individual of type $i$, this individual will on average produce $W(i)P_t(i,j)$ individuals of type $j$ and $W(i)P_t(i,i)$ individuals of type $i$. The expected dynamics for each type is then
 
-$$n_{t+1}(i)=\sum_{j=0}^TP_{ji}W(j)n_t(j)$$
+$$n_{t+1}(i)=\sum_{j=0}^TP_t(j,i)W(j)n_t(j)$$
 
-If we write $\mathbf{n}_t$ as a row vector denoting the sizes of each type and $\tilde P$ for a matrix whose entries are $W_{t+1}(j)P_{ij}$, we have
+If we write $\mathbf{n}_t$ as a row vector denoting the sizes of each type and $\tilde P$ for a matrix whose entries are $W_{t+1}(j)P_t(i,j)$, we have
 
 $$\mathbf{n}_{t+1}=\mathbf{n}_t \tilde P.$$
 
