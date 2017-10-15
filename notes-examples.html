@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Examples</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="interactive_theory.html">Interactive Theory</a></li>
+        <li><a href="inferring_coevolution.html">Inferring Coevolution</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="notes-fitness.html">Fitness</a></li>
+            <li><a href="notes-evolution.html">Evolution</a></li>
+            <li><a href="notes-examples.html">Examples</a></li>
+            <li><a href="notes-misc.html">Misc</a></li>
+          </ul>
+        </li>
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Examples</h1>
+
+</div>
+
+
+<!--
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+-->
+<p>These notes are the result of the interplay between my background in mathematics and my development as a theoretical biologist. I have placed them here primarily for my own reference. As I continue to learn and explore I will update these notes with my findings.</p>
+<div id="a-continuous-time-example" class="section level3">
+<h3>A Continuous Time Example</h3>
+<p>Let’s suppose we have a continuum of types indexed by <span class="math inline">\(z\)</span>. If we set <span class="math inline">\(W_t(z)=W_{max}\exp{\left( -\frac{(\theta-z)^2}{2\omega^2} \right)}\)</span> and <span class="math inline">\(\phi_0(z)=\frac{1}{\sqrt{2\pi\sigma_0^2}}\exp{\left( -\frac{(\bar z_0-z)^2}{2\sigma_0^2} \right)}\)</span>, then</p>
+<p><span class="math display">\[\frac{d\bar z_t}{dt}=\frac{\sigma_t^2}{\omega^2}(\theta-\bar z_t) \ \text{and} \ \frac{d\sigma^2_t}{dt}=-\frac{\sigma_t^4}{\omega^2}.\]</span></p>
+<p>Thus</p>
+<p><span class="math display">\[\sigma_t^2=\frac{\omega^2\sigma_0^2}{\omega^2+t\sigma_0^2}, \ \bar z_t=\frac{\omega^2\bar z_0+t\sigma_0^2\theta}{\omega^2+t\sigma_0^2},\]</span></p>
+<p>Compare this with the quantitative genetic results below. We can then plug these solutions for the mean and variance into the expression for <span class="math inline">\(\phi_t\)</span> to solve for the evolution of the whole distribution.</p>
+<p><span class="math display">\[\phi_t(z)=\frac{1}{\sqrt{2\pi\sigma_t^2}}\exp{\left( -\frac{(\bar z_t-z)^2}{2\sigma_t^2} \right)}\]</span></p>
+<p>This provides the following solution for the population size:</p>
+<p><span class="math display">\[N_t=N_0W_{max}^t\sqrt{\frac{\omega^2}{t\sigma_0^2+\omega^2}}\exp{\left( -t\frac{(\theta-\bar z_0)^2}{2(t\sigma_0^2+\omega^2)} \right)}.\]</span></p>
+<p>We can see that <span class="math inline">\(\sigma_t^2\)</span> will asymptotically decrease towards zero, which is not very realistic since we know extant populations maintain some variance. To prevent this we can assume the existence of some process that increases variance at the rate <span class="math inline">\(\eta^2\)</span> so that <span class="math inline">\(D_t\sigma_t^2=\eta^2-\sigma_t^4/\omega^2\)</span>. Our results change and become</p>
+<p><span class="math display">\[\bar z_t=\theta+C_2\mathrm{sech}{\left( \frac{\eta}{\omega}t+C_1 \right)}, \ \sigma_t^2=\eta \ \omega \ \mathrm{tanh}{\left( \frac{\eta}{\omega}t+C_1 \right)}\]</span></p>
+<p>where <span class="math inline">\(C_1=\mathrm{atanh}{\left( \frac{\sigma_0^2}{\eta \ \omega} \right)}\)</span> and <span class="math inline">\(C_2=\sqrt{\frac{\eta^2\omega^2}{\eta^2\omega^2-\sigma_0^4}}(\bar z_0-\theta)\)</span>. Note that <span class="math inline">\(\mathrm{sech}(\mathrm{atanh}(x))=\sqrt{1-x^2}.\)</span></p>
+<p><span class="math display">\[N_t=N_0e^{\int_0^t\overline{\ln W}_sds}=N_0W_{max}^t\exp{\left( \int_0^t-\frac{(\theta-\bar z_s)^2}{2\omega^2}-\frac{1}{2}\frac{\sigma_s^2}{\omega^2}ds \right)}=\dots\]</span></p>
+</div>
+<div id="another-example" class="section level3">
+<h3>Another Example</h3>
+<p>Let’s consider a population of individuals where the individuals interact with each other, potentially competing with or aiding one another in the search for resources. As above, I’ll consider a population indexed by a phenotype <span class="math inline">\(z\in{\mathbb{R}}\)</span> that is initially distributed normally with mean <span class="math inline">\(\bar z_0\)</span> and variance <span class="math inline">\(\sigma_0^2\)</span>. Suppose that each individual interacts with a random number <span class="math inline">\(K\)</span> of individuals from its population, each chosen randomly and independently. I’ll write the fitness of an individual with phenotype <span class="math inline">\(z\)</span> that interacts with individuals with phenotypes <span class="math inline">\(z_1,\dots,z_K\)</span> as <span class="math inline">\(W(z|z_1,\dots,z_K)\)</span> and assume it decomposes as follows</p>
+<p><span class="math display">\[W(z|z_1,\dots,z_K)=\prod_{i=1}^KW(z|z_i).\]</span></p>
+<p><span class="math display">\[W(z|z_i)=W_{max}\exp{\left( -\frac{(z_i-z)^2}{2\omega^2} \right)}\]</span></p>
+<p><span class="math display">\[W(z|K)=W_{max}^K{\left( \frac{\omega^2}{\omega^2+\sigma_t^2} \right)}^{K/2}\exp{\left( -K\frac{(\bar z_t-z)^2}{2(\omega^2+\sigma_t^2)} \right)}\]</span></p>
+<p><span class="math inline">\(K\sim\mathrm{Bin}(N_t,p)\)</span></p>
+<p><span class="math display">\[W(z)=\prod_{i=0}^NW(z|K=i)^{P(K=i)}=W_{max}^{pN_t}{\left( \frac{\omega^2}{\omega^2+\sigma_t^2} \right)}^{pN_t/2}\exp{\left( -pN_t\frac{(\bar z_t-z)^2}{2(\omega^2+\sigma_t^2)} \right)}\]</span></p>
+<p><span class="math display">\[\frac{d\bar z_t}{dt}=0, \ \frac{d\sigma_t^2}{dt}=-\frac{pN_t}{\omega^2+\sigma_t^2}\sigma_t^4\]</span></p>
+<p><span class="math display">\[\frac{dN_t}{dt}=pN_t^2{\left( \ln W_{max}+\ln\sqrt{\frac{\omega^2}{\omega^2+\sigma_t^2}}-\frac{\sigma_t^2}{2(\omega^2+\sigma_t^2)} \right)}\]</span></p>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>We can see that the population evolves to have less diversity but increased population size. The fitness used assumed that the more similar individuals are, the more they will benefit each others fitness. So selection for the mean of the population occurs, which then increases the mean fitness of the population. Let’s see what happens when each interaction has an equivalent effect on fitness regardless of the phenotypes involved. We might assume that at lower population densities, the individuals help each other, but at higher densities they tend to hinder each other. Let’s use <span class="math inline">\(p_1\)</span> for the proportion of the population an individual encounters that benefits its fitness and <span class="math inline">\(p_2\)</span> for the proportion that hinder. Then <span class="math inline">\(p=p_1+p_2\)</span> is the total proportion of the population encountered and <span class="math inline">\(\pi_1=\frac{p_1}{p_1+p_2}\)</span> is the fraction of this that helps and <span class="math inline">\(1-\pi_1=\pi_2=\frac{p_2}{p_1+p_2}\)</span> is the fraction that hinders. Let’s suppose <span class="math inline">\(\pi_1=\frac{1}{N_t+1}\)</span> making <span class="math inline">\(\pi_2=\frac{N_t}{N_t+1}\)</span></p>
+<p><span class="math display">\[W_1&gt;1, \ W_2&lt;1\]</span></p>
+<p><span class="math display">\[W(z|z_i)=W_1^{\pi_1}W_2^{\pi_2}\implies W(z|z_1,\dots,z_K)=W_1^{K\pi_1}W_2^{K\pi_2}\implies W(z)=W_1^{pN_t\pi_1}W_2^{pN_t\pi_2}
+=W_1^{p\frac{N_t}{N_t+1}}W_2^{p\frac{N_t^2}{N_t+1}}\]</span></p>
+<p><span class="math display">\[\frac{dN_t}{dt}=p\frac{N_t}{N_t+1}\ln W_1+p\frac{N_t^2}{N_t+1}\ln W_2\implies N_\infty=-\frac{\ln W_1}{\ln W_2}\]</span></p>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Returning to evolution, we might assume the Gaussian term used above represents the effectiveness of an individual in helping or hindering another individual based on how similar they are. In this case we get</p>
+<p><span class="math display">\[W(z|z_i)=W_1^{\pi_1}W_2^{\pi_2}\exp{\left( -\frac{(z_i-z)^2}{2\omega^2} \right)}\implies W(z|z_1,\dots,z_K)=W_1^{K\pi_1}W_2^{K\pi_2}\exp{\left( -K\frac{(z_i-z)^2}{2\omega^2} \right)}\]</span></p>
+<p><span class="math display">\[\implies W(z)=W_1^{pN_t\pi_1}W_2^{pN_t\pi_2}\exp{\left( -pN_t\frac{(\bar z_t-z)^2}{2(\omega^2+\sigma_t^2)} \right)}
+=W_1^{p\frac{N_t}{N_t+1}}W_2^{p\frac{N_t^2}{N_t+1}}\exp{\left( -pN_t\frac{(\bar z_t-z)^2}{2(\omega^2+\sigma_t^2)} \right)}\]</span></p>
+<p><span class="math display">\[\frac{d\sigma_t^2}{dt}=\eta^2-\frac{pN_t}{\omega^2+\sigma_t^2}\sigma_t^4\]</span></p>
+<p><span class="math display">\[\frac{dN_t}{dt}=p\frac{N_t}{N_t+1}\ln W_1+p\frac{N_t^2}{N_t+1}\ln W_2+pN_t^2\ln\sqrt{\frac{\omega^2}{\omega^2+\sigma_t^2}}-pN_t^2\frac{\sigma_t^2}{2(\omega^2+\sigma_t^2)}\]</span></p>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>This seems promising.</p>
+</div>
+<div id="another-other-example" class="section level3">
+<h3>Another Other Example</h3>
+<p>Expanding on the above, consider two interacting populations each indexed by <span class="math inline">\(x,y\in{\mathbb{R}}\)</span> respectively. Let’s suppose the expected fitness of an individual depends not only on its phenotype, but also on the phenotypes of the individuals it interacts with. Each interaction builds up to overall fitness of the individual. For example, for an individual with phenotype <span class="math inline">\(x\)</span> that interacts with <span class="math inline">\(K_1\)</span> individuals with phenotypes <span class="math inline">\(y_1,y_2,\dots,y_{K_1}\)</span>, we can define fitness for <span class="math inline">\(x\)</span> to be</p>
+<p><span class="math display">\[W_1(x|y_1,\dots,y_{K_1})\equiv\prod_{i=1}^{K_1}W_1(x|y_i).\]</span></p>
+<p>If there’s <span class="math inline">\(N_{2,t}\)</span> individuals in species 2 at time <span class="math inline">\(t\)</span>, we can have <span class="math inline">\(K_1\sim\mathrm{Bin}(N_{2,t},p_1)\)</span>. Suppose <span class="math inline">\(W_1(x|y)=W_{1,max}\exp{\left( -\frac{(y-x)^2}{2\omega_1^2} \right)}\)</span>, then</p>
+<p><span class="math display">\[W_1(x|y_1,\dots,y_{K_1})=W_{1,max}^{K_1}\exp{\left( -\sum_{i=1}^{K_1}\frac{(y_i-x)^2}{2\omega_1^2} \right)}\]</span></p>
+<p>If we assume the phenotypes <span class="math inline">\(y_1,\dots,y_{K_1}\)</span> are distributed normally and are drawn at random independently of one another, we can calculate the expected fitness for an individual from population 1 with phenotype <span class="math inline">\(x\)</span> given that it interacts with <span class="math inline">\(K_1\)</span> individuals as</p>
+<p><span class="math display">\[W_1(x|K_1)=\int_{\mathbb{R}}\cdots\int_{\mathbb{R}}W_1(x|y_1,\dots,y_{K_1})\phi_{2,t}(y_1)\cdots\phi_{2,t}(y_{K_1})dy_1\cdots dy_{K_1}={\left( \int_{\mathbb{R}}W_1(x|y)\phi_{2,t}(y)dy \right)}^{K_1}\]</span></p>
+<p><span class="math display">\[=W_{1,max}^{K_1}\exp{\left( -K_1\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}.\]</span></p>
+<p>Finally, to get the total expected fitness <span class="math inline">\(W_1(x)\)</span>, we average over all possible values of <span class="math inline">\(K_1\)</span>. However, since each component of fitness multiplies together to produce the total fitness, we shouldn’t take an arithmetic average, we should take a geometric average. Doing so provides the following result</p>
+<p><span class="math display">\[W_1(x)=\prod_{i=0}^{N_{2,t}}W_1(x|K_1=i)^{P(K_1=i)}=W_{1,max}^{p_1N_{2,t}}\exp{\left( -p_1N_{2,t}\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}.\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\ln W_1(x)=\sum_{i=0}^{N_{2,t}}P(K_1=i)\ln W_1(x|K_1=i)=p_1N_{2,t}{\left( \ln W_{1,max}-\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}\]</span></p>
+<p><span class="math display">\[\dots\]</span></p>
+<p><span class="math display">\[\frac{d\bar x_t}{dt}=\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^2(\bar y_t-\bar x_t) \ \text{and} \
+\frac{d\sigma_{1,t}^2}{dt}=-\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^4\]</span></p>
+<p><span class="math display">\[\frac{dN_{1,t}}{dt}=\overline{\ln W_t}N_{1,t}=p_1{\left( \ln W_{1,max}-\frac{(\bar y_t-\bar x_t)^2+\sigma_{1,t}^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}N_{2,t}N_{1,t}\]</span></p>
+<p>To solve this, we have to solve a system of six nonlinear differential equations simultaneously. Wouldn’t it be nice to just get rid of the population dynamics? If we assumed that each individual interacts with the same number of individuals from the opposing population every generation, this would be equivalent to assuming the population sizes are constant. But then we would need some combination of extinction, zero interaction, or zero selection. Any of those three possibilities defeats the purpose of this investigation, so it cannot be logically reduced to a simpler problem. However, it’s this added complexity that we were interested in to begin with, so this is not an issue. Let’s begin with a numerical exploration.</p>
+<div id="parameters" class="section level4">
+<h4>Parameters:</h4>
+<ul>
+<li><span class="math inline">\(p_1=p_2=0.01\)</span></li>
+<li><span class="math inline">\(\ln W_{1,max}=\ln W_{2,max}=0.001\)</span></li>
+<li><span class="math inline">\(\omega_1^2=\omega_2^2=1000\)</span></li>
+<li><span class="math inline">\(\bar x_0=10, \ \bar y_0=-10\)</span></li>
+<li><span class="math inline">\(\sigma_{1,0}^2=\sigma_{2,0}^2=100\)</span></li>
+<li><span class="math inline">\(N_{1,0}=N_{2,0}=100\)</span></li>
+</ul>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-8-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="increasing-the-strength-of-selection" class="section level4">
+<h4>Increasing the Strength of Selection:</h4>
+<ul>
+<li><span class="math inline">\(\omega_1^2=\omega_2^2=100\)</span></li>
+</ul>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="asymmetric-strengths-of-selection" class="section level4">
+<h4>Asymmetric Strengths of Selection:</h4>
+<ul>
+<li><span class="math inline">\(\omega_1^2=100, \ \omega_2^2=1000\)</span></li>
+</ul>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-10-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="incorporating-density-regulation-and-other-stuff" class="section level4">
+<h4>Incorporating Density Regulation and Other Stuff</h4>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-12-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+<div id="now-all-that-with-asymmetry" class="section level4">
+<h4>Now all that with Asymmetry</h4>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-14-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="a-non-gaussian-example" class="section level3">
+<h3>A Non-Gaussian Example</h3>
+<p>The reason why we only needed to track the mean variance of phenotypes in order to capture the whole distribution was due to our choice of initial phenotypic distribution and selection function. They were both Gaussian for all of the above examples. If either is not Gaussian, then the resulting trajectory of phenotypic distributions will not fall within a Gaussian realm.</p>
+<div id="just-mutation" class="section level4">
+<h4>Just Mutation</h4>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+<div id="mutation-and-random-mating" class="section level4">
+<h4>Mutation and Random Mating</h4>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+<div id="bimodal-selection" class="section level4">
+<h4>Bimodal Selection</h4>
+<p>Our selection surface will be the following.</p>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>The resulting phenotypic density takes the following trajectory.</p>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Adding weak random mating:</p>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+<div id="stochastic-selection" class="section level4">
+<h4>Stochastic Selection</h4>
+<p>Our selection surface is modelled as space-time white noise. At every time step a random discontinuous surface is generated, each one taking the following general appearance:</p>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>Across time, this random surface can be visualized as a contour plot where hot colors correspond to high fitness and cool colors correspond to low fitness.</p>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>The resulting phenotypic density takes the following trajectory.</p>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>Adding a bit of random mating:</p>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+</div>
+<div id="stochastic-bimodal-selection" class="section level4">
+<h4>Stochastic Bimodal Selection</h4>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+</div>
+<div id="stochastic-selection-that-changes-smoothly-over-time" class="section level4">
+<h4>Stochastic Selection That Changes Smoothly Over Time</h4>
+<p>Our selection surface will be random, but smooth in both space and time. At an instant, it will generally look something like the following.</p>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<pre><code>## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?
+
+## Warning in contour.default(z = out, x = times, y = c(-30, -29.9, -29.8, :
+## contour(): circular/long seglist -- set options(&quot;max.contour.segments&quot;) &gt;
+## 25000?</code></pre>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="notes-examples_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<!--
+
+#### Spate
+
+
+```r
+# require(spate)
+# # might need > sudo apt-get install fftw3 fftw3-dev pkg-config
+# StartVal <- rep(0,100^2)
+# StartVal[75*100+75] <- 1000
+# par <- c(rho0=0.05,sigma2=0.7^2,zeta=-log(0.99),rho1=0.06,gamma=3,alpha=pi/4,muX=-0.1,muY=-0.1,tau2=0.00001)
+# spateSim <- spate.sim(par=par,n=100,T=5,StartVal=StartVal,seed=1)
+# plot(spateSim,mfrow=c(1,5),mar=c(2,2,2,2),indScale=TRUE,cex.axis=1.5,cex.main=2)
+```
+
+-->
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

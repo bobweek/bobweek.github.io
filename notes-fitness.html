@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Fitness</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="interactive_theory.html">Interactive Theory</a></li>
+        <li><a href="inferring_coevolution.html">Inferring Coevolution</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="notes-fitness.html">Fitness</a></li>
+            <li><a href="notes-evolution.html">Evolution</a></li>
+            <li><a href="notes-examples.html">Examples</a></li>
+            <li><a href="notes-misc.html">Misc</a></li>
+          </ul>
+        </li>
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Fitness</h1>
+
+</div>
+
+
+<!--
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+-->
+<p>These notes are the result of the interplay between my background in mathematics and my development as a theoretical biologist. I have placed them here primarily for my own reference. As I continue to learn and explore I will update these notes with my findings.</p>
+<div id="fitness" class="section level2">
+<h2>Fitness</h2>
+<p>I denote the fitness of an individual by <span class="math inline">\({\mathcal{W}}\)</span>, a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson</a> distributed random variable. Why Poisson? Firstly, the fitness of an individual is the number of offspring it leaves, which is a non-negative integer. This coincides precisely with the support of the Poisson distribution. Secondly, the Poisson distribution has the property of maximizing <a href="https://en.wikipedia.org/wiki/Principle_of_maximum_entropy">entropy</a> for all distributions that share its support under the constraint of having some specified mean. This is another of way stating that, aside from the first <a href="https://en.wikipedia.org/wiki/Moment_(mathematics)">statistical moment</a>, the Poisson distribution assumes the least information about the random variable it is modelling. If more information is known, a more precise distribution can be invoked. However, this would also make the resulting model less general.</p>
+<p>We denote expectation by <span class="math inline">\(\mathbb{E}\)</span> and <span class="math inline">\(W\equiv\mathbb{E}{\mathcal{W}}\)</span> so that <span class="math inline">\(W\)</span> represents the mean fitness of an individual (<span class="math inline">\(\equiv\)</span> is used for definitions). This individual mean fitness may depend on its genotype (<span class="math inline">\(\gamma\)</span>) or, more mechanistically, its phenotype (<span class="math inline">\(z\)</span>). In general genotypes will be modelled as elements of some discrete space, usually finite, and phenotypes will usually be modelled as elements of the real line <span class="math inline">\(\mathbb{R}\)</span>, although at times we will restrict the range of phenotypes to be a countable or even finite subset of <span class="math inline">\(\mathbb{R}\)</span>. In the case of a random phenotype <span class="math inline">\(Z\)</span> we write <span class="math inline">\(W(z)\equiv\mathbb{E}({\mathcal{W}}(Z)|Z=z)\)</span>, that is <span class="math inline">\(W(z)\)</span> is a conditional mean, conditioned on the phenotype <span class="math inline">\(Z\)</span> taking a particular value <span class="math inline">\(z\)</span>. In the case of a continuously distributed trait, we will use <span class="math inline">\(\phi(z)\)</span> for the density function of the populations phenotypic distribution. Then the total expectation of fitness, or, population mean fitness is</p>
+<p><span class="math display">\[\overline W={\mathbb{E}}{\mathcal{W}}(Z)=\int W(z)\phi(z)dz.\]</span></p>
+<p>For discrete traits we write <span class="math inline">\(\phi(i)\)</span> and <span class="math inline">\(W(i)\)</span> for the frequency and mean fitness of trait <span class="math inline">\(i\)</span> in the population. Population mean fitness is then calculated as <span class="math inline">\(\overline W=\sum_iW(i)\phi(i)\)</span>.</p>
+</div>
+<div id="population-dynamics" class="section level2">
+<h2>Population Dynamics</h2>
+<p>Let’s suppose there are <span class="math inline">\(N_t\)</span> different individuals in the population at time <span class="math inline">\(t\)</span>, with each individual <span class="math inline">\(i\)</span> having fitness <span class="math inline">\(\mathcal{W_{t+1}}(i)\)</span>. If we further suppose that generations are non-overlapping, then we obtain the population size in the next generation as <span class="math inline">\(N_{t+1}=\sum_{i=1}^{N_t}\mathcal{W_{t+1}}(i)\)</span>. If each <span class="math inline">\(\mathcal{W_{t+1}}(i)\)</span> is a Poisson random variable with mean <span class="math inline">\(W_{t+1}(i)\)</span> (in symbols <span class="math inline">\(\mathcal{W_{t+1}}(i)\sim\mathcal{P}(W_{t+1}(i))\)</span>), then by the additive property of Poisson random variables we have <span class="math inline">\(N_{t+1}\sim\mathcal{P}\left(\sum_{i=1}^{N_t}W_{t+1}(i)\right)\)</span>. If selection is absent so that each <span class="math inline">\(\mathcal{W_{t+1}}(i)\)</span> is identically distributed with mean <span class="math inline">\(W_{t+1}\)</span>, then <span class="math inline">\(N_{t+1}\sim\mathcal{P}(W_{t+1}N_t)\)</span>.</p>
+<p>Let’s now suppose we know the value of <span class="math inline">\(N_0\)</span> exactly and that <span class="math inline">\(W_t=W\)</span> for each <span class="math inline">\(t\)</span>. Then <span class="math inline">\(N_1\sim\mathcal{P}(WN_0)\)</span> and <span class="math inline">\(N_2\sim\mathcal{P}(WN_1)=\mathcal{P}(W^2N_0)\)</span>, right? We need to be careful here as <span class="math inline">\(N_1\)</span> is a random variable making <span class="math inline">\(N_2\)</span> a random variable with a compound distribution, that is, a parameter controlling the distribution is itself a random variable. We can use the laws of total expectation and variance to find out if <span class="math inline">\(N_1\)</span> is Poisson. If it is, then the expectation and variance will be equivalent. Otherwise it is not a Poisson random variable.</p>
+<p><span class="math display">\[{\mathbb{E}}(N_2)={\mathbb{E}}({\mathcal{W}}){\mathbb{E}}(N_1)=W^2N_0\]</span></p>
+<p><span class="math display">\[\mathrm{Var}(N_2)=(\mathrm{Var}({\mathcal{W}})+\mathbb{E}({\mathcal{W}})^2)\mathbb{E}(N_1)=(1+W)W^2N_0\neq\mathbb{E}(N_2)\]</span></p>
+<p>For now, let’s settle for deterministic dynamics. We’ll return to the stochastics after we get a feel for the simplier situation.</p>
+<div id="continuous-time" class="section level3">
+<h3>Continuous Time</h3>
+<p>If we assume that selection is absent and mean fitness is constant with respect to time, we can derive continuous time mean dynamics of <span class="math inline">\(N_t\)</span>. To do so, suppose that for <span class="math inline">\(0&lt;\delta&lt;1\)</span>, <span class="math inline">\(\mathbb{E}N_{t+\delta}=W^\delta\mathbb{E} N_t\)</span>. Then <span class="math inline">\(\mathbb{E}N_{t+0}=\mathbb{E}N_t\)</span> and <span class="math inline">\(\mathbb{E}N_{t+1}=W\mathbb{E}N_t\)</span>. Hence</p>
+<p><span class="math display">\[\mathbb{E}\frac{dN_t}{dt}=\frac{d}{dt}\mathbb{E}N_t=\lim_{\delta\rightarrow0}\frac{\mathbb{E}N_{t+\delta}-\mathbb{E}N_t}{\delta}\]</span></p>
+<p><span class="math display">\[=\lim_{\delta\rightarrow0}\frac{(W^\delta-1)}{\delta}\mathbb{E}N_t=\ln(W)\mathbb{E}N_t.\]</span></p>
+<p>Note that switching the derivative and the expectation must be formally justified. In what follows, we won’t drag the annoying expectation symbol along with us. Instead we will adopt the convention that <span class="math inline">\(N_t\)</span> is actually an expected value.</p>
+<p>In typical notation one would write <span class="math inline">\(r\)</span> in place of <span class="math inline">\(\ln(W)\)</span>. This exposes an interesting connection between two very distinct notions of fitness. The notion of fitness that I’ve been working with, <span class="math inline">\(W\)</span>, is called the Wrightian, or, multiplicative fitness. It is a non-negative number that corresponds to the expected number of offspring produced for some category. It’s been called multiplicative fitness because the multiplication of any two Wrightian fitnesses is yet another Wrightian fitness. The natural log of this value is known as the Malthusian, or, additive fitness. Its value can be positive or negative and corresponds to the expected per capita rate at which abundance fluctuates instantaneously. Note that the log of a product is the sum of the logs. It’s this basic log rule that provides the Malthusian fitness its additivity. The sum of any two Malthusian fitnesses is again a Malthusian fitness. Artem Kaznatcheev has a nice discussion of this topic <a href="https://egtheory.wordpress.com/2016/08/17/weak-selection">here</a>. To solidify the connection between these two notions of fitness, consider a population that maintains a constant size of 100 but becomes extinct at a single instant (as shown below). This corresponds to each individual at first having a fitness of 1 (remember we’re assuming fitness is constant throughout the population) making the Malthusian fitness of the population zero (hence, constant population size). Then when the population drops each individual must suddenly have a Wrightian fitness of zero. The Malthusian fitness of the population will then be <span class="math inline">\(\ln(0)\)</span> which is <span class="math inline">\(-\infty\)</span>, corresponding to the discontinuous drop in the population size.</p>
+<p><img src="notes-fitness_files/figure-html/unnamed-chunk-1-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>However, this result is a bit of an abuse of the above derivation as we had made the assumption that fitness is constant with respect to time. If we assume that <span class="math inline">\(\frac{dN_t}{dt}=\ln(W_t)N_t\)</span>, where now <span class="math inline">\(W_t\)</span> is allowed to change with respect to time, then for consistency it would be good to reconcile this equation with the above assumption that <span class="math inline">\(N_{t+1}-N_t=(W_{t+1}-1)N_t\)</span>. Doing so restricts the nature of <span class="math inline">\(W_t\)</span>. Specifically,</p>
+<p><span class="math display">\[1) \ \frac{d}{dt}(N_{t+1}-N_t)=\frac{d}{dt}(W_{t+1}-1)N_t=\frac{dW_{t+1}}{dt}N_t+(W_{t+1}-1)\frac{dN_t}{dt}\]</span> <span class="math display">\[={\left( \frac{dW_{t+1}}{dt}+(W_{t+1}-1)\ln W_t \right)}N_t\]</span></p>
+<p><span class="math display">\[2) \ \frac{d}{dt}(N_{t+1}-N_t)=N_{t+1}\ln W_{t+1}-N_t\ln W_t=(W_{t+1}\ln W_{t+1}-\ln W_t)N_t.\]</span></p>
+<p>Dividing eqns 1) and 2) by <span class="math inline">\(N_t\)</span>, then subtracting <span class="math inline">\(W_{t+1}\ln W_t-\ln W_t\)</span> from both returns</p>
+<p><span class="math display">\[\frac{dW_{t+1}}{dt}=W_{t+1}\ln W_{t+1}-\ln W_t-W_{t+1}\ln W_t+\ln W_t.\]</span></p>
+<p>Shifting the time index and simplifying provides</p>
+<p><span class="math display">\[\frac{d\ln W_t}{dt}=\ln W_t - \ln W_{t-1}.\]</span></p>
+<p>This states that if <span class="math inline">\(W_t=0\)</span> for some <span class="math inline">\(t\)</span>, then <span class="math inline">\(W_s=0\)</span> for <span class="math inline">\(s&gt;t\)</span>. That is to say, if the population goes extinct, it remains extinct. This makes perfect sense in the absence of immigration, but there’s another implication in this equation and to explore it I will assume that the general form of <span class="math inline">\(W_t\)</span> is <span class="math inline">\(W_t=e^{r_t}\)</span> for some function <span class="math inline">\(r_t\)</span>. Note that this implies <span class="math inline">\(\frac{dN_t}{dt}=r_tN_t\)</span>. Then the previously derived equation is equivalent to <span class="math inline">\(\frac{dr_t}{dt}=r_t-r_{t-1}\)</span>. In the case that <span class="math inline">\(r_t=k+r_{t-1}\)</span> for some constant <span class="math inline">\(k\)</span>, we get <span class="math inline">\(r_t=kt+c\)</span>, making <span class="math inline">\(\frac{dN_t}{dt}=(kt+c)N_t\)</span>. But we can also make <span class="math inline">\(k_t\)</span> a function <span class="math inline">\(t\)</span>. Here we get</p>
+<p><span class="math display">\[\frac{dN_t}{dt}=\left(\int_0^tk_sds+c\right)N_t\]</span></p>
+<p>This might be handy if, say, you wanted to incorporate the effects of population dynamics of another species that interacts with this one. In that case <span class="math inline">\(k_t\)</span> would likely be a function of the other species’ population size at time <span class="math inline">\(t\)</span>. But there are other possibilities. For example, we can set <span class="math inline">\(r_t=k_tr_{t-1}\)</span> to get</p>
+<p><span class="math display">\[\frac{dN_t}{dt}=\left(e^{\int_0^tk_sds-t}+c\right)N_t.\]</span></p>
+<p>Regardless of what is chosen for <span class="math inline">\(r_t\)</span>, this trick will be assured to work when <span class="math inline">\(r_t\)</span> is a linear function of <span class="math inline">\(r_{t-1}\)</span>. That is, <span class="math inline">\(r_t=a_t+b_tr_{t-1}\)</span>. In this general case we get</p>
+<p><span class="math display">\[\frac{dN_t}{dt}=\left(\int_0^ta_sds+e^{\int_0^tb_sds-t}+c\right)N_t.\]</span></p>
+<p>We can then solve for the mean population size as a function of time to get</p>
+<p><span class="math display">\[N_t=N_0e^{\int_0^tr(s)ds}.\]</span></p>
+<!--
+
+### Aside
+
+Before moving on, I just want to point out that these continuous time dynamics of $N_t$ imply that $N_t$ is not restricted to the set of non-negative integers, but can take any value that is a non-negative real number ($\R_{\geq0}$). The usual population size update
+
+$$N_{t+1}=\sum_{i=1}^{N_t}\W_t(i)$$
+
+is associated with a particular partition of the interval $(0,N_t]$, namely $\{(0,1),(1,2),\dots,(N_t-2,N_t-1),(N_t-1,N_t]\}$. Assuming $N_t$ is a whole number this partition has $N_t$ uniform subintervals, each of width $1$. We could instead parition $(0,N_t]$ into $K$ uniform subintervals, each of width $N_t/K$. For $x\in(0,N_t]$ define
+
+$$Y_t(x)\equiv\W_t(\lceil x\rceil).$$
+
+$$N_{t+1}=\sum_{i=1}^KY_t(N_ti/K)\frac{N_t}{K}\rightarrow\int_0^{N_t}Y_t(x)dx$$
+
+$$=\sum_{i=1}^{N_t}\int_{i-1}^iY_t(i)dx=\sum_{i=0}^{N_t}Y_t(i)(i-(i-1))=\sum_{i=1}^{N_t}\W_t(i).$$
+
+For the sake of continuity we might instead decide to ignore the individual level fitnesses and just assume the population as a whole has fitness $\W_t\sim\ln\mathcal{N}(\ln W_t,V_t)$. We can still write $N_{t+1}=\W_t N_t$ and use the same limiting approach as above to obtain $\frac{dN_t}{dt}=\ln\W_t N_t$, but now $\ln\W_t\sim\mathcal{N}(\ln W_t,V_t)$ so that we are formally dealing with the stochastic differential equation
+
+$$dN_t=\ln W_tN_tdt+\sqrt{V_t}N_tdB_t$$
+
+where $B_t$ denotes the standard Brownian motion process. Note that this SDE defines [Geometric Brownian Motion](http://www.randomservices.org/random/brown/Geometric.html). This seems promising, but it would be better to derive it from the above framework instead leaving a disconnected trail of cookie crumbs. Note that we might not actually get GBM out since it cannot capture extinction. Instead, we might need to use the Feller diffusion that Steve, Chris and Dick have used in their paper.
+
+Instead of taking the above approach with $Y_t(x)$, we can consider the random variable that results from taking the limit
+
+$$\lim_{K\rightarrow\infty}\sum_{i=1}^K U_i, \ \U_i\sim\mathcal{P}(WN_t/K).$$
+
+We know $\para{\sum_{i=1}^K U_i}\sim\mathcal{P}(WN_t)$ for all finite $K$. I suppose then it is trivial that the above limit will also be distributed by a Poisson distribution with rate $WN_t$.
+
+TIME:
+
+$$N_{t+1}\sim\mathcal{P}(N_tW)$$
+
+$$N_{t+1}\overset{?}{=}N_t\W=N_t\prod_{i=1}^K\W_i^{1/K}\rightarrow N_te^{\int_0^1\ln \W_xdx}$$
+
+I think we'll wind up with a Levy jump process where the rate can possibly take a negatively infinite value. I wonder, though, if this is not what I want since I want continuous distributions of types, not a distribution where certain points happen to drop to zero.
+
+As the number of partitions heads towards infinity, the probability that they all return zero goes to zero, I think. So maybe extinction will be avoided in the limit.
+
+-->
+</div>
+<div id="returning-to-stochastics" class="section level3">
+<h3>Returning to Stochastics</h3>
+<p>Picking up where we left off, the variance has now been decoupled from the expectation forcing future generation population size distributions to be non-Poisson. This can be delt with if we choose the next best option<span class="math inline">\(\dots\)</span> the negative binomial <span class="math inline">\(\mathrm{NB}(\nu,p)\)</span>. By setting <span class="math inline">\(\nu=WN_0\)</span> and <span class="math inline">\(p=1-\frac{1}{1+W}\)</span> this provides the expectation and variance derived above, but is <span class="math inline">\(\mathrm{NB}\)</span> the actual distribution of <span class="math inline">\(N_2\)</span>? Regardless, we can continue this program to derive the first two moments of future population sizes. Solutions for the expectation and variance of population sizes with fixed mean fitness are</p>
+<p><span class="math display">\[{\mathbb{E}}(N_t)=W^tN_0 \text{ and } {\mathrm{Var}}(N_t)={\left( \sum_{i=0}^{t-1}W^i \right)}W^tN_0=\frac{1-W^t}{1-W}W^tN_0.\]</span></p>
+<p>Our negative binomial for each time <span class="math inline">\(t\)</span> can be accordingly parameterized by <span class="math inline">\(\nu_t=\frac{1-W}{W-W^t}W^tN_0\)</span> and <span class="math inline">\(p_t=\frac{W-W^t}{1-W^t}\)</span>.</p>
+<p>HYPOTHESIS: For <span class="math inline">\(W_t\neq W\)</span>, define <span class="math inline">\(W_0\equiv1\)</span> and <span class="math inline">\(W_s=0\)</span> for <span class="math inline">\(s&lt;0\)</span>. Using the convention <span class="math inline">\(\prod_{i=1}^0W_i=1\)</span> and <span class="math inline">\(\sum_{i=0}^{-1}W_i=0\)</span>, I think the following is true:</p>
+<p><span class="math display">\[{\mathbb{E}}(N_t)={\left( \prod_{i=1}^tW_i \right)}N_0 \text{ and } {\mathrm{Var}}(N_t)={\left( \sum_{i=0}^{t-1}\prod_{j=1}^iW_j \right)}{\left( \prod_{i=1}^tW_i \right)}N_0\]</span></p>
+<p>and</p>
+<p><span class="math display">\[{\mathbb{E}}(N_t)={\left( \bigwedge_0^tW_s^{ds} \right)}N_0 \text{ and }{\mathrm{Var}}(N_t)={\left( \int_0^t\bigwedge_0^sW_u^{du}ds \right)}{\mathbb{E}}(N_t)\]</span></p>
+<p>where <span class="math inline">\(\bigwedge\)</span> represents <a href="https://en.wikipedia.org/wiki/Product_integral">type-1 product integration</a> and is defined by</p>
+<p><span class="math display">\[\bigwedge_0^tW_s^{ds}\equiv e^{\int_0^t\ln W_sds}.\]</span></p>
+<p>Hence, this returns the same expected dynamics as above when <span class="math inline">\(\ln W_t=r_t\)</span>. If <span class="math inline">\(W_t=W\)</span> is constant across time we have</p>
+<p><span class="math display">\[\bigwedge_0^tW_s^{ds}=e^{t\ln W}\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\int_0^t\bigwedge_0^s W_u^{du}ds=\frac{1}{\ln W}{\left( e^{t\ln W}-1 \right)}.\]</span></p>
+<p>In the case where <span class="math inline">\(W=1\)</span> we have a problem. We can solve it with <a href="https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule">l’Hôpital’s rule</a>.</p>
+<p><span class="math display">\[\lim_{x\rightarrow0}\frac{e^{tx}-1}{x}=\lim_{x\rightarrow0}te^{tx}=t.\]</span></p>
+<p>Note that when <span class="math inline">\(W=1\)</span> there is no bias for the population to grow or shrink, sort of like a symmetric random walk. We also see that <span class="math inline">\({\mathbb{E}}(N_t)=N_0\)</span> for all <span class="math inline">\(t\)</span>, implying that the process <span class="math inline">\(N_t\)</span> is a martingale when <span class="math inline">\(W=1\)</span>.</p>
+<p>Let’s now find the dynamics of the variance of population size across time using the same approach that we took to obtain the dynamics of the mean. Using our solution for constant fitness across time, we can obtain a derivative by making the following additional assumption</p>
+<p><span class="math display">\[{\mathrm{Var}}(N_{t+\delta})={\left( \delta W^t+\sum_{i=0}^{t-1}W^i \right)}{\mathbb{E}}(N_{t+\delta}).\]</span></p>
+<p>Hence</p>
+<p><span class="math display">\[\frac{d}{dt}{\mathrm{Var}}(N_t)=\lim_{\delta\rightarrow0}\frac{{\mathrm{Var}}(N_{t+\delta})-{\mathrm{Var}}(N_t)}{\delta}\]</span></p>
+<p><span class="math display">\[=\lim_{\delta\rightarrow0}\frac{{\left( \delta W^t+\sum_{i=0}^{t-1}W^i \right)}{\mathbb{E}}(N_{t+\delta})-{\left( \sum_{i=0}^{t-1}W^i \right)}{\mathbb{E}}(N_t)}{\delta}\]</span></p>
+<p><span class="math display">\[=\lim_{\delta\rightarrow0}\frac{{\left( W^\delta{\left( \delta W^t+\sum W^i \right)}-\sum W^i \right)}{\mathbb{E}}(N_t)}{\delta}\]</span></p>
+<p><span class="math display">\[=\lim_{\delta\rightarrow0}{\left( W^{t+\delta}+\frac{(W^\delta-1)}{\delta}\sum_i W^i \right)}{\mathbb{E}}(N_t)\]</span></p>
+<p><span class="math display">\[={\left( W^t+\ln(W)\sum_i W^i \right)}{\mathbb{E}}(N_t)\]</span></p>
+<p>For fitness that varies across time I hypothesize the following:</p>
+<p><span class="math display">\[D_t{\mathrm{Var}}(N_t)={\left( \bigwedge_0^t W_s^{ds}+
+\ln(W_t)\int_0^t\bigwedge_0^s W_u^{du}ds \right)}{\mathbb{E}}(N_t).\]</span></p>
+<p>Differentiating the above hypothesized solution for <span class="math inline">\({\mathrm{Var}}(N_t)\)</span> shows that these results are copacetic.</p>
+<p>Also note this implies that at <span class="math inline">\(t=0\)</span> the rate of increase in the variance is equal to the number of initial individuals. For instance, if there’s no individuals, the variance will be zero because we are certain there will be no offspring. Since each individual contributes uncertainty to the number of offspring the variance should increase faster with larger initial populations. However, if the fitness is less than one, the log will act to reduce the variance, most likely because extinction would happen quickly if the fitness is less than one long enough.</p>
+<div id="testing-the-results" class="section level4">
+<h4>Testing the results</h4>
+<p>Let’s start off simple and assume <span class="math inline">\(W_t=W=1\)</span> for all <span class="math inline">\(t\)</span>. Then we expect <span class="math inline">\({\mathbb{E}}(N_t)=N_0\)</span> and <span class="math inline">\({\mathrm{Var}}(N_t)=tN_0\)</span>. I’ll set <span class="math inline">\(N_0=300\)</span> and run 2000 replicates. Overlaying the trajectories for these replicates on the same scatter plot results in:</p>
+<pre class="r"><code>N &lt;- NULL
+N2 &lt;- NULL
+W &lt;- 1
+t &lt;- 1:30
+for(j in 1:2000){
+  NN &lt;- 300
+  for(i in t){
+    Np &lt;- rpois(1,NN[i]*W)
+    NN &lt;- c(NN,Np)
+  }
+  N &lt;- rbind(N,NN)
+  N2 &lt;- c(N2,NN)
+}
+t &lt;- 0:30
+data &lt;- data.frame(rep(t,2000),N2)
+colnames(data) &lt;- c(&quot;t&quot;,&quot;N&quot;)
+require(ggplot2)</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre class="r"><code>ggplot(data,aes(x=t,y=N))+geom_point()</code></pre>
+<p><img src="notes-fitness_files/figure-html/unnamed-chunk-2-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>Taking the means and variances of these replicates at each time step, we can compare the resulting trajectories of simulated population dynamics (represented by the dots) to the analytical results (represented by the solid lines).</p>
+<pre class="r"><code>mN &lt;- NULL
+for(i in (t+1)){
+  mN &lt;- c(mN,mean(N[,i]))
+}
+vN &lt;- NULL
+for(i in (t+1)){
+  vN &lt;- c(vN,var(N[,i]))
+}
+dm &lt;- data.frame(t,mN)
+dv &lt;- data.frame(t,vN)
+plm &lt;- ggplot(dm,aes(x=t,y=mN))+geom_point()+ylim(200,400)+ylab(&quot;mean(N)&quot;)+geom_abline(slope=0,intercept=300)
+plv &lt;- ggplot(dv,aes(x=t,y=vN))+geom_point()+ylab(&quot;var(N)&quot;)+geom_abline(slope=300,intercept=0)
+require(gridExtra)</code></pre>
+<pre><code>## Loading required package: gridExtra</code></pre>
+<pre class="r"><code>grid.arrange(plm,plv,ncol=2)</code></pre>
+<p><img src="notes-fitness_files/figure-html/unnamed-chunk-3-1.png" width="960" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,831 @@
+---
+title: "Examples"
+output: 
+  html_document: 
+    toc: true
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+<!--
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+-->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+
+
+These notes are the result of the interplay between my background in mathematics and my development as a theoretical biologist. I have placed them here primarily for my own reference. As I continue to learn and explore I will update these notes with my findings.
+
+### A Continuous Time Example
+
+Let's suppose we have a continuum of types indexed by $z$. If we set $W_t(z)=W_{max}\exp\para{-\frac{(\theta-z)^2}{2\omega^2}}$ and $\phi_0(z)=\frac{1}{\sqrt{2\pi\sigma_0^2}}\exp\para{-\frac{(\bar z_0-z)^2}{2\sigma_0^2}}$, then
+
+$$\frac{d\bar z_t}{dt}=\frac{\sigma_t^2}{\omega^2}(\theta-\bar z_t) \ \text{and} \ \frac{d\sigma^2_t}{dt}=-\frac{\sigma_t^4}{\omega^2}.$$
+
+Thus
+
+$$\sigma_t^2=\frac{\omega^2\sigma_0^2}{\omega^2+t\sigma_0^2}, \ \bar z_t=\frac{\omega^2\bar z_0+t\sigma_0^2\theta}{\omega^2+t\sigma_0^2},$$
+
+Compare this with the quantitative genetic results below. We can then plug these solutions for the mean and variance into the expression for $\phi_t$ to solve for the evolution of the whole distribution.
+
+$$\phi_t(z)=\frac{1}{\sqrt{2\pi\sigma_t^2}}\exp\para{-\frac{(\bar z_t-z)^2}{2\sigma_t^2}}$$
+
+This provides the following solution for the population size:
+
+$$N_t=N_0W_{max}^t\sqrt{\frac{\omega^2}{t\sigma_0^2+\omega^2}}\exp\para{-t\frac{(\theta-\bar z_0)^2}{2(t\sigma_0^2+\omega^2)}}.$$
+
+We can see that $\sigma_t^2$ will asymptotically decrease towards zero, which is not very realistic since we know extant populations maintain some variance. To prevent this we can assume the existence of some process that increases variance at the rate $\eta^2$ so that $D_t\sigma_t^2=\eta^2-\sigma_t^4/\omega^2$. Our results change and become
+
+$$\bar z_t=\theta+C_2\mathrm{sech}\para{\frac{\eta}{\omega}t+C_1}, \ \sigma_t^2=\eta \ \omega \ \mathrm{tanh}\para{\frac{\eta}{\omega}t+C_1}$$
+
+where $C_1=\mathrm{atanh}\para{\frac{\sigma_0^2}{\eta \ \omega}}$ and $C_2=\sqrt{\frac{\eta^2\omega^2}{\eta^2\omega^2-\sigma_0^4}}(\bar z_0-\theta)$. Note that $\mathrm{sech}(\mathrm{atanh}(x))=\sqrt{1-x^2}.$
+
+$$N_t=N_0e^{\int_0^t\overline{\ln W}_sds}=N_0W_{max}^t\exp\para{\int_0^t-\frac{(\theta-\bar z_s)^2}{2\omega^2}-\frac{1}{2}\frac{\sigma_s^2}{\omega^2}ds}=\dots$$
+
+### Another Example
+
+Let's consider a population of individuals where the individuals interact with each other, potentially competing with or aiding one another in the search for resources. As above, I'll consider a population indexed by a phenotype $z\in\R$ that is initially distributed normally with mean $\bar z_0$ and variance $\sigma_0^2$. Suppose that each individual interacts with a random number $K$ of individuals from its population, each chosen randomly and independently. I'll write the fitness of an individual with phenotype $z$ that interacts with individuals with phenotypes $z_1,\dots,z_K$ as $W(z|z_1,\dots,z_K)$ and assume it decomposes as follows
+
+$$W(z|z_1,\dots,z_K)=\prod_{i=1}^KW(z|z_i).$$
+
+$$W(z|z_i)=W_{max}\exp\para{-\frac{(z_i-z)^2}{2\omega^2}}$$
+
+$$W(z|K)=W_{max}^K\para{\frac{\omega^2}{\omega^2+\sigma_t^2}}^{K/2}\exp\para{-K\frac{(\bar z_t-z)^2}{2(\omega^2+\sigma_t^2)}}$$
+
+$K\sim\mathrm{Bin}(N_t,p)$
+
+$$W(z)=\prod_{i=0}^NW(z|K=i)^{P(K=i)}=W_{max}^{pN_t}\para{\frac{\omega^2}{\omega^2+\sigma_t^2}}^{pN_t/2}\exp\para{-pN_t\frac{(\bar z_t-z)^2}{2(\omega^2+\sigma_t^2)}}$$
+
+$$\frac{d\bar z_t}{dt}=0, \ \frac{d\sigma_t^2}{dt}=-\frac{pN_t}{\omega^2+\sigma_t^2}\sigma_t^4$$
+
+$$\frac{dN_t}{dt}=pN_t^2\para{\ln W_{max}+\ln\sqrt{\frac{\omega^2}{\omega^2+\sigma_t^2}}-\frac{\sigma_t^2}{2(\omega^2+\sigma_t^2)}}$$
+
+```{r, include=F}
+require(deSolve)
+parameters <- c(p=0.01,lnWmax=0.0001,omega=1000)
+state      <- c(sigma=10,N=100)
+Evolve     <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    dsigma <- -p*N*sigma^2/(omega^2+sigma)
+    dN <- p*N^2*(lnWmax+log(omega^2/(omega^2+sigma))-(sigma)/(2*omega^2+2*sigma))
+    
+    list(c(dsigma,dN))
+  })
+}
+times <- seq(0,3000,by=10)
+out <- ode(y=state,times=times,func=Evolve,parms=parameters)
+times <- out[,"time"]
+```
+
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=6}
+par(mfrow=c(1,2))
+plot(times,out[,"sigma"],xlab="time",ylab="phenotypic variance")
+plot(times,out[,"N"],xlab="time",ylab="population size")
+```
+
+We can see that the population evolves to have less diversity but increased population size. The fitness used assumed that the more similar individuals are, the more they will benefit each others fitness. So selection for the mean of the population occurs, which then increases the mean fitness of the population. Let's see what happens when each interaction has an equivalent effect on fitness regardless of the phenotypes involved. We might assume that at lower population densities, the individuals help each other, but at higher densities they tend to hinder each other. Let's use $p_1$ for the proportion of the population an individual encounters that benefits its fitness and $p_2$ for the proportion that hinder. Then $p=p_1+p_2$ is the total proportion of the population encountered and $\pi_1=\frac{p_1}{p_1+p_2}$ is the fraction of this that helps and $1-\pi_1=\pi_2=\frac{p_2}{p_1+p_2}$ is the fraction that hinders. Let's suppose $\pi_1=\frac{1}{N_t+1}$ making $\pi_2=\frac{N_t}{N_t+1}$
+
+$$W_1>1, \ W_2<1$$
+
+$$W(z|z_i)=W_1^{\pi_1}W_2^{\pi_2}\implies W(z|z_1,\dots,z_K)=W_1^{K\pi_1}W_2^{K\pi_2}\implies W(z)=W_1^{pN_t\pi_1}W_2^{pN_t\pi_2}
+=W_1^{p\frac{N_t}{N_t+1}}W_2^{p\frac{N_t^2}{N_t+1}}$$
+
+$$\frac{dN_t}{dt}=p\frac{N_t}{N_t+1}\ln W_1+p\frac{N_t^2}{N_t+1}\ln W_2\implies N_\infty=-\frac{\ln W_1}{\ln W_2}$$
+
+```{r, include=F}
+require(deSolve)
+parameters <- c(p=1,lnW1=0.01,lnW2=-0.0001)
+state      <- c(N=50)
+Evolve     <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    dN <- p*N*(lnW1+N*lnW2)/(N+1)
+    
+    list(c(dN))
+  })
+}
+times <- seq(0,100000,by=1000)
+out <- ode(y=state,times=times,func=Evolve,parms=parameters)
+times <- out[,"time"]
+
+parameters <- c(p=1,lnW1=0.01,lnW2=-0.0001)
+state      <- c(N=150)
+Evolve     <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    dN <- p*N*(lnW1+N*lnW2)/(N+1)
+    
+    list(c(dN))
+  })
+}
+times2 <- seq(0,100000,by=1000)
+out2 <- ode(y=state,times=times,func=Evolve,parms=parameters)
+times2 <- out2[,"time"]
+```
+
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=6}
+par(mfrow=c(1,2))
+plot(times,out[,"N"],xlab="time",ylab="population size")
+plot(times2,out2[,"N"],xlab="time",ylab="population size")
+```
+
+Returning to evolution, we might assume the Gaussian term used above represents the effectiveness of an individual in helping or hindering another individual based on how similar they are. In this case we get
+
+$$W(z|z_i)=W_1^{\pi_1}W_2^{\pi_2}\exp\para{-\frac{(z_i-z)^2}{2\omega^2}}\implies W(z|z_1,\dots,z_K)=W_1^{K\pi_1}W_2^{K\pi_2}\exp\para{-K\frac{(z_i-z)^2}{2\omega^2}}$$
+
+$$\implies W(z)=W_1^{pN_t\pi_1}W_2^{pN_t\pi_2}\exp\para{-pN_t\frac{(\bar z_t-z)^2}{2(\omega^2+\sigma_t^2)}}
+=W_1^{p\frac{N_t}{N_t+1}}W_2^{p\frac{N_t^2}{N_t+1}}\exp\para{-pN_t\frac{(\bar z_t-z)^2}{2(\omega^2+\sigma_t^2)}}$$
+
+$$\frac{d\sigma_t^2}{dt}=\eta^2-\frac{pN_t}{\omega^2+\sigma_t^2}\sigma_t^4$$
+
+$$\frac{dN_t}{dt}=p\frac{N_t}{N_t+1}\ln W_1+p\frac{N_t^2}{N_t+1}\ln W_2+pN_t^2\ln\sqrt{\frac{\omega^2}{\omega^2+\sigma_t^2}}-pN_t^2\frac{\sigma_t^2}{2(\omega^2+\sigma_t^2)}$$
+
+```{r, include=F}
+require(deSolve)
+parameters <- c(p=1,lnW1=0.1,lnW2=-0.0001,omega=10000,eta=0.1)
+state      <- c(sigma=10,N=100)
+Evolve     <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    dsigma <- eta^2-p*N*sigma^2/(omega^2+sigma)
+    dN <- p*N*(lnW1/(N+1)+N*lnW2/(N+1)+N*log(omega^2/(omega^2+sigma))-N*(sigma)/(2*omega^2+2*sigma))
+    
+    list(c(dsigma,dN))
+  })
+}
+times <- seq(0,20000,by=100)
+out <- ode(y=state,times=times,func=Evolve,parms=parameters)
+times <- out[,"time"]
+```
+
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=6}
+par(mfrow=c(1,2))
+plot(times,out[,"sigma"],xlab="time",ylab="phenotypic variance")
+plot(times,out[,"N"],xlab="time",ylab="population size")
+```
+
+This seems promising.
+
+### Another Other Example
+
+Expanding on the above, consider two interacting populations each indexed by $x,y\in\R$ respectively. Let's suppose the expected fitness of an individual depends not only on its phenotype, but also on the phenotypes of the individuals it interacts with. Each interaction builds up to overall fitness of the individual. For example, for an individual with phenotype $x$ that interacts with $K_1$ individuals with phenotypes $y_1,y_2,\dots,y_{K_1}$, we can define fitness for $x$ to be
+
+$$W_1(x|y_1,\dots,y_{K_1})\equiv\prod_{i=1}^{K_1}W_1(x|y_i).$$
+
+If there's $N_{2,t}$ individuals in species 2 at time $t$, we can have $K_1\sim\mathrm{Bin}(N_{2,t},p_1)$. Suppose $W_1(x|y)=W_{1,max}\exp\para{-\frac{(y-x)^2}{2\omega_1^2}}$, then
+
+$$W_1(x|y_1,\dots,y_{K_1})=W_{1,max}^{K_1}\exp\para{-\sum_{i=1}^{K_1}\frac{(y_i-x)^2}{2\omega_1^2}}$$
+
+If we assume the phenotypes $y_1,\dots,y_{K_1}$ are distributed normally and are drawn at random independently of one another, we can calculate the expected fitness for an individual from population 1 with phenotype $x$ given that it interacts with $K_1$ individuals as
+
+$$W_1(x|K_1)=\int_\R\cdots\int_\R W_1(x|y_1,\dots,y_{K_1})\phi_{2,t}(y_1)\cdots\phi_{2,t}(y_{K_1})dy_1\cdots dy_{K_1}=\para{\int_\R W_1(x|y)\phi_{2,t}(y)dy}^{K_1}$$
+
+$$=W_{1,max}^{K_1}\exp\para{-K_1\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)}}.$$
+
+Finally, to get the total expected fitness $W_1(x)$, we average over all possible values of $K_1$. However, since each component of fitness multiplies together to produce the total fitness, we shouldn't take an arithmetic average, we should take a geometric average. Doing so provides the following result
+
+$$W_1(x)=\prod_{i=0}^{N_{2,t}}W_1(x|K_1=i)^{P(K_1=i)}=W_{1,max}^{p_1N_{2,t}}\exp\para{-p_1N_{2,t}\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)}}.$$
+
+and
+
+$$\ln W_1(x)=\sum_{i=0}^{N_{2,t}}P(K_1=i)\ln W_1(x|K_1=i)=p_1N_{2,t}\para{\ln W_{1,max}-\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)}}$$
+
+$$\dots$$
+
+$$\frac{d\bar x_t}{dt}=\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^2(\bar y_t-\bar x_t) \ \text{and} \
+\frac{d\sigma_{1,t}^2}{dt}=-\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^4$$
+
+$$\frac{dN_{1,t}}{dt}=\overline{\ln W_t}N_{1,t}=p_1\para{\ln W_{1,max}-\frac{(\bar y_t-\bar x_t)^2+\sigma_{1,t}^2}{2(\omega_1^2+\sigma_{2,t}^2)}}N_{2,t}N_{1,t}$$
+
+To solve this, we have to solve a system of six nonlinear differential equations simultaneously. Wouldn't it be nice to just get rid of the population dynamics? If we assumed that each individual interacts with the same number of individuals from the opposing population every generation, this would be equivalent to assuming the population sizes are constant. But then we would need some combination of extinction, zero interaction, or zero selection. Any of those three possibilities defeats the purpose of this investigation, so it cannot be logically reduced to a simpler problem. However, it's this added complexity that we were interested in to begin with, so this is not an issue. Let's begin with a numerical exploration.
+
+#### Parameters:
+
+- $p_1=p_2=0.01$
+- $\ln W_{1,max}=\ln W_{2,max}=0.001$
+- $\omega_1^2=\omega_2^2=1000$
+- $\bar x_0=10, \ \bar y_0=-10$
+- $\sigma_{1,0}^2=\sigma_{2,0}^2=100$
+- $N_{1,0}=N_{2,0}=100$
+
+```{r, include=F}
+require(deSolve)
+parameters <- c(p1=0.01,p2=0.01,lnW1max=0.001,lnW2max=0.001,omega1=1000,omega2=1000)
+state      <- c(x=10,y=-10,sigma1=10,sigma2=10,N1=100,N2=100)
+Evolve     <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    dx <- p1*N2*sigma1^2*(y-x)/(omega1^2+sigma2^2)
+    dy <- p2*N1*sigma2^2*(x-y)/(omega2^2+sigma1^2)
+    dsigma1 <- -p1*N2*sigma1^4/(omega1^2+sigma2^2)
+    dsigma2 <- -p2*N1*sigma2^4/(omega2^2+sigma1^2)
+    dN1 <- p1*N1*N2*(lnW1max-((y-x)^2+sigma1^2)/(2*omega1^2+2*sigma2^2))
+    dN2 <- p2*N1*N2*(lnW2max-((y-x)^2+sigma2^2)/(2*omega2^2+2*sigma1^2))
+    
+    list(c(dx,dy,dsigma1,dsigma2,dN1,dN2))
+  })
+}
+times <- seq(0,10000,by=10)
+out <- ode(y=state,times=times,func=Evolve,parms=parameters)
+times <- out[,"time"]
+```
+
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=10}
+par(mfrow=c(1,3))
+plot(c(times,times),out[,c("x","y")],xlab="time",ylab="mean phenotypes")
+plot(c(times,times),out[,c("sigma1","sigma2")]^2,xlab="time",ylab="phenotypic variances")
+plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
+```
+
+#### Increasing the Strength of Selection:
+
+- $\omega_1^2=\omega_2^2=100$
+
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=10}
+parameters <- c(p1=0.01,p2=0.01,lnW1max=0.001,lnW2max=0.001,omega1=100,omega2=100)
+times <- seq(0,10000,by=10)
+out <- ode(y=state,times=times,func=Evolve,parms=parameters)
+times <- out[,"time"]
+par(mfrow=c(1,3))
+plot(c(times,times),out[,c("x","y")],xlab="time",ylab="mean phenotypes")
+plot(c(times,times),out[,c("sigma1","sigma2")]^2,xlab="time",ylab="phenotypic variances")
+plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
+```
+
+#### Asymmetric Strengths of Selection:
+
+- $\omega_1^2=100, \ \omega_2^2=1000$
+
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=10}
+parameters <- c(p1=0.01,p2=0.01,lnW1max=0.001,lnW2max=0.001,omega1=100,omega2=1000)
+times <- seq(0,10000,by=10)
+out <- ode(y=state,times=times,func=Evolve,parms=parameters)
+times <- out[,"time"]
+par(mfrow=c(1,3))
+plot(c(times,times),out[,c("x","y")],xlab="time",ylab="mean phenotypes")
+plot(c(times,times),out[,c("sigma1","sigma2")]^2,xlab="time",ylab="phenotypic variances")
+plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
+```
+
+#### Incorporating Density Regulation and Other Stuff
+
+```{r, include=F}
+require(deSolve)
+parameters <- c(p1=1,p2=1,p11=1,p22=1,lnW1max=0.00,lnW2max=0.00,lnW22=-0.0001,lnW21=0.01,lnW11=0.01,lnW12=-0.0001,omega1=10000,omega2=10000,omega11=10000,omega22=10000,eta1=0.01,eta2=0.01)
+state      <- c(x=10,y=-10,sigma1=10,sigma2=10,N1=100,N2=100)
+Evolve     <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    dx <- p1*N2*sigma1*(y-x)/(omega1^2+sigma2)
+    dy <- p2*N1*sigma2*(x-y)/(omega2^2+sigma1)
+    dsigma1 <- eta1^2-sigma1^2*(p1*N2/(omega1^2+sigma2)+p11*N1/(omega11^2+sigma1))
+    dsigma2 <- eta2^2-sigma2^2*(p2*N1/(omega2^2+sigma1)+p22*N1/(omega22^2+sigma2))
+    dN1 <- p1*N1*N2*(lnW1max-((y-x)^2+sigma1)/(2*omega1^2+2*sigma2))+
+      p11*N1*(lnW11/(N1+1)+N1*lnW12/(N1+1)+N1*log(omega11^2/(omega11^2+sigma1))-N1*(sigma1)/(2*omega11^2+2*sigma1))
+    dN2 <- p2*N1*N2*(lnW2max-((y-x)^2+sigma2)/(2*omega2^2+2*sigma1))+
+      p22*N2*(lnW21/(N2+1)+N2*lnW22/(N2+1)+N2*log(omega22^2/(omega22^2+sigma2))-N2*(sigma2)/(2*omega22^2+2*sigma2))
+    
+    list(c(dx,dy,dsigma1,dsigma2,dN1,dN2))
+  })
+}
+times <- seq(0,250000,by=500)
+out <- ode(y=state,times=times,func=Evolve,parms=parameters)
+times <- out[,"time"]
+```
+
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=10}
+par(mfrow=c(1,3))
+plot(c(times,times),out[,c("x","y")],xlab="time",ylab="mean phenotypes")
+plot(c(times,times),out[,c("sigma1","sigma2")],xlab="time",ylab="phenotypic variances")
+plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
+```
+
+#### Now all that with Asymmetry
+
+```{r, include=F}
+require(deSolve)
+parameters <- c(p1=1,p2=1,p11=1,p22=1,lnW1max=0.00,lnW2max=0.00,lnW22=-0.0001,lnW21=0.01,lnW11=0.01,lnW12=-0.0001,omega1=10000,omega2=100000,omega11=1000,omega22=10000,eta1=0.01,eta2=0.01)
+state      <- c(x=10,y=-10,sigma1=10,sigma2=10,N1=100,N2=100)
+Evolve     <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    dx <- p1*N2*sigma1*(y-x)/(omega1^2+sigma2)
+    dy <- p2*N1*sigma2*(x-y)/(omega2^2+sigma1)
+    dsigma1 <- eta1^2-sigma1^2*(p1*N2/(omega1^2+sigma2)+p11*N1/(omega11^2+sigma1))
+    dsigma2 <- eta2^2-sigma2^2*(p2*N1/(omega2^2+sigma1)+p22*N1/(omega22^2+sigma2))
+    dN1 <- p1*N1*N2*(lnW1max-((y-x)^2+sigma1)/(2*omega1^2+2*sigma2))+
+      p11*N1*(lnW11/(N1+1)+N1*lnW12/(N1+1)+N1*log(omega11^2/(omega11^2+sigma1))-N1*(sigma1)/(2*omega11^2+2*sigma1))
+    dN2 <- p2*N1*N2*(lnW2max-((y-x)^2+sigma2)/(2*omega2^2+2*sigma1))+
+      p22*N2*(lnW21/(N2+1)+N2*lnW22/(N2+1)+N2*log(omega22^2/(omega22^2+sigma2))-N2*(sigma2)/(2*omega22^2+2*sigma2))
+    
+    list(c(dx,dy,dsigma1,dsigma2,dN1,dN2))
+  })
+}
+times <- seq(0,5000000,by=10000)
+out <- ode(y=state,times=times,func=Evolve,parms=parameters)
+times <- out[,"time"]
+```
+
+```{r, echo=F, fig.align='center', fig.height=3, fig.width=10}
+par(mfrow=c(1,3))
+plot(c(times,times),out[,c("x","y")],xlab="time",ylab="mean phenotypes")
+plot(c(times,times),out[,c("sigma1","sigma2")],xlab="time",ylab="phenotypic variances")
+plot(c(times,times),out[,c("N1","N2")],xlab="time",ylab="population sizes")
+```
+
+### A Non-Gaussian Example
+
+The reason why we only needed to track the mean variance of phenotypes in order to capture the whole distribution was due to our choice of initial phenotypic distribution and selection function. They were both Gaussian for all of the above examples. If either is not Gaussian, then the resulting trajectory of phenotypic distributions will not fall within a Gaussian realm.
+
+#### Just Mutation
+
+```{r, include=F}
+Fit <- function(x){
+  Wmax <- 1.001
+  fit <- Wmax*(dnorm(x,-10,6) +  dnorm(x,10,6))
+  return(fit)
+}
+
+Model <- function(t,phi,parameters){
+  deltax <- c(0.5,rep(1,numboxes-1),0.5)
+  Flux   <- eta^2*diff(c(0,phi,0))/deltax
+  lnW    <- log(Fit(Phenotype))
+  rho    <- lnW    - sum(phi*lnW)/sum(phi)
+  lng    <- dnorm(Phenotype,Phenotype*phi/sum(phi),s,log=T)
+  rnd    <- lng    - sum(phi*lng)/sum(phi)
+  dphi   <- diff(Flux)/delx + phi*(0*rho+0*rnd)
+  
+  list(dphi)
+}
+
+eta <- 2
+s <- 7
+r <- 0.01
+delx <- .1
+numboxes <- 300
+maxT <- 50
+Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
+
+phi <- dnorm(Phenotype,0,2)
+state <- c(phi=phi)
+times <- seq(0,maxT,by=1)
+
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
+```
+
+```{r, echo=F}
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+```
+
+#### Mutation and Random Mating
+
+```{r, include=F}
+Fit <- function(x){
+  Wmax <- 1.001
+  fit <- Wmax*(dnorm(x,-10,6) +  dnorm(x,10,6))
+  return(fit)
+}
+
+Model <- function(t,phi,parameters){
+  deltax <- c(0.5,rep(1,numboxes-1),0.5)
+  Flux   <- eta^2*diff(c(0,phi,0))/deltax
+  lnW    <- log(Fit(Phenotype))
+  rho    <- lnW - sum(phi*lnW)/sum(phi)
+  m      <- sum(phi*Phenotype)/sum(phi)
+  s      <- 20*sum(phi)/sum(phi*(Phenotype-m)^2)
+  lng    <- dnorm(Phenotype,sum(Phenotype*phi)/sum(phi),s,log=T)
+  rnd    <- lng - sum(phi*lng)/sum(phi)
+  dphi   <- diff(Flux)/delx + phi*(0*rho+rnd)
+  
+  list(dphi)
+}
+
+eta <- 5
+s <- 8
+r <- 0.01
+delx <- .1
+numboxes <- 300
+maxT <- 100
+Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
+
+phi <- dnorm(Phenotype,0,6)
+state <- c(phi=phi)
+times <- seq(0,maxT,by=1)
+
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
+```
+
+```{r, echo=F}
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+```
+
+
+#### Bimodal Selection
+
+```{r, include=F}
+Fit <- function(x){
+  Wmax <- 1.001
+  fit <- Wmax*(dnorm(x,-10,6) +  dnorm(x,10,6))
+  return(fit)
+}
+
+MeanMalth <- function(phi){
+  lnW <- log(Fit(Phenotype))
+  rBar <- sum(phi*lnW)/sum(phi)
+  return(rBar)
+}
+
+Model <- function(t,phi,parameters){
+  deltax <- c(0.5,rep(1,numboxes-1),0.5)
+  Flux   <- eta^2*diff(c(0,phi,0))/deltax
+  lnW    <- log(Fit(Phenotype))
+  rho    <- lnW    - sum(phi*lnW)/sum(phi)
+  lng    <- dnorm(Phenotype,Phenotype*phi/sum(phi),s,log=T)
+  rnd    <- lng    - sum(phi*lng)/sum(phi)
+  dphi   <- diff(Flux)/delx + phi*(rho+0*rnd)
+  
+  list(dphi)
+}
+
+eta <- 2
+s <- 7
+r <- 0.01
+delx <- .1
+numboxes <- 300
+maxT <- 50
+Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
+
+phi <- dnorm(Phenotype,0,2)
+state <- c(phi=phi)
+times <- seq(0,maxT,by=1)
+
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
+```
+
+Our selection surface will be the following.
+
+```{r, echo=F}
+plot(Phenotype,Fit(Phenotype),ylab="Fitness")
+```
+
+The resulting phenotypic density takes the following trajectory.
+
+```{r, echo=F}
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+```
+
+Adding weak random mating:
+
+```{r, include=F}
+Fit <- function(x){
+  Wmax <- 1.01
+  fit <- Wmax*(dnorm(x,-10,6) +  dnorm(x,10,6))
+  return(fit)
+}
+
+Model <- function(t,phi,parameters){
+  deltax <- c(0.5,rep(1,numboxes-1),0.5)
+  Flux   <- eta^2*diff(c(0,phi,0))/deltax
+  lnW    <- log(Fit(Phenotype))
+  rho    <- lnW    - sum(phi*lnW)/sum(phi)
+  m      <- sum(phi*Phenotype)/sum(phi)
+  s      <- 100*sum(phi)/sum(phi*(Phenotype-m)^2)
+  lng    <- dnorm(Phenotype,sum(Phenotype*phi)/sum(phi),s,log=T)
+  rnd    <- lng - sum(phi*lng)/sum(phi)
+  dphi   <- diff(Flux)/delx + phi*(rho+rnd)
+  
+  list(dphi)
+}
+
+eta <- 2
+s <- 50
+r <- 0.01
+delx <- .1
+numboxes <- 300
+maxT <- 100
+Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
+
+phi <- dnorm(Phenotype,0,2)
+state <- c(phi=phi)
+times <- seq(0,maxT,by=1)
+
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
+```
+
+```{r, echo=F}
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+```
+
+
+#### Stochastic Selection
+
+```{r, include=F}
+
+Model <- function(t,phi,parameters){
+  deltax <- c(0.5,rep(1,numboxes-1),0.5)
+  Flux   <- eta^2*diff(c(0,phi,0))/deltax
+  lnW    <- log(Fit(Phenotype))
+  rho    <- lnW    - sum(phi*lnW)/sum(phi)
+  xi     <- smooth[t+1,] - sum(phi*smooth[t+1,])/sum(phi)
+  lng    <- dnorm(Phenotype,Phenotype*phi/sum(phi),s,log=T)
+  rnd    <- lng    - sum(phi*lng)/sum(phi)
+  dphi   <- diff(Flux)/delx + phi*(0*rho+xi+0*rnd)
+  
+  list(dphi)
+}
+
+eta <- 2
+s <- 7
+r <- 0.01
+delx <- .1
+numboxes <- 300
+maxT <- 50
+Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
+
+bumps  <- rnorm(numboxes,0,.5)
+smooth <- bumps
+for(i in 1:maxT){
+  bumps  <- rnorm(numboxes,0,.5)
+  NEXTsmooth <- bumps
+  smooth <- rbind(smooth,NEXTsmooth)
+}
+
+## smooth in space
+# bumps  <- rnorm(numboxes,0,1)
+# smooth <- convolve(bumps,dnorm(Phenotype,0,1))
+# for(i in 1:maxT){
+#   bumps  <- rnorm(numboxes,0,1)
+#   NEXTsmooth <- convolve(bumps,dnorm(Phenotype,0,1))
+#   smooth <- rbind(smooth,NEXTsmooth)
+# }
+
+## SMOOTH IN TIME AS WELL
+# bumps  <- rnorm(numboxes,0,1)
+# smooth <- convolve(bumps,dnorm(Phenotype,0,1))
+# NEXTsmooth <- smooth+convolve(rnorm(numboxes,0,1),dnorm(Phenotype,0,1))
+# smooth <- rbind(smooth,NEXTsmooth)
+# for(i in 2:maxT){
+#   NEXTsmooth <- smooth[i,]+convolve(rnorm(numboxes,0,1),dnorm(Phenotype,0,1))
+#   smooth <- rbind(smooth,NEXTsmooth)
+# }
+
+phi <- dnorm(Phenotype,0,2)
+state <- c(phi=phi)
+times <- seq(0,maxT,by=1)
+
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
+```
+
+Our selection surface is modelled as space-time white noise. At every time step a random discontinuous surface is generated, each one taking the following general appearance:
+
+```{r, echo=F}
+plot(Phenotype,bumps,ylab="Fitness")
+```
+
+Across time, this random surface can be visualized as a contour plot where hot colors correspond to high fitness and cool colors correspond to low fitness.
+
+```{r, echo=F}
+stuff <- out
+stuff[,2:(numboxes+1)] <- smooth
+
+image(stuff,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Fitness",legend=T)
+
+#image(stuff,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+```
+
+The resulting phenotypic density takes the following trajectory.
+
+```{r, echo=F}
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+
+# image(out,add.contour=T,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=F)
+# 
+# image(out,method="persp",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+# 
+# image(out,method="contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density")
+```
+
+Adding a bit of random mating:
+
+```{r, include=F}
+
+Model <- function(t,phi,parameters){
+  deltax <- c(0.5,rep(1,numboxes-1),0.5)
+  Flux   <- eta^2*diff(c(0,phi,0))/deltax
+  lnW    <- log(Fit(Phenotype))
+  rho    <- lnW    - sum(phi*lnW)/sum(phi)
+  xi     <- smooth[t+1,] - sum(phi*smooth[t+1,])/sum(phi)
+  m      <- sum(phi*Phenotype)/sum(phi)
+  s      <- 100*sum(phi)/sum(phi*(Phenotype-m)^2)
+  lng    <- dnorm(Phenotype,sum(Phenotype*phi)/sum(phi),s,log=T)
+  rnd    <- lng - sum(phi*lng)/sum(phi)
+  dphi   <- diff(Flux)/delx + phi*(0*rho+xi+rnd)
+  
+  list(dphi)
+}
+
+eta <- 2
+s <- 7
+r <- 0.01
+delx <- .1
+numboxes <- 300
+maxT <- 50
+Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
+
+bumps  <- rnorm(numboxes,0,.5)
+smooth <- bumps
+for(i in 1:maxT){
+  bumps  <- rnorm(numboxes,0,.5)
+  NEXTsmooth <- bumps
+  smooth <- rbind(smooth,NEXTsmooth)
+}
+
+## smooth in space
+# bumps  <- rnorm(numboxes,0,1)
+# smooth <- convolve(bumps,dnorm(Phenotype,0,1))
+# for(i in 1:maxT){
+#   bumps  <- rnorm(numboxes,0,1)
+#   NEXTsmooth <- convolve(bumps,dnorm(Phenotype,0,1))
+#   smooth <- rbind(smooth,NEXTsmooth)
+# }
+
+## SMOOTH IN TIME AS WELL
+# bumps  <- rnorm(numboxes,0,1)
+# smooth <- convolve(bumps,dnorm(Phenotype,0,1))
+# NEXTsmooth <- smooth+convolve(rnorm(numboxes,0,1),dnorm(Phenotype,0,1))
+# smooth <- rbind(smooth,NEXTsmooth)
+# for(i in 2:maxT){
+#   NEXTsmooth <- smooth[i,]+convolve(rnorm(numboxes,0,1),dnorm(Phenotype,0,1))
+#   smooth <- rbind(smooth,NEXTsmooth)
+# }
+
+phi <- dnorm(Phenotype,0,2)
+state <- c(phi=phi)
+times <- seq(0,maxT,by=1)
+
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
+```
+
+```{r, echo=F}
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+```
+
+
+#### Stochastic Bimodal Selection
+
+```{r, include=F}
+Fit <- function(x){
+  Wmax <- 1.01
+  fit <- Wmax*(dnorm(x,-10,6) +  dnorm(x,10,6))
+  return(fit)
+}
+
+Model <- function(t,phi,parameters){
+  deltax <- c(0.5,rep(1,numboxes-1),0.5)
+  Flux   <- eta^2*diff(c(0,phi,0))/deltax
+  lnW    <- log(Fit(Phenotype))
+  rho    <- lnW    - sum(phi*lnW)/sum(phi)
+  xi     <- smooth[t+1,] - sum(phi*smooth[t+1,])/sum(phi)
+  lng    <- dnorm(Phenotype,Phenotype*phi/sum(phi),s,log=T)
+  rnd    <- lng    - sum(phi*lng)/sum(phi)
+  dphi   <- diff(Flux)/delx + phi*(rho+xi+0*rnd)
+  
+  list(dphi)
+}
+
+eta <- 2
+s <- 7
+r <- 0.01
+delx <- .1
+numboxes <- 300
+maxT <- 50
+Phenotype <- seq(from = -15, by = delx, length.out = numboxes)
+
+# bumps  <- rnorm(numboxes,0,.1)
+# smooth <- convolve(bumps,dnorm(Phenotype,0,1))
+# for(i in 1:maxT){
+#   bumps  <- rnorm(numboxes,0,.1)
+#   NEXTsmooth <- convolve(bumps,dnorm(Phenotype,0,1))
+#   smooth <- rbind(smooth,NEXTsmooth)
+# }
+
+bumps  <- rnorm(numboxes,0,.5)
+smooth <- bumps
+for(i in 1:maxT){
+  bumps  <- rnorm(numboxes,0,.5)
+  NEXTsmooth <- bumps
+  smooth <- rbind(smooth,NEXTsmooth)
+}
+
+phi <- dnorm(Phenotype,0,2)
+state <- c(phi=phi)
+times <- seq(0,maxT,by=1)
+
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
+```
+
+
+```{r, echo=F}
+together <- NULL
+for(i in 1:(maxT+1)){
+  together <- rbind(together,smooth[i,]*Fit(Phenotype))
+}
+stuff <- out
+stuff[,2:(numboxes+1)] <- together
+
+image(stuff,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Fitness",legend=T)
+
+#image(stuff,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+```
+
+
+```{r, echo=F}
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+```
+
+
+#### Stochastic Selection That Changes Smoothly Over Time
+
+```{r, include=F}
+require(deSolve)
+Model <- function(t,phi,parameters){
+  deltax <- c(0.5,rep(1,numboxes-1),0.5)
+  Flux   <- eta^2*diff(c(phi[1],phi,phi[numboxes]))/deltax
+  # lnW    <- log(Fit(Phenotype))
+  # rho    <- lnW    - sum(phi*lnW)/sum(phi)
+  xi     <- smooth[t+1,] - sum(phi*smooth[t+1,])/sum(phi)
+  #lng    <- dnorm(Phenotype,Phenotype*phi/sum(phi),s,log=T)
+  #rnd    <- lng    - sum(phi*lng)/sum(phi)
+  dphi   <- diff(Flux)/delx + phi*xi
+  
+  list(dphi)
+}
+
+eta <- .1
+s <- 7
+r <- 0.01
+delx <- .1
+numboxes <- 600
+maxT <- 10000
+Phenotype <- seq(from = -30, by = delx, length.out = numboxes)
+
+# SMOOTH IN TIME AS WELL
+bumps  <- rep(0,numboxes)
+smooth <- convolve(bumps,dnorm(Phenotype,0,.7))
+NEXTsmooth <- smooth+convolve(rnorm(numboxes,0,.000005),dnorm(Phenotype,0,.6))
+smooth <- rbind(smooth,NEXTsmooth)
+for(i in 2:maxT){
+  NEXTsmooth <- smooth[i,]+convolve(rnorm(numboxes,0,.000005),dnorm(Phenotype,0,.6))
+  smooth <- rbind(smooth,NEXTsmooth)
+}
+
+phi <- dnorm(Phenotype,0,10)
+state <- c(phi=phi)
+times <- seq(0,maxT,by=1)
+
+out <- ode.1D(state,times,Model,parms=0,nspec=1,names="phi")
+```
+
+Our selection surface will be random, but smooth in both space and time. At an instant, it will generally look something like the following.
+
+```{r, echo=F}
+plot(Phenotype,smooth[2,],ylab="Fitness")
+```
+
+```{r, echo=F}
+stuff <- out
+stuff[,2:(numboxes+1)] <- smooth
+
+#image(stuff,method="filled.contour",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Fitness")
+
+image(stuff,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Fitness",legend=T)
+```
+
+```{r, echo=F}
+image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotype",main="Evolution of Phenotypic Density",legend=T)
+```
+
+<!--
+
+#### Spate
+
+```{r, fig.width=10, fig.height=3}
+# require(spate)
+# # might need > sudo apt-get install fftw3 fftw3-dev pkg-config
+# StartVal <- rep(0,100^2)
+# StartVal[75*100+75] <- 1000
+# par <- c(rho0=0.05,sigma2=0.7^2,zeta=-log(0.99),rho1=0.06,gamma=3,alpha=pi/4,muX=-0.1,muY=-0.1,tau2=0.00001)
+# spateSim <- spate.sim(par=par,n=100,T=5,StartVal=StartVal,seed=1)
+# plot(spateSim,mfrow=c(1,5),mar=c(2,2,2,2),indScale=TRUE,cex.axis=1.5,cex.main=2)
+```
+
+-->

@@ -120,7 +120,23 @@ For the sake of continuity we might instead decide to ignore the individual leve
 
 $$dN_t=\ln W_tN_tdt+\sqrt{V_t}N_tdB_t$$
 
-where $B_t$ denotes the standard Brownian motion process. Note that this SDE defines [Geometric Brownian Motion](http://www.randomservices.org/random/brown/Geometric.html). This seems promising, but it would be better to derive it from the above framework instead leaving a disconnected trail of cookie crumbs.
+where $B_t$ denotes the standard Brownian motion process. Note that this SDE defines [Geometric Brownian Motion](http://www.randomservices.org/random/brown/Geometric.html). This seems promising, but it would be better to derive it from the above framework instead leaving a disconnected trail of cookie crumbs. Note that we might not actually get GBM out since it cannot capture extinction. Instead, we might need to use the Feller diffusion that Steve, Chris and Dick have used in their paper.
+
+Instead of taking the above approach with $Y_t(x)$, we can consider the random variable that results from taking the limit
+
+$$\lim_{K\rightarrow\infty}\sum_{i=1}^K U_i, \ \U_i\sim\mathcal{P}(WN_t/K).$$
+
+We know $\para{\sum_{i=1}^K U_i}\sim\mathcal{P}(WN_t)$ for all finite $K$. I suppose then it is trivial that the above limit will also be distributed by a Poisson distribution with rate $WN_t$.
+
+TIME:
+
+$$N_{t+1}\sim\mathcal{P}(N_tW)$$
+
+$$N_{t+1}\overset{?}{=}N_t\W=N_t\prod_{i=1}^K\W_i^{1/K}\rightarrow N_te^{\int_0^1\ln \W_xdx}$$
+
+I think we'll wind up with a Levy jump process where the rate can possibly take a negatively infinite value. I wonder, though, if this is not what I want since I want continuous distributions of types, not a distribution where certain points happen to drop to zero.
+
+As the number of partitions heads towards infinity, the probability that they all return zero goes to zero, I think. So maybe extinction will be avoided in the limit.
 
 ### Returning to Stochastics
 

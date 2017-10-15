@@ -1,7 +1,27 @@
 
+
 .nav.navbar-nav li a {
-  color: #888;
+  color: #d1d1d1;
 }
+
+
+.dropdown-menu li a {
+  color: #000 !important;
+}
+
+.dropdown-menu li:hover a:hover {
+  color: #ffffff !important;
+  background-color: #000;
+}
+
+
+/*
+.dropdown-menu:hover li a {
+  color: #000;
+  background-color: #222;
+}
+*/
+
 /*
 body {
 	background: #222!important;
@@ -11,13 +31,17 @@ div, a, input, select, button, textarea {
 	color: #999;
 }
 */
+
+/*
 .list-group-item.unactive, .list-group-item.unactive:focus, .list-group-item.unactive:hover {
     color: #000;
 }
+*/
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     background-color: #222;
 }
+
 
 /*
 body {
