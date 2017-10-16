@@ -1,0 +1,58 @@
+---
+title: "Roughgarden"
+output: 
+  html_document: 
+    toc: true
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\tr}{\mathrm{tr}}
+
+## Page 519
+
+### Beef 1
+
+Who cares about the "niche position" and "nich width" if the resource utilization curve is multimodal?
+
+### (Resolved) Beef 2
+
+Equation (24.5a) alludes greatly to Hilbert space theory, but I'm not sure if I like its approach. The number $\int u_i(x)u_j(x)dx$ is an inner-product.  Shouldn't we be more interested in a distance between $u_i$ and $u_j$? Actually, now that I'm thinking about it, I like the inner-product for this. Think about a set of finite resources $R(1),\dots,R(n)$. Instead of $u_i(x)$ being defined for $x\in\R$, it's now defined for $x\in\{1,\dots,n\}$, that is $u_i\in\R^n$. Then if $u_i$ and $u_j$ are orthogonal, they utilize completely different resources.
+
+However, I'm still not sure about dividing by the norm of the focal utilization curve.
+
+### Thought 1
+
+The utilization curve $u_i(x)$ here is considered fixed across a species, but this need not be restricted to an emergent property of a population or species. Individuals can have utilization curves and these curves can change as the distribution of resources change. That is, they can be plastic. Of course it would be better to assume canalized for each individual. Then their evolution can be modelled quite easily.
+
+We can assume that an individual with phenotype $z$ will have the resource curve $u(x)=\frac{1}{\sqrt{2\pi\eta^2}}\exp\para{-\frac{(x-z)^2}{2\eta^2}}$ where $\eta^2$ is potentially heritable alongside $z$. This makes for a two dimensional phenotype. Note that $z$ and $x$ will need to be defined on the same space. The biological justification for this is that an animal is likely to use resources that match its phenotype such as beak and seed sizes. We can assume the amount of resources at time $t$ and location $x$ in niche-space is $R_t(x)$ and that
+
+$$\frac{dR_t}{dt}=\lambda_t(K_t-R_t)-C_tR_t\text{ or }\Delta R_t=\lambda_t(K_t-R_t)-C_tR_t$$
+
+so that $R_t$ converges to $K_t>0$ at a rate mediated by $\lambda_t$ when $C_t=0$. But $C_t$ will represent total per-capita consumption of the resource, so as long as there are species utilizing location $x$ at time $t$, $C_t(x)>0$.
+
+The fitness of an individual in the absence of all other individuals may be written as $W=\int u(x)R(x)dx$. Drawing on the finite space example used above to obtain some intuition, we see that if the resources available do not co-occur with the resource utilization curve, then the fitness of the individual will be zero. However, if $u(x)=cR(x)$ for some positive constant $c$ then fitness is maximized.
+
+#### Beginnings
+
+Before we move on to multiple species, let's consider a population of $n$ individuals. Each of their utilization curves are denoted by $u_1(x),u_2(x),\dots,u_n(x)$. Then $C_t(x)=\sum_iu_i(x)$ so that
+
+$$\Delta R_t=\lambda_t(K_t-R_t)-R_t\sum_i u_i.$$
+
+We can assume $z\sim\mathcal{N}(\bar z,\sigma^2)$ and $\eta\sim\ln\mathcal{N}(\overline{\ln\eta},V_\eta)$. We can probably get
+
+$$\frac{d\bar z}{dt}=\sigma^2(?-\bar z), \ \frac{d\overline{\ln\eta}}{dt}=V_\eta(?-\overline{\ln\eta}).$$
+
