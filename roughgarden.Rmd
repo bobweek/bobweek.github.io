@@ -50,9 +50,41 @@ The fitness of an individual in the absence of all other individuals may be writ
 
 Before we move on to multiple species, let's consider a population of $n$ individuals. Each of their utilization curves are denoted by $u_1(x),u_2(x),\dots,u_n(x)$. Then $C_t(x)=\sum_iu_i(x)$ so that
 
-$$\Delta R_t=\lambda_t(K_t-R_t)-R_t\sum_i u_i.$$
+$$\Delta R_t=\lambda_t(K_t-R_t)-R_t\sum_i u_i\overset{?}{\rightarrow}\frac{dR_t}{dt}=\lambda_t(K_t-R_t)-R_tn_t\overline{u_t}$$
+
+$$R_\infty=\frac{\lambda K}{1+n\bar u}\dots\text{ non-normal}\dots\text{ a necessary evil?}$$
+
+If there was no capacity to $R$ so the resource can accumulate towards infinity (which I think is really dumb), then
+
+$$R_\infty=\frac{\lambda}{n\bar u}\dots\text{ suggests diversifying selection}.$$
+
+This is even dumber than I previously imagined!! Of course we get diversifying selection. If all resources are accumulating at a constant rate, then the population will disperse out so no individuals compete with one another. What a dumb model. We might be able to rectify the situation by assuming that $\lambda$ is Gaussian. In that case it could go either way, the population could explode and diversify off into infinity, or converge to a delta.
+
+Let $n_t(z)$ be the population density of trait $z$ at time $t$. Then
+
+$$\frac{dn_t}{dt}=\ln\para{\int u(x)R(x)dx}n_t.$$
 
 We can assume $z\sim\mathcal{N}(\bar z,\sigma^2)$ and $\eta\sim\ln\mathcal{N}(\overline{\ln\eta},V_\eta)$. We can probably get
 
-$$\frac{d\bar z}{dt}=\sigma^2(?-\bar z), \ \frac{d\overline{\ln\eta}}{dt}=V_\eta(?-\overline{\ln\eta}).$$
+$$\frac{d\bar z}{dt}=\frac{\sigma^2}{\psi_z}(?-\bar z), \ \frac{d\overline{\ln\eta}}{dt}=\frac{V_\eta}{\psi_\eta}(?-\overline{\ln\eta}).$$
+
+Or simplify things for now and assume $\eta$ is constant. If we assume $R_t=\frac{1}{\sqrt{2\pi\omega_t^2}}\exp\para{-\frac{(\theta_t-z)^2}{2\omega_t^2}}$ then 
+
+$$W_i=\frac{1}{\sqrt{2\pi(\eta^2+\omega_t^2)}}\exp\para{-\frac{(z-\theta_t)^2}{2(\eta^2+\omega_t^2)}}$$
+
+and
+
+$$\overline{W_t}=\frac{1}{\sqrt{2\pi(\eta^2+\omega_t^2+\sigma^2)}}\exp\para{-\frac{(\bar z-\theta_t)^2}{2(\eta^2+\omega_t^2+\sigma^2)}}.$$
+
+Hence
+
+$$\frac{d\bar z_t}{dt}=\frac{\sigma^2}{\eta^2+\omega_t^2+\sigma^2}(\theta_t-\bar z_t).$$
+
+Let's now set $K_t=\frac{1}{\sqrt{2\pi\omega_t^2}}\exp\para{-\frac{(\theta_t-z)^2}{2\omega_t^2}}$ instead of $R_t$ and for starters assume $\omega_t=\omega$ and $\theta_t=\theta$ so that $K_t$ is constant wrt $t$.
+
+
+
+
+
+
 
