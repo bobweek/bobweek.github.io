@@ -31,6 +31,9 @@ The inference method is a major aspect of this section. However, I still would l
 
 This section is inspired by Bob Holt's community modules. However, instead of focusing on population dynamics, the focus will initially be on mean trait dynamics. The addition of trait variance dynamics and population dynamics would likely follow.
 
+* Evolutionary analog to the $R^*$ theory: instead coexistence, it's whether or not traits coincide.
+* Combine the demographic and evolutionary $R^*$'s.
+
 ## Diffuse Coevolution
 
 Here I will take a similar approach to the metapopulation model of pairwise coevolution but instead apply it to a large community of organisms, starting with one guild (such as the finches or anolis lizards) and later moving to multiple guilds (such as plant/pollinator communities or trophic webs such as primary producers, herbivores and carnivores).

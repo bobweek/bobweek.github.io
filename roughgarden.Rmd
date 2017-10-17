@@ -82,9 +82,94 @@ $$\frac{d\bar z_t}{dt}=\frac{\sigma^2}{\eta^2+\omega_t^2+\sigma^2}(\theta_t-\bar
 
 Let's now set $K_t=\frac{1}{\sqrt{2\pi\omega_t^2}}\exp\para{-\frac{(\theta_t-z)^2}{2\omega_t^2}}$ instead of $R_t$ and for starters assume $\omega_t=\omega$ and $\theta_t=\theta$ so that $K_t$ is constant wrt $t$.
 
+#### Clean it up
 
+$$\frac{\partial R}{\partial t}=\lambda(K-R(x,t))-R(x,t)\sum_in_i(t)u_i(x)=\lambda(K-R(x,t))-R(x,t)N(t)\sum_i\phi_i(t)u_i(x)$$
 
+$$=\lambda(K-R(x,t))-R(x,t)N(t)\bar u(x)$$
 
+This is a non-homogenous linear first order differential equation with $\lambda K$ as the forcing function.
+
+How about
+
+$$=\lambda(K-R(x,t))-N(t)\bar u(x)\implies R^*=K-\frac{N^*\bar u}{\lambda}$$
+
+$$\frac{\partial N}{\partial t}=(R\bar u-d)N\implies R^*=d/\bar u\implies N^*=\lambda\para{\frac{\bar uK-d}{\bar u^2}}$$
+
+Note that $\int u_i(x)u_j(x)dx\leq\|u_i\|\|u_j\|$. Define 
+
+$$\zeta_{ij}\equiv\frac{\int u_i(x)u_j(x)dx}{\|u_i\|\|u_j\|}.$$
+
+* Orthogonal utilization curves... Hermite functions? If we assume that at equilibrium all species utilization curves must be orthogonal, then a Gaussian resource function will allow a countable number of species whose utilization curves will co-occur with the Hermite functions.
+
+* I don't like that result. For one, I think that species are able to share resources, so their utilization curves will not necessarily be orthogonal at equilibrium.
+
+Suppose the effect on fitness due to competition is constant for all interactions and denote this number by $0<W_c<1$. The max fitness of an individual of type $i$ is $M_i=\int u_i(x)R(x)dx$. The resulting fitness due to competition is then
+
+$$W_i=M_iW_c^{\zeta_{ij}}.$$
+
+For Gaussian $u_i,u_j$ we have
+
+$$\zeta_{ij}=\frac{\sqrt{\sqrt{4\pi\eta_i^2}\sqrt{4\pi\eta_j^2}}}{\sqrt{2\pi(\eta_i^2+\eta_j^2)}}\exp\para{-\frac{(z_i-z_j)^2}{2(\eta_i^2+\eta_j^2)}}.$$
+
+Assuming that $\eta_i=\eta_j=\eta$ we get $\zeta_{ij}=\exp\para{-\frac{(z_i-z_j)^2}{4\eta^2}}$. Let's go ahead and assume static $R$ as above for now. Then, again,
+
+$$M_i=\frac{1}{\sqrt{2\pi(\omega^2+\eta^2)}}\exp\para{-\frac{(\theta-z_i)^2}{2(\omega^2+\eta^2)}}$$
+
+and
+
+$$\ln W_i=\ln M_i+\zeta_{ij}\ln W_c\dots$$
+
+seems kinda crazy. I already have a model that can capture some aspects of this. The result would be 
+
+$$W_c$$
+
+$$\ln W_i=\ln M_i-pN\frac{(\bar z-z_i)^2}{2(2\eta^2+\sigma^2)}$$
+
+$$\frac{d\bar z}{dt}=\frac{\theta-\bar z}{\omega^2+\sigma^2}$$
+
+$$\frac{dN}{dt}=N\para{\sqrt{\frac{\omega^2}{\omega^2+\eta^2}}-\frac{(\theta-\bar z)^2}{2(\omega^2+\eta^2)}}-pN^2\frac{\sigma^2}{2(2\eta^2+\sigma^2)}$$
+
+* All that other stuff is bleh. I'm forcing there to be some direct interaction term such as $\zeta_{ij}$ instead of letting one emerge.
+
+Working backwords
+
+$$\frac{dN}{dt}=(aR-d)N\implies W=e^{aR-d}$$
+
+Each individual needs so many resources to reproduce, but no more. The more resources required, either the bigger the offspring or more offspring. So we can relate the number of resources gathered to reproductive output.
+
+Say there's $R$ packets of resources available and each individual need 1 to reproduce. We can start by assuming all individuals have equal opportunnity so that the probability that an individual reproduces is equal to $\max(1,R/N)$. If differential opportunnity occurs because each individual has a different trait that gives them either more or less of an advantage, what is the probability for each individual that it reproduces? We can think of this as scaling the amount of resources needed. An individual with a trait that gives them an advantage scales the required number of resource packets to a lower number. This scaling could be:
+
+$$s(z)=\exp\para{\frac{(\theta-z)^2}{2\omega^2}}$$
+
+But it's not true that these individuals need more or less, just that they have a harder or easier time getting them.
+
+Suppose the effeciency of individual is:
+
+$$e(z_i)=\exp\para{-\frac{(\theta-z_i)^2}{2\omega^2}}$$
+
+and the probability that this individual reproduces is
+
+$$\frac{e(z_i)}{\sum_je(z_j)}$$
+
+in the continuum
+
+$$p_i=\frac{e(z_i)}{\int e(z)\phi(z)dz}$$
+
+suppose each individual consumes $C$ amount of resources.
+
+$$R_{t+1}=R_t+\lambda(K-R_t)-C\sum_ip_i$$
+
+$$\frac{dN}{dt}=\overline{\ln(Wp)}N$$
+
+$$\overline{\ln(Wp)}=\ln W-\frac{(\bar z-\theta)^2+\sigma^2}{2\omega^2}-\ln\sqrt{2\pi\omega^2}+\frac{(\bar z-\theta)^2}{2(\omega^2+\sigma^2)}
++\ln\sqrt{\frac{\omega^2}{\omega^2+\sigma^2}}$$
+
+$$=\ln W+\frac{(\bar z-\theta)^2(\omega^2+\sigma^2)+\sigma^2(\omega^2+\sigma^2)-\omega^2(\bar z-\theta)^2}{2\omega^2(\omega^2+\sigma^2)}+\ln\sqrt{\frac{1}{2\pi(\omega^2+\sigma^2)}}$$
+
+$$=\ln W+\frac{(\bar z-\theta)^2\sigma^2+\sigma^2(\omega^2+\sigma^2)}{2\omega^2(\omega^2+\sigma^2)}+\ln\sqrt{\frac{1}{2\pi(\omega^2+\sigma^2)}}$$
+
+$$=\ln W+\frac{}{}+\ln\sqrt{\frac{1}{2\pi(\omega^2+\sigma^2)}}$$
 
 
 

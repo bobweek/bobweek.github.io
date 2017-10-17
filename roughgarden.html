@@ -339,6 +339,37 @@ div.tocify {
 <p><span class="math display">\[\frac{d\bar z_t}{dt}=\frac{\sigma^2}{\eta^2+\omega_t^2+\sigma^2}(\theta_t-\bar z_t).\]</span></p>
 <p>Let’s now set <span class="math inline">\(K_t=\frac{1}{\sqrt{2\pi\omega_t^2}}\exp{\left( -\frac{(\theta_t-z)^2}{2\omega_t^2} \right)}\)</span> instead of <span class="math inline">\(R_t\)</span> and for starters assume <span class="math inline">\(\omega_t=\omega\)</span> and <span class="math inline">\(\theta_t=\theta\)</span> so that <span class="math inline">\(K_t\)</span> is constant wrt <span class="math inline">\(t\)</span>.</p>
 </div>
+<div id="clean-it-up" class="section level4">
+<h4>Clean it up</h4>
+<p><span class="math display">\[\frac{\partial R}{\partial t}=\lambda(K-R(x,t))-R(x,t)\sum_in_i(t)u_i(x)=\lambda(K-R(x,t))-R(x,t)N(t)\sum_i\phi_i(t)u_i(x)\]</span></p>
+<p><span class="math display">\[=\lambda(K-R(x,t))-R(x,t)N(t)\bar u(x)\]</span></p>
+<p>This is a non-homogenous linear first order differential equation with <span class="math inline">\(\lambda K\)</span> as the forcing function.</p>
+<p>How about</p>
+<p><span class="math display">\[=\lambda(K-R(x,t))-N(t)\bar u(x)\implies R^*=K-\frac{N^*\bar u}{\lambda}\]</span></p>
+<p><span class="math display">\[\frac{\partial N}{\partial t}=(R\bar u-d)N\implies R^*=d/\bar u\implies N^*=\lambda{\left( \frac{\bar uK-d}{\bar u^2} \right)}\]</span></p>
+<p>Note that <span class="math inline">\(\int u_i(x)u_j(x)dx\leq\|u_i\|\|u_j\|\)</span>. Define</p>
+<p><span class="math display">\[\zeta_{ij}\equiv\frac{\int u_i(x)u_j(x)dx}{\|u_i\|\|u_j\|}.\]</span></p>
+<ul>
+<li><p>Orthogonal utilization curves… Hermite functions? If we assume that at equilibrium all species utilization curves must be orthogonal, then a Gaussian resource function will allow a countable number of species whose utilization curves will co-occur with the Hermite functions.</p></li>
+<li><p>I don’t like that result. For one, I think that species are able to share resources, so their utilization curves will not necessarily be orthogonal at equilibrium.</p></li>
+</ul>
+<p>Suppose the effect on fitness due to competition is constant for all interactions and denote this number by <span class="math inline">\(0&lt;W_c&lt;1\)</span>. The max fitness of an individual of type <span class="math inline">\(i\)</span> is <span class="math inline">\(M_i=\int u_i(x)R(x)dx\)</span>. The resulting fitness due to competition is then</p>
+<p><span class="math display">\[W_i=M_iW_c^{\zeta_{ij}}.\]</span></p>
+<p>For Gaussian <span class="math inline">\(u_i,u_j\)</span> we have</p>
+<p><span class="math display">\[\zeta_{ij}=\frac{\sqrt{\sqrt{4\pi\eta_i^2}\sqrt{4\pi\eta_j^2}}}{\sqrt{2\pi(\eta_i^2+\eta_j^2)}}\exp{\left( -\frac{(z_i-z_j)^2}{2(\eta_i^2+\eta_j^2)} \right)}.\]</span></p>
+<p>Assuming that <span class="math inline">\(\eta_i=\eta_j=\eta\)</span> we get <span class="math inline">\(\zeta_{ij}=\exp{\left( -\frac{(z_i-z_j)^2}{4\eta^2} \right)}\)</span>. Let’s go ahead and assume static <span class="math inline">\(R\)</span> as above for now. Then, again,</p>
+<p><span class="math display">\[M_i=\frac{1}{\sqrt{2\pi(\omega^2+\eta^2)}}\exp{\left( -\frac{(\theta-z_i)^2}{2(\omega^2+\eta^2)} \right)}\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\ln W_i=\ln M_i+\zeta_{ij}\ln W_c\dots\]</span></p>
+<p>seems kinda crazy. I already have a model that can capture some aspects of this. The result would be</p>
+<p><span class="math display">\[W_c\]</span></p>
+<p><span class="math display">\[\ln W_i=\ln M_i-pN\frac{(\bar z-z_i)^2}{2(2\eta^2+\sigma^2)}\]</span></p>
+<p><span class="math display">\[\frac{d\bar z}{dt}=\frac{\theta-\bar z}{\omega^2+\sigma^2}\]</span></p>
+<p><span class="math display">\[\frac{dN}{dt}=N{\left( \sqrt{\frac{\omega^2}{\omega^2+\eta^2}}-\frac{(\theta-\bar z)^2}{2(\omega^2+\eta^2)} \right)}-pN^2\frac{\sigma^2}{2(2\eta^2+\sigma^2)}\]</span></p>
+<ul>
+<li>All that other stuff is bleh. I’m forcing there to be some direct interaction term such as <span class="math inline">\(\zeta_{ij}\)</span> instead of letting one emerge.</li>
+</ul>
+</div>
 </div>
 </div>
 
