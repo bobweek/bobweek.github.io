@@ -1,0 +1,92 @@
+---
+title: "Niche Stuff"
+output: 
+  html_document: 
+    toc: true
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+<!--
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+-->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+
+## Basic ingredients
+
+* The resource availability curve $R(x)\geq0$ is the amount of resources available of type $x$.
+
+* The resource utilization curve $u(x)\geq0$ is the "strategy" used by individuals (or species) to procure resources. We require $\int udx=1$ so that this defines a probability density of resource use.
+
+* Fitness can be measured by $\int R(x)u(x)dx$. Note that this is an inner-product if $R(x)$ and $u(x)$ belong to some inner-product-space (such as $L^2(\R)$). This fact helps develop some intuition about the biology. For instance, in the case where there are just a finite number $n$ of resources then both $R$ and $u$ are elements of $\R^n$. If $R$ and $u$ are "orthogonal" we easily see that the type of resources available do not co-occur with the type of resources preferred. Hence, fitness is zero in this situation, just as predicted by the inner-product. One snag here is that both $R(x)$ and $u(x)$ are non-negative for all $x$ and so the set of all such curves would only cover a subset of $L^2(\R)$.
+
+* The amount of competition between individuals (or species) with utilization curves $u_1$ and $u_2$ is referred to as "nich overlap" and is classically computed as $\int u_1(x)u_2(x)dx$.
+
+## Adding an evolutionary twist
+
+Assume:
+
+* A population of individuals with phenotypes $z\in\R$ distributed normally with mean $\bar z$ and variance $\sigma^2$.
+
+* Each individual has a Gaussian resource curve centered on its phenotype with constant "variance" $\eta^2$:
+
+$$u(x,z)=\frac{1}{\sqrt{2\pi\eta^2}}\exp\para{-\frac{(z-x)^2}{2\eta^2}}$$
+
+We can start by assuming a static resource availability curve that is also Gaussian:
+
+$$R(x)=\frac{1}{\sqrt{2\pi\omega^2}}\exp\para{-\frac{(\theta-x)^2}{2\omega^2}}$$
+
+Then fitness is calculated as:
+
+$$W(z)=\int R(x)u(x,z)dx=\frac{1}{\sqrt{2\pi(\omega^2+\eta^2)}}\exp\para{-\frac{(\theta-z)^2}{2(\omega^2+\eta^2)}}$$
+
+And mean fitness:
+
+$$\overline{W}=\frac{1}{\sqrt{2\pi(\omega^2+\eta^2+\sigma^2)}}\exp\para{-\frac{(\theta-\bar z)^2}{2(\omega^2+\eta^2+\sigma^2)}}$$
+The breeder's equation returns:
+
+$$\frac{d\bar z}{dt}=G\frac{\partial\ln\overline{W}}{\partial\bar z}=G\frac{\theta-\bar z}{\omega^2+\eta^2+\sigma^2}$$
+
+Hence, the population mean phenotype will converge on $\theta$. However, this is not realistic since as resources are consumed $R(x)$ will fluctuate in abundace. If there are $N$ individuals we can capture consumption with 
+
+$$\frac{\partial R(x)}{\partial t}=\lambda(K(x)-R(x))-R(x)\sum_{i=1}^Nu_i(x,z).$$
+
+I'm using $K(x)\geq0$ to represent the amount of resources that would accumulate in the absence of consumption and $\lambda$ to mediate the rate at which the resources are restored to this amount. Since the $z$ are normally distributed the $u_i(x,z)$ are random as well. The mean dynamics become
+
+$$\frac{\partial R(x)}{\partial t}=\lambda(K(x)-R(x))-R(x)N\bar u(x)$$
+
+where $\bar u(x)$ can be written as
+
+$$\bar u(x)=\frac{1}{\sqrt{\eta^2+\sigma^2}}\exp\para{-\frac{(x-\bar z)^2}{2(\eta^2+\sigma^2)}}$$
+
+so long as the phenotypes $z$ are normally distributed and this where the technical difficulties begin. We required $R$ to be Gaussian to calculate the mean fitness, which in turn needs to be Gaussian in order to calculate the change in mean phenotype. However, at equilibrium
+
+$$R^*=\frac{\lambda K}{\lambda+N\bar u}.$$
+
+My idea was to use a Gaussian $K$ and hope the details somehow fell into place. But we can see from the equilirbium expression that this is not the case. If I leave the world of Gaussians behind then I'll be left to deal with functions that I can't write down. Is there a way to deal with such a situation? Can I still somehow describe what will happen? One potential way is to consider the expected niche overlap for independently drawn phenotypes:
+
+$$\E\para{\int u(x,z_i)u(x,z_j)dx}\overset{\text{Tonelli's, right?}}{=}\int\E(u)^2dx\equiv\int\bar u(x)^2dx$$
+
+## Moving on to multiple species
+
+If we assume the distribution of $z$ is normal in each species and that variances are held constant, then we only need to worry about the mean phenotypes in species. We saw that with fluctuating resource abundances with even one species it can be difficult (or impossible) to quantify what will happen. I imagine that for a perfectly balanced situation where $\bar z$ rests at the mode of $K$, $R$ will become bimodal and $\bar z$ will remain fixed. If we have $S$ species and initialize them all in the same way, the same result might occur. But this is not what I want. I'm hoping to see the species partition niche space so that the mean overlap between different species will be minimized. That is, their mean utilization curves will be as close to orthogonal as possible. I don't think this alone will obtain a particularly new result, but sets the stage for me to extend a classic result which is that there can be no more species than there are available resource types. If were return to the finite-dimensional case with $n$ different resources, the result coincides with evolving the set of utilization "vectors" for all species $\{u_1,\dots,u_S\}$ into a linearly independent set which is only possible when $n\geq S$.
+
+## Future directions
+
+Replace the set of resources with a set of species that are "used". We can think of plant/pollinator communities as an example where the plants take the place of the resources. However, instead of being "used up" by the pollinators, they evolve in response. So they display evolutionary dynamics, not just demographic dynamics.

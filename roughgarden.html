@@ -369,8 +369,32 @@ div.tocify {
 <ul>
 <li>All that other stuff is bleh. I’m forcing there to be some direct interaction term such as <span class="math inline">\(\zeta_{ij}\)</span> instead of letting one emerge.</li>
 </ul>
+<p>Working backwords</p>
+<p><span class="math display">\[\frac{dN}{dt}=(aR-d)N\implies W=e^{aR-d}\]</span></p>
+<p>Each individual needs so many resources to reproduce, but no more. The more resources required, either the bigger the offspring or more offspring. So we can relate the number of resources gathered to reproductive output.</p>
+<p>Say there’s <span class="math inline">\(R\)</span> packets of resources available and each individual need 1 to reproduce. We can start by assuming all individuals have equal opportunnity so that the probability that an individual reproduces is equal to <span class="math inline">\(\max(1,R/N)\)</span>. If differential opportunnity occurs because each individual has a different trait that gives them either more or less of an advantage, what is the probability for each individual that it reproduces? We can think of this as scaling the amount of resources needed. An individual with a trait that gives them an advantage scales the required number of resource packets to a lower number. This scaling could be:</p>
+<p><span class="math display">\[s(z)=\exp{\left( \frac{(\theta-z)^2}{2\omega^2} \right)}\]</span></p>
+<p>But it’s not true that these individuals need more or less, just that they have a harder or easier time getting them.</p>
+<p>Suppose the effeciency of individual is:</p>
+<p><span class="math display">\[e(z_i)=\exp{\left( -\frac{(\theta-z_i)^2}{2\omega^2} \right)}\]</span></p>
+<p>and the probability that this individual reproduces is</p>
+<p><span class="math display">\[\frac{e(z_i)}{\sum_je(z_j)}\]</span></p>
+<p>in the continuum</p>
+<p><span class="math display">\[p_i=\frac{e(z_i)}{\int e(z)\phi(z)dz}\]</span></p>
+<p>suppose each individual consumes <span class="math inline">\(C\)</span> amount of resources.</p>
+<p><span class="math display">\[R_{t+1}=R_t+\lambda(K-R_t)-C\sum_ip_i\]</span></p>
+<p><span class="math display">\[\frac{dN}{dt}=\overline{\ln(Wp)}N\]</span></p>
+<p><span class="math display">\[\overline{\ln(Wp)}=\ln W-\frac{(\bar z-\theta)^2+\sigma^2}{2\omega^2}-\ln\sqrt{2\pi\omega^2}+\frac{(\bar z-\theta)^2}{2(\omega^2+\sigma^2)}
++\ln\sqrt{\frac{\omega^2}{\omega^2+\sigma^2}}\]</span></p>
+<p><span class="math display">\[=\ln W+\frac{(\bar z-\theta)^2(\omega^2+\sigma^2)+\sigma^2(\omega^2+\sigma^2)-\omega^2(\bar z-\theta)^2}{2\omega^2(\omega^2+\sigma^2)}+\ln\sqrt{\frac{1}{2\pi(\omega^2+\sigma^2)}}\]</span></p>
+<p><span class="math display">\[=\ln W+\frac{(\bar z-\theta)^2\sigma^2+\sigma^2(\omega^2+\sigma^2)}{2\omega^2(\omega^2+\sigma^2)}+\ln\sqrt{\frac{1}{2\pi(\omega^2+\sigma^2)}}\]</span></p>
+<p><span class="math display">\[=\ln W+\frac{}{}+\ln\sqrt{\frac{1}{2\pi(\omega^2+\sigma^2)}}\]</span></p>
 </div>
 </div>
+</div>
+<div id="crazy-idea" class="section level2">
+<h2>Crazy idea</h2>
+<p>The set of all polynomials provides a basis for the set of all smooth functions. The exponential of the such functions can then be written as the exponetional of the sum of polynomials. Can we transform the dynamics and work with polynomials instead? The Hermite polynomials provide a basis.</p>
 </div>
 
 

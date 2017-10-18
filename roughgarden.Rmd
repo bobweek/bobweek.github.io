@@ -173,3 +173,7 @@ $$=\ln W+\frac{}{}+\ln\sqrt{\frac{1}{2\pi(\omega^2+\sigma^2)}}$$
 
 
 
+
+## Crazy idea
+
+The set of all polynomials provides a basis for the set of all smooth functions. The exponential of the such functions can then be written as the exponetional of the sum of polynomials. Can we transform the dynamics and work with polynomials instead? The Hermite polynomials provide a basis.

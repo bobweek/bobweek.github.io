@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Niche Stuff</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="interactive_theory.html">Interactive Theory</a></li>
+        <li><a href="inferring_coevolution.html">Inferring Coevolution</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="notes-fitness.html">First Steps</a></li>
+            <li><a href="notes-evolution.html">Evolution</a></li>
+            <li><a href="notes-examples.html">Examples</a></li>
+            <li><a href="notes-misc.html">Misc</a></li>
+          </ul>
+        </li>
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Niche Stuff</h1>
+
+</div>
+
+
+<!--
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+-->
+<div id="basic-ingredients" class="section level2">
+<h2>Basic ingredients</h2>
+<ul>
+<li><p>The resource availability curve <span class="math inline">\(R(x)\geq0\)</span> is the amount of resources available of type <span class="math inline">\(x\)</span>.</p></li>
+<li><p>The resource utilization curve <span class="math inline">\(u(x)\geq0\)</span> is the “strategy” used by individuals (or species) to procure resources. We require <span class="math inline">\(\int udx=1\)</span> so that this defines a probability density of resource use.</p></li>
+<li><p>Fitness can be measured by <span class="math inline">\(\int R(x)u(x)dx\)</span>. Note that this is an inner-product if <span class="math inline">\(R(x)\)</span> and <span class="math inline">\(u(x)\)</span> belong to some inner-product-space (such as <span class="math inline">\(L^2({\mathbb{R}})\)</span>). This fact helps develop some intuition about the biology. For instance, in the case where there are just a finite number <span class="math inline">\(n\)</span> of resources then both <span class="math inline">\(R\)</span> and <span class="math inline">\(u\)</span> are elements of <span class="math inline">\({\mathbb{R}}^n\)</span>. If <span class="math inline">\(R\)</span> and <span class="math inline">\(u\)</span> are “orthogonal” we easily see that the type of resources available do not co-occur with the type of resources preferred. Hence, fitness is zero in this situation, just as predicted by the inner-product. One snag here is that both <span class="math inline">\(R(x)\)</span> and <span class="math inline">\(u(x)\)</span> are non-negative for all <span class="math inline">\(x\)</span> and so the set of all such curves would only cover a subset of <span class="math inline">\(L^2({\mathbb{R}})\)</span>.</p></li>
+<li><p>The amount of competition between individuals (or species) with utilization curves <span class="math inline">\(u_1\)</span> and <span class="math inline">\(u_2\)</span> is referred to as “nich overlap” and is classically computed as <span class="math inline">\(\int u_1(x)u_2(x)dx\)</span>.</p></li>
+</ul>
+</div>
+<div id="adding-an-evolutionary-twist" class="section level2">
+<h2>Adding an evolutionary twist</h2>
+<p>Assume:</p>
+<ul>
+<li><p>A population of individuals with phenotypes <span class="math inline">\(z\in{\mathbb{R}}\)</span> distributed normally with mean <span class="math inline">\(\bar z\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.</p></li>
+<li><p>Each individual has a Gaussian resource curve centered on its phenotype with constant “variance” <span class="math inline">\(\eta^2\)</span>:</p></li>
+</ul>
+<p><span class="math display">\[u(x,z)=\frac{1}{\sqrt{2\pi\eta^2}}\exp{\left( -\frac{(z-x)^2}{2\eta^2} \right)}\]</span></p>
+<p>We can start by assuming a static resource availability curve that is also Gaussian:</p>
+<p><span class="math display">\[R(x)=\frac{1}{\sqrt{2\pi\omega^2}}\exp{\left( -\frac{(\theta-x)^2}{2\omega^2} \right)}\]</span></p>
+<p>Then fitness is calculated as:</p>
+<p><span class="math display">\[W(z)=\int R(x)u(x,z)dx=\frac{1}{\sqrt{2\pi(\omega^2+\eta^2)}}\exp{\left( -\frac{(\theta-z)^2}{2(\omega^2+\eta^2)} \right)}\]</span></p>
+<p>And mean fitness:</p>
+<p><span class="math display">\[\overline{W}=\frac{1}{\sqrt{2\pi(\omega^2+\eta^2+\sigma^2)}}\exp{\left( -\frac{(\theta-\bar z)^2}{2(\omega^2+\eta^2+\sigma^2)} \right)}\]</span> The breeder’s equation returns:</p>
+<p><span class="math display">\[\frac{d\bar z}{dt}=G\frac{\partial\ln\overline{W}}{\partial\bar z}=G\frac{\theta-\bar z}{\omega^2+\eta^2+\sigma^2}\]</span></p>
+<p>Hence, the population mean phenotype will converge on <span class="math inline">\(\theta\)</span>. However, this is not realistic since as resources are consumed <span class="math inline">\(R(x)\)</span> will fluctuate in abundace. If there are <span class="math inline">\(N\)</span> individuals we can capture consumption with</p>
+<p><span class="math display">\[\frac{\partial R(x)}{\partial t}=\lambda(K(x)-R(x))-R(x)\sum_{i=1}^Nu_i(x,z).\]</span></p>
+<p>I’m using <span class="math inline">\(K(x)\geq0\)</span> to represent the amount of resources that would accumulate in the absence of consumption and <span class="math inline">\(\lambda\)</span> to mediate the rate at which the resources are restored to this amount. Since the <span class="math inline">\(z\)</span> are normally distributed the <span class="math inline">\(u_i(x,z)\)</span> are random as well. The mean dynamics become</p>
+<p><span class="math display">\[\frac{\partial R(x)}{\partial t}=\lambda(K(x)-R(x))-R(x)N\bar u(x)\]</span></p>
+<p>where <span class="math inline">\(\bar u(x)\)</span> can be written as</p>
+<p><span class="math display">\[\bar u(x)=\frac{1}{\sqrt{\eta^2+\sigma^2}}\exp{\left( -\frac{(x-\bar z)^2}{2(\eta^2+\sigma^2)} \right)}\]</span></p>
+<p>so long as the phenotypes <span class="math inline">\(z\)</span> are normally distributed and this where the technical difficulties begin. We required <span class="math inline">\(R\)</span> to be Gaussian to calculate the mean fitness, which in turn needs to be Gaussian in order to calculate the change in mean phenotype. However, at equilibrium</p>
+<p><span class="math display">\[R^*=\frac{\lambda K}{\lambda+N\bar u}.\]</span></p>
+<p>My idea was to use a Gaussian <span class="math inline">\(K\)</span> and hope the details somehow fell into place. But we can see from the equilirbium expression that this is not the case. If I leave the world of Gaussians behind then I’ll be left to deal with functions that I can’t write down. Is there a way to deal with such a situation? Can I still somehow describe what will happen? One potential way is to consider the expected niche overlap for independently drawn phenotypes:</p>
+<p><span class="math display">\[{\mathbb{E}}{\left( \int u(x,z_i)u(x,z_j)dx \right)}\overset{\text{Tonelli&#39;s, right?}}{=}\int{\mathbb{E}}(u)^2dx\equiv\int\bar u(x)^2dx\]</span></p>
+</div>
+<div id="moving-on-to-multiple-species" class="section level2">
+<h2>Moving on to multiple species</h2>
+<p>If we assume the distribution of <span class="math inline">\(z\)</span> is normal in each species and that variances are held constant, then we only need to worry about the mean phenotypes in species. We saw that with fluctuating resource abundances with even one species it can be difficult (or impossible) to quantify what will happen. I imagine that for a perfectly balanced situation where <span class="math inline">\(\bar z\)</span> rests at the mode of <span class="math inline">\(K\)</span>, <span class="math inline">\(R\)</span> will become bimodal and <span class="math inline">\(\bar z\)</span> will remain fixed. If we have <span class="math inline">\(S\)</span> species and initialize them all in the same way, the same result might occur. But this is not what I want. I’m hoping to see the species partition niche space so that the mean overlap between different species will be minimized. That is, their mean utilization curves will be as close to orthogonal as possible. I don’t think this alone will obtain a particularly new result, but sets the stage for me to extend a classic result which is that there can be no more species than there are available resource types. If were return to the finite-dimensional case with <span class="math inline">\(n\)</span> different resources, the result coincides with evolving the set of utilization “vectors” for all species <span class="math inline">\(\{u_1,\dots,u_S\}\)</span> into a linearly independent set which is only possible when <span class="math inline">\(n\geq S\)</span>.</p>
+</div>
+<div id="future-directions" class="section level2">
+<h2>Future directions</h2>
+<p>Replace the set of resources with a set of species that are “used”. We can think of plant/pollinator communities as an example where the plants take the place of the resources. However, instead of being “used up” by the pollinators, they evolve in response. So they display evolutionary dynamics, not just demographic dynamics.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
