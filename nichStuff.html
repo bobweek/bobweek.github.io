@@ -358,11 +358,46 @@ Replace the set of resources with a set of species. We can think of plant/pollin
 
 We can blur the distinction between discrete resources and continuous resources by assuming the existence of a set of $n$ resources that are "realized" on the resource axis in a continuous fashion. They can each have a Gaussian distribution with means $\theta_i$ and widths $\omega_i^2$ and abundances $A_i$ so that
 
-$$R_i(x)=\frac{A_i}{\sqrt{2\pi\omega_i^2}}\exp\para{-\frac{(\theta_i-x)^2}{2\omega_i^2}}$$
+
 
 Clearly, the total amount of resource $i$ is given by $\int R_idx=A_i$. The biological insight is that resources occuring at the same location need not come from the same source.
 
 -->
+</div>
+<div id="ideas-from-meeting-with-steve" class="section level2">
+<h2>Ideas from meeting with Steve</h2>
+<div id="using-gaussians-to-approximate-general-curves" class="section level3">
+<h3>Using Gaussians to approximate general curves</h3>
+<ul>
+<li>Finite number (<span class="math inline">\(n\)</span>) of resource types, each span the resource axis.</li>
+</ul>
+<p><span class="math display">\[R_i(x)=\frac{A_i}{\sqrt{2\pi\omega_i^2}}\exp{\left( -\frac{(\theta_i-x)^2}{2\omega_i^2} \right)}\]</span></p>
+<ul>
+<li>Each individual resource utilization curve approximated by a convex combination of Gaussians.</li>
+</ul>
+<p><span class="math display">\[u(x,w_1,\dots,w_n)=\sum_iw_i\frac{1}{\sqrt{2\pi\eta^2}}\exp{\left( -\frac{(z_i-x)^2}{2\eta^2} \right)}, \ w_i\geq0, \ \sum_iw_i=1\]</span></p>
+<ul>
+<li><p>Let the <span class="math inline">\(w_i\)</span> evolve and leave the <span class="math inline">\(z_i\)</span> fixed. The <span class="math inline">\(w_i\)</span> comprise an <span class="math inline">\(n\)</span>-dimensional trait.</p></li>
+<li><p>Can start with just finite number of resource types instead of a continuum and just use <span class="math inline">\(w_i\)</span>’s and <span class="math inline">\(A_i\)</span>’s instead of the above Gaussians. Could this be made to fit with a more pop-gen esque approach? The resource types provide the “alleles”, the utilization of those resources for each individual is represented by a number on the closed unit interval, sort of like an allele frequency. Could we get the basic</p></li>
+</ul>
+<p><span class="math display">\[\Delta\bar w_i=\bar w_i(1-\bar w_i)\frac{d\ln\overline W}{d\bar w_i}, \ \bar w_i={\mathbb{E}}(w_i)?\]</span></p>
+<p><span class="math display">\[W_i=A_iw_i, \ \overline{\ln W}=\sum_{j=1}^N\ln(A_iw_i)=\ln{\left( \prod_{j=1}^NA_iw_i \right)}\]</span></p>
+<p><span class="math display">\[\frac{d\bar w_i}{dt}=\bar w_i(\ln W_i-\overline{\ln W})\]</span></p>
+<p>Write</p>
+<p><span class="math display">\[w=(w_1,\dots,w_n)\in[0,1]^n\]</span></p>
+<p><span class="math display">\[W(w)=\sum_iA_iw_i\]</span></p>
+<p><span class="math display">\[\frac{d}{dt}\phi_t(w)=\phi_t(x)(\ln W_t(w)-\overline{\ln W_t})\]</span></p>
+<p><span class="math display">\[\overline{\ln W_t}=\int_0^1\cdots\int_0^1\phi_t(w_1,\dots,w_n)\ln W_t(w_1,\dots,w_n)dw_1\cdots dw_n\equiv\int_{[0,1]^n}\phi_t(w)\ln W_t(w)dw\]</span></p>
+<p><span class="math display">\[\frac{dA_i}{dt}=\lambda(K-A_i)-A_i\sum_{j=1}^Nw_i^j=\lambda(K-A_i)-A_iN\bar w_i\]</span></p>
+</div>
+<div id="dealing-with-monsters" class="section level3">
+<h3>Dealing with monsters</h3>
+<ul>
+<li><p>Travelling wave.</p></li>
+<li><p>Ask particular questions that transform the problem into something tractable.</p></li>
+<li><p>Turn PDE’s into ODE’s</p></li>
+</ul>
+</div>
 </div>
 
 

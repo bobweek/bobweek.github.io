@@ -22,49 +22,40 @@ knitr::opts_chunk$set(echo = TRUE)
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\tr}{\mathrm{tr}}
 
+## Questions
 
-## Pairwise Coevolution
+* How does the structure of the community correspond to the patterns produced?
+    + How many species can be maintained in different types of communities?
+        + How does (co)evolution affect this number?
+    + What kind of trait distributions can we expect in different types of communities?
+        + How does (co)evolution affect this distribution?
+    + What kind of abundance distributions can we expect in different types of communities?
+        + How does (co)evolution affect this distribution?
+        
+* How sensitive is a community to immigrant species?
+    + Will the residents evolve in response or will the new species become "assimilated"?
+    + How will the abundances of resident species change?
 
-The inference method is a major aspect of this section. However, I still would like to incorporate into my framework diversifying selection, variance dynamics and population dynamics.
+* Under what conditions do specialist species evolve?
 
-## Coevolutionary Community Modules
+* Tangential questions
 
-This section is inspired by Bob Holt's community modules. However, instead of focusing on population dynamics, the focus will initially be on mean trait dynamics. The addition of trait variance dynamics and population dynamics would likely follow.
+    + How does plasticity change the answers to each of the above questions?
 
-* Evolutionary analog to the $R^*$ theory: instead coexistence, it's whether or not traits coincide.
-* Combine the demographic and evolutionary $R^*$'s.
+    + How does phylogenetic signal change the answers to each of the above questions?
 
-## Diffuse Coevolution
+    + How does the genetic architecture of the traits involved change the answers to each of the above questions?
 
-Here I will take a similar approach to the metapopulation model of pairwise coevolution but instead apply it to a large community of organisms, starting with one guild (such as the finches or anolis lizards) and later moving to multiple guilds (such as plant/pollinator communities or trophic webs such as primary producers, herbivores and carnivores).
+## Structure of the approach    
 
-## More
+### Pairwise Coevolution (2 species)
 
-* All of the above models can be extended to incorporate spatial structure, either implicit or explicit, discrete or continuous.
+The theory developed for pairwise coevolution provides the backbone for all (or most) of these investigations.
 
-* I've been thinking about extending Niche theory as treated in chapter 24 of Roughgardens' book to my "Bobelian" framework.
+### Coevolutionary Community Modules (a few species)
 
-* Assembly/Succession
+These models will be used to focus on particular aspects of the big picture. There may be some questions that are more appropiately answered by focusing on just a few species.
 
-## KL vs $\Lambda$
+### Diffuse Coevolution (many species)
 
-Definition of $\Lambda$:
-
-$$\Lambda=2\ln\para{\frac{L_c}{L_0}}$$
-
-where $L_0$ is the likelihood of the null and $L_c$ is the likelihood of coevolution. For a single observation $z=(z_1,z_2)^\top$ this simplifies to
-
-$$\ln\para{\frac{|\Sigma_0|}{|\Sigma_c|}}+(z-\mu_0)^\top\Sigma_0^{-1}(z-\mu_0)-(z-\mu_c)^\top\Sigma_c^{-1}(z-\mu_c)$$
-
-where $\mu_i$ and $\Sigma_i$ are the mean vector and variance/covariance matrix of hypothesis $i$.
-
-Definition of KL:
-
-$$D_{KL}(\phi_c\|\phi_0)=\int_{\R^2}\phi_c(z)\ln\para{\frac{\phi_c(z)}{\phi_0(z)}}dz$$
-Since $\phi_c(z)$ and $\phi_0(z)$ are equivalent to $L_c$ and $L_0$ for the single observation $z$ we see that
-
-$$2D_{KL}(\phi_c\|\phi_0)=\E_{\phi_c}(\Lambda).$$
-
-That is, twice the KL-divergence is equal to the expected likelihood ratio statistic given the existence of coevolution. This expectation comes out to be:
-
-$$\ln\para{\frac{|\Sigma_0|}{|\Sigma_c|}}+(\mu_c-\mu_0)^\top\Sigma_0^{-1}(\mu_c-\mu_0)+\tr(\Sigma_0^{-1}\Sigma_c)-2$$
+This will be the primary focus. I hope to develop models that capture random variables representing the number of species, the number of significant pairwise interactions for each species, the strengths of pairwise biotic selection for every interaction, the abundances of each species, etc. I'm curious about quantifying the evolutionary stability of a community so that I can quantify the effect of a species with a particular set of attributes immigrating into the community.

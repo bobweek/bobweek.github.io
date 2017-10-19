@@ -108,6 +108,12 @@ $$=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)-(\Delta\bar z_t)^2$$
 
 Something to pay attention to in all of the above results is that they each depended on knowing how $\phi_t(i)$ changes. Here we only consider the effects of deterministic selection, but of course there are many other processes that can cause change in $\phi_t(i)$.
 
+## Multivariate Types
+
+Suppose each type $i$ has $K$ different components. In the case of discrete types we can denote a given type by $(c_1,\dots,c_K)$ where each $c_i$ belongs to some set $C_i$ that would be finite or countable. Then we would still be able to enumerate these types even with their $K$ components. We could then just use the index that enumerate them by to label each type. This wouldn't fundamentally change anything about the treatment of discrete types.
+
+However, for continuous types this is not the case. Having $K$ components does create a fundamentally new situation. Let's start by assuming $K=2$ and label each component $z_1$ and $z_2$ and assume $z=(z_1,z_2)\in\R^2$. Fitness then becomes a bivariate function $W(z)=W(z_1,z_2)$ and the phenotypic density becomes the joint density $\phi_t(z)=\phi_t(z_1,z_2)$ (and since population density is just a scaled version of $\phi$ it too will be bivariate).
+
 ## Reproduction
 
 So far I have assumed that inheritance is perfect so that offspring resemble their parents exactly. The existence of sex in the above theory is ambiguous. One could hold the perspective that individuals reproduce asexually or that individuals only mate with only other individuals of their exact type, creating $2\W$ offspring, one set for each member of the mating pair. Yet another way to look at this theory is that it tracks just one gender so that, for example, daughters resemble their mothers perfectly and their fathers make no contribution to their type. Here I will explicitly model sexual reproduction by beginning with random mating. I will first focus on discrete time dynamics for a continuum of types indexed by $\R$. Later I will extend these results to continuous time dynamics and a more general mating pattern that encompasses everything from absolutely assortative mating to random mating to absolutely disassortative mating.

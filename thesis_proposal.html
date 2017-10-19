@@ -301,38 +301,52 @@ div.tocify {
 </div>
 
 
-<div id="pairwise-coevolution" class="section level2">
-<h2>Pairwise Coevolution</h2>
-<p>The inference method is a major aspect of this section. However, I still would like to incorporate into my framework diversifying selection, variance dynamics and population dynamics.</p>
-</div>
-<div id="coevolutionary-community-modules" class="section level2">
-<h2>Coevolutionary Community Modules</h2>
-<p>This section is inspired by Bob Holt’s community modules. However, instead of focusing on population dynamics, the focus will initially be on mean trait dynamics. The addition of trait variance dynamics and population dynamics would likely follow.</p>
-</div>
-<div id="diffuse-coevolution" class="section level2">
-<h2>Diffuse Coevolution</h2>
-<p>Here I will take a similar approach to the metapopulation model of pairwise coevolution but instead apply it to a large community of organisms, starting with one guild (such as the finches or anolis lizards) and later moving to multiple guilds (such as plant/pollinator communities or trophic webs such as primary producers, herbivores and carnivores).</p>
-</div>
-<div id="more" class="section level2">
-<h2>More</h2>
+<div id="questions" class="section level2">
+<h2>Questions</h2>
 <ul>
-<li><p>All of the above models can be extended to incorporate spatial structure, either implicit or explicit, discrete or continuous.</p></li>
-<li><p>I’ve been thinking about extending Niche theory as treated in chapter 24 of Roughgardens’ book to my “Bobelian” framework.</p></li>
-<li><p>Assembly/Succession</p></li>
+<li>How does the structure of the community correspond to the patterns produced?
+<ul>
+<li>How many species can be maintained in different types of communities?
+<ul>
+<li>How does (co)evolution affect this number?</li>
+</ul></li>
+<li>What kind of trait distributions can we expect in different types of communities?
+<ul>
+<li>How does (co)evolution affect this distribution?</li>
+</ul></li>
+<li>What kind of abundance distributions can we expect in different types of communities?
+<ul>
+<li>How does (co)evolution affect this distribution?</li>
+</ul></li>
+</ul></li>
+<li>How sensitive is a community to immigrant species?
+<ul>
+<li>Will the residents evolve in response or will the new species become “assimilated”?</li>
+<li>How will the abundances of resident species change?</li>
+</ul></li>
+<li><p>Under what conditions do specialist species evolve?</p></li>
+<li><p>Tangential questions</p>
+<ul>
+<li><p>How does plasticity change the answers to each of the above questions?</p></li>
+<li><p>How does phylogenetic signal change the answers to each of the above questions?</p></li>
+<li><p>How does the genetic architecture of the traits involved change the answers to each of the above questions?</p></li>
+</ul></li>
 </ul>
 </div>
-<div id="kl-vs-lambda" class="section level2">
-<h2>KL vs <span class="math inline">\(\Lambda\)</span></h2>
-<p>Definition of <span class="math inline">\(\Lambda\)</span>:</p>
-<p><span class="math display">\[\Lambda=2\ln{\left( \frac{L_c}{L_0} \right)}\]</span></p>
-<p>where <span class="math inline">\(L_0\)</span> is the likelihood of the null and <span class="math inline">\(L_c\)</span> is the likelihood of coevolution. For a single observation <span class="math inline">\(z=(z_1,z_2)^\top\)</span> this simplifies to</p>
-<p><span class="math display">\[\ln{\left( \frac{|\Sigma_0|}{|\Sigma_c|} \right)}+(z-\mu_0)^\top\Sigma_0^{-1}(z-\mu_0)-(z-\mu_c)^\top\Sigma_c^{-1}(z-\mu_c)\]</span></p>
-<p>where <span class="math inline">\(\mu_i\)</span> and <span class="math inline">\(\Sigma_i\)</span> are the mean vector and variance/covariance matrix of hypothesis <span class="math inline">\(i\)</span>.</p>
-<p>Definition of KL:</p>
-<p><span class="math display">\[D_{KL}(\phi_c\|\phi_0)=\int_{{\mathbb{R}}^2}\phi_c(z)\ln{\left( \frac{\phi_c(z)}{\phi_0(z)} \right)}dz\]</span> Since <span class="math inline">\(\phi_c(z)\)</span> and <span class="math inline">\(\phi_0(z)\)</span> are equivalent to <span class="math inline">\(L_c\)</span> and <span class="math inline">\(L_0\)</span> for the single observation <span class="math inline">\(z\)</span> we see that</p>
-<p><span class="math display">\[2D_{KL}(\phi_c\|\phi_0)={\mathbb{E}}_{\phi_c}(\Lambda).\]</span></p>
-<p>That is, twice the KL-divergence is equal to the expected likelihood ratio statistic given the existence of coevolution. This expectation comes out to be:</p>
-<p><span class="math display">\[\ln{\left( \frac{|\Sigma_0|}{|\Sigma_c|} \right)}+(\mu_c-\mu_0)^\top\Sigma_0^{-1}(\mu_c-\mu_0)+{\mathrm{tr}}(\Sigma_0^{-1}\Sigma_c)-2\]</span></p>
+<div id="structure-of-the-approach" class="section level2">
+<h2>Structure of the approach</h2>
+<div id="pairwise-coevolution-2-species" class="section level3">
+<h3>Pairwise Coevolution (2 species)</h3>
+<p>The theory developed for pairwise coevolution provides the backbone for all (or most) of these investigations.</p>
+</div>
+<div id="coevolutionary-community-modules-a-few-species" class="section level3">
+<h3>Coevolutionary Community Modules (a few species)</h3>
+<p>These models will be used to focus on particular aspects of the big picture. There may be some questions that are more appropiately answered by focusing on just a few species.</p>
+</div>
+<div id="diffuse-coevolution-many-species" class="section level3">
+<h3>Diffuse Coevolution (many species)</h3>
+<p>This will be the primary focus. I hope to develop models that capture random variables representing the number of species, the number of significant pairwise interactions for each species, the strengths of pairwise biotic selection for every interaction, the abundances of each species, etc. I’m curious about quantifying the evolutionary stability of a community so that I can quantify the effect of a species with a particular set of attributes immigrating into the community.</p>
+</div>
 </div>
 
 
