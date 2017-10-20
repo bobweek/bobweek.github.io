@@ -24,7 +24,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Questions
 
-* How does the structure of the community correspond to the patterns produced?
+* How does the type of community correspond to the patterns produced?
+    
     + How many species can be maintained in different types of communities?
         + How does (co)evolution affect this number?
     + What kind of trait distributions can we expect in different types of communities?
@@ -38,13 +39,16 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * Under what conditions do specialist species evolve?
 
-* Tangential questions
+* How does succession proceed while coevolution occurs?
+    + If we start with a biologically vacant region that has some abiotic resources, give a regional pool of species, how will the community assemble?
 
-    + How does plasticity change the answers to each of the above questions?
+### Tangential questions
 
-    + How does phylogenetic signal change the answers to each of the above questions?
+* How does plasticity change the answers to each of the above questions?
 
-    + How does the genetic architecture of the traits involved change the answers to each of the above questions?
+* How does phylogenetic signal change the answers to each of the above questions?
+
+* How does the genetic architecture of the traits involved change the answers to each of the above questions?
 
 ## Structure of the approach    
 

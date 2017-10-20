@@ -333,81 +333,6 @@ output:
 <p>This leads to the SDE</p>
 <p><span class="math display">\[d\phi_t(i)=(\ln W_t(i)-\overline{\ln W_t})\phi_t(i)dt+\sqrt{V_t(i)+\overline{V_t}}\phi_t(i)dB_t\]</span></p>
 <p>which defines <a href="http://www.randomservices.org/random/brown/Geometric.html">geometric Brownian motion</a>.</p>
-<!--
-
-#### Stochastic Theory?
-
-$$\phi_{t+1}(i)-\phi_t(i)=\para{\frac{\W_t(i)}{\overline{\W}_t}-1}\phi_t(i)=\frac{1}{\overline{\W}_t}(\W_t(i)-\overline{\W}_t)\phi_t(i)$$
-
-$$\overline{\W}_t=\sum_i\W_t(i)\phi_t(i)\sim?$$
-
-$$\E\overline{\W}_t=\sum_iW_t(i)\phi_t(i)=\overline{W}_t$$
-
-$$\Var(\overline{\W}_t)=\E\para{\sum_i(\W_t(i)-W_t(i))\phi_t(i)}^2$$
-
-$$=\E\para{\sum_i(\W_t(i)-W_t(i))^2\phi_t^2(i)+2\sum_i\sum_j(\W_t(i)-W_t(i))(\W_t(j)-W_t(j))\phi_t(i)\phi_t(j)}$$
-
-$$=\sum_iW_t(i)\phi_t^2(i)+2\sum_{i=1}^N\sum_{j=1}^{i-1}\Cov(\W_t(i),\W_t(j))\phi_t(i)\phi_t(j)=\overline{W_t\phi_t}+\dots$$
-
-$$\E(\ln(\W_t(i))-\ln(W_t(i)))^2$$
-
-What about the stochastic theory of $\phi_t$? If we assume $\W_t(i)\sim\ln\mathcal{N}(\mu_t(i),\sigma_t^2(i))$ then $\overline{\ln W_t}=\mathcal{N}(\overline{\mu_t},\overline{\sigma_t^2})$.
-
-$$\E(D_t\phi_t(i))=\E\para{ \phi_t(i)(\ln\W_t(i)-\sum_{j=1}^T\phi_t(j)\ln\W_t(j)) }=\phi_t(i)(\ln W_t-\overline{\ln W_t})$$
-
-$$\Var(D_t\phi_t)=\E_W\para{ \phi_t(\ln\W_t-\overline{\ln\W_t})-\phi_t(\ln W_t-\overline{\ln W_t}) }^2=\phi_t^2\Var(\ln \W_t-\overline{\ln \W_t})$$
-
-Hence,
-
-$$D_t\phi_t(i)\sim\mathcal{N}(\phi_t(i)(\mu_t(i)-\overline{\mu_t}),\phi_t^2(i)(\sigma_t^2(i)+\overline{\sigma_t^2})).$$
-
-What is $\lim_{\delta\rightarrow0}\frac{\W^\delta-1}{\delta}$? We can try to figure this out by calculating the characteristic function. Note that $\ln\W$ can't be $\mathcal{N}$ as that would imply $\W\sim\ln\mathcal{N}$. Should try to multiply many indep $\mathcal{P}$ fitnesses together to get a $\ln\mathcal{N}$. In continuous time, we need to deal with a continuum of individuals instead of a discrete set.
-
-Pre-limit
-
-$$\chi(s)=\E\exp\para{is\frac{\W^\delta-1}{\delta}}=$$
-
-Post-limit
-
-$$\chi(s)=\E\exp(is\ln\W)=\sum_{k=0}^\infty\exp(is\ln k)\frac{W^ke^{-W}}{k!}=\sum_{k=1}^\infty k^{is}\frac{W^ke^{-W}}{k!}=e^{-W}T_{is}(W)$$
-
-Here, $T_x(y)$ is the Touchard polynomial function extended to $x\in\C$ and has the representation via contour integration
-
-$$T_x(y)=\frac{\Gamma(x+1)}{2\pi i}\oint\frac{e^{y(e^t)-1}}{t^{x+1}}dt.$$
-
-$$D_s T_{is}(W)=\frac{1}{e2\pi i}\oint D_s\frac{\Gamma(is+1)e^{W(e^t)}}{t^{is+1}}dt=\frac{1}{e2\pi i}\oint e^{W(e^t)}D_s\frac{\Gamma(is+1)}{t^{is+1}}dt$$
-
-$$D_s\frac{\Gamma(is+1)}{t^{is+1}}=\frac{t^{is+1}D_s\Gamma(is+1)-\Gamma(is+1)D_st^{is+1}}{t^{2is+2}}=\frac{t^{is+1}\psi(is+1)\Gamma(is+1)-\Gamma(is+1)i\ln(t)t^{is+1}}{t^{2is+2}}$$
-$$=i\frac{\Gamma(is+1)}{t^{is+1}}(\psi(is+1)-\ln(t))$$
-
-Do we wait to evaluate $s$ or just go for it? Seems like an issue arises if we just go for it.
-
-$$D_s\ln\chi(s)\Big|_{s=0}=\frac{D_s\chi(s)\Big|_{s=0}}{\chi(0)}=\sum_{k=0}^\infty i\ln(k)k^{is}\frac{W^ke^{-W}}{k!}\Big|_{s=0}\overset{?}{=}\sum_{k=0}^\infty i\ln(k)\frac{W^ke^{-W}}{k!}$$
-
-otherwise
-
-$$=\sum_{k=0}^\infty i\ln(k)k^{is}\frac{W^ke^{-W}}{k!}\Big|_{s=0}=\left.\sum_{k=0}^\infty i\ln(1+k)(1+k)^{is}\frac{W^ke^{-W}}{k!}\right|_{s=0}$$
-
-$$=\left.ie^{-W}\ln\prod_{k=1}^\infty k^{k^{is}\frac{W^k}{k!}}\right|_{s=0}$$
-
-$$=ie^{-W}\left.\sum_{k=0}^\infty(1+k)^{is}\frac{W^k}{k!}\sum_{j=1}^\infty\frac{k^j(-1)^{j+1}}{j}\right|_{s=0}$$
-
--->
-<!--
-
-We could, of course, continue on with the stochastic case to get
-
-$$\E(\phi_t(i))=\phi_0(i)e^{\int_0^t\rho_s(i)ds} \text{ and } \Var(\phi_t(i))=\para{1+\int_0^{t-1}e^{\rho_s(i)}ds}\phi_0(i)e^{\int_0^t\rho_s(i)ds}.$$
-
-Setting $\Box=\phi_0(i)e^{\int_0^t\rho_s(i)ds}$ and $\triangle=\int_0^1e^{\rho_s}ds$ we could try to fit a $\mathrm{Beta}(\alpha,\beta)$ distribution with
-
-$$\alpha=\frac{1-\Box}{1+\triangle}-\Box \ \text{ and } \ \beta=\frac{(1-\Box)^2}{1+\triangle}+\Box-1.$$
-
-If there is a continuum of types indexed by $z\in\R$ we write $\phi_t(z)$ for the density of individuals of type $z$ in the population.  Since densities are not bounded above by 1, it does not make sense to model $\phi_t(z)$ as a $\mathrm{Beta}$ distribution. Instead, it may make more sense to try a $\mathrm{Gamma}(\alpha,\beta)$ with
-
-$$\alpha=\frac{\Box}{1+\triangle} \ \text{and} \ \beta=\frac{1}{1+\triangle}$$
-
--->
 </div>
 </div>
 <div id="response-in-mean-and-variance" class="section level2">
@@ -435,6 +360,11 @@ $$\alpha=\frac{\Box}{1+\triangle} \ \text{and} \ \beta=\frac{1}{1+\triangle}$$
 <p><span class="math display">\[=\frac{1}{\overline W}{\mathrm{Cov}}((\bar z_t-z)^2,W_t)-(\Delta\bar z_t)^2\]</span></p>
 <p>Something to pay attention to in all of the above results is that they each depended on knowing how <span class="math inline">\(\phi_t(i)\)</span> changes. Here we only consider the effects of deterministic selection, but of course there are many other processes that can cause change in <span class="math inline">\(\phi_t(i)\)</span>.</p>
 </div>
+</div>
+<div id="multivariate-types" class="section level2">
+<h2>Multivariate Types</h2>
+<p>Suppose each type <span class="math inline">\(i\)</span> has <span class="math inline">\(K\)</span> different components. In the case of discrete types we can denote a given type by <span class="math inline">\((c_1,\dots,c_K)\)</span> where each <span class="math inline">\(c_i\)</span> belongs to some set <span class="math inline">\(C_i\)</span> that would be finite or countable. Then we would still be able to enumerate these types even with their <span class="math inline">\(K\)</span> components. We could then just use the index that enumerate them by to label each type. This wouldn’t fundamentally change anything about the treatment of discrete types.</p>
+<p>However, for continuous types this is not the case. Having <span class="math inline">\(K\)</span> components does create a fundamentally new situation. Let’s start by assuming <span class="math inline">\(K=2\)</span> and label each component <span class="math inline">\(z_1\)</span> and <span class="math inline">\(z_2\)</span> and assume <span class="math inline">\(z=(z_1,z_2)\in{\mathbb{R}}^2\)</span>. Fitness then becomes a bivariate function <span class="math inline">\(W(z)=W(z_1,z_2)\)</span> and the phenotypic density becomes the joint density <span class="math inline">\(\phi_t(z)=\phi_t(z_1,z_2)\)</span> (and since population density is just a scaled version of <span class="math inline">\(\phi\)</span> it too will be bivariate).</p>
 </div>
 <div id="reproduction" class="section level2">
 <h2>Reproduction</h2>
@@ -593,7 +523,10 @@ Note that random sampling is not the only source of stochasticiy. Consider my de
 </div>
 <div id="putting-it-all-together" class="section level2">
 <h2>Putting it all together</h2>
-<p><span class="math display">\[\frac{\partial\phi_t}{\partial t}=h^2 \phi(\ln W_t-\overline{\ln W_t})+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}+m^2\frac{\partial^2\phi_t}{\partial x^2}+\phi_t\xi_t\]</span></p>
+<p><span class="math display">\[\frac{\partial\phi_t}{\partial t}=\phi(\ln W_t-\overline{\ln W_t})+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}+m^2\frac{\partial^2\phi_t}{\partial x^2}+\phi_t\Xi_t\]</span></p>
+<p><span class="math display">\[\frac{\partial\bar z}{\partial t}=\frac{\partial}{\partial t}\int z\phi(z)dz=\int z[\phi(\ln W_t-\overline{\ln W_t})+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}+m^2\frac{\partial^2\phi_t}{\partial x^2}+\phi_t\Xi_t]dz\]</span></p>
+<p><span class="math display">\[={\mathrm{Cov}}_\phi(z,\ln W_t)+{\mathrm{Cov}}_\phi(z,\ln\psi_t)+\eta^2\int z\frac{\partial^2\phi_t}{\partial z^2}dz+m^2\frac{\partial^2}{\partial x^2}\int z\phi_tdz+{\mathrm{Cov}}_\phi(z,\Xi_t)\]</span></p>
+<p><span class="math display">\[={\mathrm{Cov}}_\phi(z,\ln W_t)+{\mathrm{Cov}}_\phi(z,\ln\psi_t)+\eta^2{\mathrm{Cov}}_\phi{\left( z,\frac{\partial^2}{\partial z^2} \right)}+m^2\frac{\partial^2\bar z}{\partial x^2}+{\mathrm{Cov}}_\phi(z,\Xi_t)\]</span></p>
 </div>
 
 

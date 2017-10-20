@@ -318,4 +318,12 @@ Note that random sampling is not the only source of stochasticiy. Consider my de
 
 ## Putting it all together
 
-$$\frac{\partial\phi_t}{\partial t}=h^2 \phi(\ln W_t-\overline{\ln W_t})+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}+m^2\frac{\partial^2\phi_t}{\partial x^2}+\phi_t\xi_t$$
+$$\frac{\partial\phi_t}{\partial t}=\phi(\ln W_t-\overline{\ln W_t})+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}+m^2\frac{\partial^2\phi_t}{\partial x^2}+\phi_t\Xi_t$$
+
+$$\frac{\partial\bar z}{\partial t}=\frac{\partial}{\partial t}\int z\phi(z)dz=\int z[\phi(\ln W_t-\overline{\ln W_t})+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}+m^2\frac{\partial^2\phi_t}{\partial x^2}+\phi_t\Xi_t]dz$$
+
+$$=\Cov_\phi(z,\ln W_t)+\Cov_\phi(z,\ln\psi_t)+\eta^2\int z\frac{\partial^2\phi_t}{\partial z^2}dz+m^2\frac{\partial^2}{\partial x^2}\int z\phi_tdz+\Cov_\phi(z,\Xi_t)$$
+
+$$=\Cov_\phi(z,\ln W_t)+\Cov_\phi(z,\ln\psi_t)+\eta^2\Cov_\phi\para{z,\frac{\partial^2}{\partial z^2}}+m^2\frac{\partial^2\bar z}{\partial x^2}+\Cov_\phi(z,\Xi_t)$$
+
+
