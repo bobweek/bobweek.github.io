@@ -24,8 +24,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Questions
 
-* How does the type of community correspond to the patterns produced?
-    
+* How does the type of community (e.g. predator/prey or mutualistic network) correspond to the patterns produced (e.g. trait and abundance distributions)?
     + How many species can be maintained in different types of communities?
         + How does (co)evolution affect this number?
     + What kind of trait distributions can we expect in different types of communities?
