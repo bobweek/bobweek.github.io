@@ -32,35 +32,43 @@ I will use the phrase "entire community" to refer to the entire set of biota occ
 
 ## Why community ecology?
 
-In my mind, the entire community is the ultimate biological unit of study. We can model the evolution and ecology of a single species, incorporating a mind-numbing amount of detail about mating structure, genetic architecture, spatial dynamics and so on. But even with such a thorough investigation we typically cannot claim to have understood why this particular species is the way that it is because species do not exist in a vacuum. They co-occur with various other species and this geographic overlap inevitably leads to interspecific interactions. To be certain that, for example, the abiotic environment is responsible for the diversity of a species or clade, this hypothesis should be tested against competing ones that claim such diversity is the result of interspecific interactions. Furthermore, to repeat a statement that has been made many times over, any reasonably observant individual who has spent a modest amount of time in natural environments will likely notice patterns such as the co-occurance of a particular plant-fungus species pair or abrudt changes in species composition from one location to another. To understand why such patterns exist it is important to recognize that a pair of interacting species constitutes just one element of an enormous web of interactions across an entire community. How does the nature of each of these pairwise interactions structure the entire community and give rise to patterns commonly witnessed in nature?
+In my mind, the entire community is the ultimate unit of study in evolution and ecology. We can model the evolution and ecology of a single species, incorporating a mind-numbing amount of detail about mating structure, genetic architecture, spatial dynamics and so on. But even with such a thorough investigation we typically cannot claim to have understood why this particular species is the way that it is because species do not exist in a vacuum. They co-occur with various other species and this geographic overlap inevitably leads to interspecific interactions. Of course there are models that have been developed to capture the evolutionary and ecological dynamics of interacting species. However, these models are typically limited to a small number of species. But communittees do not generally consist of just a few species. Incorporating such facts into our methods can alter the conclusions drawn. To be certain that, for example, the abiotic environment is responsible for the diversity of a species or clade, this hypothesis should be tested against competing ones such as the hypothesis that the observed diversity is the result of interspecific interactions. Furthermore, to repeat a statement that has been made many times over, any reasonably observant individual who has spent a modest amount of time in natural environments will likely notice patterns such as the co-occurance of particular species of plants and fungi or the abrudt changes in species composition from one location to another. To understand why such patterns exist it is important to recognize that a pair of interacting species constitutes just one element in an enormous web of interactions across an entire community. How does the nature of each of these pairwise interactions structure the entire community and give rise to patterns commonly witnessed in nature?
 
 ## Questions
 
-* How does the type of community (e.g. predator/prey or mutualistic network) correspond to the patterns produced (e.g. trait and abundance distributions)?
-    + How many species can be maintained in different types of communities?
-        + How does (co)evolution affect this number?
-    + What kind of trait distributions can we expect in different types of communities?
-        + How does (co)evolution affect this distribution?
-    + What kind of abundance distributions can we expect in different types of communities?
-        + How does (co)evolution affect this distribution?
+Here I provide a list of questions relating coevolution to community ecology. The reason I have developed such a large list is to prepare for the failure of answering any specific questions that I plan to be the focus of my proposed thesis.
+
+#### The primary questions
 
 * How common is pairwise coevolution?
+    + Given an index of coevolutionary selection, what is the distribution of this index across a community?
+    + How does this distribution change with respect to community type?
 
 * How sensitive is a community to immigrant species?
     + Will the residents evolve in response or will the new species become "assimilated"?
-    + How will the abundances of resident species change?
+    
+* Under what conditions do specialist species evolve?
+    + Specifically, in plant/pollinator communities, theory suggests that coevolution will result in a higher degree of 
+    generalism which in turn makes for a more robust community. Then why do specialists evolve?
+
+#### Other question
+
+* How many species can be maintained in different types of communities?
+    + How does (co)evolution affect this number?
+* What kind of trait distributions can we expect in different types of communities?
+    + How does (co)evolution affect this distribution?
+* What kind of abundance distributions can we expect in different types of communities?
+    + How does (co)evolution affect this distribution?
 
 * How does space interact with coevolution to produce community structure?
-    + What determines the distribution of various species?
-    + Does spatial continuity fundamentally differ from discretized space with respect to the dynamics of coevolution and abundance?
-
-* Under what conditions do specialist species evolve?
+    + What determines the distribution of various species? Is it primarily abiotic or biotic?
+    + Does distribution play a role in indirect interactions? For example, if two species do not co-occur, but both co-occur with a third species, ...
 
 * How does succession proceed while coevolution occurs?
     + If we start with a biologically vacant region that has some abiotic resources, give a regional pool of species, how will the community assemble?
     + Can we expect coevolution to rampant or rare during a succession?
 
-### Tangential questions
+#### Tangential questions
 
 * How does plasticity change the answers to each of the above questions?
 
@@ -70,16 +78,34 @@ In my mind, the entire community is the ultimate biological unit of study. We ca
 
 ## Structure of the approach    
 
-The idea here does not deviate from traditional reductionist approaches. To analyze a community I plan to first tear it apart into appropriate subunits of study. The atoms of such a reduction are the individuals. By making assumptions about the individuals life-cycle we can derive dynamics of their population. This leads an understanding their metapopulation, their entire species, sets of species, and eventually the entire community.
+The idea here does not deviate from traditional reductionist approaches. To analyze a community I plan to first tear it apart into appropriate subunits of study. The atoms of such a reduction are the individuals. By making assumptions about the life-cycle of individuals we can derive ecological and evolutionary dynamics of their population. This leads to an understanding of their metapopulation, their entire species, sets of species, sets of guilds and eventually the entire community.
 
-### Pairwise coevolution (2 species)
+#### Pairwise coevolution (2 species)
 
 The theory developed for pairwise coevolution provides the backbone for all (or most) of these investigations. This theory has been constructed exactly as described above. We make certain assumptions at the individual level and have been able to derive the resulting dynamics for entire metapopulations.
 
-### Coevolutionary community modules (a few species)
+#### Coevolutionary community modules (a few species)
 
 These models extend the pairwise models to a set of 3 or 4 species and will be used to focus on particular aspects of the big picture. There may be some questions that are more appropiately answered by focusing on just a few species, but the point of these models is to provide not much more than a stepping stone to the amalgamation of many species.
 
-### Diffuse coevolution (many species)
+#### Diffuse coevolution (many species)
 
 This will be the primary focus. I hope to develop models that capture random variables representing the number of species, the number of significant pairwise interactions for each species, the strengths of pairwise biotic selection for every interaction, the abundances of each species, etc. I hope that this approach will lead me to a natural way of quantifying the evolutionary stability of a community. This would in turn allow for rigorous investigations of, for example, effect of a species with a particular set of attributes immigrating into the community or how the community will respond to environmental changes. Even with this larger scale approach, I plan only to study subsets of entire communities, such as plant-pollinator or predator-prey communities.
+
+<!--
+
+## Specifics
+
+#### How common is pairwise coevolution?
+
+Now that I have developed method to infer the strength of coevolution between a pair of species, empiricists are prepared to investigate the prominence of coevolution nature. However, the question of the ubiquity of pairwise coevolution can be attacked from a theoretical approach. To do so I can develop a stochastic approach the determines the probability that a given species pair will coevolve. These probabilities will depend on the type of interaction and environmental context, including both biotic and abiotic components. The result of such an investigation will be to identify criteria that lead to a high probability of coevolution. If this criteria is stringent and not likely met in but very few species interactions, then we can hypothesize that coevolution is rare. However, if this criteria is quite laxed then we can hypothesize that coevolution is rampant. Conclusions will have to wait for empirical verification.
+
+An alternative approach is to formulate an index of coevolutionary selection and to determine the distribution across the community.
+
+* Need to go back to method and get the p-values of the $\beta$'s instead of the $B$'s. The $B$'s only represent the potential for coevolution, the $\beta$'s determine realization of coevolution.
+
+#### How sensitive is a community to immigrant species?
+
+#### Under what conditions do specialist species evolve?
+
+-->
