@@ -108,16 +108,6 @@ $$=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)-(\Delta\bar z_t)^2$$
 
 Something to pay attention to in all of the above results is that they each depended on knowing how $\phi_t(i)$ changes. Here we only consider the effects of deterministic selection, but of course there are many other processes that can cause change in $\phi_t(i)$.
 
-<!--
-
-## Multivariate Types
-
-Suppose each type $i$ has $K$ different components. In the case of discrete types we can denote a given type by $(c_1,\dots,c_K)$ where each $c_i$ belongs to some set $C_i$ that would be finite or countable. Then we would still be able to enumerate these types even with their $K$ components. We could then just use the index that enumerate them by to label each type. This wouldn't fundamentally change anything about the treatment of discrete types.
-
-However, for continuous types this is not the case. Having $K$ components does create a fundamentally new situation. Let's start by assuming $K=2$ and label each component $z_1$ and $z_2$ and assume $z=(z_1,z_2)\in\R^2$. Fitness then becomes a bivariate function $W(z)=W(z_1,z_2)$ and the phenotypic density becomes the joint density $\phi_t(z)=\phi_t(z_1,z_2)$ (and since population density is just a scaled version of $\phi$ it too will be bivariate).
-
--->
-
 ## The inseparability of evolution and ecology
 
 As we saw, the evolutionary dynamics of a population were derived from the demographic dynamics of the various types within that population. The two sets of dynamics are entangled via fitness. The population as a whole grows as a function of mean fitness while evolution occurs due to the structure of fitness across types, which in turn manipulates mean fitness and hence the dynamics of demography. Hence, one cannot, in general, have evolution without ecology and so long as there is heritable variation within a population that covaries with fitness one cannot have ecology without evolution.

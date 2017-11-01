@@ -1,0 +1,57 @@
+---
+title: "Crazy Ideas"
+output: 
+  html_document: 
+    toc: true
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+<!--
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+-->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+
+## Multivariate Types
+
+Suppose each type $i$ has $K$ different components. In the case of discrete types we can denote a given type by $(c_1,\dots,c_K)$ where each $c_i$ belongs to some set $C_i$ that would be finite or countable. Then we would still be able to enumerate these types even with their $K$ components. We could then just use the index that enumerate them by to label each type. This wouldn't fundamentally change anything about the treatment of discrete types.
+
+However, for continuous types this is not the case. Having $K$ components does create a fundamentally new situation. Let's start by assuming $K=2$ and label each component $z_1$ and $z_2$ and assume $z=(z_1,z_2)\in\R^2$. Fitness then becomes a bivariate function $W(z)=W(z_1,z_2)$ and the phenotypic density becomes the joint density $\phi_t(z)=\phi_t(z_1,z_2)$ (and since population density is just a scaled version of $\phi$ it too will be bivariate).
+
+### Trait$\times$Species
+
+Our type space can be $T\times S$ where $T$ represents the trait and $S$ represents the species. We could let $T=S=\R$ and assume adjacent species can hybridize and capture this process with diffusion. This adds another dimension through which populations can separate. Can we have random mating along the $T$ axis and, with bimodal selection, get divergence on the $S$ axis?
+
+## Energy Partitioning
+
+The proportion of energy intake allocated towards reproduction and survival over the lifetime of an individual is a trait of that individual. This number $p\in[0,1]$ will evolve to maximize fitness, the expected number of individuals left behind.
+
+## How do we incorporate different life-spans into the theory?
+
+## Fitness as a trait
+
+Fitness usually evolves indirectly as the result of some other trait $z$. We can set the trait $z=W\in\R_{>0}$. If we assume that $W\sim\ln\mathcal{N}(\overline{\ln W},V_W)$ then
+
+$$\Delta\overline{\ln W}=G_W\frac{\partial\ln\overline W}{\partial\overline{\ln W}}?$$
+
+[I think](https://stats.stackexchange.com/questions/45924/expectation-of-an-exponential-function) $\overline W=\exp\para{\overline{\ln W}+V_W/2}$. Then
+
+$$\Delta\overline{\ln W}=G_W.$$
+
+Does this result contradict the constant additive genetic variance assumption of most quantitative genetic models? Typically $\bar z\rightarrow\theta$ and $\overline W\rightarrow\overline W_\max$. However, this result states that if there is additive genetic variance in fitness then $\overline W$ increases by this amount. But if there's additive genetic variance in $z$ and fitness is a Gaussian function of $z$ as usual AND we keep the assumption of constant additive genetic variance we arrive at a contradiction! But before we get too offended, we should compute the actual distribution of $W$ given that $W$ is a Gaussian function of $z$ and $z$ is normally distributed. It will be bounded to a finite interval and so cannot be $\ln\mathcal{N}$. What relationship between $W$ and $z$ allows for both $\ln W$ and $z$ to be normally distributed?
