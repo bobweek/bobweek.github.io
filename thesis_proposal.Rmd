@@ -43,7 +43,7 @@ Here I provide a list of questions relating coevolution to community ecology.
     + How does this distribution change with respect to community type?
 
 * How does succession interact with coevolution?
-    + Can we expect coevolution to rampant or rare during a succession?
+    + Can we expect coevolution to be rampant or rare during a succession?
         + Will succession select for or against coevolution?
     + How does coevolution manipulate patterns of succession?
     + How sensitive is a community to immigrant species?
