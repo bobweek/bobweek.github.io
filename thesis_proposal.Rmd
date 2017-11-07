@@ -52,9 +52,17 @@ Here I provide a list of questions relating coevolution to community ecology.
     + Specifically, in plant/pollinator communities, theory suggests that coevolution will result in a higher degree of 
     generalism which in turn makes for a more robust community. Then why do specialists evolve?
     + In many communities there are lots of boring species (species with common traits) and few species with exaggerated traits. 
-    Can this pattern be explained by the distribution of coevolution in a community?
+    Can this pattern be explained by the joint distribution of coevolution and specialization in a community?
     
-Note that the answer to the first question is relevant to answering both subsequent questions. Futhermore, there is significant interplay between the latter two questions. For example, the evolution of specialists during the colonization of a novel landscape can alter the pattern of succession.
+Note that the answer to the first question is relevant to answering both subsequent questions. Futhermore, there is significant interplay between the latter two questions. For example, the evolution of specialists during the colonization of a novel landscape can alter the pattern of succession. Conversly, some successional situations may amplify or attenuate selection for specialists.
+
+## Scratching the surface
+
+In this context there are three primary elements through which patterns can form: the distribution of traits in species across guilds, the network structure of interactions within and among guilds and the density of species across space. Of course, time can be thought of as a fourth element, but I doubt I will be able to extend this work to the macroevolutionary setting before I graduate. Also, aside from microbes, most data relevant to this line of inquiry are cross-sectional. Hence, patterns in time will not play a significant role in the initial development of these ideas.
+
+I've identified two components acting to generate patterns across the aforementioned elements. Each of these components contain two complimentary agents that can be thought to compete for control of the patterns we witness. I (tentatively) call these components scale (regional/local) and source (biotic/abiotic). A given pattern might be explained in large part by some combination of these agents. For example, consider a pattern in space such as the number of species in a clade across some region. Is this pattern due in large part to regional processes such as the immigration of species from some external source or to local processes such as speciation (I never mentioned how large the region is so allopatric speciation is fair game)? In conjunction with scale, we can ask whether these patterns are due to abiotic or biotic sources. For example, plant immigration is abiotic when propogules are wind/water-dispersed, but biotic when animal-dispersed. For animals, the behavioral component of movement for an organism may interact with the heterogeneity of the landscape to determine how far and in what direction the organism will move. So this regional affect may be equally due to biotic and abiotic sources. Likewise, speciation can have a biotic or abiotic explanation. A biotic explanation might involve the interaction of this clade with another clade, such as a set of parasites, that induces speciation through their interaction. Abiotically, speciation may be due to vicariance. Alternatively, speciation may be a result of intra-clade competition for resources, an explanation that invokes both biotic and abiotic sources.
+
+<!-- , dimension (time/space)  -->
 
 ## Structure of the approach    
 
@@ -79,7 +87,7 @@ This will be the primary focus. Instead of explicitly modelling the dynamics of 
 
 In this framework the models will be composed of a set of stochastic processes $\{(\overline {Z}_t^{(i)},N_t^{(i)}):i=1,\dots,k\}$ with each pair representing the mean traits and population sizes of the species in guild $i$. To provide a more detailed picture, if there are $k$ guilds, each guild $i$ having a set of species denoted by $S_i$, then, in terms of probability theory, our sample space will be $\Omega=S_1\times\cdots\times S_k$ so that $\omega=(s_1,\dots,s_k)\in\Omega$ specifies a particular combination of species among the guilds. So $\{(\overline {Z}_t^{(i)},N_t^{(i)})\}(\omega)=\{(\overline {Z}_t^{(1)}(s_1),N_t^{(1)}(s_1)),\dots,(\overline {Z}_t^{(k)}(s_k),N_t^{(k)}(s_k))\}$ is a sample path representing the evolution of mean trait and population size for a specific set of species.
 
-
+If we have an index $\alpha^{(ij)}_t$ representing the strength of coevolution between species of guilds $i$ and $j$ at time $t$ we can think of this index as a random process defined on the sample space $S_i\times S_j$. Computing the asymptotic distribution of $\alpha^{(ij)}_t$ provides a natural way to answer the first question.
 
 <!--
 
