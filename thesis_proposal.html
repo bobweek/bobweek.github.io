@@ -277,6 +277,7 @@ div.tocify {
         <li><a href="index.html">Home</a></li>
         <li><a href="interactive_theory.html">Interactive Theory</a></li>
         <li><a href="inferring_coevolution.html">Inferring Coevolution</a></li>
+        <!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -286,6 +287,7 @@ div.tocify {
             <li><a href="notes-misc.html">Misc</a></li>
           </ul>
         </li>
+        -->
         
       </ul>
     </div><!--/.nav-collapse -->
@@ -322,7 +324,7 @@ div.tocify {
 <li>Given an index of coevolutionary selection, what is the distribution of this index across a community?</li>
 <li>How does this distribution change with respect to community type?</li>
 </ul></li>
-<li>How does succession proceed while coevolution occurs?
+<li>How does succession proceed in the presence of coevolution?
 <ul>
 <li>If we start with a biologically vacant region that has some abiotic resources, give a regional pool of species, how will the community assemble?</li>
 <li>Can we expect coevolution to rampant or rare during a succession?</li>
@@ -334,23 +336,28 @@ div.tocify {
 <li>Under what conditions do specialist species evolve?
 <ul>
 <li>Specifically, in plant/pollinator communities, theory suggests that coevolution will result in a higher degree of generalism which in turn makes for a more robust community. Then why do specialists evolve?</li>
+<li>In many communities there are lots of boring species (species with common traits) and few species with exaggerated traits. Can this pattern be explained by the distribution of coevolution in a community?</li>
 </ul></li>
 </ul>
+<p>Note that the answer to the first question is relevant to answering both subsequent questions. Futhermore, there is significant interplay between the latter two questions. For example, the evolution of specialists during the colonization of a novel landscape can alter the pattern of succession.</p>
 </div>
 <div id="structure-of-the-approach" class="section level2">
 <h2>Structure of the approach</h2>
 <p>The idea here does not deviate from traditional reductionist approaches. To analyze a community I plan to first tear it apart into appropriate subunits of study. The atoms of such a reduction are the individuals. By making assumptions about the life-cycle of individuals we can derive ecological and evolutionary dynamics of their population. This leads to an understanding of their metapopulation, their entire species, sets of species, sets of guilds and eventually the entire community.</p>
 <div id="pairwise-coevolution-2-species" class="section level4">
 <h4>Pairwise coevolution (2 species)</h4>
-<p>The theory developed for pairwise coevolution provides the backbone for all (or most) of these investigations. This theory has been constructed exactly as described above. We make certain assumptions at the individual level and have been able to derive the resulting dynamics for entire metapopulations.</p>
+<p>The theory developed for pairwise coevolution provides the backbone for all (or most) of these investigations. This theory has been constructed exactly as described above. We make certain assumptions at the individual level and have been able to derive the resulting dynamics for entire metapopulations. The case of fixed population sizes has been thoroughly investigated. However, since evolutionary and demographic dynamics are coupled through fitness and the form of fitness has already been specified, extending this work to fluctuating population sizes will be straightforward. In particular, for a pair of interacting species with mean traits <span class="math inline">\(\bar z_1\)</span>, <span class="math inline">\(\bar z_2\)</span> and population sizes <span class="math inline">\(n_1,n_2\)</span>, I expect to obtain dynamics of the form</p>
+<p><span class="math display">\[\Delta\bar z_i=f_{z,i}(\bar z_1,\bar z_2,n_1,n_2), \ \Delta n_i=f_{n,i}(\bar z_1,\bar z_2,n_1,n_2).\]</span></p>
 </div>
 <div id="coevolutionary-community-modules-a-few-species" class="section level4">
 <h4>Coevolutionary community modules (a few species)</h4>
-<p>These models extend the pairwise models to a set of 3 or 4 species and will be used to focus on particular aspects of the big picture. There may be some questions that are more appropiately answered by focusing on just a few species, but the point of these models is to provide not much more than a stepping stone to the amalgamation of many species.</p>
+<p>These models extend the pairwise models to a set of 3 or 4 species and will be used to focus on particular aspects of the big picture. There may be some questions that are more appropiately answered by focusing on just a few species, but the point of these models is to provide not much more than a stepping stone to the amalgamation of many species. For <span class="math inline">\(k\)</span> species, I anticipate these models to be a literal extension of the pairwise models, taking the form</p>
+<p><span class="math display">\[\Delta\bar z_i=f_{z,i}(\bar z_1,\dots,\bar z_k,n_1,\dots,n_k), \ \Delta n_i=f_{n,i}(\bar z_1,\dots,\bar z_k,n_1,\dots,n_k).\]</span></p>
 </div>
 <div id="diffuse-coevolution-many-species" class="section level4">
 <h4>Diffuse coevolution (many species)</h4>
-<p>This will be the primary focus. I hope to develop models that capture random variables representing the number of species, the number of significant pairwise interactions for each species, the strengths of pairwise biotic selection for every interaction, the abundances of each species, etc. I hope that this approach will lead me to a natural way of quantifying the evolutionary stability of a community. This would in turn allow for rigorous investigations of, for example, effect of a species with a particular set of attributes immigrating into the community or how the community will respond to environmental changes. Even with this larger scale approach, I plan only to study subsets of entire communities, such as plant-pollinator or predator-prey communities.</p>
+<p>This will be the primary focus. Instead of explicitly modelling the dynamics of each species within the community I will take the so called mean-field approach by assuming population sizes and mean traits are iid within a guild. Parameters capturing interaction strengths can be held as fixed constants or also modelled as random variables. I hope that this approach will lead me to a natural way of quantifying the evolutionary stability of a community. This would in turn allow for rigorous investigations of, for example, effect of a species with a particular set of attributes immigrating into the community or how the community will respond to environmental changes. Even with this larger scale approach, I plan only to study subsets of entire communities, such as plant-pollinator or predator-prey-resource communities.</p>
+<p>In this framework the models will be composed of a set of stochastic processes <span class="math inline">\(\{(\overline {Z}_t^{(i)},N_t^{(i)}):i=1,\dots,k\}\)</span> with each pair representing the mean traits and population sizes of the species in guild <span class="math inline">\(i\)</span>. To provide a more detailed picture, if there are <span class="math inline">\(k\)</span> guilds, each guild <span class="math inline">\(i\)</span> having a set of species denoted by <span class="math inline">\(S_i\)</span>, then, in terms of probability theory, our sample space will be <span class="math inline">\(\Omega=S_1\times\cdots\times S_k\)</span> so that <span class="math inline">\(\omega=(s_1,\dots,s_k)\in\Omega\)</span> specifies a particular combination of species among the guilds. So <span class="math inline">\(\{(\overline {Z}_t^{(i)},N_t^{(i)})\}(\omega)=\{(\overline {Z}_t^{(1)}(s_1),N_t^{(1)}(s_1)),\dots,(\overline {Z}_t^{(k)}(s_k),N_t^{(k)}(s_k))\}\)</span> is a sample path representing the evolution of mean trait and population size for a specific set of species.</p>
 <!--
 
 

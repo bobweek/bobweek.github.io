@@ -42,7 +42,7 @@ Here I provide a list of questions relating coevolution to community ecology.
     + Given an index of coevolutionary selection, what is the distribution of this index across a community?
     + How does this distribution change with respect to community type?
 
-* How does succession proceed while coevolution occurs?
+* How does succession proceed in the presence of coevolution?
     + If we start with a biologically vacant region that has some abiotic resources, give a regional pool of species, how will the community assemble?
     + Can we expect coevolution to rampant or rare during a succession?
     + How sensitive is a community to immigrant species?
@@ -51,6 +51,10 @@ Here I provide a list of questions relating coevolution to community ecology.
 * Under what conditions do specialist species evolve?
     + Specifically, in plant/pollinator communities, theory suggests that coevolution will result in a higher degree of 
     generalism which in turn makes for a more robust community. Then why do specialists evolve?
+    + In many communities there are lots of boring species (species with common traits) and few species with exaggerated traits. 
+    Can this pattern be explained by the distribution of coevolution in a community?
+    
+Note that the answer to the first question is relevant to answering both subsequent questions. Futhermore, there is significant interplay between the latter two questions. For example, the evolution of specialists during the colonization of a novel landscape can alter the pattern of succession.
 
 ## Structure of the approach    
 
@@ -58,15 +62,23 @@ The idea here does not deviate from traditional reductionist approaches. To anal
 
 #### Pairwise coevolution (2 species)
 
-The theory developed for pairwise coevolution provides the backbone for all (or most) of these investigations. This theory has been constructed exactly as described above. We make certain assumptions at the individual level and have been able to derive the resulting dynamics for entire metapopulations.
+The theory developed for pairwise coevolution provides the backbone for all (or most) of these investigations. This theory has been constructed exactly as described above. We make certain assumptions at the individual level and have been able to derive the resulting dynamics for entire metapopulations. The case of fixed population sizes has been thoroughly investigated. However, since evolutionary and demographic dynamics are coupled through fitness and the form of fitness has already been specified, extending this work to fluctuating population sizes will be straightforward. In particular, for a pair of interacting species with mean traits $\bar z_1$, $\bar z_2$ and population sizes $n_1,n_2$, I expect to obtain dynamics of the form
+
+$$\Delta\bar z_i=f_{z,i}(\bar z_1,\bar z_2,n_1,n_2), \ \Delta n_i=f_{n,i}(\bar z_1,\bar z_2,n_1,n_2).$$
+
 
 #### Coevolutionary community modules (a few species)
 
-These models extend the pairwise models to a set of 3 or 4 species and will be used to focus on particular aspects of the big picture. There may be some questions that are more appropiately answered by focusing on just a few species, but the point of these models is to provide not much more than a stepping stone to the amalgamation of many species.
+These models extend the pairwise models to a set of 3 or 4 species and will be used to focus on particular aspects of the big picture. There may be some questions that are more appropiately answered by focusing on just a few species, but the point of these models is to provide not much more than a stepping stone to the amalgamation of many species. For $k$ species, I anticipate these models to be a literal extension of the pairwise models, taking the form
+
+$$\Delta\bar z_i=f_{z,i}(\bar z_1,\dots,\bar z_k,n_1,\dots,n_k), \ \Delta n_i=f_{n,i}(\bar z_1,\dots,\bar z_k,n_1,\dots,n_k).$$
 
 #### Diffuse coevolution (many species)
 
-This will be the primary focus. I hope to develop models that capture random variables representing the number of species, the number of significant pairwise interactions for each species, the strengths of pairwise biotic selection for every interaction, the abundances of each species, etc. I hope that this approach will lead me to a natural way of quantifying the evolutionary stability of a community. This would in turn allow for rigorous investigations of, for example, effect of a species with a particular set of attributes immigrating into the community or how the community will respond to environmental changes. Even with this larger scale approach, I plan only to study subsets of entire communities, such as plant-pollinator or predator-prey communities.
+This will be the primary focus. Instead of explicitly modelling the dynamics of each species within the community I will take the so called mean-field approach by assuming population sizes and mean traits are iid within a guild. Parameters capturing interaction strengths can be held as fixed constants or also modelled as random variables. I hope that this approach will lead me to a natural way of quantifying the evolutionary stability of a community. This would in turn allow for rigorous investigations of, for example, effect of a species with a particular set of attributes immigrating into the community or how the community will respond to environmental changes. Even with this larger scale approach, I plan only to study subsets of entire communities, such as plant-pollinator or predator-prey-resource communities. 
+
+In this framework the models will be composed of a set of stochastic processes $\{(\overline {Z}_t^{(i)},N_t^{(i)}):i=1,\dots,k\}$ with each pair representing the mean traits and population sizes of the species in guild $i$. To provide a more detailed picture, if there are $k$ guilds, each guild $i$ having a set of species denoted by $S_i$, then, in terms of probability theory, our sample space will be $\Omega=S_1\times\cdots\times S_k$ so that $\omega=(s_1,\dots,s_k)\in\Omega$ specifies a particular combination of species among the guilds. So $\{(\overline {Z}_t^{(i)},N_t^{(i)})\}(\omega)=\{(\overline {Z}_t^{(1)}(s_1),N_t^{(1)}(s_1)),\dots,(\overline {Z}_t^{(k)}(s_k),N_t^{(k)}(s_k))\}$ is a sample path representing the evolution of mean trait and population size for a specific set of species.
+
 
 
 <!--
