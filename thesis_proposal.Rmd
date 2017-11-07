@@ -36,45 +36,21 @@ In my mind, the entire community is the ultimate unit of study in evolution and 
 
 ## Questions
 
-Here I provide a list of questions relating coevolution to community ecology. The reason I have developed such a large list is to prepare for the failure of answering any specific questions that I plan to be the focus of my proposed thesis.
-
-#### The primary questions
+Here I provide a list of questions relating coevolution to community ecology.
 
 * How common is pairwise coevolution?
     + Given an index of coevolutionary selection, what is the distribution of this index across a community?
     + How does this distribution change with respect to community type?
 
-* How sensitive is a community to immigrant species?
-    + Will the residents evolve in response or will the new species become "assimilated"?
+* How does succession proceed while coevolution occurs?
+    + If we start with a biologically vacant region that has some abiotic resources, give a regional pool of species, how will the community assemble?
+    + Can we expect coevolution to rampant or rare during a succession?
+    + How sensitive is a community to immigrant species?
+        + Will the residents evolve in response or will the new species become "assimilated"?
     
 * Under what conditions do specialist species evolve?
     + Specifically, in plant/pollinator communities, theory suggests that coevolution will result in a higher degree of 
     generalism which in turn makes for a more robust community. Then why do specialists evolve?
-
-#### Other questions
-
-* How many species can be maintained in different types of communities?
-    + How does (co)evolution affect this number?
-* What kind of trait distributions can we expect in different types of communities?
-    + How does (co)evolution affect this distribution?
-* What kind of abundance distributions can we expect in different types of communities?
-    + How does (co)evolution affect this distribution?
-
-* How does space interact with coevolution to produce community structure?
-    + What determines the distribution of various species? Is it primarily abiotic or biotic?
-    + Does distribution play a role in indirect interactions? For example, if two species do not co-occur, but both co-occur with a third species, ...
-
-* How does succession proceed while coevolution occurs?
-    + If we start with a biologically vacant region that has some abiotic resources, give a regional pool of species, how will the community assemble?
-    + Can we expect coevolution to rampant or rare during a succession?
-
-#### Tangential questions
-
-* How does plasticity change the answers to each of the above questions?
-
-* How does phylogenetic signal change the answers to each of the above questions?
-
-* How does the genetic architecture of the traits involved change the answers to each of the above questions?
 
 ## Structure of the approach    
 
@@ -91,6 +67,35 @@ These models extend the pairwise models to a set of 3 or 4 species and will be u
 #### Diffuse coevolution (many species)
 
 This will be the primary focus. I hope to develop models that capture random variables representing the number of species, the number of significant pairwise interactions for each species, the strengths of pairwise biotic selection for every interaction, the abundances of each species, etc. I hope that this approach will lead me to a natural way of quantifying the evolutionary stability of a community. This would in turn allow for rigorous investigations of, for example, effect of a species with a particular set of attributes immigrating into the community or how the community will respond to environmental changes. Even with this larger scale approach, I plan only to study subsets of entire communities, such as plant-pollinator or predator-prey communities.
+
+
+<!--
+
+
+#### Other questions
+
+* How many species can be maintained in different types of communities?
+    + How does (co)evolution affect this number?
+* What kind of trait distributions can we expect in different types of communities?
+    + How does (co)evolution affect this distribution?
+* What kind of abundance distributions can we expect in different types of communities?
+    + How does (co)evolution affect this distribution?
+
+* How does space interact with coevolution to produce community structure?
+    + What determines the distribution of various species? Is it primarily abiotic or biotic?
+    + Does distribution play a role in indirect interactions? For example, if two species do not co-occur, but both co-occur with a third species, ...
+
+#### Tangential questions
+
+* How does plasticity change the answers to each of the above questions?
+
+* How does phylogenetic signal change the answers to each of the above questions?
+
+* How does the genetic architecture of the traits involved change the answers to each of the above questions?
+
+-->
+
+
 
 <!--
 
