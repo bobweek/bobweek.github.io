@@ -94,6 +94,8 @@ Three basic phases of succession have been described by ecologists: primary and 
 
 I plan to extract some number measuring how far along the community has evolved towards its climax community. One potential value related to this transition is NPP, though some notion of entropy may be involved as well. Studying the asymptotic nature of this value, I can compare the rates at which this value converges or increases when coevolution is present versus when coevolution is not present.
 
+Biomass tends to increase over time as communities age. We can use mean fitness of the community to track this quantity.
+
 #### __Hypothesis 3: Invasions are more successful in the presence of coevolution.__
 
 There are two potential outcomes: 1) coevolved communities will have an increased resistance to invaders and 2) coevolved communities will be more likely to bend to the will of the invader.

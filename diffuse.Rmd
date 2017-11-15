@@ -1,0 +1,32 @@
+---
+title: "The Definition of Diffuse Coevolution: novel insights to an old problem"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+<!--
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+-->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+
+
+### The distinction between ongoing coevolution and coevolved species/traits
