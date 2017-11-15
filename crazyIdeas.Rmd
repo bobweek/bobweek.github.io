@@ -65,3 +65,12 @@ The term stochastic comes from the Greek word "stokhastikos" which means to gues
 ## Drift is a cop-out, not a process
 
 We model drift as random sampling of the (potentially) parental gene-pool. However, we know this process is not truly random but we treat as so to deal with idiosyncratic details that contribute to our uncertainty.
+
+## Not-quite-semigroup definition of a species
+
+THIS IS DUMB: A species is a pair $(S,R)$ where $S$ is a set and $R$ a binary operation s.t. $R:S\times S\rightarrow S$. That is, the only restriction is that $S$ is closed under $R$. For example, taking $S=\R$ and $R(x,y)=\frac{x+y}{2}$ we have that $(a,b)$ and $(c,d)$ form species when $a<b<c<d$ but $(a,b)\cup(c,d)$ do not since $R(b,c)\notin(a,b)\cup(c,d)$. Note that $\R$ forms a species and subsets of $\R$ that are also species can be called sub-species. 
+
+$P($individual $x$ mates with individual $y)=f($mating behavior of $x$ and $y$, location/ethology of $x$ and $y$ and compatibility of physiology as well as gametes$)$
+
+This probability is at least slightly different for every pair of individuals in a population.
+

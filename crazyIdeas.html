@@ -277,6 +277,7 @@ div.tocify {
         <li><a href="index.html">Home</a></li>
         <li><a href="interactive_theory.html">Interactive Theory</a></li>
         <li><a href="inferring_coevolution.html">Inferring Coevolution</a></li>
+        <!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -286,6 +287,7 @@ div.tocify {
             <li><a href="notes-misc.html">Misc</a></li>
           </ul>
         </li>
+        -->
         
       </ul>
     </div><!--/.nav-collapse -->
@@ -330,6 +332,20 @@ output:
 <p><a href="https://stats.stackexchange.com/questions/45924/expectation-of-an-exponential-function">I think</a> <span class="math inline">\(\overline W=\exp{\left( \overline{\ln W}+V_W/2 \right)}\)</span>. Then</p>
 <p><span class="math display">\[\Delta\overline{\ln W}=G_W.\]</span></p>
 <p>Does this result contradict the constant additive genetic variance assumption of most quantitative genetic models? Typically <span class="math inline">\(\bar z\rightarrow\theta\)</span> and <span class="math inline">\(\overline W\rightarrow\overline W_\max\)</span>. However, this result states that if there is additive genetic variance in fitness then <span class="math inline">\(\overline W\)</span> increases by this amount. But if there’s additive genetic variance in <span class="math inline">\(z\)</span> and fitness is a Gaussian function of <span class="math inline">\(z\)</span> as usual AND we keep the assumption of constant additive genetic variance we arrive at a contradiction! But before we get too offended, we should compute the actual distribution of <span class="math inline">\(W\)</span> given that <span class="math inline">\(W\)</span> is a Gaussian function of <span class="math inline">\(z\)</span> and <span class="math inline">\(z\)</span> is normally distributed. It will be bounded to a finite interval and so cannot be <span class="math inline">\(\ln\mathcal{N}\)</span>. What relationship between <span class="math inline">\(W\)</span> and <span class="math inline">\(z\)</span> allows for both <span class="math inline">\(\ln W\)</span> and <span class="math inline">\(z\)</span> to be normally distributed?</p>
+</div>
+<div id="bayesian-vs-frequentist" class="section level2">
+<h2>Bayesian vs Frequentist</h2>
+<p>They’re both wrong, but Bayesians are less wrong. No event has a probability ascribed to it by some existential force. Things happen or they don’t happen<span class="math inline">\(\dots\)</span> with probability one. That is, events occur deterministically. I have yet to study the formal logic behind the next claim, but if for each event there is a causal chain of older events leading up to and triggering this event, then events occur deterministically. That is, if you knew the effect of every event (the set of events triggered by each single event) then you would be able to predict with certainty the unfoldings of future events. Then, for example, if I were to toss a coin and had this omniscient knowledge, I would be able to predict what side the coin would land on. Of course it is impossible to have such knowledge, even with the finest lazers and sensors on the market today, that confides absolute certainty. So it seems there is some stochasticity in our world. I argue this is not so, it is error in our ability to predict the future that makes the appearance of randomness and it is easier for us to chalk up surprising events to the word “chance” (even if we don’t understand it) rather than constantly nodding our head to the infinitude of mystery that surrounds us in every moment of our existence.</p>
+<p>The term stochastic comes from the Greek word “stokhastikos” which means to guess or aim at. So instead of thinking of something that is stochastic as something that is inherently random, the word stochastic should refer to something whose understanding is unclear or uncertain due to lack of information, but that this thing has an objective existence independent of our awareness of it.</p>
+</div>
+<div id="drift-is-a-cop-out-not-a-process" class="section level2">
+<h2>Drift is a cop-out, not a process</h2>
+<p>We model drift as random sampling of the (potentially) parental gene-pool. However, we know this process is not truly random but we treat as so to deal with idiosyncratic details that contribute to our uncertainty.</p>
+</div>
+<div id="not-quite-semigroup-definition-of-a-species" class="section level2">
+<h2>Not-quite-semigroup definition of a species</h2>
+<p>THIS IS DUMB: A species is a pair <span class="math inline">\((S,R)\)</span> where <span class="math inline">\(S\)</span> is a set and <span class="math inline">\(R\)</span> a binary operation s.t. <span class="math inline">\(R:S\times S\rightarrow S\)</span>. That is, the only restriction is that <span class="math inline">\(S\)</span> is closed under <span class="math inline">\(R\)</span>. For example, taking <span class="math inline">\(S={\mathbb{R}}\)</span> and <span class="math inline">\(R(x,y)=\frac{x+y}{2}\)</span> we have that <span class="math inline">\((a,b)\)</span> and <span class="math inline">\((c,d)\)</span> form species when <span class="math inline">\(a&lt;b&lt;c&lt;d\)</span> but <span class="math inline">\((a,b)\cup(c,d)\)</span> do not since <span class="math inline">\(R(b,c)\notin(a,b)\cup(c,d)\)</span>. Note that <span class="math inline">\({\mathbb{R}}\)</span> forms a species and subsets of <span class="math inline">\({\mathbb{R}}\)</span> that are also species can be called sub-species.</p>
+<p><span class="math inline">\(P(\)</span>individual <span class="math inline">\(x\)</span> mates with individual <span class="math inline">\(y)=f(\)</span>mating behavior of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, location/ethology of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> and compatibility of physiology as well as gametes<span class="math inline">\()\)</span></p>
 </div>
 
 
