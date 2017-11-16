@@ -11,7 +11,7 @@
 
 
 
-<title>The Definition of Diffuse Coevolution: novel insights to an old problem</title>
+<title>The Coevolutionary Theory of Community Ecology</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-1.1/highlight.js"></script>
@@ -162,6 +165,101 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
@@ -200,27 +298,27 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">The Definition of Diffuse Coevolution: novel insights to an old problem</h1>
+<h1 class="title toc-ignore">The Coevolutionary Theory of Community Ecology</h1>
 
 </div>
 
 
+<div id="cover-letter" class="section level2">
+<h2>Cover Letter</h2>
+<p>Community ecology, the study of groups of interacting species, is a broad field that has provided insight to topics ranging from the microbiology of human health (citation, Forney) to the conservation of charismatic megafauna (citation, not sure if this is even true). The importance of this field stems from the fact that species tend to interact with other co-occuring species, potentially driving processes that produce the various patterns in diversity we witness today. Traditional community ecology has focused on the effects of interspecific interactions on demography and demographic stability in particular (citations, probably May and Abrams) as well as on the maintenance of biodiversity (typically in the form of species richness, cite Morin) and tend to ignore the potential role of evolution in shaping biological communities. Recently, phylogenetic perspectives have been incorporated into these studies in attempt to determine how much of the currently observed patterns of diversity within a given region are due to the history of that region and the clade(s) of organisms involved (Web et al 2002, Ruffley maybe too). However, this approach still holds the implicit assumption that microevolutionary processes are negligible and also has the drawback of classifying communities taxonomically instead of functionally (though it can be argued that closely related species tend to be functionally similar). Although trait-based approaches have been taken to investigate the interplay between (co)evolution and ecology (Roughgarden, Abrams), these approaches fall short in their ability to draw general conclusions because of their focus on idiosyncratic details and models that therefore become intractable when considering even a modest number of species. Here we propose a novel approach to coevolutionary community ecology that focuses on the evolution of the statistical distributions of traits within communities, instead of explicitly modelling the dynamics of each species. This methodology will be used to investigate the role of coevolution in succession and the evolution of specialists.</p>
 <!--
-output: 
-  html_document:
-    toc: true
-    toc_float: true
+
+Deliminating communities in terms of their function (such as predator-prey or plant-pollinator communities) has the advantage of emphasizing the biotic processes that may explain the why these communities are structured so. Combining ecological mechanism with microevolutionary insights extends the domain of community ecology to include questions such as whether or not the stability of community is a property that has evolved. Such a mechanistic approach has begun to develop within the study of mutualistic networks (Nuismer et al 2013)
+
+By coupling the mechanisms of ecological interactions with the theories of population and quantitative genetics, a well developed quantitative understanding of coevolution has emerged (Nuismer 2017). 
+
 -->
-<div id="the-distinction-between-ongoing-coevolution-and-coevolved-speciestraits" class="section level3">
-<h3>The distinction between ongoing coevolution and coevolved species/traits</h3>
-</div>
-<div id="the-evolution-of-b_ij" class="section level3">
-<h3>The evolution of <span class="math inline">\(B_{ij}\)</span></h3>
-<p>The selection strength <span class="math inline">\(B_{ij}\)</span> that mediates the amount of selection imposed by species <span class="math inline">\(j\)</span> onto species <span class="math inline">\(i\)</span> can vary in time and space. Spatial variation is known as a Thompsonian gradient. This number <span class="math inline">\(B_{ij}(x)\)</span>, the strength of biotic selection at location <span class="math inline">\(x\)</span>, is a property that corresponds to both species <span class="math inline">\(i\)</span> and species <span class="math inline">\(j\)</span> and is subject to evolution. What determines the evolution of this abstract parameter and how that mechanism can be captured mathematically is not clear as of this moment. This parameter controls the sensitivity of fitness effects to trait differences. Thus, to understand it, we must dive deeper into the lifehistories and physiologies of the individuals involved on both sides of the interaction.</p>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
