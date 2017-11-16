@@ -160,6 +160,8 @@ Here I describe ways of categorizing communities and refer to Shipley when discu
 
 Species don't need to interact for long periods of time to coevolve, they just need to exert significant reciprocal selection on one another (and respond to that selection). I hypothesize that in young and freshly disturbed communities there will be greater variation in the strengths of selection being imposed through biotic interactions than through similar interactions taking place in older communties, where the frenzy of niche packing has settled down.
 
+NOTE: Hypothesis 4 is neatly answered through this investigation. So include it within this section instead of breaking it out into it's own section.
+
 #### Method
 
 I plan to develop a model that tracks the distribution of pairwise coevolution throughout a community. I'll assume the community is initiated at random and analyze the evolution of this distribution. By my defintion of diffuse coevolution, the community transitions from pairwise to diffuse if the distribution initially has a large variance that narrows over time.
@@ -192,6 +194,10 @@ plot(nums,pdf,xlab="Coevolution",ylab="Density")
 #### __Hypothesis 2: Communities climax quicker with coevolution present.__
 
 Three basic phases of succession have been described by ecologists: primary and secondary successions followed by the achievement of what has been called the climax community. The idea here is that this climax community will be reached quicker if coevolution acts to mold the traits of the commnunity members.
+
+Extend this idea to the more general setting of community assembly instead of succession, which Scott is defining as a repeatable pattern of community assembly.
+
+Also, hypothesis 3 can potentially be absorbed by this section.
 
 #### Method
 
