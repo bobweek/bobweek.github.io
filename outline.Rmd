@@ -66,11 +66,55 @@ Here I provide the definitions of pairwise and diffuse coevolution I will be usi
 
 Potentially distinguish between the traditional idea of coevolution where traits have changed together for long periods of time and the idea I'm focusing on, the existence of significant reciprocal selection (and the response :: we could start be assuming constant $G$ so that there's always a response) even if traits don't change together.
 
-  * Coevolution: The simultaneous response to reciprocal biotic selection in a set of species
+  * Coevolution: The simultaneous response to reciprocal biotic selection in a set of interacting species.
   * Diffuse coevolution: When selection strengths among a set of coevolving species are of the same order.
   * Pairwise coevolution: When the selection strengths between a pair of coevolving species exceed the order of selection strengths exerted by peripheral species. 
       * Peripheral species: Non-focal coevolving species.
   * Mixed coevolution: When coevolution is neither diffuse nor pairwise.
+
+#### Two Coevolving Communities
+
+Here's an example of a coevolving community where pairwise coevolution is acting on a subset of species.
+
+```{r, include=F}
+require(GGally)
+require(network)
+require(sna)
+require(scales)
+# random graph
+nnodes <- 20
+net = rgraph(nnodes, mode = "graph", tprob = 0.1)
+net = network(net, directed = FALSE)
+
+# vertex names
+network.vertex.names(net) = letters[1:10]
+```
+
+```{r, echo=F}
+nedge <- network.edgecount(net)
+w <- rexp(nedge,3)
+nlabel <- 1:nnodes
+ggnet2(net, edge.size = w, node.label = nlabel)
+```
+
+Here is a coevolving community that is diffuse.
+
+```{r, include=F}
+# random graph
+net = rgraph(nnodes, mode = "graph", tprob = 0.3)
+net = network(net, directed = FALSE)
+
+# vertex names
+network.vertex.names(net) = letters[1:10]
+```
+
+```{r, echo=F}
+nlabel <- 1:nnodes
+ggnet2(net, node.label = nlabel)
+```
+
+
+SPECIAL NOTE: Although I'm using networks to solidify the concepts I'm trying to communicate, I HAVE NO PLANS TO EMPLOY NETWORK THEORY IN MY RESEARCH!
 
 ### The structure and categorization of communities
 
@@ -96,9 +140,9 @@ I plan to extract some number measuring how far along the community has evolved 
 
 Biomass tends to increase over time as communities age. We can use mean fitness of the community to track this quantity.
 
-#### __Hypothesis 3: Invasions are more successful in the presence of coevolution.__
+#### __Hypothesis 3: Invasions are more successful in the presence of coevolution for mutualistic communities but less successful in the presence of coevolution for competitive communities.__
 
-There are two potential outcomes: 1) coevolved communities will have an increased resistance to invaders and 2) coevolved communities will be more likely to bend to the will of the invader.
+There are two potential outcomes I focus on: 1) coevolved communities will have an increased resistance to invaders and 2) coevolved communities will be more likely to accomodate the invader by evolving in response to its presence. The reason why I choose the latter for mutualistic communities is that a new member of the community acts as a new resource to other members of the community, attracting interactions that by definition benefit it. With coevolution present, the benifits of these interactions may become amplified, increasing the probability of invasion. In contrast, I chose the former for competitive communities for it is a complementary scenario where the invader's fitness is decreased by interactions with members of the community. Since the community members have "home-field advantage" it seems likely that coevolution will act to snuff out invasions by amplifying fitness costs.
 
 #### Method
 
@@ -114,7 +158,9 @@ Use the inputs/outputs formalism to derive metrics of specialization/generalizat
 
 ## Significance of Proposed Research
 
-The proposed work will develop a set of theoretical approaches for understanding the evolution and potential coevolution of ecological communities. The goal is to synthesize ideas and theory in order to produce novel insights and a deepend understanding of the processes that shape the patterns we see in nature. This work can potentially be extended to include more idiosyncratic details that ties theory to data upon which methods of inference can be developed to assertain an explicit understanding of the empirical world. In a time of great flux, it is necessary that we work towards an understanding of the relationship between species and their environment (both abiotic and biotic) as well as our relationship to these species so we can best predict the outcomes of human development and climate change for the sake of the safety of future generations.
+The proposed work will develop a set of theoretical approaches for understanding the evolution and potential coevolution of ecological communities. The goal is to synthesize ideas and theory in order to produce novel insights and a deepend understanding of the processes that shape the patterns we see in nature. This work can potentially be extended to include more idiosyncratic details that ties theory to data upon which methods of inference can be developed to assertain an explicit understanding of the empirical world. 
+
+<!-- In a time of great flux, it is necessary that we work towards an understanding of the relationship between species and their environment (both abiotic and biotic) as well as our relationship to these species so we can best predict the outcomes of human development and climate change for the sake of the safety of future generations. -->
 
 ## Broader Impacts
 
