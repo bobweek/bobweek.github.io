@@ -51,35 +51,234 @@ N/A
 ### Coevolution and its measurement
 
 
-I define an __interaction community__ as a graph whose vertices represent a set of species and is connected in the graph-theoretic sense by edges which represent pairwise interactions. This means that for any two species, we can traverse the community via pairwise interactions to get from one species to any other species. If the graph is disconnected, I refer to this set of species as a composite community since it would be the union of a set of component interaction communities.
+I define an __interaction community__ as a graph whose vertices represent species. I require this set of species to be connected in the graph-theoretic sense by edges which represent pairwise interactions. This means that for any two species, we can traverse the community via pairwise interactions to get from one species to any other species. If the graph is disconnected, I refer to this set of species as a composite community.
 
-A __coevolving community__ is a subset of an interaction community that is connected in the graph-theoretic sense by coevolving pairs of species. Thus, an interaction community is a coevolving community if all of its members have sufficient genetic variation. In light of the above discussion, all interaction communities are trivially coevolving communities. The primary difference between the two is perspective. One notion focuses merely on whether or not species interact while the other includes the strengths by which they coevolve.
+A __coevolving community__ is a subgraph of an interaction community that is connected in the graph-theoretic sense by coevolving pairs of species.
 
+I make the assumption that a species is represented by one trait that mediates its interactions with any other species.
 
+It is important to distinguish between species that have coevolved and species that are currently coevolving. The classic idea of coevolution involves the observation of a pair of traits in two interacting species that appear well matched. Textbook examples include the proboscis length of Darwins moth and the corolla length of Darwins orchid as well as the levels of TTX in the flesh of newts of the genus Taricha and the resistance to TTX in the predatory snakes Thamnophsis sertalis. These are traits that have supposedly evolved over periods of time through the corresponding interaction. What makes these cases especially distinct as putative examples of coevolution is the fact that both traits in each pair are abnormal and thus seem to have simultaneously evolved in response to the interaction. This reciprocal response to selection induced by their interaction is the definition of coevolution provided by Daniel Janzen (citation).
 
-It is important to distinguish between species that have coevolved and species that are currently coevolving. The classic idea of coevolution involves the observation of a pair of traits in two interacting species that appear well matched. Textbook examples include the proboscis length of Darwins moth and the corolla length of Darwins orchid as well as the levels of TTX in the flesh of newts of the genus Taricha and the resistance to TTX in the predatory snakes Thamnophsis sertalis. These are traits that have supposedly evolved over relatively long periods of time through the interactions of these species pairs. What makes these cases especially distinct as putative examples of coevolution is the fact that both traits in each pair are abnormal and thus seem to have simultaneously evolved in response to the interaction. This reciprocal response to selection induced by their interaction is the definition of coevolution provided by Daniel Janzen (citation).
+However, by this definition alone, these classic cases of potentially coevolved traits provide only a small subset of all the coevolution that has occurred and is occurring in nature. By this definition, species are not required to interact for long periods of time to coevolve. Instead they just need to exert reciprocal selection on one another and also respond to that selection. For any pair of interacting species there is certainly some amount of selection being imparted by one onto the other, though the magnitude of this selection may be so trivial it would escape any method of detection ever concieved. Hence, so long as there is sufficient genetic variation underlying the trait in both parties, any currently interacting pairs of species are coevolving by default. If their coevolution is having noticable impacts on the evolutionary trajectories of these species, the situation returns to the colloquial notion of coevolution.
 
-However, by this definition alone, these classic cases of potentially coevolved traits provide only a small subset of all the coevolution that has occurred and is occurring in nature. By this definition, species are not required to interact for long periods of time to coevolve. Instead they just need to exert reciprocal selection on one another and also respond to that selection. For any pair of interacting species there is certainly some amount of selection being imparted by one onto the other, though the strength of this selection may be so trivial it would escape any method of detection ever concieved. Hence, so long as there is sufficient genetic variation underlying the trait in both parties, any currently interacting pairs of species are coevolving by default. If their coevolution is having noticable impacts on the evolutionary trajectories of these species, the situation returns to the colloquial notion of coevolution.
-
-The point is not that the currently accepted definition of coevolution needs to be modified, but that it implies a much broader set of situations than typically thought of. This observation leads neatly to notions of coevolution in the broader community context where a set of many interacting species are considered at once.
+The point is not that the currently accepted definition of coevolution needs to be modified, but that it implies a much broader set of situations than typically thought of. This observation leads neatly to notions of coevolution in the broader community context where a set of many interacting species are considered at once. Indeed, in light of this discussion the notion of an interaction community collapses to that of a coevolving community. The distinction is more psychological than biological. One notion is focused on who is interacting with whom while the other is primarily concerned with the strength by which their traits coevolve.
 
 In quantitative genetics the breeder's equation is the primary engine that drives many models of evolution. This equation can be written $\Delta\bar z=G\beta$ where $\Delta\bar z$ represents the change in mean trait of a population over a single generation, $G$ is the additive genetic variance of that trait and $\beta$ is the selection gradient that denotes the magnitude and direction of selection. We can partition the selection gradient into biotic $(\mathcal{B})$ and abiotic $(\mathcal{A})$ sources to obtain $\beta=\mathcal{B}+\mathcal{A}$. For a collection of species I write $\mathcal{B}_{ij}$ for the biotic selection gradient imposed on species $i$ by species $j$. The net biotic selection gradient for species $i$ is $\mathcal{B}_i=\sum_j\mathcal{B}_{ij}$. By Janzen's definition species $i$ and $j$ are coevolving iff $|\mathcal{B}_{ij}|,|\mathcal{B}_{ji}|>0$ and $G_i,G_j>0$. Note that for a pair of coevolving species it is not necessary for $|\beta_i|,|\beta_j|>0$ or for $|\mathcal{B}_i|,|\mathcal{B}_j|>0$ since the net effect of many interactions, both biotic and abiotic, may cancel with each other to produce no overall change in $\bar z_i$ or $\bar z_j$. Of course, $\Delta\bar z_i=0$ only if a delicate balance is held. By subsequently setting $\mathcal{B}_{ij}$ to zero would result in $\Delta\bar z_i=-G_i\mathcal{B}'_{ij}$ where $\mathcal{B}'_{ij}$ is the previous biotic selection gradient. Hence, the absence of change can be the response to selection implied by coevolution.
 
-Returning to the point being made above, for any pair of interacing species $(i,j)$ the probaility that either $\mathcal{B}_{ij}$ or $\mathcal{B}_{ji}$ are equal to zero is zero. Using the same argument for the magnitudes of $G_i$ and $G_j$, then we will always find at least some $\epsilon$-amount of coevolution for any given pair of interacting species. This is fine; it should be understood that coevolution is continuous in value, not binary. Also, the triviality of this notion of coevolution does not remove its relevance, but emphasizes the need to measure it. I define the __strength of coevolution__ between species $i$ and $j$ as $C_{ij}=G_iG_j|\mathcal{B}_{ij}\mathcal{B}_{ji}|$. From this metric we can construct other measurements that provide insight into the coevolutionary structure of communities. For example suppose species $i$ interacts with the set $I_i$ of species and $j$ interacts with $I_j$. Set $\gamma_i=\argmax_{l\in I_i}\{C_{il}\}$. If $\gamma_i=j$ and $\gamma_j=i$ then coevolution is strongest between species $i$ and $j$ than between $i$ and any of its partners other than $j$ and likewise for $j$. As this particular strength of coevolution increases above the rest, a pairwise coevolutionary situation emerges. 
+Returning to the point being made above, for any pair of interacing species $(i,j)$ the probaility that either $\mathcal{B}_{ij}$ or $\mathcal{B}_{ji}$ are equal to zero is zero. Using the same argument for the magnitudes of $G_i$ and $G_j$, then we will always find at least some $\epsilon$-amount of coevolution for any given pair of interacting species. This is fine; it should be understood that coevolution is continuous in value, not binary. Also, the triviality of this notion of coevolution does not remove its relevance, but emphasizes the need to measure it. I define the __strength of coevolution__ between species $i$ and $j$ as $C_{ij}=G_iG_j|\mathcal{B}_{ij}\mathcal{B}_{ji}|$. The distribution of this metric in a community can provide important information detailing the structure of the community. From this metric we can construct other measurements that provide insight into specific coevolutionary structures of communities. For example suppose species $i$ interacts with the set $I_i$ of species and $j$ interacts with $I_j$. Set $\gamma_i=\argmax_{l\in I_i}\{C_{il}\}$. If $\gamma_i=j$ and $\gamma_j=i$ then coevolution is strongest between species $i$ and $j$ than between $i$ and any of its partners other than $j$ and likewise for $j$. As this particular strength of coevolution increases above the rest, a pairwise coevolutionary situation emerges. 
 
-Once again, however, there is no threshold from which the coevolutionary relationship between this pair of species immediately transitions to pairwise. Setting $\lambda_i=\argmax_{l\in I_i\setminus\{\gamma_i\}}\{C_{il}\}$, one potential measure of pairwise coevolution is $C^2_{ij}-C_{i\lambda_i}C_{j\lambda_j}$. But this would only make sense when $\gamma_i=j$ and $\gamma_j=i$. Instead we need a notion that describes the degree to which a species is uniquely evolving in response to another species. I call this __evolutionary affinity__ and for species $i$ it can be captured by $\phi_i\equiv C^2_{i\gamma_i}-C_{i\lambda_i}C_{\gamma_i\lambda_{\gamma_i}}$ (note that when $\phi_i=\phi_{\gamma_i}$ this corresponds to a measure of pairwise coevolution since it implies that $\gamma_i=j$ and $\gamma_j=i$). Another measure that is relevant to the community level I call __pairwisivity__ ($\pi$) and define it to be the fraction of coevolving pairs $(i,j)$ for which $\gamma_i=j$ and $\gamma_j=i$. For theses cases I'll write $\phi_{ij}$ instead of $\phi_i$ or $\phi_j$ to emphasize the pairwise relationship between species $i$ and $j$. Denoting $\Pi$ as the set of all species pairs for which $\phi_i=\phi_j=\phi_{ij}$ we can provide a cursory definition of the __intensity of pairwisivity__ as 
+Once again, however, there is no threshold from which the coevolutionary relationship between this pair of species immediately transitions to pairwise. Setting $\lambda_i=\argmax_{l\in I_i\setminus\{\gamma_i\}}\{C_{il}\}$, one potential measure of pairwise coevolution is $C^2_{ij}-C_{i\lambda_i}C_{j\lambda_j}$. But this would only make sense when $\gamma_i=j$ and $\gamma_j=i$. Instead we need a notion that describes the degree to which a species is uniquely coevolving with another species. I call this __evolutionary affinity__ and for species $i$ it can be captured by $\phi_i\equiv C^2_{i\gamma_i}-C_{i\lambda_i}C_{\gamma_i\lambda_{\gamma_i}}$ (note that when $\phi_i=\phi_{\gamma_i}$ this corresponds to a measure of pairwise coevolution since it implies that $\gamma_i=j$ and $\gamma_j=i$). The subset of coevolving pairs $(i,j)$ for which $\gamma_i=j$ and $\gamma_j=i$ are an important subset of interactions for if there are any pairs that are truly undergoing pairwise coevolution, they will be in this set. For theses cases I'll write $\phi_{ij}$ instead of $\phi_i$ or $\phi_j$ to emphasize the pairwise relationship between species $i$ and $j$. Denoting $\Theta$ as the set of all pairs of coevolving species and $\Pi\subset\Theta$ as the set of potentially pairwise coevolving pairs (those for which $\phi_i=\phi_j=\phi_{ij}$) we can provide a cursory definition of the __pairwisivity__ of a community as
 
-$$\iota=\pi\sum_{(i,j)\in\Pi}\phi_{ij}.$$
+$$\pi=\frac{|\Pi|}{|\Theta|}\sum_{(i,j)\in\Pi}\phi_{ij}.$$
 
-This quantity is interesting for it allows us to investigate the distinction between diffuse coevolution and pairwise coevolution. The case of diffuse coevolution is best described as a coevolving community with $\iota=0$. As $\iota$ increases the community tends to be more populated with pairwise coevolutionary relationships.
+This quantity is interesting for it allows us to investigate the distinction between diffuse coevolution and pairwise coevolution. The case of diffuse coevolution is best described as a coevolving community with $\pi=0$. However, if there's any variability in the strength of coevolution across the community, the pair with the greatest strength of coevolution will be sure to be an element of $\Pi$. Hence, $\pi>0$ a.s. As $\pi$ increases the community tends to be more populated with pairwise coevolutionary relationships.
+ 
+Aside from whether or not species interact, we curious to know as to how often they interact. Given that an individual is in the midst of an interaction, we might draw the identity of the species it is interacting with from a distribution. Then it makes sense to quantify the rates of interaction by convex combinations of all members of the community. 
+ 
+ 
+### Three Coevolving Communities
 
-For a coevolving community we can track the evolution of $\iota$ for investigations involving the evolution of specialization.
+Assumption: All members of the community interact through the same trait for each species. That is, all the interactions of a given species are mediated through the same trait of that species.
+
+#### Here's an example of a coevolving community with high parwisivity.
+
+```{r, include=F}
+require(GGally)
+require(network)
+require(sna)
+require(scales)
+# random graph
+nnodes <- 20
+net  <- rgraph(nnodes, mode = "graph", tprob = 1)
+nett <- net
+net  <- network(net, directed = FALSE)
+
+# vertex names
+network.vertex.names(net) = letters[1:10]
+```
+
+```{r, echo=F}
+nedge <- network.edgecount(net)
+s <- 2
+w <- exp(rnorm(nedge,log(.25)-s^2/2,s))
+nlabel <- 1:nnodes
+ggnet2(net, edge.size = w, node.label = nlabel)
+
+### computing pi
+first <- function(x){return(x*nnodes-x*(x+1)/2)}
+mp <- function(x,y){
+  y+first(x-1)-x
+}
+Pi <- NULL
+sg <- NULL
+wp <- w
+
+for(j in 1:nnodes){
+
+  biggest <- which(wp==max(wp))
+
+  ## finding the strongest coevolving pair. this pair is gauranteed to be pairwise by definition.
+  # (1,2), (1,3), (1,4), ..., (1,nnodes), (2,3), (2,4), ..., (nnodes-1,nnodes)
+  # (nnodes-1) + (nnodes-2) + (nnodes-3) + ...
+
+  i <- 1
+  while(first(i)<biggest){i <- i+1}
+  sp1 <- i
+  sp2 <- biggest-first(i-1)+i
+
+  t1 <- 1
+  i  <- sp1+1
+  while(i<nnodes){
+    if( w[biggest]<w[mp(sp1,i)] ) t1<-0
+    i <- i+1
+  }
+  i <- sp1-1
+  while(i>0){
+    if( w[biggest]<w[mp(i,sp1)] ) t1<-0
+    i <- i-1
+  }
+  
+  t2 <- 1
+  i  <- sp2+1
+  while(i<nnodes){
+    if( w[biggest]<w[mp(sp2,i)] ) t2<-0
+    i <- i+1
+  }
+  i <- sp2-1
+  while(i>0){
+    if( w[biggest]<w[mp(i,sp2)] ) t2<-0
+    i <- i-1
+  }
+
+  if(sp1 %in% Pi) t1 <- 0
+  if(sp2 %in% Pi) t2 <- 0
+  
+  if(t1 && t2){
+    Pi <- rbind(Pi,c(sp1,sp2))
+    sg <- c(sg,biggest)
+  }
+  
+  wp[biggest] <- 0
+
+}
+pi <- (nrow(Pi)/nedge)*sum(w[sg])
+hist(w,xlab="Coevolution",main="")
+```
+
+In this case we get $\pi=$ `r pi`.
+
+#### Here is a coevolving community that is completely diffuse.
+
+```{r, include=F}
+# random graph
+net = rgraph(nnodes, mode = "graph", tprob = 1)
+net = network(net, directed = FALSE)
+
+# vertex names
+network.vertex.names(net) = letters[1:10]
+```
+
+```{r, echo=F}
+nlabel <- 1:nnodes
+ggnet2(net, node.label = nlabel)
+```
+
+In this case $\pi=0$.
+
+
+#### Here is a coevolving community that is still more diffuse but has some pairwisivity
+
+
+```{r, include=F}
+# random graph
+net = rgraph(nnodes, mode = "graph", tprob = 1)
+net = network(net, directed = FALSE)
+
+# vertex names
+network.vertex.names(net) = letters[1:10]
+```
+
+```{r, echo=F}
+nedge <- network.edgecount(net)
+#w <- rexp(nedge,3)
+s <- .5
+w <- exp(rnorm(nedge,log(.25)+s^2,s))
+nlabel <- 1:nnodes
+ggnet2(net, edge.size = w, node.label = nlabel)
+
+### computing pi
+first <- function(x){return(x*nnodes-x*(x+1)/2)}
+mp <- function(x,y){
+  y+first(x-1)-x
+}
+Pi <- NULL
+sg <- NULL
+wp <- w
+
+for(j in 1:nnodes){
+
+  biggest <- which(wp==max(wp))
+
+  ## finding the strongest coevolving pair. this pair is gauranteed to be pairwise by definition.
+  # (1,2), (1,3), (1,4), ..., (1,nnodes), (2,3), (2,4), ..., (nnodes-1,nnodes)
+  # (nnodes-1) + (nnodes-2) + (nnodes-3) + ...
+
+  i <- 1
+  while(first(i)<biggest){i <- i+1}
+  sp1 <- i
+  sp2 <- biggest-first(i-1)+i
+
+  t1 <- 1
+  i  <- sp1+1
+  while(i<nnodes){
+    if( w[biggest]<w[mp(sp1,i)] ) t1<-0
+    i <- i+1
+  }
+  i <- sp1-1
+  while(i>0){
+    if( w[biggest]<w[mp(i,sp1)] ) t1<-0
+    i <- i-1
+  }
+  
+  t2 <- 1
+  i  <- sp2+1
+  while(i<nnodes){
+    if( w[biggest]<w[mp(sp2,i)] ) t2<-0
+    i <- i+1
+  }
+  i <- sp2-1
+  while(i>0){
+    if( w[biggest]<w[mp(i,sp2)] ) t2<-0
+    i <- i-1
+  }
+
+  if(sp1 %in% Pi) t1 <- 0
+  if(sp2 %in% Pi) t2 <- 0
+  
+  if(t1 && t2){
+    Pi <- rbind(Pi,c(sp1,sp2))
+    sg <- c(sg,biggest)
+  }
+  
+  wp[biggest] <- 0
+
+}
+pi <- (nrow(Pi)/nedge)*sum(w[sg])
+
+hist(w,xlab="Coevolution",main="")
+```
+
+In this case $\pi=$ `r pi`.
+
+<!--
 
 The intensity of pairwisivity of a community is a distinct notion from the degree distribution of the community which is more in line with the notion of specialization. Combining the degree of species in a community with the strength by which they coevolve with their partners leads to a notion I will call the __specificity__ ($\psi$) of the community. The specificity of a species is $\psi_i=\sum_{j=1}^d\phi_{ij}$. There can be a large number of specialists in a community and yet still have $\iota=0$ if $\phi_i\neq\phi_j$ for all $i,j$. So specialization is 
 
 Affinity matrix: $[\alpha_{ij}]\equiv\left[\frac{C_{ij}}{\sum_j C_{ij}}\right]$
 
 Coevolutionary generality: $-\sum_j\alpha_{ij}\ln(\alpha_{ij})$
+
+-->
 
 Sprinkle in prev research here.
 
@@ -129,81 +328,6 @@ Distinguish between the traditional idea of coevolution where traits have change
       * Peripheral species: Non-focal coevolving species.
   * Mixed coevolution: When coevolution is neither diffuse nor pairwise.
 
-### Three Coevolving Communities
-
-Assumption: All members of the community interact through the same trait for each species. That is, all the interactions of a given species are mediated through the same trait of that species.
-
-#### Here's an example of a coevolving community with a high degree of pairwise coevolution.
-
-```{r, include=F}
-require(GGally)
-require(network)
-require(sna)
-require(scales)
-# random graph
-nnodes <- 10
-net = rgraph(nnodes, mode = "graph", tprob = 1)
-net = network(net, directed = FALSE)
-
-# vertex names
-network.vertex.names(net) = letters[1:10]
-```
-
-```{r, echo=F}
-nedge <- network.edgecount(net)
-s <- .8
-w <- exp(rnorm(nedge,log(.25)+s^2,s))
-nlabel <- 1:nnodes
-ggnet2(net, edge.size = w, node.label = nlabel)
-hist(w,xlab="Coevolution",main="")
-```
-
-The variance in the strength of coevolution across species pairs is `r var(w)`.
-
-#### Here is a coevolving community that is diffuse (a low degree of pairwise coevolution).
-
-```{r, include=F}
-# random graph
-net = rgraph(nnodes, mode = "graph", tprob = 1)
-net = network(net, directed = FALSE)
-
-# vertex names
-network.vertex.names(net) = letters[1:10]
-```
-
-```{r, echo=F}
-nlabel <- 1:nnodes
-ggnet2(net, node.label = nlabel)
-```
-
-The variance in the strength of coevolution across species pairs is 0.
-
-
-#### Here is a coevolving community that is in between being diffuse and high-degree pairwise
-
-
-```{r, include=F}
-# random graph
-net = rgraph(nnodes, mode = "graph", tprob = 1)
-net = network(net, directed = FALSE)
-
-# vertex names
-network.vertex.names(net) = letters[1:10]
-```
-
-```{r, echo=F}
-nedge <- network.edgecount(net)
-#w <- rexp(nedge,3)
-s <- .5
-w <- exp(rnorm(nedge,log(.25)+s^2,s))
-nlabel <- 1:nnodes
-ggnet2(net, edge.size = w, node.label = nlabel)
-hist(w,xlab="Coevolution",main="")
-```
-
-The variance in the strength of coevolution across species pairs is `r var(w)`.
-
-Ok, so I admit this is a bit vague. Just because there's lines connecting nodes, we don't have the full picture because these lines don't represent how these species interact, just the strength by which they interact. For a given node, some species it's interacting with can be driving the trait of that node to increase, while others might drive it to decrease. This line of thinking leads naturally to categorizing a community. For example, in plant-pollinator interactions, the community is dileneated by whether it's a plant being pollinated by an animal or animal pollinating a plant.
 
 ### The structure and categorization of communities
 
@@ -221,30 +345,18 @@ NOTE: Hypothesis 4 is neatly answered through this investigation. So include it 
 
 I plan to develop a model that tracks the distribution of pairwise coevolution throughout a community. I'll assume the community is initiated at random and analyze the evolution of this distribution. By my defintion of diffuse coevolution, the community transitions from pairwise to diffuse if the distribution initially has a large variance that narrows over time.
 
-Initial distribution of coevolution just after a disturbance or for a young community may look like:
+The for a community that has been freshly disturbed and time $t=0$, we might expect to see pairwisivity ($\pi$) take the following trajectory.
 
 ```{r, include=F}
 s <- 1
-nums <- seq(0,5,0.01)
-pdf <- dlnorm(nums,log(.25)+s^2,s)
+nums <- seq(0,100,0.1)
+pi <- 30/(1+exp((nums-50)/10))
 ```
 
 ```{r, echo=F}
-plot(nums,pdf,xlab="Coevolution",ylab="Density")
+plot(nums,pi,xlab="time",ylab="pairwisivity")
 ```
 
-
-The distribution of coevolution after a long time without disturbance may look like:
-
-```{r, include=F}
-s <- .3
-nums <- seq(0,5,0.01)
-pdf <- dlnorm(nums,log(.25)+s^2,s)
-```
-
-```{r, echo=F}
-plot(nums,pdf,xlab="Coevolution",ylab="Density")
-```
 
 #### __Hypothesis 2: Communities climax quicker with coevolution present.__
 
