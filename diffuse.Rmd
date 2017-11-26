@@ -1,5 +1,5 @@
 ---
-title: "The Definition of Diffuse Coevolution: novel insights to an old problem"
+title: "On the definition of coevolutio"
 output: 
   html_document: 
     toc: false
@@ -29,8 +29,16 @@ knitr::opts_chunk$set(echo = TRUE)
 \newcommand{\Var}{\mathrm{Var}}
 
 
+### Introduction
+
+### The triviality of coevolution
+
+### Diffuse coevolution and pairwise coevolution
+
 ### The distinction between ongoing coevolution and coevolved species/traits
 
 ### The evolution of $B_{ij}$
 
 The selection strength $B_{ij}$ that mediates the amount of selection imposed by species $j$ onto species $i$ can vary in time and space. Spatial variation is known as a Thompsonian gradient. This number $B_{ij}(x)$, the strength of biotic selection at location $x$, is a property that corresponds to both species $i$ and species $j$ and is subject to evolution. What determines the evolution of this abstract parameter and how that mechanism can be captured mathematically is not clear as of this moment. This parameter controls the sensitivity of fitness effects to trait differences. Thus, to understand it, we must dive deeper into the life histories and physiologies of the individuals involved on both sides of the interaction.
+
+### Conclusion

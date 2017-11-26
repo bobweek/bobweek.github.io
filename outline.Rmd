@@ -1,5 +1,5 @@
 ---
-title: "Proposal Outline"
+title: "The Coevolutionary Theory of Ecological Communities"
 output: 
   html_document: 
     toc: false
@@ -48,6 +48,13 @@ N/A
 
 ## Background
 
+This is an attmept to synthesize coevolutionary theory and community ecology. Why these two topics? In my mind they each hold the potential to capture the 
+
+To understand the evolution of a population, we must understand how it evolves in response to its interactions with other populations and how those populations evolve in response to it. That is, we must study the coevolution of a set of many interacting populations to really understand why they have evolved to become the way they are and to speculate how they may evolve in response to changing climates.
+
+Likewise, to understand the ecology of a population, we must also understand the ecology of the populations it interacts with and the ecology of the community altogether.
+
+
 ### Coevolution and its measurement
 
 Coevolution has been defined as the reciprocal evolutionary response in a pair of populations to their interaction.
@@ -87,7 +94,9 @@ However, by this definition alone, these classic cases of potentially coevolved 
 
 The point is not that the currently accepted definition of coevolution needs to be modified, but that it implies a much broader set of situations than typically thought of. This observation leads neatly to notions of coevolution in the broader community context where a set of many interacting species are considered at once. Indeed, in light of this discussion the notion of an interaction community collapses to that of a coevolving community. The distinction is more psychological than biological. One notion is focused on who is interacting with whom while the other is primarily concerned with the strength by which their traits coevolve.
 
-Returning to the point being made above, for any pair of interacing species $(i,j)$ the probaility that either $\mathcal{B}_{ij}$ or $\mathcal{B}_{ji}$ are equal to zero is zero. Using the same argument for the magnitudes of $G_i$ and $G_j$, then we will always find at least some $\epsilon$-amount of coevolution for any given pair of interacting species. This is fine; it should be understood that coevolution is continuous in value, not binary. Also, the triviality of this notion of coevolution does not remove its relevance, but emphasizes the need to measure its strength ($C_{ij}$) and significance. The distribution of $C_{ij}$ in a community can provide important information detailing the structure of the community and its potential trajectory. 
+Returning to the point being made above, since for any pair of interacing species $(i,j)$ the selection gradients $\mathcal{B}_{ij}$ and $\mathcal{B}_{ji}$ are continuous in value it seems natural to assume that the probability of either of them equalling to zero is zero. Another way to think about this is that the interaction induces some, maybe very small, but some selection on the interacting populations. Using the same argument for the magnitudes of $G_i$ and $G_j$, then we will almost always find at least some $\epsilon$-amount of coevolution for any given pair of interacting species (in symbols, $P(C_{ij}>0)=1$). This is fine; it should be understood that coevolution is continuous in value, not binary. Also, the triviality of this notion of coevolution does not remove its relevance, but emphasizes the need to study it in more detail so we can develop a more nuanced understanding of the many facets of coevolution.
+
+#### Pairwisivity
 
 Using $C_{ij}$ we can construct other measurements that provide insight into specific coevolutionary structures of communities. For example suppose species $i$ interacts with the set $I_i$ of species and $j$ interacts with $I_j$. Set $\gamma_i=\argmax_{l\in I_i}\{C_{il}\}$. If $\gamma_i=j$ and $\gamma_j=i$ then coevolution is strongest between species $i$ and $j$ than between $i$ and any of its partners other than $j$ and likewise for $j$. As this particular strength of coevolution increases above the rest, what we think of as a pairwise coevolutionary situation emerges. However, I will go a step further and define pairwise coevolution as the situation in which $\gamma_i=j$ and $\gamma_j=i$. Whether or not pairwise coevolution is significant, that is, whether it can be detected with some method is independent of whether or not it exists. So we can have species that are technically undergoing pairwise coevolution but the intensity of pairwise coevolution may be negligible. Setting $\lambda_i=\argmax_{l\in I_i\setminus\{\gamma_i\}}\{C_{il}\}$, one potential measure of pairwise coevolution is $C^2_{ij}-C_{i\lambda_i}C_{j\lambda_j}$. But this would only make sense when $\gamma_i=j$ and $\gamma_j=i$. Instead we need a notion that describes the degree to which a species is uniquely coevolving with another species. I call this __coevolutionary affinity__ and for species $i$ it can be captured by $\alpha_i\equiv C^2_{i\gamma_i}-C_{i\lambda_i}C_{\gamma_i\lambda_{\gamma_i}}$ (note that when $\alpha_i=\alpha_{\gamma_i}$ this corresponds to a measure of pairwise coevolution since it implies that $\gamma_i=j$ and $\gamma_j=i$). The subset of coevolving pairs $(i,j)$ for which $\gamma_i=j$ and $\gamma_j=i$ are an important subset of interactions for it contains precisely those pairs that are undergoing pairwise coevolution. For theses cases I'll write $\alpha_{ij}$ instead of $\alpha_i$ or $\alpha_j$ to emphasize the pairwise relationship between species $i$ and $j$. Denoting $\Theta$ as the set of all pairs of coevolving species and $\Pi\subset\Theta$ as the set of interactions undergoing pairwise coevolution (those for which $\alpha_i=\alpha_j=\alpha_{ij}$) we can provide a cursory definition of the __pairwisivity__ of a community as
 
@@ -329,8 +338,17 @@ Coevolutionary generality: $-\sum_j\alpha_{ij}\ln(\alpha_{ij})$
 
 -->
 
-Aside from whether or not species interact, we curious to know as to how often they interact. Given that an individual is in the midst of an interaction, we might draw the identity of the species it is interacting with from a distribution. Then it makes sense to quantify the rates of interaction by convex combinations of all members of the community. 
- 
+#### Interaction preference
+
+Aside from whether or not species interact, we curious to know as to how often they interact. Given that an individual is in the midst of an interaction, we might draw the identity of the species it is interacting with from a distribution. Then it makes sense to quantify the rates of interaction by convex combinations of all members of the community. These convex combinations represent behaviour and can also evolve.
+
+In plant-pollinators properties of flowers such as pheromones and color can evolve to attract different pollinators, in particular ones that best pollinate the flowers. The reward can also change.
+
+If interaction frequencies for species $i$ are captured with $x_i=(x_{i1},\dots,x_{iN})$ with $x_{ij}>0$ and $\sum_jx_{ij}=1$, we can characterize generalism with entropy: $\gamma_i=-\sum_jx_{ij}\ln x_{ij}$. We could then study the distribution of $\gamma$ in the community.
+
+Instead of thinking of $x_i$ as a vector of interaction frequencies, we can think of it more as preference. Frequencies must involve abundances along with preference. If a species is common here but rare there then even if $x_i$ were the same at both locations, the interaction frequencies would be different.
+
+When moving to a continuous spatial situation we can consider the probability of two critters at different locations running into each other. Or is this necessary? 
 
 <!--
 
@@ -350,6 +368,63 @@ Here I describe ways of categorizing communities and refer to Shipley when discu
 
 #### Spatial structure
 
+### The maturity of a community
+
+Define this purely in theoretical terms. What are some signuratures that a community has reached maturity? Low invasibility (no!)? Low pairwisitivity(no?)? Does the notion of maturity for communities make sense (maybe?)? What about the demographic dynamics of the resident species, if they're very regular then maybe the community has reached some equilibrium?
+
+Think about some of the oldest systems on earth. Ones that have had the same members for very long periods of time, whose population dynamics have either become very smooth or extremely predictable. The first thing that pops into my mind are the redwoods described by Whittaker.
+
+Turnover, the instantaneous expectation of flux of resident species, can be used to measure maturity. As turnover approaches zero, the community can be said to reach __ultimate maturity__. This implicitly involves stabilization of demographic dynamics. Invasion rate = $\nu$, local extinction rate = $\varepsilon$, community flux = $\nu+\varepsilon$.
+
+Let $E_T\geq0$ be a random variable representing the number of extinctions within the time interval $T=(t_1,t_2)$. Then
+
+$$\varepsilon\equiv\lim_{t_2\downarrow t_1}\frac{\E(E_T)}{t_2-t_1}.$$
+
+Let $I_T\geq0$ be the number of invasions that occur within the same time interval $T$. Then
+
+$$\nu\equiv\lim_{t_2\downarrow t_1}\frac{\E(I_T)}{t_2-t_1}.$$
+
+Should we define community maturity as $\frac{1}{\nu+\varepsilon}$?
+
+For a single species $i$ whose population size is $n_t(i)$ at time $t$, what is
+
+$$P(n_\tau=0|\tau\in(t,t+\delta))?$$
+
+OR
+
+$$P(n_\tau\leq1|\tau\in(t,t+\delta))?$$
+
+Let's stick with integral numbers for the population sizes so that the first probability can be easily calculated. Births and deaths can occur on a Poisson clock. The population dynamics of each species, of course, needs to be divied up into the population dynamics of the different types within that species. The trait of each member of the species can be modelled as iid rv's whose distribution evolves according to that which has been derived in notes-evolution.
+
+For a birth event, we could draw a Poisson distributed number of offspring. But I wonder if it would be more tractable to just increase the rate of birth instead? Then rate of birth is associated with fitness. So is rate of death. These life-history traits become directly linked to everything else.
+
+  * $B_T(i,z)\dots$ number of births within time interval $T$ for an individual of species $i$ with trait $z$
+  * $D_T(i,z)\dots$ probability of death within time interval $T$ for an individual of species $i$ with trait $z$
+
+The above rv's depend on the environment. For a plant that depends on animal pollinators, $B_T$ depends on the number of successful interactions it has with pollinators. We can assume exponential waiting times between births and an exponential waiting time for death. We could go on to get more explicit about the life-history of the organism 
+
+Let's start by focusing on a single individual born at time $t=0$. Let $\Delta$ represent the time til death. Then this individual has a fitness of $B_\Delta=B_{(0,\Delta)}$. If this individual has a birth rate $b$ (the waiting times between births are $b$) that is time-homogenous (some organisms may have a slow or infitesimal birth rate for the first part of their life that ramps up later, for example, like humans) then
+
+$$\E(B_\Delta|\Delta)=b\Delta.$$
+
+If $\E(\Delta)=\tau_d$ then the expected fitness of the organism is
+
+$$W=\E(B_\Delta)=b\tau_d.$$
+
+I don't think we need to worry about independence since $\Delta$ is a parameter that determines $B_\Delta$. We could make $b(z)$ and $\tau_d(z)$ Gaussian functions of $z$, then $W$ would also be a Gaussian function of $z$. This would probably make for the easiest first pass.
+
+$$P(B_t=X)=\text{refer to poisson processes}$$
+
+Let's now focus on a single species all with the same trait. Let $n_0$ denote the number of individuals of that species. Then 
+
+$$
+P(n_t=X)=P(X-n_t\text{ births occur, if }X>n_t)\text{ or }P(X-n_t+k\text{ births occur and }k\text{ deaths occur})\dots
+$$
+
+What about the portion of the population that doesn't get to reproduce?
+
+Before we go "full boar", let's just do things the typical way so as not to freak out everyone else. I'll just follow $\bar z_t(i)$ and $N_t(i)$ via $\overline W_t(i)$ or $\overline{\ln W}_t(i)$.
+
 ### Summary
 
   * Coevolution: The simultaneous response to reciprocal biotic selection in a set of interacting species that are connected in the graph-theoretic sense.
@@ -361,13 +436,22 @@ Here I describe ways of categorizing communities and refer to Shipley when discu
 ## Research Questions
 
   * How common is pairwise coevolution?
-  * How does succession interact with coevolution?
+  * How does community assembly interact with coevolution?
   * How does invasion interact with coevolution?
   * Under what conditions do specialist species evolve?
+  * Is the evolution of specialist species associated with evolution of nestedness?
 
 ## Specific Aims and Methods
 
-Here I describe what I'm about to describe.
+For each of the following aims I will work towards developing analytical results. However, simulation work will provide insights into situations where analytical approaches become intractable.
+
+#### __Aim 0: Find a way to measure the strength of coevolution in nature.__
+
+This aim can be said to have already been fulfilled. However, there is much more work that can be done to extend the current method of inference to less stringent assumptions such as that of normality. Furthermore, the approach is currently developed with a focus on pairwise interactions. Yet most interactions involve more than two species. Hence, there is a need to extend this methodology to the community setting.
+
+#### Method
+
+Likelihood
 
 #### __Aim 1: Determine the relationship between the maturity of a community and the pairwisivity of the community.__
 
@@ -393,7 +477,9 @@ plot(nums,pi,xlab="time",ylab="expected pairwisivity")
 
 This aim is closely related to the above aim but has several distinct qualities. Firstly, in the above aim it is thought that pattern will hold across community types. Here we explicitly focus on different types of communities defined by the kinds of interactions present. Secondly, specialization and pairwise coevolution may appear to be similar concepts, but they are in fact quite distinct. For example, members of a community can be highly specialized but pairwise coevolution absent if there is no variance in 
 
-#### __Hypothesis 2: Communities climax quicker with coevolution present.__
+#### __Aim 2: Determine the relationship between coevolution and the rate of succession.__
+
+I hypothesize that communities will reach their climax quicker with coevolution present
 
 Three basic phases of succession have been described by ecologists: primary and secondary successions followed by the achievement of what has been called the climax community. The idea here is that this climax community will be reached quicker if coevolution acts to mold the traits of the commnunity members.
 
@@ -430,7 +516,9 @@ plot(t,NPP)
 
 Biomass tends to increase over time as communities age. We can use mean fitness of the community to track this quantity.
 
-#### __Hypothesis 3: Invasions are more successful in the presence of coevolution for mutualistic communities but less successful in the presence of coevolution for competitive communities.__
+#### __Aim 3: Determine the relationship between coevolution, community maturity and invasibility.__
+
+I hypothesize that invasions are more successful in the presence of coevolution for mutualistic communities but less successful in the presence of coevolution for competitive communities
 
 There are two potential outcomes I focus on: 1) coevolved communities will have an increased resistance to invaders and 2) coevolved communities will be more likely to accomodate the invader through more coevolution. The reason why I choose the latter for mutualistic communities is that a new member of the community acts as a new resource to other members of the community, attracting interactions that by definition benefit it. With coevolution present, the benifits of these interactions may become amplified, increasing the probability of invasion. In contrast, I chose the former for competitive communities for it is a complementary scenario where the invader's fitness is decreased by interactions with members of the community. Since the community members have "home-field advantage" it seems likely that coevolution will act to snuff out invasions by amplifying fitness costs.
 
@@ -438,7 +526,7 @@ There are two potential outcomes I focus on: 1) coevolved communities will have 
 
 Begin with a climax community and bombard it with immigrants and see how many take. Find a way to measure this and figure out how this measurement changes between the situations with and without coevolution.
 
-#### __Hypothesis 4: Specialization evolves as a result of competition (and spatial structure).__
+#### __Aim 4: Determine the necessary and sufficient conditions for the evolution of specialization.__
 
 As species compete for resources, this competition can drive the evolution of specialization.
 
@@ -447,6 +535,12 @@ As species compete for resources, this competition can drive the evolution of sp
 Use the inputs/outputs formalism to derive metrics of specialization/generalization and a distribution of these quantities across the community.
 
 Find a distribution of complexity.
+
+#### __Aim 5: Determine the relationship between the evolution of specialization and nestedness.__
+
+This 
+
+#### Method
 
 ## Significance of Proposed Research
 
