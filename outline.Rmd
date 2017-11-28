@@ -433,6 +433,20 @@ Before we go "full boar", let's just do things the typical way so as not to frea
       * Peripheral species: Non-focal coevolving species.
   * Mixed coevolution: When coevolution is neither diffuse nor pairwise.
 
+### Chapters
+
+  * What is coevolution?
+    * Start with Janzen's definition and discuss the implied triviality of coevolution
+    * Move on to the community context and diffuse coevolution
+    * From here go on to your definition of pairwise coevolution
+  * The measurement of coevolution
+    * Start with the Week-Nuismer-2017 (WN17) method and discuss all of it's shortcomings
+    * Move on to ways of measuring these more refined notions of coevolution discussed in the prev chapter
+  * Coevolution and community assembly
+    * Succession
+    * Invasion
+  * Coevolution and evolution of specialization
+
 ## Research Questions
 
   * How common is pairwise coevolution?

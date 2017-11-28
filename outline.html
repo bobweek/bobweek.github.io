@@ -264,11 +264,11 @@ output:
 <p><img src="outline_files/figure-html/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>The distribution of coevolution in this community is captured by the following histogram.</p>
 <p><img src="outline_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>In this case we get <span class="math inline">\({\mathbb{E}}(C)=\)</span> 0.2010806, <span class="math inline">\({\mathrm{Var}}(C)=\)</span> 0.6305263, and <span class="math inline">\(\pi=\)</span> 2.4333694. At the opposite end of the spectrum, the following community is completely diffuse.</p>
+<p>In this case we get <span class="math inline">\({\mathbb{E}}(C)=\)</span> 0.2660808, <span class="math inline">\({\mathrm{Var}}(C)=\)</span> 0.4867172, and <span class="math inline">\(\pi=\)</span> 1.4118588. At the opposite end of the spectrum, the following community is completely diffuse.</p>
 <p><img src="outline_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>For this community we have <span class="math inline">\({\mathbb{E}}(C)=\)</span> 0.25, <span class="math inline">\({\mathrm{Var}}(C)=\)</span> 0, and <span class="math inline">\(\pi=\)</span> 0. Lastly is an example of a community that has a moderate level of pairwisivity but would probably still be considered diffuse.</p>
 <p><img src="outline_files/figure-html/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;" /><img src="outline_files/figure-html/unnamed-chunk-7-2.png" width="576" style="display: block; margin: auto;" /></p>
-<p>For this community we have <span class="math inline">\({\mathbb{E}}(C)=\)</span> 0.2590451, <span class="math inline">\({\mathrm{Var}}(C)=\)</span> 0.0155935, and <span class="math inline">\(\pi=\)</span> 0.0429139.</p>
+<p>For this community we have <span class="math inline">\({\mathbb{E}}(C)=\)</span> 0.2497745, <span class="math inline">\({\mathrm{Var}}(C)=\)</span> 0.0153068, and <span class="math inline">\(\pi=\)</span> 0.0437045.</p>
 <!--
 
 The intensity of pairwisivity of a community is a distinct notion from the degree distribution of the community which is more in line with the notion of specialization. Combining the degree of species in a community with the strength by which they coevolve with their partners leads to a notion I will call the __specificity__ ($\psi$) of the community. The specificity of a species is $\psi_i=\sum_{j=1}^d\alpha_{ij}$. There can be a large number of specialists in a community and yet still have $\iota=0$ if $\alpha_i\neq\alpha_j$ for all $i,j$. So specialization is 
@@ -336,7 +336,9 @@ One missing ingredient is the reason why certain species interact and what deter
 <p>I don’t think we need to worry about independence since <span class="math inline">\(\Delta\)</span> is a parameter that determines <span class="math inline">\(B_\Delta\)</span>. We could make <span class="math inline">\(b(z)\)</span> and <span class="math inline">\(\tau_d(z)\)</span> Gaussian functions of <span class="math inline">\(z\)</span>, then <span class="math inline">\(W\)</span> would also be a Gaussian function of <span class="math inline">\(z\)</span>. This would probably make for the easiest first pass.</p>
 <p><span class="math display">\[P(B_t=X)=\text{refer to poisson processes}\]</span></p>
 <p>Let’s now focus on a single species all with the same trait. Let <span class="math inline">\(n_0\)</span> denote the number of individuals of that species. Then</p>
-<p><span class="math display">\[P(n_t=X)=P(X-n_t\text{ births occur, if }X&gt;n_t)\text{ or }P(X-n_t+k\text{ births occur and }k\text{ deaths occur})\]</span></p>
+<p><span class="math display">\[
+P(n_t=X)=P(X-n_t\text{ births occur, if }X&gt;n_t)\text{ or }P(X-n_t+k\text{ births occur and }k\text{ deaths occur})\dots
+\]</span></p>
 <p>What about the portion of the population that doesn’t get to reproduce?</p>
 <p>Before we go “full boar”, let’s just do things the typical way so as not to freak out everyone else. I’ll just follow <span class="math inline">\(\bar z_t(i)\)</span> and <span class="math inline">\(N_t(i)\)</span> via <span class="math inline">\(\overline W_t(i)\)</span> or <span class="math inline">\(\overline{\ln W}_t(i)\)</span>.</p>
 </div>
