@@ -1,5 +1,5 @@
 ---
-title: "On the definition of coevolutio"
+title: "On the definition of coevolution"
 output: 
   html_document: 
     toc: false
