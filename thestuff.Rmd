@@ -1,0 +1,246 @@
+---
+title: "The general framework"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\cav}[1]{\left< #1 \right>}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\PF}{\mathrm{Proof:}}
+\newcommand{\CLAIM}{\mathrm{Claim:}}
+\newcommand{\DEF}{\mathrm{Def:}}
+
+## Notation
+
+  * $N\dots$ the number of species within the community.
+  * $n_i\dots$ expected population size of species $i\in\{1,\dots,N\}$.
+  * $\eta=\sum_in_i\dots$ expected total number of individuals in community.
+  * $n_i(z)\dots$ expected number of individuals of species $i$ of type $z\in\R$.
+  * $\phi_i(z)\dots$ expected proportion of individuals of type $z$ in species $i$.
+  * $\tau_i=n_i/\eta\dots$ expected proportion of individuals of species $i$ within the community.
+  * $W_i(z)\dots$ expected Wrightian fitness of an individual of species $i$ of type $z$.
+  * $m_i(z)\geq0\dots$ expected immigration rate of individuals of species $i$ of type $z$.
+    + emmigration is captured within $W_i(z)$
+    + $m_i=\int m_i(z)dz\dots$ total expected immigration rate for species $i$.
+    + $M=\sum_im_i\dots$ total expected immigration rate of individuals for community.
+  * $\overline{X_i}=\int X_i(z)dz\dots$ average of quantity $X_i$ over species $i$.
+  * $\cav{X}=\sum_i\tau_iX_i\dots$ weighted average of quantity $X_i$ over the community weighted by numbers of individuals.
+  * $\underline{X}=\frac{1}{N}\sum_iX_i\dots$ unweighted average of quantity $X_i$.
+  * e.g. $\cav{\overline{\ln W}}$ is the community average of species-level malthusian fitness
+
+## Fixed $N\in\N$
+
+### Demographic dynamics of species $i$
+
+$$\frac{dn_i}{dt}=\frac{d}{dt}\int n_i(z)dz=\int \frac{dn_i(z)}{dt}dz=\int n_i(z)\ln W_i(z)+m_i(z)dz$$
+
+$$=n_i\int\frac{n_i(z)}{n_i}\ln W_i(z)dz+\int m_i(z)dz=n_i\int\phi_i(z)\ln W_i(z)dz+m_i$$
+
+$$=n_i\overline{\ln W_i}+m_i$$
+
+### Unweighted average demographic dynamics across the community
+
+$$\frac{d\underline n}{dt}=\frac{d}{dt}\para{\frac{1}{N}\sum_in_i}=\frac{1}{N}\sum_i\para{n_i\overline{\ln W_i}+m_i}$$
+
+$$=\frac{\eta}{N}\sum_i\frac{n_i}{\eta}\overline{\ln W_i}+\frac{1}{N}M$$
+
+$$=\underline n\sum_i\tau_i\overline{\ln W_i}+\underline m=\underline n\cav{\overline{\ln W}}+\underline m$$
+
+### Dynamics of $\eta$
+
+$$\frac{d\eta}{dt}=\frac{d}{dt}\sum_in_i=\sum_i\para{n_i\overline{\ln W_i}+m_i}$$
+
+$$=\eta\cav{\overline{\ln W}}+M$$
+
+### Dynamics of $\tau_i$
+
+$$\frac{d\tau_i}{dt}=\frac{d}{dt}\frac{n_i}{\eta}$$
+
+$$=\frac{\eta\para{n_i\overline{\ln W_i}+m_i}-n_i\para{\eta\cav{\overline{\ln W}}+M}}{\eta^2}$$
+
+$$=\tau_i\para{\overline{\ln W_i}-\cav{\overline{\ln W}}}+\frac{m_i-\tau_iM}{\eta}$$
+
+Note that $\sum_i\frac{d\tau_i}{dt}=0$ as required to maintain $\sum_i\tau_i=1$.
+
+### Weighted average demographic dynamics across the community
+
+$$\frac{d\cav n}{dt}=\frac{d}{dt}\sum_i\tau_in_i=\sum_i\para{\tau_i\frac{dn_i}{dt}+n_i\frac{d\tau_i}{dt}}$$
+
+$$=\sum_i\para{\tau_i\para{n_i\overline{\ln W_i}+m_i}+n_i\frac{d\tau_i}{dt}}$$
+
+$$=\cav{n\overline{\ln W}}+\cav m+\sum_in_i\para{\tau_i\para{\overline{\ln W_i}-\cav{\overline{\ln W}}}+\frac{m_i-\tau_iM}{\eta}}$$
+
+$$=\cav{n\overline{\ln W}}+\cav m+\cav{n\overline{\ln W}}-\cav n\cav{\overline{\ln W}}+\cav m-M\cav\tau$$
+
+$$=2\cav{n\overline{\ln W}}-\cav n\cav{\overline{\ln W}}+2\cav m-M\cav\tau$$
+
+### Evolution of species $i$
+
+$$\frac{d\phi_i(z)}{dt}=\frac{d}{dt}\frac{n_i(z)}{n_i}=\frac{n_i(n_i(z)\ln W_i(z)+m_i(z))-n_i(z)(n_i\overline{\ln W_i}+m_i)}{n_i^2}$$
+
+$$=\phi_i(z)\para{\ln W_i(z)-\overline{\ln W_i}}+\frac{m_i(z)-\phi_i(z)m_i}{n_i}.$$
+
+Note that $\int\frac{d\phi_i(z)}{dt}dz=0$ as required to maintain $\int\phi_i=1$.
+
+### Unweighted evolution of the community
+
+$$\frac{d\underline\phi(z)}{dt}=\frac{d}{dt}\frac{1}{N}\sum_i\phi_i(z)$$
+
+$$=\frac{1}{N}\sum_i\para{\phi_i(z)\para{\ln W_i(z)-\overline{\ln W_i}}+\frac{m_i(z)-\phi_i(z)m_i}{n_i}}$$
+
+$$=\frac{\sum_i\phi_i(z)}{N}\sum_i\para{\frac{\phi_i(z)}{\sum_i\phi_i(z)}\para{\ln W_i(z)-\overline{\ln W_i}-\frac{m_i}{n_i}}}+\frac{1}{N}\sum_i\frac{m_i(z)}{n_i}$$
+
+$$=\underline\phi(z)\sum\tau_i\para{\ln W_i(z)-\overline{\ln W_i}-\frac{m_i}{n_i}}+\underline{\para{\frac{m(z)}{n}}}$$
+
+$$=\underline\phi(z)\cav{\ln W(z)-\overline{\ln W}-\frac{m}{n}}+\underline{\para{\frac{m(z)}{n}}}$$
+
+Integrating $\frac{d\underline\phi(z)}{dt}$ wrt $z$ should return zero.
+
+### Weighted evolution of the community
+
+$$\frac{d\cav\phi(z)}{dt}=\frac{d}{dt}\sum_i\tau_i\phi_i(z)=\sum_i\para{\tau_i\frac{d\phi_i(z)}{dt}+\phi_i(z)\frac{d\tau_i}{dt}}$$
+
+$$=\cav{\frac{d\phi_i(z)}{dt}}+\sum_i\phi_i(z)\para{\tau_i\para{\overline{\ln W_i}-\cav{\overline{\ln W}}}+\frac{m_i-\tau_iM}{\eta}}$$
+
+$$=\cav{\frac{d\phi_i(z)}{dt}}+\cav{\phi(z)\overline{\ln W}}-\cav\phi(z)\cav{\overline{\ln W}}+\frac{1}{\eta}\para{\cav{m\phi(z)}-M\cav\tau}$$
+
+$$=\cav{\phi(z)\para{\ln W(z)-\overline{\ln W}}+\frac{m(z)-\phi(z)m}{n}}$$
+
+$$+\cav{\phi(z)\overline{\ln W}}-\cav\phi(z)\cav{\overline{\ln W}}+\frac{1}{\eta}\para{\cav{m\phi(z)}-M\cav\tau}$$
+
+$$=\cav{\phi(z)\ln W(z)}-\cav\phi(z)\cav{\overline{\ln W}}+\cav{\frac{m(z)}{n}}-\cav{\frac{\phi(z)m}{n}}+\cav{\frac{\phi(z)m}{\eta}}-\frac{M}{\eta}\cav\tau$$
+
+## Letting $N=N(t)$
+
+  * $N\dots$ the expected number of species within the community.
+  * $\psi\dots$ the speciation rate of the community
+  * $\epsilon\dots$ the (local) extinction rate of the community
+  * $\omega\geq0\dots$ the species-level migration rate of the community
+  * $\eta=\sum_{i=1}^\infty n_i\dots$ the total expected number of individuals within the community
+
+### Conceptual issues
+
+Since we're tracking $N$ we can't assume an infinite number of species in the community. Recall that $n_i$ represents the __expected__  number of individuals of species $x$. The actual number will surely be a non-negative integer. So there's no obvious contradiction between assuming a finite number of species and yet having $n_i>0$ for every $i$. 
+
+One thing we will have to assume is that $\eta<\infty$ so that the sum $\sum n_i$ converges. This also requires $M<\infty$.
+
+Note that since $i=1,2,\dots$ then $m_i>0$ represents rate of invasion if $n_i=0$.
+
+We might be able to avoid a lot of this hassle if we simply track the density $\phi(z)$ of the trait $z$ for __all__ individuals in the community. We can assume species interact with one another based only on their trait value and not on their identity as a species.
+
+### Dynamics of $\psi$
+
+For now we should set $\psi\equiv0$.
+
+### Dynamics of $\epsilon$
+
+We can assume and ambient distribution of traits represented by the density $\Phi(z)$. We can assume that invaders will have traits drawn from this distribution. The probability of invasion is merely the probability that at least one invader leaves at least one offspring. Hence, this probability and therefore the rate of invasion will depend on the fitness of the invader.
+
+### Dynamics of $N$
+
+$$\frac{dN}{dt}=(\psi-\epsilon)N+\omega$$
+
+### Unweighted average demographic dynamics across the community 
+
+$$\frac{d\underline n}{dt}=\frac{d}{dt}\para{\frac{1}{N}\eta}$$
+
+$$=\frac{1}{N^2}\para{N\para{\eta\cav{\overline{\ln W}}+M}-\eta\para{(\psi-\epsilon)N+\omega}}$$
+
+$$=\underline n\cav{\overline{\ln W}}+\underline m-\eta\para{\frac{\psi-\epsilon}{N}+\frac{\omega}{N^2}}$$
+
+No assumptions have been made about the mode of interaction between individuals. Then why should extinction increase the growth of the number of individuals while speciation and immigration reduces it? Note that as the number $N$ increases $\underline n$ will decrease assuming the $n_i$ remain constant. This accounts for what seemed pathological.
+
+### Weighted average demographic dynamics across the community
+
+$$\frac{d\cav n}{dt}=\frac{d}{dt}\sum_i\tau_in_i=\sum_i\para{\tau_i\frac{dn_i}{dt}+n_i\frac{d\tau_i}{dt}}$$
+
+It appears this quantity will remain unchanged.
+
+## Interaction distributions
+
+### Assumptions
+
+  * __Unstructured community__: 
+      + Every interaction is mediated through the same pair of traits.
+      + There are no guilds.
+
+### The approach
+
+Let's focus on the trait-based approach. Assuming individuals with trait $x$ have the interaction distribution (or distribution of preference)
+
+$$\iota(x,z)=\frac{1}{\sqrt{2\pi o^2}}\exp\para{-\frac{(x-z-\kappa)^2}{2o^2}}$$
+
+we have a the normally distributed random variable $Z_x\sim\mathcal{N}(x-\kappa,o^2)$ that models the value of the trait with which this individual prefers to interact. We can assume everyone interacts with a Poisson distributed number of iid individuals. The fitness outcome for each interaction can be captured with 
+
+$$W_B(x,z)=\frac{C}{\sqrt{2\pi\beta^2}}\exp\para{-\frac{(x-z-\delta)^2}{2\beta^2}}.$$
+
+We can take this a step further and assume the $\kappa$, $\delta$, $o$, $\beta^2$, and $C$ are random variables to capture the effects of individual variability. However, assuming $\kappa$ and $\delta$ to be normally distributed around $\bar\kappa$ and $\bar\delta$ will not change the forms of the resulting expressions for the interaction distribution and the fitness function. They will just have increased variance. So I'll assume the $\kappa$ and $\delta$ are constant. Of course, relaxing these assumptions will allow us to investigate the evolution of the interaction distribution and fitness function. But for simplicity I will at first ignore these tantalizing venues.
+
+Each interaction has an effect on the fitness of an individual. For an individual with phenotype $x$ that interacts with $K$ individuals with phenotypes $z_1,z_2,\dots,z_K$, we can define fitness for $x$ to be
+
+$$W(x|z_1,\dots,z_K)\equiv\prod_{i=1}^{K}W(x|z_i).$$
+
+If $K=0$ then the product is empty and by convention takes the value 1. This makes perfect sense when realizing that multiplying any number by 1 has no effect. We can now plug in the form of fitness suggested above to get
+
+$$W(x|z_1,\dots,z_K)=\para{\frac{C}{\sqrt{2\pi\beta^2}}}^K\exp\para{-\sum_{i=1}^{K}\frac{(z_i+\delta-x)^2}{2\beta^2}}.$$
+
+Before we move further to calculate the mean fitness for an individual with trait $x$, let's work out including the interaction distribution for one interaction. Above we have the traits $z_1,\dots,z_K$ written as a given. However, the value those traits take will depend on their distribution as well as the distribution of preference for the individual with trait $x$. Taking guidance from universal Darwinism and the Bayesian update algorithm in particular, we can find the distribution of $Z_x$, the random variable capturing the trait value encountered by an individual with trait $x$ after incorporating both the distribution of the trait in the community and interaction distribution of the trait $x$. This new distribution, denoted $\tilde\phi$, is calculated as
+
+$$\tilde\phi(z)=\frac{\iota(x,z)\phi(z)}{\int\iota(x,y)\phi(y)dy}=\star.$$
+
+Assuming
+
+$$\phi(z)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\para{-\frac{(\bar z-z)^2}{2\sigma^2}},$$
+
+then
+
+$$\star=\frac{1}{\sqrt{2\pi\tilde\sigma^2}}\exp\para{-\frac{(z-\tilde z)^2}{2\tilde\sigma^2}}$$
+
+with
+
+$$\tilde z=\frac{o^2\bar z+\sigma^2(x-\kappa)}{o^2+\sigma^2}, \ \sigma^2=\frac{o^2\sigma^2}{o^2+\sigma^2}.$$
+
+
+Given $\eta$ total individuals in the community, we can suppose $K\sim\mathrm{Bin}(\eta,p)$.
+
+We can calculate the expected fitness for an individual with phenotype $x$ given that it interacts with $K$ individuals as
+
+$$W(x|K)=\int_\R\cdots\int_\R W_1(x|z_1,\dots,z_K)\phi(z_1)\cdots\phi(z_K)dz_1\cdots dz_K$$
+
+$$=\para{\int_\R W(x|z)\phi(z)dz}^K=\para{\frac{C}{\sqrt{2\pi(\beta^2+\sigma^2)}}}^K\exp\para{-K\frac{(\bar z-x)^2}{2(\beta^2+\sigma^2)}}.$$
+
+Finally, to get the total expected fitness $W(x)$, we average over all possible values of $K$. However, since each component of fitness multiplies together to produce the total fitness, we shouldn't take an arithmetic average, we should take a geometric average. Doing so provides the following result
+
+$$W(x)=\prod_{i=0}^\eta W(x|K=i)^{P(K=i)}=\para{\frac{C}{\sqrt{2\pi(\beta^2+\sigma^2)}}}^{p\eta}\exp\para{-p\eta\frac{(\bar z-x)^2}{2(\beta^2+\sigma^2)}}.$$
+
+Then
+
+$$\cav{W}=\para{\frac{C}{\sqrt{2\pi(\beta^2+2\sigma^2)}}}^{p\eta}\exp\para{-p\eta\frac{(\bar z-x)^2}{2(\beta^2+\sigma^2)}}$$
+
+and
+
+$$\ln W(x)=\sum_{i=0}^{N_{2,t}}P(K_1=i)\ln W_1(x|K_1=i)=p_1N_{2,t}\para{\ln W_{1,max}-\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)}}$$
+
+$$\dots$$
+
+$$\frac{d\bar x_t}{dt}=\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^2(\bar y_t-\bar x_t) \ \text{and} \
+\frac{d\sigma_{1,t}^2}{dt}=-\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^4$$
+
+$$\frac{dN_{1,t}}{dt}=\overline{\ln W_t}N_{1,t}=p_1\para{\ln W_{1,max}-\frac{(\bar y_t-\bar x_t)^2+\sigma_{1,t}^2}{2(\omega_1^2+\sigma_{2,t}^2)}}N_{2,t}N_{1,t}$$

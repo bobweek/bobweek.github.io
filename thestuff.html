@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>The general framework</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="interactive_theory.html">Interactive Theory</a></li>
+        <li><a href="inferring_coevolution.html">Inferring Coevolution</a></li>
+        <!--
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="notes-fitness.html">First Steps</a></li>
+            <li><a href="notes-evolution.html">Evolution</a></li>
+            <li><a href="notes-examples.html">Examples</a></li>
+            <li><a href="notes-misc.html">Misc</a></li>
+          </ul>
+        </li>
+        -->
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">The general framework</h1>
+
+</div>
+
+
+<div id="notation" class="section level2">
+<h2>Notation</h2>
+<ul>
+<li><span class="math inline">\(N\dots\)</span> the number of species within the community.</li>
+<li><span class="math inline">\(n_i\dots\)</span> expected population size of species <span class="math inline">\(i\in\{1,\dots,N\}\)</span>.</li>
+<li><span class="math inline">\(\eta=\sum_in_i\dots\)</span> expected total number of individuals in community.</li>
+<li><span class="math inline">\(n_i(z)\dots\)</span> expected number of individuals of species <span class="math inline">\(i\)</span> of type <span class="math inline">\(z\in{\mathbb{R}}\)</span>.</li>
+<li><span class="math inline">\(\phi_i(z)\dots\)</span> expected proportion of individuals of type <span class="math inline">\(z\)</span> in species <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(\tau_i=n_i/\eta\dots\)</span> expected proportion of individuals of species <span class="math inline">\(i\)</span> within the community.</li>
+<li><span class="math inline">\(W_i(z)\dots\)</span> expected Wrightian fitness of an individual of species <span class="math inline">\(i\)</span> of type <span class="math inline">\(z\)</span>.</li>
+<li><span class="math inline">\(m_i(z)\geq0\dots\)</span> expected immigration rate of individuals of species <span class="math inline">\(i\)</span> of type <span class="math inline">\(z\)</span>.
+<ul>
+<li>emmigration is captured within <span class="math inline">\(W_i(z)\)</span></li>
+<li><span class="math inline">\(m_i=\int m_i(z)dz\dots\)</span> total expected immigration rate for species <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(M=\sum_im_i\dots\)</span> total expected immigration rate of individuals for community.</li>
+</ul></li>
+<li><span class="math inline">\(\overline{X_i}=\int X_i(z)dz\dots\)</span> average of quantity <span class="math inline">\(X_i\)</span> over species <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\({\left&lt; X \right&gt;}=\sum_i\tau_iX_i\dots\)</span> weighted average of quantity <span class="math inline">\(X_i\)</span> over the community weighted by numbers of individuals.</li>
+<li><span class="math inline">\(\underline{X}=\frac{1}{N}\sum_iX_i\dots\)</span> unweighted average of quantity <span class="math inline">\(X_i\)</span>.</li>
+<li>e.g. <span class="math inline">\({\left&lt; \overline{\ln W} \right&gt;}\)</span> is the community average of species-level malthusian fitness</li>
+</ul>
+</div>
+<div id="fixed-ninmathbbn" class="section level2">
+<h2>Fixed <span class="math inline">\(N\in{\mathbb{N}}\)</span></h2>
+<div id="demographic-dynamics-of-species-i" class="section level3">
+<h3>Demographic dynamics of species <span class="math inline">\(i\)</span></h3>
+<p><span class="math display">\[\frac{dn_i}{dt}=\frac{d}{dt}\int n_i(z)dz=\int \frac{dn_i(z)}{dt}dz=\int n_i(z)\ln W_i(z)+m_i(z)dz\]</span></p>
+<p><span class="math display">\[=n_i\int\frac{n_i(z)}{n_i}\ln W_i(z)dz+\int m_i(z)dz=n_i\int\phi_i(z)\ln W_i(z)dz+m_i\]</span></p>
+<p><span class="math display">\[=n_i\overline{\ln W_i}+m_i\]</span></p>
+</div>
+<div id="unweighted-average-demographic-dynamics-across-the-community" class="section level3">
+<h3>Unweighted average demographic dynamics across the community</h3>
+<p><span class="math display">\[\frac{d\underline n}{dt}=\frac{d}{dt}{\left( \frac{1}{N}\sum_in_i \right)}=\frac{1}{N}\sum_i{\left( n_i\overline{\ln W_i}+m_i \right)}\]</span></p>
+<p><span class="math display">\[=\frac{\eta}{N}\sum_i\frac{n_i}{\eta}\overline{\ln W_i}+\frac{1}{N}M\]</span></p>
+<p><span class="math display">\[=\underline n\sum_i\tau_i\overline{\ln W_i}+\underline m=\underline n{\left&lt; \overline{\ln W} \right&gt;}+\underline m\]</span></p>
+</div>
+<div id="dynamics-of-eta" class="section level3">
+<h3>Dynamics of <span class="math inline">\(\eta\)</span></h3>
+<p><span class="math display">\[\frac{d\eta}{dt}=\frac{d}{dt}\sum_in_i=\sum_i{\left( n_i\overline{\ln W_i}+m_i \right)}\]</span></p>
+<p><span class="math display">\[=\eta{\left&lt; \overline{\ln W} \right&gt;}+M\]</span></p>
+</div>
+<div id="dynamics-of-tau_i" class="section level3">
+<h3>Dynamics of <span class="math inline">\(\tau_i\)</span></h3>
+<p><span class="math display">\[\frac{d\tau_i}{dt}=\frac{d}{dt}\frac{n_i}{\eta}\]</span></p>
+<p><span class="math display">\[=\frac{\eta{\left( n_i\overline{\ln W_i}+m_i \right)}-n_i{\left( \eta{\left&lt; \overline{\ln W} \right&gt;}+M \right)}}{\eta^2}\]</span></p>
+<p><span class="math display">\[=\tau_i{\left( \overline{\ln W_i}-{\left&lt; \overline{\ln W} \right&gt;} \right)}+\frac{m_i-\tau_iM}{\eta}\]</span></p>
+<p>Note that <span class="math inline">\(\sum_i\frac{d\tau_i}{dt}=0\)</span> as required to maintain <span class="math inline">\(\sum_i\tau_i=1\)</span>.</p>
+</div>
+<div id="weighted-average-demographic-dynamics-across-the-community" class="section level3">
+<h3>Weighted average demographic dynamics across the community</h3>
+<p><span class="math display">\[\frac{d{\left&lt; n \right&gt;}}{dt}=\frac{d}{dt}\sum_i\tau_in_i=\sum_i{\left( \tau_i\frac{dn_i}{dt}+n_i\frac{d\tau_i}{dt} \right)}\]</span></p>
+<p><span class="math display">\[=\sum_i{\left( \tau_i{\left( n_i\overline{\ln W_i}+m_i \right)}+n_i\frac{d\tau_i}{dt} \right)}\]</span></p>
+<p><span class="math display">\[={\left&lt; n\overline{\ln W} \right&gt;}+{\left&lt; m \right&gt;}+\sum_in_i{\left( \tau_i{\left( \overline{\ln W_i}-{\left&lt; \overline{\ln W} \right&gt;} \right)}+\frac{m_i-\tau_iM}{\eta} \right)}\]</span></p>
+<p><span class="math display">\[={\left&lt; n\overline{\ln W} \right&gt;}+{\left&lt; m \right&gt;}+{\left&lt; n\overline{\ln W} \right&gt;}-{\left&lt; n \right&gt;}{\left&lt; \overline{\ln W} \right&gt;}+{\left&lt; m \right&gt;}-M{\left&lt; \tau \right&gt;}\]</span></p>
+<p><span class="math display">\[=2{\left&lt; n\overline{\ln W} \right&gt;}-{\left&lt; n \right&gt;}{\left&lt; \overline{\ln W} \right&gt;}+2{\left&lt; m \right&gt;}-M{\left&lt; \tau \right&gt;}\]</span></p>
+</div>
+<div id="evolution-of-species-i" class="section level3">
+<h3>Evolution of species <span class="math inline">\(i\)</span></h3>
+<p><span class="math display">\[\frac{d\phi_i(z)}{dt}=\frac{d}{dt}\frac{n_i(z)}{n_i}=\frac{n_i(n_i(z)\ln W_i(z)+m_i(z))-n_i(z)(n_i\overline{\ln W_i}+m_i)}{n_i^2}\]</span></p>
+<p><span class="math display">\[=\phi_i(z){\left( \ln W_i(z)-\overline{\ln W_i} \right)}+\frac{m_i(z)-\phi_i(z)m_i}{n_i}.\]</span></p>
+<p>Note that <span class="math inline">\(\int\frac{d\phi_i(z)}{dt}dz=0\)</span> as required to maintain <span class="math inline">\(\int\phi_i=1\)</span>.</p>
+</div>
+<div id="unweighted-evolution-of-the-community" class="section level3">
+<h3>Unweighted evolution of the community</h3>
+<p><span class="math display">\[\frac{d\underline\phi(z)}{dt}=\frac{d}{dt}\frac{1}{N}\sum_i\phi_i(z)\]</span></p>
+<p><span class="math display">\[=\frac{1}{N}\sum_i{\left( \phi_i(z){\left( \ln W_i(z)-\overline{\ln W_i} \right)}+\frac{m_i(z)-\phi_i(z)m_i}{n_i} \right)}\]</span></p>
+<p><span class="math display">\[=\frac{\sum_i\phi_i(z)}{N}\sum_i{\left( \frac{\phi_i(z)}{\sum_i\phi_i(z)}{\left( \ln W_i(z)-\overline{\ln W_i}-\frac{m_i}{n_i} \right)} \right)}+\frac{1}{N}\sum_i\frac{m_i(z)}{n_i}\]</span></p>
+<p><span class="math display">\[=\underline\phi(z)\sum\tau_i{\left( \ln W_i(z)-\overline{\ln W_i}-\frac{m_i}{n_i} \right)}+\underline{{\left( \frac{m(z)}{n} \right)}}\]</span></p>
+<p><span class="math display">\[=\underline\phi(z){\left&lt; \ln W(z)-\overline{\ln W}-\frac{m}{n} \right&gt;}+\underline{{\left( \frac{m(z)}{n} \right)}}\]</span></p>
+<p>Integrating <span class="math inline">\(\frac{d\underline\phi(z)}{dt}\)</span> wrt <span class="math inline">\(z\)</span> should return zero.</p>
+</div>
+<div id="weighted-evolution-of-the-community" class="section level3">
+<h3>Weighted evolution of the community</h3>
+<p><span class="math display">\[\frac{d{\left&lt; \phi \right&gt;}(z)}{dt}=\frac{d}{dt}\sum_i\tau_i\phi_i(z)=\sum_i{\left( \tau_i\frac{d\phi_i(z)}{dt}+\phi_i(z)\frac{d\tau_i}{dt} \right)}\]</span></p>
+<p><span class="math display">\[={\left&lt; \frac{d\phi_i(z)}{dt} \right&gt;}+\sum_i\phi_i(z){\left( \tau_i{\left( \overline{\ln W_i}-{\left&lt; \overline{\ln W} \right&gt;} \right)}+\frac{m_i-\tau_iM}{\eta} \right)}\]</span></p>
+<p><span class="math display">\[={\left&lt; \frac{d\phi_i(z)}{dt} \right&gt;}+{\left&lt; \phi(z)\overline{\ln W} \right&gt;}-{\left&lt; \phi \right&gt;}(z){\left&lt; \overline{\ln W} \right&gt;}+\frac{1}{\eta}{\left( {\left&lt; m\phi(z) \right&gt;}-M{\left&lt; \tau \right&gt;} \right)}\]</span></p>
+<p><span class="math display">\[={\left&lt; \phi(z){\left( \ln W(z)-\overline{\ln W} \right)}+\frac{m(z)-\phi(z)m}{n} \right&gt;}\]</span></p>
+<p><span class="math display">\[+{\left&lt; \phi(z)\overline{\ln W} \right&gt;}-{\left&lt; \phi \right&gt;}(z){\left&lt; \overline{\ln W} \right&gt;}+\frac{1}{\eta}{\left( {\left&lt; m\phi(z) \right&gt;}-M{\left&lt; \tau \right&gt;} \right)}\]</span></p>
+<p><span class="math display">\[={\left&lt; \phi(z)\ln W(z) \right&gt;}-{\left&lt; \phi \right&gt;}(z){\left&lt; \overline{\ln W} \right&gt;}+{\left&lt; \frac{m(z)}{n} \right&gt;}-{\left&lt; \frac{\phi(z)m}{n} \right&gt;}+{\left&lt; \frac{\phi(z)m}{\eta} \right&gt;}-\frac{M}{\eta}{\left&lt; \tau \right&gt;}\]</span></p>
+</div>
+</div>
+<div id="letting-nnt" class="section level2">
+<h2>Letting <span class="math inline">\(N=N(t)\)</span></h2>
+<ul>
+<li><span class="math inline">\(N\dots\)</span> the expected number of species within the community.</li>
+<li><span class="math inline">\(\psi\dots\)</span> the speciation rate of the community</li>
+<li><span class="math inline">\(\epsilon\dots\)</span> the (local) extinction rate of the community</li>
+<li><span class="math inline">\(\omega\geq0\dots\)</span> the species-level migration rate of the community</li>
+<li><span class="math inline">\(\eta=\sum_{i=1}^\infty n_i\dots\)</span> the total expected number of individuals within the community</li>
+</ul>
+<div id="conceptual-issues" class="section level3">
+<h3>Conceptual issues</h3>
+<p>Since we’re tracking <span class="math inline">\(N\)</span> we can’t assume an infinite number of species in the community. Recall that <span class="math inline">\(n_i\)</span> represents the <strong>expected</strong> number of individuals of species <span class="math inline">\(x\)</span>. The actual number will surely be a non-negative integer. So there’s no obvious contradiction between assuming a finite number of species and yet having <span class="math inline">\(n_i&gt;0\)</span> for every <span class="math inline">\(i\)</span>.</p>
+<p>One thing we will have to assume is that <span class="math inline">\(\eta&lt;\infty\)</span> so that the sum <span class="math inline">\(\sum n_i\)</span> converges. This also requires <span class="math inline">\(M&lt;\infty\)</span>.</p>
+<p>Note that since <span class="math inline">\(i=1,2,\dots\)</span> then <span class="math inline">\(m_i&gt;0\)</span> represents rate of invasion if <span class="math inline">\(n_i=0\)</span>.</p>
+<p>We might be able to avoid a lot of this hassle if we simply track the density <span class="math inline">\(\phi(z)\)</span> of the trait <span class="math inline">\(z\)</span> for <strong>all</strong> individuals in the community. We can assume species interact with one another based only on their trait value and not on their identity as a species.</p>
+</div>
+<div id="dynamics-of-psi" class="section level3">
+<h3>Dynamics of <span class="math inline">\(\psi\)</span></h3>
+<p>For now we should set <span class="math inline">\(\psi\equiv0\)</span>.</p>
+</div>
+<div id="dynamics-of-epsilon" class="section level3">
+<h3>Dynamics of <span class="math inline">\(\epsilon\)</span></h3>
+<p>We can assume and ambient distribution of traits represented by the density <span class="math inline">\(\Phi(z)\)</span>. We can assume that invaders will have traits drawn from this distribution. The probability of invasion is merely the probability that at least one invader leaves at least one offspring. Hence, this probability and therefore the rate of invasion will depend on the fitness of the invader.</p>
+</div>
+<div id="dynamics-of-n" class="section level3">
+<h3>Dynamics of <span class="math inline">\(N\)</span></h3>
+<p><span class="math display">\[\frac{dN}{dt}=(\psi-\epsilon)N+\omega\]</span></p>
+</div>
+<div id="unweighted-average-demographic-dynamics-across-the-community-1" class="section level3">
+<h3>Unweighted average demographic dynamics across the community</h3>
+<p><span class="math display">\[\frac{d\underline n}{dt}=\frac{d}{dt}{\left( \frac{1}{N}\eta \right)}\]</span></p>
+<p><span class="math display">\[=\frac{1}{N^2}{\left( N{\left( \eta{\left&lt; \overline{\ln W} \right&gt;}+M \right)}-\eta{\left( (\psi-\epsilon)N+\omega \right)} \right)}\]</span></p>
+<p><span class="math display">\[=\underline n{\left&lt; \overline{\ln W} \right&gt;}+\underline m-\eta{\left( \frac{\psi-\epsilon}{N}+\frac{\omega}{N^2} \right)}\]</span></p>
+<p>No assumptions have been made about the mode of interaction between individuals. Then why should extinction increase the growth of the number of individuals while speciation and immigration reduces it? Note that as the number <span class="math inline">\(N\)</span> increases <span class="math inline">\(\underline n\)</span> will decrease assuming the <span class="math inline">\(n_i\)</span> remain constant. This accounts for what seemed pathological.</p>
+</div>
+<div id="weighted-average-demographic-dynamics-across-the-community-1" class="section level3">
+<h3>Weighted average demographic dynamics across the community</h3>
+<p><span class="math display">\[\frac{d{\left&lt; n \right&gt;}}{dt}=\frac{d}{dt}\sum_i\tau_in_i=\sum_i{\left( \tau_i\frac{dn_i}{dt}+n_i\frac{d\tau_i}{dt} \right)}\]</span></p>
+<p>It appears this quantity will remain unchanged.</p>
+</div>
+</div>
+<div id="interaction-distributions" class="section level2">
+<h2>Interaction distributions</h2>
+<div id="assumptions" class="section level3">
+<h3>Assumptions</h3>
+<ul>
+<li><strong>Unstructured community</strong>:
+<ul>
+<li>Every interaction is mediated through the same pair of traits.</li>
+<li>There are no guilds.</li>
+</ul></li>
+</ul>
+</div>
+<div id="the-approach" class="section level3">
+<h3>The approach</h3>
+<p>Let’s focus on the trait-based approach. Assuming individuals with trait <span class="math inline">\(x\)</span> have the interaction distribution (or distribution of preference)</p>
+<p><span class="math display">\[\iota(x,z)=\frac{1}{\sqrt{2\pi o^2}}\exp{\left( -\frac{(x-z-\kappa)^2}{2o^2} \right)}\]</span></p>
+<p>we have a the normally distributed random variable <span class="math inline">\(Z_x\sim\mathcal{N}(x-\kappa,o^2)\)</span> that models the value of the trait with which this individual prefers to interact. We can assume everyone interacts with a Poisson distributed number of iid individuals. The fitness outcome for each interaction can be captured with</p>
+<p><span class="math display">\[W_B(x,z)=\frac{C}{\sqrt{2\pi\beta^2}}\exp{\left( -\frac{(x-z-\delta)^2}{2\beta^2} \right)}.\]</span></p>
+<p>We can take this a step further and assume the <span class="math inline">\(\kappa\)</span>, <span class="math inline">\(\delta\)</span>, <span class="math inline">\(o\)</span>, <span class="math inline">\(\beta^2\)</span>, and <span class="math inline">\(C\)</span> are random variables to capture the effects of individual variability. However, assuming <span class="math inline">\(\kappa\)</span> and <span class="math inline">\(\delta\)</span> to be normally distributed around <span class="math inline">\(\bar\kappa\)</span> and <span class="math inline">\(\bar\delta\)</span> will not change the forms of the resulting expressions for the interaction distribution and the fitness function. They will just have increased variance. So I’ll assume the <span class="math inline">\(\kappa\)</span> and <span class="math inline">\(\delta\)</span> are constant. Of course, relaxing these assumptions will allow us to investigate the evolution of the interaction distribution and fitness function. But for simplicity I will at first ignore these tantalizing venues.</p>
+<p>Each interaction has an effect on the fitness of an individual. For an individual with phenotype <span class="math inline">\(x\)</span> that interacts with <span class="math inline">\(K\)</span> individuals with phenotypes <span class="math inline">\(z_1,z_2,\dots,z_K\)</span>, we can define fitness for <span class="math inline">\(x\)</span> to be</p>
+<p><span class="math display">\[W(x|z_1,\dots,z_K)\equiv\prod_{i=1}^{K}W(x|z_i).\]</span></p>
+<p>If <span class="math inline">\(K=0\)</span> then the product is empty and by convention takes the value 1. This makes perfect sense when realizing that multiplying any number by 1 has no effect. We can now plug in the form of fitness suggested above to get</p>
+<p><span class="math display">\[W(x|z_1,\dots,z_K)={\left( \frac{C}{\sqrt{2\pi\beta^2}} \right)}^K\exp{\left( -\sum_{i=1}^{K}\frac{(z_i+\delta-x)^2}{2\beta^2} \right)}.\]</span></p>
+<p>Before we move further to calculate the mean fitness for an individual with trait <span class="math inline">\(x\)</span>, let’s work out including the interaction distribution for one interaction. Above we have the traits <span class="math inline">\(z_1,\dots,z_K\)</span> written as a given. However, the value those traits take will depend on their distribution as well as the distribution of preference for the individual with trait <span class="math inline">\(x\)</span>. Taking guidance from universal Darwinism and the Bayesian update algorithm in particular, we can find the distribution of <span class="math inline">\(Z_x\)</span>, the random variable capturing the trait value encountered by an individual with trait <span class="math inline">\(x\)</span> after incorporating both the distribution of the trait in the community and interaction distribution of the trait <span class="math inline">\(x\)</span>. This new distribution, denoted <span class="math inline">\(\tilde\phi\)</span>, is calculated as</p>
+<p><span class="math display">\[\tilde\phi(z)=\frac{\iota(x,z)\phi(z)}{\int\iota(x,y)\phi(y)dy}=\star.\]</span></p>
+<p>Assuming</p>
+<p><span class="math display">\[\phi(z)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp{\left( -\frac{(\bar z-z)^2}{2\sigma^2} \right)},\]</span></p>
+<p>then</p>
+<p><span class="math display">\[\star=\frac{1}{\sqrt{2\pi\tilde\sigma^2}}\exp{\left( -\frac{(z-\tilde z)^2}{2\tilde\sigma^2} \right)}\]</span></p>
+<p>with</p>
+<p><span class="math display">\[\tilde z=\frac{o^2\bar z+\sigma^2(x-\kappa)}{o^2+\sigma^2}, \ \sigma^2=\frac{o^2\sigma^2}{o^2+\sigma^2}.\]</span></p>
+<p>Given <span class="math inline">\(\eta\)</span> total individuals in the community, we can suppose <span class="math inline">\(K\sim\mathrm{Bin}(\eta,p)\)</span>.</p>
+<p>We can calculate the expected fitness for an individual with phenotype <span class="math inline">\(x\)</span> given that it interacts with <span class="math inline">\(K\)</span> individuals as</p>
+<p><span class="math display">\[W(x|K)=\int_{\mathbb{R}}\cdots\int_{\mathbb{R}}W_1(x|z_1,\dots,z_K)\phi(z_1)\cdots\phi(z_K)dz_1\cdots dz_K\]</span></p>
+<p><span class="math display">\[={\left( \int_{\mathbb{R}}W(x|z)\phi(z)dz \right)}^K={\left( \frac{C}{\sqrt{2\pi(\beta^2+\sigma^2)}} \right)}^K\exp{\left( -K\frac{(\bar z-x)^2}{2(\beta^2+\sigma^2)} \right)}.\]</span></p>
+<p>Finally, to get the total expected fitness <span class="math inline">\(W(x)\)</span>, we average over all possible values of <span class="math inline">\(K\)</span>. However, since each component of fitness multiplies together to produce the total fitness, we shouldn’t take an arithmetic average, we should take a geometric average. Doing so provides the following result</p>
+<p><span class="math display">\[W(x)=\prod_{i=0}^\eta W(x|K=i)^{P(K=i)}={\left( \frac{C}{\sqrt{2\pi(\beta^2+\sigma^2)}} \right)}^{p\eta}\exp{\left( -p\eta\frac{(\bar z-x)^2}{2(\beta^2+\sigma^2)} \right)}.\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[{\left&lt; W \right&gt;}={\left( \frac{C}{\sqrt{2\pi(\beta^2+2\sigma^2)}} \right)}^{p\eta}\exp{\left( -p\eta\frac{(\bar z-x)^2}{2(\beta^2+\sigma^2)} \right)}\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\ln W(x)=\sum_{i=0}^{N_{2,t}}P(K_1=i)\ln W_1(x|K_1=i)=p_1N_{2,t}{\left( \ln W_{1,max}-\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}\]</span></p>
+<p><span class="math display">\[\dots\]</span></p>
+<p><span class="math display">\[\frac{d\bar x_t}{dt}=\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^2(\bar y_t-\bar x_t) \ \text{and} \
+\frac{d\sigma_{1,t}^2}{dt}=-\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^4\]</span></p>
+<p><span class="math display">\[\frac{dN_{1,t}}{dt}=\overline{\ln W_t}N_{1,t}=p_1{\left( \ln W_{1,max}-\frac{(\bar y_t-\bar x_t)^2+\sigma_{1,t}^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}N_{2,t}N_{1,t}\]</span></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

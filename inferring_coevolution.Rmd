@@ -56,7 +56,7 @@ opt.off.fly.model <-
 # plotting the results
 library(ggplot2)
 ggplot(offset.data,aes(x=TONGUE.TUBE,y=PERCENT_NECTAR_CONSUMED))+
-  geom_point()+stat_smooth(method = lm, formula=y~poly(x,2))
+  geom_point()+stat_smooth(method = lm, formula=y~poly(x,2))+xlab("Tongue-Tube(mm)")+ylab("Percent Nectar Consumed")
 ```
 
 We can now use algebra to solve for the peak of the above parabola, or solve for it numerically as shown below.
@@ -86,7 +86,7 @@ opt.off.flower.model <-
 # plotting the results
 library(ggplot2)
 ggplot(offset.data,aes(x=TONGUE.TUBE,y=POLLEN_GRAINS_DEPOSITED))+
-  geom_point()+stat_smooth(method = lm, formula=y~poly(x,2))
+  geom_point()+stat_smooth(method = lm, formula=y~poly(x,2))+xlab("Tongue-Tube(mm)")+ylab("Pollen Grains Deposited")
 ```
 
 ```{r, include=F}
