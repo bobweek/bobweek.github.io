@@ -80,17 +80,17 @@ Using the above results we can derive dynamics for these quantities as follows
 
 $$\frac{d\bar z_t}{dt}=\frac{d}{dt}\int_\R z\phi_t(z)dz=\int_\R z\frac{d}{dt}\phi_t(z)dz=\int_\R z(\ln W_t(z)-\overline{\ln W_t})\phi_t(z)dz$$
 
-$$=\overline{z\ln W_t(z)}-\bar z\overline{\ln W_t}=\Cov(z,\ln W_t)$$
+$$=\overline{z\ln W_t(z)}-\bar z\overline{\ln W_t}=\boxed{\Cov(z,\ln W_t)}$$
 
 $$\frac{d\sigma_t^2}{dt}=\frac{d}{dt}\int_\R (\bar z_t-z)^2\phi_t(z)dz=\int_\R 2(\bar z_t-z)\phi_t(z)\frac{d\bar z_t}{dt}+(\bar z_t-z)^2\frac{d\phi_t(z)}{dt}dz$$
 
 $$=\int_\R(\bar z_t-z)^2(\ln W_t(z)-\overline{\ln W_t})\phi_t(i)dz=\overline{(\bar z_t-z)^2\ln W_t(z)}-\overline{(\bar z_t-z)^2}\overline{\ln W_t}$$
 
-$$=\Cov((\bar z_t-z)^2,\ln W_t)$$
+$$=\boxed{\Cov((\bar z_t-z)^2,\ln W_t)}$$
 
 #### Discrete Time
 
-$$\Delta\bar z_t=\bar z_{t+1}-\bar z_t=\int_\R z\phi_{t+1}(z)dz-\int_\R z\phi_t(z)dz=\int_\R z\para{\frac{W_t(z)}{\overline{W}_t}-1}\phi_t(z)dz=\frac{1}{\overline {W}_t}\Cov(z,W_t)$$
+$$\Delta\bar z_t=\bar z_{t+1}-\bar z_t=\int_\R z\phi_{t+1}(z)dz-\int_\R z\phi_t(z)dz=\int_\R z\para{\frac{W_t(z)}{\overline{W}_t}-1}\phi_t(z)dz=\boxed{\frac{1}{\overline {W}_t}\Cov(z,W_t)}$$
 
 $$\Delta\sigma_t^2=\sigma^2_{t+1}-\sigma^2_t=\int_\R (z-\bar z_{t+1})^2\phi_{t+1}(z)dz-\int_\R (z-\bar z_t)^2\phi_t(z)dz=\int_\R \para{(z-\bar z_{t+1})^2\frac{W_t(z)}{\overline{W}}-(z-\bar z_t)^2}\phi_t(z)dz=$$
 
@@ -104,7 +104,7 @@ $$\star=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\Delta
 
 $$=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\Delta\bar z_t\para{\frac{\Cov(z,W_t)+\bar z_t\overline{W}_t}{\overline{W_t}}-\bar z_t}$$
 
-$$=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)-(\Delta\bar z_t)^2$$
+$$=\boxed{\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)-(\Delta\bar z_t)^2}$$
 
 Something to pay attention to in all of the above results is that they each depended on knowing how $\phi_t(i)$ changes. Here we only consider the effects of deterministic selection, but of course there are many other processes that can cause change in $\phi_t(i)$.
 
@@ -153,7 +153,7 @@ Hence, with just random mating $\Delta\mu=0$ and $\Delta\sigma^2=-\frac{\sigma^2
 
 The key here is to define assortative mating as a positive correlation between the types of mating pairs. We might jump to disassortative mating as a negative correlation between the types of mating pairs but this is not quite right. If mating pairs are negatively correlated, then when the phenotype of one member of the pair tends to be large, the phenotype of the other member tends to be small. So this is a restricted notion of disassortative mating. I'll attempt to work out a more general picture of disassortative mating in the next section. For now, instead of referring to the situation of negative correlation disassortative mating, I'll refer to it as negative mating. I'll use $\rho$ to denote the correlation between types of mating pairs.
 
-Let $X$ and $Y$ denote the phenotypes of a randomly chosen mating pair. I'll write $\bar z$ as the mean phenotype of their distribution and $\sigma^2$ for the phenotypic variance. If we assume it's offspring $Z$ is the midparent then $Z=\frac{X+Y}{2}$. Then the mean of offpsring population will be $\E(Z)=\frac{1}{2}(\E(X)+\E(Y))=\bar z$. Hence, this model of mating does not perturb the mean phenotype. However 
+Let $X$ and $Y$ denote the phenotypes of a randomly chosen mating pair. I'll write $\bar z$ as the mean phenotype of their distribution and $\sigma^2$ for the phenotypic variance. If we assume it's offspring $Z$ is the midparent then $Z=\frac{X+Y}{2}$. The mean of the offpsring population will be $\E(Z)=\frac{1}{2}(\E(X)+\E(Y))=\bar z$. Hence, this model of mating does not perturb the mean phenotype. However 
 
 $$\Var(Z)=\frac{1}{4}\para{\Var(X)+\Var(Y)+2\Cov(X,Y)}=\frac{1}{2}\para{\sigma^2+\Cov(X,Y)}$$
 
@@ -175,7 +175,7 @@ Solving for $\nu^2$ provides
 
 $$\frac{2}{1+\rho}=1+\frac{\nu^2}{\sigma^2}\implies\frac{1-\rho}{1+\rho}\sigma^2=\nu^2.$$
 
-The continuous time version of the above Bayesian update is
+The continuous time version of the above Bayesian update is the replicator equation;
 
 $$\frac{d\phi_t}{d t}=\phi_t(\ln\psi_t-\overline{\ln\psi_t}).$$
 
@@ -205,6 +205,8 @@ I've been assuming these populations are hermaphroditic. Would about a two-sex s
 A little excerpt from [Warren J. Ewens](http://www.springer.com/us/book/9780387201917):
 
 "It is the the 'quantal' nature of the gene that leads to the stability behavior described by the Hardy-Weinberg law. It is thus interesting that the year in which the Mendelia theory was rediscovered, 1900, was the same year as the introduction of the quantum theory in physics. Both theories have been fundamental and crucial in their respective spheres. One can even claim that if there is intelligent life, that is, life that has evolved via natural selection, elsewhere in the universe, the hereditary mechanism involved must be a quantal, maybe a Mendelian, one, since otherwise it is not clear how the variation necessary for evolution by natural selection can be maintained."
+
+From this very insightful quote we see one enormous gap in the thoery developed here; it lacks a mechanism of particulate inheritance. In fact, the engine driving the result of reproduction here is blending inheritance. However, it is widely known that the combination of blending inheritance and random mating reduces the variance of a population far too quickly.
 
 <!--
 

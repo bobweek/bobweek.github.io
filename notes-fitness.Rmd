@@ -244,3 +244,6 @@ plv <- ggplot(dv,aes(x=t,y=vN))+geom_point()+ylab("var(N)")+geom_abline(slope=30
 require(gridExtra)
 grid.arrange(plm,plv,ncol=2)
 ```
+
+## Derivation from the birth-death framework
+

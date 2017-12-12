@@ -2,7 +2,7 @@
 title: "The general framework"
 output: 
   html_document: 
-    toc: false
+    toc: true
     toc_float: true
     theme: cosmo
     css: style.css
@@ -26,6 +26,12 @@ knitr::opts_chunk$set(echo = TRUE)
 \newcommand{\PF}{\mathrm{Proof:}}
 \newcommand{\CLAIM}{\mathrm{Claim:}}
 \newcommand{\DEF}{\mathrm{Def:}}
+
+Here I derive some general results for the dynamics of demography and evolution in ecological communities.
+
+# Taxanomically structured communities
+
+I start by exploring the dynamics of parameters describing the distribution of population size and trait distribution of species across the community. This approach is to be contrasted with the approach taken by ignoring species identity and focusing strictly on the distribution of traits of all individuals throughout the community.
 
 ## Notation
 
@@ -173,21 +179,23 @@ $$\frac{d\cav n}{dt}=\frac{d}{dt}\sum_i\tau_in_i=\sum_i\para{\tau_i\frac{dn_i}{d
 
 It appears this quantity will remain unchanged.
 
-## Interaction distributions
+# Functionally structured communities
 
-### Assumptions
+Here I ignore the identity of species and focus on the evolution of the distribution of traits across all individuals within the community. First I focus on the absence of functional structure by which I mean a single intra-interactive set of individuals. I will then develop the analogous results for a pair of interacting guilds.
 
-  * __Unstructured community__: 
-      + Every interaction is mediated through the same pair of traits.
-      + There are no guilds.
+## Single guild
 
-### The approach
+### Primary assumptions
 
-Let's focus on the trait-based approach. Assuming individuals with trait $x$ have the interaction distribution (or distribution of preference)
+  * Every individual has the same trait and interactions are mediated entirely through the values of these pairs of traits.
 
-$$\iota(x,z)=\frac{1}{\sqrt{2\pi o^2}}\exp\para{-\frac{(x-z-\kappa)^2}{2o^2}}$$
+### The Derivation
 
-we have a the normally distributed random variable $Z_x\sim\mathcal{N}(x-\kappa,o^2)$ that models the value of the trait with which this individual prefers to interact. We can assume everyone interacts with a Poisson distributed number of iid individuals. The fitness outcome for each interaction can be captured with 
+Assuming individuals with trait $x$ have the interaction distribution (or distribution of preference)
+
+$$\iota(x,z)=\frac{1}{\sqrt{2\pi o^2}}\exp\para{-\frac{(\kappa-z)^2}{2o^2}}$$
+
+we have a the normally distributed random variable $Z\sim\mathcal{N}(\kappa,o^2)$ that models the value of the trait with which this individual prefers to interact. We can assume everyone interacts with a random number of iid individuals. The fitness outcome for each interaction can be captured with 
 
 $$W_B(x,z)=\frac{C}{\sqrt{2\pi\beta^2}}\exp\para{-\frac{(x-z-\delta)^2}{2\beta^2}}.$$
 
@@ -215,32 +223,59 @@ $$\star=\frac{1}{\sqrt{2\pi\tilde\sigma^2}}\exp\para{-\frac{(z-\tilde z)^2}{2\ti
 
 with
 
-$$\tilde z=\frac{o^2\bar z+\sigma^2(x-\kappa)}{o^2+\sigma^2}, \ \sigma^2=\frac{o^2\sigma^2}{o^2+\sigma^2}.$$
+$$\tilde z=\frac{o^2\bar z+\sigma^2\kappa}{o^2+\sigma^2}, \ \sigma^2=\frac{o^2\sigma^2}{o^2+\sigma^2}.$$
 
 
-Given $\eta$ total individuals in the community, we can suppose $K\sim\mathrm{Bin}(\eta,p)$.
+Given $\eta$ total individuals in the community, we can suppose $K\sim\mathrm{Bin}(\eta,p)$, with $p$ representing the proportion of the individuals in the community interacted with. We can calculate the expected fitness for an individual with phenotype $x$ given that it interacts with $K$ individuals as
 
-We can calculate the expected fitness for an individual with phenotype $x$ given that it interacts with $K$ individuals as
+$$W(x|K)=\int_\R\cdots\int_\R W_1(x|z_1,\dots,z_K)\tilde\phi(z_1)\cdots\tilde\phi(z_K)dz_1\cdots dz_K$$
 
-$$W(x|K)=\int_\R\cdots\int_\R W_1(x|z_1,\dots,z_K)\phi(z_1)\cdots\phi(z_K)dz_1\cdots dz_K$$
-
-$$=\para{\int_\R W(x|z)\phi(z)dz}^K=\para{\frac{C}{\sqrt{2\pi(\beta^2+\sigma^2)}}}^K\exp\para{-K\frac{(\bar z-x)^2}{2(\beta^2+\sigma^2)}}.$$
+$$=\para{\int_\R W(x|z)\tilde\phi(z)dz}^K=\para{\frac{C}{\sqrt{2\pi(\beta^2+\tilde\sigma^2)}}}^K\exp\para{-K\frac{(\tilde z+\delta-x)^2}{2(\beta^2+\tilde\sigma^2)}}.$$
 
 Finally, to get the total expected fitness $W(x)$, we average over all possible values of $K$. However, since each component of fitness multiplies together to produce the total fitness, we shouldn't take an arithmetic average, we should take a geometric average. Doing so provides the following result
 
-$$W(x)=\prod_{i=0}^\eta W(x|K=i)^{P(K=i)}=\para{\frac{C}{\sqrt{2\pi(\beta^2+\sigma^2)}}}^{p\eta}\exp\para{-p\eta\frac{(\bar z-x)^2}{2(\beta^2+\sigma^2)}}.$$
+$$W(x)=\prod_{i=0}^\eta W(x|K=i)^{P(K=i)}=\para{\frac{C}{\sqrt{2\pi(\beta^2+\tilde\sigma^2)}}}^{p\eta}\exp\para{-p\eta\frac{(\tilde z+\delta-x)^2}{2(\beta^2+\tilde\sigma^2)}}$$
 
-Then
 
-$$\cav{W}=\para{\frac{C}{\sqrt{2\pi(\beta^2+2\sigma^2)}}}^{p\eta}\exp\para{-p\eta\frac{(\bar z-x)^2}{2(\beta^2+\sigma^2)}}$$
+Then the mean fitness across individuals within the community (that is, ignoring the taxanomic structure of the community) is
 
-and
+$$\mathfrak{W}\equiv\int W(x)\phi(x)dx$$
 
-$$\ln W(x)=\sum_{i=0}^{N_{2,t}}P(K_1=i)\ln W_1(x|K_1=i)=p_1N_{2,t}\para{\ln W_{1,max}-\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)}}$$
+$$=\para{\frac{C}{\sqrt{2\pi(\beta^2+\tilde\sigma^2)}}}^{p\eta}\sqrt{\frac{2\pi\frac{\beta^2+\tilde\sigma^2}{p\eta}}{2\pi\para{\frac{\beta^2+\tilde\sigma^2}{p\eta}+\sigma^2}}}\exp\para{-\frac{(\tilde z+\delta-\bar z)^2}{2\para{\frac{\beta^2+\tilde\sigma^2}{p\eta}+\sigma^2}}}$$
 
-$$\dots$$
+Similarly
 
-$$\frac{d\bar x_t}{dt}=\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^2(\bar y_t-\bar x_t) \ \text{and} \
-\frac{d\sigma_{1,t}^2}{dt}=-\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^4$$
+$$\mathfrak{L}(W)\equiv\int\ln W(x)\phi(x)dx=p\eta\ln\para{\frac{C}{\sqrt{2\pi(\beta^2+\tilde\sigma^2)}}}
+-p\eta\frac{(\tilde z+\delta+\bar z)^2+\sigma^2}{2(\beta^2+\tilde\sigma^2)}.$$
 
-$$\frac{dN_{1,t}}{dt}=\overline{\ln W_t}N_{1,t}=p_1\para{\ln W_{1,max}-\frac{(\bar y_t-\bar x_t)^2+\sigma_{1,t}^2}{2(\omega_1^2+\sigma_{2,t}^2)}}N_{2,t}N_{1,t}$$
+Assuming perfect heritability and clonal reproduction,
+
+$$\frac{d\bar z}{dt}=p\eta\frac{\sigma^2}{\beta^2+\tilde\sigma^2}(\tilde z+\delta-\bar z)\para{1-\frac{o^2}{o^2+\sigma^2}}$$
+
+$$=p\eta\frac{\sigma^2}{\beta^2+\tilde\sigma^2}\frac{\sigma^2}{o^2+\sigma^2}(\tilde z+\delta-\bar z)$$
+
+$$=p\eta\frac{\sigma^2}{\beta^2+\tilde\sigma^2}\frac{\sigma^2}{o^2+\sigma^2}\para{\delta+\frac{\sigma^2}{o^2+\sigma^2}(\kappa-\bar z)}$$
+
+If we assume $\beta^2,o^2\gg1$ so that $\beta^2+\sigma^2\approx\beta^2$ and $o^2+\sigma^2\approx o^2$, then
+
+$$\frac{d\bar z}{dt}\approx p\eta\frac{\sigma^4}{\beta^2o^2}\para{\delta+\frac{\sigma^2}{o^2}(\kappa-\bar z)}$$
+
+This assumption implies selection and preference are both weak. Ignoring the evolution of $\sigma^2$ we can define the strength of biotic selection as
+
+$$B\equiv\frac{\sigma^2}{\beta^2}\geq0$$
+
+and specialization as
+
+$$\psi\equiv\frac{\sigma^2}{o^2}\geq0.$$
+
+The above dynamics of the mean trait then simplify to
+
+$$\frac{d\bar z}{dt}\approx p\eta\psi B\para{\delta+\psi(\kappa-\bar z)}.$$
+
+This model can provide insight into why the mean trait of entire communities differ from one location to another. At equilibrium we have
+
+$$\bar z^*=\frac{\delta}{\psi}+\kappa.$$
+
+Then if $\bar z$ differs from one place to another, assuming all of the above, these differences would have to be accounted for by differences in the specialization ($\psi$), the optimal offset ($\delta$) and the preferred phenotype ($\kappa$).
+
+This model also sets the stage for investigating the evolution of $\psi$, $\kappa$ and $\delta$ and also for incorporating demographic dynamics through $\eta$ and the evolution of $p$ which represents the proportion of individuals interacted with.

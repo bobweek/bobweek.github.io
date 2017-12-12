@@ -303,6 +303,10 @@ div.tocify {
 </div>
 
 
+<p>Here I derive some general results for the dynamics of demography and evolution in ecological communities.</p>
+<div id="taxanomically-structured-communities" class="section level1">
+<h1>Taxanomically structured communities</h1>
+<p>I start by exploring the dynamics of parameters describing the distribution of population size and trait distribution of species across the community. This approach is to be contrasted with the approach taken by ignoring species identity and focusing strictly on the distribution of traits of all individuals throughout the community.</p>
 <div id="notation" class="section level2">
 <h2>Notation</h2>
 <ul>
@@ -425,23 +429,23 @@ div.tocify {
 <p>It appears this quantity will remain unchanged.</p>
 </div>
 </div>
-<div id="interaction-distributions" class="section level2">
-<h2>Interaction distributions</h2>
-<div id="assumptions" class="section level3">
-<h3>Assumptions</h3>
+</div>
+<div id="functionally-structured-communities" class="section level1">
+<h1>Functionally structured communities</h1>
+<p>Here I ignore the identity of species and focus on the evolution of the distribution of traits across all individuals within the community. First I focus on the absence of functional structure by which I mean a single intra-interactive set of individuals. I will then develop the analogous results for a pair of interacting guilds.</p>
+<div id="single-guild" class="section level2">
+<h2>Single guild</h2>
+<div id="primary-assumptions" class="section level3">
+<h3>Primary assumptions</h3>
 <ul>
-<li><strong>Unstructured community</strong>:
-<ul>
-<li>Every interaction is mediated through the same pair of traits.</li>
-<li>There are no guilds.</li>
-</ul></li>
+<li>Every individual has the same trait and interactions are mediated entirely through the values of these pairs of traits.</li>
 </ul>
 </div>
-<div id="the-approach" class="section level3">
-<h3>The approach</h3>
-<p>Let’s focus on the trait-based approach. Assuming individuals with trait <span class="math inline">\(x\)</span> have the interaction distribution (or distribution of preference)</p>
-<p><span class="math display">\[\iota(x,z)=\frac{1}{\sqrt{2\pi o^2}}\exp{\left( -\frac{(x-z-\kappa)^2}{2o^2} \right)}\]</span></p>
-<p>we have a the normally distributed random variable <span class="math inline">\(Z_x\sim\mathcal{N}(x-\kappa,o^2)\)</span> that models the value of the trait with which this individual prefers to interact. We can assume everyone interacts with a Poisson distributed number of iid individuals. The fitness outcome for each interaction can be captured with</p>
+<div id="the-derivation" class="section level3">
+<h3>The Derivation</h3>
+<p>Assuming individuals with trait <span class="math inline">\(x\)</span> have the interaction distribution (or distribution of preference)</p>
+<p><span class="math display">\[\iota(x,z)=\frac{1}{\sqrt{2\pi o^2}}\exp{\left( -\frac{(\kappa-z)^2}{2o^2} \right)}\]</span></p>
+<p>we have a the normally distributed random variable <span class="math inline">\(Z\sim\mathcal{N}(\kappa,o^2)\)</span> that models the value of the trait with which this individual prefers to interact. We can assume everyone interacts with a random number of iid individuals. The fitness outcome for each interaction can be captured with</p>
 <p><span class="math display">\[W_B(x,z)=\frac{C}{\sqrt{2\pi\beta^2}}\exp{\left( -\frac{(x-z-\delta)^2}{2\beta^2} \right)}.\]</span></p>
 <p>We can take this a step further and assume the <span class="math inline">\(\kappa\)</span>, <span class="math inline">\(\delta\)</span>, <span class="math inline">\(o\)</span>, <span class="math inline">\(\beta^2\)</span>, and <span class="math inline">\(C\)</span> are random variables to capture the effects of individual variability. However, assuming <span class="math inline">\(\kappa\)</span> and <span class="math inline">\(\delta\)</span> to be normally distributed around <span class="math inline">\(\bar\kappa\)</span> and <span class="math inline">\(\bar\delta\)</span> will not change the forms of the resulting expressions for the interaction distribution and the fitness function. They will just have increased variance. So I’ll assume the <span class="math inline">\(\kappa\)</span> and <span class="math inline">\(\delta\)</span> are constant. Of course, relaxing these assumptions will allow us to investigate the evolution of the interaction distribution and fitness function. But for simplicity I will at first ignore these tantalizing venues.</p>
 <p>Each interaction has an effect on the fitness of an individual. For an individual with phenotype <span class="math inline">\(x\)</span> that interacts with <span class="math inline">\(K\)</span> individuals with phenotypes <span class="math inline">\(z_1,z_2,\dots,z_K\)</span>, we can define fitness for <span class="math inline">\(x\)</span> to be</p>
@@ -455,21 +459,35 @@ div.tocify {
 <p>then</p>
 <p><span class="math display">\[\star=\frac{1}{\sqrt{2\pi\tilde\sigma^2}}\exp{\left( -\frac{(z-\tilde z)^2}{2\tilde\sigma^2} \right)}\]</span></p>
 <p>with</p>
-<p><span class="math display">\[\tilde z=\frac{o^2\bar z+\sigma^2(x-\kappa)}{o^2+\sigma^2}, \ \sigma^2=\frac{o^2\sigma^2}{o^2+\sigma^2}.\]</span></p>
-<p>Given <span class="math inline">\(\eta\)</span> total individuals in the community, we can suppose <span class="math inline">\(K\sim\mathrm{Bin}(\eta,p)\)</span>.</p>
-<p>We can calculate the expected fitness for an individual with phenotype <span class="math inline">\(x\)</span> given that it interacts with <span class="math inline">\(K\)</span> individuals as</p>
-<p><span class="math display">\[W(x|K)=\int_{\mathbb{R}}\cdots\int_{\mathbb{R}}W_1(x|z_1,\dots,z_K)\phi(z_1)\cdots\phi(z_K)dz_1\cdots dz_K\]</span></p>
-<p><span class="math display">\[={\left( \int_{\mathbb{R}}W(x|z)\phi(z)dz \right)}^K={\left( \frac{C}{\sqrt{2\pi(\beta^2+\sigma^2)}} \right)}^K\exp{\left( -K\frac{(\bar z-x)^2}{2(\beta^2+\sigma^2)} \right)}.\]</span></p>
+<p><span class="math display">\[\tilde z=\frac{o^2\bar z+\sigma^2\kappa}{o^2+\sigma^2}, \ \sigma^2=\frac{o^2\sigma^2}{o^2+\sigma^2}.\]</span></p>
+<p>Given <span class="math inline">\(\eta\)</span> total individuals in the community, we can suppose <span class="math inline">\(K\sim\mathrm{Bin}(\eta,p)\)</span>, with <span class="math inline">\(p\)</span> representing the proportion of the individuals in the community interacted with. We can calculate the expected fitness for an individual with phenotype <span class="math inline">\(x\)</span> given that it interacts with <span class="math inline">\(K\)</span> individuals as</p>
+<p><span class="math display">\[W(x|K)=\int_{\mathbb{R}}\cdots\int_{\mathbb{R}}W_1(x|z_1,\dots,z_K)\tilde\phi(z_1)\cdots\tilde\phi(z_K)dz_1\cdots dz_K\]</span></p>
+<p><span class="math display">\[={\left( \int_{\mathbb{R}}W(x|z)\tilde\phi(z)dz \right)}^K={\left( \frac{C}{\sqrt{2\pi(\beta^2+\tilde\sigma^2)}} \right)}^K\exp{\left( -K\frac{(\tilde z+\delta-x)^2}{2(\beta^2+\tilde\sigma^2)} \right)}.\]</span></p>
 <p>Finally, to get the total expected fitness <span class="math inline">\(W(x)\)</span>, we average over all possible values of <span class="math inline">\(K\)</span>. However, since each component of fitness multiplies together to produce the total fitness, we shouldn’t take an arithmetic average, we should take a geometric average. Doing so provides the following result</p>
-<p><span class="math display">\[W(x)=\prod_{i=0}^\eta W(x|K=i)^{P(K=i)}={\left( \frac{C}{\sqrt{2\pi(\beta^2+\sigma^2)}} \right)}^{p\eta}\exp{\left( -p\eta\frac{(\bar z-x)^2}{2(\beta^2+\sigma^2)} \right)}.\]</span></p>
-<p>Then</p>
-<p><span class="math display">\[{\left&lt; W \right&gt;}={\left( \frac{C}{\sqrt{2\pi(\beta^2+2\sigma^2)}} \right)}^{p\eta}\exp{\left( -p\eta\frac{(\bar z-x)^2}{2(\beta^2+\sigma^2)} \right)}\]</span></p>
-<p>and</p>
-<p><span class="math display">\[\ln W(x)=\sum_{i=0}^{N_{2,t}}P(K_1=i)\ln W_1(x|K_1=i)=p_1N_{2,t}{\left( \ln W_{1,max}-\frac{(\bar y_t-x)^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}\]</span></p>
-<p><span class="math display">\[\dots\]</span></p>
-<p><span class="math display">\[\frac{d\bar x_t}{dt}=\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^2(\bar y_t-\bar x_t) \ \text{and} \
-\frac{d\sigma_{1,t}^2}{dt}=-\frac{p_1N_{2,t}}{\omega_1^2+\sigma_{2,t}^2}\sigma_{1,t}^4\]</span></p>
-<p><span class="math display">\[\frac{dN_{1,t}}{dt}=\overline{\ln W_t}N_{1,t}=p_1{\left( \ln W_{1,max}-\frac{(\bar y_t-\bar x_t)^2+\sigma_{1,t}^2}{2(\omega_1^2+\sigma_{2,t}^2)} \right)}N_{2,t}N_{1,t}\]</span></p>
+<p><span class="math display">\[W(x)=\prod_{i=0}^\eta W(x|K=i)^{P(K=i)}={\left( \frac{C}{\sqrt{2\pi(\beta^2+\tilde\sigma^2)}} \right)}^{p\eta}\exp{\left( -p\eta\frac{(\tilde z+\delta-x)^2}{2(\beta^2+\tilde\sigma^2)} \right)}\]</span></p>
+<p>Then the mean fitness across individuals within the community (that is, ignoring the taxanomic structure of the community) is</p>
+<p><span class="math display">\[\mathfrak{W}\equiv\int W(x)\phi(x)dx\]</span></p>
+<p><span class="math display">\[={\left( \frac{C}{\sqrt{2\pi(\beta^2+\tilde\sigma^2)}} \right)}^{p\eta}\sqrt{\frac{2\pi\frac{\beta^2+\tilde\sigma^2}{p\eta}}{2\pi{\left( \frac{\beta^2+\tilde\sigma^2}{p\eta}+\sigma^2 \right)}}}\exp{\left( -\frac{(\tilde z+\delta-\bar z)^2}{2{\left( \frac{\beta^2+\tilde\sigma^2}{p\eta}+\sigma^2 \right)}} \right)}\]</span></p>
+<p>Similarly</p>
+<p><span class="math display">\[\mathfrak{L}(W)\equiv\int\ln W(x)\phi(x)dx=p\eta\ln{\left( \frac{C}{\sqrt{2\pi(\beta^2+\tilde\sigma^2)}} \right)}
+-p\eta\frac{(\tilde z+\delta+\bar z)^2+\sigma^2}{2(\beta^2+\tilde\sigma^2)}.\]</span></p>
+<p>Assuming perfect heritability and clonal reproduction,</p>
+<p><span class="math display">\[\frac{d\bar z}{dt}=p\eta\frac{\sigma^2}{\beta^2+\tilde\sigma^2}(\tilde z+\delta-\bar z){\left( 1-\frac{o^2}{o^2+\sigma^2} \right)}\]</span></p>
+<p><span class="math display">\[=p\eta\frac{\sigma^2}{\beta^2+\tilde\sigma^2}\frac{\sigma^2}{o^2+\sigma^2}(\tilde z+\delta-\bar z)\]</span></p>
+<p><span class="math display">\[=p\eta\frac{\sigma^2}{\beta^2+\tilde\sigma^2}\frac{\sigma^2}{o^2+\sigma^2}{\left( \delta+\frac{\sigma^2}{o^2+\sigma^2}(\kappa-\bar z) \right)}\]</span></p>
+<p>If we assume <span class="math inline">\(\beta^2,o^2\gg1\)</span> so that <span class="math inline">\(\beta^2+\sigma^2\approx\beta^2\)</span> and <span class="math inline">\(o^2+\sigma^2\approx o^2\)</span>, then</p>
+<p><span class="math display">\[\frac{d\bar z}{dt}\approx p\eta\frac{\sigma^4}{\beta^2o^2}{\left( \delta+\frac{\sigma^2}{o^2}(\kappa-\bar z) \right)}\]</span></p>
+<p>This assumption implies selection and preference are both weak. Ignoring the evolution of <span class="math inline">\(\sigma^2\)</span> we can define the strength of biotic selection as</p>
+<p><span class="math display">\[B\equiv\frac{\sigma^2}{\beta^2}\geq0\]</span></p>
+<p>and specialization as</p>
+<p><span class="math display">\[\psi\equiv\frac{\sigma^2}{o^2}\geq0.\]</span></p>
+<p>The above dynamics of the mean trait then simplify to</p>
+<p><span class="math display">\[\frac{d\bar z}{dt}\approx p\eta\psi B{\left( \delta+\psi(\kappa-\bar z) \right)}.\]</span></p>
+<p>This model can provide insight into why the mean trait of entire communities differ from one location to another. At equilibrium we have</p>
+<p><span class="math display">\[\bar z^*=\frac{\delta}{\psi}+\kappa.\]</span></p>
+<p>Then if <span class="math inline">\(\bar z\)</span> differs from one place to another, assuming all of the above, these differences would have to be accounted for by differences in the specialization (<span class="math inline">\(\psi\)</span>), the optimal offset (<span class="math inline">\(\delta\)</span>) and the preferred phenotype (<span class="math inline">\(\kappa\)</span>).</p>
+<p>This model also sets the stage for investigating the evolution of <span class="math inline">\(\psi\)</span>, <span class="math inline">\(\kappa\)</span> and <span class="math inline">\(\delta\)</span> and also for incorporating demographic dynamics through <span class="math inline">\(\eta\)</span> and the evolution of <span class="math inline">\(p\)</span> which represents the proportion of individuals interacted with.</p>
+</div>
 </div>
 </div>
 
