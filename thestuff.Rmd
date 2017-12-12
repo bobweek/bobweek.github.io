@@ -136,7 +136,7 @@ $$=\cav{\phi(z)\ln W(z)}-\cav\phi(z)\cav{\overline{\ln W}}+\cav{\frac{m(z)}{n}}-
 ## Letting $N=N(t)$
 
   * $N\dots$ the expected number of species within the community.
-  * $\psi\dots$ the speciation rate of the community
+  * $s\dots$ the speciation rate of the community
   * $\epsilon\dots$ the (local) extinction rate of the community
   * $\omega\geq0\dots$ the species-level migration rate of the community
   * $\eta=\sum_{i=1}^\infty n_i\dots$ the total expected number of individuals within the community
@@ -151,9 +151,9 @@ Note that since $i=1,2,\dots$ then $m_i>0$ represents rate of invasion if $n_i=0
 
 We might be able to avoid a lot of this hassle if we simply track the density $\phi(z)$ of the trait $z$ for __all__ individuals in the community. We can assume species interact with one another based only on their trait value and not on their identity as a species.
 
-### Dynamics of $\psi$
+### Dynamics of $s$
 
-For now we should set $\psi\equiv0$.
+For now we should set $s\equiv0$.
 
 ### Dynamics of $\epsilon$
 
@@ -161,15 +161,15 @@ We can assume and ambient distribution of traits represented by the density $\Ph
 
 ### Dynamics of $N$
 
-$$\frac{dN}{dt}=(\psi-\epsilon)N+\omega$$
+$$\frac{dN}{dt}=(s-\epsilon)N+\omega$$
 
 ### Unweighted average demographic dynamics across the community 
 
 $$\frac{d\underline n}{dt}=\frac{d}{dt}\para{\frac{1}{N}\eta}$$
 
-$$=\frac{1}{N^2}\para{N\para{\eta\cav{\overline{\ln W}}+M}-\eta\para{(\psi-\epsilon)N+\omega}}$$
+$$=\frac{1}{N^2}\para{N\para{\eta\cav{\overline{\ln W}}+M}-\eta\para{(s-\epsilon)N+\omega}}$$
 
-$$=\underline n\cav{\overline{\ln W}}+\underline m-\eta\para{\frac{\psi-\epsilon}{N}+\frac{\omega}{N^2}}$$
+$$=\underline n\cav{\overline{\ln W}}+\underline m-\eta\para{\frac{s-\epsilon}{N}+\frac{\omega}{N^2}}$$
 
 No assumptions have been made about the mode of interaction between individuals. Then why should extinction increase the growth of the number of individuals while speciation and immigration reduces it? Note that as the number $N$ increases $\underline n$ will decrease assuming the $n_i$ remain constant. This accounts for what seemed pathological.
 

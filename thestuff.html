@@ -392,7 +392,7 @@ div.tocify {
 <h2>Letting <span class="math inline">\(N=N(t)\)</span></h2>
 <ul>
 <li><span class="math inline">\(N\dots\)</span> the expected number of species within the community.</li>
-<li><span class="math inline">\(\psi\dots\)</span> the speciation rate of the community</li>
+<li><span class="math inline">\(s\dots\)</span> the speciation rate of the community</li>
 <li><span class="math inline">\(\epsilon\dots\)</span> the (local) extinction rate of the community</li>
 <li><span class="math inline">\(\omega\geq0\dots\)</span> the species-level migration rate of the community</li>
 <li><span class="math inline">\(\eta=\sum_{i=1}^\infty n_i\dots\)</span> the total expected number of individuals within the community</li>
@@ -404,9 +404,9 @@ div.tocify {
 <p>Note that since <span class="math inline">\(i=1,2,\dots\)</span> then <span class="math inline">\(m_i&gt;0\)</span> represents rate of invasion if <span class="math inline">\(n_i=0\)</span>.</p>
 <p>We might be able to avoid a lot of this hassle if we simply track the density <span class="math inline">\(\phi(z)\)</span> of the trait <span class="math inline">\(z\)</span> for <strong>all</strong> individuals in the community. We can assume species interact with one another based only on their trait value and not on their identity as a species.</p>
 </div>
-<div id="dynamics-of-psi" class="section level3">
-<h3>Dynamics of <span class="math inline">\(\psi\)</span></h3>
-<p>For now we should set <span class="math inline">\(\psi\equiv0\)</span>.</p>
+<div id="dynamics-of-s" class="section level3">
+<h3>Dynamics of <span class="math inline">\(s\)</span></h3>
+<p>For now we should set <span class="math inline">\(s\equiv0\)</span>.</p>
 </div>
 <div id="dynamics-of-epsilon" class="section level3">
 <h3>Dynamics of <span class="math inline">\(\epsilon\)</span></h3>
@@ -414,13 +414,13 @@ div.tocify {
 </div>
 <div id="dynamics-of-n" class="section level3">
 <h3>Dynamics of <span class="math inline">\(N\)</span></h3>
-<p><span class="math display">\[\frac{dN}{dt}=(\psi-\epsilon)N+\omega\]</span></p>
+<p><span class="math display">\[\frac{dN}{dt}=(s-\epsilon)N+\omega\]</span></p>
 </div>
 <div id="unweighted-average-demographic-dynamics-across-the-community-1" class="section level3">
 <h3>Unweighted average demographic dynamics across the community</h3>
 <p><span class="math display">\[\frac{d\underline n}{dt}=\frac{d}{dt}{\left( \frac{1}{N}\eta \right)}\]</span></p>
-<p><span class="math display">\[=\frac{1}{N^2}{\left( N{\left( \eta{\left&lt; \overline{\ln W} \right&gt;}+M \right)}-\eta{\left( (\psi-\epsilon)N+\omega \right)} \right)}\]</span></p>
-<p><span class="math display">\[=\underline n{\left&lt; \overline{\ln W} \right&gt;}+\underline m-\eta{\left( \frac{\psi-\epsilon}{N}+\frac{\omega}{N^2} \right)}\]</span></p>
+<p><span class="math display">\[=\frac{1}{N^2}{\left( N{\left( \eta{\left&lt; \overline{\ln W} \right&gt;}+M \right)}-\eta{\left( (s-\epsilon)N+\omega \right)} \right)}\]</span></p>
+<p><span class="math display">\[=\underline n{\left&lt; \overline{\ln W} \right&gt;}+\underline m-\eta{\left( \frac{s-\epsilon}{N}+\frac{\omega}{N^2} \right)}\]</span></p>
 <p>No assumptions have been made about the mode of interaction between individuals. Then why should extinction increase the growth of the number of individuals while speciation and immigration reduces it? Note that as the number <span class="math inline">\(N\)</span> increases <span class="math inline">\(\underline n\)</span> will decrease assuming the <span class="math inline">\(n_i\)</span> remain constant. This accounts for what seemed pathological.</p>
 </div>
 <div id="weighted-average-demographic-dynamics-across-the-community-1" class="section level3">
