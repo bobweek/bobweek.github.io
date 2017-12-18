@@ -56,17 +56,6 @@ $$\phi_{t+1}(i)=\frac{n_{t+1}(i)}{N_{t+1}}=\frac{n_tW_t(i)}{N_t\overline{W}_t}=\
 
 $$\phi_{t+1}(i)-\phi_t(i)=\para{\frac{W_t(i)}{\overline{W}_t}-1}\phi_t(i)$$
 
-#### Stochastics
-
-I focus on continuous time stochastic dynamics as dealing with a ratio of random variables is usually quite ugly and also because it's difficult to tell what distribution $\overline{\W}_t$ has. If we are consistent with everything derived up until this point we run into some trouble. Namely, since the individual fitnesses $\W$ have been modelled as Poisson random variables, they can take the value zero with positive probability. Hence, $\ln\W$ can be negatively infinite with positive probability. Thus $\E(\ln\W)$ is undefined. We might be able to formally deal with situation using a generalization of the central limit theorem that would lead us to the so called [stable distributions](https://en.wikipedia.org/wiki/Stable_distribution). Alternatively, we can sweep this dirt under the rug and assume that $\ln\W_t(i)$ is distributed normally with mean $\ln W_t(i)$ and variance $V_t(i)$. Then $\overline{\ln\W_t}\sim\mathcal{N}(\overline{\ln W_t},\overline{V_t})$ where
-
-$$\overline{\ln W_t}=\sum_i\ln W_t(i)\phi_t(i), \ \overline{V_t}=\sum_iV_t\phi_t^2(i).$$
-
-This leads to the SDE
-
-$$d\phi_t(i)=(\ln W_t(i)-\overline{\ln W_t})\phi_t(i)dt+\sqrt{V_t(i)+\overline{V_t}}\phi_t(i)dB_t$$
-
-which defines [geometric Brownian motion](http://www.randomservices.org/random/brown/Geometric.html).
 
 ## Response in Mean and Variance
 
@@ -326,4 +315,20 @@ $$=\Cov_\phi(z,\ln W_t)+\Cov_\phi(z,\ln\psi_t)+\eta^2\int z\frac{\partial^2\phi_
 
 $$=\Cov_\phi(z,\ln W_t)+\Cov_\phi(z,\ln\psi_t)+\eta^2\Cov_\phi\para{z,\frac{\partial^2}{\partial z^2}}+m^2\frac{\partial^2\bar z}{\partial x^2}+\Cov_\phi(z,\Xi_t)$$
 
+#### Stochastics
 
+I focus on continuous time stochastic dynamics because it's difficult to tell what distribution $\overline{\W}_t$ has. If we are consistent with everything derived up until this point we run into some trouble. Namely, since the individual fitnesses $\W$ have been modelled as Poisson random variables, they can take the value zero with positive probability. Hence, $\ln\W$ can be negatively infinite with positive probability. Thus $\E(\ln\W)$ is undefined. We might be able to formally deal with this situation using a generalization of the central limit theorem that would lead us to the so called [stable distributions](https://en.wikipedia.org/wiki/Stable_distribution). Alternatively, we can sweep this dirt under the rug and assume that $\ln\W_t(i)$ is distributed normally with mean $\ln W_t(i)$ and variance $V_t(i)$. Then $\overline{\ln\W_t}\sim\mathcal{N}(\overline{\ln W_t},\overline{V_t})$ where
+
+$$\overline{\ln W_t}=\sum_i\ln W_t(i)\phi_t(i), \ \overline{V_t}=\sum_iV_t\phi_t^2(i).$$
+
+This leads to the SDE
+
+$$d\phi_t(i)=(\ln W_t(i)-\overline{\ln W_t})\phi_t(i)dt+\sqrt{V_t(i)+\overline{V_t}}\phi_t(i)dB_t$$
+
+which defines [geometric Brownian motion](http://www.randomservices.org/random/brown/Geometric.html).
+
+Instead making the above assumptions, incorporating diffusive mutation into the mix can salvage the formality of the approach. Specifically, since diffusion has infinite propogation speed, if $\phi_t(z)>0$ for some $z$ at time $t=t_0$ and
+
+$$\frac{\partial\phi_t}{\partial t}=\phi_t\para{\ln W_t-\overline{\ln W_t}}+\eta^2\frac{\partial^2\phi_t}{\partial z^2}$$
+
+then $\phi_t>0$ for every $z$ and every $t>t_0$.

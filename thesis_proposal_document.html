@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Thesis Proposal Document</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="interactive_theory.html">Interactive Theory</a></li>
+        <li><a href="inferring_coevolution.html">Inferring Coevolution</a></li>
+        <!--
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="notes-fitness.html">First Steps</a></li>
+            <li><a href="notes-evolution.html">Evolution</a></li>
+            <li><a href="notes-examples.html">Examples</a></li>
+            <li><a href="notes-misc.html">Misc</a></li>
+          </ul>
+        </li>
+        -->
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Thesis Proposal Document</h1>
+
+</div>
+
+
+<div id="q1-why-do-some-mutualisms-produce-highly-exaggerated-traits-while-others-do-not" class="section level1">
+<h1>Q1: Why do some mutualisms produce highly exaggerated traits while others do not?</h1>
+<p>Mutualistic interactions provide an abundant supply of putative coevolutionary arms races. The most popular of these being the potentially coevolved orchid  and the moth that pollinates it . The extreme length of this orchids nectar tube had captured the attention of Charles Darwin and begged of him an explanation. Darwin formulated the hypothesis that this exaggerated trait may be the result of the reciprocal evolutionary responses between this orchid and whatever had been pollinating it (unknown to Darwin at the time) over many generations. To come to this hypothesis Darwin had been carefully thinking about the mechanism mediating the outcome of this interaction. He speculated that the orchid would be better off having a nectar tube that is slightly longer than the proboscis of the pollinator, forcing the pollinator to further penetrate the flower in order to obtain its nectar award. This would then cause the body of the pollinator to rub against the reproductive organs of the flower and thereby increasing its effectiveness as a pollinator. Hence, we can expect selection induced by this interaction to select for slightly longer tube lengths. Likewise, with respect to the fitness of the pollinator, Darwin thought that by having a proboscis slightly longer than the tube length of the flower, the pollinator would be able to extract more nectar from each flower it visits. Thus, selection from this interaction would be reciprocally selecting for individuals from both populations with slightly longer traits. Assuming that these traits maintain ample genetic variation and that the primary source of selection on these traits is induced by their interaction, then, ignoring other processes such as migration and drift, the logical result is a never ending arms race towards more and more exaggerated, yet closely matched, traits.</p>
+<p>In spite of the logic behind this explanation, we see a wide variety in the degree of exaggeration among traits mediating interactions that are likely to lead to arms races. Blah Blah blah Anderson et al 2010.</p>
+<p>Since different species are often placed under variety of different constraints and environmental conditions, it seems obvious that this variation should exists across species. However, even within species, a striking amount of variation in the outcomes of these processes have been observed. Take, for example, the interaction between the fly M. longirostris and the flower it pollinates, L. anceps, in the coastal lowlands of South Africa. The mechanism mediating this interaction is precisely the same as that described above for  and . The mean traits of these species covary spatially with a correlation coefficient of 0.78, seeming to confirm the prediction made by Darwin that these traits should be closely matched. Yet, across eight populations the average length of the fly’s proboscis ranges from 43 mm to 86 mm and the average nectar tube of the flower across the same populations reaches a maximum length of 77 mm and a minimum of 41 mm. Then, given that each population is undergoing the same interaction, why is there such stark phenotypic variability across these species’ distributions? To answer this question I propose to use a novel model of fitness that captures the mechanism of these interactions to derive the resulting coevolutionary dynamics using a quantitive genetic approach.</p>
+<p>Previous work on the coevolutionary theory of quantitative traits have focused on two primary mechanisms; trait matching and trait differences. In the case of trait matching, it is assumed that the optimal phenotype of each species is the mean phenotype of the complementary species. This model results in very well behaved linear dynamics described by <span class="math display">\[\Delta\bar z_i=G_iB_i(\bar z_j-\bar z_i).\]</span> Here, <span class="math inline">\(G_i\)</span> denotes the additive genetic variance of the trait <span class="math inline">\(z_i\)</span>, the small non-negative parameter <span class="math inline">\(1\gg B_i\geq0\)</span> is the strength of biotic selection induced by species <span class="math inline">\(j\)</span> onto species <span class="math inline">\(i\)</span> and <span class="math inline">\(\bar z_i,\bar z_j\)</span> represent the mean traits in species <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> respectively. This model predicts the mean traits for each species to converge to a common value that lies somewhere between their initial phenotypes. Hence, no escalation can occur in this model.</p>
+<p>In contrast, Nuismer et. al. developed a model based on trait differences that leads to pure escalation dynamics. The resulting dynamics of this model are <span class="math display">\[\Delta\bar z_i=G_i\sqrt{B_i}\]</span> Under this model the mean traits of each species will forever increase at a constant rate independently of one another. Though this model predicts an arms race, it misses a crucial ingredient described by Darwin, that the traits in each species need only be slightly longer than the traits of the complementary species to maximize fitness.</p>
+<p>By incorporating this notion of an optimal offset into the models of trait matching, I will coalesce the two distinct approaches just described within a unifying framework that I call the offset-matching model. This generalized model of coevolution takes the form <span class="math display">\[\Delta\bar z_i=G_iB_i\delta_i+G_iB_i(\bar z_j-\bar z_i)\]</span> where the additional term <span class="math inline">\(\delta_i\)</span> represents the offset between the traits of species <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> that maximizes the fitness benefits of species <span class="math inline">\(i\)</span> with repsect to their interaction. By setting <span class="math inline">\(\delta_i=0\)</span> for both species we obtain the classic trait matching model. Since <span class="math inline">\(B_i\)</span> is small it can be shown that by setting <span class="math inline">\(\delta_i=1/\sqrt{B_i}\)</span> the offset-matching model is approximated by the pure escalation model when <span class="math inline">\(|\bar z_j-\bar z_i|\)</span> is small.</p>
+<p>Using this model of offset-matching we can explain both the escalation and spatial covariation observed in nature. Then to understand why there is such variation in the outcomes of these processes both across the spatial distribution of coevolving pairs as well as across different systems of coevolving pairs I plan to use the offset-matching model as a platform for investigation. Assuming a constant strength of biotic selection across populations within a pair of interacting species, two explanations for the variability observed include the stochastic effects of drift and the spatial variability in the offset term. These two explanations are not mutually exclusive and each taken on their own may require biologically unrealistic parameters. Hence, it is likely that a combination of random drift and spatial variability in mechanism will be able to explain the patterns observed within a biologically relevent subset of parameter space.</p>
+</div>
+<div id="q2-what-is-the-strength-of-coevolution-in-the-wild" class="section level1">
+<h1>Q2: What is the strength of coevolution in the wild?</h1>
+<p>Coevolution has long been thought to drive the exaggeration of traits <span class="citation">(Darwin 1859; Ehrlich and Raven 1964)</span>, promote major evolutionary transitions such as the evolution of sexual reproduction <span class="citation">(Hamilton 1980; Jaenike 1978; Lively 1987; S. Gandon and Otto 2007)</span>, and influence epidemiological dynamics <span class="citation">(Anderson and May 1982; Lion and Gandon 2015; Lively 2016)</span>. Despite coevolution’s long suspected importance, however, we know almost nothing about its strength and prevalence in the wild because we lack generally applicable statistical approaches that yield quantitative estimates. Here we develop a novel method that derives maximum likelihood estimates for the strength of direct pairwise coevolution in natural systems by coupling a well-established coevolutionary model to widely available phenotypic data. Applying our method to two well-studied interactions reveals strong evidence for coevolution in one system, but no evidence for coevolution in the other. Broad application of this approach has the potential to answer long-standing evolutionary debates such as the importance species interactions play in the evolution of sexual reproduction.</p>
+<p>Our current understanding of coevolution’s importance rests upon methods that fall into two general classes: those that are broadly applicable but yield only qualitative evidence for coevolution and those that produce quantitative estimates for the strength of coevolution but can be applied only in a narrow range of systems. For example, one popular approach for inferring coevolution relies on measuring the spatial correlation between traits of interacting species and using significant interspecific correlations as evidence of a coevolutionary process <span class="citation">(Berenbaum, Zangerl, and Nitao 1986; Benkman et al. 2003; Hanifin, Brodie Jr, and Brodie III 2008; Toju 2008; Pauw, Stofberg, and Waterman 2009)</span>. Strengths of this approach include the relative ease of collecting the relevant data and its broad applicability to a wide range of species interactions. The critical weakness of this approach, however, is that significant interspecific correlations are neither necessary nor sufficient for demonstrating coevolution <span class="citation">(Nuismer, Gomulkiewicz, and Ridenhour 2010; Janzen 1980)</span> and can never yield more than qualitative evidence for coevolution. In contrast, quantitative approaches for estimating the strength of coevolution, such as selective source analysis, require the collection of extensive trait and fitness data from interacting species and thus have proven difficult to employ in all but a few specialized systems <span class="citation">(Ridenhour 2005; E. Brodie III and Ridenhour 2003; Sletvold, Grindeland, and Ågren 2010; Toju and Sota 2005)</span>. As a consequence of these trade-offs in existing approaches, rigorous, quantitative estimates of the strength of coevolution in natural populations are extremely scarce.</p>
+<p>A promising alternative to existing approaches is the development of a likelihood-based framework that uses routinely collected phenotypic data to estimate key parameters of well-established coevolutionary models and to test hypotheses. Specifically, coevolutionary models now exist that predict the spatial distribution of traits for a pair of interacting species that evolve in response to random genetic drift, abiotic selection, and coevolution <span class="citation">(Nuismer, Gomulkiewicz, and Ridenhour 2010)</span>. These models rely on the framework of theoretical quantitative genetics, and its simplifying assumptions of fixed additive genetic variance and weak selection, to predict the spatial distribution of a pair of key traits (e.g., corolla depth and proboscis length) that mediate the interaction between a pair of species. Crucially, these models predict that the distribution of trait means in the interacting species across a metapopulation will approach a bivariate normal distribution entirely described by five statistical moments: the average value of the key trait in each species among populations, the variance of the key trait in each species among populations, and the spatial association (covariance) between the key traits in each species (SI). Because the models predict a bivariate normal distribution of traits, calculating the likelihood of observing any particular set of trait values in a pair of interacting species is straightforward (SI). Maximizing the resulting likelihood with respect to the key model parameters that quantify the strength of biotic selection acting on the two species (<span class="math inline">\(B_1,B_2\geq0\)</span>) and two parameters that capture any selective agents acting independently of the interaction (the strengths of abiotic selection <span class="math inline">\(A_1,A_2\geq0\)</span>) yields a quantitative estimate for the strength of coevolution under the assumption that the remaining model parameters have been accurately estimated (SI).</p>
+<p>In addition to providing quantitative estimates for the strength of biotic selection, our method can be used to rigorously test for the presence of coevolution. Specifically, for a coevolutionary hypothesis to be supported, reciprocal selection must be demonstrated <span class="citation">(Janzen 1980; Thompson 1994)</span>. In our maximum likelihood framework, this long-standing and widely accepted definition of coevolution corresponds to demonstrating that the pair of parameters in our model that quantify the strength of biotic selection imposed on each species by the other are significantly greater than zero. By performing likelihood ratio tests, support for the coevolutionary hypothesis can be compared relative to support for the non-coevolutionary null hypotheses of unilateral evolution where <span class="math inline">\(B_1=0\)</span> or <span class="math inline">\(B_2=0\)</span>, or evolution entirely independent of species interactions where <span class="math inline">\(B_1=0\)</span> and <span class="math inline">\(B_2=0\)</span> (Figure ). Due to the nested structure of these models, we can directly compare the likelihood of coevolution against the likelihoods of these null models by approximating p-values. Figure  shows that both <span class="math inline">\(p_1\)</span> and <span class="math inline">\(p_2\)</span> need to be less than the significance threshold <span class="math inline">\(\alpha\)</span> to support a coevolutionary hypothesis.</p>
+</div>
+<div id="q3-why-do-we-see-extreme-exaggeration-in-cases-of-negligible-pairwise-coevolution" class="section level1">
+<h1>Q3: Why do we see extreme exaggeration in cases of negligible pairwise coevolution?</h1>
+<ul>
+<li>This will require getting into the network structure of the community involved.</li>
+</ul>
+</div>
+<div id="side-projects" class="section level1">
+<h1>Side projects</h1>
+<ul>
+<li>Coevolution slows the dissassembly of communities</li>
+<li>Work with Megan</li>
+<li>Work with Austin</li>
+<li>Demographic dynamics of coevolving communities</li>
+</ul>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references">
+<div id="ref-anderson1982coevolution">
+<p>Anderson, Roy M, and RM May. 1982. “Coevolution of Hosts and Parasites.” <em>Parasitology</em> 85 (2). Cambridge University Press: 411–26.</p>
+</div>
+<div id="ref-benkman2003reciprocal">
+<p>Benkman, Craig W, Thomas L Parchman, Amanda Favis, and Adam M Siepielski. 2003. “Reciprocal Selection Causes a Coevolutionary Arms Race Between Crossbills and Lodgepole Pine.” <em>The American Naturalist</em> 162 (2). The University of Chicago Press: 182–94.</p>
+</div>
+<div id="ref-berenbaum1986constraints">
+<p>Berenbaum, MR, AR Zangerl, and JK Nitao. 1986. “Constraints on Chemical Coevolution: Wild Parsnips and the Parsnip Webworm.” <em>Evolution</em>. JSTOR, 1215–28.</p>
+</div>
+<div id="ref-brodie2003reciprocal">
+<p>Brodie III, ED, and BJ Ridenhour. 2003. “Reciprocal Selection at the Phenotypic Interface of Coevolution.” <em>Integrative and Comparative Biology</em> 43 (3). Oxford University Press: 408–18.</p>
+</div>
+<div id="ref-darwin1859origin">
+<p>Darwin, Charles. 1859. <em>On the Origin of Species by Means of Natural Selection, or, the Preservation of Favoured Races in the Struggle for Life</em>. J. Murray.</p>
+</div>
+<div id="ref-ehrlich1964butterflies">
+<p>Ehrlich, Paul R, and Peter H Raven. 1964. “Butterflies and Plants: A Study in Coevolution.” <em>Evolution</em> 18 (4). Wiley Online Library: 586–608.</p>
+</div>
+<div id="ref-gandon2007evolution">
+<p>Gandon, Sylvain, and Sarah P Otto. 2007. “The Evolution of Sex and Recombination in Response to Abiotic or Coevolutionary Fluctuations in Epistasis.” <em>Genetics</em> 175 (4). Genetics Soc America: 1835–53.</p>
+</div>
+<div id="ref-hamilton1980sex">
+<p>Hamilton, William D. 1980. “Sex Versus Non-Sex Versus Parasite.” <em>Oikos</em>. JSTOR, 282–90.</p>
+</div>
+<div id="ref-hanifin2008phenotypic">
+<p>Hanifin, Charles T, Edmund D Brodie Jr, and Edmund D Brodie III. 2008. “Phenotypic Mismatches Reveal Escape from Arms-Race Coevolution.” <em>PLoS Biology</em> 6 (3). Public Library of Science: e60.</p>
+</div>
+<div id="ref-jaenike1978hypothesis">
+<p>Jaenike, John. 1978. “An Hypothesis to Account for the Maintenance of Sex Within Populations.” <em>Evol. Theory</em> 3: 191–94.</p>
+</div>
+<div id="ref-janzen1980coevolution">
+<p>Janzen, Daniel H. 1980. “When Is It Coevolution.” <em>Evolution</em> 34 (3): 611–12.</p>
+</div>
+<div id="ref-lion2015evolution">
+<p>Lion, S, and S Gandon. 2015. “Evolution of Spatially Structured Host–parasite Interactions.” <em>Journal of Evolutionary Biology</em> 28 (1). Wiley Online Library: 10–28.</p>
+</div>
+<div id="ref-lively1987evidence">
+<p>Lively, Curtis M. 1987. “Evidence from a New Zealand Snail for the Maintenance of Sex by Parasitism.” <em>Nature</em> 328 (6130). Springer: 519–21.</p>
+</div>
+<div id="ref-lively2016coevolutionary">
+<p>———. 2016. “Coevolutionary Epidemiology: Disease Spread, Local Adaptation, and Sex.” <em>The American Naturalist</em> 187 (3). University of Chicago Press Chicago, IL: E77–E82.</p>
+</div>
+<div id="ref-nuismer2010correlation">
+<p>Nuismer, Scott L, Richard Gomulkiewicz, and Benjamin J Ridenhour. 2010. “When Is Correlation Coevolution?” <em>The American Naturalist</em> 175 (5). JSTOR: 525–37.</p>
+</div>
+<div id="ref-pauw2009flies">
+<p>Pauw, Anton, Jaco Stofberg, and Richard J Waterman. 2009. “Flies and Flowers in Darwin’s Race.” <em>Evolution</em> 63 (1). Wiley Online Library: 268–79.</p>
+</div>
+<div id="ref-ridenhour2005identification">
+<p>Ridenhour, Benjamin J. 2005. “Identification of Selective Sources: Partitioning Selection Based on Interactions.” <em>The American Naturalist</em> 166 (1). The University of Chicago Press: 12–25.</p>
+</div>
+<div id="ref-sletvold2010pollinator">
+<p>Sletvold, Nina, John M Grindeland, and Jon Ågren. 2010. “Pollinator-Mediated Selection on Floral Display, Spur Length and Flowering Phenology in the Deceptive Orchid Dactylorhiza Lapponica.” <em>New Phytologist</em> 188 (2). Wiley Online Library: 385–92.</p>
+</div>
+<div id="ref-thompson1994coevolutionary">
+<p>Thompson, John N. 1994. <em>The Coevolutionary Process</em>. University of Chicago Press.</p>
+</div>
+<div id="ref-toju2008fine">
+<p>Toju, Hirokazu. 2008. “Fine-Scale Local Adaptation of Weevil Mouthpart Length and Camellia Pericarp Thickness: Altitudinal Gradient of a Putative Arms Race.” <em>Evolution</em> 62 (5). Wiley Online Library: 1086–1102.</p>
+</div>
+<div id="ref-toju2005imbalance">
+<p>Toju, Hirokazu, and Teiji Sota. 2005. “Imbalance of Predator and Prey Armament: Geographic Clines in Phenotypic Interface and Natural Selection.” <em>The American Naturalist</em> 167 (1). The University of Chicago Press: 105–17.</p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

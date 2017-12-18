@@ -1,0 +1,73 @@
+---
+title: "Thesis Proposal Document"
+output:
+  word_document:
+    toc: yes
+  pdf_document:
+    toc: yes
+  html_document:
+    css: style.css
+    theme: cosmo
+    toc: yes
+    toc_float: yes
+bibliography: ref.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+
+# Q1: Why do some mutualisms produce highly exaggerated traits while others do not?
+
+Mutualistic interactions provide an abundant supply of putative coevolutionary arms races. The most popular of these being the potentially coevolved orchid \emph{} and the moth that pollinates it \emph{}. The extreme length of this orchids nectar tube had captured the attention of Charles Darwin and begged of him an explanation. Darwin formulated the hypothesis that this exaggerated trait may be the result of the reciprocal evolutionary responses between this orchid and whatever had been pollinating it (unknown to Darwin at the time) over many generations. To come to this hypothesis Darwin had been carefully thinking about the mechanism mediating the outcome of this interaction. He speculated that the orchid would be better off having a nectar tube that is slightly longer than the proboscis of the pollinator, forcing the pollinator to further penetrate the flower in order to obtain its nectar award. This would then cause the body of the pollinator to rub against the reproductive organs of the flower and thereby increasing its effectiveness as a pollinator. Hence, we can expect selection induced by this interaction to select for slightly longer tube lengths. Likewise, with respect to the fitness of the pollinator, Darwin thought that by having a proboscis slightly longer than the tube length of the flower, the pollinator would be able to extract more nectar from each flower it visits. Thus, selection from this interaction would be reciprocally selecting for individuals from both populations with slightly longer traits. Assuming that these traits maintain ample genetic variation and that the primary source of selection on these traits is induced by their interaction, then, ignoring other processes such as migration and drift, the logical result is a never ending arms race towards more and more exaggerated, yet closely matched, traits.
+
+In spite of the logic behind this explanation, we see a wide variety in the degree of exaggeration among traits mediating interactions that are likely to lead to arms races. Blah Blah blah Anderson et al 2010.
+
+Since different species are often placed under variety of different constraints and environmental conditions, it seems obvious that this variation should exists across species. However, even within species, a striking amount of variation in the outcomes of these processes have been observed. Take, for example, the interaction between the fly M. longirostris and the flower it pollinates, L. anceps, in the coastal lowlands of South Africa. The mechanism mediating this interaction is precisely the same as that described above for \emph{} and \emph{}. The mean traits of these species covary spatially with a correlation coefficient of 0.78, seeming to confirm the prediction made by Darwin that these traits should be closely matched. Yet, across eight populations the average length of the fly's proboscis ranges from 43 mm to 86 mm and the average nectar tube of the flower across the same populations reaches a maximum length of 77 mm and a minimum of 41 mm. Then, given that each population is undergoing the same interaction, why is there such stark phenotypic variability across these species' distributions? To answer this question I propose to use a novel model of fitness that captures the mechanism of these interactions to derive the resulting coevolutionary dynamics using a quantitive genetic approach.
+
+Previous work on the coevolutionary theory of quantitative traits have focused on two primary mechanisms; trait matching and trait differences. In the case of trait matching, it is assumed that the optimal phenotype of each species is the mean phenotype of the complementary species. This model results in very well behaved linear dynamics described by
+$$\Delta\bar z_i=G_iB_i(\bar z_j-\bar z_i).$$
+Here, $G_i$ denotes the additive genetic variance of the trait $z_i$, the small non-negative parameter $1\gg B_i\geq0$ is the strength of biotic selection induced by species $j$ onto species $i$ and $\bar z_i,\bar z_j$ represent the mean traits in species $i$ and $j$ respectively. This model predicts the mean traits for each species to converge to a common value that lies somewhere between their initial phenotypes. Hence, no escalation can occur in this model. 
+
+In contrast, Nuismer et. al. developed a model based on trait differences that leads to pure escalation dynamics. The resulting dynamics of this model are
+$$\Delta\bar z_i=G_i\sqrt{B_i}$$
+Under this model the mean traits of each species will forever increase at a constant rate independently of one another. Though this model predicts an arms race, it misses a crucial ingredient described by Darwin, that the traits in each species need only be slightly longer than the traits of the complementary species to maximize fitness. 
+
+By incorporating this notion of an optimal offset into the models of trait matching, I will coalesce the two distinct approaches just described within a unifying framework that I call the offset-matching model. This generalized model of coevolution takes the form
+$$\Delta\bar z_i=G_iB_i\delta_i+G_iB_i(\bar z_j-\bar z_i)$$
+where the additional term $\delta_i$ represents the offset between the traits of species $i$ and $j$ that maximizes the fitness benefits of species $i$ with repsect to their interaction. By setting $\delta_i=0$ for both species we obtain the classic trait matching model. Since $B_i$ is small it can be shown that by setting $\delta_i=1/\sqrt{B_i}$ the offset-matching model is approximated by the pure escalation model when $|\bar z_j-\bar z_i|$ is small.
+
+Using this model of offset-matching we can explain both the escalation and spatial covariation observed in nature. Then to understand why there is such variation in the outcomes of these processes both across the spatial distribution of coevolving pairs as well as across different systems of coevolving pairs I plan to use the offset-matching model as a platform for investigation. Assuming a constant strength of biotic selection across populations within a pair of interacting species, two explanations for the variability observed include the stochastic effects of drift and the spatial variability in the offset term. These two explanations are not mutually exclusive and each taken on their own may require biologically unrealistic parameters. Hence, it is likely that a combination of random drift and spatial variability in mechanism will be able to explain the patterns observed within a biologically relevent subset of parameter space.
+
+# Q2: What is the strength of coevolution in the wild?
+
+Coevolution has long been thought to drive the exaggeration of traits [@darwin1859origin;@ehrlich1964butterflies], promote major evolutionary transitions such as the evolution of sexual reproduction [@hamilton1980sex;@jaenike1978hypothesis;@lively1987evidence;@gandon2007evolution], and influence epidemiological dynamics [@anderson1982coevolution;@lion2015evolution;@lively2016coevolutionary]. Despite coevolution's long suspected importance, however, we know almost nothing about its strength and prevalence in the wild because we lack generally applicable statistical approaches that yield quantitative estimates. Here we develop a novel method that derives maximum likelihood estimates for the strength of direct pairwise coevolution in natural systems by coupling a well-established coevolutionary model to widely available phenotypic data. Applying our method to two well-studied interactions reveals strong evidence for coevolution in one system, but no evidence for coevolution in the other. Broad application of this approach has the potential to answer long-standing evolutionary debates such as the importance species interactions play in the evolution of sexual reproduction.
+
+Our current understanding of coevolution's importance rests upon methods that fall into two general classes: those that are broadly applicable but yield only qualitative evidence for coevolution and those that produce quantitative estimates for the strength of coevolution but can be applied only in a narrow range of systems. For example, one popular approach for inferring coevolution relies on measuring the spatial correlation between traits of interacting species and using significant interspecific correlations as evidence of a coevolutionary process  [@berenbaum1986constraints;@benkman2003reciprocal;@hanifin2008phenotypic;@toju2008fine;@pauw2009flies]. Strengths of this approach include the relative ease of collecting the relevant data and its broad applicability to a wide range of species interactions. The critical weakness of this approach, however, is that significant interspecific correlations are neither necessary nor sufficient for demonstrating coevolution  [@nuismer2010correlation;@janzen1980coevolution] and can never yield more than qualitative evidence for coevolution. In contrast, quantitative approaches for estimating the strength of coevolution, such as selective source analysis, require the collection of extensive trait and fitness data from interacting species and thus have proven difficult to employ in all but a few specialized systems [@ridenhour2005identification;@brodie2003reciprocal;@sletvold2010pollinator;@toju2005imbalance]. As a consequence of these trade-offs in existing approaches, rigorous, quantitative estimates of the strength of coevolution in natural populations are extremely scarce. 
+
+A promising alternative to existing approaches is the development of a likelihood-based framework that uses routinely collected phenotypic data to estimate key parameters of well-established coevolutionary models and to test hypotheses. Specifically, coevolutionary models now exist that predict the spatial distribution of traits for a pair of interacting species that evolve in response to random genetic drift, abiotic selection, and coevolution  [@nuismer2010correlation]. These models rely on the framework of theoretical quantitative genetics, and its simplifying assumptions of fixed additive genetic variance and weak selection, to predict the spatial distribution of a pair of key traits (e.g., corolla depth and proboscis length) that mediate the interaction between a pair of species. Crucially, these models predict that the distribution of trait means in the interacting species across a metapopulation will approach a bivariate normal distribution entirely described by five statistical moments: the average value of the key trait in each species among populations, the variance of the key trait in each species among populations, and the spatial association (covariance) between the key traits in each species (SI). Because the models predict a bivariate normal distribution of traits, calculating the likelihood of observing any particular set of trait values in a pair of interacting species is straightforward (SI). Maximizing the resulting likelihood with respect to the key model parameters that quantify the strength of biotic selection acting on the two species ($B_1,B_2\geq0$) and two parameters that capture any selective agents acting independently of the interaction (the strengths of abiotic selection $A_1,A_2\geq0$) yields a quantitative estimate for the strength of coevolution under the assumption that the remaining model parameters have been accurately estimated (SI).
+
+In addition to providing quantitative estimates for the strength of biotic selection, our method can be used to rigorously test for the presence of coevolution. Specifically, for a coevolutionary hypothesis to be supported, reciprocal selection must be demonstrated [@janzen1980coevolution;@thompson1994coevolutionary]. In our maximum likelihood framework, this long-standing and widely accepted definition of coevolution corresponds to demonstrating that the pair of parameters in our model that quantify the strength of biotic selection imposed on each species by the other are significantly greater than zero. By performing likelihood ratio tests, support for the coevolutionary hypothesis can be compared relative to support for the non-coevolutionary null hypotheses of unilateral evolution where $B_1=0$ or $B_2=0$, or evolution entirely independent of species interactions where $B_1=0$ and $B_2=0$ (Figure \ref{modelNetwork}). Due to the nested structure of these models, we can directly compare the likelihood of coevolution against the likelihoods of these null models by approximating p-values. Figure \ref{modelNetwork} shows that both $p_1$ and $p_2$ need to be less than the significance threshold $\alpha$ to support a coevolutionary hypothesis.
+
+
+# Q3: Why do we see extreme exaggeration in cases of negligible pairwise coevolution?
+
+  * This will require getting into the network structure of the community involved.
+
+# Side projects
+
+  * Coevolution slows the dissassembly of communities
+  * Work with Megan
+  * Work with Austin
+  * Demographic dynamics of coevolving communities
+
+# References

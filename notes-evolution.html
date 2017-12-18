@@ -328,14 +328,6 @@ output:
 <p><span class="math display">\[\phi_{t+1}(i)=\frac{n_{t+1}(i)}{N_{t+1}}=\frac{n_tW_t(i)}{N_t\overline{W}_t}=\phi_t(i)\frac{W_t(i)}{\overline{W}_t}\]</span></p>
 <p><span class="math display">\[\phi_{t+1}(i)-\phi_t(i)={\left( \frac{W_t(i)}{\overline{W}_t}-1 \right)}\phi_t(i)\]</span></p>
 </div>
-<div id="stochastics" class="section level4">
-<h4>Stochastics</h4>
-<p>I focus on continuous time stochastic dynamics as dealing with a ratio of random variables is usually quite ugly and also because it’s difficult to tell what distribution <span class="math inline">\(\overline{{\mathcal{W}}}_t\)</span> has. If we are consistent with everything derived up until this point we run into some trouble. Namely, since the individual fitnesses <span class="math inline">\({\mathcal{W}}\)</span> have been modelled as Poisson random variables, they can take the value zero with positive probability. Hence, <span class="math inline">\(\ln{\mathcal{W}}\)</span> can be negatively infinite with positive probability. Thus <span class="math inline">\({\mathbb{E}}(\ln{\mathcal{W}})\)</span> is undefined. We might be able to formally deal with situation using a generalization of the central limit theorem that would lead us to the so called <a href="https://en.wikipedia.org/wiki/Stable_distribution">stable distributions</a>. Alternatively, we can sweep this dirt under the rug and assume that <span class="math inline">\(\ln{\mathcal{W}}_t(i)\)</span> is distributed normally with mean <span class="math inline">\(\ln W_t(i)\)</span> and variance <span class="math inline">\(V_t(i)\)</span>. Then <span class="math inline">\(\overline{\ln{\mathcal{W}}_t}\sim\mathcal{N}(\overline{\ln W_t},\overline{V_t})\)</span> where</p>
-<p><span class="math display">\[\overline{\ln W_t}=\sum_i\ln W_t(i)\phi_t(i), \ \overline{V_t}=\sum_iV_t\phi_t^2(i).\]</span></p>
-<p>This leads to the SDE</p>
-<p><span class="math display">\[d\phi_t(i)=(\ln W_t(i)-\overline{\ln W_t})\phi_t(i)dt+\sqrt{V_t(i)+\overline{V_t}}\phi_t(i)dB_t\]</span></p>
-<p>which defines <a href="http://www.randomservices.org/random/brown/Geometric.html">geometric Brownian motion</a>.</p>
-</div>
 </div>
 <div id="response-in-mean-and-variance" class="section level2">
 <h2>Response in Mean and Variance</h2>
@@ -529,6 +521,17 @@ Note that random sampling is not the only source of stochasticiy. Consider my de
 <p><span class="math display">\[\frac{\partial\bar z}{\partial t}=\frac{\partial}{\partial t}\int z\phi(z)dz=\int z[\phi(\ln W_t-\overline{\ln W_t})+\phi(\ln \psi_t-\overline{\ln\psi_t})+\eta^2\frac{\partial^2\phi_t}{\partial z^2}+m^2\frac{\partial^2\phi_t}{\partial x^2}+\phi_t\Xi_t]dz\]</span></p>
 <p><span class="math display">\[={\mathrm{Cov}}_\phi(z,\ln W_t)+{\mathrm{Cov}}_\phi(z,\ln\psi_t)+\eta^2\int z\frac{\partial^2\phi_t}{\partial z^2}dz+m^2\frac{\partial^2}{\partial x^2}\int z\phi_tdz+{\mathrm{Cov}}_\phi(z,\Xi_t)\]</span></p>
 <p><span class="math display">\[={\mathrm{Cov}}_\phi(z,\ln W_t)+{\mathrm{Cov}}_\phi(z,\ln\psi_t)+\eta^2{\mathrm{Cov}}_\phi{\left( z,\frac{\partial^2}{\partial z^2} \right)}+m^2\frac{\partial^2\bar z}{\partial x^2}+{\mathrm{Cov}}_\phi(z,\Xi_t)\]</span></p>
+<div id="stochastics" class="section level4">
+<h4>Stochastics</h4>
+<p>I focus on continuous time stochastic dynamics because it’s difficult to tell what distribution <span class="math inline">\(\overline{{\mathcal{W}}}_t\)</span> has. If we are consistent with everything derived up until this point we run into some trouble. Namely, since the individual fitnesses <span class="math inline">\({\mathcal{W}}\)</span> have been modelled as Poisson random variables, they can take the value zero with positive probability. Hence, <span class="math inline">\(\ln{\mathcal{W}}\)</span> can be negatively infinite with positive probability. Thus <span class="math inline">\({\mathbb{E}}(\ln{\mathcal{W}})\)</span> is undefined. We might be able to formally deal with this situation using a generalization of the central limit theorem that would lead us to the so called <a href="https://en.wikipedia.org/wiki/Stable_distribution">stable distributions</a>. Alternatively, we can sweep this dirt under the rug and assume that <span class="math inline">\(\ln{\mathcal{W}}_t(i)\)</span> is distributed normally with mean <span class="math inline">\(\ln W_t(i)\)</span> and variance <span class="math inline">\(V_t(i)\)</span>. Then <span class="math inline">\(\overline{\ln{\mathcal{W}}_t}\sim\mathcal{N}(\overline{\ln W_t},\overline{V_t})\)</span> where</p>
+<p><span class="math display">\[\overline{\ln W_t}=\sum_i\ln W_t(i)\phi_t(i), \ \overline{V_t}=\sum_iV_t\phi_t^2(i).\]</span></p>
+<p>This leads to the SDE</p>
+<p><span class="math display">\[d\phi_t(i)=(\ln W_t(i)-\overline{\ln W_t})\phi_t(i)dt+\sqrt{V_t(i)+\overline{V_t}}\phi_t(i)dB_t\]</span></p>
+<p>which defines <a href="http://www.randomservices.org/random/brown/Geometric.html">geometric Brownian motion</a>.</p>
+<p>Instead making the above assumptions, incorporating diffusive mutation into the mix can salvage the formality of the approach. Specifically, since diffusion has infinite propogation speed, if <span class="math inline">\(\phi_t(z)&gt;0\)</span> for some <span class="math inline">\(z\)</span> at time <span class="math inline">\(t=t_0\)</span> and</p>
+<p><span class="math display">\[\frac{\partial\phi_t}{\partial t}=\phi_t{\left( \ln W_t-\overline{\ln W_t} \right)}+\eta^2\frac{\partial^2\phi_t}{\partial z^2}\]</span></p>
+<p>then <span class="math inline">\(\phi_t&gt;0\)</span> for every <span class="math inline">\(z\)</span> and every <span class="math inline">\(t&gt;t_0\)</span>.</p>
+</div>
 </div>
 
 
