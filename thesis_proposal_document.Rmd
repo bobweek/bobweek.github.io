@@ -62,7 +62,12 @@ A promising alternative to existing approaches is the development of a likelihoo
 In addition to providing quantitative estimates for the strength of biotic selection, our method can be used to rigorously test for the presence of coevolution. Specifically, for a coevolutionary hypothesis to be supported, reciprocal selection must be demonstrated [@janzen1980coevolution;@thompson1994coevolutionary]. In our maximum likelihood framework, this long-standing and widely accepted definition of coevolution corresponds to demonstrating that the pair of parameters in our model that quantify the strength of biotic selection imposed on each species by the other are significantly greater than zero. By performing likelihood ratio tests, support for the coevolutionary hypothesis can be compared relative to support for the non-coevolutionary null hypotheses of unilateral evolution where $B_1=0$ or $B_2=0$, or evolution entirely independent of species interactions where $B_1=0$ and $B_2=0$ (Figure \ref{modelNetwork}). Due to the nested structure of these models, we can directly compare the likelihood of coevolution against the likelihoods of these null models by approximating p-values. Figure \ref{modelNetwork} shows that both $p_1$ and $p_2$ need to be less than the significance threshold $\alpha$ to support a coevolutionary hypothesis.
 
 
-# Q3: Why do we see extreme exaggeration in cases of negligible pairwise coevolution?
+# Q3: Why do we see the variation in distribution of traits between communities?
+
+  * Why do some communities have consistently exaggerated traits, others have consistently modest traits and yet other communities have a wide range of trait values?
+  * Why do some species have exaggerated traits and yet only weakly coevolve with any other species?
+  * Is it due to the network structure of the community?
+  * Will modularity increase diversity?
 
   * This will require getting into the network structure of the community involved.
 
