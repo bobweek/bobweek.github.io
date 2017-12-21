@@ -1,5 +1,5 @@
 ---
-title: "The coevolutionary theory of pollination networks"
+title: "The evolution and ecology of mutualistic communities"
 output: 
   html_document: 
     toc: false

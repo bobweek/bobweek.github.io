@@ -1,17 +1,14 @@
 ---
-title: "Thesis Proposal Document"
 output:
-  word_document:
-    toc: yes
-  pdf_document:
-    toc: yes
   html_document:
     css: style.css
     theme: cosmo
     toc: yes
     toc_float: yes
-bibliography: ref.bib
+title: "Proposed thesis"
+author: "Bob Week"
 csl: evolution.csl
+bibliography: ref.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -27,7 +24,34 @@ knitr::opts_chunk$set(echo = TRUE)
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\Var}{\mathrm{Var}}
 
-# Q1: Why do some mutualisms produce highly exaggerated traits while others do not?
+<!--
+## Summary
+
+The coevolutionary process has been speculated to have played a significant role throughout the history of life ever since the time of Darwin. Previous studies have used coevolution to provide putative explanations for the evolution of sexual reproduction, the structuring of ecological communities, the extreme exaggeration observed in many physical traits and for the diversity of life.
+
+This
+-->
+
+## Introduction to proposed work
+
+Coevolution has long been thought to drive the exaggeration of traits [@darwin1859origin;@ehrlich1964butterflies], promote major evolutionary transitions such as the evolution of sexual reproduction [@hamilton1980sex;@jaenike1978hypothesis;@lively1987evidence;@gandon2007evolution], and influence epidemiological dynamics [@anderson1982coevolution;@lion2015evolution;@lively2016coevolutionary]. Despite coevolution's long suspected importance, however, our understanding of both the mechanisms involved and the patterns produced by this process is still in its infancy (cite one of scott's papers where he's bitchin about thompson). To truly grasp the role that coevolution plays in shaping the diversity of life we must, at the very least, account for the details of the mechanisms driving the coevolutionary process, quantify its strength in nature, and determine its consequences on ecological communities. 
+
+Previous work in this area has focused on results pertaining to a small number of interacting species (cite roughgarden, abrams, holt and mcpeek). However, many of the patterns observed span dozens, even hundreds of species. To overcome this a recent development in coevolutionary theory has taken the so-called mean field approach to this problem (cite paper that's in review and scott's 2013 paper). This approach allows the reduction of a high-dimensional problem to a low-dimensional one at the cost of resolution. With this approach we can derive analytical results pertaining to the statistical nature of communities as whole, but without explicit conclusions for each member of the community. Hence, we are now in a position to develop a mathematically rigorous theory of coevolutionary community ecology. The primary goal of this work is to contribute to this development by extending previous work to the context of mutualistic communities. 
+
+However, there are two major steps to be addressed before such a contribution can be made. First, a more biologically realistic treatment of the mechanisms mediating the outcomes of ecological interactions needs to be incorporated into coevolutionary theory. This alone may explain a significant amount of variability seen in nature. Second, a metric of the strength of coevolution within a community is required to quantify the role of coevolution in shaping communities. To derive this community-wide metric from first principles we will first need a way to measure the strength of coevolution between a pair of species (hereon referred to as pairwise coevolution). To tether this work to the empirical world, we motivate each step by the details of specific pollination networks. The three primary questions driving this work are:
+
+  1. Why do some mutualistic pairs produce highly exaggerated traits while others do not?
+  2. What is the strength of pairwise coevolution in the wild?
+  3. What is the role of coevolution in structuring mutualistic communities?
+
+These questions are complemented with the following three overarching goals
+
+  1. To develop a model that explicitly accounts for the mechanism mediating mutualistic interactions.
+  2. To develop a method for inferring the strength of coevolution between a pair of species.
+  3. To extend the mean field approach to the context of mutualistic communities.
+
+
+## Q1: Why do some mutualisms produce highly exaggerated traits while others do not?
 
 Mutualistic interactions provide an abundant supply of putative coevolutionary arms races. The most popular of these being the potentially coevolved orchid Angraecum sesquipedale and the moth that pollinates it Xanthopan morganii. The extreme length of this orchids nectar tube had captured the attention of Charles Darwin [@darwinvarious]. Darwin formulated the hypothesis that this exaggerated trait may be the result of the reciprocal evolutionary responses between this orchid and whatever had been pollinating it (unknown to Darwin at the time) over many generations. To come to this hypothesis Darwin had been carefully thinking about the mechanism mediating the outcome of this interaction. He speculated that the orchid would be better off having a nectar tube that is slightly longer than the proboscis of the pollinator, forcing the pollinator to further penetrate the flower in order to obtain its nectar reward. Darwin speculated that this would cause the body of the pollinator to rub against the reproductive organs of the flower and thereby increase the probability of pollination. Hence, we can expect selection induced by this interaction to select for slightly longer tube lengths. Likewise, with respect to the fitness of the pollinator, Darwin thought that by having a proboscis slightly longer than the tube length of the flower, the pollinator would be able to extract more resources from each flower it visits. Thus, selection from this interaction would be reciprocally selecting for individuals from both populations with slightly longer traits. Assuming that these traits maintain ample genetic variation and that the primary source of selection on these traits is induced by their interaction, then, ignoring other processes such as migration and drift, the logical result is a never ending arms race towards more and more exaggerated, yet closely matched, traits.
 
@@ -51,31 +75,31 @@ Using this model of offset-matching we can explain both the escalation and spati
 
 Though the quantitative genetic approach has the strength of providing analytic results, its weakness lies in the large amount of assumptions required to obtain such results. To counter this, I plan to test the depency of my conclusions on the assumptions made by developing individual-based simulations that allow me to relax various assumptions. By comparing the analytical results to the simulated expirements, I can quantify the extent to which particular assumptions prevent accurate descriptions of biological processes. Specifically, statistical tests, such as the t-test, will be used to calculate whether or not simulated results significantly differed from those predicted by quantitative genetic theory.
 
-# Q2: What is the strength of coevolution in the wild?
+## Q2: What is the strength of coevolution in the wild?
 
-Coevolution has long been thought to drive the exaggeration of traits [@darwin1859origin;@ehrlich1964butterflies], promote major evolutionary transitions such as the evolution of sexual reproduction [@hamilton1980sex;@jaenike1978hypothesis;@lively1987evidence;@gandon2007evolution], and influence epidemiological dynamics [@anderson1982coevolution;@lion2015evolution;@lively2016coevolutionary]. Despite coevolution's long suspected importance, however, we know almost nothing about its strength and prevalence in the wild because we lack generally applicable statistical approaches that yield quantitative estimates. Here we develop a novel method that derives maximum likelihood estimates for the strength of direct pairwise coevolution in natural systems by coupling a well-established coevolutionary model to widely available phenotypic data. Applying our method to two well-studied interactions reveals strong evidence for coevolution in one system, but no evidence for coevolution in the other. Broad application of this approach has the potential to answer long-standing evolutionary debates such as the importance species interactions play in the evolution of sexual reproduction.
+We know almost nothing about the strength and prevalence of coevolution in the wild. This is largely due to the lack of generally applicable statistical approaches that yield quantitative estimates. Here I propose a novel method that derives maximum likelihood estimates for the strength of pairwise coevolution in natural systems by coupling the coevolutionary model described above to widely available phenotypic data. I will apply this method to two well-studied interactions; one being a highly specific antagonism involving the Japanese camellia fruit and its predatory weevil and the other the mutualism previously discussed between the long-tongued fly M. longirsotris and the flower it pollinates L. anceps. Broad application of this approach has the potential to answer long-standing evolutionary debates such as the importance species interactions play in the evolution of sexual reproduction.
 
 Our current understanding of coevolution's importance rests upon methods that fall into two general classes: those that are broadly applicable but yield only qualitative evidence for coevolution and those that produce quantitative estimates for the strength of coevolution but can be applied only in a narrow range of systems. For example, one popular approach for inferring coevolution relies on measuring the spatial correlation between traits of interacting species and using significant interspecific correlations as evidence of a coevolutionary process  [@berenbaum1986constraints;@benkman2003reciprocal;@hanifin2008phenotypic;@toju2008fine;@pauw2009flies]. Strengths of this approach include the relative ease of collecting the relevant data and its broad applicability to a wide range of species interactions. The critical weakness of this approach, however, is that significant interspecific correlations are neither necessary nor sufficient for demonstrating coevolution  [@nuismer2010correlation;@janzen1980coevolution] and can never yield more than qualitative evidence for coevolution. In contrast, quantitative approaches for estimating the strength of coevolution, such as selective source analysis, require the collection of extensive trait and fitness data from interacting species and thus have proven difficult to employ in all but a few specialized systems [@ridenhour2005identification;@brodie2003reciprocal;@sletvold2010pollinator;@toju2005imbalance]. As a consequence of these trade-offs in existing approaches, rigorous, quantitative estimates of the strength of coevolution in natural populations are extremely scarce. 
 
-A promising alternative to existing approaches is the development of a likelihood-based framework that uses routinely collected phenotypic data to estimate key parameters of well-established coevolutionary models and to test hypotheses. Specifically, coevolutionary models now exist that predict the spatial distribution of traits for a pair of interacting species that evolve in response to random genetic drift, abiotic selection, and coevolution  [@nuismer2010correlation]. These models rely on the framework of theoretical quantitative genetics, and its simplifying assumptions of fixed additive genetic variance and weak selection, to predict the spatial distribution of a pair of key traits (e.g., corolla depth and proboscis length) that mediate the interaction between a pair of species. Crucially, these models predict that the distribution of trait means in the interacting species across a metapopulation will approach a bivariate normal distribution entirely described by five statistical moments: the average value of the key trait in each species among populations, the variance of the key trait in each species among populations, and the spatial association (covariance) between the key traits in each species (SI). Because the models predict a bivariate normal distribution of traits, calculating the likelihood of observing any particular set of trait values in a pair of interacting species is straightforward (SI). Maximizing the resulting likelihood with respect to the key model parameters that quantify the strength of biotic selection acting on the two species ($B_1,B_2\geq0$) and two parameters that capture any selective agents acting independently of the interaction (the strengths of abiotic selection $A_1,A_2\geq0$) yields a quantitative estimate for the strength of coevolution under the assumption that the remaining model parameters have been accurately estimated (SI).
+INCORPORATE MORE SI!!!!!!!
+
+A promising alternative to existing approaches is the development of a likelihood-based framework that uses routinely collected phenotypic data to estimate key parameters of the offset-matching coevolutionary model and to test the hypothesis of coevolution. Specifically, the offset-matching model can be easily extended to predict the spatial distribution of traits for a pair of interacting species that evolve in response to random genetic drift, abiotic selection, and coevolution  [@nuismer2010correlation]. Crucially, this extension predicts that the distribution of trait means in the interacting species across a metapopulation will approach a bivariate normal distribution entirely described by five statistical moments: the average value of the key trait in each species among populations, the variance of the key trait in each species among populations, and the spatial association (covariance) between the key traits in each species. Because the models predict a bivariate normal distribution of traits, calculating the likelihood of observing any particular set of trait values in a pair of interacting species is straightforward (SI). Maximizing the resulting likelihood with respect to the key model parameters that quantify the strength of biotic selection acting on the two species ($B_1,B_2\geq0$) and two parameters that capture any selective agents acting independently of the interaction (the strengths of abiotic selection $A_1,A_2\geq0$) yields a quantitative estimate for the strength of coevolution under the assumption that the remaining model parameters have been accurately estimated (SI).
 
 In addition to providing quantitative estimates for the strength of biotic selection, our method can be used to rigorously test for the presence of coevolution. Specifically, for a coevolutionary hypothesis to be supported, reciprocal selection must be demonstrated [@janzen1980coevolution;@thompson1994coevolutionary]. In our maximum likelihood framework, this long-standing and widely accepted definition of coevolution corresponds to demonstrating that the pair of parameters in our model that quantify the strength of biotic selection imposed on each species by the other are significantly greater than zero. By performing likelihood ratio tests, support for the coevolutionary hypothesis can be compared relative to support for the non-coevolutionary null hypotheses of unilateral evolution where $B_1=0$ or $B_2=0$, or evolution entirely independent of species interactions where $B_1=0$ and $B_2=0$ (Figure \ref{modelNetwork}). Due to the nested structure of these models, we can directly compare the likelihood of coevolution against the likelihoods of these null models by approximating p-values. Figure \ref{modelNetwork} shows that both $p_1$ and $p_2$ need to be less than the significance threshold $\alpha$ to support a coevolutionary hypothesis.
 
 
-# Q3: Why do we see the variation in distribution of traits between communities?
+## Q3: What is the role of coevolution in structuring mutualistic communities?
 
   * Why do some communities have consistently exaggerated traits, others have consistently modest traits and yet other communities have a wide range of trait values?
   * Why do some species have exaggerated traits and yet only weakly coevolve with any other species?
   * Is it due to the network structure of the community?
   * Will modularity increase diversity?
 
-  * This will require getting into the network structure of the community involved.
-
-# Side projects
+## Side projects
 
   * Coevolution slows the dissassembly of communities
   * Work with Megan
   * Work with Austin
   * Demographic dynamics of coevolving communities
 
-# References
+## References
