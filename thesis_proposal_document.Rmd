@@ -35,7 +35,7 @@ This
 
 ## Introduction to proposed work
 
-Coevolution has long been thought to drive the exaggeration of traits [@darwin1859origin;@ehrlich1964butterflies], promote major evolutionary transitions such as the evolution of sexual reproduction [@hamilton1980sex;@jaenike1978hypothesis;@lively1987evidence;@gandon2007evolution], and influence epidemiological dynamics [@anderson1982coevolution;@lion2015evolution;@lively2016coevolutionary]. Despite coevolution's long suspected importance, however, our understanding of both the mechanisms involved and the patterns produced by this process is still in its infancy (cite one of scott's papers where he's bitchin about thompson). To truly grasp the role that coevolution plays in shaping the diversity of life we must, at the very least, account for the details of the mechanisms driving the coevolutionary process, quantify its strength in nature, and determine its consequences on ecological communities. 
+Coevolution has long been thought to drive the exaggeration of traits [@darwin1859origin;@ehrlich1964butterflies], promote major evolutionary transitions such as the evolution of sexual reproduction [@hamilton1980sex;@jaenike1978hypothesis;@lively1987evidence;@gandon2007evolution], and influence epidemiological dynamics [@anderson1982coevolution;@lion2015evolution;@lively2016coevolutionary]. Despite coevolution's long suspected importance, however, our understanding of both the mechanisms involved and the patterns produced by this process is still in its infancy (what to cite?). To truly grasp the role that coevolution plays in shaping the diversity of life we must, at the very least, account for the details of the mechanisms driving the coevolutionary process, quantify its strength in nature, and determine its consequences on ecological communities. 
 
 Previous work in this area has focused on results pertaining to a small number of interacting species (cite roughgarden, abrams, holt and mcpeek). This approach has provided some analytical results for a few species, but rapidly becomes intractable with additional species. However, many of the patterns observed in ecological communities span dozens, even hundreds of species [manning and goldblatt, hubbel]. To overcome this difficulty a recent development in coevolutionary theory has taken the so-called mean field approach (cite paper that's in review and scott's 2013 paper). This approach allows the reduction of a high-dimensional problem involving equations describing the evolution of each species within a community to a low-dimensional one that focuses on the community as a whole. With this approach we can derive analytical results pertaining to the statistical nature of a community as a whole, but without explicit conclusions for any particular member of the community. Hence, the stage has been set to develop a mathematically rigorous theory of coevolutionary community ecology. The primary goal of the proposed work is to contribute to this development by extending previous work on the coevolution of communities to the context of mutualistic networks.
 
@@ -95,7 +95,7 @@ Because the models predict a bivariate normal distribution of traits, calculatin
 
 In addition to providing quantitative estimates for the strength of biotic selection, our method can be used to rigorously test for the presence of coevolution. Specifically, for a coevolutionary hypothesis to be supported, reciprocal selection must be demonstrated [@janzen1980coevolution;@thompson1994coevolutionary]. In our maximum likelihood framework, this long-standing and widely accepted definition of coevolution corresponds to demonstrating that the pair of parameters in our model that quantify the strength of biotic selection imposed on each species by the other are significantly greater than zero. By performing likelihood ratio tests, support for the coevolutionary hypothesis can be compared relative to support for the non-coevolutionary null hypotheses of unilateral evolution where $B_1=0$ or $B_2=0$, or evolution entirely independent of species interactions where $B_1=0$ and $B_2=0$ (Figure \ref{modelNetwork}). Due to the nested structure of these models, we can directly compare the likelihood of coevolution against the likelihoods of these null models by approximating p-values. Figure \ref{modelNetwork} shows that both $p_1$ and $p_2$ need to be less than the significance threshold $\alpha$ to support a coevolutionary hypothesis.
 
-
+obviously this section is incomplete
 
 ## Q3: What is the role of coevolution in structuring mutualistic communities?
 
@@ -105,6 +105,8 @@ There are two primary ways to categorize ecological communities; one is taxonomi
   2. Why do some communities exhibit such stark modularity while others seem highly nested?
 
 This work takes the perspective that these two questions are intimately interwoven with each other. The coevolutionary process both effects and is effected by the network structure of the community. As the network structure imposes dynamics on the traits mediating interactions within the community, these changing traits effect the mode of interactions between species and therefore reciprocally impose dynamics on the network structure of the community. Using simple mathematical models to unravel this feedback loop, I can generate a set of specific and testable hypothesis pertaining to the relationship between the coevolutionary process and the structure of ecological communities. This project, largely exploratory in nature, will provide a roadmap showing where future efforts will be best placed both for the collection of data and for the development of new statistical methods in order obtain a crisp understanding of how coevolution molds the natural world.
+
+this section needs to be expanded to introduce the math.
 
 ## Side projects
 
@@ -118,5 +120,7 @@ This work takes the perspective that these two questions are intimately interwov
   * Demographic dynamics of coevolving communities
       * Invasion dynamics
       * $\alpha/\beta$-diversity
+      * Speciation
+      * Community assembly
 
 ## References
