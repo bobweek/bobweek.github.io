@@ -1,0 +1,27 @@
+---
+title: "Fitness Landscapes - Abstract"
+author: "Bob Week"
+date: "December 28, 2017"
+output:
+  html_document:
+    css: style.css
+    theme: cosmo
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\sqbr}[1]{\left[ #1 \right]}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+
+Fitness landscapes are very useful conceptual tools for understanding how the environment within which a population resides shapes that populations evolutionary trajectory. By making specific assumptions about the approximate shape of these surfaces, theoreticians have derived elegant dynamical equations that quantify the effects of natural selection and predict future states of the population. However, these assumptions restrict our ability to rigorously investigate all but a very specific set of evolutionary situations. Here I discuss why this is so using insights from the mathematical structure of selection and reproduction which point to a fundamental trade-off between the tractability of a model and its general applicability. In light of this result, I discuss some theoretical loose-ends that require our attention and suggest potential paths to a deeper theoretical understanding of the evolutionary process.
+
+Concepts from information theory, partial differential equations, stochastic processes and differential geometry will be presented in a fashion accessible to a wide audience.
