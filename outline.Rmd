@@ -342,7 +342,7 @@ Coevolutionary generality: $-\sum_j\alpha_{ij}\ln(\alpha_{ij})$
 
 #### Interaction preference
 
-Aside from whether or not species interact, we curious to know as to how often they interact. Given that an individual is in the midst of an interaction, we might draw the identity of the species it is interacting with from a distribution. Then it makes sense to quantify the rates of interaction by convex combinations of all members of the community. These convex combinations represent behaviour and can also evolve.
+Aside from whether or not species interact, we are curious to know as to how often they interact. Given that an individual is in the midst of an interaction, we might draw the identity of the species it is interacting with from a distribution. Then it makes sense to quantify the rates of interaction by convex combinations of all members of the community. These convex combinations represent behaviour and can also evolve.
 
 In plant-pollinators properties of flowers such as pheromones and color can evolve to attract different pollinators, in particular ones that best pollinate the flowers. The reward can also change.
 

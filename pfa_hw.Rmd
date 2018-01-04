@@ -1,0 +1,38 @@
+---
+title: "Principles of functional analysis"
+output:
+  html_document:
+    css: style.css
+    theme: cosmo
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\sqbr}[1]{\left[ #1 \right]}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+
+### Chapter 2
+
+  1. Claim: The norm of a bounded linear functional $F$, $\para{\|F\|\equiv\sup_{x\in\underline{X}}\frac{|F(x)|}{\|x\|}}$ is equal to the smallest number $M$ satisfying
+  
+  $$|F(x)|\leq M\|x\| \ \ \forall \ x\in X.$$
+  
+  Proof: By definition there exists $M\geq0$ s.t. $|F(x)|\leq M\|x\| \ \ \forall \ x\in X.$ Set $M=\|F\|$ and assume $M'\leq M$ also satisfies the previous inequality. Then
+  
+  $$\frac{|F(x)|}{\|x\|}\leq M'\leq M=\sup_{x\in\underline{X}}\frac{|F(x)|}{\|x\|}.$$
+  
+  Hence, there is a sequence $\{x_n\}$ such that $\lim_{n\rightarrow\infty}\frac{F(x_n)}{\|x_n\|}=M$ and $\frac{|F(x_n)|}{\|x_n\|}\leq M'$. Then, by continuity, $M=M'$. $\square$
+  
+  2.
+  
