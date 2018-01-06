@@ -5,7 +5,7 @@ output:
     theme: cosmo
     toc: yes
     toc_float: yes
-title: "Proposed thesis: The coevolution of mutualist communities"
+title: "Proposed thesis: The coevolution of mutualistic communities"
 author: "Bob Week"
 csl: evolution.csl
 bibliography: ref.bib
@@ -50,7 +50,7 @@ The three primary questions driving this work are:
   2. What is the strength of pairwise coevolution in the wild?
   3. What is the role of coevolution in structuring mutualistic communities?
 
-These questions are complemented with the following three overarching goals:
+These questions are complemented by the following three overarching goals:
 
   1. To develop a model that explicitly accounts for the mechanism mediating mutualistic interactions.
   2. To develop a method for inferring the strength of coevolution between a pair of species.
@@ -65,9 +65,9 @@ Mutualistic interactions provide an abundant supply of putative coevolutionary a
 
 Given the logic of Darwins argument, we might expect any pollination-based mutualism mediated by a mechanism analogous to the one described above to consistently produce highly exaggerated traits. However, we instead see a wide variety in the degree of exaggeration among traits mediating such interactions [@anderson2010predictable]. What can account for such variance? Clearly there is an endless list of potential explanations, but if we focus our attention on explanations pitched entirely in terms of the structure of the interactions between pairs of species, we can begin to develop a clear understanding of the role that coevolution plays in the maintenance of biodiversity.
 
-Need to incorporate more of the anderson paper.
+Do I need to incorporate more of the anderson paper?
 
-Since different species are often placed under different physiological constraints and environmental conditions, it seems obvious that this variation should exists across species. However, even within species, a striking amount of variation in the outcomes of these processes have been observed. Take, for example, the interaction between the fly Moegistorhynchus longirostris and the flower it pollinates, Lapeirousia anceps, in the coastal lowlands of South Africa. The mechanism mediating this interaction is precisely the same as that described above for A. sesquipedale and X. morganii. The mean traits of the fly and flower species covary spatially with a correlation coefficient of 0.78, seeming to confirm the prediction made by Darwin that these traits should be closely matched. Yet, across eight populations the average length of the fly's proboscis ranges from 43 mm to 86 mm and the average nectar tube of the flower across the same populations reaches a maximum length of 77 mm and a minimum of 41 mm. Then, given that each population is undergoing the same interaction, why is there such stark phenotypic variability across these species' distributions? To answer this question I propose to use a novel quantitive genetic model of coevolution derived from considering the mechanism mediating pollination interactions.
+Since different species are often placed under different physiological constraints and environmental conditions, it seems obvious that this variation should exists across species. However, even within species, a striking amount of variation in the outcomes of these processes have been observed. Take, for example, the interaction between the fly Moegistorhynchus longirostris and the flower it pollinates, Lapeirousia anceps. The mechanism mediating this interaction is precisely the same as that described above for A. sesquipedale and X. morganii. The mean traits of the fly and flower species covary spatially with a correlation coefficient of 0.78, seeming to confirm the prediction made by Darwin that these traits should be closely matched. Yet, across eight populations the average length of the fly's proboscis ranges from 43 mm to 86 mm and the average nectar tube of the flower across the same populations from 41 mm to 77 mm. Then, given that each population is undergoing the same interaction, why is there such stark phenotypic variability across these species' distributions? To answer this question I propose to use a novel quantitive genetic model of coevolution derived from considering the mechanism mediating pollination interactions.
 
 ### Outline of the approach:
 
@@ -83,7 +83,7 @@ By incorporating this notion of an optimal offset into the trait matching model,
 $$\Delta\bar z_i=G_iB_i\delta_i+G_iB_i(\bar z_j-\bar z_i)$$
 where the additional term $\delta_i$ represents the offset between the traits of species $i$ and $j$ that maximizes the fitness benefits of species $i$ with repsect to their interaction. By setting $\delta_i=0$ for both species we obtain the classic trait matching model. Since $B_i$ is small it can be shown that by setting $\delta_i=1/\sqrt{B_i}$ the offset-matching model is approximated by the pure escalation model when $|\bar z_j-\bar z_i|$ is small.
 
-Using this model of offset-matching we can explain both the escalation and spatial covariation observed in nature. I plan to use the offset-matching model as a platform to understand why there is such variation in the outcomes of these processes both across the spatial distribution of coevolving pairs as well as across different systems of coevolving pairs. Assuming a constant strength of biotic selection across populations within a pair of interacting species, two explanations for the variability observed include the stochastic effects of drift and spatial variability in the offset term. These two explanations are not mutually exclusive and each taken on their own may require biologically unrealistic parameters. Hence, it is likely that a combination of random drift and spatial variability in mechanism will be able to explain the patterns observed within a biologically relevent subset of parameter space.
+Using this model of offset-matching we can explain both the escalation and spatial covariation observed in nature. I plan to use the offset-matching model, focusing on mechanism of the interaction as manifested by the offset parameter $\delta$, as a platform to understand why there is such variation in the outcomes of these processes both across the spatial distribution of coevolving pairs as well as across different systems of coevolving pairs. Assuming a constant strength of biotic selection across populations within a pair of interacting species, two explanations for the variability observed include the stochastic effects of drift and spatial variability in the offset term. These two explanations are not mutually exclusive and each taken on their own may require biologically unrealistic parameters. Hence, it is likely that a combination of random drift and spatial variability in mechanism will be able to explain the patterns observed within a biologically relevent subset of parameter space.
 
 Though the quantitative genetic approach has the strength of providing analytic results, its weakness lies in the large amount of assumptions required to obtain such results. To counter this, I plan to test the depency of my conclusions on the assumptions made by developing individual-based simulations that allow me to numerically derive results for generalized models. By comparing analytical results to simulations, I can quantify the extent to which particular assumptions prevent accurate descriptions of biological processes. Specifically, statistical tests, such as the t-test, can be used to calculate whether or not simulated results significantly differed from those predicted by quantitative genetic theory.
 
@@ -104,9 +104,28 @@ Because the models predict a bivariate normal distribution of traits, calculatin
 
 In addition to providing quantitative estimates for the strength of biotic selection, our method can be used to rigorously test for the presence of coevolution. Specifically, for a coevolutionary hypothesis to be supported, reciprocal selection must be demonstrated [@janzen1980coevolution;@thompson1994coevolutionary]. In our maximum likelihood framework, this long-standing and widely accepted definition of coevolution corresponds to demonstrating that the pair of parameters in our model that quantify the strength of biotic selection imposed on each species by the other are significantly greater than zero. By performing likelihood ratio tests, support for the coevolutionary hypothesis can be compared relative to support for the non-coevolutionary null hypotheses of unilateral evolution where $B_1=0$ or $B_2=0$, or evolution entirely independent of species interactions where $B_1=0$ and $B_2=0$ (Figure \ref{modelNetwork}). Due to the nested structure of these models, we can directly compare the likelihood of coevolution against the likelihoods of these null models by approximating p-values. Figure \ref{modelNetwork} shows that both $p_1$ and $p_2$ need to be less than the significance threshold $\alpha$ to support a coevolutionary hypothesis.
 
+![Figure 1: The relationships between the coevolutionary hypothesis and the non-coevolutionary hypotheses.](network.jpg) 
+
+<!--
+
+```{r, include=F}
+library(imager)
+library(ggplot2)
+image <- load.image('network.jpg')
+df <- image %>% as.data.frame
+p <- ggplot(df,aes(x,y))+geom_raster(aes(fill=value))# + theme(legend.position = "none")
+#plot(image)
+```
+
+```{r}
+p
+```
+
+ -->
+
 ### Current Results:
 
-Applying this approach to two well-studied putative examples of coevolution, I found strong support for pairwise coevolution in one system and no support in the other system...
+Applying this approach to two well-studied putative examples of coevolution, one being the pollination mutualism between M. longirostris and L. anceps and the other the antagonism between the fruit Camellia japonica and its weevil predator, Curculio camellia. I found strong support for pairwise coevolution in the antagonism, but no support in the mutualism. 
 
 obviously this section is incomplete
 
@@ -121,7 +140,7 @@ Here the focus is on the latter description. Since a particular species may use 
 
 Unfortunately, the patterns alluded to in the first question have not been accumulated in any data-set to my knowledge. Instead we are left with representative species from various communities to get a sense of these patterns. 
 
-This work takes the perspective that these two questions are intimately interwoven with each other. The coevolutionary process both effects and is effected by the network structure of the community as well as the distribution of functional traits across the community. As the network structure imposes dynamics on the traits mediating interactions, these changing traits affect the mode of interactions between species and therefore reciprocally impose dynamics on the network structure of the community. Using simple mathematical models to unravel this feedback loop, I can generate a set of specific and testable hypotheses pertaining to the relationship between the coevolutionary process and the structure of ecological communities. 
+This work takes the perspective that these two questions are intimately interwoven with each other. The coevolutionary process both effects and is affected by the network structure of the community as well as the distribution of functional traits across the community. As the network structure imposes dynamics on the traits mediating interactions, these changing traits affect the mode of interactions between species and therefore reciprocally impose dynamics on the network structure of the community. Using simple mathematical models to unravel this feedback loop, I can generate a set of specific and testable hypotheses pertaining to the relationship between the coevolutionary process and the structure of ecological communities. 
 
 <!--
 This project, largely exploratory in nature, will provide a roadmap showing where future efforts will be best placed both for the collection of data relevant to testing hypotheses and for the development of new statistical methods for obtaining a crisp understanding of how coevolution molds the natural world.
@@ -129,9 +148,9 @@ This project, largely exploratory in nature, will provide a roadmap showing wher
 
 ### Outline of the approach:
 
-Again, the focus will be on pollination communities. Fittingly, there is a long-standing debate in the pollination literature on whether or not pollination tends to lead to higher degrees of specialization or to more generalized interactions (pat willmer). To quantify the degree of specialization/generalization I will consider the interaction preference of an individual with respect to functional trait values (as opposed to taxonomic identity). This interaction preference can be represented by a statistical distribution across all possible trait values. Given that all trait values are equally abundant, we can model the particular value the individual chooses to interact with via a random variable captured by the previously mentioned statistical distribution. For simplicity, I start by assuming this distribution is normal with mean $\kappa$ and variance $\gamma^2$. Then $\gamma>0$ can be understood as the degree of generalization of this individual. Hence, the distribution of $\gamma$ across the community provides a way to measure the network structure of the community. If the average $\gamma$ is small and has low variance, we can anticipate the community to be highly modular. In contrast, if the average $\gamma$ is large and has low variance, then we can anticipate the community to be highly modular. To model the evolution of $\gamma$, ... This paves the way to find theoretical answers for question 2 above.
+Again, the focus will be on pollination communities. Therefore, the community will be split into two guilds, one consisting of the flowers and the other consisting of the pollinators. Fittingly, there is a long-standing debate in the pollination literature on whether or not pollination as a process tends to produce higher degrees of specialization or instead more generalized interactions (pat willmer). To quantify the degree of specialization/generalization I will consider the interaction preference of an individual with respect to functional trait values (as opposed to taxonomic identity). This interaction preference can be represented by a statistical distribution across all possible trait values. Given that all trait values are equally abundant, we can model the particular value the individual chooses to interact with via a random variable captured by the previously mentioned statistical distribution. For simplicity, I start by assuming this distribution is normal with mean $\kappa$ and variance $\gamma^2$. Then $\gamma>0$ can be understood as the degree of generalization of this individual. Hence, the distribution of $\gamma$ across the community provides a way to describe the network structure of the community that is similar to the information provided by the degree distribution. If the average $\gamma$ is small and has low variance, we can anticipate the community to be highly modular. In contrast, if the average $\gamma$ is large and has low variance, then we can anticipate the community to be highly nested. To model the evolution of $\gamma$ we can treat it as a continuous trait. Assuming $\gamma$ follows a log-normal distribution within the population of any particular species, the transformed variable $\ln\gamma$ will be normally distributed. This allows us to develop a model of the evolution of $\overline{\ln\gamma}$, the mean-log degree of generalization for a given species, using the breeders equation. Extending this model to one that describes the evolution of the distribution of $\overline{\ln\gamma}$ across the entire community will pave the way to theoretical answers for question 2 above.
 
-For question 1, the focus is on functional trait evolution. Returning to the example of long-tongued flies and long-tubed flowers, the functional traits are the length of the tongues in the flies and the length of the tubes in the flowers.
+For question 1, the focus is on functional trait evolution. Returning to the example of long-tongued flies and long-tubed flowers, the functional traits are the length of the tongues in the flies and the length of the tubes in the flowers. The coevolution of these traits has already been captured with the offset-matching model. However, that model contains the assumption of random encounters. If we are to incorporate interaction preferences then the model will need to be rederived in a way that incorporates non-random encounters. Denoting $z$ the value of the functional trait (proboscis or tube length, for example), the resulting model will be describing the evolution of the bivariate mean trait $(\bar z, \overline{\ln\gamma})$. For the sake of parsimony I assume these two traits to be genetically independent of one another.
 
 ### Math
 

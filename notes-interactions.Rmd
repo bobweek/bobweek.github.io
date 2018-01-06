@@ -1,0 +1,35 @@
+---
+title: "Interactions"
+output: 
+  html_document: 
+    toc: true
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+<!--
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+-->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+
+## The competitive exclusion principle and the contrapositive
+
+The competitive exclusion principle is a logical statement. If a certain set of conditions are satisfied then a particular outcome will take place. It has a proof and is logically undeniable. Yet I have heard refutations of this principle based on observations in nature. This has me desparately concerned that biologists are taking it upon themselves to decide when logic is true. In my view, refutations of such principles are the seeds of a future war on logic, not dissimilar to that taking place within the current US administration. I do not believe that, for example, many species of phytoplankton that compete for a similar food-source being able to maintain coexisting populations implies that the competitive exclusion principle is false. Instead it appears obvious to me that the conditions required for it to hold have not been satisfied. In the study of formal logic, predicate calculus in particular, this is known as the contrapositive of a logical implication. Consider a logical implication asserting that if condition __P__ is satisfied then __Q__ must be true. The contrapositive of this implication asserts that if __Q__ is false it follows that condition __P__ is dissatisfied. It can be shown (with truth tables for example) that both an implication and its contrapositive are logically equivalent. Hence, the competitive exclusion principle which states that for multiple populations competing for exactly one resource without external influences the most competitve population will survive and all others will go extinct has the contrapositive which states that if more than one population is able to coexist then there must either be multiple resources or some external influences mediating the population dynamics. Principles such as that of competitive exclusion should be embraced as part of the logical structure of nature instead of being incorrectly shamed as a result of a widespread misunderstanding of elementary logic. In light of this it should be abundantly obvious that the phytoplankton considered above must be competing for some other resource (such as space) or may be the subject of external forces (such as predation) and do not provide a counter example to an inescapable logical fact.
+
+Aside from the appearant lack of awareness of logical concepts such as the contrapositive in the biological sciences, there is a vagueness about the competitive exclusion principle that needs to be addressed involving time. My question is whether or not the principle is meant to apply asymptotically, in which case it is quite obvious to never be satisfied, or if its outcome should always occur within some finite span of time. Using some basic stochastic processes theory (birth-death models in particular) we can derive this result for finite time and obtain some parameters describing our populations that predict the distribution of the time we must wait for its outcome to occur.
