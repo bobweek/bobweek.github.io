@@ -11,9 +11,58 @@ csl: evolution.csl
 bibliography: ref.bib
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r number_figures, echo=FALSE}
+# This is a knitr hook to enable figure and table captions
+# number figures
+# from http://stackoverflow.com/a/18672268/1036500
+library("knitr")
+tn = local({
+  i = 0
+  function(x) {
+    i <<- i + 1
+    paste("<table><caption>", 'Figure ', i, ': ', x, "</caption><colgroup><col width='100'></col></colgroup><thead><tr class='header'></tr></thead><tbody></tbody></table><p>", sep = '')
+  }
+})
+knit_hooks$set(fig.cap = function(before, options, envir) {
+  if(!before)
+    tn(options$fig.cap)
+})
+default_output_hook = knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  if (is.null(options$fig.cap) == F)  
+    x
+  else
+    default_output_hook(x,options)
+})
+
+# number tables
+# from http://stackoverflow.com/a/18672268/1036500
+to = local({
+  i = 0
+  function(x) {
+    i <<- i + 1
+    paste("<table><caption>", 'Table ', i, ': ', x, "</caption><colgroup><col width='100'></col></colgroup><thead><tr class='header'></tr></thead><tbody></tbody></table><p>", sep = '')
+  }
+})
+knit_hooks$set(tab.cap = function(before, options, envir) {
+  if(!before)
+    to(options$tab.cap)
+})
+default_output_hook = knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  if (is.null(options$tab.cap) == F)  
+    x
+  else
+    default_output_hook(x,options)
+})
 ```
+
+```{r setup, echo=FALSE, message=FALSE}
+require(knitr)
+require(kfigr) # devtools::install_github("github mkoohafkan/kfigr")
+opts_chunk$set(message=FALSE, warning=FALSE)
+```
+
 
 \newcommand{\W}{\mathcal{W}}
 \newcommand{\R}{\mathbb{R}}
@@ -102,26 +151,25 @@ $$C'=(1-A_1G_1-A_2G_2)C+B_2G_2(V_1-C)+B_1G_1(V_2-C).$$
 
 Because the models predict a bivariate normal distribution of traits, calculating the likelihood of observing any particular set of trait values in a pair of interacting species is straightforward (SI). Maximizing the resulting likelihood with respect to the strengths of biotic and abiotic selection acting on the two species yields a quantitative estimate for the strength of coevolution under the assumption that the remaining model parameters have been accurately estimated (SI).
 
-In addition to providing quantitative estimates for the strength of biotic selection, our method can be used to rigorously test for the presence of coevolution. Specifically, for a coevolutionary hypothesis to be supported, reciprocal selection must be demonstrated [@janzen1980coevolution;@thompson1994coevolutionary]. In our maximum likelihood framework, this long-standing and widely accepted definition of coevolution corresponds to demonstrating that the pair of parameters in our model that quantify the strength of biotic selection imposed on each species by the other are significantly greater than zero. By performing likelihood ratio tests, support for the coevolutionary hypothesis can be compared relative to support for the non-coevolutionary null hypotheses of unilateral evolution where $B_1=0$ or $B_2=0$, or evolution entirely independent of species interactions where $B_1=0$ and $B_2=0$ (Figure \ref{modelNetwork}). Due to the nested structure of these models, we can directly compare the likelihood of coevolution against the likelihoods of these null models by approximating p-values. Figure \ref{modelNetwork} shows that both $p_1$ and $p_2$ need to be less than the significance threshold $\alpha$ to support a coevolutionary hypothesis.
-
-![Figure 1: The relationships between the coevolutionary hypothesis and the non-coevolutionary hypotheses.](network.jpg) 
-
-<!--
+In addition to providing quantitative estimates for the strength of biotic selection, our method can be used to rigorously test for the presence of coevolution. Specifically, for a coevolutionary hypothesis to be supported, reciprocal selection must be demonstrated [@janzen1980coevolution;@thompson1994coevolutionary]. In our maximum likelihood framework, this long-standing and widely accepted definition of coevolution corresponds to demonstrating that the pair of parameters in our model that quantify the strength of biotic selection imposed on each species by the other are significantly greater than zero. By performing likelihood ratio tests, support for the coevolutionary hypothesis can be compared relative to support for the non-coevolutionary null hypotheses of unilateral evolution where $B_1=0$ or $B_2=0$, or evolution entirely independent of species interactions where $B_1=0$ and $B_2=0$ (`r figr('networkfig', TRUE, type="Figure")`). Due to the nested structure of these models, we can directly compare the likelihood of coevolution against the likelihoods of these null models by approximating p-values. `r figr('networkfig', TRUE, type="Figure")` shows that both $p_1$ and $p_2$ need to be less than the significance threshold $\alpha$ to support a coevolutionary hypothesis.
 
 ```{r, include=F}
-library(imager)
-library(ggplot2)
-image <- load.image('network.jpg')
-df <- image %>% as.data.frame
-p <- ggplot(df,aes(x,y))+geom_raster(aes(fill=value))# + theme(legend.position = "none")
-#plot(image)
+require('jpeg')
+plot_jpeg = function(path, scale, add=FALSE)
+{
+  jpg = readJPEG(path, native=T) # read the file
+  res = scale*dim(jpg)[2:1] # get the resolution, [x, y]
+  if (!add) # initialize an empty plot area if add==FALSE
+    plot(1,1,xlim=c(1,res[1]),ylim=c(1,res[2]),asp=1,type='n',xaxs='i',yaxs='i',xaxt='n',yaxt='n',xlab='',ylab='',bty='n')
+  rasterImage(jpg,1,1,res[1],res[2])
+}
 ```
 
-```{r}
-p
+
+```{r networkfig, echo=F, fig.cap="Relationships between the coevolutionary hypothesis and non-coevolutionary hypotheses", fig.align='center', anchor="figure"}
+plot_jpeg('~/Documents/Website/bobweek.github.io/network.jpg',2)
 ```
 
- -->
 
 ### Current Results:
 
@@ -135,12 +183,10 @@ There are several ways to describe ecological communities [morin]. One is taxono
 
 Here the focus is on the latter description. Since a particular species may use different traits for each of the other species it interacts with, modelling the evolution of traits in a general community involving a wide variety of interaction types would require the development of multivariate models of trait evolution for each species across a mind-numbing quantity of interactions, giving rise to a highly complex network structure. It is undoubtable that if such a framework were successfully constructed in a biologically realistic yet mathematically tractable manner, it would provide not only deep insight into the manifold relations between coevolution and community ecology but also an improved ability to predict the response of ecological communities to changing climates and the movement of species. However, before diving into such a grandiose and difficult task, there are obvious simplifying assumptions to be made that result in models which are more humble and tractable but still contribute to the development of this grand vision. There are three basic assumptions I work with: 1) Interactions between any two members of interacting guilds are mediated by the same traits. This reduces the multivariate models required above to univariate ones. 2) The distribution of species abundances across the community remains fixed. This assumption can be taken a step further by assuming this distribution is uniform and to ignore species abundances altogether. 3) I assume that each species within a guild is distributed indepedently and identically with respect to both trait value and distribution. This assumption transitions the models used from sets of equations describing the evolution and demographic dynamics of each species explicitly to a set of equation describing the dynamics of the distribution of traits and abundances of each guild. It is this last assumption that turns this body of work towards a mean-field approach. Starting with this set of assumptions, I will develop simple models of coevolving communities and use them to answer the following questions:
 
-  1. Why would some communities have consistently exaggerated traits, others have consistently modest traits and yet other communities have a wide range of trait values?
+  1. What predicts the distribution of trait values across a community?
   2. Why do some communities exhibit such stark modularity while others seem highly nested?
 
-Unfortunately, the patterns alluded to in the first question have not been accumulated in any data-set to my knowledge. Instead we are left with representative species from various communities to get a sense of these patterns. 
-
-This work takes the perspective that these two questions are intimately interwoven with each other. The coevolutionary process both effects and is affected by the network structure of the community as well as the distribution of functional traits across the community. As the network structure imposes dynamics on the traits mediating interactions, these changing traits affect the mode of interactions between species and therefore reciprocally impose dynamics on the network structure of the community. Using simple mathematical models to unravel this feedback loop, I can generate a set of specific and testable hypotheses pertaining to the relationship between the coevolutionary process and the structure of ecological communities. 
+This work takes the perspective that these two questions are intimately interwoven with each other. The coevolutionary process both effects and is affected by the network structure of the community as well as the distribution of functional traits across the community. As the network structure imposes dynamics on the traits mediating interactions, these changing traits affect the mode of interactions between species and therefore reciprocally impose dynamics on the network structure of the community. Using simple mathematical models to unravel this feedback loop, I will develop a set of specific and testable hypotheses pertaining to the relationship between the coevolutionary process and the structure of ecological communities.
 
 <!--
 This project, largely exploratory in nature, will provide a roadmap showing where future efforts will be best placed both for the collection of data relevant to testing hypotheses and for the development of new statistical methods for obtaining a crisp understanding of how coevolution molds the natural world.
@@ -148,7 +194,9 @@ This project, largely exploratory in nature, will provide a roadmap showing wher
 
 ### Outline of the approach:
 
-Again, the focus will be on pollination communities. Therefore, the community will be split into two guilds, one consisting of the flowers and the other consisting of the pollinators. Fittingly, there is a long-standing debate in the pollination literature on whether or not pollination as a process tends to produce higher degrees of specialization or instead more generalized interactions (pat willmer). To quantify the degree of specialization/generalization I will consider the interaction preference of an individual with respect to functional trait values (as opposed to taxonomic identity). This interaction preference can be represented by a statistical distribution across all possible trait values. Given that all trait values are equally abundant, we can model the particular value the individual chooses to interact with via a random variable captured by the previously mentioned statistical distribution. For simplicity, I start by assuming this distribution is normal with mean $\kappa$ and variance $\gamma^2$. Then $\gamma>0$ can be understood as the degree of generalization of this individual. Hence, the distribution of $\gamma$ across the community provides a way to describe the network structure of the community that is similar to the information provided by the degree distribution. If the average $\gamma$ is small and has low variance, we can anticipate the community to be highly modular. In contrast, if the average $\gamma$ is large and has low variance, then we can anticipate the community to be highly nested. To model the evolution of $\gamma$ we can treat it as a continuous trait. Assuming $\gamma$ follows a log-normal distribution within the population of any particular species, the transformed variable $\ln\gamma$ will be normally distributed. This allows us to develop a model of the evolution of $\overline{\ln\gamma}$, the mean-log degree of generalization for a given species, using the breeders equation. Extending this model to one that describes the evolution of the distribution of $\overline{\ln\gamma}$ across the entire community will pave the way to theoretical answers for question 2 above.
+Again, the focus will be on pollination communities. Therefore, the community will be split into two guilds, one consisting of the flower species and the other consisting of the pollinator species. Fittingly, there is a long-standing debate in the pollination literature on whether or not pollination as a process tends to produce higher degrees of specialization or instead more generalized interactions (pat willmer). The specialization and generalization of interactions is an important component of the network structure of the community. For a community to be more modular, there must be many specialized interactions. If these specialized interactions relax and evolve to include other species and thus become generalized, the modularity of the community will diminish. Hence, we can learn much about the network structure of communities simply by studying the distribution of generalization/specialization across the community.
+
+To quantify the degree of generalization of an individual I will consider the individuals interaction preference with respect to functional trait values (as opposed to taxonomic identity). This interaction preference can be represented by a statistical distribution across all possible trait values and is related in many ways to the notion of a niche. Given that all trait values are equally abundant, we can model the particular value the individual chooses to interact with using a random variable described by the interaction preference distribution. For simplicity, I start by assuming this distribution is normal with mean $\kappa$ and variance $\gamma^2$. Then $\gamma>0$ can be understood as the degree of generalization of this individual. Hence, the distribution of $\gamma$ across the community provides a way to describe the network structure of the community that is similar to the information provided by the degree distribution. If the average $\gamma$ is small and has low variance, we can anticipate the community to be highly modular. In contrast, if the average $\gamma$ is large and has low variance, then we can anticipate the community to be highly nested. To model the evolution of $\gamma$ we can treat it as a continuous trait. Assuming $\gamma$ follows a log-normal distribution within the population of any particular species, the transformed variable $\ln\gamma$ will be normally distributed. This allows us to develop a model of the evolution of $\overline{\ln\gamma}$, the mean-log degree of generalization for a given species, using the breeders equation. Extending this model to one that describes the evolution of the distribution of $\overline{\ln\gamma}$ across the entire community will pave the way to theoretical answers for question 2 above.
 
 For question 1, the focus is on functional trait evolution. Returning to the example of long-tongued flies and long-tubed flowers, the functional traits are the length of the tongues in the flies and the length of the tubes in the flowers. The coevolution of these traits has already been captured with the offset-matching model. However, that model contains the assumption of random encounters. If we are to incorporate interaction preferences then the model will need to be rederived in a way that incorporates non-random encounters. Denoting $z$ the value of the functional trait (proboscis or tube length, for example), the resulting model will be describing the evolution of the bivariate mean trait $(\bar z, \overline{\ln\gamma})$. For the sake of parsimony I assume these two traits to be genetically independent of one another.
 
