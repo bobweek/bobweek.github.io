@@ -11,58 +11,19 @@ csl: evolution.csl
 bibliography: ref.bib
 ---
 
-```{r number_figures, echo=FALSE}
-# This is a knitr hook to enable figure and table captions
-# number figures
-# from http://stackoverflow.com/a/18672268/1036500
-library("knitr")
-tn = local({
-  i = 0
-  function(x) {
-    i <<- i + 1
-    paste("<table><caption>", 'Figure ', i, ': ', x, "</caption><colgroup><col width='100'></col></colgroup><thead><tr class='header'></tr></thead><tbody></tbody></table><p>", sep = '')
-  }
-})
-knit_hooks$set(fig.cap = function(before, options, envir) {
-  if(!before)
-    tn(options$fig.cap)
-})
-default_output_hook = knit_hooks$get("output")
-knit_hooks$set(output = function(x, options) {
-  if (is.null(options$fig.cap) == F)  
-    x
-  else
-    default_output_hook(x,options)
-})
-
-# number tables
-# from http://stackoverflow.com/a/18672268/1036500
-to = local({
-  i = 0
-  function(x) {
-    i <<- i + 1
-    paste("<table><caption>", 'Table ', i, ': ', x, "</caption><colgroup><col width='100'></col></colgroup><thead><tr class='header'></tr></thead><tbody></tbody></table><p>", sep = '')
-  }
-})
-knit_hooks$set(tab.cap = function(before, options, envir) {
-  if(!before)
-    to(options$tab.cap)
-})
-default_output_hook = knit_hooks$get("output")
-knit_hooks$set(output = function(x, options) {
-  if (is.null(options$tab.cap) == F)  
-    x
-  else
-    default_output_hook(x,options)
-})
-```
-
 ```{r setup, echo=FALSE, message=FALSE}
-require(knitr)
-require(kfigr) # devtools::install_github("github mkoohafkan/kfigr")
-opts_chunk$set(message=FALSE, warning=FALSE)
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 ```
 
+```{r results="asis", echo=F}
+cat("
+<style>
+a {
+   color: black;
+}
+</style>
+")
+```
 
 \newcommand{\W}{\mathcal{W}}
 \newcommand{\R}{\mathbb{R}}
@@ -73,6 +34,7 @@ opts_chunk$set(message=FALSE, warning=FALSE)
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Matrix}[1]{\left(\begin{matrix}#1\end{matrix}\right)}
 
 <!--
 ## Summary
@@ -84,9 +46,9 @@ This
 
 ## Introduction to proposed work
 
-Coevolution has long been thought to drive the exaggeration of traits [@darwin1859origin;@ehrlich1964butterflies], promote major evolutionary transitions such as the evolution of sexual reproduction [@hamilton1980sex;@jaenike1978hypothesis;@lively1987evidence;@gandon2007evolution], and influence epidemiological dynamics [@anderson1982coevolution;@lion2015evolution;@lively2016coevolutionary]. Despite coevolution's long suspected importance, however, a rigorous understanding of both the mechanisms involved and the patterns produced by this process is still in its infancy. A clear understanding of the role that coevolution plays in shaping the diversity of life must account for the details of the mechanisms driving the coevolutionary process, be able to quantify its strength and significance in nature and to determine its consequences for ecological communities. The proposed research seeks to further develop past theoretical work contributing to these three main objectives.
+Coevolution, the reciprocal evolutionary response of two populations to their interactrion, has long been thought to play a key role in driving the exaggeration of traits [@darwin1859origin;@ehrlich1964butterflies], promoting major evolutionary transitions such as the evolution of sexual reproduction [@hamilton1980sex;@jaenike1978hypothesis;@lively1987evidence;@gandon2007evolution], manipulating the structure of ecological communities [@nuismer2013coevolution], influencing epidemiological dynamics [@anderson1982coevolution;@lion2015evolution;@lively2016coevolutionary], and maintaining the diversity of life [@yoder2010does]. However, despite coevolution's long suspected importance a rigorous understanding of both the mechanisms involved and the patterns produced by this process is still in its infancy. A clear understanding of the role that coevolution plays in the evolutionary play must account for the details of the mechanisms driving the coevolutionary process, be able to quantify its strength and significance in nature and determine its consequences for ecological communities. The proposed research seeks to further develop past theoretical work contributing to these three main objectives.
 
-Previous models capturing the relationship between community ecology and coevolution have focused on results pertaining to a small number of interacting species (cite roughgarden, abrams, holt and mcpeek for theory, strauss, benkman, berenbaum, zergall for empirical work). The common approach in each of these studies is to derive a model of mean trait evolution alongside a model of demographic dynamics for each species involved. Hence, if there are $N$ species under consideration, there will be $2N$ dynamical, often nonlinear, equations used to model the system. This approach has provided some analytical results for a few species, but rapidly becomes intractable with additional species. However, many of the patterns observed in ecological communities span dozens, even hundreds of species [manning and goldblatt, hubbel]. To overcome this difficulty a recent development in coevolutionary theory has taken the so-called mean field approach with respect to the identity of species (cite paper that's in review and scott's 2013 paper and a book or article on the mean-field approach). This approach allows the reduction of a high-dimensional problem involving equations describing the evolution of each species within a community to a low-dimensional one that focuses on the community as a whole. With this approach analytical results can be derived that capture the statistical nature of a community, but without explicit conclusions for any particular member of the community. Hence, the stage has been set to develop a mathematically rigorous theory of coevolutionary community ecology. The ultimate goal of the proposed work is to contribute to this development through extending previous work on the coevolution of mutualistic networks by incorporating further biological elements than have been previously considered (such as behaviour and demographic dynamics, see section Q3).
+A major limiting factor in past theoretical work comes from a common modelling approach. Previous models capturing the relationship between community ecology and coevolution have focused on results pertaining to a small number of interacting species (cite roughgarden, abrams, holt and mcpeek for theory, strauss, benkman, berenbaum, zergall for empirical work). The common approach in each of these studies is to derive a model of mean trait evolution alongside a model of demographic dynamics for each species involved. Hence, if there are $N$ species under consideration, there will be $2N$ dynamical, often nonlinear, equations used to model the system. This approach has provided some analytical results for a few species, but rapidly becomes intractable with additional species. However, many of the patterns observed in ecological communities span dozens, even hundreds of species [manning and goldblatt, hubbel]. To overcome this difficulty a recent development in coevolutionary theory has taken the so-called mean field approach with respect to the identity of species (cite paper that's in review and scott's 2013 paper and a book or article on the mean-field approach). This approach allows the reduction of a high-dimensional problem involving equations describing the evolution of each species within a community to a low-dimensional one that focuses on the community as a whole. With this approach analytical results can be derived that capture the statistical nature of the community, but without explicit conclusions for any particular member of the community. Hence, the stage has been set to develop a mathematically rigorous theory of coevolutionary community ecology. The ultimate goal of the proposed work is to contribute to this development through extending previous work on the coevolution of mutualistic networks by incorporating further biological elements than have been previously considered (such as behaviour and demographic dynamics, see section Q3).
 
 However, before such a contribution can be made there are two major steps to be taken. First, a more biologically realistic treatment of the mechanisms mediating the outcomes of ecological interactions needs to be incorporated into coevolutionary theory. Variation in this mechanism alone may explain a significant amount of functional diversity seen in nature. Second, a metric for the strength of coevolution within a community is required to quantify the role of coevolution in the community. A way to measure the strength of coevolution between a pair of species will be needed in order to derive this community-wide metric from first principles. Hence, a novel metric of pairwise-coevolution and a method to infer it will be introduced. Accomplishing these first two steps will brandish a framework ripe for rigorous investigations of the relationship between coevolution and ecological communities. 
 To tether this work to the empirical world, each step is motivated by the details of specific pollination networks. The primary example used throughout is the interaction between a long-tongued fly Moegistorhynchus longirostris and the flower it pollinates, Lapeirousia anceps, occuring in the coastal lowlands of South Africa [@pauw2009flies] (also, manning). Other fly-flower mutualisms from across the globe will be explored for cross-system comparisons. 
@@ -121,18 +83,29 @@ Since different species are often placed under different physiological constrain
 ### Outline of the approach:
 
 Previous work on the coevolutionary theory of quantitative traits have focused on two primary mechanisms; trait matching and trait differences. In the case of trait matching, it is assumed that the optimal phenotype of each species is the mean phenotype of the complementary species. This model results in very well behaved linear dynamics described by
+
+(@match)
 $$\Delta\bar z_i=G_iB_i(\bar z_j-\bar z_i).$$
+
 Here, $G_i$ denotes the additive genetic variance of the trait $z_i$, the small non-negative parameter $1\gg B_i\geq0$ is the strength of biotic selection induced by species $j$ onto species $i$ and $\bar z_i,\bar z_j$ represent the mean traits in species $i$ and $j$ respectively. This model predicts the mean traits for each species to converge to a common value that lies somewhere between their initial phenotypes. Hence, no escalation can occur in this model. 
 
 In contrast, @nuismer2010correlation developed a model based on trait differences that leads to pure escalation dynamics. The resulting dynamics of this model are
+
+(@diff)
 $$\Delta\bar z_i=G_i\sqrt{B_i}$$
+
 Under this model the mean traits of each species will forever increase at a constant rate independently of one another. Though this model predicts an arms race, it misses a crucial ingredient described by Darwin, that the traits in each species need only be slightly longer than the traits of the complementary species to maximize fitness. 
 
 By incorporating this notion of an optimal offset into the trait matching model, I will coalesce the two distinct sets of dynamics just described within a unifying framework that I call the offset-matching model. This generalized model of coevolution takes the form
+
+(@coal)
 $$\Delta\bar z_i=G_iB_i\delta_i+G_iB_i(\bar z_j-\bar z_i)$$
+
 where the additional term $\delta_i$ represents the offset between the traits of species $i$ and $j$ that maximizes the fitness benefits of species $i$ with repsect to their interaction. By setting $\delta_i=0$ for both species I obtain the classic trait matching model. Since $B_i$ is small it can be shown that by setting $\delta_i=1/\sqrt{B_i}$ the offset-matching model is approximated by the pure escalation model when $|\bar z_j-\bar z_i|$ is small.
 
-Using this model of offset-matching I can explain both the escalation and spatial covariation observed in nature. I plan to use the offset-matching model, focusing on mechanism of the interaction as manifested by the offset parameter $\delta$, as a platform to understand why there is such variation in the outcomes of these processes across the spatial distribution of coevolving pairs. If I assume constant strengths of biotic selection in two interacting species throughout their populations, then two explanations for the variability observed include the stochastic effects of drift and spatial variability in the offset term. These two explanations are not mutually exclusive and each taken on their own may require biologically unrealistic parameters in order to mimic real data. Hence, it is likely that a combination of random drift and spatial variability in mechanism will be able to explain the patterns observed within a biologically relevent subset of parameter space.
+Using this model of offset-matching I can explain both the escalation and spatial covariation observed in nature. I plan to use the offset-matching model, focusing on mechanism of the interaction as manifested by the offset parameter $\delta$, as a platform to understand why there is such variation in the outcomes of these processes across the spatial distribution of coevolving pairs. Assuming constant strengths of biotic selection in two interacting species throughout their populations, two explanations for the variability observed include the stochastic effects of drift and spatial variability in the offset term. These two explanations are not mutually exclusive and each taken on their own may require biologically unrealistic parameters in order to mimic real data. Hence, it is likely that a combination of random drift and spatial variability in mechanism will be able to explain the patterns observed within a biologically relevent subset of parameter space.
+
+The key parameters to be investigated are the variance of drift $(V_d)$ and the variance in offset $(V_\delta)$ for each species. In order to couple this theory to the empirical world I will use heuristic searches to find values for $(V_d,V_\delta)$ that roughly match the summary statistics of the data published in Pauw et al. [-@pauw2009flies].
 
 Though the quantitative genetic approach has the strength of providing analytic results, its weakness lies in the large amount of assumptions required to obtain such results. To account for this restriction, I plan to test the depency of my conclusions on the assumptions made by developing individual-based simulations that allow me to numerically derive results for generalized models. By comparing analytical results to simulations, I can quantify the extent to which particular assumptions prevent accurate descriptions of biological processes. Specifically, statistical tests, such as the t-test, can be used to calculate whether or not simulated results significantly differ from those predicted by quantitative genetic theory.
 
@@ -145,13 +118,25 @@ Our current understanding of coevolution's importance rests upon methods that fa
 ### Outline of the approach:
 
 A promising alternative to existing approaches is the development of a likelihood-based framework that uses routinely collected phenotypic data to estimate key parameters of the offset-matching model of coevolution and to test for the existence of coevolution. Specifically, the offset-matching model can be easily extended to predict the spatial distribution of population-level mean traits for a pair of interacting species that evolve in response to random genetic drift, abiotic selection, and coevolution [@nuismer2010correlation]. Crucially, this extension predicts that the distribution of trait means in the interacting species across a metapopulation will approach a bivariate normal distribution entirely described by five statistical moments: the metapopulation-level average of the population-level average key trait in each species among populations ($\mu_1$ and $\mu_2$), the variance of the population-level mean trait in each species among populations ($V_1$ and $V_2$), and the spatial association (covariance, $C$) between the key traits in each species. The key model parameters that quantify the strength of biotic selection acting on the two species are $B_1$ and $B_2$. Any selective agents acting independently of the interaction are captured collectively by the strengths of abiotic selection on each species; $A_1$ and $A_2$. All four of these model parameters are required to be non-negative and small ($\ll1$). Denoting the optimal phenotype with respect to abiotic selection by $\theta_i$ and the effective population size by $n_i$ for species $i$, classical quantitative genetic assumptions lead to the following recursion equations for the statistical moments describing the metapopulation:
+
+(@dynmet)
 $$\mu_i'=\mu_i+G_i\sqbr{B_i\delta_i+B_i(\mu_j-\mu_i)+A_i(\theta_i-\mu_i)}$$
 $$V_i'=(1-2A_iG_i)V_i+2B_jG_j(C-V_i)+G_i/n_i$$
 $$C'=(1-A_1G_1-A_2G_2)C+B_2G_2(V_1-C)+B_1G_1(V_2-C).$$
 
-Because the models predict a bivariate normal distribution of traits, calculating the likelihood of observing any particular set of trait values in a pair of interacting species is straightforward (SI). Maximizing the resulting likelihood with respect to the strengths of biotic and abiotic selection acting on the two species yields a quantitative estimate for the strength of coevolution under the assumption that the remaining model parameters have been accurately estimated (SI).
+Because the models predict a bivariate normal distribution of traits, calculating the likelihood of observing any particular set of trait values in a pair of interacting species is straightforward. In particular, letting $D=\{D_i\}_{i=1}^N\equiv\{(\bar z_1,\bar z_2)_i^\top\}_{i=1}^N$ denote the data (mean trait pairs of the interacting species from several populations) we get
 
-In addition to providing quantitative estimates for the strength of biotic selection, our method can be used to rigorously test for the presence of coevolution. Specifically, for a coevolutionary hypothesis to be supported, reciprocal selection must be demonstrated [@janzen1980coevolution;@thompson1994coevolutionary]. In our maximum likelihood framework, this long-standing and widely accepted definition of coevolution corresponds to demonstrating that the pair of parameters in our model that quantify the strength of biotic selection imposed on each species by the other are significantly greater than zero. By performing likelihood ratio tests, support for the coevolutionary hypothesis can be compared relative to support for the non-coevolutionary null hypotheses of unilateral evolution where $B_1=0$ or $B_2=0$, or evolution entirely independent of species interactions where $B_1=0$ and $B_2=0$ (`r figr('networkfig', TRUE, type="Figure")`). Due to the nested structure of these models, I can directly compare the likelihood of coevolution against the likelihoods of these null models by approximating p-values. `r figr('networkfig', TRUE, type="Figure")` shows that both $p_1$ and $p_2$ need to be less than the significance threshold $\alpha$ to support a coevolutionary hypothesis.
+(@lik)
+$$L(D|\mu,\Sigma)=\prod_{i=1}^N\frac{\exp\para{-\frac{1}{2}(D_i-\mu)^\top\Sigma^{-1}(D_i-\mu)}}{2\pi\sqrt{|\Sigma|}}, \ \Sigma=\Matrix{V_1 & C\\ C & V_2}.$$
+
+Using the equilibrium of system (@dynmet) we can derive expressions of the first five moments in terms of the selection strengths $A_1,A_2,B_1$ and $B_2$. Unfortunately these functions cannot be inverted to obtain the selection strengths as functions of the first five moments. Thus, we numerically solve for the $A_i$ and $B_i$ that maximize 
+
+(@likstr)
+$$L(D|A_1,A_2,B_1,B_2)\equiv L(D|\mu(A_1,A_2,B_1,B_2),\Sigma(A_1,A_2,B_1,B_2)).$$
+
+By maximizing this likelihood with respect to the strengths of biotic and abiotic selection acting on the two species a quantitative estimate for the strength of coevolution is obtained under the assumption that the remaining model parameters have been accurately estimated.
+
+In addition to providing quantitative estimates for the strength of biotic selection, our method can be used to rigorously test for the presence of coevolution. Specifically, for a coevolutionary hypothesis to be supported, reciprocal selection must be demonstrated [@janzen1980coevolution;@thompson1994coevolutionary]. In our maximum likelihood framework, this long-standing and widely accepted definition of coevolution corresponds to demonstrating that the pair of parameters in our model that quantify the strength of biotic selection imposed on each species by the other are significantly greater than zero. By performing likelihood ratio tests, support for the coevolutionary hypothesis can be compared relative to support for the non-coevolutionary null hypotheses of unilateral evolution where $B_1=0$ or $B_2=0$, or evolution entirely independent of species interactions where $B_1=0$ and $B_2=0$ (Figure @networkfig). Due to the nested structure of these models, I can directly compare the likelihood of coevolution against the likelihoods of these null models by approximating p-values. Figure @networkfig shows that both $p_1$ and $p_2$ need to be less than the significance threshold $\alpha$ to support a coevolutionary hypothesis.
 
 ```{r, include=F}
 require('jpeg')
@@ -165,17 +150,36 @@ plot_jpeg = function(path, scale, add=FALSE)
 }
 ```
 
-
-```{r networkfig, echo=F, fig.cap="Relationships between the coevolutionary hypothesis and non-coevolutionary hypotheses", fig.align='center', anchor="figure"}
+```{r networkfig, echo=F, fig.cap="(@networkfig) \\ Relationships between the coevolutionary hypothesis and non-coevolutionary hypotheses", fig.align='center', anchor="figure"}
 plot_jpeg('~/Documents/Website/bobweek.github.io/network.jpg',2)
 ```
+
+Restricting the selection parameters $B_i$ to match our null hypotheses of unilateral evolution ($B_1=0$ or $B_2=0$) results in a restricted likelihood ($L(D|A_1,A_2,0,B_2)$ or $L(D|A_1,A_2,B_1,0)$), one that is always less than $L(D|A_1,A_2,B_1,B_2)$. Then to calculate the significance of $B_1$, for example, we compute the probability that the statistic
+
+(@likrat)
+$$\Lambda=2\ln\para{\frac{L(D|A_1,A_2,B_1,B_2)}{L(D|A_1,A_2,0,B_2)}}$$
+
+lands within a given percentile of its distribution under the assumption of the null hypothesis $B_1=0$. We adopt the standard 95th percentile as our threshold for determining significance.
+
+According to Wilks' Theorem, the distribution of this statistic is approximated by a Chi-square for large sample sizes. However, typical numbers of populations sampled are on the order of ten. Hence, this approximation fails and empirical distributions need to be calculated  [@wasserman2013all]. To do so, we simulate 250 sets of data under the null model for each comparison, with each set of data containing the number of populations equal to those sampled empirically. This provides adequate resolution (p-value estimates span 0 to 1 in increments of 0.004) while remaining computationally feasible. Calculations have been carried out in the statistical programming language $R$ and scripts will be made available at:
+
+https://github.com/bobweek/inferring.coevolution
 
 
 ### Current Results:
 
-Applying this approach to two well-studied putative examples of coevolution, one being the pollination mutualism between M. longirostris and L. anceps and the other the antagonism between the fruit Camellia japonica and its weevil predator, Curculio camellia. I found strong support for pairwise coevolution in the antagonism, but no support in the mutualism. 
+I applied this maximum likelihood approach to two textbook examples of coevolution where previous work has implicated coevolution as a cause of trait exaggeration and spatial variability [@pauw2009flies; @toju2011weevils]: the interaction between the long-tongued fly M. longirostris and a plant it pollinates L. anceps and the interaction between the camellia plant Camellia japonica and its seed predator, the weevil Curculio camellia. In both cases, the interactions are thought to depend largely on a single key trait in each species (fly proboscis and plant floral tube lengths or weevil rostrum length and camellia pericarp thickness). In addition to the essential phenotypic data, previous work in both systems provided valuable additional information that allowed us to estimate key background parameters such as the likely trait optima in the absence of the interaction (the "abiotic" optima).
 
-obviously this section is incomplete
+The long-proboscid fly, M. longirostris, resides in lowland habitats near the coast of South Africa and pollinates a guild of at least 20 plant species [@manning1997themoegistorhynchus]. Among these species, the most widespread is L. anceps, a long-tubed perennial whose distribution extends outside the range of M. longirostris [@pauw2009flies]. Crucial to our analysis, we were able to estimate the likely optimal tube and proboscis lengths for these species in the absence of this particular interaction. Using the phenotypic data published by [@pauw2009flies], we inferred these parameters by averaging the trait values of additional species within the pollination assemblage. Details of the methods used to calculate other background parameters can be found in the supplementary information (SI \S\ref{data}). We found that the biotic selection strengths $B_1$ and $B_2$ on M. longirostris and L. anceps, respectively, do not statistically differ from zero ($p_1\approx$ 0.968, $p_2\approx$ 0.736, see @networkfig). Thus, our analysis fails to support the hypothesis of strict pairwise coevolution in this system. Our failure to find evidence of pairwise coevolution in this interaction may result from its actual absence or because the richness of the plant-pollinator community creates a scenario where coevolutionary selection is more diffuse and driven by a large number of weak pairwise interactions [@fox1988diffuse; @strauss2005toward]. In such a case, our approach may not be sufficiently powerful to detect the weak coevolution attributable to a single pairwise interaction. It is also possible that coevolution in this system is driven largely by indirect effects, undetectable with our approach, as has been recently suggested by [@guimaraes2017indirect].
+
+```{r biostr, echo=F, fig.cap="(@biostr) \\ Inferred strengths of biotic selection", fig.align='center', anchor="figure"}
+plot_jpeg('~/Documents/Website/bobweek.github.io/Bmtca.jpg',3)
+```
+
+We complemented our analysis of a plant-pollinator interaction with an analysis of the antagonistic interactions between the C. camellia weevil, an obligate seed predator of the C. japonica fruit [@toju2005imbalance]. Female weevils bore holes into the woody pericarps of the camellia to oviposit their offspring. Inside the fruit, weevil larvae feed on the seeds of the camellia up until the fourth instar, at which time they exit the fruit and overwinter [@toju2005imbalance]. These two species co-occur across Japan, although camellia populations where the weevil is absent also exist [@toju2005imbalance]. We estimated the strength of coevolution between the camellia and weevil using  data from previously published work [@toju2011metapopulation, @toju2011climatic] and the fact that male weevil rostrum lengths could be used as a proxy for the abiotic optimum of the female weevils since males do not interact with the camellia. The abiotic optima for the pericarp thickness of the camellia was inferred by averaging pericarp thicknesses across populations where weevils are absent. Both $B_1$, the strength of biotic selection on the weevil, and $B_2$, biotic selection on the camellia plant, significantly differed from zero ($p_1\approx$ 0, $p_2\approx$ 0, Figure @biostr). Hence, we found evidence for pairwise coevolution between the seed-eating weevil C. camellia and its host plant C. japonica. Unlike the plant-pollinator system, this interaction involves just two species. Hence there is no risk of diffusive coevolution masking the pairwise coevolutionary signal, making it easier to detect.
+
+These results demonstrate that coupling existing coevolutionary models with a maximum likelihood approach allows the strength of coevolutionary selection to be estimated using routinely collected phenotypic data. By providing a methodology that does not rely on extensive and system specific experimental manipulation, this approach greatly expands the range of systems for which the strength of coevolutionary selection can be estimated, paving the road for a more quantitative and critical assessment of coevolution's importance in natural systems.  Hence, when coupled with data from a broad range of empirical systems, this method holds the potential to settle long standing debates involving the importance of species interactions and coevolution in the evolution of various phenomena including phenotypic diversity, sexual reproduction, community structure, and epidemiological dynamics [@yoder2010does; @hamilton1980sex; @nuismer2013coevolution; @anderson1982coevolution].
+
 
 ## Q3: What is the role of coevolution in structuring mutualistic communities?
 
@@ -186,13 +190,11 @@ Here the focus is on the latter description. Since a particular species may use 
   1. What predicts the distribution of trait values across a community?
   2. When does coevolution produce specialization?
 
-This work takes the perspective that these two questions are intimately interwoven with each other. The coevolutionary process both effects and is affected by the network structure of the community as well as the distribution of functional traits across the community. As the network structure imposes dynamics on the traits mediating interactions, these changing traits affect the mode of interactions between species and therefore reciprocally impose dynamics on the network structure of the community. This observation is not particularly novel. Indeed, Nuismer et. al. [-@nuismer2013] investigated various aspects of the relationship between coevolution and the network structure of mutualistic communities, finding that strong coevolution tends to lead to higher modularity while weak coevolution results in nested communities. 
+This work takes the perspective that these two questions are intimately interwoven with each other. The coevolutionary process both effects and is affected by the network structure of the community as well as the distribution of functional traits across the community. As the network structure imposes dynamics on the traits mediating interactions, these changing traits affect the mode of interactions between species and therefore reciprocally impose dynamics on the network structure of the community. This observation is not particularly novel. Indeed, Nuismer et al. [-@nuismer2013coevolution] investigated various aspects of the relationship between coevolution and the network structure of mutualistic communities, finding that strong coevolution tends to lead to higher modularity while weak coevolution results in nested communities. 
 
 The novel contribution of this project comes from a goal to explicitly incorporate the behaviour of the organisms with respect to their interaction preferences. Previous models of coevolution focus on the role of functional trait values in mediating the outcomes of interactions. Here, in addition to predicting the effects of ecological interactions on fitness, I model the decision, or the propensity of interactions to take place at all. Assuming the interaction preference of an organism has a genetic basis I can model the evolution of this behavioral trait. Using this approach I can develop models that determine the necessary and sufficient conditions for specialized interactions to evolve.
 
-### Motivation:
-
-Again, the focus will be on pollination-based interactions and communities composed of such interactions. Therefore two guilds will form the basic structure of these communities, one consisting of the flower species and the other consisting of the pollinator species. Fittingly, there is a long-standing debate in the pollination literature on whether or not pollination as a process tends to produce higher degrees of specialization or instead more generalized interactions (pat willmer). MORE ON THIS DEBATE, WHAT ARE THE ARGUMENTS?
+The focus will be on pollination-based interactions and communities composed of such interactions. Therefore two guilds will form the basic structure of these communities, one consisting of the flower species and the other consisting of the pollinator species. Fittingly, there is a long-standing debate in the pollination literature on whether or not pollination as a process tends to produce higher degrees of specialization or instead more generalized interactions (pat willmer). MORE ON THIS DEBATE, WHAT ARE THE ARGUMENTS?
 
 ### Outline of the approach:
 
@@ -205,7 +207,7 @@ For question 1, the focus is on functional trait evolution. Returning to the exa
 $$\Delta\mu=f_1(\mu,\Sigma)$$
 $$\Delta \Sigma=f_2(\mu,\Sigma).$$
 
-The parameters I anticipate to be most important in determining when specialization will occur are the strengths of biotic selection ($B$) and the optimal offset ($\delta$). By imposing specific statistical distributions on these parameters across the community, I might find, for example, that a high variance in $\delta$ inevitably leads to the specialization in interactions between a subset of the community. 
+The parameters I anticipate to be most important in determining when specialization will occur are the strengths of biotic selection ($B$) and the optimal offset ($\delta$). By imposing specific statistical distributions on these parameters across the community, it may be discovered that, for example, a high variance in $\delta$ inevitably leads to the specialization in interactions between a subset of the community. 
 
 Although biotic selection is an important component of coevolution, it alone does not represent a coevolutionary process. Coevolution is defined by the reciprocal induction of biotic selection between two interacting populations. Denoting $B_f$ as the random variable representing the strength of biotic selection induced on the flowers by the pollinators and $B_p$ to the random variable representing strength of selection on the pollinators by the flowers, then $\sqrt{B_fB_p}$, the geometric mean of the two biotic selection strengths is a natural way to quantify the strength of coevolution between the two guilds. Thus, the distribution of this geometric mean across interacting pairs will capture the presence of coevolution throughout the community. Relating the properties of this distribution to specific ecological and evolutionary outcomes, such as the evolution of specialization, will provide important insight into the many ways that coevolution shapes ecological communities.
 
