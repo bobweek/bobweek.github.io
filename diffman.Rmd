@@ -1,0 +1,45 @@
+---
+title: "Differentiable Manifolds and Riemannian Geometry"
+output:
+  html_document:
+    css: style.css
+    theme: cosmo
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<style>
+.nobullet li {
+  list-style-type: none;
+}
+</style>
+
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\sqbr}[1]{\left[ #1 \right]}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+
+### 1.1
+
+1. This mapping is linear and linear mappings are continuous.
+
+2. onto: Rank$(A)\geq m$, one-to-one: Det$(A)\neq0$
+
+3. If $\bf{W}$ is an $n$-dim Euclidean space, then it has an inner-product $(x,y)$. We already know by the dimension theorem that there exists and isomorphism $\phi:\bf{W}\rightarrow\R^n$. Define the isomorphism $\phi^*:\bf{W}\rightarrow\R^n$ by
+
+$$\phi^*(x)=\frac{\|x\|}{\|\phi(x)\|}\phi(x)$$
+
+<div class="nobullet">
+* Then $(\phi^*(x),\phi^*(y))=\|x\|\|y\|\para{\frac{\phi(y)}{\|\phi(y)\|},\frac{\phi(x)}{\|\phi(x)\|}}=(x,y)$. Hence, $\phi^*$ is an isometry.
+</div>
+
+4. Obviously by listing the $n$ real components first, followed by the $n$ imaginary components, we have a $2n$-tuple of real numbers. So clearly $\C^n$ can be associated with $\R^n$.
