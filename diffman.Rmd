@@ -4,8 +4,6 @@ output:
   html_document:
     css: style.css
     theme: cosmo
-    toc: yes
-    toc_float: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -42,4 +40,6 @@ $$\phi^*(x)=\frac{\|x\|}{\|\phi(x)\|}\phi(x)$$
 * Then $(\phi^*(x),\phi^*(y))=\|x\|\|y\|\para{\frac{\phi(y)}{\|\phi(y)\|},\frac{\phi(x)}{\|\phi(x)\|}}=(x,y)$. Hence, $\phi^*$ is an isometry.
 </div>
 
-4. Obviously by listing the $n$ real components first, followed by the $n$ imaginary components, we have a $2n$-tuple of real numbers. So clearly $\C^n$ can be associated with $\R^n$.
+4. Obviously by listing the $n$ real components first, followed by the $n$ imaginary components, we have a $2n$-tuple of real numbers. So clearly $\C^n$ can be associated with $\R^{2n}$. This correspondence is an isomorphism only if $\C^n$ is interpreted as a vector space over $\R$. Otherwise, as vector space over $\C$, it does not make sense because the underlying fields are different (and not isomorphic).
+
+5. 
