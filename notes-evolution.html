@@ -19,9 +19,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-1.1/highlight.js"></script>
@@ -165,101 +162,6 @@ $(document).ready(function () {
 
 
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-
-
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
@@ -325,8 +227,14 @@ output:
 </div>
 <div id="discrete-time" class="section level4">
 <h4>Discrete Time</h4>
-<p><span class="math display">\[\phi_{t+1}(i)=\frac{n_{t+1}(i)}{N_{t+1}}=\frac{n_tW_t(i)}{N_t\overline{W}_t}=\phi_t(i)\frac{W_t(i)}{\overline{W}_t}\]</span></p>
-<p><span class="math display">\[\phi_{t+1}(i)-\phi_t(i)={\left( \frac{W_t(i)}{\overline{W}_t}-1 \right)}\phi_t(i)\]</span></p>
+<p><span class="math display">\[N_{t+1}=\sum_in_{t+1}(i)=\sum_iW_t(i)n_t(i)=\frac{N_t}{N_t}\sum_iW_t(i)n_t(i)\]</span></p>
+<p><span class="math display">\[=N_t\sum W_t(i)\frac{n_t(i)}{N_t}=N_t\sum W_t(i)\phi_t(i)=N_t\overline{W}_t\]</span></p>
+<p><span class="math display">\[\phi_{t+1}(i)=\frac{n_{t+1}(i)}{N_{t+1}}=\frac{n_t(i)W_t(i)}{N_t\overline{W}_t}=\phi_t(i)\frac{W_t(i)}{\overline{W}_t}\]</span></p>
+<p><span class="math display">\[\implies\phi_{t+1}(i)-\phi_t(i)={\left( \frac{W_t(i)}{\overline{W}_t}-1 \right)}\phi_t(i)\]</span></p>
+<ul>
+<li>Neat Observation: Compare the above to the Bayesian update; Given a hypothesis <span class="math inline">\(\psi_n(x)\)</span> and a likelihood <span class="math inline">\(L(x)\)</span>, Bayes theorem provides the updated hypothesis <span class="math inline">\(\psi_{n+1}\)</span> as</li>
+</ul>
+<p><span class="math display">\[\psi_{n+1}(x)=\frac{\psi_n(x)L(x)}{\int\psi_n(x)L(x)dx}=\psi_n(x)\frac{L(x)}{\overline L}\]</span></p>
 </div>
 </div>
 <div id="response-in-mean-and-variance" class="section level2">
@@ -354,6 +262,10 @@ output:
 <p><span class="math display">\[=\boxed{\frac{1}{\overline W}{\mathrm{Cov}}((\bar z_t-z)^2,W_t)-(\Delta\bar z_t)^2}\]</span></p>
 <p>Something to pay attention to in all of the above results is that they each depended on knowing how <span class="math inline">\(\phi_t(i)\)</span> changes. Here we only consider the effects of deterministic selection, but of course there are many other processes that can cause change in <span class="math inline">\(\phi_t(i)\)</span>.</p>
 </div>
+</div>
+<div id="the-geometric-mean-fitness" class="section level2">
+<h2>The Geometric Mean Fitness</h2>
+<p>Could it be more appropriate to consider the geometric mean of the Wrightian fitness of a population instead of the arithmetic mean? After all, Wrightian fitness’ canonical algebraic structure is multiplicative.</p>
 </div>
 <div id="the-inseparability-of-evolution-and-ecology" class="section level2">
 <h2>The inseparability of evolution and ecology</h2>
@@ -536,8 +448,6 @@ Note that random sampling is not the only source of stochasticiy. Consider my de
 
 
 
-</div>
-</div>
 
 </div>
 

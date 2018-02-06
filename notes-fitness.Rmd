@@ -2,7 +2,7 @@
 title: "First Steps"
 output: 
   html_document: 
-    toc: true
+    toc: false
     toc_float: true
     theme: cosmo
     css: style.css
@@ -44,6 +44,8 @@ For discrete traits we write $\phi(i)$ and $W(i)$ for the frequency and mean fit
 ## Population Dynamics
 
 Let's suppose there are $N_t$ different individuals in the population at time $t$, with each individual $i$ having fitness $\mathcal{W_{t+1}}(i)$. If we further suppose that generations are non-overlapping, then we obtain the population size in the next generation as $N_{t+1}=\sum_{i=1}^{N_t}\mathcal{W_{t+1}}(i)$. If each $\mathcal{W_{t+1}}(i)$ is a Poisson random variable with mean $W_{t+1}(i)$ (in symbols $\mathcal{W_{t+1}}(i)\sim\mathcal{P}(W_{t+1}(i))$), then by the additive property of Poisson random variables we have $N_{t+1}\sim\mathcal{P}\left(\sum_{i=1}^{N_t}W_{t+1}(i)\right)$. If selection is absent so that each $\mathcal{W_{t+1}}(i)$ is identically distributed with mean $W_{t+1}$, then $N_{t+1}\sim\mathcal{P}(W_{t+1}N_t)$. 
+
+  * Careful note: The random variable $N_t\mathcal{W_{t+1}}(1)$ is not the same as $\sum_{i=1}^{N_t}\mathcal{W_{t+1}}(i)$. Compute the variances for each case to see why.
 
 Let's now suppose we know the value of $N_0$ exactly and that $W_t=W$ for each $t$. Then $N_1\sim\mathcal{P}(WN_0)$ and $N_2\sim\mathcal{P}(WN_1)=\mathcal{P}(W^2N_0)$, right? We need to be careful here as $N_1$ is a random variable making $N_2$ a random variable with a compound distribution, that is, a parameter controlling the distribution is itself a random variable. We can use the laws of total expectation and variance to find out if $N_1$ is Poisson. If it is, then the expectation and variance will be equivalent. Otherwise it is not a Poisson random variable.
 
@@ -246,4 +248,12 @@ grid.arrange(plm,plv,ncol=2)
 ```
 
 ## Derivation from the birth-death framework
+
+## Other thoughts
+
+$$\dot N=rN\implies\dot{\ln N}=\dot n=r$$
+
+If we have $k$ categories with $N_1,\dots,N_k$ in each, what if we followed $N=\prod_i N_i$ instead of $N=\sum_i N_i$?
+
+
 

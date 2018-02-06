@@ -19,9 +19,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-1.1/highlight.js"></script>
@@ -165,101 +162,6 @@ $(document).ready(function () {
 
 
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-
-
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
@@ -277,6 +179,7 @@ div.tocify {
         <li><a href="index.html">Home</a></li>
         <li><a href="interactive_theory.html">Interactive Theory</a></li>
         <li><a href="inferring_coevolution.html">Inferring Coevolution</a></li>
+        <!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -286,6 +189,7 @@ div.tocify {
             <li><a href="notes-misc.html">Misc</a></li>
           </ul>
         </li>
+        -->
         
       </ul>
     </div><!--/.nav-collapse -->
@@ -318,6 +222,9 @@ output:
 <div id="population-dynamics" class="section level2">
 <h2>Population Dynamics</h2>
 <p>Let’s suppose there are <span class="math inline">\(N_t\)</span> different individuals in the population at time <span class="math inline">\(t\)</span>, with each individual <span class="math inline">\(i\)</span> having fitness <span class="math inline">\(\mathcal{W_{t+1}}(i)\)</span>. If we further suppose that generations are non-overlapping, then we obtain the population size in the next generation as <span class="math inline">\(N_{t+1}=\sum_{i=1}^{N_t}\mathcal{W_{t+1}}(i)\)</span>. If each <span class="math inline">\(\mathcal{W_{t+1}}(i)\)</span> is a Poisson random variable with mean <span class="math inline">\(W_{t+1}(i)\)</span> (in symbols <span class="math inline">\(\mathcal{W_{t+1}}(i)\sim\mathcal{P}(W_{t+1}(i))\)</span>), then by the additive property of Poisson random variables we have <span class="math inline">\(N_{t+1}\sim\mathcal{P}\left(\sum_{i=1}^{N_t}W_{t+1}(i)\right)\)</span>. If selection is absent so that each <span class="math inline">\(\mathcal{W_{t+1}}(i)\)</span> is identically distributed with mean <span class="math inline">\(W_{t+1}\)</span>, then <span class="math inline">\(N_{t+1}\sim\mathcal{P}(W_{t+1}N_t)\)</span>.</p>
+<ul>
+<li>Careful note: The random variable <span class="math inline">\(N_t\mathcal{W_{t+1}}(1)\)</span> is not the same as <span class="math inline">\(\sum_{i=1}^{N_t}\mathcal{W_{t+1}}(i)\)</span>. Compute the variances for each case to see why.</li>
+</ul>
 <p>Let’s now suppose we know the value of <span class="math inline">\(N_0\)</span> exactly and that <span class="math inline">\(W_t=W\)</span> for each <span class="math inline">\(t\)</span>. Then <span class="math inline">\(N_1\sim\mathcal{P}(WN_0)\)</span> and <span class="math inline">\(N_2\sim\mathcal{P}(WN_1)=\mathcal{P}(W^2N_0)\)</span>, right? We need to be careful here as <span class="math inline">\(N_1\)</span> is a random variable making <span class="math inline">\(N_2\)</span> a random variable with a compound distribution, that is, a parameter controlling the distribution is itself a random variable. We can use the laws of total expectation and variance to find out if <span class="math inline">\(N_1\)</span> is Poisson. If it is, then the expectation and variance will be equivalent. Otherwise it is not a Poisson random variable.</p>
 <p><span class="math display">\[{\mathbb{E}}(N_2)={\mathbb{E}}({\mathcal{W}}){\mathbb{E}}(N_1)=W^2N_0\]</span></p>
 <p><span class="math display">\[\mathrm{Var}(N_2)=(\mathrm{Var}({\mathcal{W}})+\mathbb{E}({\mathcal{W}})^2)\mathbb{E}(N_1)=(1+W)W^2N_0\neq\mathbb{E}(N_2)\]</span></p>
@@ -459,11 +366,12 @@ require(gridExtra)</code></pre>
 </div>
 </div>
 </div>
-
-
-
+<div id="derivation-from-the-birth-death-framework" class="section level2">
+<h2>Derivation from the birth-death framework</h2>
 </div>
-</div>
+
+
+
 
 </div>
 

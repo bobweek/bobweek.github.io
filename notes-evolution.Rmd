@@ -2,7 +2,7 @@
 title: "Evolution"
 output: 
   html_document: 
-    toc: true
+    toc: false
     toc_float: true
     theme: cosmo
     css: style.css
@@ -52,10 +52,17 @@ $$D_tn_t=N_tD_t\phi_t+\phi_tD_tN_t=N_t\phi_t\para{\ln W_t-\overline{\ln W_t}}+\p
 
 #### Discrete Time
 
-$$\phi_{t+1}(i)=\frac{n_{t+1}(i)}{N_{t+1}}=\frac{n_tW_t(i)}{N_t\overline{W}_t}=\phi_t(i)\frac{W_t(i)}{\overline{W}_t}$$
+$$N_{t+1}=\sum_in_{t+1}(i)=\sum_iW_t(i)n_t(i)=\frac{N_t}{N_t}\sum_iW_t(i)n_t(i)$$
 
-$$\phi_{t+1}(i)-\phi_t(i)=\para{\frac{W_t(i)}{\overline{W}_t}-1}\phi_t(i)$$
+$$=N_t\sum W_t(i)\frac{n_t(i)}{N_t}=N_t\sum W_t(i)\phi_t(i)=N_t\overline{W}_t$$
 
+$$\phi_{t+1}(i)=\frac{n_{t+1}(i)}{N_{t+1}}=\frac{n_t(i)W_t(i)}{N_t\overline{W}_t}=\phi_t(i)\frac{W_t(i)}{\overline{W}_t}$$
+
+$$\implies\phi_{t+1}(i)-\phi_t(i)=\para{\frac{W_t(i)}{\overline{W}_t}-1}\phi_t(i)$$
+
+  * Neat Observation: Compare the above to the Bayesian update; Given a hypothesis $\psi_n(x)$ and a likelihood $L(x)$, Bayes theorem provides the updated hypothesis $\psi_{n+1}$ as
+
+$$\psi_{n+1}(x)=\frac{\psi_n(x)L(x)}{\int\psi_n(x)L(x)dx}=\psi_n(x)\frac{L(x)}{\overline L}$$
 
 ## Response in Mean and Variance
 
@@ -96,6 +103,16 @@ $$=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\Delta\bar 
 $$=\boxed{\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)-(\Delta\bar z_t)^2}$$
 
 Something to pay attention to in all of the above results is that they each depended on knowing how $\phi_t(i)$ changes. Here we only consider the effects of deterministic selection, but of course there are many other processes that can cause change in $\phi_t(i)$.
+
+## The Geometric Mean Fitness
+
+Could it be more appropriate to consider the geometric mean of the Wrightian fitness of a population instead of the arithmetic mean? After all, Wrightian fitness' canonical algebraic structure is multiplicative.
+
+Geometric mean fitness might be appropriate for the individual-level Wrightian fitness, not the population-level. To see this we can assume a set of $k$ effects that act multiplicatively on the individual fitness, $\{W_i\}_{i=1}^k$, so that fitness of the individual can be written
+
+$$W=\prod_{i=1}^kW_i^{w_i}$$
+
+where the $w_i$ are the weights of each effect and $\sum w_i=1$. Under certain conditions, as $k\rightarrow\infty$, $W\overset{d}{\rightarrow}\ln\mathcal{N}$.
 
 ## The inseparability of evolution and ecology
 
