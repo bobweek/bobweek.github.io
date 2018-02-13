@@ -1,0 +1,45 @@
+---
+title: "A coevolutionary theory of pollination"
+date: February 26, 2018
+author: Bob Week
+output: revealjs::revealjs_presentation
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(viridis)
+```
+
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\argmax}{\mathrm{argmax}}
+\newcommand{\argmin}{\mathrm{argmin}}
+\newcommand{\CLAIM}{\bf{Claim}}
+\newcommand{\PF}{\bf{Proof}}
+
+<!-- start by introducing community ecology and coevolutionary theory... separately. focus on the aspects most pertinent to your research (network structure and trait evolution). transition to the specifics of pollination biology. hone in on south africa system. discuss the mechanism mediating their interaction. play video clip. introduce the offset matching model by tying it together with the other models. use data to show the existence of an optimal offset. move on to consider the diversity of the system and ponder why such diversity exists. contemplate various potential explanations. then ask, "but what if this diversity is simply due to diversity in mechanism?". what does this mean biologically? maybe wind conditions change from one location to another that create differences in the optimal offset. as we saw from the video, the longer the proboscis, the more difficult it is to score. this difficulty will likely fluctuate with environmental conditions such as wind. dive into chapter 1. after finishing develop segway to the next chapter. -->
+
+# A coevolutionary theory of pollination}
+
+
+![](flowers.jpg)
+
+# Community Ecology
+
+# Ceovolution
+
+#
+
+</br>
+
+<video width="640" height="480" controls>
+  <source src="/home/bob/Videos/cut_fly.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video> 
+

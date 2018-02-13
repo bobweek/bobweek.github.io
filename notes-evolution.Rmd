@@ -112,7 +112,7 @@ Geometric mean fitness might be appropriate for the individual-level Wrightian f
 
 $$W=\prod_{i=1}^kW_i^{w_i}$$
 
-where the $w_i$ are the weights of each effect and $\sum w_i=1$. Under certain conditions, as $k\rightarrow\infty$, $W\overset{d}{\rightarrow}\ln\mathcal{N}$.
+where the $w_i$ are the weights of each effect and $\sum w_i=1$. Under certain conditions, as $k\rightarrow\infty$, $W\overset{d}{\rightarrow}\ln\mathcal{N}$... clt
 
 ## The inseparability of evolution and ecology
 
