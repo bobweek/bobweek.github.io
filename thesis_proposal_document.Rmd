@@ -106,15 +106,15 @@ After a weak selection approximation ($\beta_i^2\gg\sigma_i^2+\sigma_j^2$), thes
 
 Here, $G_i$ denotes the additive genetic variance of the trait $z_i$, the small non-negative parameter $0\leq B_i\ll1$ is the strength of biotic selection induced by species $j$ onto species $i$. This model predicts the mean traits for each species to converge to a common value that lies somewhere between their initial phenotypes. Hence, no escalation can occur in this model.
 
-In contrast, Nuismer et al. [-@nuismer2010correlation] developed a model based on trait differences that leads to pure escalation dynamics. One way to derive this model is to assume fitness follows a Gaussian that is translated a distance equal to the "root-width" of biotic selection. Here the width of biotic selection is denoted by $\beta_i^2$ and its root is $\beta_i$. See Lande [-@lande1976natural] for a brief discussion on this quantity. Hence,
+In contrast, Nuismer et al. [-@nuismer2010correlation] developed a model based on trait differences that leads to pure escalation dynamics. One way to derive this model is to assume fitness follows a Gaussian that is translated a distance equal to the "root-width" of biotic selection. Here the strength of biotic selection is denoted by $B_i$ and its root is $\sqrt {B_i}$. Hence,
 
-(@fit2) $$W_i(z_i,z_j)=W_{i,\max}\exp\para{\frac{(z_j+\beta_i-z_i)^2}{2\beta_i^2}}.$$
+(@fit2) $$W_i(z_i,z_j)=W_{i,\max}\exp\para{-\frac{B_i}{2}(z_j+B_i^{-1/2}-z_i)^2}.$$
 
 Under the assumption of weak selection this distance is quite large and the resulting dynamics are approximated by
 
 (@diff1) $$Δ\bar z_i=G_i\sqrt{B_i} + G_i B_i (\bar z_j-\bar z_i).$$
 
-Alternatively, this model can be derived by modelling fitness with the sigmoid function (Figure (@sigmoid))
+Alternatively, this model can be derived by modelling fitness with the sigmoid function (Figure @sigmoid)
 
 (@fit3) $$W_i(z_i,z_j)=\frac{W_{i,\max}}{1+e^{B_i(z_j-z_i)}}$$
 
@@ -134,7 +134,7 @@ xl <- expression('z'['i']-'z'['j'])
 plot(s,S,cex=0.01,xlab=xl,ylab=yl)
 ```
 
-Unfortunately this function is not friendly to the clean algebraic analysis that Gaussian functions comply with and thus requires some extra steps. The extra steps involved are a series of Taylor approximations around $B_i$ for resolving the nonlinearities that arise from taking this route. At each Taylor expansion, the approximation involves keeping terms that are linear with respect to $B_i$, but neglects higher order terms. This results in the exact same dynamics as in eqn (@diff1).
+Unfortunately this function is not friendly to the clean algebraic analysis that Gaussian functions comply with and thus requires some extra steps. The extra steps are a series of Taylor approximations around $B_i$ that allow the approximation of mean fitness. At each Taylor expansion, the approximation involves keeping terms that are linear with respect to $B_i$, but neglects higher order terms. This results in the exact same dynamics as in eqn (@diff1).
 
 Originally Nuismer et al. [-@nuismer2010correlation] took these approximations a step further by assuming terms of order $B_i$ and higher are negligible. This resulted in the pure escalation model resulting from trait differences expressed as
 
@@ -154,12 +154,13 @@ Using the same series of steps described for the derivation of the trait-matchin
 
 By setting $δ_i=0$ for both species the classic trait matching model, eqn (@match), is retrieved. In hindsight of the above discussion it is easily seen that by setting $δ_i=1/\sqrt{B_i}$, the offset-matching model is approximated by the pure escalation model when $|\bar z_j−\bar z_i|$ is small. Hence, this new model, which has been dubbed the offset-matching model of coevolution, has coalesced two previously distinct models of coevolution into one unifying framework.
 
-### Outline of the approach:
-
-Using the offset-matching model of coevolution, both the escalation and spatial covariation observed in nature can be explained. This offset-matching model can be used as a platform to understand why there is such variation in the outcomes of these arms races across the spatial distribution of coevolving pairs by focusing on the mechanism of the interaction as manifested by the offset parameter $δ$. 
 Returning to pollination as a motivating example the optimal offset will vary for each individual and each interaction an individual participates in. The offset for a fly will depend on, for example, the behavior of the fly (such as its flight pattern if it hovers while feeding) and the amount of nectar in the tube of the flower. Thus, by optimal offset for an individual it is meant the offset that will on average benefit this individual the most across all potential interactions.
 
-By incorporating a variance in $\delta$ across a metapopulation we can expect variance in the outcomes of this process. Hence, the trait diversity observed in Pauw et al [-@pauw2009flies] may explained by variation in the mechanism mediating this interaction. To test this hypothesis a metapopulation model of coevolution will be constructed from the offset-matching model. This model will incorporate the stochastic effects due to drift, providing an underlying null model to be tested against. The variance of $\delta$ may in principle be inferred from available data using maximum likelihood. The significance of this variance can then be tested for with a likelihood ratio test.
+### Outline of the approach:
+
+Using the offset-matching model of coevolution, both the escalation and spatial covariation observed in nature can be explained. Furthermore, by focusing on the mechanism of the interaction as manifested by the offset parameter $δ$, this model can be used as a platform to understand why there is such variation in the outcomes of arms races across the spatial distribution of coevolving pairs. 
+
+By incorporating a variance in $\delta$ across a metapopulation we can expect a variance in the outcomes of the coevolutionary process. Hence, the trait diversity observed in Pauw et al [-@pauw2009flies] may explained by variation in the mechanism mediating this interaction. To test this hypothesis a metapopulation model of coevolution will be constructed from the offset-matching model. This model will incorporate the stochastic effects due to drift, providing an underlying null model to be tested against. The variance of $\delta$ may in principle be inferred from available data using maximum likelihood. The significance of this variance can then be tested for with a likelihood ratio test.
 
 <!--
 assume perfect heritability (G=phenotypic diversity)
@@ -241,6 +242,8 @@ This analysis of a plant-pollinator interaction was complemented by an analysis 
 
 These results demonstrate that coupling existing coevolutionary models with a maximum likelihood approach allows the strength of coevolutionary selection to be estimated using routinely collected phenotypic data. By providing a methodology that does not rely on extensive and system specific experimental manipulation, this approach greatly expands the range of systems for which the strength of coevolutionary selection can be estimated, paving the road for a more quantitative and critical assessment of coevolution's importance in natural systems. Therefore, when coupled with data from a broad range of empirical systems, this method holds the potential to settle long standing debates involving the importance of species interactions and coevolution in the evolution of various phenomena including phenotypic diversity, sexual reproduction, community structure, and epidemiological dynamics [@yoder2010does; @hamilton1980sex; @nuismer2013coevolution; @anderson1982coevolution].
 
+This project has been submitted to the journal _Nature_ and made it into review but was later rejected. The manuscript is currently being reformatted to be submitted to the journal _Science_.
+
 ## Q3: When does pollinator preference matter?
 
 #### (Introduction to the non-random encounters model of coevolution)
@@ -253,7 +256,7 @@ One potential implication of pollinator preference is on the diversity of traits
 
 ### Outline of the approach
 
-Free-living individuals within a population may exhibit a preference towards particular organisms with which they interact. This interaction preference can be represented by a statistical distribution across all possible trait values. Interestingly, this notion is related in many ways to the concept of a niche [@vazquez2006community]. The particular trait value an individual chooses to interact with can be modelled using a random variable defined by the interaction preference distribution. In reality this distribution may be a highly complex multi-modal function. However, for the sake of simplicity I start by assuming this distribution is normal with mean $\kappa$ and variance $\gamma^2$. These parameters have a biological interpretation; $\kappa$ represents the phenotype an individual prefers to interact with and $\gamma$ represents how focused the individual is on its preferred phenotype. Alternatively, $\gamma$ can be thought of as a measure of generalization. However, the notion of generalization/specialization is typically restricted to the number of species a population is found to interact with.
+Individuals within a population may exhibit a preference towards particular forms of organisms with which they interact. This interaction preference can be represented by a statistical distribution across all possible trait values. Interestingly, this notion is related in many ways to the concept of a niche [@vazquez2006community]. The particular trait value an individual chooses to interact with can be modelled using a random variable defined by the interaction preference distribution. In reality this distribution may be a highly complex multi-modal function. However, for the sake of simplicity I start by assuming this distribution is normal with mean $\kappa$ and variance $\gamma^2$. These parameters have a biological interpretation; $\kappa$ represents the phenotype an individual prefers to interact with and $\gamma$ represents how focused the individual is on its preferred phenotype. Alternatively, $\gamma$ can be thought of as a measure of generalization. However, the notion of generalization/specialization is typically restricted to the number of species a population is found to interact with.
 
 To derive a model of mean trait dynamics, we first write down the fitness function of an individual of species $i$ in guild 1 used to derive the offset-matching model
 
@@ -275,9 +278,9 @@ Hence, the change in $\bar z_i$ is
 
 (@traitdyn) $$\Delta\bar z_i=G_i\frac{\partial\ln\overline{W}_i}{\partial\bar z_i}.$$
 
-Evaluating this expression will lead to a simple model of trait evolution that incorporates the interaction preference of individuals. This model can then be easily extended to a metapopulation model.
+Evaluating this expression will lead to a simple model of trait evolution that incorporates the interaction preference of individuals.
 
-To understand if the variation observed in nature can be explained by variance in pollinator preference an approach analagous to that described in section Q1 will be taken. By incorporating a variance in $\kappa$ across a metapopulation we can expect variance in the outcomes of this process. Hence, the trait diversity observed in Pauw et al [-@pauw2009flies] may explained by variation in pollinator preference. To test this hypothesis a metapopulation model of coevolution will be constructed from the offset-matching model. This model will incorporate the stochastic effects due to drift, providing an underlying null model to be tested against. The variance of $\kappa$ may in principle be inferred from available data using maximum likelihood. The significance of this variance can then be tested for with a likelihood ratio test.
+To understand if the variation observed in nature can be explained by variance in pollinator preference an approach analagous to that described in section Q1 will be taken. By incorporating a variance in $\kappa$ across a metapopulation we can expect a variance in the outcomes of the coevolutionary process. Hence, the trait diversity observed in Pauw et al [-@pauw2009flies] may explained by variation in pollinator preference. To test this hypothesis a metapopulation model of coevolution will be constructed from the offset-matching model with pollinator preference. This model will incorporate the stochastic effects due to drift, providing an underlying null model to be tested against. The variance of $\kappa$ may in principle be inferred from available data using maximum likelihood. The significance of this variance can then be tested for with a likelihood ratio test.
 
 <!--
 An implicit assumption of this approach is that every individual within a species has the same interaction preference. But this is not true in nature. If such preferences have an underlying genetic architecture and exhibit additive genetic variance throughout their population, then these behavioral traits (both the preferred phenotype $\kappa$ and the degree of generalization $\gamma$) are subject to evolution by natural selection. 
@@ -295,8 +298,8 @@ The second, which is the focus of the proposed work, is to discover basic princi
 
 The primary tool used for this project is theoretical quantitative-genetics. Hence, all of the assumptions of quantitative-genetic theory must be adopted. This includes assumptions such as the normality of phenotypic distributions, random mating, blending inheritance and constant additive genetic variance. Beyond the essential assumptions of quantitative genetic theory, I work with the two basic assumptions relevant at the community level: 1) The outcomes of interactions between any two members of separate guilds are mediated by the same traits in each species. This allows the theory to be developed around a single physical trait for each guild (such as proboscis or nectar tube lengths). 2) The mean phenotype and population size of any particular species are both treated as random variables. It will be assumed that for each species within a guild, these random variables are distributed independently and identically. This assumption transitions the models used from sets of equations describing the evolution and demographic dynamics of each species explicitly to a set of equations describing the dynamics of the distribution of traits and abundances of each guild as a whole. This last assumption is the essential component that makes this approach a mean-field approach. Starting with this set of assumptions, I will develop simple models of coevolving communities and use them to answer the following questions:
 
-  * What distribution of trait values across a community emerges from biotic selection?
-  * When does coevolution produce specialization?
+  1. What distribution of trait values across a community emerges from biotic selection?
+  2. When does coevolution produce specialization?
 
 This work takes the perspective that these two questions are intimately interwoven with each other. The coevolutionary process both effects and is affected by the network structure of the community as well as the distribution of functional traits across the community. The network structure of interspecific interactions determines the net biotic selection pressures on the traits that mediate the outcomes of such interactions. Hence, as these traits evolve the interactions they dictate evolve with them. Thus, trait evolution reciprocally imposes dynamics on the network structure of the community, creating a feedback loop. This observation is not particularly novel. Indeed, Nuismer et al. (2013) investigated various aspects of the relationship between coevolution and the network structure of mutualistic communities, finding that, among other results, strong matching coevolution tends to lead to higher modularity while weak matching coevolution results in nested communities.
 
@@ -311,9 +314,6 @@ As mentioned in section Q3, $\gamma$ can be thought of as representing the degre
 Since $\gamma$ is a continuous trait, quantitative genetics can be used to model its evolution. However, because $\gamma$ is a positive number, we cannot assume it is normally distributed within a species as required by quantitative-genetic assumptions. Instead, by assuming $\gamma$ follows a log-normal distribution within any given species, the transformed variable $g=\ln\gamma$ will be normally distributed. This allows the development of a model that captures the evolution of $g$, the mean-log degree of generalization, using the breeders equation.
 
 The distribution of $\bar\gamma$, the mean degree of generalization of a species, across each guild comprising the community provides a way to describe the network structure of the community that is similar to the information provided by the degree distribution, the number of nodes with a particular degree (see Figure @nets). If the community-level average $\bar\gamma$ is small (which implies that species are highly specialized on average) and has low variance (which implies that most species are highly specialized), we can anticipate the community to be sparsely connected. In contrast, if the community-level average $\bar\gamma$ is large (highly generalized species on average) and has low variance (most species are highly generalized), then we can anticipate the community to be highly connected (see Figure @nets). 
-
-*Extending this model to one that describes the evolution of the distribution of $g$ across the entire community will pave the way to theoretical answers for question 2 above.
-
 
 ```{r, include=F}
 require(GGally)
@@ -395,7 +395,7 @@ par(mar=c(2,2,2,2))
 grid.arrange(A,net1,dd1,B,net2,dd2,nrow=2,widths=c(0.5,1,1))
 ```
 
-For sub-question 1 of this section, the focus is on functional trait evolution. Returning to the example of long-tongued flies and long-tubed flowers, the functional traits are the length of the tongues in the flies and the length of the tubes in the flowers. The coevolution of these traits has already been captured with the offset-matching model. However, that model contains the assumption of random encounters. Incorporating interaction preferences requires re-deriving the model in a way that incorporates non-random encounters. Denoting $z$ the value of the functional trait (proboscis or tube length, for example), the resulting model describes the evolution of the guild-level mean and variance of the multivariate species-level mean trait $(\bar z,\bar κ,\bar g)$. This trait consists of one physical component, the mean functional trait of the species ($\bar z$), and two behavioral components, the mean preference of the species ($\bar\kappa$) and the mean generalization of the species ($\bar g$). For the sake of parsimony these traits are assumed to be genetically independent of one another.
+For sub-question 1 of this section, the focus is on functional trait evolution. Returning to the example of long-tongued flies and long-tubed flowers, the functional traits are the length of the tongues in the flies and the length of the tubes in the flowers. The offset-matching model of coevolution with pollinator preference can be extending to describe the evolution of species-level mean traits across a guild of species in a way analogous to the derivation of the metapopulation models described in each of the three previous sections. The resulting model captures the evolution of the guild-level mean and variance of the multivariate species-level mean trait $(\bar z,\bar κ,\bar g)$. This trait consists of one physical component, the mean functional trait of the species ($\bar z$), and two behavioral components, the mean preference of the species ($\bar\kappa$) and the mean generalization of the species ($\bar g$). For the sake of parsimony these traits are assumed to be genetically independent of one another.
 
 <!-- As a cognitive crutch, assume for now that there are $K$ species in guild 2 with abundances $N_1, N_2, \dots, N_K$. Then, assuming each species’ functional trait is distributed normally with mean $\bar y_i$ and variance $\sigma^2_{2,i}$, we have
 
@@ -437,11 +437,11 @@ Hence, the change in $\bar x_i$ is
 
 -->
 
-By extending the model developed in chapters 1 and 3 to a community-wide model, the biotic causes of specialization can be explored. In particular, denoting $\mu_i=(\E \bar z_i,\E \bar κ_i,\E \bar g_i)^\top$ and $\nu_i=\para{\V\bar z_i,\V\bar κ_i, \V\bar g_i}^\top$ to be the multivariate mean vector and vector of variances of the three traits across guild $i$, it would be ideal to find relatively simple equations describing the evolution of these quantities of the form
+By extending the model developed in chapters 1 and 3 to a community-wide model, the biotic causes of specialization can be explored, providing an answer to sub-question 2. In particular, denoting $\mu_i=(\E \bar z_i,\E \bar κ_i,\E \bar g_i)^\top$ and $\nu_i=\para{\V\bar z_i,\V\bar κ_i, \V\bar g_i}^\top$ to be the multivariate mean vector and vector of variances of the three traits across guild $i$, it would be ideal to find relatively simple equations describing the evolution of these quantities of the form
 
-(@commmean) $$\Delta\mu_i=f(\mu_i,\nu_i,\mu_j,\nu_j)$$
+(@commmean) $$\Delta\mu_i=f_i(\mu_i,\nu_i,\mu_j,\nu_j)$$
 
-(@commvar) $$\Delta\nu_i=g(\mu_i,\nu_i,\mu_j,\nu_j).$$
+(@commvar) $$\Delta\nu_i=g_i(\mu_i,\nu_i,\mu_j,\nu_j).$$
 
 The parameters anticipated to be most important in determining when specialization will occur are the strengths of biotic selection ($B$) and the optimal offset ($δ$). By imposing specific statistical distributions on these parameters across the community, it may be discovered that, for example, a high variance in $δ$ inevitably leads to the specialization in interactions between a subset of the community.
 
