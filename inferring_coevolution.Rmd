@@ -15,7 +15,7 @@ rm(list=ls())
 
 ## Introduction
 
-This is a tutorial for employing the method of coevolutionary inference described in [Week & Nuismer 2017](weeknuismer17.html). Data used in this tutorial is available [here](https://github.com/bobweek/inferring.coevolution). All analysis is done in the statistal programming language R.
+This is a tutorial for employing the method of coevolutionary inference described in [Week & Nuismer 2018](weeknuismer17.html). Data used in this tutorial is available [here](https://github.com/bobweek/inferring.coevolution). All analysis is done in the statistal programming language R.
 
 
 ## Phenotypic data

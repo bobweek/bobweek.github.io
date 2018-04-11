@@ -8,9 +8,12 @@ output:
 
 <!--<img src="images/users/meprof.jpg" height="150" width="150" border="0"/>-->
 
-I am a student at the University of Idaho working on a PhD under professor [Scott Nuismer](http://www.webpages.uidaho.edu/~snuismer/Nuismer_Lab/). My degree program is [Bioinformatics and Computational Biology](http://www.uidaho.edu/sci/bcb) (BCB) which is housed within [The Institute for Bioinformatics and Evolutionary Studies](http://www.ibest.uidaho.edu/) (IBEST). 
+I am a PhD candidate at the University of Idaho working with professor [Scott Nuismer](http://www.webpages.uidaho.edu/~snuismer/Nuismer_Lab/). My degree program is [Bioinformatics and Computational Biology](http://www.uidaho.edu/sci/bcb) (BCB) which is housed within [The Institute for Bioinformatics and Evolutionary Studies](http://www.ibest.uidaho.edu/) (IBEST).
 
-I am currently working on a method for detecting pairwise coevolution in nature. I recently gave a talk on this project at the Evolution meeting in Portland, OR. My slides are available [here](files/evolutionTalk2017.pdf).
+My interests are in extending coevolutionary theory to the community context. Currently I am focused on doing this entirely in terms of phenotypic evolution, that is, basing all of my models on quantitative genetics (QG). Hence, I live in the world of microevolution. However, I am beginning to think about larger spatial and temporal scales and thus how to marry QG with phylogenetics and metacommunity ecology.
 
 My CV is available [here](files/cv.pdf).
 
+### Updates
+
+  * I have recently finished developing a method for measuring pairwise coevolution in nature which will hopefully be published soon. A poster summarizing this work is available [here](files/poster.pdf).
