@@ -20,8 +20,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -30,12 +30,10 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
 }
 </script>
 
@@ -180,7 +178,6 @@ $(document).ready(function () {
 
         <li><a href="index.html">Home</a></li>
         <li><a href="interactive_theory.html">Interactive Theory</a></li>
-        <li><a href="inferring_coevolution.html">Inferring Coevolution</a></li>
         <!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
@@ -209,12 +206,12 @@ $(document).ready(function () {
 
 <!--<img src="images/users/meprof.jpg" height="150" width="150" border="0"/>-->
 <p>I am a PhD candidate at the University of Idaho working with professor <a href="http://www.webpages.uidaho.edu/~snuismer/Nuismer_Lab/">Scott Nuismer</a>. My degree program is <a href="http://www.uidaho.edu/sci/bcb">Bioinformatics and Computational Biology</a> (BCB) which is housed within <a href="http://www.ibest.uidaho.edu/">The Institute for Bioinformatics and Evolutionary Studies</a> (IBEST).</p>
-<p>My interests are in extending coevolutionary theory to the community context. Currently I am focused on doing this entirely in terms of phenotypic evolution, that is, basing all of my models on quantitative genetics (QG). Hence, I live in the world of microevolution. However, I am beginning to think about larger spatial and temporal scales and thus how to marry QG with phylogenetics and metacommunity ecology.</p>
+<p>My interests are in extending coevolutionary theory to the community context. Currently I am focused on doing this entirely in terms of phenotypic evolution, that is, deriving all of my models from a quantitative genetic (QG) foundation. Hence, I live in the world of microevolution. However, I have begun to think about larger spatial and temporal scales and thus how to marry QG with phylogenetics and metacommunity ecology.</p>
 <p>My CV is available <a href="files/cv.pdf">here</a>.</p>
 <div id="updates" class="section level3">
 <h3>Updates</h3>
 <ul>
-<li>I have recently finished developing a method for measuring pairwise coevolution in nature which will hopefully be published soon. A poster summarizing this work is available <a href="files/poster.pdf">here</a>.</li>
+<li>I have recently finished developing a method for measuring pairwise coevolution in nature which will hopefully be published soon.</li>
 </ul>
 </div>
 
