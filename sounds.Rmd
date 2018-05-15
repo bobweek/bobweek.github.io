@@ -1,0 +1,13 @@
+---
+title: "Sounds"
+output: 
+  html_document: 
+    theme: cosmo
+    css: style.css
+---
+
+```{r}
+htmltools::includeHTML("imbedsoundcloud.html")
+```
+
+![](meditation001.mp3)
