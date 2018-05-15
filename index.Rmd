@@ -17,9 +17,3 @@ My CV is available [here](files/cv.pdf).
 ### Updates
 
   * I have recently finished developing a method for measuring pairwise coevolution in nature which will hopefully be published soon.
-
-
-```{r}
-htmltools::includeHTML("imbedsoundcloud.html")
-```
-
