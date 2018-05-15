@@ -6,8 +6,6 @@ output:
     css: style.css
 ---
 
-```{r}
+```{r, echo=F}
 htmltools::includeHTML("imbedsoundcloud.html")
 ```
-
-![](meditation001.mp3)
