@@ -1,0 +1,54 @@
+---
+title: "The measurement of coevolution - UNDER CONSTUCTION!!"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list=ls())
+```
+
+This is a tutorial for employing the method of coevolutionary inference described in Week & Nuismer 20XX. Data used in this tutorial comes from Toju & Sota 2006 and has been collected [here](https://github.com/bobweek/measuring.coevolution) for convenience. All analysis is done in the statistal programming language R.
+
+## Introduction to the biology and data
+
+To demonstrate the utility of our method, we walk through each step taken to obtain the results produced in the main text. We restrict our analysis in this document to the excellent data provided by Toju & Sota 2006. This paper documents the antagonistic interaction between the female __Curculio camellia__ weevil and the __Camellia japonica__ fruit. Female weevils bore holes into the woody pericarps of the camellia to oviposit. Inside the fruit, weevil larvae feed on the seeds of the camellia up until the fourth instar, at which time they exit the fruit and overwinter. These two species co-occur across Japan, although camellia populations where the weevil is absent also exist.
+
+## Phenotypic data
+
+Estimates of mean trait pairs across multiple locations comprise the core data required to utilize this method. With these data we calculate the metapopulation mean traits, variance of local mean traits across space, and the spatial covariance of local mean traits for the two interacting species. To begin we read in the trait data to a data frame in R.
+
+```{r, message=FALSE, warning=FALSE}
+
+# read in data
+load("toju_pairs.Rda")
+head(toju_df)
+
+```
+
+Note the column names in this data frame. The column __rostrum__ contains the mean rostrum lengths at each location used in our analysis. Column __pericarp__ contains the mean pericarp thickness at each location. Column __location__ contains the names of each location which we keep identical to those used in Toju & Sota 2006. Finally, the __island__ column contains the islands for which each of these locations belong. We can visualize these data with following line of code:
+
+```{r}
+# plot data
+library(ggplot2)
+ggplot(toju_df,aes(x=rostrum,y=pericarp,color=island))+geom_point()+theme_bw()
+```
+
+
+## Background parameters
+
+Before we can infer the strengths of biotic selection we need to infer some key background parameters. Specifically, we need to know what the optimal offset is for each species, the abiotic optima, the effective population sizes and additive genetic variances.
+
+### $\rightarrow \theta_i$
+
+To infer the optimal offset for both species we need data that measures a proxy for interaction performance for each species alongside trait differences. For the plant-pollinator system data has been collected that captures the percent of nectar consumed by the fly, the number of pollen grains deposited by the flower and the difference in fly proboscis length and flower tube length. We will fit curves to these data that relate the difference in traits to performance for both the fly and flower. We then find the trait differences associated with the maximum of these curves and use these values for the optimal offsets.
+
+
+## Estimating Selection
+
+## Hypothesis Testing

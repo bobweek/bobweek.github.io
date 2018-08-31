@@ -11,7 +11,7 @@
 
 
 
-<title>Inferring Coevolution - UNDER CONSTUCTION!!</title>
+<title>The measurement of coevolution - UNDER CONSTUCTION!!</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -275,8 +275,8 @@ div.tocify {
       <ul class="nav navbar-nav">
 
         <li><a href="index.html">Home</a></li>
-        <li><a href="interactive_theory.html">Interactive Theory</a></li>
-        <li><a href="inferring_coevolution.html">Inferring Coevolution</a></li>
+        <li><a href="interactive_theory.html">Interactive theory</a></li>
+        <li><a href="measuring_coevolution.html">Measuring coevolution</a></li>
         <!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
@@ -298,130 +298,41 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Inferring Coevolution - UNDER CONSTUCTION!!</h1>
+<h1 class="title toc-ignore">The measurement of coevolution - UNDER CONSTUCTION!!</h1>
 
 </div>
 
 
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p>This is a tutorial for employing the method of coevolutionary inference described in <a href="weeknuismer17.html">Week &amp; Nuismer 2017</a>. Data used in this tutorial is available <a href="https://github.com/bobweek/inferring.coevolution">here</a>. All analysis is done in the statistal programming language R.</p>
+<p>This is a tutorial for employing the method of coevolutionary inference described in Week &amp; Nuismer 20XX. Data used in this tutorial comes from Toju &amp; Sota 2006 and has been collected <a href="https://github.com/bobweek/measuring.coevolution">here</a> for convenience. All analysis is done in the statistal programming language R.</p>
+<div id="introduction-to-the-biology-and-data" class="section level2">
+<h2>Introduction to the biology and data</h2>
+<p>To demonstrate the utility of our method, we walk through each step taken to obtain the results produced in the main text. We restrict our analysis in this document to the excellent data provided by Toju &amp; Sota 2006. This paper documents the antagonistic interaction between the female <strong>Curculio camellia</strong> weevil and the <strong>Camellia japonica</strong> fruit. Female weevils bore holes into the woody pericarps of the camellia to oviposit. Inside the fruit, weevil larvae feed on the seeds of the camellia up until the fourth instar, at which time they exit the fruit and overwinter. These two species co-occur across Japan, although camellia populations where the weevil is absent also exist.</p>
 </div>
 <div id="phenotypic-data" class="section level2">
 <h2>Phenotypic data</h2>
+<p>Estimates of mean trait pairs across multiple locations comprise the core data required to utilize this method. With these data we calculate the metapopulation mean traits, variance of local mean traits across space, and the spatial covariance of local mean traits for the two interacting species. To begin we read in the trait data to a data frame in R.</p>
+<pre class="r"><code># read in data
+load(&quot;toju_pairs.Rda&quot;)
+head(toju_df)</code></pre>
+<pre><code>##   rostrum pericarp  location island
+## 1    9.63     5.42   Nodzumi    HNS
+## 2    7.98     4.32      Kamo    HNS
+## 3    9.13     3.88   Nagaoka    HNS
+## 4   10.42     6.07   Kutsuki    HNS
+## 5   10.79     4.90 Hiratsuka    HNS
+## 6    9.89     6.30     Kyoto    HNS</code></pre>
+<p>Note the column names in this data frame. The column <strong>rostrum</strong> contains the mean rostrum lengths at each location used in our analysis. Column <strong>pericarp</strong> contains the mean pericarp thickness at each location. Column <strong>location</strong> contains the names of each location which we keep identical to those used in Toju &amp; Sota 2006. Finally, the <strong>island</strong> column contains the islands for which each of these locations belong. We can visualize these data with following line of code:</p>
+<pre class="r"><code># plot data
+library(ggplot2)
+ggplot(toju_df,aes(x=rostrum,y=pericarp,color=island))+geom_point()+theme_bw()</code></pre>
+<p><img src="measuring_coevolution_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <div id="background-parameters" class="section level2">
 <h2>Background parameters</h2>
 <p>Before we can infer the strengths of biotic selection we need to infer some key background parameters. Specifically, we need to know what the optimal offset is for each species, the abiotic optima, the effective population sizes and additive genetic variances.</p>
-<div id="rightarrow-delta_i" class="section level3">
-<h3><span class="math inline">\(\rightarrow \delta_i\)</span></h3>
-<p>To infer the optimal offset for both species we need data that measures a proxy for interaction performance for each species alongside trait differences. For the plant-pollinator system data has been collected that captures the percent of nectar consumed by the fly, the number of pollen grains deposited by the flower and the difference in fly proboscis length and flower tube length. We will fit curves to these data that relate the difference in traits to performance for both the fly and flower. We then find the trait differences associated with the maximum of these curves and use these values for the optimal offsets.</p>
-<p>To begin we read in the offset data to a data frame in R.</p>
-<pre class="r"><code>library(gdata)
-
-# read in data
-offset.data &lt;- read.xls(&quot;PlantPollinatorOffset.xlsx&quot;)
-head(offset.data)</code></pre>
-<pre><code>##   TONGUE.TUBE POLLEN_GRAINS_DEPOSITED PERCENT_NECTAR_CONSUMED  X
-## 1     -1.1037                      10               0.8823529 NA
-## 2     -1.6037                       8               0.9637599 NA
-## 3     -3.1037                       7               0.8155340 NA
-## 4     -7.6037                       6               0.4342105 NA
-## 5    -11.6037                       2               0.0000000 NA
-## 6     -4.9792                       6               0.1213235 NA</code></pre>
-<p>Note the column names in this data frame. The column TONGUE.TUBE denotes the length of the proboscis minus the length of tube for the interacting fly and flower individuals. POLLEN_GRAINS_DEPOSITED contains the number of pollen grains deposited onto the fly by the flower for each recorded interaction. Likewise PERCENT_NECTAR_CONSUMED contains the percentage of nectar consumed by the fly for each interaction. This percentage has been calculated by dividing the volume of nectar within the flower tube after the interaction by the volume of nectar within the tube before the interaction.</p>
-<p>Now that we have our data, let’s prepare to do some inference. I’ll start by performing a quadratic regression of TONGUE.TUBE onto PERCENT_NECTAR_CONSUMED. This will return a parabola that we can use to find the optimal offset for the fly.</p>
-<pre class="r"><code># setting up the variables
-off1 &lt;- offset.data$TONGUE.TUBE
-off2 &lt;- offset.data$TONGUE.TUBE^2
-
-# performing the regression
-opt.off.fly.model &lt;- 
-  lm(offset.data$PERCENT_NECTAR_CONSUMED ~ off1 + off2)
-
-# plotting the results
-library(ggplot2)
-ggplot(offset.data,aes(x=TONGUE.TUBE,y=PERCENT_NECTAR_CONSUMED))+
-  geom_point()+stat_smooth(method = lm, formula=y~poly(x,2))+xlab(&quot;Tongue-Tube(mm)&quot;)+ylab(&quot;Percent Nectar Consumed&quot;)</code></pre>
-<p><img src="inferring_coevolution_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p>We can now use algebra to solve for the peak of the above parabola, or solve for it numerically as shown below.</p>
-<pre class="r"><code># pulling the coefficients out of the quadratic fit
-coeffs &lt;- opt.off.fly.model$coefficients
-
-# solving with algebra
--coeffs[2]/(2*coeffs[3])</code></pre>
-<pre><code>##     off1 
-## 16.96538</code></pre>
-<pre class="r"><code># solving numerically
-getOffset &lt;- function(x){
-  y &lt;- as.numeric(coeffs[2]*x + coeffs[3]*x^2)
-  return(-y)
-}
-optim(0,getOffset)$par</code></pre>
-<pre><code>## [1] 16.96538</code></pre>
-<p>Let’s repeat this analysis to find the optimal offset for the flower.</p>
-<pre class="r"><code># performing the regression
-opt.off.flower.model &lt;- 
-  lm(offset.data$POLLEN_GRAINS_DEPOSITED ~ off1 + off2)
-
-# plotting the results
-library(ggplot2)
-ggplot(offset.data,aes(x=TONGUE.TUBE,y=POLLEN_GRAINS_DEPOSITED))+
-  geom_point()+stat_smooth(method = lm, formula=y~poly(x,2))+xlab(&quot;Tongue-Tube(mm)&quot;)+ylab(&quot;Pollen Grains Deposited&quot;)</code></pre>
-<p><img src="inferring_coevolution_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>As you can see, we run into a bit of a snag here as the parabola is convex with the quadratic coefficient 0.032353. This means it opens up and therefore has no maximum. Hence, the data suggests that the flower does not have an optimal offset, but that a longer tube length is always more beneficial.</p>
-<!--
-If we want to find an optimal offset, we need to fit a curve that __always__ has a maximum. Gaussian curves not only satisfy this need, but they also approximate concave parabolas quite well near their maxima, making them ideal candidates to solve this problem. The expression of a typical Gaussian function is shown below.
-
-$$g(x)=m\exp\left(-\frac{(x-c)^2}{2w}\right)$$
-
-Implementing the Gaussian fit is a matter of setting up a non-linear least squares problem. As with linear and quadratic regression, our goal is to minimize the sum of the squared differences between our data and the resulting curve. The Gaussian curve has three parameters, a maximum ($m$), a center ($c$) and a width ($w$). We can solve for the maximum, center and width parameters that minimize the sum of the squares numerically. Because the maximum and width parameters are positive numbers, we have to take care to ensure we don't get negative results.
-
-
-```r
-# fitting a gaussian curve
-# p[1] = maximum
-# p[2] = center
-# p[3] = width
-gaussianfit <- function(p){
-  m <- exp(p[1])
-  c <- p[2]
-  w <- exp(p[3])
-  sum(( offset.data$POLLEN_GRAINS_DEPOSITED - 
-         m*exp(-(offset.data$TONGUE.TUBE - c)^2/2*w) )^2)
-}
-sol <- optim( runif(3,0,1), gaussianfit )
-
-# attempt many fits and choose the best one
-for(i in 1:50){
-  try <- optim( runif(3,0,1), gaussianfit )
-  if(try$value < sol$value) sol <- try
-}
-max    <- exp(sol$par[1])
-center <- sol$par[2]
-width  <- exp(sol$par[3])
-
-# plotting the results
-fitted_gaussian <- function(x){
-  max*exp(-(x-center)^2/2*width)
-}
-ggplot(offset.data,aes(x=TONGUE.TUBE,y=POLLEN_GRAINS_DEPOSITED))+
-  geom_point()+stat_smooth(method = lm, formula=y~fitted_gaussian(x))
-```
-
-<img src="inferring_coevolution_files/figure-html/unnamed-chunk-6-1.png" width="672" />
-
-This provides an optimal offset for the flower of 4.6908419.
--->
-</div>
 <div id="rightarrow-theta_i" class="section level3">
 <h3><span class="math inline">\(\rightarrow \theta_i\)</span></h3>
-</div>
-<div id="rightarrow-n_i" class="section level3">
-<h3><span class="math inline">\(\rightarrow n_i\)</span></h3>
-</div>
-<div id="rightarrow-g_i" class="section level3">
-<h3><span class="math inline">\(\rightarrow G_i\)</span></h3>
+<p>To infer the optimal offset for both species we need data that measures a proxy for interaction performance for each species alongside trait differences. For the plant-pollinator system data has been collected that captures the percent of nectar consumed by the fly, the number of pollen grains deposited by the flower and the difference in fly proboscis length and flower tube length. We will fit curves to these data that relate the difference in traits to performance for both the fly and flower. We then find the trait differences associated with the maximum of these curves and use these values for the optimal offsets.</p>
 </div>
 </div>
 <div id="estimating-selection" class="section level2">
