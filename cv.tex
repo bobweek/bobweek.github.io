@@ -108,6 +108,13 @@
 \noindent \textit{#4} \par        % Journal
 \normalsize \par}
 
+\newcommand{\ReviewEntry}[2]{
+\noindent \textbf{#1} \hfill      % Title
+\colorbox{White}{%
+\parbox{6em}{%
+\hfill\color{Black}#2}} \par  % Date
+\normalsize \par}
+
 \newcommand{\WorkEntry}[4]{				  % Same as \EducationEntry
 \noindent \textbf{#1} \hfill      % Jobname
 \colorbox{Black}{\color{White}#2} \par  % Duration
@@ -165,13 +172,19 @@
 %\PublicationEntry{The measurement of coevolution in the wild}{-}{Week, B.; Nuismer, S.L.}{-}
 
 
+%%% Publications
+%%% ------------------------------------------------------------
+\NewPart{Reviews}{}
+\ReviewEntry{Reviewer for \emph{The American Naturalist}}{2018}
+\ReviewEntry{Reviewer for \emph{Evolution}}{2018}
+
 %%% Work experience
 %%% ------------------------------------------------------------
 \NewPart{Relevant Work Experience}{}
 
 \EducationEntry{Mathematics Tutor}{2010-2012}{Clark Community College}{A part time position through the college's tutoring center providing personalized teaching to students taking coursework spanning from high school mathematics to introductory Differential Equations and Linear Algebra.}
 \sepspace
-\EducationEntry{Engineering Physics Teaching Assistant}{2010-2011}{Clark Community College}{One quarter of grading assignments and exams for a sophomore level physics course.}
+%\EducationEntry{Engineering Physics Teaching Assistant}{2010-2011}{Clark Community College}{One quarter of grading assignments and exams for a sophomore level physics course.}
 
 %%% Extracurricular
 %%% ------------------------------------------------------------
@@ -187,7 +200,7 @@
   
   \SkillsEntry{Software}{\textsc{R}, \textsc{Python}, \textsc{Mathematica}, \textsc{C++}, \textsc{Java}, \LaTeX}
   
-  \SkillsEntry{Mathematics}{measure theory, probability, mathematical statistics, differential equations (ordinary, partial and stochastic), dynamical systems (stability analysis and bifurcation theory), group theory (representation theory), basic topological manifolds.}
+  \SkillsEntry{Mathematics}{measure theory, probability, elementary functional analysis, mathematical statistics, differential equations (ordinary, partial and stochastic), dynamical systems (stability analysis and bifurcation theory), group theory (representation theory), basic topological manifolds.}
   
   %%% Interests
   %%% ------------------------------------------------------------
@@ -195,7 +208,7 @@
   
   \SkillsEntry{Cool stuff}{road bikes, sport climbing, building interactive art installations}
   \sepspace
-  \SkillsEntry{Nerdy stuff}{equivariant bifurcation theory, differentiable manifolds, fractals, modular synthesizers}
+  \SkillsEntry{Nerdy stuff}{equivariant bifurcation theory, differentiable manifolds, modular synthesizers}
   
   \end{document}
   
