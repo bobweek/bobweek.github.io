@@ -10,4 +10,4 @@ I am a PhD candidate at the University of Idaho working with professor [Scott Nu
 
 My interests are in extending coevolutionary theory to the community context. Currently I am focused on doing this entirely in terms of phenotypic evolution, that is, deriving all of my models from a quantitative genetic (QG) foundation. Hence, I live in the world of microevolution. However, I have begun to think about larger spatial and temporal scales and thus how to marry QG with phylogenetics and metacommunity ecology.
 
-My CV is available [here](files/cv.pdf).
+My CV is available [here](cv.pdf).
