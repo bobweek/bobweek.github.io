@@ -34,7 +34,7 @@ In terms of modelling, a population can be very abstract. Its concept is not res
 
 #### Continuous Time
 
-Consider a population of $T$ different types, each type $i$ with $n_t(i)$ individuals at time $t$. If we denote $\phi_t(i)$ to be the proportion of individuals within type $i$ at time $t$ among the population, we have $\phi_t(i)=\frac{n_t(i)}{N_t}$ where $N_t=\sum_{i=1}^Tn_t(i)$. Denote the expected fitness of each individual within type $i$ as $W_t(i)$. Then committing ourselves to be content with expected dynamics and adopting the notation $D_t$ in place of $\frac{d}{dt}$, we have
+Consider a population of $T$ different types, each type $i$ with $n_t(i)$ individuals at time $t$. If we denote $\phi_t(i)$ to be the proportion of individuals within type $i$ at time $t$ among the population, we have $\phi_t(i)=\frac{n_t(i)}{N_t}$ where $N_t=\sum_{i=1}^Tn_t(i)$. Denote the expected fitness of each individual within type $i$ as $W_t(i)$ and assume individuals of type $i$ only produce other individuals of type $i$. That is, the type of an individual is a perfectly heritable trait. Then, focusing on expected dynamics and adopting the notation $D_t$ in place of $\frac{d}{dt}$, we have (from our notes on population dynamics)
 
 $$D_tN_t=D_t\sum_in_t(i)=\sum_in_t(i)\ln W_t(i)=\overline{\ln W_t}N_t.$$
 
@@ -44,13 +44,13 @@ $$=\frac{n_t(i)\ln W_t(i)-n_t(i)\overline{\ln W_t}}{N_t}=\phi_t(i)\para{\ln W_t(
 
 Setting $\rho_t(i)=\ln W_t(i)-\overline{\ln W_t}$ (what I refer to as the "relative" Malthusian fitness) we can solve for $\phi_t(i)$ to get
 
-$$\phi_t(i)=\phi_0(i)e^{\int_0^t\rho_s(i)ds}$$
+$$\phi_t(i)=\phi_0(i)\exp\left(\int_0^t\rho_s(i)ds\right)$$
 
 Just as a sanity check, we have
 
 $$D_tn_t=N_tD_t\phi_t+\phi_tD_tN_t=N_t\phi_t\para{\ln W_t-\overline{\ln W_t}}+\phi_tN_t\overline{\ln W_t}=N_t\phi_t\ln W_t=n_t\ln W_t.$$
 
-#### Discrete Time
+#### Discrete Time (non-overlapping generations)
 
 $$N_{t+1}=\sum_in_{t+1}(i)=\sum_iW_t(i)n_t(i)=\frac{N_t}{N_t}\sum_iW_t(i)n_t(i)$$
 
@@ -285,6 +285,8 @@ Another way would be to assume $\phi_t$ is normal and integrate the equation $\p
 Returning to the perspective of dispersal as geographic mutation, we can replace $\eta$ with $m$, where I'm now using $m$ to represent the standard deviation in location between offspring and parent.
 
 ### Breeding Value as a Trait
+
+I think this will be the most effective way at capturing imperfect inheritance.
 
 What happens if the mean offspring trait of an individual is allowed to evolve so that it is not always the trait of the parental individual?
 

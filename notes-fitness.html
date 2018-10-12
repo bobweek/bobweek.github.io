@@ -20,8 +20,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -30,10 +30,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -177,8 +179,8 @@ $(document).ready(function () {
       <ul class="nav navbar-nav">
 
         <li><a href="index.html">Home</a></li>
-        <li><a href="interactive_theory.html">Interactive Theory</a></li>
-        <li><a href="inferring_coevolution.html">Inferring Coevolution</a></li>
+        <li><a href="interactive_theory.html">Interactive theory</a></li>
+        <li><a href="measuring_coevolution.html">Measuring coevolution</a></li>
         <!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
@@ -211,7 +213,7 @@ output:
     toc: true
     toc_float: true
 -->
-<p>These notes are the result of the interplay between my background in mathematics and my development as a theoretical biologist. I have placed them here primarily for my own reference. As I continue to learn and explore I will update these notes with my findings.</p>
+<p>These notes are the result of the interplay between my background in mathematics and my development as a theoretical biologist. I have placed them here primarily for my own reference, but also offer them as a resource to other scientists. Much of what is provided in these notes are hard to procure from the main literature (if it exists in the main literature) and many books such as Burger (2000) or Rice (20XX) don’t provide axiomatic (that is, straightforward) derivations and leave out many of what I’ve found to be the most general and beautiful results in the mathematical translation of the evolutionary process. Furthermore, it appears the most mathemtically competent evolutionary biologists I’ve met either don’t understand what I mean when I ask about a general mathematical theory of evolution, believe my approach is not biologically motivated and therefore irrelevant, or think this has all been done before (and yet fail to point me towards the literature where such work exists). As a result, I’ve found my time is better spent focusing on my own derivations instead of slogging through an ad-hoc and often contradictory literature. This has led me to some beautiful convergences and insights. As an example of a nice convergence between my “weirdo” approach and some well accepted model is my stumbling upon what I realized later to be a generalization of Kimura’s continuum of alleles model (Kimura 1965). A nice insight that sort of fell out of my “weirdo” approach is the relation between demographic stochasticity, hard/soft selection and drift (when selection is hard, drift does not disappear with large populations and when selection is soft, drift has the “typical” relation to population size). As I continue to learn and explore I will update these notes with my findings.</p>
 <div id="fitness" class="section level2">
 <h2>Fitness</h2>
 <p>I denote the fitness of an individual by <span class="math inline">\({\mathcal{W}}\)</span>, a <a href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson</a> distributed random variable. Why Poisson? Firstly, the fitness of an individual is the number of offspring it leaves, which is a non-negative integer. This coincides precisely with the support of the Poisson distribution. Secondly, the Poisson distribution has the property of maximizing <a href="https://en.wikipedia.org/wiki/Principle_of_maximum_entropy">entropy</a> for all distributions that share its support under the constraint of having some specified mean. This is another of way stating that, aside from the first <a href="https://en.wikipedia.org/wiki/Moment_(mathematics)">statistical moment</a>, the Poisson distribution assumes the least information about the random variable it is modelling. If more information is known, a more precise distribution can be invoked. However, this would also make the resulting model less general.</p>
@@ -221,7 +223,7 @@ output:
 </div>
 <div id="population-dynamics" class="section level2">
 <h2>Population Dynamics</h2>
-<p>Let’s suppose there are <span class="math inline">\(N_t\)</span> different individuals in the population at time <span class="math inline">\(t\)</span>, with each individual <span class="math inline">\(i\)</span> having fitness <span class="math inline">\(\mathcal{W_{t+1}}(i)\)</span>. If we further suppose that generations are non-overlapping, then we obtain the population size in the next generation as <span class="math inline">\(N_{t+1}=\sum_{i=1}^{N_t}\mathcal{W_{t+1}}(i)\)</span>. If each <span class="math inline">\(\mathcal{W_{t+1}}(i)\)</span> is a Poisson random variable with mean <span class="math inline">\(W_{t+1}(i)\)</span> (in symbols <span class="math inline">\(\mathcal{W_{t+1}}(i)\sim\mathcal{P}(W_{t+1}(i))\)</span>), then by the additive property of Poisson random variables we have <span class="math inline">\(N_{t+1}\sim\mathcal{P}\left(\sum_{i=1}^{N_t}W_{t+1}(i)\right)\)</span>. If selection is absent so that each <span class="math inline">\(\mathcal{W_{t+1}}(i)\)</span> is identically distributed with mean <span class="math inline">\(W_{t+1}\)</span>, then <span class="math inline">\(N_{t+1}\sim\mathcal{P}(W_{t+1}N_t)\)</span>.</p>
+<p>Let’s suppose there are <span class="math inline">\(N_t\)</span> different individuals in the population at time <span class="math inline">\(t\)</span>, with each individual <span class="math inline">\(i\)</span> having fitness <span class="math inline">\(\mathcal{W_{t+1}}(i)\)</span>. If we further suppose that generations are non-overlapping (so that reproduction events are perfectly synchronized and occur the exact same time every year), then we obtain the population size in the next generation as <span class="math inline">\(N_{t+1}=\sum_{i=1}^{N_t}\mathcal{W_{t+1}}(i)\)</span>. If each <span class="math inline">\(\mathcal{W_{t+1}}(i)\)</span> is a Poisson random variable with mean <span class="math inline">\(W_{t+1}(i)\)</span> (in symbols <span class="math inline">\(\mathcal{W_{t+1}}(i)\sim\mathcal{P}(W_{t+1}(i))\)</span>), then by the additive property of Poisson random variables we have <span class="math inline">\(N_{t+1}\sim\mathcal{P}\left(\sum_{i=1}^{N_t}W_{t+1}(i)\right)\)</span>. If selection is absent so that each <span class="math inline">\(\mathcal{W_{t+1}}(i)\)</span> is identically distributed with mean <span class="math inline">\(W_{t+1}\)</span>, then <span class="math inline">\(N_{t+1}\sim\mathcal{P}(W_{t+1}N_t)\)</span>.</p>
 <ul>
 <li>Careful note: The random variable <span class="math inline">\(N_t\mathcal{W_{t+1}}(1)\)</span> is not the same as <span class="math inline">\(\sum_{i=1}^{N_t}\mathcal{W_{t+1}}(i)\)</span>. Compute the variances for each case to see why.</li>
 </ul>
@@ -231,11 +233,12 @@ output:
 <p>For now, let’s settle for deterministic dynamics. We’ll return to the stochastics after we get a feel for the simplier situation.</p>
 <div id="continuous-time" class="section level3">
 <h3>Continuous Time</h3>
-<p>If we assume that selection is absent and mean fitness is constant with respect to time, we can derive continuous time mean dynamics of <span class="math inline">\(N_t\)</span>. To do so, suppose that for <span class="math inline">\(0&lt;\delta&lt;1\)</span>, <span class="math inline">\(\mathbb{E}N_{t+\delta}=W^\delta\mathbb{E} N_t\)</span>. Then <span class="math inline">\(\mathbb{E}N_{t+0}=\mathbb{E}N_t\)</span> and <span class="math inline">\(\mathbb{E}N_{t+1}=W\mathbb{E}N_t\)</span>. Hence</p>
-<p><span class="math display">\[\mathbb{E}\frac{dN_t}{dt}=\frac{d}{dt}\mathbb{E}N_t=\lim_{\delta\rightarrow0}\frac{\mathbb{E}N_{t+\delta}-\mathbb{E}N_t}{\delta}\]</span></p>
+<p>If we assume that selection is absent and mean fitness is constant with respect to time, we can derive continuous time mean dynamics of <span class="math inline">\(N_t\)</span>. To do so, suppose that for <span class="math inline">\(0&lt;\delta&lt;1\)</span>, <span class="math inline">\(\mathbb{E}N_{t+\delta}=W^\delta\mathbb{E} N_t\)</span>. This implies that repdoction events are uniformly distributed throughout the year so that, in expectation, the population is continuously reproducing. Then <span class="math inline">\(\mathbb{E}N_{t+0}=\mathbb{E}N_t\)</span> and <span class="math inline">\(\mathbb{E}N_{t+1}=W\mathbb{E}N_t\)</span>. Hence</p>
+<p><span class="math display">\[\mathbb{E}\frac{dN_t}{dt}=\mathbb{E}\lim_{\delta\rightarrow0}\frac{N_{t+\delta}-N_t}{\delta}=\lim_{\delta\rightarrow0}\frac{\mathbb{E}N_{t+\delta}-\mathbb{E}N_t}{\delta}\]</span></p>
 <p><span class="math display">\[=\lim_{\delta\rightarrow0}\frac{(W^\delta-1)}{\delta}\mathbb{E}N_t=\ln(W)\mathbb{E}N_t.\]</span></p>
-<p>Note that switching the derivative and the expectation must be formally justified. In what follows, we won’t drag the annoying expectation symbol along with us. Instead we will adopt the convention that <span class="math inline">\(N_t\)</span> is actually an expected value.</p>
-<p>In typical notation one would write <span class="math inline">\(r\)</span> in place of <span class="math inline">\(\ln(W)\)</span>. This exposes an interesting connection between two very distinct notions of fitness. The notion of fitness that I’ve been working with, <span class="math inline">\(W\)</span>, is called the Wrightian, or, multiplicative fitness. It is a non-negative number that corresponds to the expected number of offspring produced for some category. It’s been called multiplicative fitness because the multiplication of any two Wrightian fitnesses is yet another Wrightian fitness. The natural log of this value is known as the Malthusian, or, additive fitness. Its value can be positive or negative and corresponds to the expected per capita rate at which abundance fluctuates instantaneously. Note that the log of a product is the sum of the logs. It’s this basic log rule that provides the Malthusian fitness its additivity. The sum of any two Malthusian fitnesses is again a Malthusian fitness. Artem Kaznatcheev has a nice discussion of this topic <a href="https://egtheory.wordpress.com/2016/08/17/weak-selection">here</a>. To solidify the connection between these two notions of fitness, consider a population that maintains a constant size of 100 but becomes extinct at a single instant (as shown below). This corresponds to each individual at first having a fitness of 1 (remember we’re assuming fitness is constant throughout the population) making the Malthusian fitness of the population zero (hence, constant population size). Then when the population drops each individual must suddenly have a Wrightian fitness of zero. The Malthusian fitness of the population will then be <span class="math inline">\(\ln(0)\)</span> which is <span class="math inline">\(-\infty\)</span>, corresponding to the discontinuous drop in the population size.</p>
+<p>Note that switching the limit and the expectation must be formally justified. In what follows, we won’t drag the annoying expectation symbol along with us. Instead we will adopt the convention that <span class="math inline">\(N_t\)</span> is actually an expected value.</p>
+<p>In typical notation one would write <span class="math inline">\(r\)</span> or <span class="math inline">\(m\)</span> in place of <span class="math inline">\(\ln(W)\)</span>. This exposes an interesting connection between two very distinct notions of fitness. The notion of fitness that I’ve been working with, <span class="math inline">\(W\)</span>, is called the Wrightian, or, multiplicative fitness. It is a non-negative number that corresponds to the expected number of offspring produced for some category. It’s been called multiplicative fitness because the multiplication of any two Wrightian fitnesses is yet another Wrightian fitness. The natural log of this value is known as the Malthusian, or, additive fitness. Its value can be positive or negative and corresponds to the expected per capita rate at which abundance fluctuates instantaneously. Note that the log of a product is the sum of the logs. It’s this basic log rule that provides the Malthusian fitness its additivity. The sum of any two Malthusian fitnesses is again a Malthusian fitness. Artem Kaznatcheev has a nice discussion of this topic <a href="https://egtheory.wordpress.com/2016/08/17/weak-selection">here</a>.</p>
+<p>To solidify the connection between these two notions of fitness, consider a population that maintains a constant size of 100 but becomes extinct at a single instant (as shown below). This corresponds to each individual at first having a fitness of 1 (remember we’re assuming fitness is constant throughout the population) making the Malthusian fitness of the population zero (hence, constant population size). Then when the population drops each individual must suddenly have a Wrightian fitness of zero. The Malthusian fitness of the population will then be <span class="math inline">\(\ln(0)\)</span> which is <span class="math inline">\(-\infty\)</span>, corresponding to the discontinuous drop in the population size.</p>
 <p><img src="notes-fitness_files/figure-html/unnamed-chunk-1-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>However, this result is a bit of an abuse of the above derivation as we had made the assumption that fitness is constant with respect to time. If we assume that <span class="math inline">\(\frac{dN_t}{dt}=\ln(W_t)N_t\)</span>, where now <span class="math inline">\(W_t\)</span> is allowed to change with respect to time, then for consistency it would be good to reconcile this equation with the above assumption that <span class="math inline">\(N_{t+1}-N_t=(W_{t+1}-1)N_t\)</span>. Doing so restricts the nature of <span class="math inline">\(W_t\)</span>. Specifically,</p>
 <p><span class="math display">\[1) \ \frac{d}{dt}(N_{t+1}-N_t)=\frac{d}{dt}(W_{t+1}-1)N_t=\frac{dW_{t+1}}{dt}N_t+(W_{t+1}-1)\frac{dN_t}{dt}\]</span> <span class="math display">\[={\left( \frac{dW_{t+1}}{dt}+(W_{t+1}-1)\ln W_t \right)}N_t\]</span></p>
@@ -244,14 +247,14 @@ output:
 <p><span class="math display">\[\frac{dW_{t+1}}{dt}=W_{t+1}\ln W_{t+1}-\ln W_t-W_{t+1}\ln W_t+\ln W_t.\]</span></p>
 <p>Shifting the time index and simplifying provides</p>
 <p><span class="math display">\[\frac{d\ln W_t}{dt}=\ln W_t - \ln W_{t-1}.\]</span></p>
-<p>This states that if <span class="math inline">\(W_t=0\)</span> for some <span class="math inline">\(t\)</span>, then <span class="math inline">\(W_s=0\)</span> for <span class="math inline">\(s&gt;t\)</span>. That is to say, if the population goes extinct, it remains extinct. This makes perfect sense in the absence of immigration, but there’s another implication in this equation and to explore it I will assume that the general form of <span class="math inline">\(W_t\)</span> is <span class="math inline">\(W_t=e^{r_t}\)</span> for some function <span class="math inline">\(r_t\)</span>. Note that this implies <span class="math inline">\(\frac{dN_t}{dt}=r_tN_t\)</span>. Then the previously derived equation is equivalent to <span class="math inline">\(\frac{dr_t}{dt}=r_t-r_{t-1}\)</span>. In the case that <span class="math inline">\(r_t=k+r_{t-1}\)</span> for some constant <span class="math inline">\(k\)</span>, we get <span class="math inline">\(r_t=kt+c\)</span>, making <span class="math inline">\(\frac{dN_t}{dt}=(kt+c)N_t\)</span>. But we can also make <span class="math inline">\(k_t\)</span> a function <span class="math inline">\(t\)</span>. Here we get</p>
+<p>This states that, in the absence of migration, if <span class="math inline">\(W_t=0\)</span> for some <span class="math inline">\(t\)</span>, then <span class="math inline">\(W_s=0\)</span> for <span class="math inline">\(s&gt;t\)</span>. That is to say that without immigrants, if the population goes extinct, it remains extinct. There’s another implication in this equation and to explore it I will assume that the general form of <span class="math inline">\(W_t\)</span> is <span class="math inline">\(W_t=e^{r_t}\)</span> for some function <span class="math inline">\(r_t\)</span>. Note that this implies <span class="math inline">\(\frac{dN_t}{dt}=r_tN_t\)</span>. Then the previously derived equation is equivalent to <span class="math inline">\(\frac{dr_t}{dt}=r_t-r_{t-1}\)</span>. In the case that <span class="math inline">\(r_t=k+r_{t-1}\)</span> for some constant <span class="math inline">\(k\)</span>, we get <span class="math inline">\(r_t=kt+c\)</span>, making <span class="math inline">\(\frac{dN_t}{dt}=(kt+c)N_t\)</span>. But we can also make <span class="math inline">\(k_t\)</span> a function <span class="math inline">\(t\)</span>. Here we get</p>
 <p><span class="math display">\[\frac{dN_t}{dt}=\left(\int_0^tk_sds+c\right)N_t\]</span></p>
 <p>This might be handy if, say, you wanted to incorporate the effects of population dynamics of another species that interacts with this one. In that case <span class="math inline">\(k_t\)</span> would likely be a function of the other species’ population size at time <span class="math inline">\(t\)</span>. But there are other possibilities. For example, we can set <span class="math inline">\(r_t=k_tr_{t-1}\)</span> to get</p>
-<p><span class="math display">\[\frac{dN_t}{dt}=\left(e^{\int_0^tk_sds-t}+c\right)N_t.\]</span></p>
+<p><span class="math display">\[\frac{dN_t}{dt}=\left(\exp\left(\int_0^tk_sds-t\right)+c\right)N_t.\]</span></p>
 <p>Regardless of what is chosen for <span class="math inline">\(r_t\)</span>, this trick will be assured to work when <span class="math inline">\(r_t\)</span> is a linear function of <span class="math inline">\(r_{t-1}\)</span>. That is, <span class="math inline">\(r_t=a_t+b_tr_{t-1}\)</span>. In this general case we get</p>
-<p><span class="math display">\[\frac{dN_t}{dt}=\left(\int_0^ta_sds+e^{\int_0^tb_sds-t}+c\right)N_t.\]</span></p>
+<p><span class="math display">\[\frac{dN_t}{dt}=\left(\int_0^ta_sds+\exp\left(\int_0^tb_sds-t\right)+c\right)N_t.\]</span></p>
 <p>We can then solve for the mean population size as a function of time to get</p>
-<p><span class="math display">\[N_t=N_0e^{\int_0^tr(s)ds}.\]</span></p>
+<p><span class="math display">\[N_t=N_0\exp\left(\int_0^tr(s)ds\right).\]</span></p>
 <!--
 
 ### Aside
@@ -302,11 +305,11 @@ As the number of partitions heads towards infinity, the probability that they al
 <p>and</p>
 <p><span class="math display">\[{\mathbb{E}}(N_t)={\left( \bigwedge_0^tW_s^{ds} \right)}N_0 \text{ and }{\mathrm{Var}}(N_t)={\left( \int_0^t\bigwedge_0^sW_u^{du}ds \right)}{\mathbb{E}}(N_t)\]</span></p>
 <p>where <span class="math inline">\(\bigwedge\)</span> represents <a href="https://en.wikipedia.org/wiki/Product_integral">type-1 product integration</a> and is defined by</p>
-<p><span class="math display">\[\bigwedge_0^tW_s^{ds}\equiv e^{\int_0^t\ln W_sds}.\]</span></p>
+<p><span class="math display">\[\bigwedge_0^tW_s^{ds}\equiv \exp\left(\int_0^t\ln W_sds\right).\]</span></p>
 <p>Hence, this returns the same expected dynamics as above when <span class="math inline">\(\ln W_t=r_t\)</span>. If <span class="math inline">\(W_t=W\)</span> is constant across time we have</p>
-<p><span class="math display">\[\bigwedge_0^tW_s^{ds}=e^{t\ln W}\]</span></p>
+<p><span class="math display">\[\bigwedge_0^tW_s^{ds}=\exp\left(t \ln W\right)\]</span></p>
 <p>and</p>
-<p><span class="math display">\[\int_0^t\bigwedge_0^s W_u^{du}ds=\frac{1}{\ln W}{\left( e^{t\ln W}-1 \right)}.\]</span></p>
+<p><span class="math display">\[\int_0^t\bigwedge_0^s W_u^{du}ds=\frac{1}{\ln W}\left\{\exp\left(t\ln W\right)-1\right\}.\]</span></p>
 <p>In the case where <span class="math inline">\(W=1\)</span> we have a problem. We can solve it with <a href="https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule">l’Hôpital’s rule</a>.</p>
 <p><span class="math display">\[\lim_{x\rightarrow0}\frac{e^{tx}-1}{x}=\lim_{x\rightarrow0}te^{tx}=t.\]</span></p>
 <p>Note that when <span class="math inline">\(W=1\)</span> there is no bias for the population to grow or shrink, sort of like a symmetric random walk. We also see that <span class="math inline">\({\mathbb{E}}(N_t)=N_0\)</span> for all <span class="math inline">\(t\)</span>, implying that the process <span class="math inline">\(N_t\)</span> is a martingale when <span class="math inline">\(W=1\)</span>.</p>
@@ -368,6 +371,11 @@ require(gridExtra)</code></pre>
 </div>
 <div id="derivation-from-the-birth-death-framework" class="section level2">
 <h2>Derivation from the birth-death framework</h2>
+</div>
+<div id="other-thoughts" class="section level2">
+<h2>Other thoughts</h2>
+<p><span class="math display">\[\dot N=rN\implies\dot{\ln N}=\dot n=r\]</span></p>
+<p>If we have <span class="math inline">\(k\)</span> categories with <span class="math inline">\(N_1,\dots,N_k\)</span> in each, what if we followed <span class="math inline">\(N=\prod_i N_i\)</span> instead of <span class="math inline">\(N=\sum_i N_i\)</span>?</p>
 </div>
 
 
