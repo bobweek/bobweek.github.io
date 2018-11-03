@@ -1,5 +1,5 @@
 ---
-title: "BB"
+title: ""
 output: 
   html_document: 
     toc: false
@@ -25,4 +25,11 @@ knitr::opts_chunk$set(echo = TRUE)
   <source src="000.mp4" type="video/mp4">
 </video>
 
-<h1>Hello world!</h1>
+<!-- Optional: some overlay text to describe the video -->
+<div class="content">
+  <h1>BB<small> - blobbot - bobbot - buttblob - buttbutt - buttbot - ~~ :B <=8=>* ;/ </small></h1>
+  <a href="BB.html">home</a> -
+  <a href="BB_gallery.html">gallery</a> -
+  <a href="BB_medium.html">medium</a> -
+  <a href="BB_theory.html">theory</a>
+</div>
