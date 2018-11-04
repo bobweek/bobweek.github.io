@@ -27,9 +27,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <!-- Optional: some overlay text to describe the video -->
 <div class="content">
-  <h1>BB<small> - blobbot - bobbot - buttblob - buttbutt - buttbot - ~~ :B <=8=>* ;/ </small></h1>
+  <h1>BB<font face="monospace" size=2> - blobbot - bobbot - buttblob - buttbutt - buttbot - ~~ :B <=8=>* ;/ </font></h1>
+  <font face="monospace" size=2>
   <a href="BB.html">home</a> -
   <a href="BB_gallery.html">gallery</a> -
   <a href="BB_medium.html">medium</a> -
   <a href="BB_theory.html">theory</a>
+  </font>
 </div>
