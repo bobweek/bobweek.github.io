@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Solutions to various mathematical exercises</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="interactive_theory.html">Interactive theory</a></li>
+        <li><a href="measuring_coevolution.html">Measuring coevolution</a></li>
+        <!--
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="notes-fitness.html">First Steps</a></li>
+            <li><a href="notes-evolution.html">Evolution</a></li>
+            <li><a href="notes-examples.html">Examples</a></li>
+            <li><a href="notes-misc.html">Misc</a></li>
+          </ul>
+        </li>
+        -->
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Solutions to various mathematical exercises</h1>
+
+</div>
+
+
+<div id="ordinary-differential-equations---v.i.-arnold" class="section level1">
+<h1>Ordinary Differential Equations - V.I. Arnold</h1>
+<div id="section" class="section level2">
+<h2>1.2</h2>
+<div id="problem-2" class="section level4">
+<h4>Problem 2</h4>
+<p>Prove that a one-parameter group of transformations is a commutative group and that every mapping <span class="math inline">\(g^t:M\rightarrow M\)</span> is one-to-one.</p>
+<ul>
+<li><p>Let <span class="math inline">\(G\)</span> denote the set of one-parameter transformations. Since <span class="math inline">\(g^0\in G\)</span> and <span class="math inline">\(g^0g^t=g^tg^0=g^{t+0}=g^t\)</span> we see that <span class="math inline">\(g^0\)</span> is an identity element. Note further that if <span class="math inline">\(g^sg^t=g^tg^s=g^t\)</span> then <span class="math inline">\(g^s=g^0\)</span> which implies the identity element is unique. By definition <span class="math inline">\(g^t\in G\)</span> <span class="math inline">\(\forall\)</span> <span class="math inline">\(t\in{\mathbb{R}}\)</span> and hence <span class="math inline">\(g^{-t}\in G\)</span> for every <span class="math inline">\(g^t\in G\)</span>. That is, for every element in <span class="math inline">\(G\)</span> there exists an inverse also in <span class="math inline">\(G\)</span>. Lastly, <span class="math inline">\((g^tg^s)g^u=g^t(g^sg^u)=g^tg^sg^u=g^{t+s+u}\)</span> which implies the underlying binary operation is associative and hence <span class="math inline">\(G\)</span> is a group. Furthermore, <span class="math inline">\(g^tg^s=g^{t+s}=g^sg^t\)</span> which implies <span class="math inline">\(G\)</span> is a communtative group.</p></li>
+<li><p>For the second part of this problem, suppose <span class="math inline">\(g^tx=g^ty\)</span>. Then it is a simple matter to transform by <span class="math inline">\(g^{-t}\)</span> to get <span class="math inline">\(g^0x=x=g^0y=y\)</span> and in particular <span class="math inline">\(x=y\)</span>.</p></li>
+</ul>
+</div>
+<div id="problem-3" class="section level4">
+<h4>Problem 3</h4>
+<p>Prove that there is one and only one phase curve passing through every point of phase space.</p>
+<ul>
+<li>Since <span class="math inline">\(g^t\)</span> is defined on all of <span class="math inline">\(M\)</span> for each <span class="math inline">\(t\)</span>, then, for any <span class="math inline">\(x\in M\)</span>, we can calculate the phase curve passing through <span class="math inline">\(x\)</span> via <span class="math inline">\(\{g^tx:t\in{\mathbb{R}}\}\)</span>. Since <span class="math inline">\(g^t\)</span> is one-to-one, there can only be one such phase curve.</li>
+</ul>
+</div>
+<div id="problem-4" class="section level4">
+<h4>Problem 4</h4>
+<p>Prove there is one and only one integral curve passing through every point of extended phase space</p>
+<ul>
+<li>Let <span class="math inline">\((t,x)\in {\mathbb{R}}\times M\)</span>. We know that <span class="math inline">\(x\)</span> has exactly one phase curve passing through it. Denote this curve by <span class="math inline">\(\{g^tx:t\in{\mathbb{R}}\}\)</span>. Then the integral curve passing through <span class="math inline">\((t,x)\)</span> is just <span class="math inline">\({\mathbb{R}}\times\{g^tx\}\)</span>. From this we see that there is exactly one integral curve passing through every point in extended phase space.</li>
+</ul>
+</div>
+<div id="problem-5" class="section level4">
+<h4>Problem 5</h4>
+<p>Prove that the horizontal line <span class="math inline">\({\mathbb{R}}\times x, \ x\in M\)</span> is an integal curve iff <span class="math inline">\(x\)</span> is an equilibrium position.</p>
+<ul>
+<li>If <span class="math inline">\(x\)</span> is an equilibrium position then <span class="math inline">\(g^tx=x\)</span> for any <span class="math inline">\(t\in {\mathbb{R}}\)</span> and hence the integral curve passing through <span class="math inline">\(x\)</span> is the horizontal line <span class="math inline">\({\mathbb{R}}\times x\)</span>. On the other hand, if the horizontal line <span class="math inline">\({\mathbb{R}}\times x\)</span> is an integral curve then <span class="math inline">\(g^tx=x\)</span> for all <span class="math inline">\(t\)</span> and hence <span class="math inline">\(x\)</span> is an equilibrium position.</li>
+</ul>
+</div>
+<div id="problem-6" class="section level4">
+<h4>Problem 6</h4>
+<p>Prove that a shift <span class="math inline">\(h^s:({\mathbb{R}}\times M)\rightarrow({\mathbb{R}}\times M), \ h^s(t,x)=(t+s,x)\)</span> of extended phase space along the time axis carries integral curves into integral curves.</p>
+<ul>
+<li>We know there is exactly one integral curve passing through the point <span class="math inline">\((t,x)\)</span> of extended phase space and that every point of extended phase space has an integral curve passing through it. Hence, <span class="math inline">\((t+s,x)\)</span> is the point along some other integral curve and so <span class="math inline">\(h^s\)</span> carries integral curves into integral curves.</li>
+</ul>
+</div>
+</div>
+<div id="section-1" class="section level2">
+<h2>1.3</h2>
+<div id="problem-1" class="section level4">
+<h4>Problem 1</h4>
+<p>Which of the functions specify a diffeomorphism <span class="math inline">\(f:{\mathbb{R}}\rightarrow{\mathbb{R}}\)</span> on the line:</p>
+<p><span class="math display">\[f(x)=2x,x^2,x^3,e^x,e^x+x\]</span></p>
+<ul>
+<li>yes, no, yes, no, yes</li>
+</ul>
+</div>
+<div id="problem-2-1" class="section level4">
+<h4>Problem 2</h4>
+<p>Prove that if <span class="math inline">\(f:U\rightarrow V\)</span> is a diffeomorphism, then the Euclidean spaces with the domains <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> as subsets have the same dimension.</p>
+<ul>
+<li>Since <span class="math inline">\(f\)</span> is a diffeomorphism, the spaces <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are isomorphic and must therefore have the same dimensionality. I wouldn’t go so far as to say that the Euclidean spaces containing <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> must be equal in dimension, however, since <span class="math inline">\(U\)</span>, for example, may be a subset of a lower dimensional subspace of its parental Euclidean space. But this makes for a rather contrived discussion as the parental spaces were never defined.</li>
+</ul>
+</div>
+</div>
+<div id="section-2" class="section level2">
+<h2>11.5</h2>
+<div id="problem-3-1" class="section level4">
+<h4>Problem 3</h4>
+<p>Prove the differential operator <span class="math inline">\(L_aL_b-L_bL_a=L_c\)</span> is a first-order differential operator.</p>
+<ul>
+<li>WLOG let <span class="math inline">\((x_1,\dots,x_n)\)</span> be a local coordinate system so that <span class="math inline">\(L_v=\sum_iv_i\frac{\partial}{\partial x_i}\)</span> for any vector field <span class="math inline">\(v\)</span>. Then</li>
+</ul>
+<p><span class="math display">\[L_aL_b-L_bL_a=\left(\sum_ia_i\frac{\partial}{\partial x_i}\right)\left(\sum_jb_j\frac{\partial}{\partial x_j}\right)-\left(\sum_kb_k\frac{\partial}{\partial x_k}\right)\left(\sum_la_l\frac{\partial}{\partial x_l}\right)\]</span></p>
+<p><span class="math display">\[=\sum_{ij}a_i\left(\frac{\partial b_j}{\partial x_i}\frac{\partial}{\partial x_j}+b_j\frac{\partial^2}{\partial x_i\partial x_j}\right)-\sum_{kl}b_k\left(\frac{\partial a_l}{\partial x_k}\frac{\partial}{\partial x_l}+a_l\frac{\partial^2}{\partial x_k\partial x_l}\right)\]</span></p>
+<p><span class="math display">\[=\sum_{ij}\left(a_i\frac{\partial b_j}{\partial x_i}\frac{\partial}{\partial x_j}-b_j\frac{\partial a_i}{\partial x_j}\frac{\partial}{\partial x_i}\right). \ \square\]</span></p>
+<p>The operator <span class="math inline">\(L_c\)</span> can be also be expressed as</p>
+<p><span class="math display">\[\sum_j\left(\sum_ia_i\frac{\partial b_j}{\partial x_i}\right)\frac{\partial}{\partial x_j}-\sum_j\left(\sum_ib_i\frac{\partial a_j}{\partial x_i}\right)\frac{\partial}{\partial x_j}\]</span></p>
+<p><span class="math display">\[=\sum_j\sum_i\left(a_i\frac{\partial b_j}{\partial x_i}-b_i\frac{\partial a_j}{\partial x_i}\right)\frac{\partial}{\partial x_j}.\]</span></p>
+<p>Hence, <span class="math inline">\(c_j=\sum_i a_i\frac{\partial b_j}{\partial x_i}-b_i\frac{\partial a_j}{\partial x_i}\)</span>.</p>
+</div>
+<div id="problem-4-1" class="section level4">
+<h4>Problem 4</h4>
+<p>In the above case <span class="math inline">\(c\)</span> can be written as <span class="math inline">\([a,b]\)</span> and is called the <em>commutator</em> of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. Prove the following</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\([a,b+\lambda c]=[a,b]+\lambda[a,c]\)</span></li>
+<li><span class="math inline">\([a,b]+[b,a]=0\)</span></li>
+<li><span class="math inline">\([[a,b],c]+[[b,c],a]+[[c,a],b]=0\)</span></li>
+</ol>
+<ul>
+<li>Using the above formula for <span class="math inline">\(c_j\)</span>, these are all direct computations.</li>
+</ul>
+</div>
+</div>
+<div id="section-3" class="section level2">
+<h2>33.2</h2>
+<div id="d1-a-map-of-a-manifold-m-is-the-pair-uphi-s.t.-usubsetmathbbrn-and-phiwrightarrow-u-is-a-mapping-of-wsubset-m-onto-u." class="section level4">
+<h4>D1: A <em>map</em> of a manifold <span class="math inline">\(M\)</span> is the pair <span class="math inline">\((U,\phi)\)</span> s.t. <span class="math inline">\(U\subset{\mathbb{R}}^n\)</span> and <span class="math inline">\(\phi:W\rightarrow U\)</span> is a mapping of <span class="math inline">\(W\subset M\)</span> onto <span class="math inline">\(U\)</span>.</h4>
+<p>For two maps <span class="math inline">\((U_1,\phi_1),(U_2,\phi_2)\)</span> such that <span class="math inline">\(\phi_i:W_i\rightarrow U_i\)</span> we write <span class="math inline">\(U_{ij}\equiv\phi_i(W_i\cap W_j)\)</span> and <span class="math inline">\(\phi_{ij}:U_{ij}\rightarrow U_{ji}, \ x\mapsto (\phi_j\circ\phi_i^{-1})(x)\)</span>.</p>
+</div>
+<div id="d2-the-maps-phi_1phi_2-are-compatible-if" class="section level4">
+<h4>D2: The maps <span class="math inline">\(\phi_1,\phi_2\)</span> are <em>compatible</em> if</h4>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(U_{12},U_{21}\)</span> are open.</li>
+<li><span class="math inline">\(\phi_{12},\phi_{21}\)</span> are diffeomorphisms on domains of <span class="math inline">\({\mathbb{R}}^n\)</span> when <span class="math inline">\(W_1\cap W_2\)</span> is nonempty.</li>
+</ol>
+</div>
+<div id="d3-an-atlas-of-a-manifold-m-is-a-collection-of-maps-mathcalau_iphi_i-on-m-s.t." class="section level4">
+<h4>D3: An <em>atlas</em> of a manifold <span class="math inline">\(M\)</span> is a collection of maps <span class="math inline">\(\mathcal{A}=\{(U_i,\phi_i)\}\)</span> on <span class="math inline">\(M\)</span> s.t.</h4>
+<ol style="list-style-type: decimal">
+<li>Any pair of maps in <span class="math inline">\(\mathcal{A}\)</span> are compatible.</li>
+<li>For any <span class="math inline">\(x\in M\)</span> there is a map <span class="math inline">\((U_i,\phi_i)\in\mathcal{A}\)</span> s.t. <span class="math inline">\(\phi_i(x)\in U_i\)</span>.</li>
+</ol>
+</div>
+<div id="d4-two-atlases-are-equivalent-if-every-inter-atlas-pair-of-maps-are-compatible." class="section level4">
+<h4>D4: Two atlases are <em>equivalent</em> if every inter-atlas pair of maps are compatible.</h4>
+</div>
+<div id="d5-a-differentiable-structure-on-m-is-a-class-of-equivalent-atlases-on-m." class="section level4">
+<h4>D5: A <em>differentiable structure</em> on <span class="math inline">\(M\)</span> is a class of equivalent atlases on <span class="math inline">\(M\)</span>.</h4>
+</div>
+<div id="dstar-a-differentaible-manifold-is-a-manifold-with-a-differentiable-structure-s.t." class="section level4">
+<h4>D<span class="math inline">\(\star\)</span>: A <em>differentaible manifold</em> is a manifold with a differentiable structure s.t.</h4>
+<ol style="list-style-type: decimal">
+<li>For every <span class="math inline">\(x\neq y\in M\)</span> there exists open <span class="math inline">\(W_x,W_y\)</span> s.t. <span class="math inline">\(W_x\cap W_y=\emptyset\)</span>.</li>
+<li>There exists an atlas with no more than a countable number of maps.</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

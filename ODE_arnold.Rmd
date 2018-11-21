@@ -1,0 +1,128 @@
+---
+title: "Solutions to various mathematical exercises"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+
+# Ordinary Differential Equations - V.I. Arnold
+
+## 1.2
+
+#### Problem 2
+
+Prove that a one-parameter group of transformations is a commutative group and that every mapping $g^t:M\rightarrow M$ is one-to-one.
+
+- Let $G$ denote the set of one-parameter transformations. Since $g^0\in G$ and $g^0g^t=g^tg^0=g^{t+0}=g^t$ we see that $g^0$ is an identity element. Note further that if $g^sg^t=g^tg^s=g^t$ then $g^s=g^0$ which implies the identity element is unique. By definition $g^t\in G$ $\forall$ $t\in\R$ and hence $g^{-t}\in G$ for every $g^t\in G$. That is, for every element in $G$ there exists an inverse also in $G$. Lastly, $(g^tg^s)g^u=g^t(g^sg^u)=g^tg^sg^u=g^{t+s+u}$ which implies the underlying binary operation is associative and hence $G$ is a group. Furthermore, $g^tg^s=g^{t+s}=g^sg^t$ which implies $G$ is a communtative group.
+
+- For the second part of this problem, suppose $g^tx=g^ty$. Then it is a simple matter to transform by $g^{-t}$ to get $g^0x=x=g^0y=y$ and in particular $x=y$.
+
+#### Problem 3
+
+Prove that there is one and only one phase curve passing through every point of phase space.
+
+- Since $g^t$ is defined on all of $M$ for each $t$, then, for any $x\in M$, we can calculate the phase curve passing through $x$ via $\{g^tx:t\in\R\}$. Since $g^t$ is one-to-one, there can only be one such phase curve.
+
+#### Problem 4
+
+Prove there is one and only one integral curve passing through every point of extended phase space
+
+- Let $(t,x)\in \R\times M$. We know that $x$ has exactly one phase curve passing through it. Denote this curve by $\{g^tx:t\in\R\}$. Then the integral curve passing through $(t,x)$ is just $\R\times\{g^tx\}$. From this we see that there is exactly one integral curve passing through every point in extended phase space.
+
+#### Problem 5
+
+Prove that the horizontal line $\R\times x, \ x\in M$ is an integal curve iff $x$ is an equilibrium position.
+
+- If $x$ is an equilibrium position then $g^tx=x$ for any $t\in \R$ and hence the integral curve passing through $x$ is the horizontal line $\R\times x$. On the other hand, if the horizontal line $\R\times x$ is an integral curve then $g^tx=x$ for all $t$ and hence $x$ is an equilibrium position.
+
+#### Problem 6
+
+Prove that a shift $h^s:(\R\times M)\rightarrow(\R\times M), \ h^s(t,x)=(t+s,x)$ of extended phase space along the time axis carries integral curves into integral curves.
+
+- We know there is exactly one integral curve passing through the point $(t,x)$ of extended phase space and that every point of extended phase space has an integral curve passing through it. Hence, $(t+s,x)$ is the point along some other integral curve and so $h^s$ carries integral curves into integral curves.
+
+## 1.3
+
+#### Problem 1
+
+Which of the functions specify a diffeomorphism $f:\R\rightarrow\R$ on the line:
+
+$$f(x)=2x,x^2,x^3,e^x,e^x+x$$
+
+- yes, no, yes, no, yes
+
+#### Problem 2
+
+Prove that if $f:U\rightarrow V$ is a diffeomorphism, then the Euclidean spaces with the domains $U$ and $V$ as subsets have the same dimension.
+
+- Since $f$ is a diffeomorphism, the spaces $U$ and $V$ are isomorphic and must therefore have the same dimensionality. I wouldn't go so far as to say that the Euclidean spaces containing $U$ and $V$ must be equal in dimension, however, since $U$, for example, may be a subset of a lower dimensional subspace of its parental Euclidean space. But this makes for a rather contrived discussion as the parental spaces were never defined.
+
+## 11.5
+
+#### Problem 3
+
+Prove the differential operator $L_aL_b-L_bL_a=L_c$ is a first-order differential operator.
+
+- WLOG let $(x_1,\dots,x_n)$ be a local coordinate system so that $L_v=\sum_iv_i\frac{\partial}{\partial x_i}$ for any vector field $v$. Then
+
+$$L_aL_b-L_bL_a=\left(\sum_ia_i\frac{\partial}{\partial x_i}\right)\left(\sum_jb_j\frac{\partial}{\partial x_j}\right)-\left(\sum_kb_k\frac{\partial}{\partial x_k}\right)\left(\sum_la_l\frac{\partial}{\partial x_l}\right)$$
+
+$$=\sum_{ij}a_i\left(\frac{\partial b_j}{\partial x_i}\frac{\partial}{\partial x_j}+b_j\frac{\partial^2}{\partial x_i\partial x_j}\right)-\sum_{kl}b_k\left(\frac{\partial a_l}{\partial x_k}\frac{\partial}{\partial x_l}+a_l\frac{\partial^2}{\partial x_k\partial x_l}\right)$$
+
+$$=\sum_{ij}\left(a_i\frac{\partial b_j}{\partial x_i}\frac{\partial}{\partial x_j}-b_j\frac{\partial a_i}{\partial x_j}\frac{\partial}{\partial x_i}\right). \ \square$$
+
+The operator $L_c$ can be also be expressed as
+
+$$\sum_j\left(\sum_ia_i\frac{\partial b_j}{\partial x_i}\right)\frac{\partial}{\partial x_j}-\sum_j\left(\sum_ib_i\frac{\partial a_j}{\partial x_i}\right)\frac{\partial}{\partial x_j}$$
+
+$$=\sum_j\sum_i\left(a_i\frac{\partial b_j}{\partial x_i}-b_i\frac{\partial a_j}{\partial x_i}\right)\frac{\partial}{\partial x_j}.$$
+
+Hence, $c_j=\sum_i a_i\frac{\partial b_j}{\partial x_i}-b_i\frac{\partial a_j}{\partial x_i}$.
+
+#### Problem 4
+
+In the above case $c$ can be written as $[a,b]$ and is called the _commutator_ of $a$ and $b$. Prove the following
+
+  1. $[a,b+\lambda c]=[a,b]+\lambda[a,c]$
+  2. $[a,b]+[b,a]=0$
+  3. $[[a,b],c]+[[b,c],a]+[[c,a],b]=0$
+
+- Using the above formula for $c_j$, these are all direct computations.
+
+## 33.2
+
+#### D1: A _map_ of a manifold $M$ is the pair $(U,\phi)$ s.t. $U\subset\R^n$ and $\phi:W\rightarrow U$ is a mapping of $W\subset M$ onto $U$.
+
+For two maps $(U_1,\phi_1),(U_2,\phi_2)$ such that $\phi_i:W_i\rightarrow U_i$ we write $U_{ij}\equiv\phi_i(W_i\cap W_j)$ and $\phi_{ij}:U_{ij}\rightarrow U_{ji}, \ x\mapsto (\phi_j\circ\phi_i^{-1})(x)$.
+
+#### D2: The maps $\phi_1,\phi_2$ are _compatible_ if
+
+  1. $U_{12},U_{21}$ are open.
+  2. $\phi_{12},\phi_{21}$ are diffeomorphisms on domains of $\R^n$ when $W_1\cap W_2$ is nonempty.
+  
+#### D3: An _atlas_ of a manifold $M$ is a collection of maps $\mathcal{A}=\{(U_i,\phi_i)\}$ on $M$ s.t.
+
+  1. Any pair of maps in $\mathcal{A}$ are compatible.
+  2. For any $x\in M$ there is a map $(U_i,\phi_i)\in\mathcal{A}$ s.t. $\phi_i(x)\in U_i$.
+
+#### D4: Two atlases are _equivalent_ if every inter-atlas pair of maps are compatible.
+
+#### D5: A _differentiable structure_ on $M$ is a class of equivalent atlases on $M$.
+
+#### D$\star$: A _differentaible manifold_ is a manifold with a differentiable structure s.t.
+
+  1. For every $x\neq y\in M$ there exists open $W_x,W_y$ s.t. $W_x\cap W_y=\emptyset$.
+  2. There exists an atlas with no more than a countable number of maps.
+    
