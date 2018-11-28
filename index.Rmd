@@ -6,8 +6,12 @@ output:
     css: style.css
 ---
 
-I am a PhD candidate at the University of Idaho working with professor [Scott Nuismer](http://www.webpages.uidaho.edu/~snuismer/Nuismer_Lab/). My degree program is [Bioinformatics and Computational Biology](http://www.uidaho.edu/sci/bcb) (BCB) which is housed within [The Institute for Bioinformatics and Evolutionary Studies](http://www.ibest.uidaho.edu/) (IBEST).
+  - __Position__: PhD candidate at the University of Idaho working with professor [Scott Nuismer](http://www.webpages.uidaho.edu/~snuismer/Nuismer_Lab/).
+    - __Degree program__: [Bioinformatics and Computational Biology](http://www.uidaho.edu/sci/bcb) (BCB).
+    - __Departments__: [Department of Biological Sciences](https://www.uidaho.edu/sci/biology) and [The Institute for Bioinformatics and Evolutionary Studies](http://www.ibest.uidaho.edu/) (IBEST).
 
-My interests are in extending coevolutionary theory to the community context. Currently I am focused on doing this entirely in terms of phenotypic evolution, that is, deriving all of my models from a quantitative genetic (QG) foundation. Hence, I live in the world of microevolution. However, I have begun to think about larger spatial and temporal scales and thus how to marry QG with phylogenetics and metacommunity ecology.
+My interests are in the patterns of traits and interactions of species in ecological communities, how they have and are evolving and the roles they play for the ecosystems in which they are imbedded. My current focus is on short-term evolution because I believe it is A) more tractable and B) more relevant to solving some of our current dilemmas as a species. However, I acknowledge the importance of history and its potential impact on short-term processes. Hence, my long term goal is to contribute to a unified understanding of evolutionary ecosystem ecology that transcends scale in every sense; time, space, and biological diversity. My general approach is bottom-up, starting with the basic building blocks of a system and analyzing the set of potential behaviours the system can exhibit through mathematical techniques. By continuing to extend the mathematical framework I use to encompass larger sets of processes, it is my hope that the mathematical theory I produce will be as holistic and interwoven as the understanding of nature I am pursuing.
+
+My proposed thesis focuses on contributing to a coevolutionary theory of community ecology in the context of plant-pollinator networks. Specifically, I am working on methods to detect various forms of coevolution, models that predict the coevolution of patterns of interspecific interactions and the evolution of the phenology of ecological networks. The theory of stochastic differential equations is my primary weapon for confronting these tasks.
 
 My CV is available [here](cv.pdf).
