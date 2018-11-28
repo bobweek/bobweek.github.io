@@ -126,3 +126,9 @@ For two maps $(U_1,\phi_1),(U_2,\phi_2)$ such that $\phi_i:W_i\rightarrow U_i$ w
   1. For every $x\neq y\in M$ there exists open $W_x,W_y$ s.t. $W_x\cap W_y=\emptyset$.
   2. There exists an atlas with no more than a countable number of maps.
     
+    
+# An Introduction to Differemtiable Manifolds - Boothby
+
+
+
+# Introductory Functional Analysis - Kreyszig
