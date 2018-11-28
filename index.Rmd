@@ -6,8 +6,6 @@ output:
     css: style.css
 ---
 
-<link rel="stylesheet" href="styles.css" type="text/css">
-
   - __Position__: PhD candidate at the University of Idaho working with professor [Scott Nuismer](http://www.webpages.uidaho.edu/~snuismer/Nuismer_Lab/).
     - __Degree program__: [Bioinformatics and Computational Biology](http://www.uidaho.edu/sci/bcb) (BCB).
     - __Departments__: [Department of Biological Sciences](https://www.uidaho.edu/sci/biology) and [The Institute for Bioinformatics and Evolutionary Studies](http://www.ibest.uidaho.edu/) (IBEST).
