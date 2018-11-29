@@ -1,0 +1,27 @@
+---
+title: "Functional Analysis - Kreyszig"
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+
+# 7.1 Spectral theory in finite dimensional normed spaces
+
+### 2. Show that the eigenvalues of a Hermitian matrix $A=(\alpha_{jk})$ are real.
+
+### 3. Show that the eigenvalues of a skew-Hermitian matrix $A=(\alpha_{jk})$ are pure imaginary or zero.
+
+### 2. Show that the eigenvalues of a unitary matrix $A=(\alpha_{jk})$ have absolute value 1.
+
+
+
