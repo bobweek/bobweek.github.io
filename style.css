@@ -18,6 +18,11 @@
     background-color: #222;
 }
 
+#TOC {
+  color: black; 
+}
+
+
 body{
    color: white;
    font-size: large;

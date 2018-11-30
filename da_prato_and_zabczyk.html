@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Da Prato &amp; Zabczyk" />
+
+
+<title>Stochastic equations in infinite dimensions</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="interactive_theory.html">Interactive theory</a></li>
+        <li><a href="measuring_coevolution.html">Measuring coevolution</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Math <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="ODE_arnold.html">ODE</a></li>
+            <li><a href="diffman.html">DM</a></li>
+            <li><a href="kreyszig.html">FA</a></li>
+            <li><a href="da_prato_and_zabczyk.html">SPDE</a></li>
+          </ul>
+        </li><!--
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="notes-fitness.html">First Steps</a></li>
+            <li><a href="notes-evolution.html">Evolution</a></li>
+            <li><a href="notes-examples.html">Examples</a></li>
+            <li><a href="notes-misc.html">Misc</a></li>
+          </ul>
+        </li>
+        -->
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Stochastic equations in infinite dimensions</h1>
+<h4 class="author"><em>Da Prato &amp; Zabczyk</em></h4>
+
+</div>
+
+
+<p>Notation:</p>
+<ul>
+<li><span class="math inline">\(\mathscr{L}(X)\)</span>… the law of the random variable <span class="math inline">\(X\)</span>.</li>
+<li><span class="math inline">\(E,F\)</span>… Hilbert or Banach spaces</li>
+<li><span class="math inline">\(E^*\)</span>… the dual of <span class="math inline">\(E\)</span></li>
+<li><span class="math inline">\(H\)</span>… a Hilbert space</li>
+<li><span class="math inline">\(U\)</span>… a separable Hilbert space <span class="math inline">\(\iff\)</span> <span class="math inline">\(U\)</span> admits a countable orthonormal basis
+<ul>
+<li><span class="math inline">\(U_1,U_2,\dots\)</span> will also denote separable Hilbert spaces</li>
+</ul></li>
+<li><span class="math inline">\(\mathscr{B}(E)\)</span>… the Banach <span class="math inline">\(\sigma\)</span>-algebra of a space <span class="math inline">\(E\)</span></li>
+<li><span class="math inline">\(\mu\)</span>… a Gaussian measure on <span class="math inline">\(H\)</span></li>
+<li><span class="math inline">\(m\in H\)</span>… mean of a Gaussian measure</li>
+<li><span class="math inline">\(Q:H\rightarrow H\)</span>… covariance operator of a Gaussian measure</li>
+<li><span class="math inline">\(\mathscr{O}\)</span>… a subset of <span class="math inline">\({\mathbb{R}}^d\)</span></li>
+<li><span class="math inline">\(U_0=Q^{1/2}(U)\)</span>… the reproducing kernel of a generalized Wiener process</li>
+<li><span class="math inline">\(L(E,F)\)</span>… set of all linear bounded operators from <span class="math inline">\(E\)</span> to <span class="math inline">\(F\)</span>.</li>
+<li><span class="math inline">\(L_2^0=L_2(U_0,U_1)\)</span>… the space of all Hilbert-Schmidt operators from <span class="math inline">\(U_0\)</span> to <span class="math inline">\(U_1\)</span></li>
+</ul>
+<div id="c" class="section level1">
+<h1>C</h1>
+<p>Let <span class="math inline">\(L(E,G)\)</span> be the Banach space of all linear bounded operators from <span class="math inline">\(E\)</span> into <span class="math inline">\(G\)</span> with the supremum norm</p>
+<p><span class="math display">\[\|T\|\equiv\sup_{x\in E}\frac{\|Tx\|}{\|x\|}.\]</span></p>
+<div id="def-tin-leg-is-nuclear-or-trace-class-if-there-exists-sequences-a_jsubset-g-phi_jsubset-e-s.t." class="section level4">
+<h4><strong>Def</strong> <span class="math inline">\(T\in L(E,G)\)</span> is <strong>nuclear</strong> or <strong>trace class</strong> if there exists sequences <span class="math inline">\(\{a_j\}\subset G, \ \{\phi_j\}\subset E^*\)</span> s.t.</h4>
+<p><span class="math display">\[\sum_{j=1}^\infty\|a_j\|\|\phi_j\|&lt;\infty\]</span></p>
+<p>and <span class="math inline">\(T\)</span> has the representation <span class="math inline">\(Tx=\sum_ja_j\phi_j(x), \ x\in E\)</span>. The space of all nuclear operators with the norm</p>
+<p><span class="math display">\[\|T\|_1\equiv\inf\left\{\sum_j\|a_j\|\|\phi_j\|:Tx=\sum_ja_j\phi_j(x)\right\}\]</span></p>
+<p>is a Banach space denoted as <span class="math inline">\(L_1(E,G)\)</span> or <span class="math inline">\(L_1(E)\)</span> if <span class="math inline">\(E=E\)</span>. If <span class="math inline">\(T\in L_1(U)\)</span> and <span class="math inline">\(\{e_k\}\)</span> is a complete orhonormal system in H, then we define</p>
+<p><span class="math display">\[\mathrm{Tr}T=\sum_j\left&lt;Te_j,e_j\right&gt;\]</span></p>
+</div>
+<div id="proposition-c.3-a-nonnegative-operator-tin-lh-is-of-trace-class-iff-there-exists-an-orthonormal-basis-e_k-on-h-s.t." class="section level4">
+<h4><strong>Proposition C.3</strong> A nonnegative operator <span class="math inline">\(T\in L(H)\)</span> is of trace class iff there exists an orthonormal basis <span class="math inline">\(\{e_k\}\)</span> on <span class="math inline">\(H\)</span> s.t.</h4>
+<p><span class="math display">\[\sum_j\left&lt;Te_j,e_j\right&gt;&lt;\infty.\]</span></p>
+<p>When this occurs <span class="math inline">\(\mathrm{Tr}T=\|T\|_1\)</span>.</p>
+</div>
+<div id="def-for-two-separable-hilbert-spaces-u_1-and-u_2-with-complete-orthonormal-bases-e_ksubset-u_1-and-f_ksubset-u_2-a-linear-bounded-operator-tu_1rightarrow-u_2-is-said-to-be-hilbert-schmidt-if" class="section level4">
+<h4><strong>Def</strong> For two separable Hilbert spaces <span class="math inline">\(U_1\)</span> and <span class="math inline">\(U_2\)</span> with complete orthonormal bases <span class="math inline">\(\{e_k\}\subset U_1\)</span> and <span class="math inline">\(\{f_k\}\subset U_2\)</span>, a linear bounded operator <span class="math inline">\(T:U_1\rightarrow U_2\)</span> is said to be <strong>Hilbert-Schmidt</strong> if</h4>
+<p><span class="math display">\[\sum_k|Te_k|^2&lt;\infty.\]</span></p>
+<p>The space of all Hilbert-Schmidt operators from <span class="math inline">\(U_1\)</span> to <span class="math inline">\(U_2\)</span>, equipped with the norm</p>
+<p><span class="math display">\[\|T\|_2\equiv\left(\sum_k|Te_k|^2\right)^{1/2}\]</span></p>
+<p>is a separable Hilbert space with the scalar product</p>
+<p><span class="math display">\[\left&lt;S,T\right&gt;\equiv\sum_k\left&lt;Se_k,Te_k\right&gt;.\]</span></p>
+</div>
+<div id="notation-for-any-vectors-ain-u_1-and-bin-u_2-the-operation-botimes-a-denotes-the-linear-operator-defined-by" class="section level4">
+<h4><strong>Notation</strong> For any vectors <span class="math inline">\(a\in U_1\)</span> and <span class="math inline">\(b\in U_2\)</span>, the operation <span class="math inline">\(b\otimes a\)</span> denotes the linear operator defined by</h4>
+<p><span class="math display">\[b\otimes a:U_1\rightarrow U_2, \ h\mapsto \left&lt;a,h\right&gt;b, \ \ h\in U_1.\]</span></p>
+<p>The double sequence <span class="math inline">\(\left\{f_j\otimes e_k\right\}_{j,k\in \mathbb{N}}\)</span> is a complete orthonormal basis in <span class="math inline">\(L_2(E,F)\)</span>.</p>
+</div>
+<div id="proposition-c.4-let-u_1u_2u_3-be-separable-hilbert-spaces.-if-tin-l_2u_1u_2-and-sin-l_2u_2u_3-then-stin-l_1u_1u_3-and" class="section level4">
+<h4><strong>Proposition C.4</strong> Let <span class="math inline">\(U_1,U_2,U_3\)</span> be separable Hilbert spaces. If <span class="math inline">\(T\in L_2(U_1,U_2)\)</span> and <span class="math inline">\(S\in L_2(U_2,U_3)\)</span> then <span class="math inline">\(ST\in L_1(U_1,U_3)\)</span> and</h4>
+<p><span class="math display">\[\|ST\|_1\leq\|S\|_2\|T\|_2.\]</span></p>
+</div>
+</div>
+<div id="gaussian-measures-in-banach-spaces" class="section level1">
+<h1>2.2 Gaussian measures in Banach spaces</h1>
+<div id="reproducing-kernels" class="section level2">
+<h2>2.2.2 Reproducing kernels</h2>
+<p>Let <span class="math inline">\(\mu\)</span> be a symmetric Gaussian measure on a Banach space <span class="math inline">\(E\)</span>.</p>
+<div id="def-a-linear-subspace-hsubset-e-equipped-with-a-hilbert-norm-cdot_h-is-said-to-be-a-reproducing-kernel-space-for-mu-if-h-is-complete-continously-embedded-in-e-and-such-that-for-arbitrary-phiin-e" class="section level4">
+<h4><strong>Def</strong> A linear subspace <span class="math inline">\(H\subset E\)</span> equipped with a Hilbert norm <span class="math inline">\(|\cdot|_H\)</span> is said to be a <strong>reproducing kernel space</strong> for <span class="math inline">\(\mu\)</span> if <span class="math inline">\(H\)</span> is complete, continously embedded in <span class="math inline">\(E\)</span> and such that for arbitrary <span class="math inline">\(\phi\in E^*\)</span></h4>
+<p><span class="math display">\[\mathscr{L}(\phi)=\mathscr{N}(0,|\phi|^2_H),\]</span></p>
+<p>where <span class="math inline">\(|\phi|_H\equiv\sup_{|h|_H\leq1}|\phi(h)|\)</span>.</p>
+</div>
+<div id="theorem-2.9-for-an-arbitrary-symmetric-gaussian-measure-mu-on-a-separable-banasch-space-there-exists-a-unique-reproducing-kernel-space-hcdot_h." class="section level4">
+<h4><strong>Theorem 2.9</strong> For an arbitrary symmetric Gaussian measure <span class="math inline">\(\mu\)</span> on a separable Banasch space, there exists a unique reproducing kernel space <span class="math inline">\((H,|\cdot|_H)\)</span>.</h4>
+<p>The reproducing kernel space of <span class="math inline">\(\mu\)</span> will be denoted by <span class="math inline">\(H_\mu\)</span>. In can be thought of as independent of the ambient Banach space <span class="math inline">\(E\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="probability-measures-on-hilbert-spaces" class="section level1">
+<h1>2.3 Probability measures on Hilbert spaces</h1>
+<div id="gaussian-measures-on-hilbert-spaces" class="section level2">
+<h2>2.3.1 Gaussian measures on Hilbert spaces</h2>
+<div id="def-a-pr-msr-mu-on-hmathscrbh-is-gaussian-if-for-any-hin-h-there-exists-minmathbbr1qgeq0-s.t." class="section level4">
+<h4><strong>Def</strong> A pr msr <span class="math inline">\(\mu\)</span> on <span class="math inline">\((H,\mathscr{B}(H))\)</span> is <strong>Gaussian</strong> if for any <span class="math inline">\(h\in H\)</span> there exists <span class="math inline">\(m\in{\mathbb{R}}^1,q\geq0\)</span> s.t.</h4>
+<p><span class="math display">\[\mu(\{x\in H;\left&lt;h,x\right&gt;\in A\})=\mathscr{N}(m,q)(A), \ \forall \ A\in\mathscr{B}({\mathbb{R}}^1)\]</span></p>
+<p>If <span class="math inline">\(\mu\)</span> is Gaussian the following functionals</p>
+<p><span class="math display">\[H\rightarrow{\mathbb{R}}^1, \ h\mapsto\int_H\left&lt;h,x\right&gt;\mu(dx),\]</span></p>
+<p><span class="math display">\[H\times H\rightarrow{\mathbb{R}}^1, \ (h_1,h_2)\mapsto\int_H\left&lt;h_1,x\right&gt;\left&lt;h_2,x\right&gt;\mu(dx)\]</span></p>
+<p>are well defined and continous.</p>
+</div>
+<div id="lemma-2.15-sort-of-like-cauchy-schwartz-for-hilbert-spaces-with-probability-measures." class="section level4">
+<h4><strong>Lemma 2.15</strong> Sort of like Cauchy-Schwartz for Hilbert spaces with probability measures.</h4>
+<p>Let <span class="math inline">\(\nu\)</span> be a pr msr on <span class="math inline">\((H,\mathscr{B}(H))\)</span>. If there exists a <span class="math inline">\(k\in\mathbb{N}\)</span> s.t.</p>
+<p><span class="math display">\[\int_H|\left&lt;z,x\right&gt;|^k\nu(dx)&lt;\infty, \ \forall \ z\in H,\]</span></p>
+<p>then there also exists a constant <span class="math inline">\(c&gt;0\)</span> s.t.</p>
+<p><span class="math display">\[\left|\int_H\prod_{i=1}^k\left&lt;h_i,x\right&gt;\nu(dx)\right|\leq c\prod_{i=1}^k|h_i|, \ h_1,\dots,h_k\in H.\]</span></p>
+<p>This lemma implies that if <span class="math inline">\(\mu\)</span> is Gaussian then there exists <span class="math inline">\(m\in H\)</span> and a linear operator <span class="math inline">\(Q\)</span> s.t.</p>
+<p><span class="math display">\[\int_H\left&lt;h,x\right&gt;\mu(dx)=\left&lt;m,h\right&gt;, \ \forall \ h\in H,\]</span></p>
+<p><span class="math display">\[\int_H\left&lt;h_1,x-m\right&gt;\left&lt;h_2,x-m\right&gt;\mu(dx)=\left&lt;Qh_1,h_2\right&gt;.\]</span></p>
+<p>A Gaussian msr has the characteristic functional</p>
+<p><span class="math display">\[\hat\mu(\lambda)=\int_He^{i\left&lt;\lambda,x\right&gt;}\mu(dx)=e^{i\left&lt;\lambda,m\right&gt;-\frac{1}{2}\left&lt;Q\lambda,\lambda\right&gt;}\]</span></p>
+</div>
+</div>
+</div>
+<div id="wiener-processes" class="section level1">
+<h1>4.1 Wiener processes</h1>
+<div id="def-4.1-a-real-valued-stochastic-process-wt-tgeq0-is-called-a-wiener-process-if" class="section level4">
+<h4><strong>Def 4.1</strong> A real valued stochastic process <span class="math inline">\(W(t), \ t\geq0\)</span>, is called a <strong>Wiener process</strong> if</h4>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(W\)</span> has continous trajectories and <span class="math inline">\(W(0)=0\)</span>,</li>
+<li><span class="math inline">\(W\)</span> has independent increments and</li>
+</ol>
+<p><span class="math display">\[\mathscr{L}(W(t)-W(s))=\mathscr{L}(W(t-s)), \ t\geq s\geq0,\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li><span class="math inline">\(\mathscr{L}(W(t))=\mathscr{L}(-W(t)), \ t\geq0\)</span></li>
+</ol>
+</div>
+<div id="hilbert-space-valued-wiener-processes" class="section level2">
+<h2>4.1.2 Hilbert space valued Wiener processes</h2>
+</div>
+<div id="generalized-wiener-processes-on-a-hilbert-space" class="section level2">
+<h2>4.1.2 Generalized Wiener processes on a Hilbert space</h2>
+<p>For each <span class="math inline">\(a\in U\)</span> define a real valued Wiener process <span class="math inline">\(W_a(t), \ t\geq0\)</span>, by the formula <span class="math inline">\(W_a(t)=\left&lt;a,W(t)\right&gt;, \ t\geq0\)</span>. The transformation <span class="math inline">\(a\mapsto W_a\)</span> is linear from <span class="math inline">\(U\)</span> to the space of stochastic processes. It is also continuous in that</p>
+<p><span class="math display">\[t\geq0, \{a_n\}\subset U, \lim_{n\rightarrow\infty}a_n=a\implies\lim_{n\rightarrow\infty}{\mathbb{E}}|W_a(t)-W_{a_n}(t)|^2=0.\]</span></p>
+<div id="def-any-transformation-amapsto-w_a-whose-values-are-real-valued-wiener-processes-on-0infty-that-is-continuous-in-the-above-sense-is-a-generalized-wiener-process." class="section level4">
+<h4><strong>Def</strong> Any transformation <span class="math inline">\(a\mapsto W_a\)</span> whose values are real valued Wiener processes on <span class="math inline">\([0,\infty)\)</span> that is continuous in the above sense is a <strong>generalized Wiener process</strong>.</h4>
+<p>This definition implies the existence of a bilinear form <span class="math inline">\(K(a,b), \ a,b\in U\)</span> s.t.</p>
+<p><span class="math display">\[{\mathbb{E}}[W_a(t)W_b(s)]=(t\wedge s) \ K(a,b), \ \ t,s\geq0, \ a,b\in U.\]</span></p>
+<p>The continuity condition gurantees that <span class="math inline">\(K\)</span> is continuous in <span class="math inline">\(U\)</span> and hence there exists <span class="math inline">\(Q\in L(U)\)</span> s.t.</p>
+<p><span class="math display">\[{\mathbb{E}}[W_a(t)W_b(t)]=(t\wedge s)\left&lt;Q a,b\right&gt;, \ \ t,s\geq0, \ a,b\in U.\]</span></p>
+</div>
+<div id="constructing-a-generalized-wiener-process-from-an-arbitrary-self-adjoint-and-positive-definite-operator-q." class="section level4">
+<h4>Constructing a generalized Wiener process from an arbitrary self-adjoint and positive definite operator <span class="math inline">\(Q\)</span>.</h4>
+<p>Let <span class="math inline">\(\{e_j\}\)</span> be a complete orthonormal basis in <span class="math inline">\(U\)</span> and <span class="math inline">\(\{\beta_j\}\)</span> a sequence of independent real valued standard Wiener processes. Define</p>
+<p><span class="math display">\[W_a(t)\equiv\sum_j\left&lt;Q^{1/2}e_j,a\right&gt;\beta_j(t), \ \ t\geq0, \ a\in U.\]</span></p>
+<ul>
+<li>Intuitive result: An arbitrary generalized Wiener process on <span class="math inline">\(U\)</span> is a classical Wiener process in some larger Hilbert space <span class="math inline">\(U_1\)</span>.</li>
+</ul>
+</div>
+<div id="proposition-4.8-for-every-ain-u-we-have" class="section level4">
+<h4><strong>Proposition 4.8</strong> For every <span class="math inline">\(a\in U\)</span> we have</h4>
+<p><span class="math display">\[W_a(t)=\sum_j\left&lt;Q^{1/2}e_j,a\right&gt;W_{Q^{1/2}e_j}(t).\]</span></p>
+<p>This forms a generalized Wiener process with covariance <span class="math inline">\(Q\)</span>.</p>
+</div>
+</div>
+<div id="wiener-processes-in-ul2mathscro" class="section level2">
+<h2>4.1.3 Wiener processes in <span class="math inline">\(U=L^2(\mathscr{O})\)</span></h2>
+</div>
+</div>
+<div id="definition-of-the-stochastic-integral" class="section level1">
+<h1>4.2 Definition of the stochastic integral</h1>
+<div id="stochastic-integral-for-generalized-wiener-processes" class="section level2">
+<h2>4.2.1 Stochastic integral for generalized Wiener processes</h2>
+<p>Here the definition of the stochastic integral is extended for processes where <span class="math inline">\(Q\)</span> is not necessarily of trace-class.</p>
+</div>
+</div>
+<div id="the-ito-formula" class="section level1">
+<h1>4.4 The It^o formula</h1>
+<ul>
+<li>Verbatim from the text:</li>
+</ul>
+<p>Assume that <span class="math inline">\(\Phi\)</span> is an <span class="math inline">\(L_2^0\)</span>-valued process stochastically integrable in <span class="math inline">\([0,T]\)</span>, <span class="math inline">\(\phi\)</span> a <span class="math inline">\(H\)</span>-valued predictable process Bochner integrable on <span class="math inline">\([0,T]\)</span>, <span class="math inline">\(\mathbb{P}\)</span>-a.s., and <span class="math inline">\(X(0)\)</span> a <span class="math inline">\(\mathscr{F}_0\)</span>-measurabl <span class="math inline">\(H\)</span>-valued random variable. Then the following process</p>
+<p><span class="math display">\[X(t)=X(0)+\int_0^t\phi(s)ds+\int_0^t\Phi(s)dW(s), \ t\in[0,T]\]</span></p>
+<p>is well defined. Assume that a function <span class="math inline">\(F:[0,T]\times H\rightarrow{\mathbb{R}}^1\)</span> and its partial derivatives <span class="math inline">\(F_t,F_x,F_{xx}\)</span>, are uniformly continuous on bounded subsets of <span class="math inline">\([0,T]\times H\)</span>.</p>
+<div id="theorem-4.32-under-the-above-conditions-mathbbp-a.s.-for-all-tin0t" class="section level4">
+<h4><strong>Theorem 4.32</strong> <em>Under the above conditions</em>, <span class="math inline">\(\mathbb{P}\)</span>-a.s., <em>for all</em> <span class="math inline">\(t\in[0,T]\)</span></h4>
+<p><span class="math display">\[F(t,X(t))=F(0,X(0))+\int_0^t\left&lt;F_x(s,X(s)),\Phi(s)dW(s)\right&gt;\]</span></p>
+<p><span class="math display">\[+\int_0^t\Big{\{}F_t(s,X(s))+\left&lt;F_x(s,X(s)),\phi(s)\right&gt;\]</span></p>
+<p><span class="math display">\[\left.+\frac{1}{2}\mathrm{Tr}[F_{xx}(s,X(s))(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]\right\}\]</span></p>
+<ul>
+<li>Interpretation:</li>
+</ul>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

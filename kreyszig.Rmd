@@ -1,5 +1,6 @@
 ---
-title: "Functional Analysis - Kreyszig"
+title: "Introductory Functional Analysis"
+author: "Kreyszig"
 output: 
   html_document:
     theme: cosmo

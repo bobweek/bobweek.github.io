@@ -1,0 +1,211 @@
+---
+title: "Stochastic equations in infinite dimensions"
+author: "Da Prato & Zabczyk"
+output: 
+  html_document: 
+    toc: true
+    toc_float: true
+    toc_depth: 1
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+
+
+Notation:
+
+  - $\mathscr{L}(X)$... the law of the random variable $X$.
+  - $E,F$... Hilbert or Banach spaces
+  - $E^*$... the dual of $E$
+  - $H$... a Hilbert space
+  - $U$... a separable Hilbert space $\iff$ $U$ admits a countable orthonormal basis
+    - $U_1,U_2,\dots$ will also denote separable Hilbert spaces
+  - $\mathscr{B}(E)$... the Banach $\sigma$-algebra of a space $E$
+  - $\mu$... a Gaussian measure on $H$
+  - $m\in H$... mean of a Gaussian measure
+  - $Q:H\rightarrow H$... covariance operator of a Gaussian measure
+  - $\mathscr{O}$... a subset of $\R^d$
+  - $U_0=Q^{1/2}(U)$... the reproducing kernel of a generalized Wiener process
+  - $L(E,F)$... set of all linear bounded operators from $E$ to $F$.
+  - $L_2^0=L_2(U_0,U_1)$... the space of all Hilbert-Schmidt operators from $U_0$ to $U_1$
+
+# C
+
+Let $L(E,G)$ be the Banach space of all linear bounded operators from $E$ into $G$ with the supremum norm
+
+$$\|T\|\equiv\sup_{x\in E}\frac{\|Tx\|}{\|x\|}.$$
+
+#### __Def__ $T\in L(E,G)$ is __nuclear__ or __trace class__ if there exists sequences $\{a_j\}\subset G, \ \{\phi_j\}\subset E^*$ s.t.
+
+$$\sum_{j=1}^\infty\|a_j\|\|\phi_j\|<\infty$$
+
+and $T$ has the representation $Tx=\sum_ja_j\phi_j(x), \ x\in E$. The space of all nuclear operators with the norm
+
+$$\|T\|_1\equiv\inf\left\{\sum_j\|a_j\|\|\phi_j\|:Tx=\sum_ja_j\phi_j(x)\right\}$$
+
+is a Banach space denoted as $L_1(E,G)$ or $L_1(E)$ if $E=E$.  If $T\in L_1(U)$ and $\{e_k\}$ is a complete orhonormal system in H, then we define
+
+$$\mathrm{Tr}T=\sum_j\left<Te_j,e_j\right>$$
+
+#### __Proposition C.3__ A nonnegative operator $T\in L(H)$ is of trace class iff there exists an orthonormal basis $\{e_k\}$ on $H$ s.t.
+
+$$\sum_j\left<Te_j,e_j\right><\infty.$$
+
+When this occurs $\mathrm{Tr}T=\|T\|_1$.
+
+#### __Def__ For two separable Hilbert spaces $U_1$ and $U_2$ with complete orthonormal bases $\{e_k\}\subset U_1$ and $\{f_k\}\subset U_2$, a linear bounded operator $T:U_1\rightarrow U_2$ is said to be __Hilbert-Schmidt__ if
+
+$$\sum_k|Te_k|^2<\infty.$$
+
+The space of all Hilbert-Schmidt operators from $U_1$ to $U_2$, equipped with the norm
+
+$$\|T\|_2\equiv\left(\sum_k|Te_k|^2\right)^{1/2}$$
+
+is a separable Hilbert space with the scalar product
+
+$$\left<S,T\right>\equiv\sum_k\left<Se_k,Te_k\right>.$$
+
+#### __Notation__ For any vectors $a\in U_1$ and $b\in U_2$, the operation $b\otimes a$ denotes the linear operator defined by
+
+$$b\otimes a:U_1\rightarrow U_2, \ h\mapsto \left<a,h\right>b, \ \ h\in U_1.$$
+
+The double sequence $\left\{f_j\otimes e_k\right\}_{j,k\in \mathbb{N}}$ is a complete orthonormal basis in $L_2(E,F)$.
+
+#### __Proposition C.4__ Let $U_1,U_2,U_3$ be separable Hilbert spaces. If $T\in L_2(U_1,U_2)$ and $S\in L_2(U_2,U_3)$ then $ST\in L_1(U_1,U_3)$ and
+
+$$\|ST\|_1\leq\|S\|_2\|T\|_2.$$
+
+# 2.2 Gaussian measures in Banach spaces
+
+## 2.2.2 Reproducing kernels
+
+Let $\mu$ be a symmetric Gaussian measure on a Banach space $E$. 
+
+#### __Def__ A linear subspace $H\subset E$ equipped with a Hilbert norm $|\cdot|_H$ is said to be a __reproducing kernel space__ for $\mu$ if $H$ is complete, continously embedded in $E$ and such that for arbitrary $\phi\in E^*$
+
+$$\mathscr{L}(\phi)=\mathscr{N}(0,|\phi|^2_H),$$
+
+where $|\phi|_H\equiv\sup_{|h|_H\leq1}|\phi(h)|$.
+
+#### __Theorem 2.9__ For an arbitrary symmetric Gaussian measure $\mu$ on a separable Banasch space, there exists a unique reproducing kernel space $(H,|\cdot|_H)$.
+
+The reproducing kernel space of $\mu$ will be denoted by $H_\mu$. In can be thought of as independent of the ambient Banach space $E$.
+
+# 2.3 Probability measures on Hilbert spaces
+
+## 2.3.1 Gaussian measures on Hilbert spaces
+
+#### __Def__ A pr msr $\mu$ on $(H,\mathscr{B}(H))$ is __Gaussian__ if for any $h\in H$ there exists $m\in\R^1,q\geq0$ s.t.
+
+$$\mu(\{x\in H;\left<h,x\right>\in A\})=\mathscr{N}(m,q)(A), \ \forall \ A\in\mathscr{B}(\R^1)$$
+
+If $\mu$ is Gaussian the following functionals
+
+$$H\rightarrow\R^1, \ h\mapsto\int_H\left<h,x\right>\mu(dx),$$
+
+$$H\times H\rightarrow\R^1, \ (h_1,h_2)\mapsto\int_H\left<h_1,x\right>\left<h_2,x\right>\mu(dx)$$
+
+are well defined and continous.
+
+#### __Lemma 2.15__ Sort of like Cauchy-Schwartz for Hilbert spaces with probability measures.
+
+Let $\nu$ be a pr msr on $(H,\mathscr{B}(H))$. If there exists a $k\in\mathbb{N}$ s.t.
+
+$$\int_H|\left<z,x\right>|^k\nu(dx)<\infty, \ \forall \ z\in H,$$
+
+then there also exists a constant $c>0$ s.t.
+
+$$\left|\int_H\prod_{i=1}^k\left<h_i,x\right>\nu(dx)\right|\leq c\prod_{i=1}^k|h_i|, \ h_1,\dots,h_k\in H.$$
+
+This lemma implies that if $\mu$ is Gaussian then there exists $m\in H$ and a linear operator $Q$ s.t.
+
+$$\int_H\left<h,x\right>\mu(dx)=\left<m,h\right>, \ \forall \ h\in H,$$
+
+$$\int_H\left<h_1,x-m\right>\left<h_2,x-m\right>\mu(dx)=\left<Qh_1,h_2\right>.$$
+
+A Gaussian msr has the characteristic functional
+
+$$\hat\mu(\lambda)=\int_He^{i\left<\lambda,x\right>}\mu(dx)=e^{i\left<\lambda,m\right>-\frac{1}{2}\left<Q\lambda,\lambda\right>}$$
+
+
+
+# 4.1 Wiener processes
+
+#### __Def 4.1__ A real valued stochastic process $W(t), \ t\geq0$, is called a __Wiener process__ if
+
+  1. $W$ has continous trajectories and $W(0)=0$,
+  2. $W$ has independent increments and
+  
+$$\mathscr{L}(W(t)-W(s))=\mathscr{L}(W(t-s)), \ t\geq s\geq0,$$  
+
+  3. $\mathscr{L}(W(t))=\mathscr{L}(-W(t)), \ t\geq0$
+
+## 4.1.2 Hilbert space valued Wiener processes 
+
+## 4.1.2 Generalized Wiener processes on a Hilbert space
+
+For each $a\in U$ define a real valued Wiener process $W_a(t), \ t\geq0$, by the formula $W_a(t)=\left<a,W(t)\right>, \ t\geq0$. The transformation $a\mapsto W_a$ is linear from $U$ to the space of stochastic processes. It is also continuous in that
+
+$$t\geq0, \{a_n\}\subset U, \lim_{n\rightarrow\infty}a_n=a\implies\lim_{n\rightarrow\infty}\E|W_a(t)-W_{a_n}(t)|^2=0.$$
+
+#### __Def__ Any transformation $a\mapsto W_a$ whose values are real valued Wiener processes on $[0,\infty)$ that is continuous in the above sense is a __generalized Wiener process__.
+
+This definition implies the existence of a bilinear form $K(a,b), \ a,b\in U$ s.t.
+
+$$\E[W_a(t)W_b(s)]=(t\wedge s) \ K(a,b), \ \ t,s\geq0, \ a,b\in U.$$
+
+The continuity condition gurantees that $K$ is continuous in $U$ and hence there exists $Q\in L(U)$ s.t.
+
+$$\E[W_a(t)W_b(t)]=(t\wedge s)\left<Q a,b\right>, \ \ t,s\geq0, \ a,b\in U.$$
+
+#### Constructing a generalized Wiener process from an arbitrary self-adjoint and positive definite operator $Q$.
+
+Let $\{e_j\}$ be a complete orthonormal basis in $U$ and $\{\beta_j\}$ a sequence of independent real valued standard Wiener processes. Define
+
+$$W_a(t)\equiv\sum_j\left<Q^{1/2}e_j,a\right>\beta_j(t), \ \ t\geq0, \ a\in U.$$
+
+  - Intuitive result: An arbitrary generalized Wiener process on $U$ is a classical Wiener process in some larger Hilbert space $U_1$.
+
+#### __Proposition 4.8__ For every $a\in U$ we have
+
+$$W_a(t)=\sum_j\left<Q^{1/2}e_j,a\right>W_{Q^{1/2}e_j}(t).$$
+
+This forms a generalized Wiener process with covariance $Q$.
+
+## 4.1.3 Wiener processes in $U=L^2(\mathscr{O})$
+
+# 4.2 Definition of the stochastic integral
+
+## 4.2.1 Stochastic integral for generalized Wiener processes
+
+Here the definition of the stochastic integral is extended for processes where $Q$ is not necessarily of trace-class.
+
+# 4.4 The It\^o formula
+
+  - Verbatim from the text:
+
+Assume that $\Phi$ is an $L_2^0$-valued process stochastically integrable in $[0,T]$, $\phi$ a $H$-valued predictable process Bochner integrable on $[0,T]$, $\mathbb{P}$-a.s., and $X(0)$ a $\mathscr{F}_0$-measurabl $H$-valued random variable. Then the following process
+
+$$X(t)=X(0)+\int_0^t\phi(s)ds+\int_0^t\Phi(s)dW(s), \ t\in[0,T]$$
+
+
+is well defined. Assume that a function $F:[0,T]\times H\rightarrow\R^1$ and its partial derivatives $F_t,F_x,F_{xx}$, are uniformly continuous on bounded subsets of $[0,T]\times H$.
+
+#### __Theorem 4.32__ _Under the above conditions_, $\mathbb{P}$-a.s., _for all_ $t\in[0,T]$
+
+$$F(t,X(t))=F(0,X(0))+\int_0^t\left<F_x(s,X(s)),\Phi(s)dW(s)\right>$$
+
+$$+\int_0^t\Big{\{}F_t(s,X(s))+\left<F_x(s,X(s)),\phi(s)\right>$$
+
+$$\left.+\frac{1}{2}\mathrm{Tr}[F_{xx}(s,X(s))(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]\right\}$$
+
+  - Interpretation:
+  
+
