@@ -33,7 +33,9 @@ Notation:
   - $Q:H\rightarrow H$... covariance operator of a Gaussian measure
   - $\mathscr{O}$... a subset of $\R^d$
   - $U_0=Q^{1/2}(U)$... the reproducing kernel of a generalized Wiener process
-  - $L(E,F)$... set of all linear bounded operators from $E$ to $F$.
+  - $L(E,F)$... Banach space of linear bounded operators from $E$ to $F$.
+  - $L_1(E,F)$... Banach space of trace class operators
+  - $L_2(U_1,U_2)$... separable Hilbert space of Hilbert-Schmidt operators
   - $L_2^0=L_2(U_0,U_1)$... the space of all Hilbert-Schmidt operators from $U_0$ to $U_1$
 
 # C
@@ -46,11 +48,13 @@ $$\|T\|\equiv\sup_{x\in E}\frac{\|Tx\|}{\|x\|}.$$
 
 $$\sum_{j=1}^\infty\|a_j\|\|\phi_j\|<\infty$$
 
-and $T$ has the representation $Tx=\sum_ja_j\phi_j(x), \ x\in E$. The space of all nuclear operators with the norm
+and $T$ has the representation $Tx=\sum_ja_j\phi_j(x), \ x\in E$.
+
+The space of all nuclear operators with the norm
 
 $$\|T\|_1\equiv\inf\left\{\sum_j\|a_j\|\|\phi_j\|:Tx=\sum_ja_j\phi_j(x)\right\}$$
 
-is a Banach space denoted as $L_1(E,G)$ or $L_1(E)$ if $E=E$.  If $T\in L_1(U)$ and $\{e_k\}$ is a complete orhonormal system in H, then we define
+is a Banach space denoted as $L_1(E,G)$ or $L_1(E)$ if $E=E$.  If $T\in L_1(U)$ and $\{e_k\}$ is a complete orhonormal system in  U$. then we define
 
 $$\mathrm{Tr}T=\sum_j\left<Te_j,e_j\right>$$
 
@@ -187,7 +191,7 @@ This forms a generalized Wiener process with covariance $Q$.
 
 Here the definition of the stochastic integral is extended for processes where $Q$ is not necessarily of trace-class.
 
-# 4.4 The It\^o formula
+# 4.4 The It&ocirc; formula
 
   - Verbatim from the text:
 
@@ -209,3 +213,6 @@ $$\left.+\frac{1}{2}\mathrm{Tr}[F_{xx}(s,X(s))(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*
   - Interpretation:
   
 
+  - Concrete example:
+  
+  For each $x$ let $\mathfrak{n}_t(x)$ be an It&ocirc; diffusion

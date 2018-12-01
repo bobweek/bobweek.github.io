@@ -329,7 +329,9 @@ div.tocify {
 <li><span class="math inline">\(Q:H\rightarrow H\)</span>… covariance operator of a Gaussian measure</li>
 <li><span class="math inline">\(\mathscr{O}\)</span>… a subset of <span class="math inline">\({\mathbb{R}}^d\)</span></li>
 <li><span class="math inline">\(U_0=Q^{1/2}(U)\)</span>… the reproducing kernel of a generalized Wiener process</li>
-<li><span class="math inline">\(L(E,F)\)</span>… set of all linear bounded operators from <span class="math inline">\(E\)</span> to <span class="math inline">\(F\)</span>.</li>
+<li><span class="math inline">\(L(E,F)\)</span>… Banach space of linear bounded operators from <span class="math inline">\(E\)</span> to <span class="math inline">\(F\)</span>.</li>
+<li><span class="math inline">\(L_1(E,F)\)</span>… Banach space of trace class operators</li>
+<li><span class="math inline">\(L_2(U_1,U_2)\)</span>… separable Hilbert space of Hilbert-Schmidt operators</li>
 <li><span class="math inline">\(L_2^0=L_2(U_0,U_1)\)</span>… the space of all Hilbert-Schmidt operators from <span class="math inline">\(U_0\)</span> to <span class="math inline">\(U_1\)</span></li>
 </ul>
 <div id="c" class="section level1">
@@ -339,9 +341,10 @@ div.tocify {
 <div id="def-tin-leg-is-nuclear-or-trace-class-if-there-exists-sequences-a_jsubset-g-phi_jsubset-e-s.t." class="section level4">
 <h4><strong>Def</strong> <span class="math inline">\(T\in L(E,G)\)</span> is <strong>nuclear</strong> or <strong>trace class</strong> if there exists sequences <span class="math inline">\(\{a_j\}\subset G, \ \{\phi_j\}\subset E^*\)</span> s.t.</h4>
 <p><span class="math display">\[\sum_{j=1}^\infty\|a_j\|\|\phi_j\|&lt;\infty\]</span></p>
-<p>and <span class="math inline">\(T\)</span> has the representation <span class="math inline">\(Tx=\sum_ja_j\phi_j(x), \ x\in E\)</span>. The space of all nuclear operators with the norm</p>
+<p>and <span class="math inline">\(T\)</span> has the representation <span class="math inline">\(Tx=\sum_ja_j\phi_j(x), \ x\in E\)</span>.</p>
+<p>The space of all nuclear operators with the norm</p>
 <p><span class="math display">\[\|T\|_1\equiv\inf\left\{\sum_j\|a_j\|\|\phi_j\|:Tx=\sum_ja_j\phi_j(x)\right\}\]</span></p>
-<p>is a Banach space denoted as <span class="math inline">\(L_1(E,G)\)</span> or <span class="math inline">\(L_1(E)\)</span> if <span class="math inline">\(E=E\)</span>. If <span class="math inline">\(T\in L_1(U)\)</span> and <span class="math inline">\(\{e_k\}\)</span> is a complete orhonormal system in H, then we define</p>
+<p>is a Banach space denoted as <span class="math inline">\(L_1(E,G)\)</span> or <span class="math inline">\(L_1(E)\)</span> if <span class="math inline">\(E=E\)</span>. If <span class="math inline">\(T\in L_1(U)\)</span> and <span class="math inline">\(\{e_k\}\)</span> is a complete orhonormal system in U$. then we define</p>
 <p><span class="math display">\[\mathrm{Tr}T=\sum_j\left&lt;Te_j,e_j\right&gt;\]</span></p>
 </div>
 <div id="proposition-c.3-a-nonnegative-operator-tin-lh-is-of-trace-class-iff-there-exists-an-orthonormal-basis-e_k-on-h-s.t." class="section level4">
@@ -462,7 +465,7 @@ div.tocify {
 </div>
 </div>
 <div id="the-ito-formula" class="section level1">
-<h1>4.4 The It^o formula</h1>
+<h1>4.4 The Itô formula</h1>
 <ul>
 <li>Verbatim from the text:</li>
 </ul>
@@ -475,8 +478,10 @@ div.tocify {
 <p><span class="math display">\[+\int_0^t\Big{\{}F_t(s,X(s))+\left&lt;F_x(s,X(s)),\phi(s)\right&gt;\]</span></p>
 <p><span class="math display">\[\left.+\frac{1}{2}\mathrm{Tr}[F_{xx}(s,X(s))(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]\right\}\]</span></p>
 <ul>
-<li>Interpretation:</li>
+<li><p>Interpretation:</p></li>
+<li><p>Concrete example:</p></li>
 </ul>
+<p>For each <span class="math inline">\(x\)</span> let <span class="math inline">\(\mathfrak{n}_t(x)\)</span> be an Itô diffusion</p>
 </div>
 </div>
 
