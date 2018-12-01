@@ -22,9 +22,9 @@ output:
 Notation:
 
   - $\mathscr{L}(X)$... the law of the random variable $X$.
-  - $E,F$... Hilbert or Banach spaces
+  - $E,F,G$... Hilbert or Banach spaces
   - $E^*$... the dual of $E$
-  - $H$... a Hilbert space
+  - $H$... a Hilbert space with inner product $\left<\cdot,\cdot\right>$
   - $U$... a separable Hilbert space $\iff$ $U$ admits a countable orthonormal basis
     - $U_1,U_2,\dots$ will also denote separable Hilbert spaces
   - $\mathscr{B}(E)$... the Banach $\sigma$-algebra of a space $E$
@@ -34,39 +34,40 @@ Notation:
   - $\mathscr{O}$... a subset of $\R^d$
   - $U_0=Q^{1/2}(U)$... the reproducing kernel of a generalized Wiener process
   - $L(E,F)$... Banach space of linear bounded operators from $E$ to $F$.
-  - $L_1(E,F)$... Banach space of trace class operators
+  - $L_1(E,F)$... Banach space of nuclear operators
   - $L_2(U_1,U_2)$... separable Hilbert space of Hilbert-Schmidt operators
   - $L_2^0=L_2(U_0,U_1)$... the space of all Hilbert-Schmidt operators from $U_0$ to $U_1$
+  - $\triangle$... denotes the end of a formal statement 
 
-# C
+# A.C Nuclear & Hilbert-Schmidt operators
 
 Let $L(E,G)$ be the Banach space of all linear bounded operators from $E$ into $G$ with the supremum norm
 
 $$\|T\|\equiv\sup_{x\in E}\frac{\|Tx\|}{\|x\|}.$$
 
-#### __Def__ $T\in L(E,G)$ is __nuclear__ or __trace class__ if there exists sequences $\{a_j\}\subset G, \ \{\phi_j\}\subset E^*$ s.t.
+- __Def__ $T\in L(E,G)$ is __nuclear__ or __trace class__ if there exists sequences $\{a_j\}\subset G, \ \{\phi_j\}\subset E^*$ s.t.
 
 $$\sum_{j=1}^\infty\|a_j\|\|\phi_j\|<\infty$$
 
-and $T$ has the representation $Tx=\sum_ja_j\phi_j(x), \ x\in E$.
+and $T$ has the representation $Tx=\sum_ja_j\phi_j(x), \ x\in E$. $\triangle$
 
 The space of all nuclear operators with the norm
 
 $$\|T\|_1\equiv\inf\left\{\sum_j\|a_j\|\|\phi_j\|:Tx=\sum_ja_j\phi_j(x)\right\}$$
 
-is a Banach space denoted as $L_1(E,G)$ or $L_1(E)$ if $E=E$.  If $T\in L_1(U)$ and $\{e_k\}$ is a complete orhonormal system in  U$. then we define
+is a Banach space denoted as $L_1(E,G)$ or $L_1(E)$ if $E=E$. Let $K$ be another Banach space. If $T\in L_1(E,G)$ and $S\in L_1(G,K)$, then $TS\in L_1(E,K)$ and $\|TS\|_1\leq\|T\|_1\|S\|_1$. If $T\in L_1(U)$ and $\{e_k\}$ is a complete orhonormal system in $U$, then we define
 
-$$\mathrm{Tr}T=\sum_j\left<Te_j,e_j\right>$$
+$$\mathrm{Tr}T\equiv\sum_j\left<Te_j,e_j\right>$$
 
-#### __Proposition C.3__ A nonnegative operator $T\in L(H)$ is of trace class iff there exists an orthonormal basis $\{e_k\}$ on $H$ s.t.
+- __Proposition C.3__ A nonnegative operator $T\in L(H)$ is of trace class iff there exists an orthonormal basis $\{e_k\}$ on $H$ s.t.
 
 $$\sum_j\left<Te_j,e_j\right><\infty.$$
 
-When this occurs $\mathrm{Tr}T=\|T\|_1$.
+When this occurs $\mathrm{Tr}T=\|T\|_1$. $\triangle$
 
-#### __Def__ For two separable Hilbert spaces $U_1$ and $U_2$ with complete orthonormal bases $\{e_k\}\subset U_1$ and $\{f_k\}\subset U_2$, a linear bounded operator $T:U_1\rightarrow U_2$ is said to be __Hilbert-Schmidt__ if
+- __Def__ For two separable Hilbert spaces $U_1$ and $U_2$ with complete orthonormal bases $\{e_k\}\subset U_1$ and $\{f_k\}\subset U_2$, a linear bounded operator $T:U_1\rightarrow U_2$ is said to be __Hilbert-Schmidt__ if
 
-$$\sum_k|Te_k|^2<\infty.$$
+$$\sum_k|Te_k|^2<\infty. \ \triangle$$
 
 The space of all Hilbert-Schmidt operators from $U_1$ to $U_2$, equipped with the norm
 
@@ -76,15 +77,15 @@ is a separable Hilbert space with the scalar product
 
 $$\left<S,T\right>\equiv\sum_k\left<Se_k,Te_k\right>.$$
 
-#### __Notation__ For any vectors $a\in U_1$ and $b\in U_2$, the operation $b\otimes a$ denotes the linear operator defined by
+- __Notation__ (outer product) For any vectors $a\in U_1$ and $b\in U_2$, the operation $b\otimes a$ denotes the linear operator defined by
 
-$$b\otimes a:U_1\rightarrow U_2, \ h\mapsto \left<a,h\right>b, \ \ h\in U_1.$$
+$$b\otimes a:U_1\rightarrow U_2, \ h\mapsto \left<a,h\right>b, \ \ h\in U_1. \  \triangle$$
 
 The double sequence $\left\{f_j\otimes e_k\right\}_{j,k\in \mathbb{N}}$ is a complete orthonormal basis in $L_2(E,F)$.
 
-#### __Proposition C.4__ Let $U_1,U_2,U_3$ be separable Hilbert spaces. If $T\in L_2(U_1,U_2)$ and $S\in L_2(U_2,U_3)$ then $ST\in L_1(U_1,U_3)$ and
+- __Proposition C.4__ Let $U_1,U_2,U_3$ be separable Hilbert spaces. If $T\in L_2(U_1,U_2)$ and $S\in L_2(U_2,U_3)$ then $ST\in L_1(U_1,U_3)$ and
 
-$$\|ST\|_1\leq\|S\|_2\|T\|_2.$$
+$$\|ST\|_1\leq\|S\|_2\|T\|_2. \ \triangle$$
 
 # 2.2 Gaussian measures in Banach spaces
 
@@ -92,13 +93,13 @@ $$\|ST\|_1\leq\|S\|_2\|T\|_2.$$
 
 Let $\mu$ be a symmetric Gaussian measure on a Banach space $E$. 
 
-#### __Def__ A linear subspace $H\subset E$ equipped with a Hilbert norm $|\cdot|_H$ is said to be a __reproducing kernel space__ for $\mu$ if $H$ is complete, continously embedded in $E$ and such that for arbitrary $\phi\in E^*$
+- __Def__ A linear subspace $H\subset E$ equipped with a Hilbert norm $|\cdot|_H$ is said to be a __reproducing kernel space__ for $\mu$ if $H$ is complete, continously embedded in $E$ and such that for arbitrary $\phi\in E^*$
 
 $$\mathscr{L}(\phi)=\mathscr{N}(0,|\phi|^2_H),$$
 
-where $|\phi|_H\equiv\sup_{|h|_H\leq1}|\phi(h)|$.
+where $|\phi|_H\equiv\sup_{|h|_H\leq1}|\phi(h)|$. $\triangle$
 
-#### __Theorem 2.9__ For an arbitrary symmetric Gaussian measure $\mu$ on a separable Banasch space, there exists a unique reproducing kernel space $(H,|\cdot|_H)$.
+- __Theorem 2.9__ For an arbitrary symmetric Gaussian measure $\mu$ on a separable Banasch space, there exists a unique reproducing kernel space $(H,|\cdot|_H)$. $\triangle$
 
 The reproducing kernel space of $\mu$ will be denoted by $H_\mu$. In can be thought of as independent of the ambient Banach space $E$.
 
@@ -106,9 +107,9 @@ The reproducing kernel space of $\mu$ will be denoted by $H_\mu$. In can be thou
 
 ## 2.3.1 Gaussian measures on Hilbert spaces
 
-#### __Def__ A pr msr $\mu$ on $(H,\mathscr{B}(H))$ is __Gaussian__ if for any $h\in H$ there exists $m\in\R^1,q\geq0$ s.t.
+- __Def__ A probability measure $\mu$ on $(H,\mathscr{B}(H))$ is __Gaussian__ if for any $h\in H$ there exists $m\in\R^1,q\geq0$ s.t.
 
-$$\mu(\{x\in H;\left<h,x\right>\in A\})=\mathscr{N}(m,q)(A), \ \forall \ A\in\mathscr{B}(\R^1)$$
+$$\mu(\{x\in H;\left<h,x\right>\in A\})=\mathscr{N}(m,q)(A), \ \forall \ A\in\mathscr{B}(\R^1). \  \triangle$$
 
 If $\mu$ is Gaussian the following functionals
 
@@ -118,15 +119,15 @@ $$H\times H\rightarrow\R^1, \ (h_1,h_2)\mapsto\int_H\left<h_1,x\right>\left<h_2,
 
 are well defined and continous.
 
-#### __Lemma 2.15__ Sort of like Cauchy-Schwartz for Hilbert spaces with probability measures.
+- __Lemma 2.15__ (sort of like Cauchy-Schwartz for Hilbert spaces with probability measures)
 
-Let $\nu$ be a pr msr on $(H,\mathscr{B}(H))$. If there exists a $k\in\mathbb{N}$ s.t.
+Let $\nu$ be a probability measure on $(H,\mathscr{B}(H))$. If there exists a $k\in\mathbb{N}$ s.t.
 
 $$\int_H|\left<z,x\right>|^k\nu(dx)<\infty, \ \forall \ z\in H,$$
 
 then there also exists a constant $c>0$ s.t.
 
-$$\left|\int_H\prod_{i=1}^k\left<h_i,x\right>\nu(dx)\right|\leq c\prod_{i=1}^k|h_i|, \ h_1,\dots,h_k\in H.$$
+$$\left|\int_H\prod_{i=1}^k\left<h_i,x\right>\nu(dx)\right|\leq c\prod_{i=1}^k|h_i|, \ h_1,\dots,h_k\in H. \ \triangle$$
 
 This lemma implies that if $\mu$ is Gaussian then there exists $m\in H$ and a linear operator $Q$ s.t.
 
@@ -134,24 +135,83 @@ $$\int_H\left<h,x\right>\mu(dx)=\left<m,h\right>, \ \forall \ h\in H,$$
 
 $$\int_H\left<h_1,x-m\right>\left<h_2,x-m\right>\mu(dx)=\left<Qh_1,h_2\right>.$$
 
-A Gaussian msr has the characteristic functional
+A Gaussian measure has the characteristic functional
 
-$$\hat\mu(\lambda)=\int_He^{i\left<\lambda,x\right>}\mu(dx)=e^{i\left<\lambda,m\right>-\frac{1}{2}\left<Q\lambda,\lambda\right>}$$
+$$\hat\mu(\lambda)=\int_He^{i\left<\lambda,x\right>}\mu(dx)=e^{i\left<\lambda,m\right>-\frac{1}{2}\left<Q\lambda,\lambda\right>}.$$
 
 
 
 # 4.1 Wiener processes
 
-#### __Def 4.1__ A real valued stochastic process $W(t), \ t\geq0$, is called a __Wiener process__ if
+- __Def 4.1__ A real valued stochastic process $W(t), \ t\geq0$, is called a __Wiener process__ if
 
-  1. $W$ has continous trajectories and $W(0)=0$,
+  1. $W$ has continous trajectories and $W(0)=0$.
   2. $W$ has independent increments and
   
-$$\mathscr{L}(W(t)-W(s))=\mathscr{L}(W(t-s)), \ t\geq s\geq0,$$  
+$$\mathscr{L}(W(t)-W(s))=\mathscr{L}(W(t-s)), \ t\geq s\geq0.$$  
 
-  3. $\mathscr{L}(W(t))=\mathscr{L}(-W(t)), \ t\geq0$
+  3. $\mathscr{L}(W(t))=\mathscr{L}(-W(t)), \ t\geq0. \ \triangle$
 
-## 4.1.2 Hilbert space valued Wiener processes 
+- __Def__ (extension to a general linear (topological) space $K$ with $\sigma$-algebra $\mathscr{B}(K)$) A $K$-valued stochastic process $W(t), \ t\geq0$ satisfying 1.-3. is a __Wiener process__ in $K$. $\triangle$
+
+## 4.1.1 Hilbert space valued Wiener processes 
+
+Let $W$ be a $U$-valued Wiener process. Then $\left<W(t),u\right>, \ t\geq0,$ is a real valued Wiener process and $\mathscr{L}(W(t))$ is a Gaussian measure with mean 0. Furthermore, for any $u,v\in U, \ t,s\geq0,$
+
+$$\E[\left<W(t),u\right>\left<W(s),v\right>]=(t\wedge s)\E[\left<W(1),u\right>^2]$$
+
+and
+
+$$\E[\left<W(t),u\right>\left<W(s),v\right>]=(t\wedge s)\E[\left<W(1),u\right>\left<W(1),v\right>]$$
+
+$$=(t\wedge s)\left<Qu,v\right>$$
+
+where $Q$ is the covariance operator of the Gaussian measure $\mathscr{L}(W(1))$. The operator $Q$ is of trace class and for each distribution $\mathscr{L}(W(1))$, there is a trace class $Q$ that completely characterizes it.
+
+- __Def 4.2__ A $U$-valued stochastic process $W(t), \ t\geq0$ is a __$Q$-Wiener__ process if
+
+  1. $W(0)=0$.
+  2. $W$ has continuous trajectories.
+  3. $W$ has independent increments.
+  4. $\mathscr{L}(W(t)-W(s))=\mathscr{N}(0,(t-s)Q), \ t\geq s\geq0$. $\triangle$
+
+Because of our assumptions about $Q$ and since $U$ has a complete orthonormal system $\{e_k\}\subset U$, there exists a bounded sequence of nonnegative real numbers $\{\lambda_k\}$ s.t. $Qe_k=\lambda_ke_k, \ k\in\mathbb{N}$.
+
+- __Proposition 4.3__ If $W(t)$ is a $Q$-Wiener process, then
+
+  1. $W$ is a Gaussian process on $U$ and
+  
+$$\E(W(t))=0, \ \Cov(W(t))=tQ, \ t\geq0.$$
+
+  2. For any $t\geq0$, $W$ has the expansion
+  
+$$W(t)=\sum_j\sqrt{\lambda_j}\beta_j(t)e_j$$
+
+where
+
+$$\beta_j(t)=\frac{1}{\sqrt{\lambda_j}}\left<W(t),e_j\right>, \ j\in\mathbb{N}$$
+
+are real valued Brownian motions mutually independent on $(\Omega,\mathscr{F},\mathbb{P})$ and the series expansion of $W(t)$ converges in $L^2(\Omega,\mathscr{F},\mathbb{P})$.
+
+  - __Observation__ The expansion above is strikingly remeniscient of the Karhunen-Lo&egrave;ve (KL) expansion. However the above expansion is with respect to the Hilbert space in which $W(t)$ takes its values. The KL expansion, on the other hand, is with respect to time. Specifically, the KL expansion is defined for a zero-mean process $X(t)\in L^2(\Omega,\mathscr{F},\mathbb{P})$ with $t\in[a,b]$ and continuous $K(s,t)=\E(X(s)X(t))$. If $\{\lambda_k\}$ denotes the set of eigenvalues of $T:L^2([a,b])\rightarrow L^2([a,b])$ defined by $(Tf)(t)\equiv\int_a^b K(s,t)f(s)ds$, then the KL expansion of $X(t)$ is
+  
+$$X(t)=\sum_j\sqrt{\lambda_j}\beta_je_j(t)$$
+
+where 
+
+$$\beta_j=\frac{1}{\sqrt{\lambda_j}}\int_a^bX(t)e_j(t)dt, \ j\in\mathbb{N}$$
+
+are uncorrelated zero-mean random variables with unit variance. The convergence of the KL expansion is in $L^2(\Omega)$, uniform in $t$. Notice that in Proposition 4.3, $e_j\in U$ are not functions of time, but the $\beta_j$ are. However, for the KL expansion the $\beta_j$ are not functions of time but the $e_j$ are.
+
+- __Proposition 4.4__ For any trace class symmetric nonnegative operator $Q$ on a separable Hilbert space $U$, there exists a $Q$-Wiener process $W(t), \ t\geq0$.
+
+- __Theorem 4.5__ Let $W$ be a $Q$-Wiener process s.t. consequence 1. of Proposition 4.3 holds. Then the series in consequence 2. of Proposition 4.3 is $\mathbb{P}$-a.s. uniformaly convergent on $[0,T]$ for any $T>0$.
+
+The quadrative variation of a $Q$-Wiener process in $U$ with $\mathrm{Tr}Q<\infty$ is given by $\left<\left<W(t)\right>\right>=tQ$. 
+
+- __Theorem 4.6__ A $U$-valued square integrable martingale $M(t)$ with $M(0)=0$ is a $Q$-Wiener process on $[0,T]$ adapted to the filtration $\mathscr{F}_t, \ t\geq0$ with increments $M(t)-M(s), \ t\geq s$ independent of $\mathscr{F}_t, \ s\geq0$ iff $\left<\left<M(t)\right>\right>=tQ, \ t\geq0$.
+
+This result is a direct generalization L&eacute;vy's theorem one dimensional processes which states that if $M(t)$ is a real valued square integrable martingale s.t. $M(0)=0$ and $\left<\left<M(t)\right>\right>=t, \ t\in[0,T]$, then $M(\cdot)$ is a standard Wiener process adapted to $\mathscr{F}_t, \ t\in[0,T]$ and with increments $M(s)-M(t), \ s>t$, independent of $\mathscr{F}_t, \ t\in[0,T]$.
 
 ## 4.1.2 Generalized Wiener processes on a Hilbert space
 
@@ -159,7 +219,7 @@ For each $a\in U$ define a real valued Wiener process $W_a(t), \ t\geq0$, by the
 
 $$t\geq0, \{a_n\}\subset U, \lim_{n\rightarrow\infty}a_n=a\implies\lim_{n\rightarrow\infty}\E|W_a(t)-W_{a_n}(t)|^2=0.$$
 
-#### __Def__ Any transformation $a\mapsto W_a$ whose values are real valued Wiener processes on $[0,\infty)$ that is continuous in the above sense is a __generalized Wiener process__.
+- __Def__ Any transformation $a\mapsto W_a$ whose values are real valued Wiener processes on $[0,\infty)$ that is continuous in the above sense is a __generalized Wiener process__.
 
 This definition implies the existence of a bilinear form $K(a,b), \ a,b\in U$ s.t.
 
@@ -169,7 +229,7 @@ The continuity condition gurantees that $K$ is continuous in $U$ and hence there
 
 $$\E[W_a(t)W_b(t)]=(t\wedge s)\left<Q a,b\right>, \ \ t,s\geq0, \ a,b\in U.$$
 
-#### Constructing a generalized Wiener process from an arbitrary self-adjoint and positive definite operator $Q$.
+- Constructing a generalized Wiener process from an arbitrary self-adjoint and positive definite operator $Q$.
 
 Let $\{e_j\}$ be a complete orthonormal basis in $U$ and $\{\beta_j\}$ a sequence of independent real valued standard Wiener processes. Define
 
@@ -177,7 +237,7 @@ $$W_a(t)\equiv\sum_j\left<Q^{1/2}e_j,a\right>\beta_j(t), \ \ t\geq0, \ a\in U.$$
 
   - Intuitive result: An arbitrary generalized Wiener process on $U$ is a classical Wiener process in some larger Hilbert space $U_1$.
 
-#### __Proposition 4.8__ For every $a\in U$ we have
+- __Proposition 4.8__ For every $a\in U$ we have
 
 $$W_a(t)=\sum_j\left<Q^{1/2}e_j,a\right>W_{Q^{1/2}e_j}(t).$$
 
@@ -187,6 +247,97 @@ This forms a generalized Wiener process with covariance $Q$.
 
 # 4.2 Definition of the stochastic integral
 
+Consider the $U$-valued $Q$-Wiener process $W(t)$ in $(\Omega,\mathscr{F},\mathbb{P})$ and the normal filtration $\{\mathscr{F}_t\}_{t\geq0}$ in $\mathscr{F}$. Assume that
+
+  1. $W(t)$ is $\mathscr{F}_t$-measurable
+  2. $W(t+h)-W(t)$ is independent of $\mathscr{F}_t, \ \ \ \ \forall \ h\geq0, \ \ \forall \ t\geq0.$
+
+Then $W(t)$ is called a __$Q$-Wiener process with respect to $\{\mathscr{F}_t\}_{t\geq0}$__. Fix $T<\infty$. An $L=L(U,H)$-valued process $\Phi(t), \ t\in[0,T]$ taking only a finite number of values is said to be __elementary__ if $\exists$ a parition $0=t_0<\dots<t_k=T$ and a sequence $\Phi_0,\dots,\Phi_{k-1}$ of $L$-valued random variables each taking just a finite number of values s.t. the $\Phi_m$ are $\mathscr{F}_{t_m}$-measurable and $\Phi(t)=\Phi_m$ for $t\in(t_m,t_{m+1}]$, $m=0,\dots,k-1$. For elementary processes $\Phi$ the stochastic integral is defined by
+
+$$\int_0^t\Phi(s)ds\equiv\sum_{m=0}^{k-1}\Phi_m(W_{t_{m+1}\wedge t}-W_{t_m\wedge t})$$
+
+and is denoted by $\Phi\cdot W(t), \ t\in[0,T]$. The subspace $U_0\equiv Q^{1/2}(U)$ of $U$, endowed with the inner product
+
+$$\left<u,v\right>_0\equiv\sum_k\frac{1}{\lambda_k}\left<u,e_k\right>\left<v,e_k\right>=\left<Q^{-1/2}u,Q^{-1/2}v\right>, \ \ u,v\in U_0$$
+
+is a Hilbert space. The space of all Hilbert-Schmidt operators $L_2^0\equiv L_2(U_0,H)$ is a separable Hilbert space with the norm
+
+$$\|\Psi\|_{L_2^0}^2\equiv\sum_{h,k}\left|\left<\Psi \sqrt{\lambda_h}e_h,f_k\right>\right|^2=\sum_{h,k}\lambda_h|\left<\Psi e_h,f_k\right>|^2$$
+
+where $\{\sqrt{\lambda_j}e_j\}$, $\{e_j\}$ and $\{f_j\}$ are complete orthonormal bases in $U_0$, $U$ and $H$ respectively. Let $\Phi(t), \ t\in[0,T]$ be a measurable $L_2^0$-valued process. Define the norms
+
+$$\|\Phi\|_t\equiv\left[\E\int_0^t\|\Phi(s)\|_{L_2^0}^2\right]^{1/2}$$
+
+$$=\left[\E\int_0^t\mathrm{Tr}[(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]ds\right]^{1/2}, \ \ t\in[0,T].$$
+
+- __Proposition 4.20__ If a process $\Phi$ is elementary and $\|\Phi\|_T<\infty$ then the process $\Phi\cdot W$ is a contiunous square integrable $H$-valued martingale on [0,T] and
+
+$$\E|\Phi\cdot W(t)|^2=\|\Phi\|_T^2, \ \ 0\leq t\leq T.$$
+
+- __Remark 4.21__ The stochastic integral is a linear transformation from the space of all elementary process with the norm $\|\cdot\|_T$ into the space $\mathscr{M}_T^2(H)$ of $H$-valued martingales.
+
+- Quick detor:
+
+A $\sigma$-field $\mathscr{P}_\infty$ of subsets of $[0,\infty)\times\Omega$ is generated by sets of the form,
+
+$$(s,t]\times F, \ \ 0\leq s<t<\infty, \ \ F\in\mathscr{F}_s$$
+
+and
+
+$$\{0\}\times F, \ \ F\in\mathscr{F}_0.$$
+
+This $\sigma$-field and its elements are referrred to as a __predictable__ $\sigma$-field and __predictable__ sets repsectively. The restriction of $\mathscr{P}_\infty$ to $[0,T]\times\Omega$ is denoted by $\mathscr{P}_T$. Any measurable mapping from $([0,T)\times\Omega,\mathscr{F}_T)$ into $(E,\mathscr{B}(E))$ is called a __predictable process__.
+
+To better detect a predictable process, I collect the following
+
+- __Proposition 3.7__
+
+  1. If $\Phi$ is an adapted process with values in $L(U,H)$ such that for any $u\in U$ and $h\in H$, the process $\left<\Phi(t)u,h\right>$ $t\geq0$ has left continuous trajectories then $\Phi$ is predictable.
+  
+  2. If $\Phi$ is an adapted and stochastically continuous process on an interval $[0,T]$, then the process $\Phi$ has a predictable version on $[0,T]$
+
+The integrands of stochastic intregrals can be regarded as random variables defined on $\Omega_\infty\equiv[0.\infty)\times\Omega$ (or $\Omega_T\equiv[0,T]\times\Omega$) with the $\sigma$-field $\mathscr{B}([0,\infty))\times\mathscr{F}$ (or $\mathscr{B}([0,T])\times\mathscr{F}$). The product of the Lebesgue measure on $[0,\infty)$ (or, $[0,T]$) and the probability measure $\mathbb{P}$ is denoted by $\mathbb{P}_\infty$ (or $\mathbb{P}_T$).
+
+Taking into account the adaptability of processes we choose the $\sigma$-field generated by the adapted simple process ($\mathscr{P}_\infty$ or $\mathscr{P}_T$). The class of processes proper as integrands of stochastic integrals are predictable processes with values in $L_2^0$. That is, they are measurable mappings from $(\Omega_\infty,\mathscr{P}_\infty)$ (or $(\Omega_T,\mathscr{P}_T)$) into $(L_2^0,\mathscr{B}(L_2^0))$.
+
+- __Proposition 4.22__
+
+  1. If a mapping $\Phi$ from $\Omega_T$ into $L$ is $L$-predictable then $\Phi$ is also $L_2^0$-predictable. Hence, elementary processes are $L_2^0$-predictable
+  
+  2. If $\Phi$ is an $L_2^0$-predictable process s.t. $\|\Phi\|_T<\infty$ then there exists a sequence of elementary processes $\{\Phi_n\}$ s.t. $\|\Phi-\Phi_n\|_T\rightarrow0$ and $n\rightarrow\infty$.
+
+This allows us to extend the stochastic integral to any $L_2^0$-predictable process $|phi$ s.t. $\|\Phi\|_T<\infty$. These processes form a Hilbert space denoted $\mathscr{N}_W^2(0,T;L_2^0)$ (or just $\mathscr{N}_W^2(0,T)$, or even $\mathscr{N}_W^2$) and by the above proposition, the elementary processes form a dense set in $\mathscr{N}_W^2$. From proposition 4.20, the stochastic integral $\Phi\cdot W$ is an isometry from that dense set into $\mathscr{M}_T^2(H)$. Hence, the definition of the integral ca be extended to all of $\mathscr{N}_W^2$. Furthermore, $\E|\Phi\cdot W(t)|^2=\|\Phi\|_t^2, \ 0\leq t\leq T$ holds true. As a final step, the integral is extended one step further to $L_2^0$-predictable processes satisfying the even weaker condition
+
+$$\mathbb{P}\left(\int_0^T\|\Phi(s)\|^2_{L_2^0}ds<\infty\right)=1.$$
+
+Any such process is called __stochastically integrable__ on $[0,T]$. They form a linear space denoted by $\mathscr{N}_W(0,T;L_2^0$ (or $\mathscr{N}_W(0,T)$, or even $\mathscr{N}_W$). The extension is carried by the __localization procedure__.
+
+- __Lemma 4.24__ Assume that $\Phi\in \mathscr{N}_W^2$ and $\tau$ is an $\mathscr{F}_\tau$-stopping time s.t. $\mathbb{P}(\tau\leq T)=1$. Then
+
+$$\int_0^tI_{[0,\tau]}(s)\Phi(s)dW(s)=\Phi\cdot W(\tau\wedge t), \ \ \ t\in (0,T], \ \mathbb{P}\text{-a.s.} \ \triangle$$
+
+Assuming the above weak condition, define
+
+$$\tau_n\equiv\inf\left\{t\in[0,T]:\int_0^t\|\Phi(s)\|_{L_2^0}^2ds\geq n\right\}$$
+
+with the convention that the infimum of the empty set returns $T$. Then $\{\tau_n\}$ is a sequence s.t.
+
+$$\E\int_0^t\|I_{[0,\tau_n)}(s)\Phi(s)\|_{L_2^0}^2ds<\infty.$$
+
+This implies that stochastic integrals $I_{[0,\tau_n]}\Phi\cdot W(t), \ t\in[0,T]$ are well defined for each $n$. If $n<m$ the $\mathbb{P}$-a.s.
+
+$$I_{[0,\tau_n]}\Phi\cdot W(t)=(I_{[0,\tau_n]}(I_{[0,\tau_m]}\Phi)\cdot W(t))=(I_{[0,\tau_m]}\Phi)\cdot(\tau_n\wedge t), \ \ t\in [0,T].$$
+
+Hence, one can assume the previous expectation holds for all $\omega\in\Omega, \ t\in[0,T], \ n<m$. For any $t\in[0,T]$ define
+
+$$\Phi\cdot W(t)\equiv I_{[0,\tau_n]}\Phi\cdot W(t)$$
+
+where $n$ is an arbitrary natural number s.t. $\tau_n\geq t$. If also $\tau_m\geq t$ and $m>n$ then
+
+$$(I_{[0,\tau_m]}\Phi)\cdot W(t)=(I_{[0,\tau_m]}\Phi)\cdot W(t)(\tau_n\wedge t)=I_{[0,\tau_n]}\Phi\cdot W(t)$$
+
+and thus the above definition is consistent. 
+
 ## 4.2.1 Stochastic integral for generalized Wiener processes
 
 Here the definition of the stochastic integral is extended for processes where $Q$ is not necessarily of trace-class.
@@ -195,14 +346,14 @@ Here the definition of the stochastic integral is extended for processes where $
 
   - Verbatim from the text:
 
-Assume that $\Phi$ is an $L_2^0$-valued process stochastically integrable in $[0,T]$, $\phi$ a $H$-valued predictable process Bochner integrable on $[0,T]$, $\mathbb{P}$-a.s., and $X(0)$ a $\mathscr{F}_0$-measurabl $H$-valued random variable. Then the following process
+Assume that $\Phi$ is an $L_2^0$-valued process stochastically integrable in $[0,T]$, $\phi$ a $H$-valued predictable process Bochner integrable on $[0,T]$, $\mathbb{P}$-a.s., and $X(0)$ a $\mathscr{F}_0$-measurable $H$-valued random variable. Then the following process
 
 $$X(t)=X(0)+\int_0^t\phi(s)ds+\int_0^t\Phi(s)dW(s), \ t\in[0,T]$$
 
 
 is well defined. Assume that a function $F:[0,T]\times H\rightarrow\R^1$ and its partial derivatives $F_t,F_x,F_{xx}$, are uniformly continuous on bounded subsets of $[0,T]\times H$.
 
-#### __Theorem 4.32__ _Under the above conditions_, $\mathbb{P}$-a.s., _for all_ $t\in[0,T]$
+- __Theorem 4.32__ _Under the above conditions_, $\mathbb{P}$-a.s., _for all_ $t\in[0,T]$
 
 $$F(t,X(t))=F(0,X(0))+\int_0^t\left<F_x(s,X(s)),\Phi(s)dW(s)\right>$$
 
@@ -210,9 +361,54 @@ $$+\int_0^t\Big{\{}F_t(s,X(s))+\left<F_x(s,X(s)),\phi(s)\right>$$
 
 $$\left.+\frac{1}{2}\mathrm{Tr}[F_{xx}(s,X(s))(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]\right\}$$
 
-  - Interpretation:
-  
+  - Unpacking:
 
-  - Concrete example:
+Recall that,  in general, a space is separable if it admits a countably dense subset. For a separable Banach space $E$ with norm $\|\cdot\|$, an $E$-valued random variable $X$ on $(\Omega,\mathscr{F},\mathbb{P})$ is called __Bochner integrable__ if the real valued random variable $\|X\|$ is Lebesgue integrable, which occurs when
+
+$$\int_\Omega\|X(\omega)\|\mathbb{P}(d\omega)<\infty.$$
+
+If $X(t)$ is a stochastically continuous process on $I$ satisfies then for each $t_0\in I, \ \ \epsilon,\delta>0$ there exists $\rho>0$ s.t.
+
+$$\mathbb{P}(\|X(t)-X(t_0)\|\geq\epsilon)\leq\delta \ \ \forall \ \ t\in[t_0-\rho,t_0+\rho]\cap[0,T].$$
+
+$W$ is a Hilbert space valued ($Q$-)Wiener process.
+
+  - A concrete example:
+
+This example uses less abstract stochastic processes (It&ocirc; diffusions) to formulate an SPDE. Developing SPDE in this way appeals to the more naive mathematician (myself in particular) by breathing in a more intuitive understanding of the behaviour and structure of SPDE. However, since It&ocirc; diffusions are not explicitely defined in Da Prato & Zabczyk, I borrow the definition from the excellent introduction to SDE by &Oslash;ksendal:
   
-  For each $x$ let $\mathfrak{n}_t(x)$ be an It&ocirc; diffusion
+- __Def 7.1.1__ A (time-homogeneous) __It&ocirc; diffusion__ is a stochastic process $X_t(\omega)=X(t,\omega):[s,\infty)\times\Omega\rightarrow\R^n$ satisfying an SDE of the form
+  
+$$dX_t=b(X_t)dt+\sigma(X_t)dW_t, \ t\geq s, \ X_0\in\R^n$$
+
+where $W_t$ is an $\R^m$-valued Wiener process and $b:\R^n\rightarrow\R^m$, $\sigma:\R^n\rightarrow\R^{n\times m}$ are Lipschitz continuous. That is, there exists $D>0$ s.t.
+
+$$|b(x)-b(y)|+|\sigma(x)-\sigma(y)|\leq D|x-y|, \ x,y\in\R^n. \ \triangle$$
+
+For each $z\in \R$ let $\mathfrak{n}_t(z)$ be a stochastic process satisfying
+
+$$d\mathfrak{n}_t(z)=m(z)\mathfrak{n}_t(z)dt+\eta\mathfrak{n}_t(z)dW_t(z), \ \ \mathfrak{n}_0(z)\in\R.$$
+
+To give some biological context, $\mathfrak{n}_t(z)$ denotes the abundance density of the trait value $z$ at time $t$ in a population. Hence, the total abundance of the population $n_t$ is given by $n_t=\int\mathfrak{n}_t(z)dx$. The function $m\in L^\infty(\R)$ is the Malthusian fitness of individuals with trait $z$. For now we assume perfect heritability which may be implied by the more specific assumptions that the population is asexually reproducing and the effects of mutation and epigenetics are absent. The number $0\leq\eta<\infty$ denotes the magnitude of demographic stochasticity.
+
+In terms of definition 7.1.1, for a fixed $z\in\R$, we have $b(x)=m(z)x$ and $\sigma(x)=\eta x$ for each $x\in\R$. Hence,
+
+$$|b(x)-b(y)|+|\sigma(x)+\sigma(y)|=|m(z)||x-y|+\eta|x-y|=\left(|m(z)|+\eta\right)|x-y|, \ x,y\in\R.$$
+
+Hence, $b(x)=m(z)x$ and $\sigma(x)=\eta x$ are Lipschitz continuous for each $z\in\R$ and therefore $\mathfrak{n}_t(z)$ is an It&ocirc; diffusion for each $z\in\R$. Note that 
+
+$$\mathfrak{n}_0(z)\in L^1(\R)\cap L^\infty(\R)$$
+
+since we require 
+
+$$\|\mathfrak{n}_0\|_1\equiv\int|\mathfrak{n}_0(z)|dz=n_0<\infty$$
+
+and 
+
+$$\|\mathfrak{n}_0\|_\infty\equiv\sup_{z\in\R}|\mathfrak{n}_0(z)|<\infty.$$
+
+Hence, H&ouml;lder's inequality implies
+
+$$\|\mathfrak{n}_0^2\|_1\leq\|\mathfrak{n}_0\|_1\|\mathfrak{n}_0\|_\infty<\infty.$$
+
+In particular, $\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}<\infty$ so that $\mathfrak{n}_0\in L^2(\R)$, ie, $\mathfrak{n}_0$ is an $H$-valued random variable with $H=L^2(\R)$. This satisfies one of the conditions of Theorem 4.32.
