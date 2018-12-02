@@ -306,7 +306,7 @@ Taking into account the adaptability of processes we choose the $\sigma$-field g
   
   2. If $\Phi$ is an $L_2^0$-predictable process s.t. $\|\Phi\|_T<\infty$ then there exists a sequence of elementary processes $\{\Phi_n\}$ s.t. $\|\Phi-\Phi_n\|_T\rightarrow0$ and $n\rightarrow\infty$.
 
-This allows us to extend the stochastic integral to any $L_2^0$-predictable process $|phi$ s.t. $\|\Phi\|_T<\infty$. These processes form a Hilbert space denoted $\mathscr{N}_W^2(0,T;L_2^0)$ (or just $\mathscr{N}_W^2(0,T)$, or even $\mathscr{N}_W^2$) and by the above proposition, the elementary processes form a dense set in $\mathscr{N}_W^2$. From proposition 4.20, the stochastic integral $\Phi\cdot W$ is an isometry from that dense set into $\mathscr{M}_T^2(H)$. Hence, the definition of the integral ca be extended to all of $\mathscr{N}_W^2$. Furthermore, $\E|\Phi\cdot W(t)|^2=\|\Phi\|_t^2, \ 0\leq t\leq T$ holds true. As a final step, the integral is extended one step further to $L_2^0$-predictable processes satisfying the even weaker condition
+This allows us to extend the stochastic integral to any $L_2^0$-predictable process $\Phi$ s.t. $\|\Phi\|_T<\infty$. These processes form a Hilbert space denoted $\mathscr{N}_W^2(0,T;L_2^0)$ (or just $\mathscr{N}_W^2(0,T)$, or even $\mathscr{N}_W^2$) and by the above proposition, the elementary processes form a dense set in $\mathscr{N}_W^2$. From proposition 4.20, the stochastic integral $\Phi\cdot W$ is an isometry from that dense set into $\mathscr{M}_T^2(H)$. Hence, the definition of the integral ca be extended to all of $\mathscr{N}_W^2$. Furthermore, $\E|\Phi\cdot W(t)|^2=\|\Phi\|_t^2, \ 0\leq t\leq T$ holds true. As a final step, the integral is extended one step further to $L_2^0$-predictable processes satisfying the even weaker condition
 
 $$\mathbb{P}\left(\int_0^T\|\Phi(s)\|^2_{L_2^0}ds<\infty\right)=1.$$
 
@@ -361,17 +361,31 @@ $$+\int_0^t\Big{\{}F_t(s,X(s))+\left<F_x(s,X(s)),\phi(s)\right>$$
 
 $$\left.+\frac{1}{2}\mathrm{Tr}[F_{xx}(s,X(s))(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]\right\}$$
 
-  - Unpacking:
+- Collecting a few things I keep forgetting:
 
-Recall that,  in general, a space is separable if it admits a countably dense subset. For a separable Banach space $E$ with norm $\|\cdot\|$, an $E$-valued random variable $X$ on $(\Omega,\mathscr{F},\mathbb{P})$ is called __Bochner integrable__ if the real valued random variable $\|X\|$ is Lebesgue integrable, which occurs when
+  - Recall that,  in general, a space is __separable__ if it admits a countably dense subset.
+    
+  - For a separable Banach space $E$ with norm $\|\cdot\|$, an $E$-valued random variable $X$ on $(\Omega,\mathscr{F},\mathbb{P})$ is called __Bochner integrable__ if the real valued random variable $\|X\|$ is Lebesgue integrable, which occurs when
 
 $$\int_\Omega\|X(\omega)\|\mathbb{P}(d\omega)<\infty.$$
 
-If $X(t)$ is a stochastically continuous process on $I$ satisfies then for each $t_0\in I, \ \ \epsilon,\delta>0$ there exists $\rho>0$ s.t.
+  - $X(t)$ is a __stochastically continuous__ process on $I$ if for each $t_0\in I$ and $\epsilon>0$ the deterministic function $f_{X,t_0,\epsilon}(t)=\mathbb{P}(\|X(t)-X(t_0)\|\geq\epsilon)$ vanishes as $t\rightarrow t_0$. That is, for each $\delta>0$ there exists a $\rho>0$ s.t.
 
-$$\mathbb{P}(\|X(t)-X(t_0)\|\geq\epsilon)\leq\delta \ \ \forall \ \ t\in[t_0-\rho,t_0+\rho]\cap[0,T].$$
+$$\mathbb{P}(\|X(t)-X(t_0)\|\geq\epsilon)\leq\delta \ \ \forall \ \ t\in[t_0-\rho,t_0+\rho]\cap I.$$
 
-$W$ is a Hilbert space valued ($Q$-)Wiener process.
+  - $W$ is a $U$-valued $Q$-Wiener process with respect to $\{\mathscr{F}_t\}_{t\geq0}$.
+
+  - $\Phi$ being __stochastically integrable__ implies
+  
+$$\mathbb{P}\left(\int_0^T\|\Phi(s)\|^2_{L_2^0}ds<\infty\right)=1.$$
+
+where $\Phi(t)\in L_2^0$ for each $t\in[0,T]$. That is, $\Phi(t)$ maps elements from the reproducing kernel of $U$ (the Hilbert space $U_0=Q^{1/2}(U)$) to $H$. Hence $\Phi Q^{1/2}\in L_2(U,H)$, the space of all Hilbert-Schmidt operators from the separable Hilbert space $U$ to the separable Hilbert space $H$. The $L_2^0$-norm is given by
+
+$$\|\Phi(s)\|_{L_2^0}^2=\sum_{h,k}\lambda_h|\left<\Phi e_h,f_k\right>|^2$$
+
+$$=\|\Phi Q^{1/2}\|^2_{L_2(U,H)}=\mathrm{Tr}[(\Phi Q^{1/2})(\Phi Q^{1/2})^*]$$
+
+where the $\{e_j\}$ and $\{f_j\}$ are complete orthonormal systems for $U$ and $H$ and the $\lambda_j$ are the eigenvalues of $Q$.
 
   - A concrete example:
 
@@ -411,4 +425,6 @@ Hence, H&ouml;lder's inequality implies
 
 $$\|\mathfrak{n}_0^2\|_1\leq\|\mathfrak{n}_0\|_1\|\mathfrak{n}_0\|_\infty<\infty.$$
 
-In particular, $\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}<\infty$ so that $\mathfrak{n}_0\in L^2(\R)$, ie, $\mathfrak{n}_0$ is an $H$-valued random variable with $H=L^2(\R)$. This satisfies one of the conditions of Theorem 4.32.
+In particular, $\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}<\infty$ so that $\mathfrak{n}_0\in L^2(\R)$, ie, $\mathfrak{n}_0$ is an $H$-valued random variable with $H=L^2(\R)$. This satisfies one of the conditions of Theorem 4.32. We still need to show that $\eta\mathfrak{n}_t$ is an $L_2^0$-valued process stochastically integrable on $[0,T]$ and that $m\mathfrak{n}_t$ is an $H$-valued predictable process Bochner integrable on $[0,T] \ \ \mathbb{P}$-a.s.
+
+The operator $\Phi(t):?\rightarrow?$ defined by $[\Phi(t)] x=\eta x$ for each $x\in?$... we need $?$ to be the reproducing kernel of some separable Hilbert space $U$.

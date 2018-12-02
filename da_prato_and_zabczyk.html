@@ -24,8 +24,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -34,10 +34,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -551,7 +553,7 @@ div.tocify {
 <li><p>If a mapping <span class="math inline">\(\Phi\)</span> from <span class="math inline">\(\Omega_T\)</span> into <span class="math inline">\(L\)</span> is <span class="math inline">\(L\)</span>-predictable then <span class="math inline">\(\Phi\)</span> is also <span class="math inline">\(L_2^0\)</span>-predictable. Hence, elementary processes are <span class="math inline">\(L_2^0\)</span>-predictable</p></li>
 <li><p>If <span class="math inline">\(\Phi\)</span> is an <span class="math inline">\(L_2^0\)</span>-predictable process s.t. <span class="math inline">\(\|\Phi\|_T&lt;\infty\)</span> then there exists a sequence of elementary processes <span class="math inline">\(\{\Phi_n\}\)</span> s.t. <span class="math inline">\(\|\Phi-\Phi_n\|_T\rightarrow0\)</span> and <span class="math inline">\(n\rightarrow\infty\)</span>.</p></li>
 </ol>
-<p>This allows us to extend the stochastic integral to any <span class="math inline">\(L_2^0\)</span>-predictable process <span class="math inline">\(|phi\)</span> s.t. <span class="math inline">\(\|\Phi\|_T&lt;\infty\)</span>. These processes form a Hilbert space denoted <span class="math inline">\(\mathscr{N}_W^2(0,T;L_2^0)\)</span> (or just <span class="math inline">\(\mathscr{N}_W^2(0,T)\)</span>, or even <span class="math inline">\(\mathscr{N}_W^2\)</span>) and by the above proposition, the elementary processes form a dense set in <span class="math inline">\(\mathscr{N}_W^2\)</span>. From proposition 4.20, the stochastic integral <span class="math inline">\(\Phi\cdot W\)</span> is an isometry from that dense set into <span class="math inline">\(\mathscr{M}_T^2(H)\)</span>. Hence, the definition of the integral ca be extended to all of <span class="math inline">\(\mathscr{N}_W^2\)</span>. Furthermore, <span class="math inline">\({\mathbb{E}}|\Phi\cdot W(t)|^2=\|\Phi\|_t^2, \ 0\leq t\leq T\)</span> holds true. As a final step, the integral is extended one step further to <span class="math inline">\(L_2^0\)</span>-predictable processes satisfying the even weaker condition</p>
+<p>This allows us to extend the stochastic integral to any <span class="math inline">\(L_2^0\)</span>-predictable process <span class="math inline">\(\Phi\)</span> s.t. <span class="math inline">\(\|\Phi\|_T&lt;\infty\)</span>. These processes form a Hilbert space denoted <span class="math inline">\(\mathscr{N}_W^2(0,T;L_2^0)\)</span> (or just <span class="math inline">\(\mathscr{N}_W^2(0,T)\)</span>, or even <span class="math inline">\(\mathscr{N}_W^2\)</span>) and by the above proposition, the elementary processes form a dense set in <span class="math inline">\(\mathscr{N}_W^2\)</span>. From proposition 4.20, the stochastic integral <span class="math inline">\(\Phi\cdot W\)</span> is an isometry from that dense set into <span class="math inline">\(\mathscr{M}_T^2(H)\)</span>. Hence, the definition of the integral ca be extended to all of <span class="math inline">\(\mathscr{N}_W^2\)</span>. Furthermore, <span class="math inline">\({\mathbb{E}}|\Phi\cdot W(t)|^2=\|\Phi\|_t^2, \ 0\leq t\leq T\)</span> holds true. As a final step, the integral is extended one step further to <span class="math inline">\(L_2^0\)</span>-predictable processes satisfying the even weaker condition</p>
 <p><span class="math display">\[\mathbb{P}\left(\int_0^T\|\Phi(s)\|^2_{L_2^0}ds&lt;\infty\right)=1.\]</span></p>
 <p>Any such process is called <strong>stochastically integrable</strong> on <span class="math inline">\([0,T]\)</span>. They form a linear space denoted by <span class="math inline">\(\mathscr{N}_W(0,T;L_2^0\)</span> (or <span class="math inline">\(\mathscr{N}_W(0,T)\)</span>, or even <span class="math inline">\(\mathscr{N}_W\)</span>). The extension is carried by the <strong>localization procedure</strong>.</p>
 <ul>
@@ -589,13 +591,24 @@ div.tocify {
 <p><span class="math display">\[+\int_0^t\Big{\{}F_t(s,X(s))+\left&lt;F_x(s,X(s)),\phi(s)\right&gt;\]</span></p>
 <p><span class="math display">\[\left.+\frac{1}{2}\mathrm{Tr}[F_{xx}(s,X(s))(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]\right\}\]</span></p>
 <ul>
-<li>Unpacking:</li>
+<li><p>Collecting a few things I keep forgetting:</p></li>
+<li><p>Recall that, in general, a space is <strong>separable</strong> if it admits a countably dense subset.</p></li>
+<li><p>For a separable Banach space <span class="math inline">\(E\)</span> with norm <span class="math inline">\(\|\cdot\|\)</span>, an <span class="math inline">\(E\)</span>-valued random variable <span class="math inline">\(X\)</span> on <span class="math inline">\((\Omega,\mathscr{F},\mathbb{P})\)</span> is called <strong>Bochner integrable</strong> if the real valued random variable <span class="math inline">\(\|X\|\)</span> is Lebesgue integrable, which occurs when</p></li>
 </ul>
-<p>Recall that, in general, a space is separable if it admits a countably dense subset. For a separable Banach space <span class="math inline">\(E\)</span> with norm <span class="math inline">\(\|\cdot\|\)</span>, an <span class="math inline">\(E\)</span>-valued random variable <span class="math inline">\(X\)</span> on <span class="math inline">\((\Omega,\mathscr{F},\mathbb{P})\)</span> is called <strong>Bochner integrable</strong> if the real valued random variable <span class="math inline">\(\|X\|\)</span> is Lebesgue integrable, which occurs when</p>
 <p><span class="math display">\[\int_\Omega\|X(\omega)\|\mathbb{P}(d\omega)&lt;\infty.\]</span></p>
-<p>If <span class="math inline">\(X(t)\)</span> is a stochastically continuous process on <span class="math inline">\(I\)</span> satisfies then for each <span class="math inline">\(t_0\in I, \ \ \epsilon,\delta&gt;0\)</span> there exists <span class="math inline">\(\rho&gt;0\)</span> s.t.</p>
-<p><span class="math display">\[\mathbb{P}(\|X(t)-X(t_0)\|\geq\epsilon)\leq\delta \ \ \forall \ \ t\in[t_0-\rho,t_0+\rho]\cap[0,T].\]</span></p>
-<p><span class="math inline">\(W\)</span> is a Hilbert space valued (<span class="math inline">\(Q\)</span>-)Wiener process.</p>
+<ul>
+<li><span class="math inline">\(X(t)\)</span> is a <strong>stochastically continuous</strong> process on <span class="math inline">\(I\)</span> if for each <span class="math inline">\(t_0\in I\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span> the deterministic function <span class="math inline">\(f_{X,t_0,\epsilon}(t)=\mathbb{P}(\|X(t)-X(t_0)\|\geq\epsilon)\)</span> vanishes as <span class="math inline">\(t\rightarrow t_0\)</span>. That is, for each <span class="math inline">\(\delta&gt;0\)</span> there exists a <span class="math inline">\(\rho&gt;0\)</span> s.t.</li>
+</ul>
+<p><span class="math display">\[\mathbb{P}(\|X(t)-X(t_0)\|\geq\epsilon)\leq\delta \ \ \forall \ \ t\in[t_0-\rho,t_0+\rho]\cap I.\]</span></p>
+<ul>
+<li><p><span class="math inline">\(W\)</span> is a <span class="math inline">\(U\)</span>-valued <span class="math inline">\(Q\)</span>-Wiener process with respect to <span class="math inline">\(\{\mathscr{F}_t\}_{t\geq0}\)</span>.</p></li>
+<li><p><span class="math inline">\(\Phi\)</span> being <strong>stochastically integrable</strong> implies</p></li>
+</ul>
+<p><span class="math display">\[\mathbb{P}\left(\int_0^T\|\Phi(s)\|^2_{L_2^0}ds&lt;\infty\right)=1.\]</span></p>
+<p>where <span class="math inline">\(\Phi(t)\in L_2^0\)</span> for each <span class="math inline">\(t\in[0,T]\)</span>. That is, <span class="math inline">\(\Phi(t)\)</span> maps elements from the reproducing kernel of <span class="math inline">\(U\)</span> (the Hilbert space <span class="math inline">\(U_0=Q^{1/2}(U)\)</span>) to <span class="math inline">\(H\)</span>. Hence <span class="math inline">\(\Phi Q^{1/2}\in L_2(U,H)\)</span>, the space of all Hilbert-Schmidt operators from the separable Hilbert space <span class="math inline">\(U\)</span> to the separable Hilbert space <span class="math inline">\(H\)</span>. The <span class="math inline">\(L_2^0\)</span>-norm is given by</p>
+<p><span class="math display">\[\|\Phi(s)\|_{L_2^0}^2=\sum_{h,k}\lambda_h|\left&lt;\Phi e_h,f_k\right&gt;|^2\]</span></p>
+<p><span class="math display">\[=\|\Phi Q^{1/2}\|^2_{L_2(U,H)}=\mathrm{Tr}[(\Phi Q^{1/2})(\Phi Q^{1/2})^*]\]</span></p>
+<p>where the <span class="math inline">\(\{e_j\}\)</span> and <span class="math inline">\(\{f_j\}\)</span> are complete orthonormal systems for <span class="math inline">\(U\)</span> and <span class="math inline">\(H\)</span> and the <span class="math inline">\(\lambda_j\)</span> are the eigenvalues of <span class="math inline">\(Q\)</span>.</p>
 <ul>
 <li>A concrete example:</li>
 </ul>
@@ -619,7 +632,7 @@ div.tocify {
 <p><span class="math display">\[\|\mathfrak{n}_0\|_\infty\equiv\sup_{z\in{\mathbb{R}}}|\mathfrak{n}_0(z)|&lt;\infty.\]</span></p>
 <p>Hence, Hölder’s inequality implies</p>
 <p><span class="math display">\[\|\mathfrak{n}_0^2\|_1\leq\|\mathfrak{n}_0\|_1\|\mathfrak{n}_0\|_\infty&lt;\infty.\]</span></p>
-<p>In particular, <span class="math inline">\(\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}&lt;\infty\)</span> so that <span class="math inline">\(\mathfrak{n}_0\in L^2({\mathbb{R}})\)</span>, ie, <span class="math inline">\(\mathfrak{n}_0\)</span> is an <span class="math inline">\(H\)</span>-valued random variable with <span class="math inline">\(H=L^2({\mathbb{R}})\)</span>. This satisfies one of the conditions of Theorem 4.32.</p>
+<p>In particular, <span class="math inline">\(\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}&lt;\infty\)</span> so that <span class="math inline">\(\mathfrak{n}_0\in L^2({\mathbb{R}})\)</span>, ie, <span class="math inline">\(\mathfrak{n}_0\)</span> is an <span class="math inline">\(H\)</span>-valued random variable with <span class="math inline">\(H=L^2({\mathbb{R}})\)</span>. This satisfies one of the conditions of Theorem 4.32. We still need to show that <span class="math inline">\(\eta\mathfrak{n}_t\)</span> is an <span class="math inline">\(L_2^0\)</span>-valued process stochastically integrable on <span class="math inline">\([0,T]\)</span> and that <span class="math inline">\(m\mathfrak{n}_t\)</span> is an <span class="math inline">\(H\)</span>-valued predictable process Bochner integrable on <span class="math inline">\([0,T] \ \ \mathbb{P}\)</span>-a.s.</p>
 </div>
 
 
