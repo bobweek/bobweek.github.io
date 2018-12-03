@@ -505,6 +505,14 @@ div.tocify {
 </div>
 <div id="wiener-processes-in-ul2mathscro" class="section level2">
 <h2>4.1.3 Wiener processes in <span class="math inline">\(U=L^2(\mathscr{O})\)</span></h2>
+<p>Let <span class="math inline">\(U=L^2(\mathscr{O})\)</span> and <span class="math inline">\(W\)</span> a <span class="math inline">\(U\)</span>-valued <span class="math inline">\(Q\)</span>-Wiener process. Then <span class="math inline">\(Q^{1/2}\)</span> is Hilbert-Schmidt on <span class="math inline">\(U\)</span> which implies it is the integral operator</p>
+<p><span class="math display">\[Q^{1/2}\phi(\xi)=\int_\mathscr{O}r(\xi,\zeta)\phi(\zeta)d\zeta, \ \ \xi\in\mathscr{O}, \ \phi\in L^2(\mathscr{O})\]</span></p>
+<p>where the kernel <span class="math inline">\(r\)</span> is square-integrable on <span class="math inline">\(\mathscr{O}^2\)</span> and hence so is <span class="math inline">\(Q\)</span></p>
+<p><span class="math display">\[Q\phi(\xi)=\int_{\mathscr{O}^2}r(\xi,\gamma)r(\gamma,\zeta)\phi(\zeta)d\gamma d\zeta, \ \ \xi\in\mathscr{O}, \ \phi\in L^2(\mathscr{O}).\]</span></p>
+<p>The kernel of <span class="math inline">\(Q\)</span>, <span class="math inline">\(g(\xi,\zeta)=\int_\mathscr{O}r(\xi,\gamma)r(\gamma,\zeta)d\gamma\)</span>, can be interpreted as the “spatial” correlation of <span class="math inline">\(W\)</span> in <span class="math inline">\(L^2(\mathscr{O})\)</span>. For all <span class="math inline">\(t&gt;0\)</span>, <span class="math inline">\(W(t,\cdot)\)</span> is an <span class="math inline">\(L^2(\mathscr{O})\)</span>-valued random variable and <span class="math inline">\(W(\cdot,\xi)\)</span> is a real valued random variable for a.a. <span class="math inline">\(\xi\in\mathscr{O}\)</span>.</p>
+<p>WLOG assume the random field <span class="math inline">\(W(t,\xi), \ t\geq0, \ \xi\in\mathscr{O}\)</span> is measurable. For <span class="math inline">\(\phi,\psi\in L^2(\mathscr{O})\)</span></p>
+<p><span class="math display">\[{\mathbb{E}}[\left&lt;W(t,\phi)\right&gt;\left&lt;W(t,\psi)\right&gt;]={\mathbb{E}}\left[\int_\mathscr{O} W(t,\xi)\phi(\xi)d\xi\int_\mathscr{O} W(t,\eta)\psi(\eta)d\eta\right]\]</span></p>
+<p>This can be used to show <span class="math inline">\(g(\xi,\eta)=\frac{1}{t}{\mathbb{E}}[W(t,\xi)W(t,\eta)]\)</span></p>
 </div>
 </div>
 <div id="definition-of-the-stochastic-integral" class="section level1">
@@ -633,7 +641,9 @@ div.tocify {
 <p>Hence, Hölder’s inequality implies</p>
 <p><span class="math display">\[\|\mathfrak{n}_0^2\|_1\leq\|\mathfrak{n}_0\|_1\|\mathfrak{n}_0\|_\infty&lt;\infty.\]</span></p>
 <p>In particular, <span class="math inline">\(\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}&lt;\infty\)</span> so that <span class="math inline">\(\mathfrak{n}_0\in L^2({\mathbb{R}})\)</span>, ie, <span class="math inline">\(\mathfrak{n}_0\)</span> is an <span class="math inline">\(H\)</span>-valued random variable with <span class="math inline">\(H=L^2({\mathbb{R}})\)</span>. This satisfies one of the conditions of Theorem 4.32. We still need to show that <span class="math inline">\(\eta\mathfrak{n}_t\)</span> is an <span class="math inline">\(L_2^0\)</span>-valued process stochastically integrable on <span class="math inline">\([0,T]\)</span> and that <span class="math inline">\(m\mathfrak{n}_t\)</span> is an <span class="math inline">\(H\)</span>-valued predictable process Bochner integrable on <span class="math inline">\([0,T] \ \ \mathbb{P}\)</span>-a.s.</p>
-<p>The operator <span class="math inline">\(\Phi(t):?\rightarrow?\)</span> defined by <span class="math inline">\([\Phi(t)] x=\eta x\)</span> for each <span class="math inline">\(x\in?\)</span>… we need <span class="math inline">\(?\)</span> to be the reproducing kernel of some separable Hilbert space <span class="math inline">\(U\)</span>.</p>
+<p>Let <span class="math inline">\(U=L^2({\mathbb{R}})\)</span> and note that <span class="math inline">\(U\)</span> is a separable Hilbert space (since <span class="math inline">\({\mathbb{R}}\)</span> is second-countable). Because <span class="math inline">\(W\)</span> is a standard <span class="math inline">\(U\)</span>-valued Wiener process, the associated covariance operator <span class="math inline">\(Q\)</span>, given by <span class="math inline">\({\mathrm{Cov}}(W(t))=tQ\)</span>, is the identity operator. Hence <span class="math inline">\(U_0=Q^{1/2}(L^2({\mathbb{R}}))=L^2({\mathbb{R}})=U\)</span>. Write <span class="math inline">\(L_2^0=L_2(U_0,U)=L_2(U)\)</span> for the space of all Hilbert-Schmidt operators on <span class="math inline">\(U\)</span>. The operator <span class="math inline">\(\Phi(t):U\rightarrow U\)</span>, defined by <span class="math inline">\([\Phi(t)] x=\eta x\)</span> for each <span class="math inline">\(x\in L^2({\mathbb{R}}), \ t\geq0\)</span>, is clearly a member of <span class="math inline">\(L_2^0\)</span> and</p>
+<p><span class="math display">\[\|\Phi(t)\|_{L_2^0}^2=\mathrm{Tr}[(\Phi(t) Q^{1/2})(\Phi(t) Q^{1/2})^*]\]</span></p>
+<p><span class="math display">\[=\mathrm{Tr}[(\eta)(\eta)^*]\]</span></p>
 </div>
 
 

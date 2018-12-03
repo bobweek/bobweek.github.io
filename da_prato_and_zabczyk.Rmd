@@ -245,6 +245,22 @@ This forms a generalized Wiener process with covariance $Q$.
 
 ## 4.1.3 Wiener processes in $U=L^2(\mathscr{O})$
 
+Let $U=L^2(\mathscr{O})$ and $W$ a $U$-valued $Q$-Wiener process. Then $Q^{1/2}$ is Hilbert-Schmidt on $U$ which implies it is the integral operator
+
+$$Q^{1/2}\phi(\xi)=\int_\mathscr{O}r(\xi,\zeta)\phi(\zeta)d\zeta, \ \ \xi\in\mathscr{O}, \ \phi\in L^2(\mathscr{O})$$
+
+where the kernel $r$ is square-integrable on $\mathscr{O}^2$ and hence so is $Q$
+
+$$Q\phi(\xi)=\int_{\mathscr{O}^2}r(\xi,\gamma)r(\gamma,\zeta)\phi(\zeta)d\gamma d\zeta, \ \ \xi\in\mathscr{O}, \ \phi\in L^2(\mathscr{O}).$$
+
+The kernel of $Q$, $g(\xi,\zeta)=\int_\mathscr{O}r(\xi,\gamma)r(\gamma,\zeta)d\gamma$, can be interpreted as the "spatial" correlation of $W$ in $L^2(\mathscr{O})$. For all $t>0$, $W(t,\cdot)$ is an $L^2(\mathscr{O})$-valued random variable and $W(\cdot,\xi)$ is a real valued random variable for a.a. $\xi\in\mathscr{O}$.
+
+WLOG assume the random field $W(t,\xi), \ t\geq0, \ \xi\in\mathscr{O}$ is measurable. For $\phi,\psi\in L^2(\mathscr{O})$
+
+$$\E[\left<W(t,\phi)\right>\left<W(t,\psi)\right>]=\E\left[\int_\mathscr{O} W(t,\xi)\phi(\xi)d\xi\int_\mathscr{O} W(t,\eta)\psi(\eta)d\eta\right]$$
+
+This can be used to show $g(\xi,\eta)=\frac{1}{t}\E[W(t,\xi)W(t,\eta)]$
+
 # 4.2 Definition of the stochastic integral
 
 Consider the $U$-valued $Q$-Wiener process $W(t)$ in $(\Omega,\mathscr{F},\mathbb{P})$ and the normal filtration $\{\mathscr{F}_t\}_{t\geq0}$ in $\mathscr{F}$. Assume that
@@ -393,15 +409,15 @@ This example uses less abstract stochastic processes (It&ocirc; diffusions) to f
   
 - __Def 7.1.1__ A (time-homogeneous) __It&ocirc; diffusion__ is a stochastic process $X_t(\omega)=X(t,\omega):[s,\infty)\times\Omega\rightarrow\R^n$ satisfying an SDE of the form
   
-$$dX_t=b(X_t)dt+\sigma(X_t)dW_t, \ t\geq s, \ X_0\in\R^n$$
+$$dX_t=b(X_t)dt+\sigma(X_t)dB_t, \ t\geq s, \ X_0\in\R^n$$
 
-where $W_t$ is an $\R^m$-valued Wiener process and $b:\R^n\rightarrow\R^m$, $\sigma:\R^n\rightarrow\R^{n\times m}$ are Lipschitz continuous. That is, there exists $D>0$ s.t.
+where $B_t$ is an $\R^m$-valued Brownian motion and $b:\R^n\rightarrow\R^m$, $\sigma:\R^n\rightarrow\R^{n\times m}$ are Lipschitz continuous. That is, there exists $D>0$ s.t.
 
 $$|b(x)-b(y)|+|\sigma(x)-\sigma(y)|\leq D|x-y|, \ x,y\in\R^n. \ \triangle$$
 
 For each $z\in \R$ let $\mathfrak{n}_t(z)$ be a stochastic process satisfying
 
-$$d\mathfrak{n}_t(z)=m(z)\mathfrak{n}_t(z)dt+\eta\mathfrak{n}_t(z)dW_t(z), \ \ \mathfrak{n}_0(z)\in\R.$$
+$$d\mathfrak{n}_t(z)=m(z)\mathfrak{n}_t(z)dt+\eta\mathfrak{n}_t(z)dB_t(z), \ \ \mathfrak{n}_0(z)\in\R.$$
 
 To give some biological context, $\mathfrak{n}_t(z)$ denotes the abundance density of the trait value $z$ at time $t$ in a population. Hence, the total abundance of the population $n_t$ is given by $n_t=\int\mathfrak{n}_t(z)dx$. The function $m\in L^\infty(\R)$ is the Malthusian fitness of individuals with trait $z$. For now we assume perfect heritability which may be implied by the more specific assumptions that the population is asexually reproducing and the effects of mutation and epigenetics are absent. The number $0\leq\eta<\infty$ denotes the magnitude of demographic stochasticity.
 
@@ -425,6 +441,22 @@ Hence, H&ouml;lder's inequality implies
 
 $$\|\mathfrak{n}_0^2\|_1\leq\|\mathfrak{n}_0\|_1\|\mathfrak{n}_0\|_\infty<\infty.$$
 
-In particular, $\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}<\infty$ so that $\mathfrak{n}_0\in L^2(\R)$, ie, $\mathfrak{n}_0$ is an $H$-valued random variable with $H=L^2(\R)$. This satisfies one of the conditions of Theorem 4.32. We still need to show that $\eta\mathfrak{n}_t$ is an $L_2^0$-valued process stochastically integrable on $[0,T]$ and that $m\mathfrak{n}_t$ is an $H$-valued predictable process Bochner integrable on $[0,T] \ \ \mathbb{P}$-a.s.
+In particular, $\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}<\infty$ so that $\mathfrak{n}_0\in L^2(\R)$, ie, $\mathfrak{n}_0$ is an $H$-valued random variable with $H=L^2(\R)$. This satisfies one of the conditions of Theorem 4.32. We still need to show that $\mathfrak{n}_t W_t$ is a Hilbert space valued Wiener process, $\Phi$, given by $\Phi(t) x = \eta x$ for each $t\geq0$, is an $L_2^0$-valued process stochastically integrable on $[0,T]$ and that $m\mathfrak{n}_t$ is an $H$-valued predictable process Bochner integrable on $[0,T] \ \ \mathbb{P}$-a.s.
 
-The operator $\Phi(t):?\rightarrow?$ defined by $[\Phi(t)] x=\eta x$ for each $x\in?$... we need $?$ to be the reproducing kernel of some separable Hilbert space $U$.
+Let $U=L^2(\R)$ and note that $U$ is a separable Hilbert space (since $\R$ is second-countable). Because $W$ is a standard $U$-valued Wiener process, the associated covariance operator $Q$, given by $\Cov(W(t))=tQ$, is the identity operator. Hence $U_0=Q^{1/2}(L^2(\R))=L^2(\R)=U$. Write $L_2^0=L_2(U_0,U)=L_2(U)$ for the space of all Hilbert-Schmidt operators on $U$. The operator $\Phi(t):U\rightarrow U$, defined by $[\Phi(t)]W_t(z)=\left<\eta\mathfrak{n}_t, W_t(z)\right>=\eta\int_\R\mathfrak{n}_t(z)W_t(z)dz$ for each $W_t(z)\in L^2(\R), \ 0\leq t<\infty$
+
+... hold up.
+
+, is clearly a member of $L_2^0$ and
+
+$$\|\Phi(t)\|_{L_2^0}^2=\mathrm{Tr}[(\Phi(t) Q^{1/2})(\Phi(t) Q^{1/2})^*]$$
+
+$$=\mathrm{Tr}[(\Phi(t))(\Phi(t))^*]\overset{?}{=}\eta^2<\infty.$$
+
+Hence 
+
+$$\int_0^T\|\Phi(s)\|_{L_2^0}^2ds$$
+
+is a univariate normally distributed random variable with mean zero and variance $\eta^2T$. Thus, $\Phi$ is an $L_2^0$-valued process stochastically integrable on $[0,T]$ for any $T<\infty$.
+
+Finally, to show that $\phi(t)=m\mathfrak{n}(t)$
