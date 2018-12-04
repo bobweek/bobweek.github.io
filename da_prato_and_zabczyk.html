@@ -24,8 +24,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -34,12 +34,10 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
 }
 </script>
 
@@ -335,7 +333,7 @@ div.tocify {
 <li><span class="math inline">\(L_1(E,F)\)</span>… Banach space of nuclear operators</li>
 <li><span class="math inline">\(L_2(U_1,U_2)\)</span>… separable Hilbert space of Hilbert-Schmidt operators</li>
 <li><span class="math inline">\(L_2^0=L_2(U_0,U_1)\)</span>… the space of all Hilbert-Schmidt operators from <span class="math inline">\(U_0\)</span> to <span class="math inline">\(U_1\)</span></li>
-<li><span class="math inline">\(\triangle\)</span>… denotes the end of a formal statement</li>
+<li><span class="math inline">\(\triangle\)</span>… denotes the end of a statement</li>
 </ul>
 <div id="a.c-nuclear-hilbert-schmidt-operators" class="section level1">
 <h1>A.C Nuclear &amp; Hilbert-Schmidt operators</h1>
@@ -522,22 +520,33 @@ div.tocify {
 <li><span class="math inline">\(W(t)\)</span> is <span class="math inline">\(\mathscr{F}_t\)</span>-measurable</li>
 <li><span class="math inline">\(W(t+h)-W(t)\)</span> is independent of <span class="math inline">\(\mathscr{F}_t, \ \ \ \ \forall \ h\geq0, \ \ \forall \ t\geq0.\)</span></li>
 </ol>
-<p>Then <span class="math inline">\(W(t)\)</span> is called a <strong><span class="math inline">\(Q\)</span>-Wiener process with respect to <span class="math inline">\(\{\mathscr{F}_t\}_{t\geq0}\)</span></strong>. Fix <span class="math inline">\(T&lt;\infty\)</span>. An <span class="math inline">\(L=L(U,H)\)</span>-valued process <span class="math inline">\(\Phi(t), \ t\in[0,T]\)</span> taking only a finite number of values is said to be <strong>elementary</strong> if <span class="math inline">\(\exists\)</span> a parition <span class="math inline">\(0=t_0&lt;\dots&lt;t_k=T\)</span> and a sequence <span class="math inline">\(\Phi_0,\dots,\Phi_{k-1}\)</span> of <span class="math inline">\(L\)</span>-valued random variables each taking just a finite number of values s.t. the <span class="math inline">\(\Phi_m\)</span> are <span class="math inline">\(\mathscr{F}_{t_m}\)</span>-measurable and <span class="math inline">\(\Phi(t)=\Phi_m\)</span> for <span class="math inline">\(t\in(t_m,t_{m+1}]\)</span>, <span class="math inline">\(m=0,\dots,k-1\)</span>. For elementary processes <span class="math inline">\(\Phi\)</span> the stochastic integral is defined by</p>
-<p><span class="math display">\[\int_0^t\Phi(s)ds\equiv\sum_{m=0}^{k-1}\Phi_m(W_{t_{m+1}\wedge t}-W_{t_m\wedge t})\]</span></p>
-<p>and is denoted by <span class="math inline">\(\Phi\cdot W(t), \ t\in[0,T]\)</span>. The subspace <span class="math inline">\(U_0\equiv Q^{1/2}(U)\)</span> of <span class="math inline">\(U\)</span>, endowed with the inner product</p>
+<p>Then <span class="math inline">\(W(t)\)</span> is called a <strong><span class="math inline">\(Q\)</span>-Wiener process with respect to <span class="math inline">\(\{\mathscr{F}_t\}_{t\geq0}\)</span></strong>. Fix <span class="math inline">\(T&lt;\infty\)</span>.</p>
+<ul>
+<li><strong>Def</strong> An <span class="math inline">\(L=L(U,H)\)</span>-valued process <span class="math inline">\(\Phi(t), \ t\in[0,T]\)</span> taking only a finite number of values is said to be <strong>elementary</strong> if <span class="math inline">\(\exists\)</span> a partition <span class="math inline">\(0=t_0&lt;\dots&lt;t_k=T\)</span> and a sequence <span class="math inline">\(\Phi_0,\dots,\Phi_{k-1}\)</span> of <span class="math inline">\(L\)</span>-valued random variables each taking just a finite number of values s.t. the <span class="math inline">\(\Phi_m\)</span> are <span class="math inline">\(\mathscr{F}_{t_m}\)</span>-measurable and <span class="math inline">\(\Phi(t)=\Phi_m\)</span> for <span class="math inline">\(t\in(t_m,t_{m+1}]\)</span>, <span class="math inline">\(m=0,\dots,k-1\)</span>. For elementary processes <span class="math inline">\(\Phi\)</span> the stochastic integral is defined by</li>
+</ul>
+<p><span class="math display">\[\int_0^t\Phi(s)dW(s)\equiv\sum_{m=0}^{k-1}\Phi_m(W_{t_{m+1}\wedge t}-W_{t_m\wedge t})\]</span></p>
+<p>and is denoted by <span class="math inline">\(\Phi\cdot W(t), \ t\in[0,T]\)</span>.</p>
+<ul>
+<li><strong>Comparison to SDE</strong> The only difference is that <span class="math inline">\(W(t)\)</span> is a real valued standard Wiener process (so that <span class="math inline">\(Q=1\)</span>) and the <span class="math inline">\(\Phi_m\)</span> are real valued random variables. <span class="math inline">\(\triangle\)</span></li>
+</ul>
+<p>The subspace <span class="math inline">\(U_0\equiv Q^{1/2}(U)\)</span> of <span class="math inline">\(U\)</span>, endowed with the inner product</p>
 <p><span class="math display">\[\left&lt;u,v\right&gt;_0\equiv\sum_k\frac{1}{\lambda_k}\left&lt;u,e_k\right&gt;\left&lt;v,e_k\right&gt;=\left&lt;Q^{-1/2}u,Q^{-1/2}v\right&gt;, \ \ u,v\in U_0\]</span></p>
 <p>is a Hilbert space. The space of all Hilbert-Schmidt operators <span class="math inline">\(L_2^0\equiv L_2(U_0,H)\)</span> is a separable Hilbert space with the norm</p>
 <p><span class="math display">\[\|\Psi\|_{L_2^0}^2\equiv\sum_{h,k}\left|\left&lt;\Psi \sqrt{\lambda_h}e_h,f_k\right&gt;\right|^2=\sum_{h,k}\lambda_h|\left&lt;\Psi e_h,f_k\right&gt;|^2\]</span></p>
 <p>where <span class="math inline">\(\{\sqrt{\lambda_j}e_j\}\)</span>, <span class="math inline">\(\{e_j\}\)</span> and <span class="math inline">\(\{f_j\}\)</span> are complete orthonormal bases in <span class="math inline">\(U_0\)</span>, <span class="math inline">\(U\)</span> and <span class="math inline">\(H\)</span> respectively. Let <span class="math inline">\(\Phi(t), \ t\in[0,T]\)</span> be a measurable <span class="math inline">\(L_2^0\)</span>-valued process. Define the norms</p>
-<p><span class="math display">\[\|\Phi\|_t\equiv\left[{\mathbb{E}}\int_0^t\|\Phi(s)\|_{L_2^0}^2\right]^{1/2}\]</span></p>
+<p><span class="math display">\[\|\Phi\|_t\equiv\left[{\mathbb{E}}\int_0^t\|\Phi(s)\|_{L_2^0}^2ds\right]^{1/2}\]</span></p>
 <p><span class="math display">\[=\left[{\mathbb{E}}\int_0^t\mathrm{Tr}[(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]ds\right]^{1/2}, \ \ t\in[0,T].\]</span></p>
 <ul>
-<li><strong>Proposition 4.20</strong> If a process <span class="math inline">\(\Phi\)</span> is elementary and <span class="math inline">\(\|\Phi\|_T&lt;\infty\)</span> then the process <span class="math inline">\(\Phi\cdot W\)</span> is a contiunous square integrable <span class="math inline">\(H\)</span>-valued martingale on [0,T] and</li>
+<li><strong>Proposition 4.20</strong> If a process <span class="math inline">\(\Phi\)</span> is elementary and <span class="math inline">\(\|\Phi\|_T&lt;\infty\)</span> then the process <span class="math inline">\(\Phi\cdot W\)</span> is a contiunous square integrable <span class="math inline">\(H\)</span>-valued martingale on <span class="math inline">\([0,T]\)</span> and</li>
 </ul>
 <p><span class="math display">\[{\mathbb{E}}|\Phi\cdot W(t)|^2=\|\Phi\|_T^2, \ \ 0\leq t\leq T.\]</span></p>
 <ul>
+<li><strong>Comparison to SDE</strong> This is analogous to the Itô isometry which states that if <span class="math inline">\(\Phi(t)\)</span> is elementary in the sense of SDE and if there exists <span class="math inline">\(M&gt;0\)</span> s.t. <span class="math inline">\(|\Phi_m(\omega)|&lt;M\)</span> for each <span class="math inline">\(\omega\in\Omega, \ m=0,\dots,k-1\)</span>, then</li>
+</ul>
+<p><span class="math display">\[{\mathbb{E}}\left[\left(\int_0^T\Phi(t)dW(t)\right)^2\right]={\mathbb{E}}\left(\int_0^T[\Phi(t)]^2dt\right).\]</span></p>
+<ul>
 <li><p><strong>Remark 4.21</strong> The stochastic integral is a linear transformation from the space of all elementary process with the norm <span class="math inline">\(\|\cdot\|_T\)</span> into the space <span class="math inline">\(\mathscr{M}_T^2(H)\)</span> of <span class="math inline">\(H\)</span>-valued martingales.</p></li>
-<li><p>Quick detor:</p></li>
+<li><p>Quick detour:</p></li>
 </ul>
 <p>A <span class="math inline">\(\sigma\)</span>-field <span class="math inline">\(\mathscr{P}_\infty\)</span> of subsets of <span class="math inline">\([0,\infty)\times\Omega\)</span> is generated by sets of the form,</p>
 <p><span class="math display">\[(s,t]\times F, \ \ 0\leq s&lt;t&lt;\infty, \ \ F\in\mathscr{F}_s\]</span></p>
@@ -618,21 +627,52 @@ div.tocify {
 <p><span class="math display">\[=\|\Phi Q^{1/2}\|^2_{L_2(U,H)}=\mathrm{Tr}[(\Phi Q^{1/2})(\Phi Q^{1/2})^*]\]</span></p>
 <p>where the <span class="math inline">\(\{e_j\}\)</span> and <span class="math inline">\(\{f_j\}\)</span> are complete orthonormal systems for <span class="math inline">\(U\)</span> and <span class="math inline">\(H\)</span> and the <span class="math inline">\(\lambda_j\)</span> are the eigenvalues of <span class="math inline">\(Q\)</span>.</p>
 <ul>
+<li>A comparison to SDE:</li>
+</ul>
+<p>My primary reference for SDE is Øksendal. Here, stochastic integration is defined for functions <span class="math inline">\(f:[0,\infty)\times\Omega\rightarrow{\mathbb{R}}\)</span> that satisfy</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\((t,\omega)\mapsto f(t,\omega)\)</span> is <span class="math inline">\(\mathcal{B}([0,\infty)])\times\)</span></li>
+</ol>
+<p>the notion of stochastic integrability introduced above is replaced with</p>
+<ul>
 <li>A concrete example:</li>
 </ul>
-<p>This example uses less abstract stochastic processes (Itô diffusions) to formulate an SPDE. Developing SPDE in this way appeals to the more naive mathematician (myself in particular) by breathing in a more intuitive understanding of the behaviour and structure of SPDE. However, since Itô diffusions are not explicitely defined in Da Prato &amp; Zabczyk, I borrow the definition from the excellent introduction to SDE by Øksendal:</p>
+<p>This example begins with a set of less abstract stochastic processes and shows the need to use SPDE theory for their analysis. Approaching SPDE in this way appeals to the more naive mathematician (myself in particular) by utilizing simpler concepts and some more familiar theory of SDE.</p>
+<p>For each fixed <span class="math inline">\(z\in {\mathbb{R}}\)</span> let <span class="math inline">\(\mathfrak{n}_t(z)\)</span> be a real valued stochastic process satisfying the SDE</p>
+<p><span class="math display">\[d\mathfrak{n}_t(z)=m(z)\mathfrak{n}_t(z)dt+\eta\mathfrak{n}_t(z)dB_t(z), \ \ \mathfrak{n}_0(z)&gt;0.\]</span></p>
+<p>To give some biological context, <span class="math inline">\(\mathfrak{n}_t(z)\)</span> denotes the abundance density of the trait value <span class="math inline">\(z\)</span> at time <span class="math inline">\(t\)</span> in a population. Hence, the total abundance of the population <span class="math inline">\(n_t\)</span> is given by <span class="math inline">\(n_t=\int\mathfrak{n}_t(z)dx\)</span>. The function <span class="math inline">\(m\in L^\infty({\mathbb{R}})\)</span> is the Malthusian fitness of individuals with trait <span class="math inline">\(z\)</span> which is assumed to be constant with respect to time. For now we assume perfect heritability which may be implied by the more specific assumptions that the population is asexually reproducing and the effects of mutation and epigenetics are absent. The number <span class="math inline">\(0\leq\eta&lt;\infty\)</span> denotes the magnitude of demographic stochasticity. The goal of this example is to calculate the evolution of the entire distribution of traits in the population. That is, setting <span class="math inline">\(\mathfrak{p}_t(z)=\mathfrak{n}_t(z)/n_t\)</span>, the goal is to compute <span class="math inline">\(d\mathfrak{p}_t(z)\)</span> for each <span class="math inline">\(z\)</span>.</p>
+<p>The solution to this SDE <span class="math inline">\(d\mathfrak{n}_t(z)\)</span> can be found in Øksendal, example 5.1.1, which is repeated here:</p>
+<p>The dependency on <span class="math inline">\(z\)</span> is suppressed for clarity. Rearranging, we have</p>
+<p><span class="math display">\[\frac{d\mathfrak{n}_t}{\mathfrak{n}_t}=mdt+\eta dB_t\]</span></p>
+<p>and thus</p>
+<p><span class="math display">\[\int_0^t\frac{d\mathfrak{n}_s}{\mathfrak{n}_s}ds=mt+\eta B_t.\]</span></p>
+<p>Using the classic Itô formula (as opposed to the more general one given above) on the function <span class="math inline">\(g(t,x)=\ln x, \ x&gt;0\)</span>, we get</p>
+<p><span class="math display">\[d(\ln \mathfrak{n}_t)=\frac{1}{\mathfrak{n}_t}d\mathfrak{n}_t+\frac{1}{2}\left(-\frac{1}{\mathfrak{n}_t}\right)(d\mathfrak{n}_t)^2\]</span></p>
+<p><span class="math display">\[=\frac{d\mathfrak{n}_t}{\mathfrak{n}_t}-\frac{1}{2}\eta^2dt.\]</span></p>
+<p>Combining these results, we find <span class="math inline">\(\mathfrak{n}_t=\mathfrak{n}_0\exp((m-\frac{1}{2}\eta^2)t+\eta B_t)\)</span>, which is a geometric Brownian motion. Since we assumed perfect heritability and that fitness for each trait is constant in time, the solution <span class="math inline">\(\mathfrak{n}_t(z)\)</span> has been found for each <span class="math inline">\(z\)</span>. We can rewrite <span class="math inline">\(n_t\)</span> as</p>
+<p><span class="math display">\[\int_{\mathbb{R}}\mathfrak{n}_t(z)dz=\int_{\mathbb{R}}\mathfrak{n}_0(z)\exp((m(z)-\frac{1}{2}\eta^2)t+\eta B_t(z))dz. \ \triangle\]</span></p>
+<p>Since <span class="math inline">\(\mathfrak{n}_t(z)&gt;0\)</span> for <span class="math inline">\(t\geq0, \ z\in{\mathbb{R}}\)</span>, we can use Tonelli’s theorem to justify</p>
+<p><span class="math display">\[{\mathbb{E}}n_t=\int_{\mathbb{R}}{\mathbb{E}}\mathfrak{n}_t(z)dz.\]</span></p>
+<p>Using the properties of geometric Brownian motion, we know that <span class="math inline">\(\mathfrak{n}_t(z)\)</span> is a log-normal random variable with mean <span class="math inline">\({\mathbb{E}}(\mathfrak{n}_0)e^{m(z)t}\)</span></p>
+<p>Writing <span class="math inline">\(\mathfrak{p}_t(z)\)</span> as the density of <span class="math inline">\(z\)</span> at time <span class="math inline">\(t\)</span>, we have</p>
+<p><span class="math display">\[\mathfrak{p}_t(z)=\frac{\mathfrak{n}_t(z)}{n_t}=\frac{\exp(m(z)t+\eta B_t(z))}{\int_{\mathbb{R}}\exp(m(\zeta)t+\eta B_t(\zeta))d\zeta}\]</span></p>
+<p>since <span class="math inline">\(\mathfrak{n}_0(z)&gt;0\)</span> for each <span class="math inline">\(z\)</span>. Fixing <span class="math inline">\(z\)</span> again, we can view <span class="math inline">\(\mathfrak{p}_t(z)\)</span> as a function <span class="math inline">\(F\)</span> of the two-dimensional process <span class="math inline">\(\left(\mathfrak{n}_t(z),n_t\right)\)</span> given by <span class="math inline">\(F(x)=\frac{x_1}{x_2}, \ x\in{\mathbb{R}}^2_{&gt;0}\)</span>. Hence the gradient of <span class="math inline">\(\mathfrak{p}_t(z)\)</span> is</p>
+<p><span class="math display">\[\left(\frac{1}{n_t},-\frac{\mathfrak{p}_t(z)}{n_t}\right)\]</span></p>
+<p>and the Hessian of <span class="math inline">\(\mathfrak{p}_t(x)\)</span> is</p>
+<p><span class="math display">\[\left(\begin{matrix}0 &amp; -n_t^{-2} \\ -n_t^{-2} &amp; 2\mathfrak{n}_t(z)n_t^{-3}\end{matrix}\right)=\frac{1}{n_t^2}\left(\begin{matrix}0 &amp; -1 \\ -1 &amp; 2\mathfrak{p}_t(z)\end{matrix}\right).\]</span></p>
+<p>Applying the <span class="math inline">\(n\)</span>-dimensional Itô formula provides</p>
+<p><span class="math display">\[d\phi(x)=\partial_{\mathfrak{n}(x)}\phi(x)d\mathfrak{n}(x)+\partial_n\phi(x)dn+\frac{1}{2}\left(\partial_{\mathfrak{n}(x)\mathfrak{n}(x)}\phi(x)(d\mathfrak{n}(x))^2+\partial_{nn}\phi(x)(dn)^2+2\partial_{\mathfrak{n}(x)n}\phi(x)(d\mathfrak{n}(x))(dn)\right)\]</span></p>
+<p><span class="math display">\[=\frac{1}{n}(m(x)\mathfrak{n}(x)dt+\eta\mathfrak{n}(x)dB_t(x))-\frac{\phi(x)}{n}dn_t\]</span></p>
+<p><span class="math display">\[+\frac{1}{2}\left(2\frac{\phi(x)}{n^2}dn_t^2-2\frac{1}{n^2}(m(x)\mathfrak{n}(x)dt+\eta\mathfrak{n}(x)dB_t(x))\right)dn_t\]</span></p>
+<p><span class="math display">\[=(m(x)-\bar m)\phi(x)dt+\phi(x)\eta\left(dB_t(x)-\overline{dB}_t\right)+\frac{\phi(x)}{n^2}(\eta n^2dt)-\frac{1}{n^2}(\eta\mathfrak{n}(x)ndt)\]</span></p>
+<p><span class="math display">\[=(m(x)-\bar m)\phi(x)dt+\phi(x)\eta\left(dB_t(x)-\overline{dB}_t\right)\]</span></p>
+<p>I now wish to show that the process</p>
+<p><span class="math display">\[\mathfrak{n}_t=\mathfrak{n}_0+\int_0^tm\mathfrak{n}_t\]</span></p>
+<p>is a well defined process in terms of the conditions needed to apply Theorem 4.32 (Itô’s formula) in order to calculate <span class="math inline">\(dn_t\)</span> where <span class="math inline">\(n_t\equiv F(\mathfrak{n}_t)=\int_{\mathbb{R}}\mathfrak{n}_t(z)dz\)</span>.</p>
 <ul>
-<li><strong>Def 7.1.1</strong> A (time-homogeneous) <strong>Itô diffusion</strong> is a stochastic process <span class="math inline">\(X_t(\omega)=X(t,\omega):[s,\infty)\times\Omega\rightarrow{\mathbb{R}}^n\)</span> satisfying an SDE of the form</li>
+<li><strong>Claim</strong> <span class="math inline">\(\mathfrak{n}_t(0)\)</span> is a <span class="math inline">\(\mathscr{F}_0\)</span>-measurable <span class="math inline">\(H\)</span>-valued random variable</li>
 </ul>
-<p><span class="math display">\[dX_t=b(X_t)dt+\sigma(X_t)dW_t, \ t\geq s, \ X_0\in{\mathbb{R}}^n\]</span></p>
-<p>where <span class="math inline">\(W_t\)</span> is an <span class="math inline">\({\mathbb{R}}^m\)</span>-valued Wiener process and <span class="math inline">\(b:{\mathbb{R}}^n\rightarrow{\mathbb{R}}^m\)</span>, <span class="math inline">\(\sigma:{\mathbb{R}}^n\rightarrow{\mathbb{R}}^{n\times m}\)</span> are Lipschitz continuous. That is, there exists <span class="math inline">\(D&gt;0\)</span> s.t.</p>
-<p><span class="math display">\[|b(x)-b(y)|+|\sigma(x)-\sigma(y)|\leq D|x-y|, \ x,y\in{\mathbb{R}}^n. \ \triangle\]</span></p>
-<p>For each <span class="math inline">\(z\in {\mathbb{R}}\)</span> let <span class="math inline">\(\mathfrak{n}_t(z)\)</span> be a stochastic process satisfying</p>
-<p><span class="math display">\[d\mathfrak{n}_t(z)=m(z)\mathfrak{n}_t(z)dt+\eta\mathfrak{n}_t(z)dW_t(z), \ \ \mathfrak{n}_0(z)\in{\mathbb{R}}.\]</span></p>
-<p>To give some biological context, <span class="math inline">\(\mathfrak{n}_t(z)\)</span> denotes the abundance density of the trait value <span class="math inline">\(z\)</span> at time <span class="math inline">\(t\)</span> in a population. Hence, the total abundance of the population <span class="math inline">\(n_t\)</span> is given by <span class="math inline">\(n_t=\int\mathfrak{n}_t(z)dx\)</span>. The function <span class="math inline">\(m\in L^\infty({\mathbb{R}})\)</span> is the Malthusian fitness of individuals with trait <span class="math inline">\(z\)</span>. For now we assume perfect heritability which may be implied by the more specific assumptions that the population is asexually reproducing and the effects of mutation and epigenetics are absent. The number <span class="math inline">\(0\leq\eta&lt;\infty\)</span> denotes the magnitude of demographic stochasticity.</p>
-<p>In terms of definition 7.1.1, for a fixed <span class="math inline">\(z\in{\mathbb{R}}\)</span>, we have <span class="math inline">\(b(x)=m(z)x\)</span> and <span class="math inline">\(\sigma(x)=\eta x\)</span> for each <span class="math inline">\(x\in{\mathbb{R}}\)</span>. Hence,</p>
-<p><span class="math display">\[|b(x)-b(y)|+|\sigma(x)+\sigma(y)|=|m(z)||x-y|+\eta|x-y|=\left(|m(z)|+\eta\right)|x-y|, \ x,y\in{\mathbb{R}}.\]</span></p>
-<p>Hence, <span class="math inline">\(b(x)=m(z)x\)</span> and <span class="math inline">\(\sigma(x)=\eta x\)</span> are Lipschitz continuous for each <span class="math inline">\(z\in{\mathbb{R}}\)</span> and therefore <span class="math inline">\(\mathfrak{n}_t(z)\)</span> is an Itô diffusion for each <span class="math inline">\(z\in{\mathbb{R}}\)</span>. Note that</p>
+<p>Note that</p>
 <p><span class="math display">\[\mathfrak{n}_0(z)\in L^1({\mathbb{R}})\cap L^\infty({\mathbb{R}})\]</span></p>
 <p>since we require</p>
 <p><span class="math display">\[\|\mathfrak{n}_0\|_1\equiv\int|\mathfrak{n}_0(z)|dz=n_0&lt;\infty\]</span></p>
@@ -640,10 +680,17 @@ div.tocify {
 <p><span class="math display">\[\|\mathfrak{n}_0\|_\infty\equiv\sup_{z\in{\mathbb{R}}}|\mathfrak{n}_0(z)|&lt;\infty.\]</span></p>
 <p>Hence, Hölder’s inequality implies</p>
 <p><span class="math display">\[\|\mathfrak{n}_0^2\|_1\leq\|\mathfrak{n}_0\|_1\|\mathfrak{n}_0\|_\infty&lt;\infty.\]</span></p>
-<p>In particular, <span class="math inline">\(\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}&lt;\infty\)</span> so that <span class="math inline">\(\mathfrak{n}_0\in L^2({\mathbb{R}})\)</span>, ie, <span class="math inline">\(\mathfrak{n}_0\)</span> is an <span class="math inline">\(H\)</span>-valued random variable with <span class="math inline">\(H=L^2({\mathbb{R}})\)</span>. This satisfies one of the conditions of Theorem 4.32. We still need to show that <span class="math inline">\(\eta\mathfrak{n}_t\)</span> is an <span class="math inline">\(L_2^0\)</span>-valued process stochastically integrable on <span class="math inline">\([0,T]\)</span> and that <span class="math inline">\(m\mathfrak{n}_t\)</span> is an <span class="math inline">\(H\)</span>-valued predictable process Bochner integrable on <span class="math inline">\([0,T] \ \ \mathbb{P}\)</span>-a.s.</p>
-<p>Let <span class="math inline">\(U=L^2({\mathbb{R}})\)</span> and note that <span class="math inline">\(U\)</span> is a separable Hilbert space (since <span class="math inline">\({\mathbb{R}}\)</span> is second-countable). Because <span class="math inline">\(W\)</span> is a standard <span class="math inline">\(U\)</span>-valued Wiener process, the associated covariance operator <span class="math inline">\(Q\)</span>, given by <span class="math inline">\({\mathrm{Cov}}(W(t))=tQ\)</span>, is the identity operator. Hence <span class="math inline">\(U_0=Q^{1/2}(L^2({\mathbb{R}}))=L^2({\mathbb{R}})=U\)</span>. Write <span class="math inline">\(L_2^0=L_2(U_0,U)=L_2(U)\)</span> for the space of all Hilbert-Schmidt operators on <span class="math inline">\(U\)</span>. The operator <span class="math inline">\(\Phi(t):U\rightarrow U\)</span>, defined by <span class="math inline">\([\Phi(t)] x=\eta x\)</span> for each <span class="math inline">\(x\in L^2({\mathbb{R}}), \ t\geq0\)</span>, is clearly a member of <span class="math inline">\(L_2^0\)</span> and</p>
+<p>In particular, <span class="math inline">\(\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}&lt;\infty\)</span> so that <span class="math inline">\(\mathfrak{n}_0\in L^2({\mathbb{R}})\)</span>, ie, <span class="math inline">\(\mathfrak{n}_0\)</span> is an <span class="math inline">\(H\)</span>-valued random variable with <span class="math inline">\(H=L^2({\mathbb{R}})\)</span>.</p>
+<p>We still need to show that <span class="math inline">\(\mathfrak{n}_t W_t\)</span> is a Hilbert space valued Wiener process, <span class="math inline">\(\Phi\)</span>, given by <span class="math inline">\(\Phi(t) x = \eta x\)</span> for each <span class="math inline">\(t\geq0\)</span>, is an <span class="math inline">\(L_2^0\)</span>-valued process stochastically integrable on <span class="math inline">\([0,T]\)</span> and that <span class="math inline">\(m\mathfrak{n}_t\)</span> is an <span class="math inline">\(H\)</span>-valued predictable process Bochner integrable on <span class="math inline">\([0,T] \ \ \mathbb{P}\)</span>-a.s.</p>
+<p>Let <span class="math inline">\(U=L^2({\mathbb{R}})\)</span> and note that <span class="math inline">\(U\)</span> is a separable Hilbert space (since <span class="math inline">\({\mathbb{R}}\)</span> is second-countable). Because <span class="math inline">\(W\)</span> is a standard <span class="math inline">\(U\)</span>-valued Wiener process, the associated covariance operator <span class="math inline">\(Q\)</span>, given by <span class="math inline">\({\mathrm{Cov}}(W(t))=tQ\)</span>, is the identity operator. Hence <span class="math inline">\(U_0=Q^{1/2}(L^2({\mathbb{R}}))=L^2({\mathbb{R}})=U\)</span>. Write <span class="math inline">\(L_2^0=L_2(U_0,U)=L_2(U)\)</span> for the space of all Hilbert-Schmidt operators on <span class="math inline">\(U\)</span>. The operator <span class="math inline">\(\Phi(t):U\rightarrow U\)</span>, defined by <span class="math inline">\([\Phi(t)]W_t(z)=\left&lt;\eta\mathfrak{n}_t, W_t(z)\right&gt;=\eta\int_{\mathbb{R}}\mathfrak{n}_t(z)W_t(z)dz\)</span> for each <span class="math inline">\(W_t(z)\in L^2({\mathbb{R}}), \ 0\leq t&lt;\infty\)</span></p>
+<p>… hold up.</p>
+<p>, is clearly a member of <span class="math inline">\(L_2^0\)</span> and</p>
 <p><span class="math display">\[\|\Phi(t)\|_{L_2^0}^2=\mathrm{Tr}[(\Phi(t) Q^{1/2})(\Phi(t) Q^{1/2})^*]\]</span></p>
-<p><span class="math display">\[=\mathrm{Tr}[(\eta)(\eta)^*]\]</span></p>
+<p><span class="math display">\[=\mathrm{Tr}[(\Phi(t))(\Phi(t))^*]\overset{?}{=}\eta^2&lt;\infty.\]</span></p>
+<p>Hence</p>
+<p><span class="math display">\[\int_0^T\|\Phi(s)\|_{L_2^0}^2ds\]</span></p>
+<p>is a univariate normally distributed random variable with mean zero and variance <span class="math inline">\(\eta^2T\)</span>. Thus, <span class="math inline">\(\Phi\)</span> is an <span class="math inline">\(L_2^0\)</span>-valued process stochastically integrable on <span class="math inline">\([0,T]\)</span> for any <span class="math inline">\(T&lt;\infty\)</span>.</p>
+<p>Finally, to show that <span class="math inline">\(\phi(t)=m\mathfrak{n}(t)\)</span></p>
 </div>
 
 
