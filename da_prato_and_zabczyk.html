@@ -316,23 +316,25 @@ div.tocify {
 <p>Notation:</p>
 <ul>
 <li><span class="math inline">\(\mathscr{L}(X)\)</span>… the law of the random variable <span class="math inline">\(X\)</span>.</li>
-<li><span class="math inline">\(E,F,G\)</span>… Hilbert or Banach spaces</li>
+<li><span class="math inline">\(E,F,G\)</span>… Banach spaces</li>
 <li><span class="math inline">\(E^*\)</span>… the dual of <span class="math inline">\(E\)</span></li>
 <li><span class="math inline">\(H\)</span>… a Hilbert space with inner product <span class="math inline">\(\left&lt;\cdot,\cdot\right&gt;\)</span></li>
 <li><span class="math inline">\(U\)</span>… a separable Hilbert space <span class="math inline">\(\iff\)</span> <span class="math inline">\(U\)</span> admits a countable orthonormal basis
 <ul>
 <li><span class="math inline">\(U_1,U_2,\dots\)</span> will also denote separable Hilbert spaces</li>
 </ul></li>
-<li><span class="math inline">\(\mathscr{B}(E)\)</span>… the Banach <span class="math inline">\(\sigma\)</span>-algebra of a space <span class="math inline">\(E\)</span></li>
-<li><span class="math inline">\(\mu\)</span>… a Gaussian measure on <span class="math inline">\(H\)</span></li>
-<li><span class="math inline">\(m\in H\)</span>… mean of a Gaussian measure</li>
-<li><span class="math inline">\(Q:H\rightarrow H\)</span>… covariance operator of a Gaussian measure</li>
 <li><span class="math inline">\(\mathscr{O}\)</span>… a subset of <span class="math inline">\({\mathbb{R}}^d\)</span></li>
-<li><span class="math inline">\(U_0=Q^{1/2}(U)\)</span>… the reproducing kernel of a generalized Wiener process</li>
+<li><span class="math inline">\(\mathscr{B}(E)\)</span>… the Banach <span class="math inline">\(\sigma\)</span>-algebra of a space <span class="math inline">\(E\)</span></li>
 <li><span class="math inline">\(L(E,F)\)</span>… Banach space of linear bounded operators from <span class="math inline">\(E\)</span> to <span class="math inline">\(F\)</span>.</li>
 <li><span class="math inline">\(L_1(E,F)\)</span>… Banach space of nuclear operators</li>
 <li><span class="math inline">\(L_2(U_1,U_2)\)</span>… separable Hilbert space of Hilbert-Schmidt operators</li>
 <li><span class="math inline">\(L_2^0=L_2(U_0,U_1)\)</span>… the space of all Hilbert-Schmidt operators from <span class="math inline">\(U_0\)</span> to <span class="math inline">\(U_1\)</span></li>
+<li><span class="math inline">\(W:[0,\infty)\rightarrow U\)</span>… a <span class="math inline">\(U\)</span>-valued Wiener process</li>
+<li><span class="math inline">\(\mathscr{W}\)</span>… a generalized Wiener process</li>
+<li><span class="math inline">\(Q\in L_1(U)\)</span>… covariance operator of a <span class="math inline">\(U\)</span>-valued Wiener process</li>
+<li><span class="math inline">\(\mathscr{Q}\in L(U)\)</span>… covariance operator of a generalized Wiener process</li>
+<li><span class="math inline">\(U_0=Q^{1/2}(U)\)</span>… the reproducing kernel of a <span class="math inline">\(U\)</span>-valued Wiener process</li>
+<li><span class="math inline">\(\mathscr{U}_0=\mathscr{Q}^{1/2}(U)\)</span>… the reproducing kernel of a generalized Wiener process</li>
 <li><span class="math inline">\(\triangle\)</span>… denotes the end of a statement</li>
 </ul>
 <div id="a.c-nuclear-hilbert-schmidt-operators" class="section level1">
@@ -370,48 +372,6 @@ div.tocify {
 <li><strong>Proposition C.4</strong> Let <span class="math inline">\(U_1,U_2,U_3\)</span> be separable Hilbert spaces. If <span class="math inline">\(T\in L_2(U_1,U_2)\)</span> and <span class="math inline">\(S\in L_2(U_2,U_3)\)</span> then <span class="math inline">\(ST\in L_1(U_1,U_3)\)</span> and</li>
 </ul>
 <p><span class="math display">\[\|ST\|_1\leq\|S\|_2\|T\|_2. \ \triangle\]</span></p>
-</div>
-<div id="gaussian-measures-in-banach-spaces" class="section level1">
-<h1>2.2 Gaussian measures in Banach spaces</h1>
-<div id="reproducing-kernels" class="section level2">
-<h2>2.2.2 Reproducing kernels</h2>
-<p>Let <span class="math inline">\(\mu\)</span> be a symmetric Gaussian measure on a Banach space <span class="math inline">\(E\)</span>.</p>
-<ul>
-<li><strong>Def</strong> A linear subspace <span class="math inline">\(H\subset E\)</span> equipped with a Hilbert norm <span class="math inline">\(|\cdot|_H\)</span> is said to be a <strong>reproducing kernel space</strong> for <span class="math inline">\(\mu\)</span> if <span class="math inline">\(H\)</span> is complete, continously embedded in <span class="math inline">\(E\)</span> and such that for arbitrary <span class="math inline">\(\phi\in E^*\)</span></li>
-</ul>
-<p><span class="math display">\[\mathscr{L}(\phi)=\mathscr{N}(0,|\phi|^2_H),\]</span></p>
-<p>where <span class="math inline">\(|\phi|_H\equiv\sup_{|h|_H\leq1}|\phi(h)|\)</span>. <span class="math inline">\(\triangle\)</span></p>
-<ul>
-<li><strong>Theorem 2.9</strong> For an arbitrary symmetric Gaussian measure <span class="math inline">\(\mu\)</span> on a separable Banasch space, there exists a unique reproducing kernel space <span class="math inline">\((H,|\cdot|_H)\)</span>. <span class="math inline">\(\triangle\)</span></li>
-</ul>
-<p>The reproducing kernel space of <span class="math inline">\(\mu\)</span> will be denoted by <span class="math inline">\(H_\mu\)</span>. In can be thought of as independent of the ambient Banach space <span class="math inline">\(E\)</span>.</p>
-</div>
-</div>
-<div id="probability-measures-on-hilbert-spaces" class="section level1">
-<h1>2.3 Probability measures on Hilbert spaces</h1>
-<div id="gaussian-measures-on-hilbert-spaces" class="section level2">
-<h2>2.3.1 Gaussian measures on Hilbert spaces</h2>
-<ul>
-<li><strong>Def</strong> A probability measure <span class="math inline">\(\mu\)</span> on <span class="math inline">\((H,\mathscr{B}(H))\)</span> is <strong>Gaussian</strong> if for any <span class="math inline">\(h\in H\)</span> there exists <span class="math inline">\(m\in{\mathbb{R}}^1,q\geq0\)</span> s.t.</li>
-</ul>
-<p><span class="math display">\[\mu(\{x\in H;\left&lt;h,x\right&gt;\in A\})=\mathscr{N}(m,q)(A), \ \forall \ A\in\mathscr{B}({\mathbb{R}}^1). \  \triangle\]</span></p>
-<p>If <span class="math inline">\(\mu\)</span> is Gaussian the following functionals</p>
-<p><span class="math display">\[H\rightarrow{\mathbb{R}}^1, \ h\mapsto\int_H\left&lt;h,x\right&gt;\mu(dx),\]</span></p>
-<p><span class="math display">\[H\times H\rightarrow{\mathbb{R}}^1, \ (h_1,h_2)\mapsto\int_H\left&lt;h_1,x\right&gt;\left&lt;h_2,x\right&gt;\mu(dx)\]</span></p>
-<p>are well defined and continous.</p>
-<ul>
-<li><strong>Lemma 2.15</strong> (sort of like Cauchy-Schwartz for Hilbert spaces with probability measures)</li>
-</ul>
-<p>Let <span class="math inline">\(\nu\)</span> be a probability measure on <span class="math inline">\((H,\mathscr{B}(H))\)</span>. If there exists a <span class="math inline">\(k\in\mathbb{N}\)</span> s.t.</p>
-<p><span class="math display">\[\int_H|\left&lt;z,x\right&gt;|^k\nu(dx)&lt;\infty, \ \forall \ z\in H,\]</span></p>
-<p>then there also exists a constant <span class="math inline">\(c&gt;0\)</span> s.t.</p>
-<p><span class="math display">\[\left|\int_H\prod_{i=1}^k\left&lt;h_i,x\right&gt;\nu(dx)\right|\leq c\prod_{i=1}^k|h_i|, \ h_1,\dots,h_k\in H. \ \triangle\]</span></p>
-<p>This lemma implies that if <span class="math inline">\(\mu\)</span> is Gaussian then there exists <span class="math inline">\(m\in H\)</span> and a linear operator <span class="math inline">\(Q\)</span> s.t.</p>
-<p><span class="math display">\[\int_H\left&lt;h,x\right&gt;\mu(dx)=\left&lt;m,h\right&gt;, \ \forall \ h\in H,\]</span></p>
-<p><span class="math display">\[\int_H\left&lt;h_1,x-m\right&gt;\left&lt;h_2,x-m\right&gt;\mu(dx)=\left&lt;Qh_1,h_2\right&gt;.\]</span></p>
-<p>A Gaussian measure has the characteristic functional</p>
-<p><span class="math display">\[\hat\mu(\lambda)=\int_He^{i\left&lt;\lambda,x\right&gt;}\mu(dx)=e^{i\left&lt;\lambda,m\right&gt;-\frac{1}{2}\left&lt;Q\lambda,\lambda\right&gt;}.\]</span></p>
-</div>
 </div>
 <div id="wiener-processes" class="section level1">
 <h1>4.1 Wiener processes</h1>
@@ -468,29 +428,33 @@ div.tocify {
 <p>where</p>
 <p><span class="math display">\[\beta_j=\frac{1}{\sqrt{\lambda_j}}\int_a^bX(t)e_j(t)dt, \ j\in\mathbb{N}\]</span></p>
 <p>are uncorrelated zero-mean random variables with unit variance. The convergence of the KL expansion is in <span class="math inline">\(L^2(\Omega)\)</span>, uniform in <span class="math inline">\(t\)</span>. Notice that in Proposition 4.3, <span class="math inline">\(e_j\in U\)</span> are not functions of time, but the <span class="math inline">\(\beta_j\)</span> are. However, for the KL expansion the <span class="math inline">\(\beta_j\)</span> are not functions of time but the <span class="math inline">\(e_j\)</span> are.</p>
-<ul>
-<li><p><strong>Proposition 4.4</strong> For any trace class symmetric nonnegative operator <span class="math inline">\(Q\)</span> on a separable Hilbert space <span class="math inline">\(U\)</span>, there exists a <span class="math inline">\(Q\)</span>-Wiener process <span class="math inline">\(W(t), \ t\geq0\)</span>.</p></li>
-<li><p><strong>Theorem 4.5</strong> Let <span class="math inline">\(W\)</span> be a <span class="math inline">\(Q\)</span>-Wiener process s.t. consequence 1. of Proposition 4.3 holds. Then the series in consequence 2. of Proposition 4.3 is <span class="math inline">\(\mathbb{P}\)</span>-a.s. uniformaly convergent on <span class="math inline">\([0,T]\)</span> for any <span class="math inline">\(T&gt;0\)</span>.</p></li>
-</ul>
-<p>The quadrative variation of a <span class="math inline">\(Q\)</span>-Wiener process in <span class="math inline">\(U\)</span> with <span class="math inline">\(\mathrm{Tr}Q&lt;\infty\)</span> is given by <span class="math inline">\(\left&lt;\left&lt;W(t)\right&gt;\right&gt;=tQ\)</span>.</p>
-<ul>
-<li><strong>Theorem 4.6</strong> A <span class="math inline">\(U\)</span>-valued square integrable martingale <span class="math inline">\(M(t)\)</span> with <span class="math inline">\(M(0)=0\)</span> is a <span class="math inline">\(Q\)</span>-Wiener process on <span class="math inline">\([0,T]\)</span> adapted to the filtration <span class="math inline">\(\mathscr{F}_t, \ t\geq0\)</span> with increments <span class="math inline">\(M(t)-M(s), \ t\geq s\)</span> independent of <span class="math inline">\(\mathscr{F}_t, \ s\geq0\)</span> iff <span class="math inline">\(\left&lt;\left&lt;M(t)\right&gt;\right&gt;=tQ, \ t\geq0\)</span>.</li>
-</ul>
-<p>This result is a direct generalization Lévy’s theorem one dimensional processes which states that if <span class="math inline">\(M(t)\)</span> is a real valued square integrable martingale s.t. <span class="math inline">\(M(0)=0\)</span> and <span class="math inline">\(\left&lt;\left&lt;M(t)\right&gt;\right&gt;=t, \ t\in[0,T]\)</span>, then <span class="math inline">\(M(\cdot)\)</span> is a standard Wiener process adapted to <span class="math inline">\(\mathscr{F}_t, \ t\in[0,T]\)</span> and with increments <span class="math inline">\(M(s)-M(t), \ s&gt;t\)</span>, independent of <span class="math inline">\(\mathscr{F}_t, \ t\in[0,T]\)</span>.</p>
 </div>
 <div id="generalized-wiener-processes-on-a-hilbert-space" class="section level2">
 <h2>4.1.2 Generalized Wiener processes on a Hilbert space</h2>
-<p>For each <span class="math inline">\(a\in U\)</span> define a real valued Wiener process <span class="math inline">\(W_a(t), \ t\geq0\)</span>, by the formula <span class="math inline">\(W_a(t)=\left&lt;a,W(t)\right&gt;, \ t\geq0\)</span>. The transformation <span class="math inline">\(a\mapsto W_a\)</span> is linear from <span class="math inline">\(U\)</span> to the space of stochastic processes. It is also continuous in that</p>
-<p><span class="math display">\[t\geq0, \{a_n\}\subset U, \lim_{n\rightarrow\infty}a_n=a\implies\lim_{n\rightarrow\infty}{\mathbb{E}}|W_a(t)-W_{a_n}(t)|^2=0.\]</span></p>
+<p>The primary reason for my study of SPDE is to formally treat PDE subjected to a specific kind of noise. In particular, the noise I wish to account for, denoted by <span class="math inline">\(\mathscr{W}\)</span> where <span class="math inline">\(\mathscr{W}(x,t)\in{\mathbb{R}}\)</span> for each <span class="math inline">\(x\in U\)</span> (<span class="math inline">\(U\)</span> is usually some subset of <span class="math inline">\({\mathbb{R}}^n\)</span>) and <span class="math inline">\(t\in[0,\infty)\)</span>, should satisfy the following properties:</p>
+<ol style="list-style-type: decimal">
+<li>For every <span class="math inline">\(x\in U,0\leq s\leq t\in[0,\infty)\)</span></li>
+</ol>
+<p><span class="math display">\[\mathscr{L}(\mathscr{W}(x,t)-\mathscr{W}(x,s))=\mathscr{L}(\mathscr{W}(x,t-s))=\mathscr{N}(0,t-s).\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>For any <span class="math inline">\(x_1,x_2\in U\)</span> and <span class="math inline">\(t\in[0,\infty)\)</span></li>
+</ol>
+<p><span class="math display">\[{\mathbb{E}}(\mathscr{W}(x_1,t)\mathscr{W}(x_2,t))=\left\{\begin{matrix} t, &amp; \|x_1-x_2\|_U=0 \\ 0, &amp; \|x_1-x_2\|_U&gt;0. \end{matrix}\right.\]</span></p>
+<p>That is, <span class="math inline">\(\mathscr{W}(x,t)\)</span> is a set of independent real valued Brownian motions indexed by <span class="math inline">\(x\in U\)</span>. Previous definitions of the Wiener process are insufficient to capture this since <span class="math inline">\(\mathscr{W}(t)=\{\mathscr{W}(x,t):x\in U\}\)</span> is not a Hilbert space valued process. Indeed <span class="math inline">\(\mathscr{W}(t)\)</span> is not even Bochner integrable over <span class="math inline">\(U\)</span>. To circumvent this, Da Prato &amp; Zabczyk give the following definition</p>
 <ul>
-<li><strong>Def</strong> Any transformation <span class="math inline">\(a\mapsto W_a\)</span> whose values are real valued Wiener processes on <span class="math inline">\([0,\infty)\)</span> that is continuous in the above sense is a <strong>generalized Wiener process</strong>.</li>
+<li><strong>Def</strong> Any transformation <span class="math inline">\(\mathscr{W}\)</span> that maps <span class="math inline">\(a\in U_1\)</span> to <span class="math inline">\(W_a\)</span>, a real valued Wiener processes on <span class="math inline">\([0,\infty)\)</span>, that is continuous in the sense</li>
 </ul>
-<p>This definition implies the existence of a bilinear form <span class="math inline">\(K(a,b), \ a,b\in U\)</span> s.t.</p>
-<p><span class="math display">\[{\mathbb{E}}[W_a(t)W_b(s)]=(t\wedge s) \ K(a,b), \ \ t,s\geq0, \ a,b\in U.\]</span></p>
-<p>The continuity condition gurantees that <span class="math inline">\(K\)</span> is continuous in <span class="math inline">\(U\)</span> and hence there exists <span class="math inline">\(Q\in L(U)\)</span> s.t.</p>
-<p><span class="math display">\[{\mathbb{E}}[W_a(t)W_b(t)]=(t\wedge s)\left&lt;Q a,b\right&gt;, \ \ t,s\geq0, \ a,b\in U.\]</span></p>
+<p><span class="math display">\[t\geq0, \{a_n\}\subset U_n, \lim_{n\rightarrow\infty}\|a_n-a\|_{U_1}=0\implies\lim_{n\rightarrow\infty}{\mathbb{E}}\left|W_a(t)-W_{a_n}(t)\right|^2=0.\]</span></p>
+<p>is a <strong>generalized Wiener process</strong>. Note that the integral <span class="math inline">\(\int_U a(x)\mathscr{W}(x,t)dx\)</span> may qualify as such a mapping. For concreteness, I think of <span class="math inline">\(U={\mathbb{R}}^n\)</span> and <span class="math inline">\(U_1=L^2({\mathbb{R}}^n)\)</span>.</p>
+<p>This definition implies the existence of a bilinear form <span class="math inline">\(K(a,b), \ a,b\in U_1\)</span> s.t.</p>
+<p><span class="math display">\[{\mathbb{E}}[W_a(t)W_b(s)]=(t\wedge s) \ K(a,b), \ \ t,s\geq0, \ a,b\in U_1.\]</span></p>
+<p>The continuity condition gurantees that <span class="math inline">\(K\)</span> is continuous in <span class="math inline">\(U\)</span> and hence there exists <span class="math inline">\(\mathscr{Q}\in L(U)\)</span> s.t.</p>
+<p><span class="math display">\[{\mathbb{E}}[W_a(t)W_b(s)]=(t\wedge s)\left&lt;\mathscr{Q} a,b\right&gt;, \ \ t,s\geq0, \ a,b\in U_1.\]</span></p>
+<p>This operator is self-adjoint and positive definite and it the <strong>covariance</strong> of the generalized Wiener process <span class="math inline">\(\mathscr{W}\)</span>. If <span class="math inline">\(\mathscr{Q}\)</span> is the identity operator,</p>
+<p><span class="math display">\[\mathscr{Q}a=a, \ \ a\in U_1\]</span></p>
+<p>then <span class="math inline">\(\mathscr{W}\)</span> is called a <strong>cylindrical Wiener process</strong> in <span class="math inline">\(U_1\)</span>. If <span class="math inline">\(\mathscr{U}_0=\mathscr{Q}^{1/2}(U_1)\)</span> we call <span class="math inline">\(\mathscr{U}_0\)</span> the <strong>reproducing kernel</strong> of the generalized Wiener process.</p>
 <ul>
-<li>Constructing a generalized Wiener process from an arbitrary self-adjoint and positive definite operator <span class="math inline">\(Q\)</span>.</li>
+<li>Constructing a generalized Wiener process from an arbitrary self-adjoint and positive definite operator <span class="math inline">\(\mathscr{Q}\)</span>.</li>
 </ul>
 <p>Let <span class="math inline">\(\{e_j\}\)</span> be a complete orthonormal basis in <span class="math inline">\(U\)</span> and <span class="math inline">\(\{\beta_j\}\)</span> a sequence of independent real valued standard Wiener processes. Define</p>
 <p><span class="math display">\[W_a(t)\equiv\sum_j\left&lt;Q^{1/2}e_j,a\right&gt;\beta_j(t), \ \ t\geq0, \ a\in U.\]</span></p>
@@ -544,23 +508,10 @@ div.tocify {
 <li><strong>Comparison to SDE</strong> This is analogous to the Itô isometry which states that if <span class="math inline">\(\Phi(t)\)</span> is elementary in the sense of SDE and if there exists <span class="math inline">\(M&gt;0\)</span> s.t. <span class="math inline">\(|\Phi_m(\omega)|&lt;M\)</span> for each <span class="math inline">\(\omega\in\Omega, \ m=0,\dots,k-1\)</span>, then</li>
 </ul>
 <p><span class="math display">\[{\mathbb{E}}\left[\left(\int_0^T\Phi(t)dW(t)\right)^2\right]={\mathbb{E}}\left(\int_0^T[\Phi(t)]^2dt\right).\]</span></p>
+<p>Since <span class="math inline">\({\mathbb{R}}\)</span></p>
 <ul>
-<li><p><strong>Remark 4.21</strong> The stochastic integral is a linear transformation from the space of all elementary process with the norm <span class="math inline">\(\|\cdot\|_T\)</span> into the space <span class="math inline">\(\mathscr{M}_T^2(H)\)</span> of <span class="math inline">\(H\)</span>-valued martingales.</p></li>
-<li><p>Quick detour:</p></li>
+<li><strong>Remark 4.21</strong> The stochastic integral is a linear transformation from the space of all elementary process with the norm <span class="math inline">\(\|\cdot\|_T\)</span> into the space <span class="math inline">\(\mathscr{M}_T^2(H)\)</span> of <span class="math inline">\(H\)</span>-valued martingales.</li>
 </ul>
-<p>A <span class="math inline">\(\sigma\)</span>-field <span class="math inline">\(\mathscr{P}_\infty\)</span> of subsets of <span class="math inline">\([0,\infty)\times\Omega\)</span> is generated by sets of the form,</p>
-<p><span class="math display">\[(s,t]\times F, \ \ 0\leq s&lt;t&lt;\infty, \ \ F\in\mathscr{F}_s\]</span></p>
-<p>and</p>
-<p><span class="math display">\[\{0\}\times F, \ \ F\in\mathscr{F}_0.\]</span></p>
-<p>This <span class="math inline">\(\sigma\)</span>-field and its elements are referrred to as a <strong>predictable</strong> <span class="math inline">\(\sigma\)</span>-field and <strong>predictable</strong> sets repsectively. The restriction of <span class="math inline">\(\mathscr{P}_\infty\)</span> to <span class="math inline">\([0,T]\times\Omega\)</span> is denoted by <span class="math inline">\(\mathscr{P}_T\)</span>. Any measurable mapping from <span class="math inline">\(([0,T)\times\Omega,\mathscr{F}_T)\)</span> into <span class="math inline">\((E,\mathscr{B}(E))\)</span> is called a <strong>predictable process</strong>.</p>
-<p>To better detect a predictable process, I collect the following</p>
-<ul>
-<li><strong>Proposition 3.7</strong></li>
-</ul>
-<ol style="list-style-type: decimal">
-<li><p>If <span class="math inline">\(\Phi\)</span> is an adapted process with values in <span class="math inline">\(L(U,H)\)</span> such that for any <span class="math inline">\(u\in U\)</span> and <span class="math inline">\(h\in H\)</span>, the process <span class="math inline">\(\left&lt;\Phi(t)u,h\right&gt;\)</span> <span class="math inline">\(t\geq0\)</span> has left continuous trajectories then <span class="math inline">\(\Phi\)</span> is predictable.</p></li>
-<li><p>If <span class="math inline">\(\Phi\)</span> is an adapted and stochastically continuous process on an interval <span class="math inline">\([0,T]\)</span>, then the process <span class="math inline">\(\Phi\)</span> has a predictable version on <span class="math inline">\([0,T]\)</span></p></li>
-</ol>
 <p>The integrands of stochastic intregrals can be regarded as random variables defined on <span class="math inline">\(\Omega_\infty\equiv[0.\infty)\times\Omega\)</span> (or <span class="math inline">\(\Omega_T\equiv[0,T]\times\Omega\)</span>) with the <span class="math inline">\(\sigma\)</span>-field <span class="math inline">\(\mathscr{B}([0,\infty))\times\mathscr{F}\)</span> (or <span class="math inline">\(\mathscr{B}([0,T])\times\mathscr{F}\)</span>). The product of the Lebesgue measure on <span class="math inline">\([0,\infty)\)</span> (or, <span class="math inline">\([0,T]\)</span>) and the probability measure <span class="math inline">\(\mathbb{P}\)</span> is denoted by <span class="math inline">\(\mathbb{P}_\infty\)</span> (or <span class="math inline">\(\mathbb{P}_T\)</span>).</p>
 <p>Taking into account the adaptability of processes we choose the <span class="math inline">\(\sigma\)</span>-field generated by the adapted simple process (<span class="math inline">\(\mathscr{P}_\infty\)</span> or <span class="math inline">\(\mathscr{P}_T\)</span>). The class of processes proper as integrands of stochastic integrals are predictable processes with values in <span class="math inline">\(L_2^0\)</span>. That is, they are measurable mappings from <span class="math inline">\((\Omega_\infty,\mathscr{P}_\infty)\)</span> (or <span class="math inline">\((\Omega_T,\mathscr{P}_T)\)</span>) into <span class="math inline">\((L_2^0,\mathscr{B}(L_2^0))\)</span>.</p>
 <ul>
@@ -691,6 +642,14 @@ div.tocify {
 <p><span class="math display">\[\int_0^T\|\Phi(s)\|_{L_2^0}^2ds\]</span></p>
 <p>is a univariate normally distributed random variable with mean zero and variance <span class="math inline">\(\eta^2T\)</span>. Thus, <span class="math inline">\(\Phi\)</span> is an <span class="math inline">\(L_2^0\)</span>-valued process stochastically integrable on <span class="math inline">\([0,T]\)</span> for any <span class="math inline">\(T&lt;\infty\)</span>.</p>
 <p>Finally, to show that <span class="math inline">\(\phi(t)=m\mathfrak{n}(t)\)</span></p>
+<p><span class="math display">\[PART \ II: \ SOLUTIONS \ OF \ SPDE\]</span></p>
+</div>
+<div id="linear-equations-with-multiplicative-noise" class="section level1">
+<h1>6 Linear equations with multiplicative noise</h1>
+<div id="strong-weak-and-mild-solutions" class="section level2">
+<h2>6.1 Strong, weak, and mild solutions</h2>
+<p><span class="math display">\[\left\{\begin{matrix}dX(t)=(AX(t)+f(t))dt+B(X(t))dW(t) \\ X(0)=\xi\end{matrix}\right.\]</span></p>
+</div>
 </div>
 
 
