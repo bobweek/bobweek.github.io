@@ -106,7 +106,7 @@ $$\mathscr{L}(W(t)-W(s))=\mathscr{L}(W(t-s)), \ t\geq s\geq0.$$
 
 Let $W$ be a $U$-valued Wiener process. Then $\left<W(t),u\right>, \ t\geq0,$ is a real valued Wiener process and $\mathscr{L}(W(t))$ is a Gaussian measure with mean 0. Furthermore, for any $u,v\in U, \ t,s\geq0,$
 
-$$\E[\left<W(t),u\right>\left<W(s),v\right>]=(t\wedge s)\E[\left<W(1),u\right>^2]$$
+$$\E[\left<W(t),u\right>\left<W(s),u\right>]=(t\wedge s)\E[\left<W(1),u\right>^2]$$
 
 and
 
