@@ -24,7 +24,69 @@ output:
 \newcommand{\L}{\mathscr{L}}
 \newcommand{\O}{\mathscr{O}}
 
-Notation:
+# Motivation
+
+Consider a biological population where each individual has a real valued trait $z$. Let $\mathfrak{n}_t(z)$ denote the abundance density of the trait value $z$ at time $t$. The total abundance of the population $n_t$ is given by $n_t=\int\mathfrak{n}_t(z)dz$. For each fixed $z\in \R$ let $\mathfrak{n}_t(z)$ be a real valued stochastic process satisfying the SDE
+
+$$d\mathfrak{n}_t(z)=m(z)\mathfrak{n}_t(z)dt+\eta\mathfrak{n}_t(z)dB_t(z), \ \ \mathfrak{n}_0(z)>0.$$
+
+The function $m\in L^\infty(\R)$ maps the trait value $z$ to the Malthusian fitness of individuals with trait $z$. The number $0\leq\eta<\infty$ denotes the magnitude of demographic stochasticity and $B_t(z)$ is a one dimensional Brownian motion for each fixed $z\in\R$. For now we assume perfect heritability which may be implied by the more specific assumptions that the population is asexually reproducing and the effects of mutation and epigenetics are absent. This means the set of processes $\{\mathfrak{n}_t(z)\}$ are independent.
+
+The solution to this SDE $d\mathfrak{n}_t(z)$ can be found in &Oslash;ksendal, example 5.1.1, which is repeated here:
+
+The dependency on $z$ is suppressed for clarity. Rearranging, we have
+
+$$\frac{d\mathfrak{n}_t}{\mathfrak{n}_t}=mdt+\eta dB_t$$
+
+and thus
+
+$$\int_0^t\frac{d\mathfrak{n}_s}{\mathfrak{n}_s}ds=mt+\eta B_t.$$
+
+Using the finite dimensional It&ocirc; formula on the function $g(t,x)=\ln x, \ x>0$, we get
+
+$$d(\ln \mathfrak{n}_t)=\frac{1}{\mathfrak{n}_t}d\mathfrak{n}_t+\frac{1}{2}\left(-\frac{1}{\mathfrak{n}_t}\right)(d\mathfrak{n}_t)^2$$
+
+$$=\frac{d\mathfrak{n}_t}{\mathfrak{n}_t}-\frac{1}{2}\eta^2dt.$$
+
+Combining these results, we find $\mathfrak{n}_t=\mathfrak{n}_0\exp((m-\frac{1}{2}\eta^2)t+\eta B_t)$, which is a geometric Brownian motion. Since we assumed perfect heritability and that fitness for each trait is constant in time, the solution $\mathfrak{n}_t(z)$ has been found for each $z$. We can rewrite $n_t$ as
+
+$$\int_\R\mathfrak{n}_t(z)dz=\int_\R\mathfrak{n}_0(z)\exp((m(z)-\frac{1}{2}\eta^2)t+\eta B_t(z))dz.$$
+
+Since $\mathfrak{n}_t(z)>0$ for $t\geq0, \ z\in\R$, we can use Tonelli's theorem to justify
+
+$$\E n_t=\int_\R\E\mathfrak{n}_t(z)dz.$$
+
+Using the properties of geometric Brownian motion, we know that $\mathfrak{n}_t(z)$ is a log-normal random variable with mean $\E(\mathfrak{n}_0(z))e^{m(z)t}$. Writing $p_t(z)=\mathfrak{n}_t(z)/n_t$, we have
+
+$$\E n_t=\E\int_\R\mathfrak{n}_0e^{mt}dz=\E\int_\R n_0p_0e^{mt}dz$$
+
+$$=\E\left(n_0\int_\R p_0e^{mt}dz\right).$$
+
+Assuming the random numbers $n_0$ and $p_0$ are independent, we have
+
+$$\E n_t=\E(n_0)\E\overline{e^{mt}}^{(0)}$$
+
+where $\overline{e^{mt}}^{(s)}=\int_\R p_s(z)e^{m(z)t}dz$. We could use a similar approach to find the variance of $n_t$. However, it would be useful to calculate the SDE $dn_t$ and the associated $dp_t$.
+
+Note that 
+
+$$\mathfrak{n}_0(z)\in L^1(\R)\cap L^\infty(\R)$$
+
+since we require 
+
+$$\|\mathfrak{n}_0\|_1\equiv\int|\mathfrak{n}_0(z)|dz=n_0<\infty$$
+
+and 
+
+$$\|\mathfrak{n}_0\|_\infty\equiv\sup_{z\in\R}|\mathfrak{n}_0(z)|<\infty.$$
+
+Hence, H&ouml;lder's inequality implies
+
+$$\|\mathfrak{n}_0^2\|_1\leq\|\mathfrak{n}_0\|_1\|\mathfrak{n}_0\|_\infty<\infty.$$
+
+In particular, $\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}=\|\mathfrak{n}_0\|_2<\infty$ so that $\mathfrak{n}_0\in L^2(\R)$. Because of this we can view $n_t$ as a linear functional on $L^2(\R)$. Therefore, to calculate $dn_t$ from $\mathfrak{n}_t$ we will need an infinite dimensional extension of It&ocirc;'s formula. Developing the theory for this extension will also allow us to work with actual SPDE where, for example, the set of SDE $\{\mathfrak{n}_t(z)\}$ no longer evolve independently. In particular, we'll be able to develop models accounting for imperfect heritability, sexual preference, frequency and density dependent selection, migration and so forth.
+
+# Notation:
 
   - $\L(X)$... the law of the random variable $X$.
   - $E,F,G$... Banach spaces
@@ -211,7 +273,7 @@ This forms a generalized Wiener process with covariance $\Q$.
 
 ## 4.1.3 Wiener processes in $U_1=L^2(\mathscr{O})$
 
-- The point of including this section is that it provides a formal treatment of Brownian sheets.
+- The point of including this section is that it explicitly treats Brownian sheets.
 
 Let $U_1=L^2(\mathscr{O})$ and $W$ a $U_1$-valued $Q$-Wiener process. Then $Q^{1/2}$ is Hilbert-Schmidt on $U_1$ which implies it is the integral operator
 
@@ -263,13 +325,13 @@ $$(t\wedge s)g(x,y), \ (t,x),(s,y)\in[0,\infty)\times\O,$$
 
 is also positive definite and there exists a Gaussian family $W(t,x), \ t\geq0, \ x\in\O$ s.t.
 
-$$$\E[W(t,x)W(s,y)]=(t\wedge s)g(x,y).$$
+$$\E[W(t,x)W(s,y)]=(t\wedge s)g(x,y).$$
 
 For each $x$, $W(\cdot,x)$ has all the properties of a real valued Wiener process except for the regularity of trajectories. To prove the existence of a proper modification requires additional properties of $g$. $\triangle$
 
 ## 4.1.4. Spatially homogeneous Wiener processes
 
-- The point of including this section is that it gives a formal treatment of a cylindrical Wiener process on $L^2(\R^n)$.
+- This section is included becuase it provides and explicit treatment of a cylindrical Wiener process on $L^2(\R^n)$.
 
 - __Def__ If $\mu$ is a probability measure on $(E,\mathscr{B}(E))$, then the function $\hat\mu$ on $E^*$
 
@@ -351,15 +413,35 @@ $$(\Gamma,\phi*\psi_{(s)})=(2\pi)^{n/2}\int_{\R^n}\phi(-x)\psi_{(s)}(x)dx$$
 
 $$=(2\pi)^{n/2}\int_{\R^n}\phi(-x)\psi(-x)dx=(2\pi)^{n/2}\int_{\R^n}\phi(x)\psi(x)dx$$
 
-Hence, $\W=(2\pi)^{-n/2}\beta(t)\delta_0$ so that $(2\pi)^{n/2}\W$ is a cylindrical Wiener process on $L^2(\R^n)$. $\triangle$
+Hence, if $\W=(2\pi)^{-n/2}\beta(t)\delta_0$ then $(2\pi)^{n/2}\W$ is a cylindrical Wiener process on $L^2(\R^n)$. $\triangle$
 
 ## 4.1.5 Complements on a Brownian sheet
 
-- The point of including this section is that it connects Brownian sheets on $[0,\infty)\times\R^n$ with cylindrical Wiener processes on $L^2(\R^n)$.
+- The point of including this section is that it connects Brownian sheets on $[0,\infty)\times\R^n$ (as developed in 4.1.3) with cylindrical Wiener processes on $L^2(\R^n)$ (as developed in 4.1.4).
 
+This section shows that the distributional derivative of a Brownian sheet $B$ on $[0,\infty)\times\R^n$ is "eqaul" to the cylindrical Wiener process $\W$ on $L^2(\R^n)$. That is
+
+$$\frac{\partial^n}{\partial x_1\cdots\partial x_n}B(t,x)=\W(t,x), \ x\in\R^n.$$
+
+- __Def__ A Brownian sheet $B$ on $[0,\infty)\times[0,\infty)^n$ is a Gaussian random field with correlation function
+
+$$(t\wedge s)\prod_j(x_j\wedge y_j), \ \ t,s,x_j,y_j\geq0.$$
+
+Now let $B_l$ be a family of independent Brownian sheets on $[0,\infty)\times[0,\infty)^n$ indexed by the family of all sequences $l=\{l_i\}$ where each $l_i\in\{0,1\}$. Then, for any $t\geq0$ and $x=(x_1,\dots,x_n)\in\R^n$, we define
+
+$$B(t,x)\equiv B_l(t,(-1)^{l_1}x_1,\dots,(-1)^{l_n}x_n)$$
+
+when each $(-1)^{l_i}x_i\geq0$. The resulting object $B$ is called the __Brownian sheet__ on $[0,\infty)\times\R^n$. The Kolmogorov continuity test allows us to assume each realization of $B$ is continuous. Furthermore, $B$ can be thought of as an $L^2_\rho(\R)$-valued Wiener process with weight $\rho$ s.t.
+
+$$\int_{\R^n}|x_1|\cdots|x_n|\rho(x_1,\dots,x_n)dx_1\cdots dx_n<\infty.$$
+
+- __Proposition 4.19__ If $B$ is a Brownian sheet on $[0,\infty)\times\R^n$ then, for any $\phi,\psi\in\mathscr{S}(\R^n)$,
+
+$$\E\left(\frac{\partial^n}{\partial x_1\cdots\partial x_n}B(t),\phi\right)\left(\frac{\partial^n}{\partial x_1\cdots\partial x_n}B(t),\psi\right)=(t\wedge s)\int_{\R^n}\phi(x)\psi(x)dx.$$
 
 # 4.2 Definition of the stochastic integral
 
+The development of the infinite dimensional stochastic integral is analogous to the development of the stochastic integral for finite dimensional stochastic processes. We begin with a definition for elementary processes and progressively extend this definition until it is sufficiently general.
 
 Consider the $U$-valued $Q$-Wiener process $W(t)$ in $(\Omega,\mathscr{F},\mathbb{P})$ and the normal filtration $\{\mathscr{F}_t\}_{t\geq0}$ in $\mathscr{F}$. Assume that
 
@@ -368,7 +450,7 @@ Consider the $U$-valued $Q$-Wiener process $W(t)$ in $(\Omega,\mathscr{F},\mathb
 
 Then $W(t)$ is called a __$Q$-Wiener process with respect to $\{\mathscr{F}_t\}_{t\geq0}$__. Fix $T<\infty$. 
 
-- __Def__ An $L=L(U,H)$-valued process $\Phi(t), \ t\in[0,T]$ taking only a finite number of values is said to be __elementary__ if $\exists$ a partition $0=t_0<\dots<t_k=T$ and a sequence $\Phi_0,\dots,\Phi_{k-1}$ of $L$-valued random variables each taking just a finite number of values s.t. the $\Phi_m$ are $\mathscr{F}_{t_m}$-measurable and $\Phi(t)=\Phi_m$ for $t\in(t_m,t_{m+1}]$, $m=0,\dots,k-1$. For elementary processes $\Phi$ the stochastic integral is defined by
+- __Def__ An $L=L(U,H)$-valued process $\Phi(t), \ t\in[0,T]$ taking only a finite number of values is said to be __elementary__ if $\exists$ a partition $0=t_0<\dots<t_k=T$ and a sequence $\Phi_0,\dots,\Phi_{k-1}$ of $L$-valued random variables s.t. the $\Phi_m$ are $\mathscr{F}_{t_m}$-measurable and bounded (in the sense that $\|\Phi_m\|_L$ is a bounded random variable for each $m$) and $\Phi(t)=\Phi_m$ for $t\in(t_m,t_{m+1}]$, $m=0,\dots,k-1$. For elementary processes $\Phi$ the stochastic integral is defined by
 
 $$\int_0^t\Phi(s)dW(s)\equiv\sum_{m=0}^{k-1}\Phi_m(W_{t_{m+1}\wedge t}-W_{t_m\wedge t})$$
 
@@ -466,6 +548,28 @@ $$+\int_0^t\Big{\{}F_t(s,X(s))+\left<F_x(s,X(s)),\phi(s)\right>$$
 
 $$\left.+\frac{1}{2}\mathrm{Tr}[F_{xx}(s,X(s))(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]\right\}$$
 
+- __Example __ Let $B$ be a Brownian sheet on $[0,\infty)\times\R$. Then, obviously, $B(t)=\int_0^tdB(s)$. Given $\psi\in L^2(\R)$ s.t. $\psi(x)\geq0$ for each $x\in\R$ and $\int\psi=1$ define $F:L_\rho^2(\R)\rightarrow \R$ by $F(u)=\int_\R \psi(x)u(x)dx$. We should get
+
+$$W(t)=F(B(t))=\int_\R\psi(x)B(t,x)dx$$
+
+is a standard one dimensional Brownian motion. For the sake of applying It&ocirc;'s formula, we note $F_t=0$ and $F_u, F_{uu}$ are linear functionals given by the functional derivatives
+
+$$F_u v\equiv \lim_{\epsilon\rightarrow0}\frac{1}{\epsilon}(F(u+\epsilon v)-F(u))$$
+
+$$=\lim_{\epsilon\rightarrow0}\frac{1}{\epsilon}\int_\R\epsilon \psi(x)v(x)dx=\int_\R \psi(x)v(x)dx=F(v),$$
+
+$$F_{uu}(v)\equiv \lim_{\epsilon\rightarrow0}\frac{1}{\epsilon}(F_u(u+\epsilon v)-F_u(u))$$
+
+$$=\int_\R \psi(x)v(x)dx=F_u(v), \ v\in L^2(\R).$$
+
+Therefore 
+
+$$F(B)=F(B(0))+\int_0^t\left<F_u(B(s)),dB(s)\right>+\frac{1}{2}\mathrm{Tr}(F_{uu}(B(s))I)ds$$
+
+$$=\int_0^t\left(\left<\int_\R\psi(x)B(s,x) dx,dB(s)\right>+\frac{1}{2}\int_\R\psi(x)B(s,x)dx\right)ds$$
+
+$$=\int_0^t\left<W(s),dB(s)\right>$$
+
 - Collecting a few things I keep forgetting:
 
   - Recall that,  in general, a space is __separable__ if it admits a countably dense subset.
@@ -500,116 +604,6 @@ My primary reference for SDE is &Oslash;ksendal. Here, stochastic integration is
 
 
 the notion of stochastic integrability introduced above is replaced with
-
-  - A concrete example:
-
-This example begins with a set of less abstract stochastic processes and shows the need to use SPDE theory for their analysis. Approaching SPDE in this way appeals to the more naive mathematician (myself in particular) by utilizing simpler concepts and some more familiar theory of SDE.
-
-For each fixed $z\in \R$ let $\mathfrak{n}_t(z)$ be a real valued stochastic process satisfying the SDE
-
-$$d\mathfrak{n}_t(z)=m(z)\mathfrak{n}_t(z)dt+\eta\mathfrak{n}_t(z)dB_t(z), \ \ \mathfrak{n}_0(z)>0.$$
-
-To give some biological context, $\mathfrak{n}_t(z)$ denotes the abundance density of the trait value $z$ at time $t$ in a population. Hence, the total abundance of the population $n_t$ is given by $n_t=\int\mathfrak{n}_t(z)dx$. The function $m\in L^\infty(\R)$ is the Malthusian fitness of individuals with trait $z$ which is assumed to be constant with respect to time. For now we assume perfect heritability which may be implied by the more specific assumptions that the population is asexually reproducing and the effects of mutation and epigenetics are absent. The number $0\leq\eta<\infty$ denotes the magnitude of demographic stochasticity. The goal of this example is to calculate the evolution of the entire distribution of traits in the population. That is, setting $\mathfrak{p}_t(z)=\mathfrak{n}_t(z)/n_t$, the goal is to compute $d\mathfrak{p}_t(z)$ for each $z$.
-
-The solution to this SDE $d\mathfrak{n}_t(z)$ can be found in &Oslash;ksendal, example 5.1.1, which is repeated here:
-
-The dependency on $z$ is suppressed for clarity. Rearranging, we have
-
-$$\frac{d\mathfrak{n}_t}{\mathfrak{n}_t}=mdt+\eta dB_t$$
-
-and thus
-
-$$\int_0^t\frac{d\mathfrak{n}_s}{\mathfrak{n}_s}ds=mt+\eta B_t.$$
-
-Using the classic It&ocirc; formula (as opposed to the more general one given above) on the function $g(t,x)=\ln x, \ x>0$, we get
-
-$$d(\ln \mathfrak{n}_t)=\frac{1}{\mathfrak{n}_t}d\mathfrak{n}_t+\frac{1}{2}\left(-\frac{1}{\mathfrak{n}_t}\right)(d\mathfrak{n}_t)^2$$
-
-$$=\frac{d\mathfrak{n}_t}{\mathfrak{n}_t}-\frac{1}{2}\eta^2dt.$$
-
-Combining these results, we find $\mathfrak{n}_t=\mathfrak{n}_0\exp((m-\frac{1}{2}\eta^2)t+\eta B_t)$, which is a geometric Brownian motion. Since we assumed perfect heritability and that fitness for each trait is constant in time, the solution $\mathfrak{n}_t(z)$ has been found for each $z$. We can rewrite $n_t$ as
-
-$$\int_\R\mathfrak{n}_t(z)dz=\int_\R\mathfrak{n}_0(z)\exp((m(z)-\frac{1}{2}\eta^2)t+\eta B_t(z))dz. \ \triangle$$
-
-Since $\mathfrak{n}_t(z)>0$ for $t\geq0, \ z\in\R$, we can use Tonelli's theorem to justify
-
-$$\E n_t=\int_\R\E\mathfrak{n}_t(z)dz.$$
-
-Using the properties of geometric Brownian motion, we know that $\mathfrak{n}_t(z)$ is a log-normal random variable with mean $\E(\mathfrak{n}_0)e^{m(z)t}$
-
-Writing $\mathfrak{p}_t(z)$ as the density of $z$ at time $t$, we have
-
-$$\mathfrak{p}_t(z)=\frac{\mathfrak{n}_t(z)}{n_t}=\frac{\exp(m(z)t+\eta B_t(z))}{\int_\R\exp(m(\zeta)t+\eta B_t(\zeta))d\zeta}$$
-
-since $\mathfrak{n}_0(z)>0$ for each $z$. Fixing $z$ again, we can view $\mathfrak{p}_t(z)$ as a function $F$ of the two-dimensional process $\left(\mathfrak{n}_t(z),n_t\right)$ given by $F(x)=\frac{x_1}{x_2}, \ x\in\R^2_{>0}$. Hence the gradient of $\mathfrak{p}_t(z)$ is 
-
-$$\left(\frac{1}{n_t},-\frac{\mathfrak{p}_t(z)}{n_t}\right)$$
-
-and the Hessian of $\mathfrak{p}_t(x)$ is
-
-$$\left(\begin{matrix}0 & -n_t^{-2} \\ -n_t^{-2} & 2\mathfrak{n}_t(z)n_t^{-3}\end{matrix}\right)=\frac{1}{n_t^2}\left(\begin{matrix}0 & -1 \\ -1 & 2\mathfrak{p}_t(z)\end{matrix}\right).$$
-
-Applying the $n$-dimensional It&ocirc; formula provides
-
-$$d\phi(x)=\partial_{\mathfrak{n}(x)}\phi(x)d\mathfrak{n}(x)+\partial_n\phi(x)dn+\frac{1}{2}\left(\partial_{\mathfrak{n}(x)\mathfrak{n}(x)}\phi(x)(d\mathfrak{n}(x))^2+\partial_{nn}\phi(x)(dn)^2+2\partial_{\mathfrak{n}(x)n}\phi(x)(d\mathfrak{n}(x))(dn)\right)$$
-
-$$=\frac{1}{n}(m(x)\mathfrak{n}(x)dt+\eta\mathfrak{n}(x)dB_t(x))-\frac{\phi(x)}{n}dn_t$$
-
-$$+\frac{1}{2}\left(2\frac{\phi(x)}{n^2}dn_t^2-2\frac{1}{n^2}(m(x)\mathfrak{n}(x)dt+\eta\mathfrak{n}(x)dB_t(x))\right)dn_t$$
-
-$$=(m(x)-\bar m)\phi(x)dt+\phi(x)\eta\left(dB_t(x)-\overline{dB}_t\right)+\frac{\phi(x)}{n^2}(\eta n^2dt)-\frac{1}{n^2}(\eta\mathfrak{n}(x)ndt)$$
-
-$$=(m(x)-\bar m)\phi(x)dt+\phi(x)\eta\left(dB_t(x)-\overline{dB}_t\right)$$
-
-I now wish to show that the process
-
-$$\mathfrak{n}_t=\mathfrak{n}_0+\int_0^tm\mathfrak{n}_t$$
-
-is a well defined process in terms of the conditions needed to apply Theorem 4.32 (It&ocirc;'s formula) in order to calculate $dn_t$ where $n_t\equiv F(\mathfrak{n}_t)=\int_\R\mathfrak{n}_t(z)dz$.
-
-
-
-- __Claim__ $\mathfrak{n}_t(0)$ is a $\mathscr{F}_0$-measurable $H$-valued random variable
-
-Note that 
-
-$$\mathfrak{n}_0(z)\in L^1(\R)\cap L^\infty(\R)$$
-
-since we require 
-
-$$\|\mathfrak{n}_0\|_1\equiv\int|\mathfrak{n}_0(z)|dz=n_0<\infty$$
-
-and 
-
-$$\|\mathfrak{n}_0\|_\infty\equiv\sup_{z\in\R}|\mathfrak{n}_0(z)|<\infty.$$
-
-Hence, H&ouml;lder's inequality implies
-
-$$\|\mathfrak{n}_0^2\|_1\leq\|\mathfrak{n}_0\|_1\|\mathfrak{n}_0\|_\infty<\infty.$$
-
-In particular, $\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}<\infty$ so that $\mathfrak{n}_0\in L^2(\R)$, ie, $\mathfrak{n}_0$ is an $H$-valued random variable with $H=L^2(\R)$.
-
-We still need to show that $\mathfrak{n}_t W_t$ is a Hilbert space valued Wiener process, $\Phi$, given by $\Phi(t) x = \eta x$ for each $t\geq0$, is an $L_2^0$-valued process stochastically integrable on $[0,T]$ and that $m\mathfrak{n}_t$ is an $H$-valued predictable process Bochner integrable on $[0,T] \ \ \mathbb{P}$-a.s.
-
-
-
-Let $U=L^2(\R)$ and note that $U$ is a separable Hilbert space (since $\R$ is second-countable). Because $W$ is a standard $U$-valued Wiener process, the associated covariance operator $Q$, given by $\Cov(W(t))=tQ$, is the identity operator. Hence $U_0=Q^{1/2}(L^2(\R))=L^2(\R)=U$. Write $L_2^0=L_2(U_0,U)=L_2(U)$ for the space of all Hilbert-Schmidt operators on $U$. The operator $\Phi(t):U\rightarrow U$, defined by $[\Phi(t)]W_t(z)=\left<\eta\mathfrak{n}_t, W_t(z)\right>=\eta\int_\R\mathfrak{n}_t(z)W_t(z)dz$ for each $W_t(z)\in L^2(\R), \ 0\leq t<\infty$
-
-... hold up.
-
-, is clearly a member of $L_2^0$ and
-
-$$\|\Phi(t)\|_{L_2^0}^2=\mathrm{Tr}[(\Phi(t) Q^{1/2})(\Phi(t) Q^{1/2})^*]$$
-
-$$=\mathrm{Tr}[(\Phi(t))(\Phi(t))^*]\overset{?}{=}\eta^2<\infty.$$
-
-Hence 
-
-$$\int_0^T\|\Phi(s)\|_{L_2^0}^2ds$$
-
-is a univariate normally distributed random variable with mean zero and variance $\eta^2T$. Thus, $\Phi$ is an $L_2^0$-valued process stochastically integrable on $[0,T]$ for any $T<\infty$.
-
-Finally, to show that $\phi(t)=m\mathfrak{n}(t)$
 
 $$PART \ II: \ SOLUTIONS \ OF \ SPDE$$
 
