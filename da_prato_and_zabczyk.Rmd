@@ -87,7 +87,7 @@ $$\|\mathfrak{n}_0^2\|_1\leq\|\mathfrak{n}_0\|_1\|\mathfrak{n}_0\|_\infty<\infty
 
 In particular, $\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}=\|\mathfrak{n}_0\|_2<\infty$ so that $\mathfrak{n}_0\in L^2(\R)$. Because of this we can view $n_t$ as a linear functional on $L^2(\R)$. Therefore, to calculate $dn_t$ from $\mathfrak{n}_t$ we will need an infinite dimensional extension of It&ocirc;'s formula. Developing the theory for this extension will also allow us to work with actual SPDE where, for example, the set of SDE $\{\mathfrak{n}_t(z)\}$ no longer evolve independently. In particular, we'll be able to develop models accounting for imperfect heritability, sexual preference, frequency and density dependent selection, migration and so forth.
 
-# Notation:
+# Notation
 
   - $\L(X)$... the law of the random variable $X$.
   - $E,F,G$... Banach spaces
@@ -278,7 +278,7 @@ This forms a generalized Wiener process with covariance $\Q$.
 
 - __Intuitive result__ An arbitrary generalized Wiener process over $\U$ is a classical Wiener process taking values in some larger Hilbert space $\U'$. 
 
-For example if $\U=L^2(\R)$ we could take $\U'=L^2_\rho(\R)$ which is the set of all real valued functions $u$ over $\R$ s.t. $\int_\R|u(x)|^2\rho(x)dx<\infty$ for some positive fixed $\rho\in L^2(\R)$. Clearly $L^2_\rho=L^2(\R,\mathscr{B}(\R),\nu)$ where the measure $\nu$ is given by $\nu(A)=\int_A\rho(x)dx$. It is also clear that $L^2(\R)\subset L^2_\rho(\R)$ since for $v\in L^2(\R)$, we have $w=|v|^2\in L^2$ and hence the Schwartz inequality implies $\int_\R|v(x)|^2\rho(x)dx\leq\|w\|_2\|\rho\|_2<\infty$. 
+For example if $\U=L^2(\R)$ we could take $\U'=L^2_\rho(\R)$ which is the set of all real valued functions $u$ over $\R$ s.t. $\int_\R|u(x)|^2\rho(x)dx<\infty$ for some nonnegative fixed $\rho\in L^2(\R)$. Clearly $L^2_\rho=L^2(\R,\mathscr{B}(\R),\nu)$ where the measure $\nu$ is given by $\nu(A)=\int_A\rho(x)dx$. It is also clear that $L^2(\R)\subset L^2_\rho(\R)$ since for $v\in L^2(\R)$, we have $w=|v|^2\in L^2$ and hence the Schwartz inequality implies $\int_\R|v(x)|^2\rho(x)dx\leq\|w\|_2\|\rho\|_2<\infty$. 
 
 If we set $\rho$ s.t. $\int\rho^2=1$ then we can think of a cylindrical Wiener process $\W$ over $L^2(\R)$ (so that $\W$ takes values in $L^2_\rho(\R)$) as a function of time which, for each $t$, returns an infinite set of mean zero normal random variables with variance $t$ that we can "sample" using $\rho$. That is,
 
@@ -304,9 +304,13 @@ With $\rho$ defined in this manner we have
 
 $$\V(X(t))=\V\left(\sum_i\int_{I_i}\W(t,x)\rho(x)dx\right)$$
 
-$$=\sum_i\rho_i^2\V(\int_{a_i}^{b_i}\W(t,x)dx)=\sum_i\rho_i^2(b_i-a_i)t=t$$
+$$=\sum_i\rho_i^2\V\left(\int_{a_i}^{b_i}\W(t,x)dx\right)=\sum_i\rho_i^2(b_i-a_i)t=t$$
 
 For the final step we simply note that any nonnegative measurable function can be approximated arbitrarily closely by a simple function. Using Lebesgue's dominated convergence theorem, we achieve our result.
+
+Of course, this can be applied to nonnegative $\rho\in L^2(\R)$ where $\int\rho^2\neq1$. In this case, we simply get
+
+$$\Var(X(t))=\|\rho\|_2t.s$$
 
 ## 4.1.3 Wiener processes over $\U=L^2(\mathscr{O})$
 
