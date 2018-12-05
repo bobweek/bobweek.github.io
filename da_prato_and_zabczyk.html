@@ -9,10 +9,9 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Da Prato &amp; Zabczyk" />
 
 
-<title>Stochastic equations in infinite dimensions</title>
+<title>Stochastic partial differential equations</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -307,8 +306,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Stochastic equations in infinite dimensions</h1>
-<h4 class="author"><em>Da Prato &amp; Zabczyk</em></h4>
+<h1 class="title toc-ignore">Stochastic partial differential equations</h1>
 
 </div>
 
@@ -465,8 +463,8 @@ div.tocify {
 <p><span class="math display">\[\beta_j=\frac{1}{\sqrt{\lambda_j}}\int_a^bX(t)e_j(t)dt, \ j\in\mathbb{N}\]</span></p>
 <p>are uncorrelated zero-mean random variables with unit variance. The convergence of the KL expansion is in <span class="math inline">\(L^2(\Omega)\)</span>, uniform in <span class="math inline">\(t\)</span>. Notice that in Proposition 4.3, <span class="math inline">\(e_j\in U\)</span> are not functions of time, but the <span class="math inline">\(\beta_j\)</span> are. However, for the KL expansion the <span class="math inline">\(\beta_j\)</span> are not functions of time but the <span class="math inline">\(e_j\)</span> are.</p>
 </div>
-<div id="generalized-wiener-processes-on-a-hilbert-space" class="section level2">
-<h2>4.1.2 Generalized Wiener processes on a Hilbert space</h2>
+<div id="generalized-wiener-processes-over-a-hilbert-space" class="section level2">
+<h2>4.1.2 Generalized Wiener processes over a Hilbert space</h2>
 <p>The primary reason for my study of SPDE is to formally treat PDE subjected to a specific kind of noise. In particular, the noise I wish to account for, denoted by <span class="math inline">\({\mathscr{W}}\)</span> where <span class="math inline">\({\mathscr{W}}(x,t)\in{\mathbb{R}}\)</span> for each <span class="math inline">\(x\in U\)</span> (<span class="math inline">\(U\)</span> is usually some subset of <span class="math inline">\({\mathbb{R}}^n\)</span>) and <span class="math inline">\(t\in[0,\infty)\)</span>, should satisfy the following properties:</p>
 <ol style="list-style-type: decimal">
 <li>For every <span class="math inline">\(x\in U,0\leq s\leq t\in[0,\infty)\)</span></li>
@@ -476,45 +474,73 @@ div.tocify {
 <li>For any <span class="math inline">\(x,y\in U\)</span> and <span class="math inline">\(t,s\in[0,\infty)\)</span></li>
 </ol>
 <p><span class="math display">\[{\mathbb{E}}({\mathscr{W}}(x,t){\mathscr{W}}(y,s))=\left\{\begin{matrix} t\wedge s, &amp; \|x-y\|_U=0 \\ 0, &amp; \|x-y\|_U&gt;0. \end{matrix}\right.\]</span></p>
-<p>That is, <span class="math inline">\({\mathscr{W}}(x,t)\)</span> is a set of independent real valued Brownian motions indexed by <span class="math inline">\(x\in U\)</span>. Previous definitions of the Wiener process are insufficient to capture this since <span class="math inline">\({\mathscr{W}}(t)=\{{\mathscr{W}}(x,t):x\in U\}\)</span> is not a Hilbert space valued process. Indeed <span class="math inline">\({\mathscr{W}}(t)\)</span> is not even Bochner integrable over <span class="math inline">\(U\)</span>. To circumvent this, Da Prato &amp; Zabczyk give the following definition</p>
+<p>That is, <span class="math inline">\({\mathscr{W}}(x,t)\)</span> is a set of independent real valued Brownian motions indexed by <span class="math inline">\(x\in U\)</span>. Previous definitions of the Wiener process are insufficient to capture this since <span class="math inline">\({\mathscr{W}}(t)=\{{\mathscr{W}}(x,t):x\in U\}\)</span> is not valued in a convenient Hilbert space. In particular, my prefered Hilbert space is <span class="math inline">\(L^2({\mathbb{R}}^n)\)</span>, but, even for <span class="math inline">\(n=1\)</span>, <span class="math inline">\(\int_{\mathbb{R}}{\mathscr{W}}(t,x)dx\)</span> is not finite wp1! To circumvent this, Da Prato &amp; Zabczyk give the following definition</p>
 <ul>
-<li><strong>Def</strong> Any transformation that maps <span class="math inline">\(a\in U_1\)</span> to <span class="math inline">\(W_a\)</span>, a real valued Wiener processes on <span class="math inline">\([0,\infty)\)</span>, that is continuous in the sense</li>
+<li><strong>Def</strong> Any transformation that maps <span class="math inline">\(a\in{\mathscr{U}}\)</span> to <span class="math inline">\(W_a\)</span>, a real valued Wiener processes on <span class="math inline">\([0,\infty)\)</span>, that is continuous in the sense</li>
 </ul>
 <p><span class="math display">\[t\geq0, \{a_n\}\subset U_1, \lim_{n\rightarrow\infty}\|a_n-a\|_{U_1}=0\implies\lim_{n\rightarrow\infty}{\mathbb{E}}\left|W_a(t)-W_{a_n}(t)\right|^2=0.\]</span></p>
-<p>is a <strong>generalized Wiener process</strong>. Note that the integral transformation given by <span class="math inline">\(W_a(t)=\int_U a(x){\mathscr{W}}(x,t)dx\)</span> may qualify as such a mapping (for concreteness, I think of <span class="math inline">\(U={\mathbb{R}}^n\)</span> and <span class="math inline">\(U_1=L^2({\mathbb{R}}^n)\)</span>). With this in mind, I use the symbol <span class="math inline">\({\mathscr{W}}\)</span> to also denote the mapping satisfying the above definition so I may refer to <span class="math inline">\({\mathscr{W}}\)</span> as a generalized Wiener process.</p>
-<p>This definition implies the existence of a bilinear form <span class="math inline">\(K(a,b), \ a,b\in U_1\)</span> s.t.</p>
-<p><span class="math display">\[{\mathbb{E}}[W_a(t)W_b(s)]=(t\wedge s) \ K(a,b), \ \ t,s\geq0, \ a,b\in U_1.\]</span></p>
-<p>The continuity condition gurantees that <span class="math inline">\(K\)</span> is continuous in <span class="math inline">\(U_1\)</span> and hence there exists <span class="math inline">\({\mathscr{Q}}\in L(U_1)\)</span> s.t.</p>
-<p><span class="math display">\[{\mathbb{E}}[W_a(t)W_b(s)]=(t\wedge s)\left&lt;{\mathscr{Q}}a,b\right&gt;, \ \ t,s\geq0, \ a,b\in U_1.\]</span></p>
+<p>is a <strong>generalized Wiener process</strong>. Note that the integral transformation given by <span class="math inline">\(W_a(t)=\int_U a(x){\mathscr{W}}(x,t)dx\)</span> may qualify as such a mapping (for concreteness, I think of <span class="math inline">\(U={\mathbb{R}}^n\)</span> and <span class="math inline">\({\mathscr{U}}=L^2({\mathbb{R}}^n)\)</span>). With this in mind, I use the symbol <span class="math inline">\({\mathscr{W}}\)</span> to also denote the mapping satisfying the above definition so I may refer to <span class="math inline">\({\mathscr{W}}\)</span> as a generalized Wiener process.</p>
+<p>This definition implies the existence of a bilinear form <span class="math inline">\(K(a,b), \ a,b\in {\mathscr{U}}\)</span> s.t.</p>
+<p><span class="math display">\[{\mathbb{E}}[W_a(t)W_b(s)]=(t\wedge s) \ K(a,b), \ \ t,s\geq0, \ a,b\in{\mathscr{U}}.\]</span></p>
+<p>The continuity condition gurantees that <span class="math inline">\(K\)</span> is continuous in <span class="math inline">\({\mathscr{U}}\)</span> and hence there exists <span class="math inline">\({\mathscr{Q}}\in L({\mathscr{U}})\)</span> s.t.</p>
+<p><span class="math display">\[{\mathbb{E}}[W_a(t)W_b(s)]=(t\wedge s)\left&lt;{\mathscr{Q}}a,b\right&gt;, \ \ t,s\geq0, \ a,b\in{\mathscr{U}}.\]</span></p>
 <p>This operator is self-adjoint and positive definite and is the <strong>covariance</strong> of the generalized Wiener process <span class="math inline">\({\mathscr{W}}\)</span>.</p>
 <p>If <span class="math inline">\({\mathscr{Q}}\)</span> is the identity operator,</p>
-<p><span class="math display">\[{\mathscr{Q}}a=a, \ \ a\in U_1\]</span></p>
-<p>then <span class="math inline">\({\mathscr{W}}\)</span> is called a <strong>cylindrical Wiener process</strong> in <span class="math inline">\(U_1\)</span>. This is the case that I will pay special attention to.</p>
-<p>If <span class="math inline">\({\mathscr{U}}_0={\mathscr{Q}}^{1/2}(U_1)\)</span> we call <span class="math inline">\({\mathscr{U}}_0\)</span> the <strong>reproducing kernel</strong> of the generalized Wiener process.</p>
+<p><span class="math display">\[{\mathscr{Q}}a=a, \ \ a\in {\mathscr{U}}\]</span></p>
+<p>then <span class="math inline">\({\mathscr{W}}\)</span> is called a <strong>cylindrical Wiener process</strong> in <span class="math inline">\({\mathscr{U}}\)</span>. As mentioned in the primer on SPDE by Martin Hairer, it is unfortunate that <span class="math inline">\({\mathscr{W}}\)</span> is referred to as a process in <span class="math inline">\({\mathscr{U}}\)</span> since it is <strong>not</strong> <span class="math inline">\({\mathscr{U}}\)</span>-valued. Hairer suggests that <span class="math inline">\({\mathscr{W}}\)</span> should be called a cylindrical Wiener process over <span class="math inline">\({\mathscr{U}}\)</span>.</p>
+<ul>
+<li><strong>Example</strong> Let <span class="math inline">\({\mathscr{W}}\)</span> be a cylindrical Wiener process over <span class="math inline">\({\mathscr{U}}=L^2({\mathbb{R}})\)</span>. Then for any <span class="math inline">\(u,v\in L^2({\mathbb{R}})\)</span></li>
+</ul>
+<p><span class="math display">\[{\mathbb{E}}[W_u(t)W_v(s)]=(t\wedge s)\int_{\mathbb{R}}u(x)v(x)dx.\]</span></p>
+<p>This is the case that I will pay special attention to.</p>
+<p>If <span class="math inline">\({\mathscr{U}}_0={\mathscr{Q}}^{1/2}({\mathscr{U}})\)</span> we call <span class="math inline">\({\mathscr{U}}_0\)</span> the <strong>reproducing kernel</strong> of the generalized Wiener process.</p>
 <ul>
 <li>Constructing a generalized Wiener process from an arbitrary self-adjoint and positive definite operator <span class="math inline">\({\mathscr{Q}}\)</span>:</li>
 </ul>
 <p>Let <span class="math inline">\(\{e_j\}\)</span> be a complete orthonormal basis in <span class="math inline">\(U_1\)</span> and <span class="math inline">\(\{\beta_j\}\)</span> a sequence of independent real valued standard Wiener processes. Define</p>
-<p><span class="math display">\[W_a(t)\equiv\sum_j\left&lt;{\mathscr{Q}}^{1/2}e_j,a\right&gt;\beta_j(t), \ \ t\geq0, \ a\in U_1.\]</span></p>
+<p><span class="math display">\[W_a(t)\equiv\sum_j\left&lt;{\mathscr{Q}}^{1/2}e_j,a\right&gt;\beta_j(t), \ \ t\geq0, \ a\in{\mathscr{U}}.\]</span></p>
 <ul>
-<li><p>Intuitive result: An arbitrary generalized Wiener process on <span class="math inline">\(U_1\)</span> is a classical Wiener process in some larger Hilbert space <span class="math inline">\(U_2\)</span>.</p></li>
-<li><p><strong>Proposition 4.8</strong> For every <span class="math inline">\(a\in U_1\)</span> we have</p></li>
+<li><strong>Proposition 4.8</strong> For every <span class="math inline">\(a\in{\mathscr{U}}\)</span> we have</li>
 </ul>
 <p><span class="math display">\[W_a(t)=\sum_j\left&lt;{\mathscr{Q}}^{1/2}e_j,a\right&gt;W_{{\mathscr{Q}}^{1/2}e_j}(t).\]</span></p>
 <p>This forms a generalized Wiener process with covariance <span class="math inline">\({\mathscr{Q}}\)</span>.</p>
+<ul>
+<li><strong>Intuitive result</strong> An arbitrary generalized Wiener process over <span class="math inline">\({\mathscr{U}}\)</span> is a classical Wiener process taking values in some larger Hilbert space <span class="math inline">\({\mathscr{U}}&#39;\)</span>.</li>
+</ul>
+<p>For example if <span class="math inline">\({\mathscr{U}}=L^2({\mathbb{R}})\)</span> we could take <span class="math inline">\({\mathscr{U}}&#39;=L^2_\rho({\mathbb{R}})\)</span> which is the set of all real valued functions <span class="math inline">\(u\)</span> over <span class="math inline">\({\mathbb{R}}\)</span> s.t. <span class="math inline">\(\int_{\mathbb{R}}|u(x)|^2\rho(x)dx&lt;\infty\)</span> for some positive fixed <span class="math inline">\(\rho\in L^2({\mathbb{R}})\)</span>. Clearly <span class="math inline">\(L^2_\rho=L^2({\mathbb{R}},\mathscr{B}({\mathbb{R}}),\nu)\)</span> where the measure <span class="math inline">\(\nu\)</span> is given by <span class="math inline">\(\nu(A)=\int_A\rho(x)dx\)</span>. It is also clear that <span class="math inline">\(L^2({\mathbb{R}})\subset L^2_\rho({\mathbb{R}})\)</span> since for <span class="math inline">\(v\in L^2({\mathbb{R}})\)</span>, we have <span class="math inline">\(w=|v|^2\in L^2\)</span> and hence the Schwartz inequality implies <span class="math inline">\(\int_{\mathbb{R}}|v(x)|^2\rho(x)dx\leq\|w\|_2\|\rho\|_2&lt;\infty\)</span>.</p>
+<p>If we set <span class="math inline">\(\rho\)</span> s.t. <span class="math inline">\(\int\rho^2=1\)</span> then we can think of a cylindrical Wiener process <span class="math inline">\({\mathscr{W}}\)</span> over <span class="math inline">\(L^2({\mathbb{R}})\)</span> (so that <span class="math inline">\({\mathscr{W}}\)</span> takes values in <span class="math inline">\(L^2_\rho({\mathbb{R}})\)</span>) as a function of time which, for each <span class="math inline">\(t\)</span>, returns an infinite set of mean zero normal random variables with variance <span class="math inline">\(t\)</span> that we can “sample” using <span class="math inline">\(\rho\)</span>. That is,</p>
+<p><span class="math display">\[\int_{\mathbb{R}}{\mathscr{W}}(t,x)\rho(x)dx=X(t)\]</span></p>
+<p>is a well defined random variable for each <span class="math inline">\(t\)</span>. It seems obvious that if <span class="math inline">\(\rho^2\)</span> is a probability density function, then <span class="math inline">\(X(t)\)</span> is a normally distributed random variable with mean zero and variance <span class="math inline">\(t\)</span>. In fact, since <span class="math inline">\({\mathbb{E}}|W(x,t)|\)</span> is finite for each <span class="math inline">\(x\in{\mathbb{R}}\)</span> and <span class="math inline">\(t\geq0\)</span>, we have</p>
+<p><span class="math display">\[{\mathbb{E}}\int_{\mathbb{R}}|{\mathscr{W}}(t,x)||\rho(x)|dx\leq\int_{\mathbb{R}}\rho(x){\mathbb{E}}|{\mathscr{W}}(x,t)|dx&lt;\infty\]</span></p>
+<p>and therefore we may swap the order of Lebesgue integration to show</p>
+<p><span class="math display">\[{\mathbb{E}}X(t)=0.\]</span></p>
+<p>Note also that, for a fixed <span class="math inline">\(t\)</span>, <span class="math inline">\({\mathscr{W}}(t,x)\)</span> is white-noise wrt <span class="math inline">\(x\)</span>. That is, <span class="math inline">\({\mathscr{W}}(t,x)\)</span> is, in some sense, the derivative of a Brownian motion over <span class="math inline">\(x\in{\mathbb{R}}\)</span>. Restricting our attention to the closed subset <span class="math inline">\([a,b]\subset{\mathbb{R}}\)</span> we then have</p>
+<p><span class="math display">\[\int_a^b{\mathscr{W}}(t,x)dx\]</span></p>
+<p>is a mean zero normally distributed random variable with variance <span class="math inline">\((b-a)t\)</span>. Hence, by partitioning <span class="math inline">\({\mathbb{R}}\)</span> into a finite set of intervals <span class="math inline">\(\{[a_i,b_i]\}\)</span> we can define <span class="math inline">\(\rho\)</span> as a simple function so that it is constant on each interval and</p>
+<p><span class="math display">\[\int_{\mathbb{R}}\rho^2=\sum_i\rho_i^2(b_i-a_i)=1.\]</span></p>
+<p>With <span class="math inline">\(\rho\)</span> defined in this manner we have</p>
+<p><span class="math display">\[{\mathrm{Var}}(X(t))={\mathrm{Var}}\left(\sum_i\int_{I_i}{\mathscr{W}}(t,x)\rho(x)dx\right)\]</span></p>
+<p><span class="math display">\[=\sum_i\rho_i^2{\mathrm{Var}}(\int_{a_i}^{b_i}{\mathscr{W}}(t,x)dx)=\sum_i\rho_i^2(b_i-a_i)t=t\]</span></p>
+<p>For the final step we simply note that any nonnegative measurable function can be approximated arbitrarily closely by a simple function. Using Lebesgue’s dominated convergence theorem, we achieve our result.</p>
 </div>
-<div id="wiener-processes-in-u_1l2mathscro" class="section level2">
-<h2>4.1.3 Wiener processes in <span class="math inline">\(U_1=L^2(\mathscr{O})\)</span></h2>
+<div id="wiener-processes-over-mathscrul2mathscro" class="section level2">
+<h2>4.1.3 Wiener processes over <span class="math inline">\({\mathscr{U}}=L^2(\mathscr{O})\)</span></h2>
 <ul>
 <li>The point of including this section is that it explicitly treats Brownian sheets.</li>
 </ul>
-<p>Let <span class="math inline">\(U_1=L^2(\mathscr{O})\)</span> and <span class="math inline">\(W\)</span> a <span class="math inline">\(U_1\)</span>-valued <span class="math inline">\(Q\)</span>-Wiener process. Then <span class="math inline">\(Q^{1/2}\)</span> is Hilbert-Schmidt on <span class="math inline">\(U_1\)</span> which implies it is the integral operator</p>
-<p><span class="math display">\[Q^{1/2}\phi(x)=\int_\mathscr{O}r(x,y)\phi(y)dy, \ \ x\in\mathscr{O}, \ \phi\in L^2(\mathscr{O})\]</span></p>
+<p>Let <span class="math inline">\({\mathscr{U}}=L^2(\mathscr{O})\)</span> and <span class="math inline">\(W\)</span> a <span class="math inline">\({\mathscr{U}}\)</span>-valued <span class="math inline">\(Q\)</span>-Wiener process. Then <span class="math inline">\(Q^{1/2}\)</span> is Hilbert-Schmidt on <span class="math inline">\({\mathscr{U}}\)</span> which implies it is the integral operator</p>
+<p><span class="math display">\[Q^{1/2}\phi(x)=\int_{\mathscr{O}}r(x,y)\phi(y)dy, \ \ x\in{\mathscr{O}}, \ \phi\in L^2({\mathscr{O}})\]</span></p>
 <p>where the kernel <span class="math inline">\(r\)</span> is square-integrable on <span class="math inline">\(\mathscr{O}^2\)</span> and hence so is <span class="math inline">\(Q\)</span></p>
-<p><span class="math display">\[Q\phi(x)=\int_{\mathscr{O}^2}r(x,z)r(z,y)\phi(y)dz dy, \ \ x\in\mathscr{O}, \ \phi\in L^2(\mathscr{O}).\]</span></p>
-<p>The kernel of <span class="math inline">\(Q\)</span>, <span class="math inline">\(g(x,y)=\int_\mathscr{O}r(x,z)r(z,y)dz\)</span>, can be interpreted as the “spatial” correlation of <span class="math inline">\(W\)</span> in <span class="math inline">\(L^2(\mathscr{O})\)</span>. For all <span class="math inline">\(t&gt;0\)</span>, <span class="math inline">\(W(t,\cdot)\)</span> is an <span class="math inline">\(L^2(\mathscr{O})\)</span>-valued random variable and <span class="math inline">\(W(\cdot,x)\)</span> is a real valued random variable for a.a. <span class="math inline">\(x\in\mathscr{O}\)</span>.</p>
-<p>WLOG assume the random field <span class="math inline">\(W(t,x), \ t\geq0, \ x\in\mathscr{O}\)</span> is measurable. For <span class="math inline">\(\phi,\psi\in L^2(\mathscr{O})\)</span></p>
-<p><span class="math display">\[{\mathbb{E}}[\left&lt;W(t,\phi)\right&gt;\left&lt;W(t,\psi)\right&gt;]={\mathbb{E}}\left[\int_\mathscr{O} W(t,x)\phi(x)dx\int_\mathscr{O} W(t,y)\psi(y)dy\right]\]</span></p>
+<p><span class="math display">\[Q\phi(x)=\int_{\mathscr{O}}\int_{\mathscr{O}}r(x,z)r(z,y)\phi(y)dz dy, \ \ x\in\mathscr{O}, \ \phi\in L^2({\mathscr{O}}).\]</span></p>
+<p>The kernel of <span class="math inline">\(Q\)</span>, <span class="math inline">\(g(x,y)=\int_{\mathscr{O}}r(x,z)r(z,y)dz\)</span>, can be interpreted as the “spatial” correlation of <span class="math inline">\(W\)</span> in <span class="math inline">\(L^2({\mathscr{O}})\)</span>. For all <span class="math inline">\(t&gt;0\)</span>, <span class="math inline">\(W(t,\cdot)\)</span> is an <span class="math inline">\(L^2({\mathscr{O}})\)</span>-valued random variable and <span class="math inline">\(W(\cdot,x)\)</span> is a real valued random variable for a.a. <span class="math inline">\(x\in{\mathscr{O}}\)</span>.</p>
+<p>Assume the random field <span class="math inline">\(W(t,x), \ t\geq0, \ x\in{\mathscr{O}}\)</span> is measurable. For <span class="math inline">\(\phi,\psi\in L^2({\mathscr{O}})\)</span></p>
+<p><span class="math display">\[{\mathbb{E}}[\left&lt;W(t),\phi\right&gt;\left&lt;W(t),\psi\right&gt;]={\mathbb{E}}\left[\int_{\mathscr{O}}W(t,x)\phi(x)dx\int_{\mathscr{O}}W(t,y)\psi(y)dy\right]=\star.\]</span></p>
+<p>Taking absolute values within the expectation, one can use the Schwartz inequality to justify changing the order of Lebesgue integration to get</p>
+<p><span class="math display">\[\star=\int_{\mathscr{O}}\int_{\mathscr{O}}\phi(x)\psi(y){\mathbb{E}}[W(t,x)W(t,y)]dxdy.\]</span></p>
+<p>Since <span class="math inline">\(W\)</span> is a <span class="math inline">\({\mathscr{U}}\)</span>-valued Wiener process we have</p>
+<p><span class="math display">\[{\mathbb{E}}[\left&lt;W(t),\psi\right&gt;\left&lt;W(t),\phi\right&gt;]=t\left&lt;Q\phi,\psi\right&gt;.\]</span></p>
+<p>But from the beginning of this section we also have <span class="math inline">\(Q\phi(x)=\int_{\mathscr{O}}g(x,y)\phi(y)dy\)</span>. Hence,</p>
+<p><span class="math inline">\($\)</span>$</p>
 <p>This can be used to show <span class="math inline">\(g(x,y)=\frac{1}{t}{\mathbb{E}}[W(t,x)W(t,y)]\)</span> which is interpreted as the “spatial” correlation of the <span class="math inline">\(Q\)</span>-Wiener processes <span class="math inline">\(W\)</span> in <span class="math inline">\(L^2(\mathscr{O})\)</span>. If <span class="math inline">\(\mathscr{O}\)</span> is an open (closed) bounded subset of <span class="math inline">\({\mathbb{R}}^n\)</span> and <span class="math inline">\(g\)</span> is bounded and continuous on <span class="math inline">\(\mathscr{O}\)</span>, then <span class="math inline">\(Q\)</span> is a covariance operator on <span class="math inline">\(U_1\)</span> of trace class.</p>
 <ul>
 <li><strong>Example 4.9: Brownian sheets</strong> Let <span class="math inline">\(\mathscr{O}=[0,\pi]\)</span> and <span class="math inline">\(g(x,y)=x\wedge y, \ x,y\in[0,\pi]\)</span>. Note that <span class="math inline">\(g\)</span> is continuous and, since for a one dimensional Wiener process <span class="math inline">\(\beta\)</span></li>
@@ -619,7 +645,8 @@ div.tocify {
 <p><span class="math display">\[(t\wedge s)\prod_j(x_j\wedge y_j), \ \ t,s,x_j,y_j\geq0.\]</span></p>
 <p>Now let <span class="math inline">\(B_l\)</span> be a family of independent Brownian sheets on <span class="math inline">\([0,\infty)\times[0,\infty)^n\)</span> indexed by the family of all sequences <span class="math inline">\(l=\{l_i\}\)</span> where each <span class="math inline">\(l_i\in\{0,1\}\)</span>. Then, for any <span class="math inline">\(t\geq0\)</span> and <span class="math inline">\(x=(x_1,\dots,x_n)\in{\mathbb{R}}^n\)</span>, we define</p>
 <p><span class="math display">\[B(t,x)\equiv B_l(t,(-1)^{l_1}x_1,\dots,(-1)^{l_n}x_n)\]</span></p>
-<p>when each <span class="math inline">\((-1)^{l_i}x_i\geq0\)</span>. The resulting object <span class="math inline">\(B\)</span> is called the <strong>Brownian sheet</strong> on <span class="math inline">\([0,\infty)\times{\mathbb{R}}^n\)</span>. The Kolmogorov continuity test allows us to assume each realization of <span class="math inline">\(B\)</span> is continuous.</p>
+<p>when each <span class="math inline">\((-1)^{l_i}x_i\geq0\)</span>. The resulting object <span class="math inline">\(B\)</span> is called the <strong>Brownian sheet</strong> on <span class="math inline">\([0,\infty)\times{\mathbb{R}}^n\)</span>. The Kolmogorov continuity test allows us to assume each realization of <span class="math inline">\(B\)</span> is continuous. Furthermore, <span class="math inline">\(B\)</span> can be thought of as an <span class="math inline">\(L^2_\rho({\mathbb{R}})\)</span>-valued Wiener process with weight <span class="math inline">\(\rho\)</span> s.t.</p>
+<p><span class="math display">\[\int_{{\mathbb{R}}^n}|x_1|\cdots|x_n|\rho(x_1,\dots,x_n)dx_1\cdots dx_n&lt;\infty.\]</span></p>
 <ul>
 <li><strong>Proposition 4.19</strong> If <span class="math inline">\(B\)</span> is a Brownian sheet on <span class="math inline">\([0,\infty)\times{\mathbb{R}}^n\)</span> then, for any <span class="math inline">\(\phi,\psi\in\mathscr{S}({\mathbb{R}}^n)\)</span>,</li>
 </ul>
@@ -709,19 +736,18 @@ div.tocify {
 <p><span class="math display">\[+\int_0^t\Big{\{}F_t(s,X(s))+\left&lt;F_x(s,X(s)),\phi(s)\right&gt;\]</span></p>
 <p><span class="math display">\[\left.+\frac{1}{2}\mathrm{Tr}[F_{xx}(s,X(s))(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]\right\}\]</span></p>
 <ul>
-<li><strong>Example </strong> Let <span class="math inline">\({\mathscr{W}}\)</span> be a cylindrical Wiener process on <span class="math inline">\(L^2({\mathbb{R}})\)</span>. Then, obviously, <span class="math inline">\({\mathscr{W}}(t)=\int_0^td{\mathscr{W}}(s)\)</span>. Now define <span class="math inline">\(F:L^2({\mathbb{R}})\rightarrow {\mathbb{R}}\)</span> by <span class="math inline">\(F(u)=\int_{\mathbb{R}}\psi(x)u(x)dx, \ \psi,u\in L^2({\mathbb{R}})\)</span> and <span class="math inline">\(\psi\geq0, \ \int\psi=1\)</span>. We should get</li>
+<li><strong>Example </strong> Let <span class="math inline">\(B\)</span> be a Brownian sheet on <span class="math inline">\([0,\infty)\times{\mathbb{R}}\)</span>. Then, obviously, <span class="math inline">\(B(t)=\int_0^tdB(s)\)</span>. Given <span class="math inline">\(\psi\in L^2({\mathbb{R}})\)</span> s.t. <span class="math inline">\(\psi(x)\geq0\)</span> for each <span class="math inline">\(x\in{\mathbb{R}}\)</span> and <span class="math inline">\(\int\psi=1\)</span> define <span class="math inline">\(F:L_\rho^2({\mathbb{R}})\rightarrow {\mathbb{R}}\)</span> by <span class="math inline">\(F(u)=\int_{\mathbb{R}}\psi(x)u(x)dx\)</span>. We should get</li>
 </ul>
-<p><span class="math display">\[W(t)=F({\mathscr{W}}(t))=\int_{\mathbb{R}}\psi(x){\mathscr{W}}(t,x)dx\]</span></p>
-<p>is a standard one dimensional Brownian motion.</p>
-<p>For the sake of applying Itô’s formula, we note <span class="math inline">\(F_t=0\)</span> and <span class="math inline">\(F_u, F_{uu}\)</span> are linear functionals given by the functional derivatives</p>
+<p><span class="math display">\[W(t)=F(B(t))=\int_{\mathbb{R}}\psi(x)B(t,x)dx\]</span></p>
+<p>is a standard one dimensional Brownian motion. For the sake of applying Itô’s formula, we note <span class="math inline">\(F_t=0\)</span> and <span class="math inline">\(F_u, F_{uu}\)</span> are linear functionals given by the functional derivatives</p>
 <p><span class="math display">\[F_u v\equiv \lim_{\epsilon\rightarrow0}\frac{1}{\epsilon}(F(u+\epsilon v)-F(u))\]</span></p>
 <p><span class="math display">\[=\lim_{\epsilon\rightarrow0}\frac{1}{\epsilon}\int_{\mathbb{R}}\epsilon \psi(x)v(x)dx=\int_{\mathbb{R}}\psi(x)v(x)dx=F(v),\]</span></p>
 <p><span class="math display">\[F_{uu}(v)\equiv \lim_{\epsilon\rightarrow0}\frac{1}{\epsilon}(F_u(u+\epsilon v)-F_u(u))\]</span></p>
 <p><span class="math display">\[=\int_{\mathbb{R}}\psi(x)v(x)dx=F_u(v), \ v\in L^2({\mathbb{R}}).\]</span></p>
 <p>Therefore</p>
-<p><span class="math display">\[F({\mathscr{W}})=F({\mathscr{W}}(0))+\int_0^t\left&lt;F_u({\mathscr{W}}(s)),d{\mathscr{W}}(s)\right&gt;+\frac{1}{2}\mathrm{Tr}(F_{uu}({\mathscr{W}}(s))I)ds\]</span></p>
-<p><span class="math display">\[=\int_0^t\left(\left&lt;\int_{\mathbb{R}}\psi(x){\mathscr{W}}(s,x) dx,d{\mathscr{W}}(s)\right&gt;+\frac{1}{2}\int_{\mathbb{R}}\psi(x){\mathscr{W}}(s,x)dx\right)ds\]</span></p>
-<p><span class="math display">\[=+\int_0^t dW(s)\]</span></p>
+<p><span class="math display">\[F(B)=F(B(0))+\int_0^t\left&lt;F_u(B(s)),dB(s)\right&gt;+\frac{1}{2}\mathrm{Tr}(F_{uu}(B(s))I)ds\]</span></p>
+<p><span class="math display">\[=\int_0^t\left(\left&lt;\int_{\mathbb{R}}\psi(x)B(s,x) dx,dB(s)\right&gt;+\frac{1}{2}\int_{\mathbb{R}}\psi(x)B(s,x)dx\right)ds\]</span></p>
+<p><span class="math display">\[=\int_0^t\left&lt;W(s),dB(s)\right&gt;\]</span></p>
 <ul>
 <li><p>Collecting a few things I keep forgetting:</p></li>
 <li><p>Recall that, in general, a space is <strong>separable</strong> if it admits a countably dense subset.</p></li>

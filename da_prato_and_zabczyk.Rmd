@@ -1,6 +1,5 @@
 ---
-title: "Stochastic equations in infinite dimensions"
-author: "Da Prato & Zabczyk"
+title: "Stochastic partial differential equations"
 output: 
   html_document: 
     toc: true
@@ -23,6 +22,8 @@ output:
 \newcommand{\U}{\mathscr{U}}
 \newcommand{\L}{\mathscr{L}}
 \newcommand{\O}{\mathscr{O}}
+
+
 
 # Motivation
 
@@ -219,7 +220,7 @@ $$\beta_j=\frac{1}{\sqrt{\lambda_j}}\int_a^bX(t)e_j(t)dt, \ j\in\mathbb{N}$$
 
 are uncorrelated zero-mean random variables with unit variance. The convergence of the KL expansion is in $L^2(\Omega)$, uniform in $t$. Notice that in Proposition 4.3, $e_j\in U$ are not functions of time, but the $\beta_j$ are. However, for the KL expansion the $\beta_j$ are not functions of time but the $e_j$ are.
 
-## 4.1.2 Generalized Wiener processes on a Hilbert space
+## 4.1.2 Generalized Wiener processes over a Hilbert space
 
 The primary reason for my study of SPDE is to formally treat PDE subjected to a specific kind of noise. In particular, the noise I wish to account for, denoted by $\W$ where $\W(x,t)\in\R$ for each $x\in U$ ($U$ is usually some subset of $\R^n$) and $t\in[0,\infty)$, should satisfy the following properties:
 
@@ -231,63 +232,111 @@ $$\L(\W(x,t)-\W(x,s))=\L(\W(x,t-s))=\mathscr{N}(0,t-s).$$
   
 $$\E(\W(x,t)\W(y,s))=\left\{\begin{matrix} t\wedge s, & \|x-y\|_U=0 \\ 0, & \|x-y\|_U>0. \end{matrix}\right.$$
 
-That is, $\W(x,t)$ is a set of independent real valued Brownian motions indexed by $x\in U$. Previous definitions of the Wiener process are insufficient to capture this since $\W(t)=\{\W(x,t):x\in U\}$ is not a Hilbert space valued process. Indeed $\W(t)$ is not even Bochner integrable over $U$. To circumvent this, Da Prato & Zabczyk give the following definition 
+That is, $\W(x,t)$ is a set of independent real valued Brownian motions indexed by $x\in U$. Previous definitions of the Wiener process are insufficient to capture this since $\W(t)=\{\W(x,t):x\in U\}$ is not valued in a convenient Hilbert space. In particular, my prefered Hilbert space is $L^2(\R^n)$, but, even for $n=1$, $\int_\R\W(t,x)dx$ is not finite wp1! To circumvent this, Da Prato & Zabczyk give the following definition 
 
-- __Def__ Any transformation that maps $a\in U_1$ to $W_a$, a real valued Wiener processes on $[0,\infty)$, that is continuous in the sense 
+- __Def__ Any transformation that maps $a\in\U$ to $W_a$, a real valued Wiener processes on $[0,\infty)$, that is continuous in the sense 
 
 $$t\geq0, \{a_n\}\subset U_1, \lim_{n\rightarrow\infty}\|a_n-a\|_{U_1}=0\implies\lim_{n\rightarrow\infty}\E\left|W_a(t)-W_{a_n}(t)\right|^2=0.$$
 
-is a __generalized Wiener process__. Note that the integral transformation given by $W_a(t)=\int_U a(x)\W(x,t)dx$ may qualify as such a mapping (for concreteness, I think of $U=\R^n$ and $U_1=L^2(\R^n)$). With this in mind, I use the symbol $\W$ to also denote the mapping satisfying the above definition so I may refer to $\W$ as a generalized Wiener process.
+is a __generalized Wiener process__. Note that the integral transformation given by $W_a(t)=\int_U a(x)\W(x,t)dx$ may qualify as such a mapping (for concreteness, I think of $U=\R^n$ and $\U=L^2(\R^n)$). With this in mind, I use the symbol $\W$ to also denote the mapping satisfying the above definition so I may refer to $\W$ as a generalized Wiener process.
 
-This definition implies the existence of a bilinear form $K(a,b), \ a,b\in U_1$ s.t.
+This definition implies the existence of a bilinear form $K(a,b), \ a,b\in \U$ s.t.
 
-$$\E[W_a(t)W_b(s)]=(t\wedge s) \ K(a,b), \ \ t,s\geq0, \ a,b\in U_1.$$
+$$\E[W_a(t)W_b(s)]=(t\wedge s) \ K(a,b), \ \ t,s\geq0, \ a,b\in\U.$$
 
-The continuity condition gurantees that $K$ is continuous in $U_1$ and hence there exists $\Q\in L(U_1)$ s.t.
+The continuity condition gurantees that $K$ is continuous in $\U$ and hence there exists $\Q\in L(\U)$ s.t.
 
-$$\E[W_a(t)W_b(s)]=(t\wedge s)\left<\Q a,b\right>, \ \ t,s\geq0, \ a,b\in U_1.$$
+$$\E[W_a(t)W_b(s)]=(t\wedge s)\left<\Q a,b\right>, \ \ t,s\geq0, \ a,b\in\U.$$
 
 This operator is self-adjoint and positive definite and is the __covariance__ of the generalized Wiener process $\W$. 
 
 If $\Q$ is the identity operator,
 
-$$\Q a=a, \ \ a\in U_1$$
+$$\Q a=a, \ \ a\in \U$$
 
-then $\W$ is called a __cylindrical Wiener process__ in $U_1$. This is the case that I will pay special attention to.
+then $\W$ is called a __cylindrical Wiener process__ in $\U$. As mentioned in the primer on SPDE by Martin Hairer, it is unfortunate that $\W$ is referred to as a process in $\U$ since it is __not__ $\U$-valued. Hairer suggests that $\W$ should be called a cylindrical Wiener process over $\U$. 
 
-If $\U_0=\Q^{1/2}(U_1)$ we call $\U_0$ the __reproducing kernel__ of the generalized Wiener process.
+- __Example__ Let $\W$ be a cylindrical Wiener process over $\U=L^2(\R)$. Then for any $u,v\in L^2(\R)$
+
+$$\E[W_u(t)W_v(s)]=(t\wedge s)\int_\R u(x)v(x)dx.$$
+
+This is the case that I will pay special attention to.
+
+If $\U_0=\Q^{1/2}(\U)$ we call $\U_0$ the __reproducing kernel__ of the generalized Wiener process.
 
 - Constructing a generalized Wiener process from an arbitrary self-adjoint and positive definite operator $\Q$:
 
 Let $\{e_j\}$ be a complete orthonormal basis in $U_1$ and $\{\beta_j\}$ a sequence of independent real valued standard Wiener processes. Define
 
-$$W_a(t)\equiv\sum_j\left<\Q^{1/2}e_j,a\right>\beta_j(t), \ \ t\geq0, \ a\in U_1.$$
+$$W_a(t)\equiv\sum_j\left<\Q^{1/2}e_j,a\right>\beta_j(t), \ \ t\geq0, \ a\in\U.$$
 
-  - Intuitive result: An arbitrary generalized Wiener process on $U_1$ is a classical Wiener process in some larger Hilbert space $U_2$.
-
-- __Proposition 4.8__ For every $a\in U_1$ we have
+- __Proposition 4.8__ For every $a\in\U$ we have
 
 $$W_a(t)=\sum_j\left<\Q^{1/2}e_j,a\right>W_{\Q^{1/2}e_j}(t).$$
 
 This forms a generalized Wiener process with covariance $\Q$.
 
-## 4.1.3 Wiener processes in $U_1=L^2(\mathscr{O})$
+- __Intuitive result__ An arbitrary generalized Wiener process over $\U$ is a classical Wiener process taking values in some larger Hilbert space $\U'$. 
+
+For example if $\U=L^2(\R)$ we could take $\U'=L^2_\rho(\R)$ which is the set of all real valued functions $u$ over $\R$ s.t. $\int_\R|u(x)|^2\rho(x)dx<\infty$ for some positive fixed $\rho\in L^2(\R)$. Clearly $L^2_\rho=L^2(\R,\mathscr{B}(\R),\nu)$ where the measure $\nu$ is given by $\nu(A)=\int_A\rho(x)dx$. It is also clear that $L^2(\R)\subset L^2_\rho(\R)$ since for $v\in L^2(\R)$, we have $w=|v|^2\in L^2$ and hence the Schwartz inequality implies $\int_\R|v(x)|^2\rho(x)dx\leq\|w\|_2\|\rho\|_2<\infty$. 
+
+If we set $\rho$ s.t. $\int\rho^2=1$ then we can think of a cylindrical Wiener process $\W$ over $L^2(\R)$ (so that $\W$ takes values in $L^2_\rho(\R)$) as a function of time which, for each $t$, returns an infinite set of mean zero normal random variables with variance $t$ that we can "sample" using $\rho$. That is,
+
+$$\int_\R\W(t,x)\rho(x)dx=X(t)$$
+
+is a well defined random variable for each $t$. It seems obvious that if $\rho^2$ is a probability density function, then $X(t)$ is a normally distributed random variable with mean zero and variance $t$. In fact, since $\E|W(x,t)|$ is finite for each $x\in\R$ and $t\geq0$, we have
+
+$$\E\int_\R|\W(t,x)||\rho(x)|dx\leq\int_\R\rho(x)\E|\W(x,t)|dx<\infty$$
+
+and therefore we may swap the order of Lebesgue integration to show
+
+$$\E X(t)=0.$$
+
+Note also that, for a fixed $t$, $\W(t,x)$ is white-noise wrt $x$. That is, $\W(t,x)$ is, in some sense, the derivative of a Brownian motion over $x\in\R$. Restricting our attention to the closed subset $[a,b]\subset\R$ we then have
+
+$$\int_a^b\W(t,x)dx$$
+
+is a mean zero normally distributed random variable with variance $(b-a)t$. Hence, by partitioning $\R$ into a finite set of intervals $\{[a_i,b_i]\}$ we can define $\rho$ as a simple function so that it is constant on each interval and
+
+$$\int_\R\rho^2=\sum_i\rho_i^2(b_i-a_i)=1.$$
+
+With $\rho$ defined in this manner we have
+
+$$\V(X(t))=\V\left(\sum_i\int_{I_i}\W(t,x)\rho(x)dx\right)$$
+
+$$=\sum_i\rho_i^2\V(\int_{a_i}^{b_i}\W(t,x)dx)=\sum_i\rho_i^2(b_i-a_i)t=t$$
+
+For the final step we simply note that any nonnegative measurable function can be approximated arbitrarily closely by a simple function. Using Lebesgue's dominated convergence theorem, we achieve our result.
+
+## 4.1.3 Wiener processes over $\U=L^2(\mathscr{O})$
 
 - The point of including this section is that it explicitly treats Brownian sheets.
 
-Let $U_1=L^2(\mathscr{O})$ and $W$ a $U_1$-valued $Q$-Wiener process. Then $Q^{1/2}$ is Hilbert-Schmidt on $U_1$ which implies it is the integral operator
+Let $\U=L^2(\mathscr{O})$ and $W$ a $\U$-valued $Q$-Wiener process. Then $Q^{1/2}$ is Hilbert-Schmidt on $\U$ which implies it is the integral operator
 
-$$Q^{1/2}\phi(x)=\int_\mathscr{O}r(x,y)\phi(y)dy, \ \ x\in\mathscr{O}, \ \phi\in L^2(\mathscr{O})$$
+$$Q^{1/2}\phi(x)=\int_\O r(x,y)\phi(y)dy, \ \ x\in\O, \ \phi\in L^2(\O)$$
 
 where the kernel $r$ is square-integrable on $\mathscr{O}^2$ and hence so is $Q$
 
-$$Q\phi(x)=\int_{\mathscr{O}^2}r(x,z)r(z,y)\phi(y)dz dy, \ \ x\in\mathscr{O}, \ \phi\in L^2(\mathscr{O}).$$
+$$Q\phi(x)=\int_\O\int_\O r(x,z)r(z,y)\phi(y)dz dy, \ \ x\in\mathscr{O}, \ \phi\in L^2(\O).$$
 
-The kernel of $Q$, $g(x,y)=\int_\mathscr{O}r(x,z)r(z,y)dz$, can be interpreted as the "spatial" correlation of $W$ in $L^2(\mathscr{O})$. For all $t>0$, $W(t,\cdot)$ is an $L^2(\mathscr{O})$-valued random variable and $W(\cdot,x)$ is a real valued random variable for a.a. $x\in\mathscr{O}$.
+The kernel of $Q$, $g(x,y)=\int_\O r(x,z)r(z,y)dz$, can be interpreted as the "spatial" correlation of $W$ in $L^2(\O)$. For all $t>0$, $W(t,\cdot)$ is an $L^2(\O)$-valued random variable and $W(\cdot,x)$ is a real valued random variable for a.a. $x\in\O$.
 
-WLOG assume the random field $W(t,x), \ t\geq0, \ x\in\mathscr{O}$ is measurable. For $\phi,\psi\in L^2(\mathscr{O})$
+Assume the random field $W(t,x), \ t\geq0, \ x\in\O$ is measurable. For $\phi,\psi\in L^2(\O)$
 
-$$\E[\left<W(t,\phi)\right>\left<W(t,\psi)\right>]=\E\left[\int_\mathscr{O} W(t,x)\phi(x)dx\int_\mathscr{O} W(t,y)\psi(y)dy\right]$$
+$$\E[\left<W(t),\phi\right>\left<W(t),\psi\right>]=\E\left[\int_\O W(t,x)\phi(x)dx\int_\O W(t,y)\psi(y)dy\right]=\star.$$
+
+Taking absolute values within the expectation, one can use the Schwartz inequality to justify changing the order of Lebesgue integration to get
+
+$$\star=\int_\O\int_\O\phi(x)\psi(y)\E[W(t,x)W(t,y)]dxdy.$$
+
+Since $W$ is a $\U$-valued Wiener process we have
+
+$$\E[\left<W(t),\psi\right>\left<W(t),\phi\right>]=t\left<Q\phi,\psi\right>.$$
+
+But from the beginning of this section we also have $Q\phi(x)=\int_\O g(x,y)\phi(y)dy$. Hence,
+
+$$$$
 
 This can be used to show $g(x,y)=\frac{1}{t}\E[W(t,x)W(t,y)]$ which is interpreted as the "spatial" correlation of the $Q$-Wiener processes $W$ in $L^2(\mathscr{O})$. If $\mathscr{O}$ is an open (closed) bounded subset of $\R^n$ and $g$ is bounded and continuous on $\mathscr{O}$, then $Q$ is a covariance operator on $U_1$ of trace class.
 
