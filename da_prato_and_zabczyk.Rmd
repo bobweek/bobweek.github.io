@@ -110,54 +110,6 @@ In particular, $\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\r
   - $\U_0=\Q^{1/2}(U)$... the reproducing kernel of a generalized Wiener process
   - $\triangle$... denotes the end of a statement 
 
-# A.C Nuclear & Hilbert-Schmidt operators
-
-Let $L(E,G)$ be the Banach space of all linear bounded operators from $E$ into $G$ with the supremum norm
-
-$$\|T\|\equiv\sup_{x\in E}\frac{\|Tx\|}{\|x\|}.$$
-
-- __Def__ $T\in L(E,G)$ is __nuclear__ or __trace class__ if there exists sequences $\{a_j\}\subset G, \ \{\phi_j\}\subset E^*$ s.t.
-
-$$\sum_{j=1}^\infty\|a_j\|\|\phi_j\|<\infty$$
-
-and $T$ has the representation $Tx=\sum_ja_j\phi_j(x), \ x\in E$. $\triangle$
-
-The space of all nuclear operators with the norm
-
-$$\|T\|_1\equiv\inf\left\{\sum_j\|a_j\|\|\phi_j\|:Tx=\sum_ja_j\phi_j(x)\right\}$$
-
-is a Banach space denoted as $L_1(E,G)$ or $L_1(E)$ if $E=E$. Let $K$ be another Banach space. If $T\in L_1(E,G)$ and $S\in L_1(G,K)$, then $TS\in L_1(E,K)$ and $\|TS\|_1\leq\|T\|_1\|S\|_1$. If $T\in L_1(U)$ and $\{e_k\}$ is a complete orhonormal system in $U$, then we define
-
-$$\mathrm{Tr}T\equiv\sum_j\left<Te_j,e_j\right>$$
-
-- __Proposition C.3__ A nonnegative operator $T\in L(H)$ is of trace class iff there exists an orthonormal basis $\{e_k\}$ on $H$ s.t.
-
-$$\sum_j\left<Te_j,e_j\right><\infty.$$
-
-When this occurs $\mathrm{Tr}T=\|T\|_1$. $\triangle$
-
-- __Def__ For two separable Hilbert spaces $U_1$ and $U_2$ with complete orthonormal bases $\{e_k\}\subset U_1$ and $\{f_k\}\subset U_2$, a linear bounded operator $T:U_1\rightarrow U_2$ is said to be __Hilbert-Schmidt__ if
-
-$$\sum_k|Te_k|^2<\infty. \ \triangle$$
-
-The space of all Hilbert-Schmidt operators from $U_1$ to $U_2$, equipped with the norm
-
-$$\|T\|_2\equiv\left(\sum_k|Te_k|^2\right)^{1/2}$$
-
-is a separable Hilbert space with the scalar product
-
-$$\left<S,T\right>\equiv\sum_k\left<Se_k,Te_k\right>.$$
-
-- __Notation__ (outer product) For any vectors $a\in U_1$ and $b\in U_2$, the operation $b\otimes a$ denotes the linear operator defined by
-
-$$b\otimes a:U_1\rightarrow U_2, \ h\mapsto \left<a,h\right>b, \ \ h\in U_1. \  \triangle$$
-
-The double sequence $\left\{f_j\otimes e_k\right\}_{j,k\in \mathbb{N}}$ is a complete orthonormal basis in $L_2(E,F)$.
-
-- __Proposition C.4__ Let $U_1,U_2,U_3$ be separable Hilbert spaces. If $T\in L_2(U_1,U_2)$ and $S\in L_2(U_2,U_3)$ then $ST\in L_1(U_1,U_3)$ and
-
-$$\|ST\|_1\leq\|S\|_2\|T\|_2. \ \triangle$$
-
 # 4.1 Wiener processes
 
 - __Def 4.1__ A real valued stochastic process $W(t), \ t\geq0$, is called a __Wiener process__ if
@@ -222,17 +174,17 @@ are uncorrelated zero-mean random variables with unit variance. The convergence 
 
 ## 4.1.2 Generalized Wiener processes over a Hilbert space
 
-The primary reason for my study of SPDE is to formally treat PDE subjected to a specific kind of noise. In particular, the noise I wish to account for, denoted by $B$ where $B(x,t)\in\R$ for each $x\in U$ ($U$ is usually some subset of $\R^n$) and $t\in[0,\infty)$, should satisfy the following properties:
+The primary reason for my study of SPDE is to formally treat PDE subjected to a specific kind of noise. In particular, the noise I wish to account for, denoted by $\W$ where $\W(x,t)\in\R$ for each $x\in U$ ($U$ is usually some subset of $\R^n$) and $t\in[0,\infty)$, should satisfy the following properties:
 
   1. For every $x\in U,0\leq s\leq t\in[0,\infty)$
 
-$$\L(B(x,t)-B(x,s))=\L(B(x,t-s))=\mathscr{N}(0,t-s).$$
+$$\L(\W(x,t)-\W(x,s))=\L(\W(x,t-s))=\mathscr{N}(0,t-s).$$
 
   2. For any $x,y\in U$ and $t,s\in[0,\infty)$
   
-$$\E(B(x,t)B(y,s))=(t\wedge s)\delta(x-y)=0.$$
+$$\E(\W(x,t)\W(y,s))=(t\wedge s)\delta(x-y)=0.$$
 
-That is, $B(x,t)$ is a set of independent real valued Brownian motions indexed by $x\in U$. Previous definitions of the Wiener process are insufficient to capture this since $B(t)=\{B(x,t):x\in U\}$ is not valued in a convenient Hilbert space. In particular, my prefered Hilbert space is $L^2(\R^n)$, but, even for $n=1$, $\int_\R\W(t,x)dx$ is not finite wp1! To circumvent this, Da Prato & Zabczyk give the following definition 
+That is, $\W(x,t)$ is a set of independent real valued Brownian motions indexed by $x\in U$. Previous definitions of the Wiener process are insufficient to capture this since $\W(t)=\{\W(x,t):x\in U\}$ is not valued in a convenient Hilbert space. In particular, my prefered Hilbert space is $L^2(\R^n)$, but, even for $n=1$, $\int_\R\W(t,x)dx$ is not finite wp1! To circumvent this, Da Prato & Zabczyk give the following definition 
 
 - __Def__ Any transformation that maps $a\in\U$ to $W_a$, a real valued Wiener processes on $[0,\infty)$, that is continuous in the sense 
 
@@ -256,11 +208,11 @@ $$\Q a=a, \ \ a\in \U$$
 
 then $\W$ is called a __cylindrical Wiener process__ in $\U$. As mentioned in the primer on SPDE by Martin Hairer, it is unfortunate that $\W$ is referred to as a process in $\U$ since it is __not__ $\U$-valued. Hairer suggests that $\W$ should be called a cylindrical Wiener process over $\U$. 
 
-At first glance, I feel there is an issue here. For my process $B$, I mistakenly believe I need $K(a,b)=\delta(a-b)$. I'm not sure if there exists a $\Q$ that corresponds to this form. However, none of this is true. I'm forgetting that $a,b\in\U$ and what I'm thinking of are $a,b\R^n$. Note that if $a(x)=\delta(x-y)$ and $b=\delta(x-z)$, then (for $\Q=I$)
+At first glance, I feel there is an issue here. For my process $\W$ introduced at the beginning of this section, I mistakenly believe I need $K(a,b)=\delta(a-b)$. I'm not sure if there exists a $\Q$ that corresponds to this form. However, none of this is true. I'm forgetting that $a,b\in\U$ and what I'm thinking of are $a,b\R^n$. Note that if $a(x)=\delta(x-y)$ and $b=\delta(x-z)$, then (for $\Q=I$)
 
 $$\E[W_a(t)W_b(s)]=(t\wedge s)\left<a,b\right>=(t\wedge s)\delta(y-z).$$
 
-Thus, the above result is a generalization of condition (2.) on the process $B$ where $\E[B(t,y)B(s,z)]=(t\wedge s)\delta(y-z)$. Hence, everything is just fine.
+Thus, the above result is a generalization of condition (2.) on the process $B$ where $\E[\W(t,y)\W(s,z)]=(t\wedge s)\delta(y-z)$. Hence, everything is just fine.
 
 - __Example__ Let $\W$ be a cylindrical Wiener process over $\U=L^2(\R)$. Then for any $u,v\in L^2(\R)$
 
@@ -672,4 +624,52 @@ $$PART \ II: \ SOLUTIONS \ OF \ SPDE$$
 
 $$\left\{\begin{matrix}dX(t)=(AX(t)+f(t))dt+B(X(t))dW(t) \\ X(0)=\xi\end{matrix}\right.$$
 
+$$APPENDIX$$
 
+# A.C Nuclear & Hilbert-Schmidt operators
+
+Let $L(E,G)$ be the Banach space of all linear bounded operators from $E$ into $G$ with the supremum norm
+
+$$\|T\|\equiv\sup_{x\in E}\frac{\|Tx\|}{\|x\|}.$$
+
+- __Def__ $T\in L(E,G)$ is __nuclear__ or __trace class__ if there exists sequences $\{a_j\}\subset G, \ \{\phi_j\}\subset E^*$ s.t.
+
+$$\sum_{j=1}^\infty\|a_j\|\|\phi_j\|<\infty$$
+
+and $T$ has the representation $Tx=\sum_ja_j\phi_j(x), \ x\in E$. $\triangle$
+
+The space of all nuclear operators with the norm
+
+$$\|T\|_1\equiv\inf\left\{\sum_j\|a_j\|\|\phi_j\|:Tx=\sum_ja_j\phi_j(x)\right\}$$
+
+is a Banach space denoted as $L_1(E,G)$ or $L_1(E)$ if $E=E$. Let $K$ be another Banach space. If $T\in L_1(E,G)$ and $S\in L_1(G,K)$, then $TS\in L_1(E,K)$ and $\|TS\|_1\leq\|T\|_1\|S\|_1$. If $T\in L_1(U)$ and $\{e_k\}$ is a complete orhonormal system in $U$, then we define
+
+$$\mathrm{Tr}T\equiv\sum_j\left<Te_j,e_j\right>$$
+
+- __Proposition C.3__ A nonnegative operator $T\in L(H)$ is of trace class iff there exists an orthonormal basis $\{e_k\}$ on $H$ s.t.
+
+$$\sum_j\left<Te_j,e_j\right><\infty.$$
+
+When this occurs $\mathrm{Tr}T=\|T\|_1$. $\triangle$
+
+- __Def__ For two separable Hilbert spaces $U_1$ and $U_2$ with complete orthonormal bases $\{e_k\}\subset U_1$ and $\{f_k\}\subset U_2$, a linear bounded operator $T:U_1\rightarrow U_2$ is said to be __Hilbert-Schmidt__ if
+
+$$\sum_k|Te_k|^2<\infty. \ \triangle$$
+
+The space of all Hilbert-Schmidt operators from $U_1$ to $U_2$, equipped with the norm
+
+$$\|T\|_2\equiv\left(\sum_k|Te_k|^2\right)^{1/2}$$
+
+is a separable Hilbert space with the scalar product
+
+$$\left<S,T\right>\equiv\sum_k\left<Se_k,Te_k\right>.$$
+
+- __Notation__ (outer product) For any vectors $a\in U_1$ and $b\in U_2$, the operation $b\otimes a$ denotes the linear operator defined by
+
+$$b\otimes a:U_1\rightarrow U_2, \ h\mapsto \left<a,h\right>b, \ \ h\in U_1. \  \triangle$$
+
+The double sequence $\left\{f_j\otimes e_k\right\}_{j,k\in \mathbb{N}}$ is a complete orthonormal basis in $L_2(E,F)$.
+
+- __Proposition C.4__ Let $U_1,U_2,U_3$ be separable Hilbert spaces. If $T\in L_2(U_1,U_2)$ and $S\in L_2(U_2,U_3)$ then $ST\in L_1(U_1,U_3)$ and
+
+$$\|ST\|_1\leq\|S\|_2\|T\|_2. \ \triangle$$
