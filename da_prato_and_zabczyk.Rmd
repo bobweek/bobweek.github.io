@@ -14,19 +14,25 @@ output:
 \newcommand{\W}{\mathcal{W}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\V}{\mathrm{Var}}
 \newcommand{\Cov}{\mathrm{Cov}}
-
+\newcommand{\W}{\mathscr{W}}
+\newcommand{\Q}{\mathscr{Q}}
+\newcommand{\U}{\mathscr{U}}
+\newcommand{\L}{\mathscr{L}}
+\newcommand{\O}{\mathscr{O}}
 
 Notation:
 
-  - $\mathscr{L}(X)$... the law of the random variable $X$.
+  - $\L(X)$... the law of the random variable $X$.
   - $E,F,G$... Banach spaces
   - $E^*$... the dual of $E$
   - $H$... a Hilbert space with inner product $\left<\cdot,\cdot\right>$
   - $U$... a separable Hilbert space $\iff$ $U$ admits a countable orthonormal basis
     - $U_1,U_2,\dots$ will also denote separable Hilbert spaces
+    - $\U$... denotes a separable Hilbert space that can be interpreted as $L^2(U)$
   - $\mathscr{O}$... a subset of $\R^d$
   - $\mathscr{B}(E)$... the Banach $\sigma$-algebra of a space $E$
   - $L(E,F)$... Banach space of linear bounded operators from $E$ to $F$.
@@ -34,11 +40,11 @@ Notation:
   - $L_2(U_1,U_2)$... separable Hilbert space of Hilbert-Schmidt operators
   - $L_2^0=L_2(U_0,U_1)$... the space of all Hilbert-Schmidt operators from $U_0$ to $U_1$
   - $W:[0,\infty)\rightarrow U$... a $U$-valued Wiener process
-  - $\mathscr{W}$... a generalized Wiener process
+  - $\W$... a generalized Wiener process
   - $Q\in L_1(U)$... covariance operator of a $U$-valued Wiener process
-  - $\mathscr{Q}\in L(U)$... covariance operator of a generalized Wiener process
+  - $\Q\in L(U)$... covariance operator of a generalized Wiener process
   - $U_0=Q^{1/2}(U)$... the reproducing kernel of a $U$-valued Wiener process
-  - $\mathscr{U}_0=\mathscr{Q}^{1/2}(U)$... the reproducing kernel of a generalized Wiener process
+  - $\U_0=\Q^{1/2}(U)$... the reproducing kernel of a generalized Wiener process
   - $\triangle$... denotes the end of a statement 
 
 # A.C Nuclear & Hilbert-Schmidt operators
@@ -96,15 +102,15 @@ $$\|ST\|_1\leq\|S\|_2\|T\|_2. \ \triangle$$
   1. $W$ has continous trajectories and $W(0)=0$.
   2. $W$ has independent increments and
   
-$$\mathscr{L}(W(t)-W(s))=\mathscr{L}(W(t-s)), \ t\geq s\geq0.$$  
+$$\L(W(t)-W(s))=\L(W(t-s)), \ t\geq s\geq0.$$  
 
-  3. $\mathscr{L}(W(t))=\mathscr{L}(-W(t)), \ t\geq0. \ \triangle$
+  3. $\L(W(t))=\L(-W(t)), \ t\geq0. \ \triangle$
 
 - __Def__ (extension to a general linear (topological) space $K$ with $\sigma$-algebra $\mathscr{B}(K)$) A $K$-valued stochastic process $W(t), \ t\geq0$ satisfying 1.-3. is a __Wiener process__ in $K$. $\triangle$
 
 ## 4.1.1 Hilbert space valued Wiener processes 
 
-Let $W$ be a $U$-valued Wiener process. Then $\left<W(t),u\right>, \ t\geq0,$ is a real valued Wiener process and $\mathscr{L}(W(t))$ is a Gaussian measure with mean 0. Furthermore, for any $u,v\in U, \ t,s\geq0,$
+Let $W$ be a $U$-valued Wiener process. Then $\left<W(t),u\right>, \ t\geq0,$ is a real valued Wiener process and $\L(W(t))$ is a Gaussian measure with mean 0. Furthermore, for any $u,v\in U, \ t,s\geq0,$
 
 $$\E[\left<W(t),u\right>\left<W(s),u\right>]=(t\wedge s)\E[\left<W(1),u\right>^2]$$
 
@@ -114,14 +120,14 @@ $$\E[\left<W(t),u\right>\left<W(s),v\right>]=(t\wedge s)\E[\left<W(1),u\right>\l
 
 $$=(t\wedge s)\left<Qu,v\right>$$
 
-where $Q$ is the covariance operator of the Gaussian measure $\mathscr{L}(W(1))$. The operator $Q$ is of trace class and for each distribution $\mathscr{L}(W(1))$, there is a trace class $Q$ that completely characterizes it.
+where $Q$ is the covariance operator of the Gaussian measure $\L(W(1))$. The operator $Q$ is of trace class and for each distribution $\L(W(1))$, there is a trace class $Q$ that completely characterizes it.
 
 - __Def 4.2__ A $U$-valued stochastic process $W(t), \ t\geq0$ is a __$Q$-Wiener__ process if
 
   1. $W(0)=0$.
   2. $W$ has continuous trajectories.
   3. $W$ has independent increments.
-  4. $\mathscr{L}(W(t)-W(s))=\mathscr{N}(0,(t-s)Q), \ t\geq s\geq0$. $\triangle$
+  4. $\L(W(t)-W(s))=\mathscr{N}(0,(t-s)Q), \ t\geq s\geq0$. $\triangle$
 
 Because of our assumptions about $Q$ and since $U$ has a complete orthonormal system $\{e_k\}\subset U$, there exists a bounded sequence of nonnegative real numbers $\{\lambda_k\}$ s.t. $Qe_k=\lambda_ke_k, \ k\in\mathbb{N}$.
 
@@ -153,73 +159,207 @@ are uncorrelated zero-mean random variables with unit variance. The convergence 
 
 ## 4.1.2 Generalized Wiener processes on a Hilbert space
 
-The primary reason for my study of SPDE is to formally treat PDE subjected to a specific kind of noise. In particular, the noise I wish to account for, denoted by $\mathscr{W}$ where $\mathscr{W}(x,t)\in\R$ for each $x\in U$ ($U$ is usually some subset of $\R^n$) and $t\in[0,\infty)$, should satisfy the following properties:
+The primary reason for my study of SPDE is to formally treat PDE subjected to a specific kind of noise. In particular, the noise I wish to account for, denoted by $\W$ where $\W(x,t)\in\R$ for each $x\in U$ ($U$ is usually some subset of $\R^n$) and $t\in[0,\infty)$, should satisfy the following properties:
 
   1. For every $x\in U,0\leq s\leq t\in[0,\infty)$
 
-$$\mathscr{L}(\mathscr{W}(x,t)-\mathscr{W}(x,s))=\mathscr{L}(\mathscr{W}(x,t-s))=\mathscr{N}(0,t-s).$$
+$$\L(\W(x,t)-\W(x,s))=\L(\W(x,t-s))=\mathscr{N}(0,t-s).$$
 
-  2. For any $x_1,x_2\in U$ and $t\in[0,\infty)$
+  2. For any $x,y\in U$ and $t,s\in[0,\infty)$
   
-$$\E(\mathscr{W}(x_1,t)\mathscr{W}(x_2,t))=\left\{\begin{matrix} t, & \|x_1-x_2\|_U=0 \\ 0, & \|x_1-x_2\|_U>0. \end{matrix}\right.$$
+$$\E(\W(x,t)\W(y,s))=\left\{\begin{matrix} t\wedge s, & \|x-y\|_U=0 \\ 0, & \|x-y\|_U>0. \end{matrix}\right.$$
 
-That is, $\mathscr{W}(x,t)$ is a set of independent real valued Brownian motions indexed by $x\in U$. Previous definitions of the Wiener process are insufficient to capture this since $\mathscr{W}(t)=\{\mathscr{W}(x,t):x\in U\}$ is not a Hilbert space valued process. Indeed $\mathscr{W}(t)$ is not even Bochner integrable over $U$. To circumvent this, Da Prato & Zabczyk give the following definition 
+That is, $\W(x,t)$ is a set of independent real valued Brownian motions indexed by $x\in U$. Previous definitions of the Wiener process are insufficient to capture this since $\W(t)=\{\W(x,t):x\in U\}$ is not a Hilbert space valued process. Indeed $\W(t)$ is not even Bochner integrable over $U$. To circumvent this, Da Prato & Zabczyk give the following definition 
 
-- __Def__ Any transformation $\mathscr{W}$ that maps $a\in U_1$ to $W_a$, a real valued Wiener processes on $[0,\infty)$, that is continuous in the sense 
+- __Def__ Any transformation that maps $a\in U_1$ to $W_a$, a real valued Wiener processes on $[0,\infty)$, that is continuous in the sense 
 
-$$t\geq0, \{a_n\}\subset U_n, \lim_{n\rightarrow\infty}\|a_n-a\|_{U_1}=0\implies\lim_{n\rightarrow\infty}\E\left|W_a(t)-W_{a_n}(t)\right|^2=0.$$
+$$t\geq0, \{a_n\}\subset U_1, \lim_{n\rightarrow\infty}\|a_n-a\|_{U_1}=0\implies\lim_{n\rightarrow\infty}\E\left|W_a(t)-W_{a_n}(t)\right|^2=0.$$
 
-is a __generalized Wiener process__. Note that the integral $\int_U a(x)\mathscr{W}(x,t)dx$ may qualify as such a mapping. For concreteness, I think of $U=\R^n$ and $U_1=L^2(\R^n)$.
+is a __generalized Wiener process__. Note that the integral transformation given by $W_a(t)=\int_U a(x)\W(x,t)dx$ may qualify as such a mapping (for concreteness, I think of $U=\R^n$ and $U_1=L^2(\R^n)$). With this in mind, I use the symbol $\W$ to also denote the mapping satisfying the above definition so I may refer to $\W$ as a generalized Wiener process.
 
 This definition implies the existence of a bilinear form $K(a,b), \ a,b\in U_1$ s.t.
 
 $$\E[W_a(t)W_b(s)]=(t\wedge s) \ K(a,b), \ \ t,s\geq0, \ a,b\in U_1.$$
 
-The continuity condition gurantees that $K$ is continuous in $U$ and hence there exists $\mathscr{Q}\in L(U)$ s.t.
+The continuity condition gurantees that $K$ is continuous in $U_1$ and hence there exists $\Q\in L(U_1)$ s.t.
 
-$$\E[W_a(t)W_b(s)]=(t\wedge s)\left<\mathscr{Q} a,b\right>, \ \ t,s\geq0, \ a,b\in U_1.$$
+$$\E[W_a(t)W_b(s)]=(t\wedge s)\left<\Q a,b\right>, \ \ t,s\geq0, \ a,b\in U_1.$$
 
-This operator is self-adjoint and positive definite and it the __covariance__ of the generalized Wiener process $\mathscr{W}$. If $\mathscr{Q}$ is the identity operator,
+This operator is self-adjoint and positive definite and is the __covariance__ of the generalized Wiener process $\W$. 
 
-$$\mathscr{Q}a=a, \ \ a\in U_1$$
+If $\Q$ is the identity operator,
 
-then $\mathscr{W}$ is called a __cylindrical Wiener process__ in $U_1$. If $\mathscr{U}_0=\mathscr{Q}^{1/2}(U_1)$ we call $\mathscr{U}_0$ the __reproducing kernel__ of the generalized Wiener process.
+$$\Q a=a, \ \ a\in U_1$$
 
+then $\W$ is called a __cylindrical Wiener process__ in $U_1$. This is the case that I will pay special attention to.
 
+If $\U_0=\Q^{1/2}(U_1)$ we call $\U_0$ the __reproducing kernel__ of the generalized Wiener process.
 
-- Constructing a generalized Wiener process from an arbitrary self-adjoint and positive definite operator $\mathscr{Q}$.
+- Constructing a generalized Wiener process from an arbitrary self-adjoint and positive definite operator $\Q$:
 
-Let $\{e_j\}$ be a complete orthonormal basis in $U$ and $\{\beta_j\}$ a sequence of independent real valued standard Wiener processes. Define
+Let $\{e_j\}$ be a complete orthonormal basis in $U_1$ and $\{\beta_j\}$ a sequence of independent real valued standard Wiener processes. Define
 
-$$W_a(t)\equiv\sum_j\left<Q^{1/2}e_j,a\right>\beta_j(t), \ \ t\geq0, \ a\in U.$$
+$$W_a(t)\equiv\sum_j\left<\Q^{1/2}e_j,a\right>\beta_j(t), \ \ t\geq0, \ a\in U_1.$$
 
-  - Intuitive result: An arbitrary generalized Wiener process on $U$ is a classical Wiener process in some larger Hilbert space $U_1$.
+  - Intuitive result: An arbitrary generalized Wiener process on $U_1$ is a classical Wiener process in some larger Hilbert space $U_2$.
 
-- __Proposition 4.8__ For every $a\in U$ we have
+- __Proposition 4.8__ For every $a\in U_1$ we have
 
-$$W_a(t)=\sum_j\left<Q^{1/2}e_j,a\right>W_{Q^{1/2}e_j}(t).$$
+$$W_a(t)=\sum_j\left<\Q^{1/2}e_j,a\right>W_{\Q^{1/2}e_j}(t).$$
 
-This forms a generalized Wiener process with covariance $Q$.
+This forms a generalized Wiener process with covariance $\Q$.
 
-## 4.1.3 Wiener processes in $U=L^2(\mathscr{O})$
+## 4.1.3 Wiener processes in $U_1=L^2(\mathscr{O})$
 
-Let $U=L^2(\mathscr{O})$ and $W$ a $U$-valued $Q$-Wiener process. Then $Q^{1/2}$ is Hilbert-Schmidt on $U$ which implies it is the integral operator
+- The point of including this section is that it provides a formal treatment of Brownian sheets.
 
-$$Q^{1/2}\phi(\xi)=\int_\mathscr{O}r(\xi,\zeta)\phi(\zeta)d\zeta, \ \ \xi\in\mathscr{O}, \ \phi\in L^2(\mathscr{O})$$
+Let $U_1=L^2(\mathscr{O})$ and $W$ a $U_1$-valued $Q$-Wiener process. Then $Q^{1/2}$ is Hilbert-Schmidt on $U_1$ which implies it is the integral operator
+
+$$Q^{1/2}\phi(x)=\int_\mathscr{O}r(x,y)\phi(y)dy, \ \ x\in\mathscr{O}, \ \phi\in L^2(\mathscr{O})$$
 
 where the kernel $r$ is square-integrable on $\mathscr{O}^2$ and hence so is $Q$
 
-$$Q\phi(\xi)=\int_{\mathscr{O}^2}r(\xi,\gamma)r(\gamma,\zeta)\phi(\zeta)d\gamma d\zeta, \ \ \xi\in\mathscr{O}, \ \phi\in L^2(\mathscr{O}).$$
+$$Q\phi(x)=\int_{\mathscr{O}^2}r(x,z)r(z,y)\phi(y)dz dy, \ \ x\in\mathscr{O}, \ \phi\in L^2(\mathscr{O}).$$
 
-The kernel of $Q$, $g(\xi,\zeta)=\int_\mathscr{O}r(\xi,\gamma)r(\gamma,\zeta)d\gamma$, can be interpreted as the "spatial" correlation of $W$ in $L^2(\mathscr{O})$. For all $t>0$, $W(t,\cdot)$ is an $L^2(\mathscr{O})$-valued random variable and $W(\cdot,\xi)$ is a real valued random variable for a.a. $\xi\in\mathscr{O}$.
+The kernel of $Q$, $g(x,y)=\int_\mathscr{O}r(x,z)r(z,y)dz$, can be interpreted as the "spatial" correlation of $W$ in $L^2(\mathscr{O})$. For all $t>0$, $W(t,\cdot)$ is an $L^2(\mathscr{O})$-valued random variable and $W(\cdot,x)$ is a real valued random variable for a.a. $x\in\mathscr{O}$.
 
-WLOG assume the random field $W(t,\xi), \ t\geq0, \ \xi\in\mathscr{O}$ is measurable. For $\phi,\psi\in L^2(\mathscr{O})$
+WLOG assume the random field $W(t,x), \ t\geq0, \ x\in\mathscr{O}$ is measurable. For $\phi,\psi\in L^2(\mathscr{O})$
 
-$$\E[\left<W(t,\phi)\right>\left<W(t,\psi)\right>]=\E\left[\int_\mathscr{O} W(t,\xi)\phi(\xi)d\xi\int_\mathscr{O} W(t,\eta)\psi(\eta)d\eta\right]$$
+$$\E[\left<W(t,\phi)\right>\left<W(t,\psi)\right>]=\E\left[\int_\mathscr{O} W(t,x)\phi(x)dx\int_\mathscr{O} W(t,y)\psi(y)dy\right]$$
 
-This can be used to show $g(\xi,\eta)=\frac{1}{t}\E[W(t,\xi)W(t,\eta)]$
+This can be used to show $g(x,y)=\frac{1}{t}\E[W(t,x)W(t,y)]$ which is interpreted as the "spatial" correlation of the $Q$-Wiener processes $W$ in $L^2(\mathscr{O})$. If $\mathscr{O}$ is an open (closed) bounded subset of $\R^n$ and $g$ is bounded and continuous on $\mathscr{O}$, then $Q$ is a covariance operator on $U_1$ of trace class.
+
+- __Example 4.9: Brownian sheets__ Let $\mathscr{O}=[0,\pi]$ and $g(x,y)=x\wedge y, \ x,y\in[0,\pi]$. Note that $g$ is continuous and, since for a one dimensional Wiener process $\beta$
+
+$$x\wedge y=\E[\beta(x)\beta(y)]$$
+
+$g$ is positive definite. The eigenvalues and eigenfunctions of the corresponding $Q$ are
+
+$$\lambda_n=(n+\frac{1}{2})^{-2}, \ e_n=\sqrt{\frac{2}{\pi}}\sin\left[\left(n+\frac{1}{2}\right)x\right], \ x\in[0,\pi], \ n\in\N$$
+
+hence
+
+$$W(t,x)=\sum_n\frac{\beta_n(t)}{n+\frac{1}{2}}\sqrt{\frac{2}{\pi}}\sin\left[\left(n+\frac{1}{2}\right)x\right], \ t\geq0, \ x\in[0,\pi]$$
+
+where the $\beta_n$ are independent real standard Brownian motions. From this we have
+
+$$\E[W(t,x)W(s,y)]=(t\wedge s)(x\wedge y).$$
+
+Fields $W$ with the above covariance are called __Brownian sheets__ on $[0,\infty)\times[0,\pi]$. $\triangle$
+
+- __Proposition 4.10__ Given an arbitraty set $\O$, a function $g(x,y)$ is positive definite iff there exists a family of random variables $X(x)$ s.t. for distinct $x_1,\dots,x_j\in\O$ the random vector $X(x_1),\dots,X(x_j)$ is Gaussian with mean zero and 
+
+$$g(x,y)=\E[X(x)X(y)], \ x,y\in\O. \ \triangle$$
+
+- __Corr 4.11__ If $g_1$ and $g_2$ are positive definite on $\O_1$ and $\O_2$ then
+
+$$g((x_1,x_2),(y_1,y_2))\equiv g_1(x_1,y_1)g(x_2,y_2), \ (x_1,y_1)\in\O_1, \ (x_2,y_2)\in\O_2$$
+
+is positive definite on $\O_1\times\O_2$. $\triangle$
+
+- __Example 4.12: Brownian sheets on $[0,\infty)\times\O$__ Let $\O\subset\R^n$ and $g$ a positive definite function on $\O$. By prop 4.11
+
+$$(t\wedge s)g(x,y), \ (t,x),(s,y)\in[0,\infty)\times\O,$$
+
+is also positive definite and there exists a Gaussian family $W(t,x), \ t\geq0, \ x\in\O$ s.t.
+
+$$$\E[W(t,x)W(s,y)]=(t\wedge s)g(x,y).$$
+
+For each $x$, $W(\cdot,x)$ has all the properties of a real valued Wiener process except for the regularity of trajectories. To prove the existence of a proper modification requires additional properties of $g$. $\triangle$
+
+## 4.1.4. Spatially homogeneous Wiener processes
+
+- The point of including this section is that it gives a formal treatment of a cylindrical Wiener process on $L^2(\R^n)$.
+
+- __Def__ If $\mu$ is a probability measure on $(E,\mathscr{B}(E))$, then the function $\hat\mu$ on $E^*$
+
+$$\hat\mu(y)\equiv\int_Ee^{iy(x)}\mu(dx), \ \ y\in E^*$$
+
+is the __characteristic function__ of $\mu$. If $E=H$ is a Hilbert space then
+
+$$\hat\mu(\lambda)=\int_He^{i\left<\lambda,x\right>}\mu(dx), \ \ \lambda\in H.$$
+
+- __Bochners theorem__ If $\phi:U\rightarrow\mathbb{C}$ is a characteristic function of a probability measure $\mu$ on $(U,\mathscr{B}(U))$ then
+
+  1. $\phi$ is a continuous, positive definite function s.t. $\phi(0)=1$.
+  2. For any $\epsilon>0$ there exists a nonnegative nuclear operator $S_\epsilon$ s.t.
+  
+$$1-\mathfrak{Re}\phi(\lambda)\leq\epsilon, \ \ \forall \ \lambda:\left<S_\epsilon\lambda,\lambda\right>\leq1.$$
+
+Conversly, if $\phi$ satisfies 1. & 2., then it is a characteristic function of some probability measure on $U$. $\triangle$
+
+Let $\mu$ be a finite nonnegative measure on $\R^n$ and
+
+$$\Gamma(\lambda)\equiv\int_{\R^n}e^{i\left<\lambda,x\right>}\mu(dx), \ \lambda\in\R^n,$$
+
+then $g(x,y)=\Gamma(x-y), \ x, \ y\in\R^n,$ is a continuous, bounded, positive definite function. Under some further (mild) conditions on $\mu$ one can show there exists a continuous random field $W(t,x)$ s.t. $W(t,\cdot)$ is a Wiener process in $L_\rho^2(\R^n)$, for an integrable weight $\rho$, s.t.
+
+$$\E[W(t,x)W(s,y)]=(t\wedge s)\Gamma(x-y).$$
+
+Then
+
+$$\E\|W(t,\cdot)\|_{L_\rho^2}^2=\E\int_{\R^n}|W(t,x)|^2\rho(x)dx$$
+
+$$=\int_{\R^n}\E|W(t,x)|^2\rho(x)dx=t\Gamma(0)\int_{\R^n}\rho(x)dx.$$
+
+We now generalize. Let $\mathscr{S}_c(\R^n)$ denote the space of $\mathbb{C}$-valued infinitely differentiable functions $\psi$ on $\R^n$ for which each seminorm
+
+$$|\psi|_{\alpha,\beta}=\sup_{x\in\R^n}|x^\alpha D^\beta\psi(x)|$$
+
+is finite. The dual space $\mathscr{S}^*_c(\R^n)$ is the space of __tempered distributions__. The space $\mathscr{S}(\R^n)$ consists of real valued functions from $\mathscr{S}_c(\R^n)$. The space $\mathscr{S}^*(\R^n)$ consists of real valued functionals from $\mathscr{S}^*_c(\R^n)$. We suppress the dependency on $\R^n$.
+
+For $\psi\in\mathscr{S}_c$ define $\psi_{(s)}\equiv\overline{\psi(-x)}, \ x\in\R^n.$ Denote $\mathscr{S}_{(s)}=\{\psi\in\mathscr{S}_c:\psi=\psi_{(s)}\}$ and $\mathscr{S}_{(s)}^*=\{u\in\mathscr{S}^*:(u,\psi)=(u,\psi_{(s)}s) \ \forall \ \psi\in\mathscr{S}_{(s)}\}$. For $\psi\in\mathscr{S}_c$ write $\hat\psi$ for the Fourier transform
+
+$$\hat\psi(\lambda)=\left(\frac{1}{2\pi}\right)^{n/2}\int_{\R^n}e^{-2\pi i\left<\lambda,x\right>}\psi(x)dx.$$
+
+For each $u\in\mathscr{S}_c^*$, $\hat u$ is given by $(\hat u,\hat\psi)=(u,\psi)$.
+
+The distribution $\Gamma\in\mathscr{S}^*$ is positive definite if for each $\psi\in\mathscr{S}$
+
+$$(\Gamma,\psi*\psi_{(s)})\geq0.$$
+
+- __Theorem 4.13__ A distribution $\Gamma\in\mathscr{S}^*$ is positive definite if there exists a measure $\mu\in\mathscr{S}^*$ symmetric around 0 s.t. $\Gamma=\hat\mu$. Then $\mu$ is called the spectral measure of $\Gamma$.
+
+- __Def__ An $\mathscr{S}^*$-valued continuous stochastic process $\W$ is called a Wiener process with covariance kernel $\Gamma$ if
+
+  1. For each $\psi\in\mathscr{S}$ the process $(\W,\psi)$ is a real valued Wiener process
+  2. For all $s,t\geq0,\phi,\psi\in\mathscr{S}$ we have
+  
+$$\E[(\W(t),\phi)(\W(s),\psi)]=(t\wedge s)(\Gamma,\phi*\psi_{(s)}).$$
+
+- __Theorem 4.14__ For any positive definite distribution $\Gamma$ there exists a Wiener process $W$ with covariance kernel $\Gamma$. Furthermore, there is a Hilbert space $U_\Gamma$, continuously embedded in $\mathscr{S}^*$, s.t.
+
+$$\L((\W(t),\psi))=\mathscr{N}(0,t\|\psi\|^2_{U_\Gamma}), \ \ \forall \ \psi\in\mathscr{S}.$$
+
+- __Example 4.16__ Let $\mu=\delta_0$, the delta measure at 0, then
+
+$$\Gamma=\hat\delta_0=\left(\frac{1}{2\pi}\right)^{n/2}\lambda_n,$$
+
+where $\lambda_n$ denotes the Lebesgue measure on $\R^n$. The space $U_\Gamma$ is then one dimensional and consists of constant functions (so is it isomorphic to $\R$?). The process $\W$ is then of the form
+
+$$\W=\left(\frac{1}{2\pi}\right)^{n/2}\beta(t)\lambda_n$$
+
+where $\beta(t)$ is a standard Brownian motion. $\triangle$
+
+- __Example 4.17__ Let $\mu=\lambda_n$, then
+
+$$\Gamma=\hat\lambda_n=(2\pi)^{n/2}\delta_0.$$
+
+For any $\phi,\psi\in\mathscr{S}$ we then have
+
+$$(\Gamma,\phi*\psi_{(s)})=(2\pi)^{n/2}\int_{\R^n}\phi(-x)\psi_{(s)}(x)dx$$
+
+$$=(2\pi)^{n/2}\int_{\R^n}\phi(-x)\psi(-x)dx=(2\pi)^{n/2}\int_{\R^n}\phi(x)\psi(x)dx$$
+
+Hence, $\W=(2\pi)^{-n/2}\beta(t)\delta_0$ so that $(2\pi)^{n/2}\W$ is a cylindrical Wiener process on $L^2(\R^n)$. $\triangle$
+
+## 4.1.5 Complements on a Brownian sheet
+
+- The point of including this section is that it connects Brownian sheets on $[0,\infty)\times\R^n$ with cylindrical Wiener processes on $L^2(\R^n)$.
+
 
 # 4.2 Definition of the stochastic integral
+
 
 Consider the $U$-valued $Q$-Wiener process $W(t)$ in $(\Omega,\mathscr{F},\mathbb{P})$ and the normal filtration $\{\mathscr{F}_t\}_{t\geq0}$ in $\mathscr{F}$. Assume that
 
