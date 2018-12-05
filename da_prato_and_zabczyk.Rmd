@@ -230,7 +230,7 @@ $$\L(B(x,t)-B(x,s))=\L(B(x,t-s))=\mathscr{N}(0,t-s).$$
 
   2. For any $x,y\in U$ and $t,s\in[0,\infty)$
   
-$$\E(B(x,t)B(y,s))=\left\{\begin{matrix} t\wedge s, & \|x-y\|_U=0 \\ 0, & \|x-y\|_U>0. \end{matrix}\right.$$
+$$\E(B(x,t)B(y,s))=(t\wedge s)\delta(x-y)=0.$$
 
 That is, $B(x,t)$ is a set of independent real valued Brownian motions indexed by $x\in U$. Previous definitions of the Wiener process are insufficient to capture this since $B(t)=\{B(x,t):x\in U\}$ is not valued in a convenient Hilbert space. In particular, my prefered Hilbert space is $L^2(\R^n)$, but, even for $n=1$, $\int_\R\W(t,x)dx$ is not finite wp1! To circumvent this, Da Prato & Zabczyk give the following definition 
 
@@ -256,7 +256,11 @@ $$\Q a=a, \ \ a\in \U$$
 
 then $\W$ is called a __cylindrical Wiener process__ in $\U$. As mentioned in the primer on SPDE by Martin Hairer, it is unfortunate that $\W$ is referred to as a process in $\U$ since it is __not__ $\U$-valued. Hairer suggests that $\W$ should be called a cylindrical Wiener process over $\U$. 
 
-There's an issue here. For my process $B$, I need $K(a,b)=\delta(a-b)$. I'm not sure if there exists a $\Q$ that corresponds to this form.
+At first glance, I feel there is an issue here. For my process $B$, I mistakenly believe I need $K(a,b)=\delta(a-b)$. I'm not sure if there exists a $\Q$ that corresponds to this form. However, none of this is true. I'm forgetting that $a,b\in\U$ and what I'm thinking of are $a,b\R^n$. Note that if $a(x)=\delta(x-y)$ and $b=\delta(x-z)$, then (for $\Q=I$)
+
+$$\E[W_a(t)W_b(s)]=(t\wedge s)\left<a,b\right>=(t\wedge s)\delta(y-z).$$
+
+Thus, the above result is a generalization of condition (2.) on the process $B$ where $\E[B(t,y)B(s,z)]=(t\wedge s)\delta(y-z)$. Hence, everything is just fine.
 
 - __Example__ Let $\W$ be a cylindrical Wiener process over $\U=L^2(\R)$. Then for any $u,v\in L^2(\R)$
 
