@@ -190,7 +190,7 @@ That is, $\W(x,t)$ is a set of independent real valued Brownian motions indexed 
 
 $$t\geq0, \{a_n\}\subset U_1, \lim_{n\rightarrow\infty}\|a_n-a\|_{U_1}=0\implies\lim_{n\rightarrow\infty}\E\left|W_a(t)-W_{a_n}(t)\right|^2=0.$$
 
-is a __generalized Wiener process__. Note that the integral transformation given by $W_a(t)=\int_U a(x)\W(x,t)dx$ may qualify as such a mapping (for concreteness, I think of $U=\R^n$ and $\U=L^2(\R^n)$). With this in mind, I use the symbol $\W$ to also denote the mapping satisfying the above definition so I may refer to $\W$ as a generalized Wiener process.
+is a __generalized Wiener process__ over $\U$. Note that the integral transformation given by $W_a(t)=\int_U a(x)\W(x,t)dx$ may qualify as such a mapping (for concreteness, I think of $U=\R^n$ and $\U=L^2(\R^n)$). With this in mind, I use the symbol $\W$ to also denote the mapping satisfying the above definition so I may refer to $\W$ as a generalized Wiener process.
 
 This definition implies the existence of a bilinear form $K(a,b), \ a,b\in \U$ s.t.
 
@@ -242,7 +242,7 @@ If we set $\rho$ s.t. $\int\rho^2=1$ then we can think of a cylindrical Wiener p
 
 $$\int_\R\W(t,x)\rho(x)dx=X(t)$$
 
-is a well defined random variable for each $t$. It seems obvious that if $\rho^2$ is a probability density function, then $X(t)$ is a normally distributed random variable with mean zero and variance $t$. In fact, since $\E|W(x,t)|$ is finite for each $x\in\R$ and $t\geq0$, we have
+is a well defined random variable for each $t$. Partly by definition of $\W$ it seems obvious that if $\rho^2$ is a probability density function, then $X(t)$ is a normally distributed random variable with mean zero and variance $t$. In fact, since $\E|W(x,t)|$ is finite for each $x\in\R$ and $t\geq0$, we have
 
 $$\E\int_\R|\W(t,x)||\rho(x)|dx\leq\int_\R\rho(x)\E|\W(x,t)|dx<\infty$$
 
@@ -268,7 +268,7 @@ For the final step we simply note that any nonnegative measurable function can b
 
 Of course, this can be applied to nonnegative $\rho\in L^2(\R)$ where $\int\rho^2\neq1$. In this case, we simply get
 
-$$\V(X(t))=\|\rho\|_2t.$$
+$$\V(X(t))=\|\rho\|_2^2t.$$
 
 ## 4.1.3 Wiener processes over $\U=L^2(\mathscr{O})$
 
@@ -557,64 +557,55 @@ $$F(t,X(t))=F(0,X(0))+\int_0^t\left<F_x(s,X(s)),\Phi(s)dW(s)\right>$$
 
 $$+\int_0^t\Big{\{}F_t(s,X(s))+\left<F_x(s,X(s)),\phi(s)\right>$$
 
-$$\left.+\frac{1}{2}\mathrm{Tr}[F_{xx}(s,X(s))(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]\right\}$$
+$$\left.+\frac{1}{2}\mathrm{Tr}[F_{xx}(s,X(s))(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]\right\}ds$$
 
-- __Example __ Let $B$ be a Brownian sheet on $[0,\infty)\times\R$. Then, obviously, $B(t)=\int_0^tdB(s)$. Given $\psi\in L^2(\R)$ s.t. $\psi(x)\geq0$ for each $x\in\R$ and $\int\psi=1$ define $F:L_\rho^2(\R)\rightarrow \R$ by $F(u)=\int_\R \psi(x)u(x)dx$. We should get
+- __Interpretation__ The process $X(t)$ is some $H$-valued process. For concreteness $H$ might be the familiar $\R^n$ or $L^2(\R^n)$. However, recall the cylindrical Wiener process takes values in a "higher" Hilbert space (such as $L^2_\rho(\R^n)$). So if $X(t)$ belongs to one of our familiar Hilbert spaces, but we're integrating against a cylindrical Wiener process, we need some transformation $\Phi$ that maps the "misbehaved" cylindrical Wiener process into something more manageable (something $H$-valued in particular). This way both integrals above return $H$-valued processes and, thus, their sum is also an $H$-valued process. This is consistent with the statement that $X(t)$ is $H$-valued. For each $t$, the function $F(t)$ takes values from $H$ and maps them to $\R$ in a sufficiently smooth manner. This allows us to use the "change of variables" formula above (It&ocirc;'s formula). Note that the inner product in this formula is with respect to $H$.
 
-$$W(t)=F(B(t))=\int_\R\psi(x)B(t,x)dx$$
+- __Example __ Let $B$ be a Brownian sheet on $[0,\infty)\times\R$. Then, obviously, $B(t)=\int_0^tdB(s)$. Given a nonnegative $\psi\in L^2(\R)$ define $F:L_\psi^2(\R)\rightarrow \R$ by $F(u)=\int_\R \psi(x)u(x)dx$. We should get
 
-is a standard one dimensional Brownian motion. For the sake of applying It&ocirc;'s formula, we note $F_t=0$ and $F_u, F_{uu}$ are linear functionals given by the functional derivatives
+$$W(t)=F(B(t))=\int_\R\psi(x)B(t,x)dx,$$
 
-$$F_u v\equiv \lim_{\epsilon\rightarrow0}\frac{1}{\epsilon}(F(u+\epsilon v)-F(u))$$
+a one dimensional Wiener process. This is obviously the case from the above definition of a Brownian sheet. However, for the sake of applying It&ocirc;'s formula, we note $F_t=0$ and set $\|v\|_{L_\psi^1}\equiv\int v(x)\psi(x)dx$ so that $F_u, F_{uu}$ are given by
 
-$$=\lim_{\epsilon\rightarrow0}\frac{1}{\epsilon}\int_\R\epsilon \psi(x)v(x)dx=\int_\R \psi(x)v(x)dx=F(v),$$
+$$F_u(v)\equiv \lim_{\epsilon\rightarrow0}\frac{1}{\|\epsilon v\|_{L_\psi^1}}(F(u+\epsilon v)-F(u))$$
 
-$$F_{uu}(v)\equiv \lim_{\epsilon\rightarrow0}\frac{1}{\epsilon}(F_u(u+\epsilon v)-F_u(u))$$
+$$=\lim_{\epsilon\rightarrow0}\frac{1}{\|\epsilon v\|_{L_\psi^1}}\int_\R\epsilon \psi(x)v(x)dx=1,$$
 
-$$=\int_\R \psi(x)v(x)dx=F_u(v), \ v\in L^2(\R).$$
+$$F_{uu}(v)\equiv \lim_{\epsilon\rightarrow0}\frac{1}{\|\epsilon v\|_{L_\psi^1}}(F_u(u+\epsilon v)-F_u(u))=0$$
 
-Therefore 
+for each $v\in L_\psi^2$. In this case $X(t)$ is a cylindrical Wiener process and is hence $L_\psi^2$ valued. Also, since $F$ is mapping objects from $L_\psi^2$ to $\R$, we know the inncer product in It&ocirc;'s formula is with respect to $L_\psi^2$. Therefore, applying It&ocirc;'s formula, we get 
 
-$$F(B)=F(B(0))+\int_0^t\left<F_u(B(s)),dB(s)\right>+\frac{1}{2}\mathrm{Tr}(F_{uu}(B(s))I)ds$$
+$$F(B)=F(B(0))+\int_0^t\left<F_u(B(s)),dB(s)\right>_{L_\psi^2}+\frac{1}{2}\mathrm{Tr}(F_{uu}(B(s))I)ds$$
 
-$$=\int_0^t\left(\left<\int_\R\psi(x)B(s,x) dx,dB(s)\right>+\frac{1}{2}\int_\R\psi(x)B(s,x)dx\right)ds$$
+$$=\int_0^t\left<1,dB(s)\right>_{L_\psi^2}=\int_0^t\int_\R\psi(x)dB(s,x)dx=\int_\R\psi(x)\int_0^tdB(s,x)dx$$
 
-$$=\int_0^t\left<W(s),dB(s)\right>$$
+$$=\int_\R\psi(x)B(t,x)dx$$
 
-- Collecting a few things I keep forgetting:
+as desired. $\triangle$
 
-  - Recall that,  in general, a space is __separable__ if it admits a countably dense subset.
-    
-  - For a separable Banach space $E$ with norm $\|\cdot\|$, an $E$-valued random variable $X$ on $(\Omega,\mathscr{F},\mathbb{P})$ is called __Bochner integrable__ if the real valued random variable $\|X\|$ is Lebesgue integrable, which occurs when
+- __Another example __ Now suppose we are working with
 
-$$\int_\Omega\|X(\omega)\|\mathbb{P}(d\omega)<\infty.$$
+$$\mathfrak{n}(t,z)=m(z)\mathfrak{n}(t,z)dt+\eta\mathfrak{n}(t,z)dB(t,z).$$
 
-  - $X(t)$ is a __stochastically continuous__ process on $I$ if for each $t_0\in I$ and $\epsilon>0$ the deterministic function $f_{X,t_0,\epsilon}(t)=\mathbb{P}(\|X(t)-X(t_0)\|\geq\epsilon)$ vanishes as $t\rightarrow t_0$. That is, for each $\delta>0$ there exists a $\rho>0$ s.t.
+In this case $\mathfrak{n}(0)=X(0)$ and $\mathfrak{n}(t)=X(t)$ are $L^2(\R)$-valued, $\phi(t)=m\mathfrak{n}(t)$ is also $L^2(\R)$-valued and $\Phi(t):L^2_{\mathfrak{n}(t)}(\R)\rightarrow L^2(\R)$ defined by $B\mapsto\eta\mathfrak{n}(t)B$ for each $t$ converts the cylindrical Wiener process $B(t,z)$ into a $L^2(\R)$-valued random variable. We define $F:L^2(\R)\rightarrow\R$ by $F(v)=\int_\R |v(x)|dx$ so that $F_t=0$ and
 
-$$\mathbb{P}(\|X(t)-X(t_0)\|\geq\epsilon)\leq\delta \ \ \forall \ \ t\in[t_0-\rho,t_0+\rho]\cap I.$$
+$$F_u(v)=\lim_{\epsilon\rightarrow0}\frac{1}{\|\epsilon v\|_1}(F(u+\epsilon v)-F(u))$$
 
-  - $W$ is a $U$-valued $Q$-Wiener process with respect to $\{\mathscr{F}_t\}_{t\geq0}$.
+$$=\lim_{\epsilon\rightarrow0}\frac{1}{\|\epsilon v\|_1}\int_\R|\epsilon v(x)|dx=1, \ F_{uu}(v)=0.$$
 
-  - $\Phi$ being __stochastically integrable__ implies
-  
-$$\mathbb{P}\left(\int_0^T\|\Phi(s)\|^2_{L_2^0}ds<\infty\right)=1.$$
+Then, applying It&ocirc;'s formula,
 
-where $\Phi(t)\in L_2^0$ for each $t\in[0,T]$. That is, $\Phi(t)$ maps elements from the reproducing kernel of $U$ (the Hilbert space $U_0=Q^{1/2}(U)$) to $H$. Hence $\Phi Q^{1/2}\in L_2(U,H)$, the space of all Hilbert-Schmidt operators from the separable Hilbert space $U$ to the separable Hilbert space $H$. The $L_2^0$-norm is given by
+$$F(\mathfrak{n}(t))=F(\mathfrak{n}(0))+\int_0^t\left<1,\eta\mathfrak{n}(t) dB(s)\right>_{L^2}+\int_0^t\left<1,m(z)\mathfrak{n}(s)\right>ds$$
 
-$$\|\Phi(s)\|_{L_2^0}^2=\sum_{h,k}\lambda_h|\left<\Phi e_h,f_k\right>|^2$$
+$$=n(0)+\eta\int_0^tn(s)\int_\R p(s,z)dB(s,z)+\int_0^tn(t)\int_\R m(z)p(s,z)ds$$
 
-$$=\|\Phi Q^{1/2}\|^2_{L_2(U,H)}=\mathrm{Tr}[(\Phi Q^{1/2})(\Phi Q^{1/2})^*]$$
+$$=n(0)\int_0^tn(s)\overline{m}^{(s)}ds+\eta\int_0^tn(s)\overline{dB(s)}^{(s)}.$$
 
-where the $\{e_j\}$ and $\{f_j\}$ are complete orthonormal systems for $U$ and $H$ and the $\lambda_j$ are the eigenvalues of $Q$.
+Thus, the real valued process $n(t)$ satisfies the sde
 
-  - A comparison to SDE:
-  
-My primary reference for SDE is &Oslash;ksendal. Here, stochastic integration is defined for functions $f:[0,\infty)\times\Omega\rightarrow\R$ that satisfy
+$$dn=n\tilde{m}(t)dt+\tilde\eta(t) ndW$$
 
-  1. $(t,\omega)\mapsto f(t,\omega)$ is $\mathcal{B}([0,\infty)])\times$
-
-
-the notion of stochastic integrability introduced above is replaced with
+where $W$ is a standard one dimensional Brownian motion, $\tilde m(t)$ is the Malthusian fitness of the whole population (which is the average Malthusian fitness across $z$ at time $t$) and $\tilde\eta(t)$ takes into account that $\overline{dB(t)}^{(t)}$ has variance proportional to $t$, evolving in time. Because of this, $n(t)$ is __not__ a geometric Brownian motion as intuition might suggest.
 
 $$PART \ II: \ SOLUTIONS \ OF \ SPDE$$
 
@@ -622,7 +613,11 @@ $$PART \ II: \ SOLUTIONS \ OF \ SPDE$$
 
 ## 6.1 Strong, weak, and mild solutions
 
-$$\left\{\begin{matrix}dX(t)=(AX(t)+f(t))dt+B(X(t))dW(t) \\ X(0)=\xi\end{matrix}\right.$$
+Let $H$ ($=L^2(\R)$) and $U$ ($=L^2_\rho(\R)$) be Hilbert spaces, $Q$ a self-adjoint nonnegative operator on $U$ and $W$ a $Q$-Wiener process on $U_1$ ($=L^2_\rho(\R)$) $\supset U$ and $U_0=Q^{1/2}U$.
+
+$$\left\{\begin{matrix}dX(t)=AX(t)dt+B(X(t))dW(t) \\ X(0)=\xi\end{matrix}\right.$$
+
+$A:D(A)\subset H\rightarrow H$ the infitesimal generator of a strongly continuous semigroup $S(\cdot)$, $\xi$ an $H$-valued random variable and $B:D(B)\subset H\rightarrow L_2^0=L_2(U_0,H)$.
 
 $$APPENDIX$$
 
