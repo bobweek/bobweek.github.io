@@ -181,13 +181,13 @@ are uncorrelated zero-mean random variables with unit variance. The convergence 
 
 The primary reason for my study of SPDE is to formally treat PDE subjected to a specific kind of noise. In particular, the noise I wish to account for, denoted by $\W$ where $\W(x,t)\in\R$ for each $x\in U$ ($U$ is usually some subset of $\R^n$) and $t\in[0,\infty)$, should satisfy the following properties:
 
-  1. For every $x\in U,0\leq s\leq t\in[0,\infty)$
+  1. For every $x\in U,s\leq t\in[0,\infty)$
 
 $$\L(\W(x,t)-\W(x,s))=\L(\W(x,t-s))=\mathscr{N}(0,t-s).$$
 
   2. For any $x,y\in U$ and $t,s\in[0,\infty)$
   
-$$\E(\W(x,t)\W(y,s))=(t\wedge s)\delta(x-y)=0.$$
+$$\E(\W(x,t)\W(y,s))=(t\wedge s)\delta(x-y).$$
 
 That is, $\W(x,t)$ is a set of independent real valued Brownian motions indexed by $x\in U$. Previous definitions of the Wiener process are insufficient to capture this since $\W(t)=\{\W(x,t):x\in U\}$ is not valued in a convenient Hilbert space. In particular, my prefered Hilbert space is $L^2(\R^n)$, but, even for $n=1$, $\int_\R\W(t,x)dx$ is not finite wp1! To circumvent this, Da Prato & Zabczyk give the following definition 
 
@@ -331,7 +331,7 @@ $$g(x,y)=\E[X(x)X(y)], \ x,y\in\O.$$
 
 $$g((x_1,x_2),(y_1,y_2))\equiv g_1(x_1,y_1)g(x_2,y_2), \ (x_1,y_1)\in\O_1, \ (x_2,y_2)\in\O_2$$
 
-is positive definite on $\O_1\times\O_2$. $$
+is positive definite on $\O_1\times\O_2$.
 
 - __Example 4.12: (Brownian sheets on $[0,\infty)\times\O$)__ Let $\O\subset\R^n$ and $g$ a positive definite function on $\O$. By prop 4.11
 
@@ -341,7 +341,7 @@ is also positive definite and there exists a Gaussian family $W(t,x), \ t\geq0, 
 
 $$\E[W(t,x)W(s,y)]=(t\wedge s)g(x,y).$$
 
-For each $x$, $W(\cdot,x)$ has all the properties of a real valued Wiener process except for the regularity of trajectories. To prove the existence of a proper modification requires additional properties of $g$. $$
+For each $x$, $W(\cdot,x)$ has all the properties of a real valued Wiener process except for the regularity of trajectories. To prove the existence of a proper modification requires additional properties of $g$.
 
 ## 4.1.4. Spatially homogeneous Wiener processes
 

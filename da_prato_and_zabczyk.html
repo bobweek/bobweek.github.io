@@ -434,13 +434,13 @@ div.tocify {
 <h2>4.1.2 Generalized Wiener processes over a Hilbert space</h2>
 <p>The primary reason for my study of SPDE is to formally treat PDE subjected to a specific kind of noise. In particular, the noise I wish to account for, denoted by <span class="math inline">\({\mathscr{W}}\)</span> where <span class="math inline">\({\mathscr{W}}(x,t)\in{\mathbb{R}}\)</span> for each <span class="math inline">\(x\in U\)</span> (<span class="math inline">\(U\)</span> is usually some subset of <span class="math inline">\({\mathbb{R}}^n\)</span>) and <span class="math inline">\(t\in[0,\infty)\)</span>, should satisfy the following properties:</p>
 <ol style="list-style-type: decimal">
-<li>For every <span class="math inline">\(x\in U,0\leq s\leq t\in[0,\infty)\)</span></li>
+<li>For every <span class="math inline">\(x\in U,s\leq t\in[0,\infty)\)</span></li>
 </ol>
 <p><span class="math display">\[{\mathscr{L}}({\mathscr{W}}(x,t)-{\mathscr{W}}(x,s))={\mathscr{L}}({\mathscr{W}}(x,t-s))=\mathscr{N}(0,t-s).\]</span></p>
 <ol start="2" style="list-style-type: decimal">
 <li>For any <span class="math inline">\(x,y\in U\)</span> and <span class="math inline">\(t,s\in[0,\infty)\)</span></li>
 </ol>
-<p><span class="math display">\[{\mathbb{E}}({\mathscr{W}}(x,t){\mathscr{W}}(y,s))=(t\wedge s)\delta(x-y)=0.\]</span></p>
+<p><span class="math display">\[{\mathbb{E}}({\mathscr{W}}(x,t){\mathscr{W}}(y,s))=(t\wedge s)\delta(x-y).\]</span></p>
 <p>That is, <span class="math inline">\({\mathscr{W}}(x,t)\)</span> is a set of independent real valued Brownian motions indexed by <span class="math inline">\(x\in U\)</span>. Previous definitions of the Wiener process are insufficient to capture this since <span class="math inline">\({\mathscr{W}}(t)=\{{\mathscr{W}}(x,t):x\in U\}\)</span> is not valued in a convenient Hilbert space. In particular, my prefered Hilbert space is <span class="math inline">\(L^2({\mathbb{R}}^n)\)</span>, but, even for <span class="math inline">\(n=1\)</span>, <span class="math inline">\(\int_{\mathbb{R}}{\mathscr{W}}(t,x)dx\)</span> is not finite wp1! To circumvent this, Da Prato &amp; Zabczyk give the following definition</p>
 <ul>
 <li><strong>Def:</strong> Any transformation that maps <span class="math inline">\(a\in{\mathscr{U}}\)</span> to <span class="math inline">\(W_a\)</span>, a real valued Wiener processes on <span class="math inline">\([0,\infty)\)</span>, that is continuous in the sense</li>
@@ -536,14 +536,14 @@ div.tocify {
 <li><strong>Corr 4.11:</strong> If <span class="math inline">\(g_1\)</span> and <span class="math inline">\(g_2\)</span> are positive definite on <span class="math inline">\({\mathscr{O}}_1\)</span> and <span class="math inline">\({\mathscr{O}}_2\)</span> then</li>
 </ul>
 <p><span class="math display">\[g((x_1,x_2),(y_1,y_2))\equiv g_1(x_1,y_1)g(x_2,y_2), \ (x_1,y_1)\in{\mathscr{O}}_1, \ (x_2,y_2)\in{\mathscr{O}}_2\]</span></p>
-<p>is positive definite on <span class="math inline">\({\mathscr{O}}_1\times{\mathscr{O}}_2\)</span>. $$</p>
+<p>is positive definite on <span class="math inline">\({\mathscr{O}}_1\times{\mathscr{O}}_2\)</span>.</p>
 <ul>
 <li><strong>Example 4.12: (Brownian sheets on <span class="math inline">\([0,\infty)\times{\mathscr{O}}\)</span>)</strong> Let <span class="math inline">\({\mathscr{O}}\subset{\mathbb{R}}^n\)</span> and <span class="math inline">\(g\)</span> a positive definite function on <span class="math inline">\({\mathscr{O}}\)</span>. By prop 4.11</li>
 </ul>
 <p><span class="math display">\[(t\wedge s)g(x,y), \ (t,x),(s,y)\in[0,\infty)\times{\mathscr{O}},\]</span></p>
 <p>is also positive definite and there exists a Gaussian family <span class="math inline">\(W(t,x), \ t\geq0, \ x\in{\mathscr{O}}\)</span> s.t.</p>
 <p><span class="math display">\[{\mathbb{E}}[W(t,x)W(s,y)]=(t\wedge s)g(x,y).\]</span></p>
-<p>For each <span class="math inline">\(x\)</span>, <span class="math inline">\(W(\cdot,x)\)</span> has all the properties of a real valued Wiener process except for the regularity of trajectories. To prove the existence of a proper modification requires additional properties of <span class="math inline">\(g\)</span>. $$</p>
+<p>For each <span class="math inline">\(x\)</span>, <span class="math inline">\(W(\cdot,x)\)</span> has all the properties of a real valued Wiener process except for the regularity of trajectories. To prove the existence of a proper modification requires additional properties of <span class="math inline">\(g\)</span>.</p>
 </div>
 <div id="spatially-homogeneous-wiener-processes" class="section level2">
 <h2>4.1.4. Spatially homogeneous Wiener processes</h2>
