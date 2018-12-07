@@ -23,17 +23,17 @@ output:
 \newcommand{\L}{\mathscr{L}}
 \newcommand{\O}{\mathscr{O}}
 
-
-
 # Motivation
+
+The initial goal of this investigation was to derive the Price equation in continuous time with stochasticity and to compare the result to diffusion approximations of the discrete time breeders equation.
 
 Consider a biological population where each individual has a real valued trait $z$. Let $\mathfrak{n}_t(z)$ denote the abundance density of the trait value $z$ at time $t$. The total abundance of the population $n_t$ is given by $n_t=\int\mathfrak{n}_t(z)dz$. For each fixed $z\in \R$ let $\mathfrak{n}_t(z)$ be a real valued stochastic process satisfying the SDE
 
 $$d\mathfrak{n}_t(z)=m(z)\mathfrak{n}_t(z)dt+\eta\mathfrak{n}_t(z)dB_t(z), \ \ \mathfrak{n}_0(z)>0.$$
 
-The function $m\in L^\infty(\R)$ maps the trait value $z$ to the Malthusian fitness of individuals with trait $z$. The number $0\leq\eta<\infty$ denotes the magnitude of demographic stochasticity and $B_t(z)$ is a one dimensional Brownian motion for each fixed $z\in\R$. For now we assume perfect heritability which may be implied by the more specific assumptions that the population is asexually reproducing and the effects of mutation and epigenetics are absent. This means the set $\{\mathfrak{n}_t(z)\}_{z\in\R}$ consists of real valued independent stochastic processes.
+The function $m\in L^\infty(\R)$ maps the trait value $z$ to the Malthusian fitness of individuals with trait $z$. The number $0\leq\eta<\infty$ denotes the magnitude of demographic stochasticity and $B_t(z)$ is a one dimensional standard Brownian motion for each fixed $z\in\R$. For now we assume perfect heritability which may be implied by the more specific assumptions that the population is asexually reproducing and the effects of mutation and epigenetics are absent. This means the set $\{\mathfrak{n}_t(z)\}_{z\in\R}$ consists of real valued independent stochastic processes.
 
-The solution to $d\mathfrak{n}_t(z)$ can be found in [&Oslash;ksendal](http://dx.doi.org/10.1007/978-3-642-14394-6), example 5.1.1, which is repeated here:
+The solution to $d\mathfrak{n}_t(z)$ can be found in [&Oslash;ksendal](http://dx.doi.org/10.1007/978-3-642-14394-6) (example 5.1.1) which is repeated here:
 
 -------------------------------------------------------------------------------
 
@@ -51,29 +51,27 @@ $$d(\ln \mathfrak{n}_t)=\frac{1}{\mathfrak{n}_t}d\mathfrak{n}_t+\frac{1}{2}\left
 
 $$=\frac{d\mathfrak{n}_t}{\mathfrak{n}_t}-\frac{1}{2}\eta^2dt.$$
 
-Combining these results, we find $\mathfrak{n}_t=\mathfrak{n}_0\exp((m-\frac{1}{2}\eta^2)t+\eta B_t)$, which is a geometric Brownian motion.
+Combining these results, we find $\mathfrak{n}_t=\mathfrak{n}_0\exp((m-\frac{1}{2}\eta^2)t+\eta B_t)$, which is a [geometric Brownian motion](http://www.randomservices.org/random/brown/Geometric.html) (for each fixed $z\in\R$).
 
 -------------------------------------------------------------------------------
 
-Since we assumed perfect heritability and that fitness for each trait is constant in time, the solution $\mathfrak{n}_t(z)$ has been found for each $z$. We can rewrite $n_t$ as
+Since we assumed perfect heritability and that fitness for each trait is constant in time, the solution $\mathfrak{n}_t(z)$ has been found for each $z$. Thus, the total abundance is given as
 
-$$\int_\R\mathfrak{n}_t(z)dz=\int_\R\mathfrak{n}_0(z)\exp((m(z)-\frac{1}{2}\eta^2)t+\eta B_t(z))dz.$$
+$$n_t=\int_\R\mathfrak{n}_t(z)dz=\int_\R\mathfrak{n}_0(z)\exp((m(z)-\frac{1}{2}\eta^2)t+\eta B_t(z))dz.$$
 
 Since $\mathfrak{n}_t(z)>0$ for $t\geq0, \ z\in\R$, we can use Tonelli's theorem to justify
 
-$$\E n_t=\int_\R\E\mathfrak{n}_t(z)dz.$$
+$$\E n_t=\int_\R\E[\mathfrak{n}_t(z)]dz.$$
 
-Using the properties of geometric Brownian motion, we know that $\mathfrak{n}_t(z)$ is a log-normal random variable with mean $\E(\mathfrak{n}_0(z))e^{m(z)t}$. Writing $p_t(z)=\mathfrak{n}_t(z)/n_t$, we have
+Using the properties of geometric Brownian motion we know that, for each fixed $z\in\R$ and $t\geq0$, $\mathfrak{n}_t(z)$ is a log-normal random variable with mean $\E[\mathfrak{n}_t(z)]=e^{m(z)t}\E[\mathfrak{n}_0(z)]$. Writing $p_t(z)=\mathfrak{n}_t(z)/n_t$, we have
 
-$$\E n_t=\E\int_\R\mathfrak{n}_0e^{mt}dz=\E\int_\R n_0p_0e^{mt}dz$$
+$$\E n_t=\int_\R e^{m(z)t}\E[\mathfrak{n}_0(z)]dz=\int_\R e^{m(z)t}\E[n_0p_0(z)]dz.$$
 
-$$=\E\left(n_0\int_\R p_0e^{mt}dz\right).$$
+Assuming the random number $n_0$ and the random function $p_0$ are independent, we have
 
-Assuming the random numbers $n_0$ and $p_0$ are independent, we have
+$$\E n_t=\left(\E n_0\right)\int_\R e^{m(z)t}\E[p_0(z)]dz.$$
 
-$$\E n_t=\E(n_0)\E\overline{e^{mt}}^{(0)}$$
-
-where $\overline{e^{mt}}^{(s)}=\int_\R p_s(z)e^{m(z)t}dz$. However, it would be useful to calculate the SDE $dn_t$ and the associated $dp_t(z)$, especially since, in classical quantitative genetics, $p_t$ is assumed to be Gaussian. This approach would relax this assumption. However, to calculate $n_t$ we need an appropriate chain rule. For functions on finite dimensionsional spaces, of course, this is given by It&ocirc;'s finite dimensional formula which can be found in almost any book on SDE. However, $n_t$ is not a function on a finite dimensional space. To see this note that 
+Carefully note that $n_t$ is a geometric Brownian motion only when $m(z)=m_0\in\R$ is constant with respect to $z$. Hence, in general $n_t$ does not share the same nice qualities as a geometric Brownian motion. It would be interesting to formulate and solve the SDE $dn_t$ and the associated SPDE $dp_t(z)$. This is especially true for $dp_t(z)$ since in classical quantitative genetics $p_t(z)$ is assumed to be a Gaussian probability density wrt $z$. Developing an SPDE for $dp_t(z)$ would relax this assumption while still capturing stochasticity derived from demography. However, it also requires us to calculate $n_t$ from $\mathfrak{n}_t(z)$ for which we need an appropriate chain rule. For functions on finite dimensionsional spaces, of course, this is given by It&ocirc;'s finite dimensional formula which can be found in almost any book on SDE. However, $n_t$ is not a function on a finite dimensional space. To see this note that 
 
 $$\mathfrak{n}_0(z)\in L^1(\R)\cap L^\infty(\R)$$
 
@@ -116,7 +114,6 @@ Most of the material that follows comes from [Stochastic equations in infinite d
   - $\Q\in L(U)$... covariance operator of a generalized Wiener process
   - $U_0=Q^{1/2}(U)$... the reproducing kernel of a $U$-valued Wiener process
   - $\U_0=\Q^{1/2}(U)$... the reproducing kernel of a generalized Wiener process
-  - $\triangle$... denotes the end of a statement 
 
 # 4.1 Wiener processes
 
@@ -127,9 +124,9 @@ Most of the material that follows comes from [Stochastic equations in infinite d
   
 $$\L(W(t)-W(s))=\L(W(t-s)), \ t\geq s\geq0.$$  
 
-  3. $\L(W(t))=\L(-W(t)), \ t\geq0. \ \triangle$
+  3. $\L(W(t))=\L(-W(t)), \ t\geq0. \ $
 
-- __Def:__ (extension to a general linear (topological) space $K$ with $\sigma$-algebra $\mathscr{B}(K)$) A $K$-valued stochastic process $W(t), \ t\geq0$ satisfying 1.-3. is a __Wiener process__ in $K$. $\triangle$
+- __Def:__ (extension to a general linear (topological) space $K$ with $\sigma$-algebra $\mathscr{B}(K)$) A $K$-valued stochastic process $W(t), \ t\geq0$ satisfying 1.-3. is a __Wiener process__ in $K$.
 
 ## 4.1.1 Hilbert space valued Wiener processes 
 
@@ -150,7 +147,7 @@ where $Q$ is the covariance operator of the Gaussian measure $\L(W(1))$. The ope
   1. $W(0)=0$.
   2. $W$ has continuous trajectories.
   3. $W$ has independent increments.
-  4. $\L(W(t)-W(s))=\mathscr{N}(0,(t-s)Q), \ t\geq s\geq0$. $\triangle$
+  4. $\L(W(t)-W(s))=\mathscr{N}(0,(t-s)Q), \ t\geq s\geq0$. $$
 
 Because of our assumptions about $Q$ and since $U$ has a complete orthonormal system $\{e_k\}\subset U$, there exists a bounded sequence of nonnegative real numbers $\{\lambda_k\}$ s.t. $Qe_k=\lambda_ke_k, \ k\in\mathbb{N}$.
 
@@ -324,17 +321,17 @@ where the $\beta_n$ are independent real standard Brownian motions. From this we
 
 $$\E[W(t,x)W(s,y)]=(t\wedge s)(x\wedge y).$$
 
-Fields $W$ with the above covariance are called __Brownian sheets__ on $[0,\infty)\times[0,\pi]$. $\triangle$
+Fields $W$ with the above covariance are called __Brownian sheets__ on $[0,\infty)\times[0,\pi]$.
 
 - __Proposition 4.10:__ Given an arbitraty set $\O$, a function $g(x,y)$ is positive definite iff there exists a family of random variables $X(x)$ s.t. for distinct $x_1,\dots,x_j\in\O$ the random vector $X(x_1),\dots,X(x_j)$ is Gaussian with mean zero and 
 
-$$g(x,y)=\E[X(x)X(y)], \ x,y\in\O. \ \triangle$$
+$$g(x,y)=\E[X(x)X(y)], \ x,y\in\O.$$
 
 - __Corr 4.11:__ If $g_1$ and $g_2$ are positive definite on $\O_1$ and $\O_2$ then
 
 $$g((x_1,x_2),(y_1,y_2))\equiv g_1(x_1,y_1)g(x_2,y_2), \ (x_1,y_1)\in\O_1, \ (x_2,y_2)\in\O_2$$
 
-is positive definite on $\O_1\times\O_2$. $\triangle$
+is positive definite on $\O_1\times\O_2$. $$
 
 - __Example 4.12: (Brownian sheets on $[0,\infty)\times\O$)__ Let $\O\subset\R^n$ and $g$ a positive definite function on $\O$. By prop 4.11
 
@@ -344,7 +341,7 @@ is also positive definite and there exists a Gaussian family $W(t,x), \ t\geq0, 
 
 $$\E[W(t,x)W(s,y)]=(t\wedge s)g(x,y).$$
 
-For each $x$, $W(\cdot,x)$ has all the properties of a real valued Wiener process except for the regularity of trajectories. To prove the existence of a proper modification requires additional properties of $g$. $\triangle$
+For each $x$, $W(\cdot,x)$ has all the properties of a real valued Wiener process except for the regularity of trajectories. To prove the existence of a proper modification requires additional properties of $g$. $$
 
 ## 4.1.4. Spatially homogeneous Wiener processes
 
@@ -363,9 +360,9 @@ $$\hat\mu(\lambda)=\int_He^{i\left<\lambda,x\right>}\mu(dx), \ \ \lambda\in H.$$
   1. $\phi$ is a continuous, positive definite function s.t. $\phi(0)=1$.
   2. For any $\epsilon>0$ there exists a nonnegative nuclear operator $S_\epsilon$ s.t.
   
-$$1-\mathfrak{Re}\phi(\lambda)\leq\epsilon, \ \ \forall \ \lambda:\left<S_\epsilon\lambda,\lambda\right>\leq1.$$
+$$1-\Re\phi(\lambda)\leq\epsilon, \ \ \forall \ \lambda:\left<S_\epsilon\lambda,\lambda\right>\leq1.$$
 
-Conversly, if $\phi$ satisfies 1. & 2., then it is a characteristic function of some probability measure on $U$. $\triangle$
+Conversly, if $\phi$ satisfies 1. & 2., then it is a characteristic function of some probability measure on $U$.
 
 Let $\mu$ be a finite nonnegative measure on $\R^n$ and
 
@@ -418,7 +415,7 @@ where $\lambda_n$ denotes the Lebesgue measure on $\R^n$. The space $U_\Gamma$ i
 
 $$\W=\left(\frac{1}{2\pi}\right)^{n/2}\beta(t)\lambda_n$$
 
-where $\beta(t)$ is a standard Brownian motion. $\triangle$
+where $\beta(t)$ is a standard Brownian motion.
 
 - __Example 4.17:__ Let $\mu=\lambda_n$, then
 
@@ -430,7 +427,7 @@ $$(\Gamma,\phi*\psi_{(s)})=(2\pi)^{n/2}\int_{\R^n}\phi(-x)\psi_{(s)}(x)dx$$
 
 $$=(2\pi)^{n/2}\int_{\R^n}\phi(-x)\psi(-x)dx=(2\pi)^{n/2}\int_{\R^n}\phi(x)\psi(x)dx$$
 
-Hence, if $\W=(2\pi)^{-n/2}\beta(t)\delta_0$ then $(2\pi)^{n/2}\W$ is a cylindrical Wiener process on $L^2(\R^n)$. $\triangle$
+Hence, if $\W=(2\pi)^{-n/2}\beta(t)\delta_0$ then $(2\pi)^{n/2}\W$ is a cylindrical Wiener process on $L^2(\R^n)$.
 
 ## 4.1.5 Complements on a Brownian sheet
 
@@ -473,7 +470,7 @@ $$\int_0^t\Phi(s)dW(s)\equiv\sum_{m=0}^{k-1}\Phi_m(W_{t_{m+1}\wedge t}-W_{t_m\we
 
 and is denoted by $\Phi\cdot W(t), \ t\in[0,T]$. 
 
-- __Comparison to SDE:__ The only difference is that $W(t)$ is a real valued standard Wiener process (so that $Q=1$) and the $\Phi_m$ are real valued random variables. $\triangle$
+- __Comparison to SDE:__ The only difference is that $W(t)$ is a real valued standard Wiener process (so that $Q=1$) and the $\Phi_m$ are real valued random variables.
 
 The subspace $U_0\equiv Q^{1/2}(U)$ of $U$, endowed with the inner product
 
@@ -519,7 +516,7 @@ Any such process is called __stochastically integrable__ on $[0,T]$. They form a
 
 - __Lemma 4.24:__ Assume that $\Phi\in \mathscr{N}_W^2$ and $\tau$ is an $\mathscr{F}_\tau$-stopping time s.t. $\mathbb{P}(\tau\leq T)=1$. Then
 
-$$\int_0^tI_{[0,\tau]}(s)\Phi(s)dW(s)=\Phi\cdot W(\tau\wedge t), \ \ \ t\in (0,T], \ \mathbb{P}\text{-a.s.} \ \triangle$$
+$$\int_0^tI_{[0,\tau]}(s)\Phi(s)dW(s)=\Phi\cdot W(\tau\wedge t), \ \ \ t\in (0,T], \ \mathbb{P}\text{-a.s.}$$
 
 Assuming the above weak condition, define
 
@@ -587,31 +584,37 @@ $$=\int_0^t\left<1,dB(s)\right>_{L_\psi^2}=\int_0^t\int_\R\psi(x)dB(s,x)dx=\int_
 
 $$=\int_\R\psi(x)B(t,x)dx$$
 
-as desired. $\triangle$
+as desired.
 
 - __BW: (returning to the original problem) __ Now suppose we are working with
 
 $$\mathfrak{n}(t,z)=m(z)\mathfrak{n}(t,z)dt+\eta\mathfrak{n}(t,z)dB(t,z).$$
 
-In this case $\mathfrak{n}(0)=X(0)$ and $\mathfrak{n}(t)=X(t)$ are $L^2(\R)$-valued, $\phi(t)=m\mathfrak{n}(t)$ is also $L^2(\R)$-valued and $\Phi(t):L^2_{\mathfrak{n}(t)}(\R)\rightarrow L^2(\R)$ defined by $B\mapsto\eta\mathfrak{n}(t)B$ for each $t$ converts the cylindrical Wiener process $B(t,z)$ into a $L^2(\R)$-valued random variable. We define $F:L^2(\R)\rightarrow\R$ by $F(v)=\int_\R |v(x)|dx$ so that $F_t=0$ and
+In this case $\mathfrak{n}(0)=X(0)$, $\mathfrak{n}(t)=X(t)$ and $\phi(t)=m\mathfrak{n}(t)$ are $L^2(\R)$-valued and $\Phi(t):L^2_{\mathfrak{n}(t)}(\R)\rightarrow L^2(\R)$ defined by $B\mapsto\eta\mathfrak{n}(t)B$ for each $t$ converts the cylindrical Wiener process $B(t,z)$ into a $L^2(\R)$-valued random variable. We define $F:L^2(\R)\rightarrow\R$ by $F(v)=\int_\R |v(x)|dx$ so that $F_t=0$ and
 
 $$F_u(v)=\lim_{\epsilon\rightarrow0}\frac{1}{\|\epsilon v\|_1}(F(u+\epsilon v)-F(u))$$
 
-$$=\lim_{\epsilon\rightarrow0}\frac{1}{\|\epsilon v\|_1}\int_\R|\epsilon v(x)|dx=1, \ F_{uu}(v)=0.$$
+$$=\lim_{\epsilon\rightarrow0}\frac{1}{\|\epsilon v\|_1}\int_\R|\epsilon v(x)|dx=1,$$
+
+$$F_{uu}(v)=0.$$
 
 Then, applying It&ocirc;'s formula,
 
 $$F(\mathfrak{n}(t))=F(\mathfrak{n}(0))+\int_0^t\left<1,\eta\mathfrak{n}(t) dB(s)\right>_{L^2}+\int_0^t\left<1,m(z)\mathfrak{n}(s)\right>ds$$
 
-$$=n(0)+\eta\int_0^tn(s)\int_\R p(s,z)dB(s,z)+\int_0^tn(t)\int_\R m(z)p(s,z)ds$$
-
-$$=n(0)\int_0^tn(s)\overline{m}^{(s)}ds+\eta\int_0^tn(s)\overline{dB(s)}^{(s)}.$$
+$$=n(0)+\eta\int_0^tn(s)\int_\R p(s,z)dB(s,z)dz+\int_0^tn(t)\int_\R m(z)p(s,z)dzds$$
 
 Thus, the real valued process $n(t)$ satisfies the sde
 
-$$dn=n\tilde{m}(t)dt+\tilde\eta(t) ndW$$
+$$dn(t)=n(t)\tilde{m}(t)dt+n(t)\tilde\eta(t)dW(t)$$
 
-where $W$ is a standard one dimensional Brownian motion, $\tilde m(t)$ is the Malthusian fitness of the whole population (which is the average Malthusian fitness across $z$ at time $t$) and $\tilde\eta(t)$ takes into account that $\overline{dB(t)}^{(t)}$ has variance proportional to $t$, evolving in time. Because of this, $n(t)$ is __not__ a geometric Brownian motion as intuition might suggest.
+where
+
+$$\tilde m(t)=\int_\R m(z)p(t,z)dz,$$
+
+$$\tilde\eta(t)dW(t)=\eta\int_\R p(t,z)dB(t,z)dz$$
+
+and $W$ is a standard one dimensional Brownian motion. Since the Malthusian fitness of the whole population $\tilde m$ is a function of time, $n(t)$ is __not__ a geometric Brownian motion as intuition might suggest.
 
 $$PART \ II: \ SOLUTIONS \ OF \ SPDE$$
 
@@ -637,7 +640,7 @@ $$\|T\|\equiv\sup_{x\in E}\frac{\|Tx\|}{\|x\|}.$$
 
 $$\sum_{j=1}^\infty\|a_j\|\|\phi_j\|<\infty$$
 
-and $T$ has the representation $Tx=\sum_ja_j\phi_j(x), \ x\in E$. $\triangle$
+and $T$ has the representation $Tx=\sum_ja_j\phi_j(x), \ x\in E$.
 
 The space of all nuclear operators with the norm
 
@@ -651,11 +654,11 @@ $$\mathrm{Tr}T\equiv\sum_j\left<Te_j,e_j\right>$$
 
 $$\sum_j\left<Te_j,e_j\right><\infty.$$
 
-When this occurs $\mathrm{Tr}T=\|T\|_1$. $\triangle$
+When this occurs $\mathrm{Tr}T=\|T\|_1$.
 
 - __Def:__ For two separable Hilbert spaces $U_1$ and $U_2$ with complete orthonormal bases $\{e_k\}\subset U_1$ and $\{f_k\}\subset U_2$, a linear bounded operator $T:U_1\rightarrow U_2$ is said to be __Hilbert-Schmidt__ if
 
-$$\sum_k|Te_k|^2<\infty. \ \triangle$$
+$$\sum_k|Te_k|^2<\infty.$$
 
 The space of all Hilbert-Schmidt operators from $U_1$ to $U_2$, equipped with the norm
 
@@ -667,10 +670,10 @@ $$\left<S,T\right>\equiv\sum_k\left<Se_k,Te_k\right>.$$
 
 - __Notation: (outer product)__ For any vectors $a\in U_1$ and $b\in U_2$, the operation $b\otimes a$ denotes the linear operator defined by
 
-$$b\otimes a:U_1\rightarrow U_2, \ h\mapsto \left<a,h\right>b, \ \ h\in U_1. \  \triangle$$
+$$b\otimes a:U_1\rightarrow U_2, \ h\mapsto \left<a,h\right>b, \ \ h\in U_1.$$
 
 The double sequence $\left\{f_j\otimes e_k\right\}_{j,k\in \mathbb{N}}$ is a complete orthonormal basis in $L_2(E,F)$.
 
 - __Proposition C.4:__ Let $U_1,U_2,U_3$ be separable Hilbert spaces. If $T\in L_2(U_1,U_2)$ and $S\in L_2(U_2,U_3)$ then $ST\in L_1(U_1,U_3)$ and
 
-$$\|ST\|_1\leq\|S\|_2\|T\|_2. \ \triangle$$
+$$\|ST\|_1\leq\|S\|_2\|T\|_2.$$
