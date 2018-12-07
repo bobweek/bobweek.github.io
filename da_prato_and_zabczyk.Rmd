@@ -31,11 +31,13 @@ Consider a biological population where each individual has a real valued trait $
 
 $$d\mathfrak{n}_t(z)=m(z)\mathfrak{n}_t(z)dt+\eta\mathfrak{n}_t(z)dB_t(z), \ \ \mathfrak{n}_0(z)>0.$$
 
-The function $m\in L^\infty(\R)$ maps the trait value $z$ to the Malthusian fitness of individuals with trait $z$. The number $0\leq\eta<\infty$ denotes the magnitude of demographic stochasticity and $B_t(z)$ is a one dimensional Brownian motion for each fixed $z\in\R$. For now we assume perfect heritability which may be implied by the more specific assumptions that the population is asexually reproducing and the effects of mutation and epigenetics are absent. This means the set of processes $\{\mathfrak{n}_t(z)\}$ are independent.
+The function $m\in L^\infty(\R)$ maps the trait value $z$ to the Malthusian fitness of individuals with trait $z$. The number $0\leq\eta<\infty$ denotes the magnitude of demographic stochasticity and $B_t(z)$ is a one dimensional Brownian motion for each fixed $z\in\R$. For now we assume perfect heritability which may be implied by the more specific assumptions that the population is asexually reproducing and the effects of mutation and epigenetics are absent. This means the set $\{\mathfrak{n}_t(z)\}_{z\in\R}$ consists of real valued independent stochastic processes.
 
-The solution to this SDE $d\mathfrak{n}_t(z)$ can be found in &Oslash;ksendal, example 5.1.1, which is repeated here:
+The solution to $d\mathfrak{n}_t(z)$ can be found in [&Oslash;ksendal](http://dx.doi.org/10.1007/978-3-642-14394-6), example 5.1.1, which is repeated here:
 
-The dependency on $z$ is suppressed for clarity. Rearranging, we have
+-------------------------------------------------------------------------------
+
+Fix $z\in\R$ so that $\mathfrak{n}_t(z)$ is viewed as a real valued stochastic process. The dependency on $z$ is suppressed for clarity. Rearranging, we have
 
 $$\frac{d\mathfrak{n}_t}{\mathfrak{n}_t}=mdt+\eta dB_t$$
 
@@ -49,7 +51,11 @@ $$d(\ln \mathfrak{n}_t)=\frac{1}{\mathfrak{n}_t}d\mathfrak{n}_t+\frac{1}{2}\left
 
 $$=\frac{d\mathfrak{n}_t}{\mathfrak{n}_t}-\frac{1}{2}\eta^2dt.$$
 
-Combining these results, we find $\mathfrak{n}_t=\mathfrak{n}_0\exp((m-\frac{1}{2}\eta^2)t+\eta B_t)$, which is a geometric Brownian motion. Since we assumed perfect heritability and that fitness for each trait is constant in time, the solution $\mathfrak{n}_t(z)$ has been found for each $z$. We can rewrite $n_t$ as
+Combining these results, we find $\mathfrak{n}_t=\mathfrak{n}_0\exp((m-\frac{1}{2}\eta^2)t+\eta B_t)$, which is a geometric Brownian motion.
+
+-------------------------------------------------------------------------------
+
+Since we assumed perfect heritability and that fitness for each trait is constant in time, the solution $\mathfrak{n}_t(z)$ has been found for each $z$. We can rewrite $n_t$ as
 
 $$\int_\R\mathfrak{n}_t(z)dz=\int_\R\mathfrak{n}_0(z)\exp((m(z)-\frac{1}{2}\eta^2)t+\eta B_t(z))dz.$$
 
@@ -67,9 +73,7 @@ Assuming the random numbers $n_0$ and $p_0$ are independent, we have
 
 $$\E n_t=\E(n_0)\E\overline{e^{mt}}^{(0)}$$
 
-where $\overline{e^{mt}}^{(s)}=\int_\R p_s(z)e^{m(z)t}dz$. We could use a similar approach to find the variance of $n_t$. However, it would be useful to calculate the SDE $dn_t$ and the associated $dp_t$.
-
-Note that 
+where $\overline{e^{mt}}^{(s)}=\int_\R p_s(z)e^{m(z)t}dz$. However, it would be useful to calculate the SDE $dn_t$ and the associated $dp_t(z)$, especially since, in classical quantitative genetics, $p_t$ is assumed to be Gaussian. This approach would relax this assumption. However, to calculate $n_t$ we need an appropriate chain rule. For functions on finite dimensionsional spaces, of course, this is given by It&ocirc;'s finite dimensional formula which can be found in almost any book on SDE. However, $n_t$ is not a function on a finite dimensional space. To see this note that 
 
 $$\mathfrak{n}_0(z)\in L^1(\R)\cap L^\infty(\R)$$
 
@@ -85,7 +89,11 @@ Hence, H&ouml;lder's inequality implies
 
 $$\|\mathfrak{n}_0^2\|_1\leq\|\mathfrak{n}_0\|_1\|\mathfrak{n}_0\|_\infty<\infty.$$
 
-In particular, $\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}=\|\mathfrak{n}_0\|_2<\infty$ so that $\mathfrak{n}_0\in L^2(\R)$. Because of this we can view $n_t$ as a linear functional on $L^2(\R)$. Therefore, to calculate $dn_t$ from $\mathfrak{n}_t$ we will need an infinite dimensional extension of It&ocirc;'s formula. Developing the theory for this extension will also allow us to work with actual SPDE where, for example, the set of SDE $\{\mathfrak{n}_t(z)\}$ no longer evolve independently. In particular, we'll be able to develop models accounting for imperfect heritability, sexual preference, frequency and density dependent selection, migration and so forth.
+In particular, $\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\right)^{1/2}=\|\mathfrak{n}_0\|_2<\infty$ so that $\mathfrak{n}_0\in L^2(\R)$. Because of this we can view $n_t$ as a linear functional on $L^2(\R)$. Therefore, to calculate $dn_t$ from $\mathfrak{n}_t$ we will need an infinite dimensional extension of It&ocirc;'s formula. 
+
+Developing the theory for this extension will also allow us to work with actual SPDE where, for example, the set of SDE $\{\mathfrak{n}_t(z)\}$ no longer evolve independently. In particular, we'll be able to develop models accounting for imperfect heritability, sexual preference, frequency and density dependent selection, migration and so forth. If done correctly, I believe this approach will result in a beautiful synthesis of contemporary evolutionary and ecological theory. It is this advantage over previous treatments of evolutionary theory that make it worth pursuing, even if the road to this goal is lengthy and difficult.
+
+Most of the material that follows comes from [Stochastic equations in infinite dimensions](https://doi.org/10.1017/CBO9781107295513) by Da Prato & Zabczyk. I adapt their notation slightly to help clarify certain aspects (such as when a space needs to be a separable Hilbert space as opposed to just a Hilbert space) and rephrase some of their discussion in my own wording. However, some of the content is typed verbatim from their text. I also refer to two key papers by Curtain & Falb ([It&ocirc;'s lemma in infinite dimensions](https://doi.org/10.1016/0022-247X(70)90037-5) & [Stochastic differential equations in Hilbert space](https://doi.org/10.1016/0022-0396(71)90004-0)) for an alternative treatment of the infinite dimensional It&ocirc; formula and to [Stochastic differential equations](http://dx.doi.org/10.1007/978-3-642-14394-6) by &Oslash;ksendal.
 
 # Notation
 
@@ -112,7 +120,7 @@ In particular, $\|\mathfrak{n}_0^2\|_1^{1/2}=\left(\int|\mathfrak{n}_0(z)|^2dz\r
 
 # 4.1 Wiener processes
 
-- __Def 4.1__ A real valued stochastic process $W(t), \ t\geq0$, is called a __Wiener process__ if
+- __Def 4.1:__ A real valued stochastic process $W(t), \ t\geq0$, is called a __Wiener process__ if
 
   1. $W$ has continous trajectories and $W(0)=0$.
   2. $W$ has independent increments and
@@ -121,7 +129,7 @@ $$\L(W(t)-W(s))=\L(W(t-s)), \ t\geq s\geq0.$$
 
   3. $\L(W(t))=\L(-W(t)), \ t\geq0. \ \triangle$
 
-- __Def__ (extension to a general linear (topological) space $K$ with $\sigma$-algebra $\mathscr{B}(K)$) A $K$-valued stochastic process $W(t), \ t\geq0$ satisfying 1.-3. is a __Wiener process__ in $K$. $\triangle$
+- __Def:__ (extension to a general linear (topological) space $K$ with $\sigma$-algebra $\mathscr{B}(K)$) A $K$-valued stochastic process $W(t), \ t\geq0$ satisfying 1.-3. is a __Wiener process__ in $K$. $\triangle$
 
 ## 4.1.1 Hilbert space valued Wiener processes 
 
@@ -137,7 +145,7 @@ $$=(t\wedge s)\left<Qu,v\right>$$
 
 where $Q$ is the covariance operator of the Gaussian measure $\L(W(1))$. The operator $Q$ is of trace class and for each distribution $\L(W(1))$, there is a trace class $Q$ that completely characterizes it.
 
-- __Def 4.2__ A $U$-valued stochastic process $W(t), \ t\geq0$ is a __$Q$-Wiener__ process if
+- __Def 4.2:__ A $U$-valued stochastic process $W(t), \ t\geq0$ is a __$Q$-Wiener__ process if
 
   1. $W(0)=0$.
   2. $W$ has continuous trajectories.
@@ -146,7 +154,7 @@ where $Q$ is the covariance operator of the Gaussian measure $\L(W(1))$. The ope
 
 Because of our assumptions about $Q$ and since $U$ has a complete orthonormal system $\{e_k\}\subset U$, there exists a bounded sequence of nonnegative real numbers $\{\lambda_k\}$ s.t. $Qe_k=\lambda_ke_k, \ k\in\mathbb{N}$.
 
-- __Proposition 4.3__ If $W(t)$ is a $Q$-Wiener process, then
+- __Proposition 4.3:__ If $W(t)$ is a $Q$-Wiener process, then
 
   1. $W$ is a Gaussian process on $U$ and
   
@@ -162,7 +170,7 @@ $$\beta_j(t)=\frac{1}{\sqrt{\lambda_j}}\left<W(t),e_j\right>, \ j\in\mathbb{N}$$
 
 are real valued Brownian motions mutually independent on $(\Omega,\mathscr{F},\mathbb{P})$ and the series expansion of $W(t)$ converges in $L^2(\Omega,\mathscr{F},\mathbb{P})$.
 
-  - __Observation__ The expansion above is strikingly remeniscient of the Karhunen-Lo&egrave;ve (KL) expansion. However the above expansion is with respect to the Hilbert space in which $W(t)$ takes its values. The KL expansion, on the other hand, is with respect to time. Specifically, the KL expansion is defined for a zero-mean process $X(t)\in L^2(\Omega,\mathscr{F},\mathbb{P})$ with $t\in[a,b]$ and continuous $K(s,t)=\E(X(s)X(t))$. If $\{\lambda_k\}$ denotes the set of eigenvalues of $T:L^2([a,b])\rightarrow L^2([a,b])$ defined by $(Tf)(t)\equiv\int_a^b K(s,t)f(s)ds$, then the KL expansion of $X(t)$ is
+- __BW: (comparison to KL expansion)__ The expansion above is strikingly remeniscient of the Karhunen-Lo&egrave;ve (KL) expansion. However the above expansion is with respect to the Hilbert space in which $W(t)$ takes its values. The KL expansion, on the other hand, is with respect to time. Specifically, the KL expansion is defined for a zero-mean process $X(t)\in L^2(\Omega,\mathscr{F},\mathbb{P})$ with $t\in[a,b]$ and continuous $K(s,t)=\E(X(s)X(t))$. If $\{\lambda_k\}$ denotes the set of eigenvalues of $T:L^2([a,b])\rightarrow L^2([a,b])$ defined by $(Tf)(t)\equiv\int_a^b K(s,t)f(s)ds$, then the KL expansion of $X(t)$ is
   
 $$X(t)=\sum_j\sqrt{\lambda_j}\beta_je_j(t)$$
 
@@ -186,11 +194,13 @@ $$\E(\W(x,t)\W(y,s))=(t\wedge s)\delta(x-y)=0.$$
 
 That is, $\W(x,t)$ is a set of independent real valued Brownian motions indexed by $x\in U$. Previous definitions of the Wiener process are insufficient to capture this since $\W(t)=\{\W(x,t):x\in U\}$ is not valued in a convenient Hilbert space. In particular, my prefered Hilbert space is $L^2(\R^n)$, but, even for $n=1$, $\int_\R\W(t,x)dx$ is not finite wp1! To circumvent this, Da Prato & Zabczyk give the following definition 
 
-- __Def__ Any transformation that maps $a\in\U$ to $W_a$, a real valued Wiener processes on $[0,\infty)$, that is continuous in the sense 
+- __Def:__ Any transformation that maps $a\in\U$ to $W_a$, a real valued Wiener processes on $[0,\infty)$, that is continuous in the sense 
 
-$$t\geq0, \{a_n\}\subset U_1, \lim_{n\rightarrow\infty}\|a_n-a\|_{U_1}=0\implies\lim_{n\rightarrow\infty}\E\left|W_a(t)-W_{a_n}(t)\right|^2=0.$$
+$$t\geq0, \{a_n\}\subset \U, \lim_{n\rightarrow\infty}\|a_n-a\|_{\U}=0\implies\lim_{n\rightarrow\infty}\E\left|W_a(t)-W_{a_n}(t)\right|^2=0.$$
 
-is a __generalized Wiener process__ over $\U$. Note that the integral transformation given by $W_a(t)=\int_U a(x)\W(x,t)dx$ may qualify as such a mapping (for concreteness, I think of $U=\R^n$ and $\U=L^2(\R^n)$). With this in mind, I use the symbol $\W$ to also denote the mapping satisfying the above definition so I may refer to $\W$ as a generalized Wiener process.
+is a __generalized Wiener process__ over $\U$. 
+
+- __BW: (remark)__ The integral transformation given by $W_a(t)=\int_U a(x)\W(x,t)dx$ may qualify as such a mapping (for concreteness, I think of $U=\R^n$ and $\U=L^2(\R^n)$).
 
 This definition implies the existence of a bilinear form $K(a,b), \ a,b\in \U$ s.t.
 
@@ -200,21 +210,17 @@ The continuity condition gurantees that $K$ is continuous in $\U$ and hence ther
 
 $$\E[W_a(t)W_b(s)]=(t\wedge s)\left<\Q a,b\right>, \ \ t,s\geq0, \ a,b\in\U.$$
 
-This operator is self-adjoint and positive definite and is the __covariance__ of the generalized Wiener process $\W$. 
+This operator is self-adjoint and positive definite and is the __covariance__ of the generalized Wiener process $\W.$ 
 
-If $\Q$ is the identity operator,
+If $\Q$ is the identity operator, so that $\Q a=a, \ a\in \U$, then $\W$ is called a __cylindrical Wiener process__ in $\U$. As mentioned in the primer on SPDE by Martin Hairer, it is unfortunate that $\W$ is referred to as a process in $\U$ since it is __not__ $\U$-valued. Hairer suggests that $\W$ should be called a cylindrical Wiener process over $\U$. 
 
-$$\Q a=a, \ \ a\in \U$$
-
-then $\W$ is called a __cylindrical Wiener process__ in $\U$. As mentioned in the primer on SPDE by Martin Hairer, it is unfortunate that $\W$ is referred to as a process in $\U$ since it is __not__ $\U$-valued. Hairer suggests that $\W$ should be called a cylindrical Wiener process over $\U$. 
-
-At first glance, I feel there is an issue here. For my process $\W$ introduced at the beginning of this section, I mistakenly believe I need $K(a,b)=\delta(a-b)$. I'm not sure if there exists a $\Q$ that corresponds to this form. However, none of this is true. I'm forgetting that $a,b\in\U$ and what I'm thinking of are $a,b\R^n$. Note that if $a(x)=\delta(x-y)$ and $b=\delta(x-z)$, then (for $\Q=I$)
+- __BW: (false issue)__ At first glance, I feel there is an issue here. For my process $\W$ introduced at the beginning of this section, I mistakenly believe I need $K(a,b)=\delta(a-b)$. I'm not sure if there exists a $\Q$ that corresponds to this form. However, none of this is true. I'm forgetting that $a,b\in\U$ and what I'm thinking of are $a,b\R^n$. Note that if $a(x)=\delta(x-y)$ and $b=\delta(x-z)$, then (for $\Q=I$)
 
 $$\E[W_a(t)W_b(s)]=(t\wedge s)\left<a,b\right>=(t\wedge s)\delta(y-z).$$
 
 Thus, the above result is a generalization of condition (2.) on the process $B$ where $\E[\W(t,y)\W(s,z)]=(t\wedge s)\delta(y-z)$. Hence, everything is just fine.
 
-- __Example__ Let $\W$ be a cylindrical Wiener process over $\U=L^2(\R)$. Then for any $u,v\in L^2(\R)$
+- __Example:__ Let $\W$ be a cylindrical Wiener process over $\U=L^2(\R)$. Then for any $u,v\in L^2(\R)$
 
 $$\E[W_u(t)W_v(s)]=(t\wedge s)\int_\R u(x)v(x)dx.$$
 
@@ -228,15 +234,15 @@ Let $\{e_j\}$ be a complete orthonormal basis in $U_1$ and $\{\beta_j\}$ a seque
 
 $$W_a(t)\equiv\sum_j\left<\Q^{1/2}e_j,a\right>\beta_j(t), \ \ t\geq0, \ a\in\U.$$
 
-- __Proposition 4.8__ For every $a\in\U$ we have
+- __Proposition 4.8:__ For every $a\in\U$ we have
 
 $$W_a(t)=\sum_j\left<\Q^{1/2}e_j,a\right>W_{\Q^{1/2}e_j}(t).$$
 
 This forms a generalized Wiener process with covariance $\Q$.
 
-- __Intuitive result__ An arbitrary generalized Wiener process over $\U$ is a classical Wiener process taking values in some larger Hilbert space $\U'$. 
+- __Intuitive result:__ An arbitrary generalized Wiener process over $\U$ is a classical Wiener process taking values in some larger Hilbert space $\U'$. 
 
-For example if $\U=L^2(\R)$ we could take $\U'=L^2_\rho(\R)$ which is the set of all real valued functions $u$ over $\R$ s.t. $\int_\R|u(x)|^2\rho(x)dx<\infty$ for some nonnegative fixed $\rho\in L^2(\R)$. Clearly $L^2_\rho=L^2(\R,\mathscr{B}(\R),\nu)$ where the measure $\nu$ is given by $\nu(A)=\int_A\rho(x)dx$. It is also clear that $L^2(\R)\subset L^2_\rho(\R)$ since for $v\in L^2(\R)$, we have $w=|v|^2\in L^2$ and hence the Schwartz inequality implies $\int_\R|v(x)|^2\rho(x)dx\leq\|w\|_2\|\rho\|_2<\infty$. 
+- __BW:__ Interpreting this result, if $\U=L^2(\R)$, we could take $\U'=L^2_\rho(\R)$ which is the set of all real valued functions $u$ over $\R$ s.t. $\int_\R|u(x)|^2\rho(x)dx<\infty$ for some nonnegative fixed $\rho\in L^2(\R)$. Clearly $L^2_\rho=L^2(\R,\mathscr{B}(\R),\nu)$ where the measure $\nu$ is given by $\nu(A)=\int_A\rho(x)dx$. It is also clear that $L^2(\R)\subset L^2_\rho(\R)$ since for $v\in L^2(\R)$, we have $w=|v|^2\in L^2$ and hence the Schwartz inequality implies $\int_\R|v(x)|^2\rho(x)dx\leq\|w\|_2\|\rho\|_2<\infty$. 
 
 If we set $\rho$ s.t. $\int\rho^2=1$ then we can think of a cylindrical Wiener process $\W$ over $L^2(\R)$ (so that $\W$ takes values in $L^2_\rho(\R)$) as a function of time which, for each $t$, returns an infinite set of mean zero normal random variables with variance $t$ that we can "sample" using $\rho$. That is,
 
@@ -302,7 +308,7 @@ $$$$
 
 This can be used to show $g(x,y)=\frac{1}{t}\E[W(t,x)W(t,y)]$ which is interpreted as the "spatial" correlation of the $Q$-Wiener processes $W$ in $L^2(\mathscr{O})$. If $\mathscr{O}$ is an open (closed) bounded subset of $\R^n$ and $g$ is bounded and continuous on $\mathscr{O}$, then $Q$ is a covariance operator on $U_1$ of trace class.
 
-- __Example 4.9: Brownian sheets__ Let $\mathscr{O}=[0,\pi]$ and $g(x,y)=x\wedge y, \ x,y\in[0,\pi]$. Note that $g$ is continuous and, since for a one dimensional Wiener process $\beta$
+- __Example 4.9: (Brownian sheets)__ Let $\mathscr{O}=[0,\pi]$ and $g(x,y)=x\wedge y, \ x,y\in[0,\pi]$. Note that $g$ is continuous and, since for a one dimensional Wiener process $\beta$
 
 $$x\wedge y=\E[\beta(x)\beta(y)]$$
 
@@ -320,17 +326,17 @@ $$\E[W(t,x)W(s,y)]=(t\wedge s)(x\wedge y).$$
 
 Fields $W$ with the above covariance are called __Brownian sheets__ on $[0,\infty)\times[0,\pi]$. $\triangle$
 
-- __Proposition 4.10__ Given an arbitraty set $\O$, a function $g(x,y)$ is positive definite iff there exists a family of random variables $X(x)$ s.t. for distinct $x_1,\dots,x_j\in\O$ the random vector $X(x_1),\dots,X(x_j)$ is Gaussian with mean zero and 
+- __Proposition 4.10:__ Given an arbitraty set $\O$, a function $g(x,y)$ is positive definite iff there exists a family of random variables $X(x)$ s.t. for distinct $x_1,\dots,x_j\in\O$ the random vector $X(x_1),\dots,X(x_j)$ is Gaussian with mean zero and 
 
 $$g(x,y)=\E[X(x)X(y)], \ x,y\in\O. \ \triangle$$
 
-- __Corr 4.11__ If $g_1$ and $g_2$ are positive definite on $\O_1$ and $\O_2$ then
+- __Corr 4.11:__ If $g_1$ and $g_2$ are positive definite on $\O_1$ and $\O_2$ then
 
 $$g((x_1,x_2),(y_1,y_2))\equiv g_1(x_1,y_1)g(x_2,y_2), \ (x_1,y_1)\in\O_1, \ (x_2,y_2)\in\O_2$$
 
 is positive definite on $\O_1\times\O_2$. $\triangle$
 
-- __Example 4.12: Brownian sheets on $[0,\infty)\times\O$__ Let $\O\subset\R^n$ and $g$ a positive definite function on $\O$. By prop 4.11
+- __Example 4.12: (Brownian sheets on $[0,\infty)\times\O$)__ Let $\O\subset\R^n$ and $g$ a positive definite function on $\O$. By prop 4.11
 
 $$(t\wedge s)g(x,y), \ (t,x),(s,y)\in[0,\infty)\times\O,$$
 
@@ -344,7 +350,7 @@ For each $x$, $W(\cdot,x)$ has all the properties of a real valued Wiener proces
 
 - This section is included becuase it provides and explicit treatment of a cylindrical Wiener process on $L^2(\R^n)$.
 
-- __Def__ If $\mu$ is a probability measure on $(E,\mathscr{B}(E))$, then the function $\hat\mu$ on $E^*$
+- __Def:__ If $\mu$ is a probability measure on $(E,\mathscr{B}(E))$, then the function $\hat\mu$ on $E^*$
 
 $$\hat\mu(y)\equiv\int_Ee^{iy(x)}\mu(dx), \ \ y\in E^*$$
 
@@ -352,7 +358,7 @@ is the __characteristic function__ of $\mu$. If $E=H$ is a Hilbert space then
 
 $$\hat\mu(\lambda)=\int_He^{i\left<\lambda,x\right>}\mu(dx), \ \ \lambda\in H.$$
 
-- __Bochners theorem__ If $\phi:U\rightarrow\mathbb{C}$ is a characteristic function of a probability measure $\mu$ on $(U,\mathscr{B}(U))$ then
+- __Bochners theorem:__ If $\phi:U\rightarrow\mathbb{C}$ is a characteristic function of a probability measure $\mu$ on $(U,\mathscr{B}(U))$ then
 
   1. $\phi$ is a continuous, positive definite function s.t. $\phi(0)=1$.
   2. For any $\epsilon>0$ there exists a nonnegative nuclear operator $S_\epsilon$ s.t.
@@ -391,20 +397,20 @@ The distribution $\Gamma\in\mathscr{S}^*$ is positive definite if for each $\psi
 
 $$(\Gamma,\psi*\psi_{(s)})\geq0.$$
 
-- __Theorem 4.13__ A distribution $\Gamma\in\mathscr{S}^*$ is positive definite if there exists a measure $\mu\in\mathscr{S}^*$ symmetric around 0 s.t. $\Gamma=\hat\mu$. Then $\mu$ is called the spectral measure of $\Gamma$.
+- __Theorem 4.13:__ A distribution $\Gamma\in\mathscr{S}^*$ is positive definite if there exists a measure $\mu\in\mathscr{S}^*$ symmetric around 0 s.t. $\Gamma=\hat\mu$. Then $\mu$ is called the spectral measure of $\Gamma$.
 
-- __Def__ An $\mathscr{S}^*$-valued continuous stochastic process $\W$ is called a Wiener process with covariance kernel $\Gamma$ if
+- __Def:__ An $\mathscr{S}^*$-valued continuous stochastic process $\W$ is called a Wiener process with covariance kernel $\Gamma$ if
 
   1. For each $\psi\in\mathscr{S}$ the process $(\W,\psi)$ is a real valued Wiener process
   2. For all $s,t\geq0,\phi,\psi\in\mathscr{S}$ we have
   
 $$\E[(\W(t),\phi)(\W(s),\psi)]=(t\wedge s)(\Gamma,\phi*\psi_{(s)}).$$
 
-- __Theorem 4.14__ For any positive definite distribution $\Gamma$ there exists a Wiener process $W$ with covariance kernel $\Gamma$. Furthermore, there is a Hilbert space $U_\Gamma$, continuously embedded in $\mathscr{S}^*$, s.t.
+- __Theorem 4.14:__ For any positive definite distribution $\Gamma$ there exists a Wiener process $W$ with covariance kernel $\Gamma$. Furthermore, there is a Hilbert space $U_\Gamma$, continuously embedded in $\mathscr{S}^*$, s.t.
 
 $$\L((\W(t),\psi))=\mathscr{N}(0,t\|\psi\|^2_{U_\Gamma}), \ \ \forall \ \psi\in\mathscr{S}.$$
 
-- __Example 4.16__ Let $\mu=\delta_0$, the delta measure at 0, then
+- __Example 4.16:__ Let $\mu=\delta_0$, the delta measure at 0, then
 
 $$\Gamma=\hat\delta_0=\left(\frac{1}{2\pi}\right)^{n/2}\lambda_n,$$
 
@@ -414,7 +420,7 @@ $$\W=\left(\frac{1}{2\pi}\right)^{n/2}\beta(t)\lambda_n$$
 
 where $\beta(t)$ is a standard Brownian motion. $\triangle$
 
-- __Example 4.17__ Let $\mu=\lambda_n$, then
+- __Example 4.17:__ Let $\mu=\lambda_n$, then
 
 $$\Gamma=\hat\lambda_n=(2\pi)^{n/2}\delta_0.$$
 
@@ -434,7 +440,7 @@ This section shows that the distributional derivative of a Brownian sheet $B$ on
 
 $$\frac{\partial^n}{\partial x_1\cdots\partial x_n}B(t,x)=\W(t,x), \ x\in\R^n.$$
 
-- __Def__ A Brownian sheet $B$ on $[0,\infty)\times[0,\infty)^n$ is a Gaussian random field with correlation function
+- __Def:__ A Brownian sheet $B$ on $[0,\infty)\times[0,\infty)^n$ is a Gaussian random field with correlation function
 
 $$(t\wedge s)\prod_j(x_j\wedge y_j), \ \ t,s,x_j,y_j\geq0.$$
 
@@ -446,7 +452,7 @@ when each $(-1)^{l_i}x_i\geq0$. The resulting object $B$ is called the __Brownia
 
 $$\int_{\R^n}|x_1|\cdots|x_n|\rho(x_1,\dots,x_n)dx_1\cdots dx_n<\infty.$$
 
-- __Proposition 4.19__ If $B$ is a Brownian sheet on $[0,\infty)\times\R^n$ then, for any $\phi,\psi\in\mathscr{S}(\R^n)$,
+- __Proposition 4.19:__ If $B$ is a Brownian sheet on $[0,\infty)\times\R^n$ then, for any $\phi,\psi\in\mathscr{S}(\R^n)$,
 
 $$\E\left(\frac{\partial^n}{\partial x_1\cdots\partial x_n}B(t),\phi\right)\left(\frac{\partial^n}{\partial x_1\cdots\partial x_n}B(t),\psi\right)=(t\wedge s)\int_{\R^n}\phi(x)\psi(x)dx.$$
 
@@ -461,13 +467,13 @@ Consider the $U$-valued $Q$-Wiener process $W(t)$ in $(\Omega,\mathscr{F},\mathb
 
 Then $W(t)$ is called a __$Q$-Wiener process with respect to $\{\mathscr{F}_t\}_{t\geq0}$__. Fix $T<\infty$. 
 
-- __Def__ An $L=L(U,H)$-valued process $\Phi(t), \ t\in[0,T]$ taking only a finite number of values is said to be __elementary__ if $\exists$ a partition $0=t_0<\dots<t_k=T$ and a sequence $\Phi_0,\dots,\Phi_{k-1}$ of $L$-valued random variables s.t. the $\Phi_m$ are $\mathscr{F}_{t_m}$-measurable and bounded (in the sense that $\|\Phi_m\|_L$ is a bounded random variable for each $m$) and $\Phi(t)=\Phi_m$ for $t\in(t_m,t_{m+1}]$, $m=0,\dots,k-1$. For elementary processes $\Phi$ the stochastic integral is defined by
+- __Def:__ An $L=L(U,H)$-valued process $\Phi(t), \ t\in[0,T]$ taking only a finite number of values is said to be __elementary__ if $\exists$ a partition $0=t_0<\dots<t_k=T$ and a sequence $\Phi_0,\dots,\Phi_{k-1}$ of $L$-valued random variables s.t. the $\Phi_m$ are $\mathscr{F}_{t_m}$-measurable and bounded (in the sense that $\|\Phi_m\|_L$ is a bounded random variable for each $m$) and $\Phi(t)=\Phi_m$ for $t\in(t_m,t_{m+1}]$, $m=0,\dots,k-1$. For elementary processes $\Phi$ the stochastic integral is defined by
 
 $$\int_0^t\Phi(s)dW(s)\equiv\sum_{m=0}^{k-1}\Phi_m(W_{t_{m+1}\wedge t}-W_{t_m\wedge t})$$
 
 and is denoted by $\Phi\cdot W(t), \ t\in[0,T]$. 
 
-- __Comparison to SDE__ The only difference is that $W(t)$ is a real valued standard Wiener process (so that $Q=1$) and the $\Phi_m$ are real valued random variables. $\triangle$
+- __Comparison to SDE:__ The only difference is that $W(t)$ is a real valued standard Wiener process (so that $Q=1$) and the $\Phi_m$ are real valued random variables. $\triangle$
 
 The subspace $U_0\equiv Q^{1/2}(U)$ of $U$, endowed with the inner product
 
@@ -483,23 +489,23 @@ $$\|\Phi\|_t\equiv\left[\E\int_0^t\|\Phi(s)\|_{L_2^0}^2ds\right]^{1/2}$$
 
 $$=\left[\E\int_0^t\mathrm{Tr}[(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]ds\right]^{1/2}, \ \ t\in[0,T].$$
 
-- __Proposition 4.20__ If a process $\Phi$ is elementary and $\|\Phi\|_T<\infty$ then the process $\Phi\cdot W$ is a contiunous square integrable $H$-valued martingale on $[0,T]$ and
+- __Proposition 4.20:__ If a process $\Phi$ is elementary and $\|\Phi\|_T<\infty$ then the process $\Phi\cdot W$ is a contiunous square integrable $H$-valued martingale on $[0,T]$ and
 
 $$\E|\Phi\cdot W(t)|^2=\|\Phi\|_T^2, \ \ 0\leq t\leq T.$$
 
-- __Comparison to SDE__ This is analogous to the It&ocirc; isometry which states that if $\Phi(t)$ is elementary in the sense of SDE and if there exists $M>0$ s.t. $|\Phi_m(\omega)|<M$ for each $\omega\in\Omega, \ m=0,\dots,k-1$, then
+- __BW (Comparison to SDE):__ This is analogous to the It&ocirc; isometry which states that if $\Phi(t)$ is elementary in the sense of SDE and if there exists $M>0$ s.t. $|\Phi_m(\omega)|<M$ for each $\omega\in\Omega, \ m=0,\dots,k-1$, then
 
 $$\E\left[\left(\int_0^T\Phi(t)dW(t)\right)^2\right]=\E\left(\int_0^T[\Phi(t)]^2dt\right).$$
 
 Since $\R$ 
 
-- __Remark 4.21__ The stochastic integral is a linear transformation from the space of all elementary process with the norm $\|\cdot\|_T$ into the space $\mathscr{M}_T^2(H)$ of $H$-valued martingales.
+- __Remark 4.21:__ The stochastic integral is a linear transformation from the space of all elementary process with the norm $\|\cdot\|_T$ into the space $\mathscr{M}_T^2(H)$ of $H$-valued martingales.
 
 The integrands of stochastic intregrals can be regarded as random variables defined on $\Omega_\infty\equiv[0.\infty)\times\Omega$ (or $\Omega_T\equiv[0,T]\times\Omega$) with the $\sigma$-field $\mathscr{B}([0,\infty))\times\mathscr{F}$ (or $\mathscr{B}([0,T])\times\mathscr{F}$). The product of the Lebesgue measure on $[0,\infty)$ (or, $[0,T]$) and the probability measure $\mathbb{P}$ is denoted by $\mathbb{P}_\infty$ (or $\mathbb{P}_T$).
 
 Taking into account the adaptability of processes we choose the $\sigma$-field generated by the adapted simple process ($\mathscr{P}_\infty$ or $\mathscr{P}_T$). The class of processes proper as integrands of stochastic integrals are predictable processes with values in $L_2^0$. That is, they are measurable mappings from $(\Omega_\infty,\mathscr{P}_\infty)$ (or $(\Omega_T,\mathscr{P}_T)$) into $(L_2^0,\mathscr{B}(L_2^0))$.
 
-- __Proposition 4.22__
+- __Proposition 4.22:__
 
   1. If a mapping $\Phi$ from $\Omega_T$ into $L$ is $L$-predictable then $\Phi$ is also $L_2^0$-predictable. Hence, elementary processes are $L_2^0$-predictable
   
@@ -511,7 +517,7 @@ $$\mathbb{P}\left(\int_0^T\|\Phi(s)\|^2_{L_2^0}ds<\infty\right)=1.$$
 
 Any such process is called __stochastically integrable__ on $[0,T]$. They form a linear space denoted by $\mathscr{N}_W(0,T;L_2^0$ (or $\mathscr{N}_W(0,T)$, or even $\mathscr{N}_W$). The extension is carried by the __localization procedure__.
 
-- __Lemma 4.24__ Assume that $\Phi\in \mathscr{N}_W^2$ and $\tau$ is an $\mathscr{F}_\tau$-stopping time s.t. $\mathbb{P}(\tau\leq T)=1$. Then
+- __Lemma 4.24:__ Assume that $\Phi\in \mathscr{N}_W^2$ and $\tau$ is an $\mathscr{F}_\tau$-stopping time s.t. $\mathbb{P}(\tau\leq T)=1$. Then
 
 $$\int_0^tI_{[0,\tau]}(s)\Phi(s)dW(s)=\Phi\cdot W(\tau\wedge t), \ \ \ t\in (0,T], \ \mathbb{P}\text{-a.s.} \ \triangle$$
 
@@ -551,7 +557,7 @@ $$X(t)=X(0)+\int_0^t\phi(s)ds+\int_0^t\Phi(s)dW(s), \ t\in[0,T]$$
 
 is well defined. Assume that a function $F:[0,T]\times H\rightarrow\R^1$ and its partial derivatives $F_t,F_x,F_{xx}$, are uniformly continuous on bounded subsets of $[0,T]\times H$.
 
-- __Theorem 4.32__ _Under the above conditions_, $\mathbb{P}$-a.s., _for all_ $t\in[0,T]$
+- __Theorem 4.32:__ Under the above conditions, $\mathbb{P}$-a.s., _for all_ $t\in[0,T]$
 
 $$F(t,X(t))=F(0,X(0))+\int_0^t\left<F_x(s,X(s)),\Phi(s)dW(s)\right>$$
 
@@ -559,9 +565,9 @@ $$+\int_0^t\Big{\{}F_t(s,X(s))+\left<F_x(s,X(s)),\phi(s)\right>$$
 
 $$\left.+\frac{1}{2}\mathrm{Tr}[F_{xx}(s,X(s))(\Phi(s)Q^{1/2})(\Phi(s)Q^{1/2})^*]\right\}ds$$
 
-- __Interpretation__ The process $X(t)$ is some $H$-valued process. For concreteness $H$ might be the familiar $\R^n$ or $L^2(\R^n)$. However, recall the cylindrical Wiener process takes values in a "higher" Hilbert space (such as $L^2_\rho(\R^n)$). So if $X(t)$ belongs to one of our familiar Hilbert spaces, but we're integrating against a cylindrical Wiener process, we need some transformation $\Phi$ that maps the "misbehaved" cylindrical Wiener process into something more manageable (something $H$-valued in particular). This way both integrals above return $H$-valued processes and, thus, their sum is also an $H$-valued process. This is consistent with the statement that $X(t)$ is $H$-valued. For each $t$, the function $F(t)$ takes values from $H$ and maps them to $\R$ in a sufficiently smooth manner. This allows us to use the "change of variables" formula above (It&ocirc;'s formula). Note that the inner product in this formula is with respect to $H$.
+- __BW: (interpretation)__ The process $X(t)$ is some $H$-valued process. For concreteness $H$ might be the familiar $\R^n$ or $L^2(\R^n)$. However, recall the cylindrical Wiener process takes values in a "higher" Hilbert space (such as $L^2_\rho(\R^n)$). So if $X(t)$ belongs to one of our familiar Hilbert spaces, but we're integrating against a cylindrical Wiener process, we need some transformation $\Phi$ that maps the "misbehaved" cylindrical Wiener process into something more manageable (something $H$-valued in particular). This way both integrals above return $H$-valued processes and, thus, their sum is also an $H$-valued process. This is consistent with the statement that $X(t)$ is $H$-valued. For each $t$, the function $F(t)$ takes values from $H$ and maps them to $\R$ in a sufficiently smooth manner. This allows us to use the "change of variables" formula above (It&ocirc;'s formula). Note that the inner product in this formula is with respect to $H$.
 
-- __Example __ Let $B$ be a Brownian sheet on $[0,\infty)\times\R$. Then, obviously, $B(t)=\int_0^tdB(s)$. Given a nonnegative $\psi\in L^2(\R)$ define $F:L_\psi^2(\R)\rightarrow \R$ by $F(u)=\int_\R \psi(x)u(x)dx$. We should get
+- __BW: (example)__ Let $B$ be a Brownian sheet on $[0,\infty)\times\R$. Then, obviously, $B(t)=\int_0^tdB(s)$. Given a nonnegative $\psi\in L^2(\R)$ define $F:L_\psi^2(\R)\rightarrow \R$ by $F(u)=\int_\R \psi(x)u(x)dx$. We should get
 
 $$W(t)=F(B(t))=\int_\R\psi(x)B(t,x)dx,$$
 
@@ -583,7 +589,7 @@ $$=\int_\R\psi(x)B(t,x)dx$$
 
 as desired. $\triangle$
 
-- __Another example __ Now suppose we are working with
+- __BW: (returning to the original problem) __ Now suppose we are working with
 
 $$\mathfrak{n}(t,z)=m(z)\mathfrak{n}(t,z)dt+\eta\mathfrak{n}(t,z)dB(t,z).$$
 
@@ -627,7 +633,7 @@ Let $L(E,G)$ be the Banach space of all linear bounded operators from $E$ into $
 
 $$\|T\|\equiv\sup_{x\in E}\frac{\|Tx\|}{\|x\|}.$$
 
-- __Def__ $T\in L(E,G)$ is __nuclear__ or __trace class__ if there exists sequences $\{a_j\}\subset G, \ \{\phi_j\}\subset E^*$ s.t.
+- __Def:__ $T\in L(E,G)$ is __nuclear__ or __trace class__ if there exists sequences $\{a_j\}\subset G, \ \{\phi_j\}\subset E^*$ s.t.
 
 $$\sum_{j=1}^\infty\|a_j\|\|\phi_j\|<\infty$$
 
@@ -641,13 +647,13 @@ is a Banach space denoted as $L_1(E,G)$ or $L_1(E)$ if $E=E$. Let $K$ be another
 
 $$\mathrm{Tr}T\equiv\sum_j\left<Te_j,e_j\right>$$
 
-- __Proposition C.3__ A nonnegative operator $T\in L(H)$ is of trace class iff there exists an orthonormal basis $\{e_k\}$ on $H$ s.t.
+- __Proposition C.3:__ A nonnegative operator $T\in L(H)$ is of trace class iff there exists an orthonormal basis $\{e_k\}$ on $H$ s.t.
 
 $$\sum_j\left<Te_j,e_j\right><\infty.$$
 
 When this occurs $\mathrm{Tr}T=\|T\|_1$. $\triangle$
 
-- __Def__ For two separable Hilbert spaces $U_1$ and $U_2$ with complete orthonormal bases $\{e_k\}\subset U_1$ and $\{f_k\}\subset U_2$, a linear bounded operator $T:U_1\rightarrow U_2$ is said to be __Hilbert-Schmidt__ if
+- __Def:__ For two separable Hilbert spaces $U_1$ and $U_2$ with complete orthonormal bases $\{e_k\}\subset U_1$ and $\{f_k\}\subset U_2$, a linear bounded operator $T:U_1\rightarrow U_2$ is said to be __Hilbert-Schmidt__ if
 
 $$\sum_k|Te_k|^2<\infty. \ \triangle$$
 
@@ -659,12 +665,12 @@ is a separable Hilbert space with the scalar product
 
 $$\left<S,T\right>\equiv\sum_k\left<Se_k,Te_k\right>.$$
 
-- __Notation__ (outer product) For any vectors $a\in U_1$ and $b\in U_2$, the operation $b\otimes a$ denotes the linear operator defined by
+- __Notation: (outer product)__ For any vectors $a\in U_1$ and $b\in U_2$, the operation $b\otimes a$ denotes the linear operator defined by
 
 $$b\otimes a:U_1\rightarrow U_2, \ h\mapsto \left<a,h\right>b, \ \ h\in U_1. \  \triangle$$
 
 The double sequence $\left\{f_j\otimes e_k\right\}_{j,k\in \mathbb{N}}$ is a complete orthonormal basis in $L_2(E,F)$.
 
-- __Proposition C.4__ Let $U_1,U_2,U_3$ be separable Hilbert spaces. If $T\in L_2(U_1,U_2)$ and $S\in L_2(U_2,U_3)$ then $ST\in L_1(U_1,U_3)$ and
+- __Proposition C.4:__ Let $U_1,U_2,U_3$ be separable Hilbert spaces. If $T\in L_2(U_1,U_2)$ and $S\in L_2(U_2,U_3)$ then $ST\in L_1(U_1,U_3)$ and
 
 $$\|ST\|_1\leq\|S\|_2\|T\|_2. \ \triangle$$
