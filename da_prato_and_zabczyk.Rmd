@@ -25,8 +25,6 @@ output:
 
 # Motivation
 
-The initial goal of this investigation was to derive the Price equation in continuous time with stochasticity and to compare the result to diffusion approximations of the discrete time breeders equation.
-
 Consider a biological population where each individual has a real valued trait $z$. Let $\mathfrak{n}_t(z)$ denote the abundance density of the trait value $z$ at time $t$. The total abundance of the population $n_t$ is given by $n_t=\int\mathfrak{n}_t(z)dz$. For each fixed $z\in \R$ let $\mathfrak{n}_t(z)$ be a real valued stochastic process satisfying the SDE
 
 $$d\mathfrak{n}_t(z)=m(z)\mathfrak{n}_t(z)dt+\eta\mathfrak{n}_t(z)dB_t(z), \ \ \mathfrak{n}_0(z)>0.$$
