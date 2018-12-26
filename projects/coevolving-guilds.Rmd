@@ -1,0 +1,303 @@
+---
+title: "Coevolving guilds"
+description: |
+  A novel method for inferring processes shaping ecological communities.
+author:
+  - name: Bob Week 
+    url: https://bobweek.github.io
+    affiliation: University of Idaho
+    affiliation_url: https://www.ibest.uidaho.edu/
+date: "`r Sys.Date()`"
+output: radix::radix_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathbb{V}}
+\newcommand{\Cov}{\mathbb{C}}
+
+## Summary
+
+I present a model for the coevolution of a pair of interacting guilds. I assume the interactions between members of each guild are mediated by two traits. The first trait captures the distribution of utilization across a fixed niche/resource space for a given individual. In general, these traits can be represented by scaled multivariate probability density functions, referred to here as resource utilization surfaces (rus's, see Figure 1). In the plant-pollinator context, I assume the resource is a univariate function representing the activity time of an individual throughout a season. Hence, in this case the rus captures individual phenology. For simplicity, I assume these resource curves all have the same bell shape but may be offset by some amount. I denote the center of a phenology curve, the individual peak activity time, by $x$. I also assume the frequency of interactions between individuals is proportional to the overlap of their phenology curves, which is computed by integrating the product of these curves. If the effects of the interaction on fitness correlate with with peak activity times, we can expect the coevolution of phenology. I denote the strength of this coevolutionary process by $\B_X$.
+
+```{r, echo=F, fig.width=12, warning=FALSE, message=FALSE, fig.cap="Examples of resource utilization curves."}
+require(plot3D)
+require(mvtnorm)
+
+x <- seq(-2,2,.1)
+y <- seq(-2,2,.1)
+z <- matrix(nc=length(x),nr=length(x))
+for(xx in x){
+  for(yy in y) z[which(x==xx),which(y==yy)] <- dmvnorm(c(xx,yy))
+}
+M <- mesh(x,y,z)
+
+par(mfrow=c(1,2))
+image2D(z,x,y)
+title("Example resource utilization surface")
+
+u1 <- dnorm(1.5*x-1)
+u2 <- dnorm(1.5*x+1)
+plot(x,u1,type='l',ylab="activity",xlab="time")
+lines(x,u2)
+title("Two phenology curves")
+
+par(mfrow=c(1,1))
+```
+
+
+While phenology (or, more generally, resource use) influences the existence of interactions, the outcome of interguild interactions may depend on a second component of the trait. This component is often a morphological or physiological feature. For plant-pollinator interactions, I assume this second component is captured by floral tube depth for plants ($u_1$) and mouthpart length for pollinators ($u_2$). To determine the outcome of an interaction given a tube depth and a mouthpart length, I assume a sigmoidal differences model. This leads to escalatory coevolutionary races. I denote the strength of this process by $\B_U$.
+
+I assume both traits experience abiotic stabilizing selection with optima $\theta_X$ for peak activity time and $\theta_U$ for morphology. I assume these optima are approximately equivalent for both guilds. However, I allow the strengths of abiotic selection to vary between guilds. I use $\A_i$ to denote this strength for guild $i$, but I assume the strengths of abiotic selection for both traits in guild $i$ are approximately the same.
+
+Intraguild interactions are assumed to be competitive. Although the outcomes of these interactions are likely dependent on other behavioural, morphological and/or physiological features, I make the simplifying assumption that the outcome of a competitive interaction is approximately the same across all interactions. Hence, competition only correlates with resource utilization, or peak activity times in this case. Since competition consistently produces negative effects, we can expect it to cause peak activities to diffuse over microevolutionary timescales. The strength of this diffusion is denoted by $\C$.
+
+Stochastic effects on the evolution of traits for guild $i$ is captured by the cylindrical Wiener process $\dot\xi_i$. I assume the stochastic effects are caused by more than randomly selected breeding values from the post-selection population (the QG version of drift), but also stochastic selection, stochastic reproduction and any other potential sources of uncertainty.
+
+For a given species in guild $i$, I write the mean peak activity time by $\bar x_i$ and the mean morphological trait by $\bar u_i$. I write $\mu_i^X$ and $\mu_i^U$ for the guild-level mean activity time and morphological trait value across species in guild $i$. After assuming weak selection along with approximate symmetry in various properties of selection and stochasticity, I arrive at the following model
+
+$$\frac{d\bar x_i}{dt}=\A_i(\theta_X-\bar x_i)+\B_X(\mu_j^X-\bar x_i)-\C(\mu_i^X-\bar x_i)+\dot\xi_i$$
+
+$$\frac{d\bar u_i}{dt}=\A_i(\theta_U-\bar u_i)+\B_U+\dot\xi_i.$$
+
+The $\dot\xi_i$ are stochastic processes which satisfy
+
+$$\int_a^b\dot\xi_i(t)dt\sim\mathcal{N}(0,(b-a)\eta_i).$$
+
+Hence, I refer to the variance parameter $\eta_i$ as the effect of stochasticity on guild $i$. I denote the guild-level variance of species-level mean traits by $V_i^U$ and $V_i^X$ for guild $i$. 
+
+From these stochastic differential equations I use It&ocirc;'s lemma to calculate the stochastic differential equations of the guild-wise means and variances in both traits. The resulting processes are standard with well known stationary distributions. Using these stationary distributions I implement a maximum likelihood approach to inferring model parameters.
+
+The strategy for choosing which evolutionary processes should be explicitly treated and which should be made symmetric or asymmetric (that is, how I chose which parameters to include and which to equate with one another) was based on avoiding linear dependency between summary statistics. For example, it turns that letting $\A_1=\A_2$ and $\eta_1=\eta_2$ causes $V_1^U=cV_2^U$ and $V_1^X=cV_2^X$ for some constant $c>0$ determined by the number of species sampled in each guild. This dependence significantly reduces the information content of these summary statistics. The data contain at least ten independent summary statistics:
+
+Statistic | Description
+----------|---------------------------------------------------
+$\hat \mu_1^U$ | Mean morphological trait of guild one  
+$\hat \mu_2^U$ | Mean morphological trait of guild two
+$\hat V_1^U$   | Variance in species-level mean morphological trait across guild one
+$\hat V_2^U$   | Variance in species-level mean morphological trait across guild two
+$\hat C^U$     | Covariance between morphological traits for interacting species between guilds
+$\hat \mu_1^X$ | Mean phenological trait of guild one
+$\hat \mu_2^X$ | Mean phenological trait of guild two
+$\hat V_1^X$   | Variance in species-level mean phenological trait across guild one
+$\hat V_2^X$   | Variance in species-level mean phenological trait across guild two
+$\hat C^X$     | Covariance between phenological traits for interacting species between guilds
+
+I use these data and the derived stationary distributions of each statistic to infer ten parameters:
+
+Parameter | Description
+----------|---------------------------------------------------
+$\A_1$     | Strength of abiotic selection on both traits across guild one
+$\A_2$     | Strength of abiotic selection on both traits across guild two
+$B$        | Sensitivity of the existence of interactions to phenological matching
+$\B_U$     | Strength selection on morphology due to interguild interactions
+$\B_X$     | Strength selection on phenology due to interguild interactions
+$\C$       | Strength selection on phenology due to intraguild interactions
+$\theta_X$ | Abiotic optimal phenological trait value
+$\theta_U$ | Abiotic optimal morphological trait value
+$\eta_1$   | Effect of stochasticity on guild one
+$\eta_2$   | Effect of stochasticity on guild two
+
+At the very end of this document, I provide a numerical implementation of this inference procedure and demonstrate its use with simulated data.
+
+
+### Numerical implementation of ML estimation
+
+Although it would be ideal to provide algebraic solutions for the ten parametes being inferred, Mathematica is struggling with the inversion (it has been running this calculation for several days and is still running) and I don't have time to do it by hand (although I believe it can be done). Hence, I've implemented a numerical approach for inferring the maximum likelihood estimates. The code, along with an example demonstration, is illustrated below.
+
+```{r echo=T}
+require(mvtnorm)
+
+likelihood <- function(d,m,S){
+  val <- 0
+  if( length(m)==1 ){
+    if( is.null(dim(d)) && length(d)==1 ) val <-   dnorm(d,m,S,log=T)
+    if( is.null(dim(d)) && length(d)> 1 ){ 
+      N <- length(d)
+      for(i in 1:N) val <- val +   dnorm(d[i],m,S,log=T)
+    }
+  } 
+  if( length(m)> 1 ){
+    if( is.null(dim(d)) || dim(d)[1]==1 ) val <- dmvnorm(d,m,S,log=T)
+    if(!is.null(dim(d)) && dim(d)[1]> 1){
+      N <- dim(d)[1]
+      for(i in 1:N) val <- val + dmvnorm(d[i,],m,S,log=T) 
+    }
+  } 
+  return(val)
+}
+
+EmU <- function(A,BU,thU){
+  thU+BU/A
+}
+
+VmU <- function(eta,n,A,BU){
+  eta/(2*n*(A+BU))
+}
+
+VmX <- function(eta,n,A,BX,C){
+  eta/(2*n*(A+BX-C))
+}
+
+VDmU <- function(eta,n,A,BU){
+  sum(VmU(eta,n,A,BU))
+}
+
+VDmX <- function(eta,n,A,BX,C){
+  sum(VmX(eta,n,A,BX,C))
+}
+
+VU <- function(eta,n,A,BU){
+  (1-1/n)*(eta/A)-sqrt(1/n-1/(n^2))*(eta/(A+BU))
+}
+
+VX <- function(eta,n,A,BX,C){
+  (1-1/n)*(eta/(A+BX-C))-sqrt(1/n-1/(n^2))*(eta/(A+BX-C))
+}
+
+rho <- function(V,mu,B){
+  
+  val <- 1/sqrt(1 - 1/(B*(V[1] + V[2] + (mu[1] - mu[2])^2)))
+  
+  return(val)
+
+}
+
+# P <- parameters to be inferred
+# P <- c(A1, A2, B, C, eta1, eta2, thX, thU)
+invert <- function(P){
+  
+  A    <- exp(P[1:2])
+  BX   <- exp(P[3])
+  BU   <- exp(P[4])
+  B    <- exp(P[5])
+  C    <- exp(P[6])
+  eta  <- exp(P[7:8])
+  thU  <- P[9]
+  
+  m      <- colMeans(DATA)
+  V      <- diag(var(DATA))
+  mU     <- m[1:2]
+  VUhat  <- V[1:2]
+  mX     <- m[3:4]
+  VXhat  <- V[3:4]
+  
+  VU_  <- VU(eta,n,A,BU)
+  VX_  <- VX(eta,n,A,BX,C)
+  
+  EmU_  <- EmU(A,BU,thU)
+  
+  VmU_  <- VmU(eta,n,A,BU)
+  VmX_  <- VmX(eta,n,A,BX,C)
+  
+  thX   <- (mX[1]*VmX_[2]+mX[2]*VmX_[1])/(VmX_[2]+VmX_[1])
+  
+  VDmU_ <- VDmU(eta,n,A,BU)
+  VDmX_ <- VDmX(eta,n,A,BX,C)
+  
+  rhoX <- rho(VX_,mX,B)
+  rhoU <- rho(VU_,mU,B)
+  
+  SU   <- diag(VU_)
+  SU[1,2] <- SU[2,1] <- rhoU*sqrt(prod(VU_))
+  SX   <- diag(VX_)
+  SX[1,2] <- SX[2,1] <- rhoX*sqrt(prod(VX_))
+  
+  val1 <- likelihood(DATA[,1:2],EmU_,diag(VU_))
+  val2 <- likelihood(DATA[,3:4],rep(thX,2),diag(VX_))
+  
+  return(val1+val2)
+  
+}
+
+ML_sol <- function(DATA,P=c(rexp(4,1000),rexp(1,1/10),rexp(1,10000),rexp(2,1/10),rexp(1,1/10))){
+
+  # each the 'p' parameters are positive, but optim optimizes across all of \R^p
+  # the log-transform maps the positive axis to the whole real line diffeomorphically
+  # so I log-transform each parameter before plugging into optim
+  # the function invert then takes the inverse (exp) to map parameters to their values on the positive axis
+  # however, optim outputs the log-transformed parameters... see just below...
+  P      <- c(log(P[1:8]),P[9])
+  sol    <- optim(P,invert,control=list(fnscale=-1))
+  
+  # transform ml parameter solutions back to positive interval
+  ml <- exp(sol$par)
+  ml <- list(A1=ml[1],A2=ml[2],BX=ml[3],BU=ml[4],B=ml[5],C=ml[6],eta1=ml[7],eta2=ml[8],thU=ml[9])
+  
+  # use inferred parameters to estimate thU and thX
+  m      <- colMeans(DATA)
+  mX     <- m[3:4]
+  VmX_  <- VmX(c(ml$eta1,ml$eta2),n,c(ml$A1,ml$A2),ml$BX,ml$C)
+  thX   <- (mX[1]*VmX_[2]+mX[2]*VmX_[1])/(VmX_[2]+VmX_[1])
+  
+  # collecting the results in a single object
+  ml_sol <- list( ml_est = list(A1=ml$A1,A2=ml$A2,BU=ml$BU,BX=ml$BX,B=ml$B,
+                                C=ml$C,eta1=ml$eta1,eta2=ml$eta2,thU=ml$thU,thX=thX),
+                  log_likelihood = sol$value,
+                  convergence = sol$convergence)
+  
+  return(ml_sol)
+  
+}
+
+
+## example use ##
+
+# draw a random set of model parameters
+Pfake    <- c(rexp(4,1000),rexp(1,1/10),rexp(1,10000),rexp(2,1/10),rexp(1,1/10))
+Afake    <- Pfake[1:2]
+BXfake   <- Pfake[3]
+BUfake   <- Pfake[4]
+Bfake    <- Pfake[5]
+Cfake    <- Pfake[6]
+etafake  <- Pfake[7:8]
+thUfake  <- Pfake[9]
+thXfake  <- rexp(1,1/10)
+n        <- 1+3*rpois(2,10)
+
+# calculate expected statistics
+EmUfake  <- EmU(Afake,BUfake,thUfake)
+VmUfake  <- VmU(etafake,n,Afake,BUfake)
+VmXfake  <- VmX(etafake,n,Afake,BXfake,Cfake)
+Emufake  <- c(EmUfake,thXfake,thXfake)
+Smufake  <- c(VmUfake,VmXfake)
+mufake   <- rmvnorm(1,Emufake,diag(Smufake))
+VUfake   <- VU(etafake,n,Afake,BUfake)
+VXfake   <- VX(etafake,n,Afake,BXfake,Cfake)
+Sfake    <- c(VUfake,VXfake)
+rhoXfake <- rho(VXfake,mufake[1:2],Bfake)
+rhoUfake <- rho(VUfake,mufake[3:4],Bfake)
+
+# assuming all species from both guilds interact
+DATA    <- rmvnorm(prod(n),mufake,diag(Sfake))
+
+# perform inference
+solfake <- ML_sol(DATA,P=Pfake)
+
+# compare input parameters with ml estimates
+Pfake <- list(A1=Pfake[1],A2=Pfake[2],BX=Pfake[3],BU=Pfake[4],B=Pfake[5],
+              C=Pfake[6],eta1=Pfake[7],eta2=Pfake[8],thU=Pfake[9],thX=thXfake)
+print("INPUT PARAMETERS:")
+print(Pfake)
+print("ML ESTIMATES:")
+print(solfake$ml_est)
+print("Euclidean distance between true parameters and inferred parameters")
+dist <- sqrt(sum( ( as.numeric(as.character(unlist(Pfake)))-as.numeric(as.character(unlist(solfake$ml_est))) )^2 ))
+print(dist)
+```
+
+
+
+
