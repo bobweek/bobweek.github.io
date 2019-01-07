@@ -40,7 +40,7 @@ ggplot(toju_df,aes(x=rostrum,y=pericarp,color=island))+geom_point()+theme_bw()
 
 ## Background parameters
 
-Before we can infer the strengths of biotic selection we need to infer some key background parameters. Specifically, we need to know what the abiotic optima, the effective population sizes and additive genetic variances.
+Before we can infer the strengths of biotic selection we need to infer some key background parameters. Specifically, we need to know the abiotic optima, the effective population sizes and additive genetic variances.
 
 ### Abiotic optimal trait values ($\theta_i$)
 
@@ -153,7 +153,4 @@ if( max(p1,p2) < 0.05 ) print("Coevolution yes")
 if( max(p1,p2) > 0.05 ) print("Coevolution no")
 ```
 
-We see that "Coevolution yes" printed and hence coevolution was detected in this system by our method. We hope this tutorial helps you and your quest to understand the patterns of life!
-
-
-  - Bob Week & Scott Nuismer
+We see that "Coevolution yes" printed and hence coevolution was detected in this system by our method.

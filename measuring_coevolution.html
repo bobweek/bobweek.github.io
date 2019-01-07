@@ -20,8 +20,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -30,10 +30,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -89,8 +91,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -106,7 +114,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -126,6 +133,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -147,18 +191,77 @@ $(document).ready(function () {
 });
 </script>
 
-
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -239,7 +342,7 @@ ggplot(toju_df,aes(x=rostrum,y=pericarp,color=island))+geom_point()+theme_bw()</
 </div>
 <div id="background-parameters" class="section level2">
 <h2>Background parameters</h2>
-<p>Before we can infer the strengths of biotic selection we need to infer some key background parameters. Specifically, we need to know what the abiotic optima, the effective population sizes and additive genetic variances.</p>
+<p>Before we can infer the strengths of biotic selection we need to infer some key background parameters. Specifically, we need to know the abiotic optima, the effective population sizes and additive genetic variances.</p>
 <div id="abiotic-optimal-trait-values-theta_i" class="section level3">
 <h3>Abiotic optimal trait values (<span class="math inline">\(\theta_i\)</span>)</h3>
 <p>These parameters represent the trait values that maximize fitness for each species ignoring the effects of the interaction. They are potentially the most difficult to estimate depending on the biological details of the system being studied. There are many ways one can choose to estimate these values which will likely differ for each of the species involved in the interaction. For example, in the camellia-weevil system analyzed here, we found estimates of average pericarp thicknesses from populations where the weevils were found to be absent. Measuring mean trait values in populations where the interaction has not been taking place over evolutionary time-scales will likely be a popular method for inferring the abiotic optima. Another approach is to identify members of the population that do not partake in the interaction. In the case of the weevils, the males do not oviposit and hence are not involved with the arms race between the rostrum lengths of the female weevils and the thickness of the pericarps. We therefore assume the average rostrum length of the male weeviles provides at least a crude estimate for the abiotic optimal trait value.</p>
@@ -338,8 +441,6 @@ if( max(p1,p2) &lt; 0.05 ) print(&quot;Coevolution yes&quot;)</code></pre>
 <pre><code>## [1] &quot;Coevolution yes&quot;</code></pre>
 <pre class="r"><code>if( max(p1,p2) &gt; 0.05 ) print(&quot;Coevolution no&quot;)</code></pre>
 <p>We see that “Coevolution yes” printed and hence coevolution was detected in this system by our method.</p>
-<ul>
-</ul>
 </div>
 
 
