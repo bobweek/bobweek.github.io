@@ -531,6 +531,7 @@ image(out,add.contour=T,method="image",grid=Phenotype,xlab="Time",ylab="Phenotyp
 ```{r, include=F}
 
 Model <- function(t,phi,parameters){
+  
   deltax <- c(0.5,rep(1,numboxes-1),0.5)
   Flux   <- eta^2*diff(c(0,phi,0))/deltax
   lnW    <- log(Fit(Phenotype))

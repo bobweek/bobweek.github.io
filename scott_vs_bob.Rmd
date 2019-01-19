@@ -1,0 +1,167 @@
+---
+title: "Nuismerian vs Bobbelian worlds"
+description: |
+  A question, a conflict, a resolution.
+author:
+  - name: Bob Week
+    url: https://bobweek.github.io
+    affiliation: University of Idaho
+    affiliation_url: https://www.ibest.uidaho.edu
+date: "`r Sys.Date()`"
+output: radix::radix_article
+---
+
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\mathbb{V}}
+\newcommand{\Cov}{\mathbb{C}}
+
+In this document I show the equivalence of our approaches. I summarize the results in a table and then provide a discussion of the differences between our conceptualizations. After that I give a brief treatment of our models and the inference approaches we employ.
+
+## Notation
+
+- $X\sim P(\Lambda)$ means that $X$ is a random variable whose distribution is denoted by $P$ with parameters $\Lambda=(\lambda_1,\dots,\lambda_d)$.
+
+- $X\sim f$ means that $X$ is a random variable whose distribution is defined by the probability density function $f$.
+
+- $n$ is the size of the sample/community.
+
+- $N_e$ is the effective population size.
+
+- $\eta$ denotes the variance of stochastic effects. If these effects are interpreted as QG drift, then $\eta=G/N_e$. I'll use these symbols interchangeably throughout the document.
+
+## Summary
+
+|         | Your approach | My approach |
+| --------|---------------|-------------|
+| Model | $\Delta\bar z=GA(\theta-\bar z)+\xi$ | $\dot{\bar z}_i=GA(\theta-\bar z_i)+\dot\xi_i, \ i=1,\dots,n$ |
+| Distribution | $\bar z\sim f, \\ \xi\sim\mathcal{N}\left(0,\frac{G}{N_e}\right)$ | $\bar z_i\sim f, \\ \int_t^{t+1}\dot\xi_idt\sim\mathcal{N}\left(0,\frac{G}{N_e}\right), \\ i=1,\dots,n$  |
+| Mean  | $\mu\equiv\E\bar z=\int_\R \zeta f(\zeta)d\zeta$ | $\hat\mu\equiv\frac{1}{n}\sum_i\bar z_i$ |
+| Variance | $V\equiv\Var(\bar z)=\int_\E(\zeta-\mu)^2f(\zeta)d\zeta$ | $\hat V\equiv \frac{1}{n}\sum_i(\bar z_i-\hat\mu)^2$ |
+| Equilibrium | $\mu=\theta$, $V=\frac{1}{2N_eA}$ | $\hat\mu\sim\mathcal{N}\left(\theta,\frac{1}{2nN_eA}\right), \\ \hat V\sim\Gamma\left(\frac{n-1}{2},nN_eA\right) \\ \E\hat V=\left(\frac{n-1}{n}\right)\left(\frac{1}{2N_eA}\right)$ |
+| Sample | $\{\bar z_1,\dots,\bar z_n\}$ | NA |
+| Sample mean | $\hat\mu\equiv\frac{1}{n}\sum_i\bar z_i \\ \hat\mu\sim\mathcal{N}(\mu,\frac{V}{n})=\mathcal{N}(\theta,\frac{1}{2nN_eA})$ | NA
+| Sample variance | $\hat V\equiv\frac{1}{n}\sum_i(\bar z_i-\hat\mu)^2 \\ \hat V\sim \frac{V}{n}\chi^2_{n-1}=\Gamma\left(\frac{n-1}{2},\frac{n}{V}\right) \\ \E\hat V=\left(\frac{n-1}{n}\right)\left(\frac{1}{2N_eA}\right)$ | NA
+
+## The key difference
+
+That our models converge to the same results should be of no surprise. The primary difference between the two lies solely in our conceptual approaches. From what I understand, in your approach you assume the existence of an infinitely large community so that for any possible mean trait you can find a species in this community with that mean trait. The data represents taking a finite sample from this infinite community at equilibrium. The distributions of $\hat\mu$ and $\hat V$ come from the way this sample is drawn. In formal probability theory, your infinite community is referred to as the _sample space_. The set of all possible mean trait values (the real line $\R$) is referred to as the _state space_. As I will now show, both our sample spaces and state spaces disagree and it is this discrepancy that forms the crux of yesterdays argument. I conclude that each approach has its advantages over the other. Your approach is easier to think about and hence easier to communicate to others, but my approach is more biologically accurate.
+
+Before I dive into this, I want to present the same idea but in a simpler context. Let us pretend to be physicists trying to locate the position of a particle in a box. We can formulate models that predict this position as a random variable. In analogy to the rest of this document, your model would assume an infinite number of particles so that, for every position possible, there is a particle at that position. Then, the random variable reflecting position is just blindly picking one of these particles (ie, sampling from the population). Alternatively, my model would be agnostic to whether there are other particles in the box, and certainly would not require the assumption that there is an infinite number of them. Instead, my model would consider all potential positions and assign a probability (density) to each of them, reflecting our uncertainty of location. In this sense my approach is more Bayesian in nature, but that's just an aside. To be clear, I am not stating this is the way you would tackle this specific problem, this is just an analogy.
+
+In general the sample space is denoted by $\Omega$ and is left vague. However, you give a definition to your sample space, the set of all species in a community. I denote this definition by $\Omega_S$, $S$ for Scott. Let me introduce a mapping $\bar Z$ from the sample space $\Omega_S$ to the state space $\R$ such that, for a given species $\omega\in\Omega_S$, $\bar Z(\omega)$ returns the mean trait of that species. This is how mathematicians define the random variable $\bar Z$, as a deterministic function of an unknown parameter $\omega$. Then, formally, your assumption of an infinitely rich community is stating that for any $\bar z\in\R$ (for any mean trait in the state space) there exists $\omega\in\Omega_S$ such that $\bar Z(\omega)=\bar z$ (ie, there is a species with that mean trait).
+
+Let's take this one step further. Assume that we can associate every species in $\Omega_S$ with some number on the open unit interval $(0,1)$. Then, essentially, we can assume $\Omega_S=(0,1)$. This allows us to describe your method of sampling as drawing a set of $n$ random species $\omega_1,\dots,\omega_n$ independently from the uniform distribution on $(0,1)$. Of course, the identity of the species $\omega_1,\dots,\omega_n$ is not what we measure. We measure the mean traits given by $\bar Z(\omega_1),\dots,\bar Z(\omega_n)$.
+
+- This last bit isn't just some funny mental excersize, but has real application for generating arbitrary random variables. The technique based on this idea is referred to as [inverse transform sampling](https://en.wikipedia.org/wiki/Inverse_transform_sampling) and it's how I solved Luke and Austins's model for evolving speciation rates.
+
+Alternatively, my approach assumes a finite community of $n$ species. The stochasticity around the moments $\hat\mu$ and $\hat V$ does not come from random sampling, but from uncertainty about the process, namely drift. Here's my take on drift (and I'm not arguing that this is not yours either, just want to clarify): In the real world, species do not evolve at random. Their evolutionary trajectories are determined by a causal chain of events. Every single detail is determined, but there are many details. Far more than just the molecular events involved with reproduction or the meteorological events that may dictate selection. Because biological reality is so immensly rich with details, we can never hope to capture the minutiae that is the true culprit of the patterns we observe. Instead, we abstract these many details, pulling out from the froth of reality a tractable conceptualization: selection, gene-flow, mutation and drift. Thus, drift is not "true" randomness. Drift is uncertainty. Of course some quantum physicist may beg to differ based on the random nature of quantum events, but even this has a deterministic conceptualization (the so-called pilot-wave theory).
+
+With this is mind, I assume we are uncertain about the effects of drift across time. As a function of time, drift has many potential realizations. In my model I bound these realizations to sample paths that can be exhibited by a Brownian motion. In this way, we are not "guessing" a random number at each moment in time, but "guessing" a random function across all time. Hence, my sample space, denoted $\Omega_B$, is not a collection of species, but is an index of the collection of all possible sample paths that can be exhibited by a Brownian motion. That is, every $\omega\in\Omega_B$ is associated with some realization of a Brownian motion. As done above, we can formulate a mapping between the sample space and the state space. Since all sample paths of a Brownian motion are continuous (even though they are nowhere differentiable!), we can use the set $C[0,\infty)$ of all continuous functions as the state space. The mapping, denoted by the uppercase Greek letter $\Xi$, then maps each point of $\Omega_B$ to some continuous function. 
+
+Applying this to my model of community evolution, you can think of the randomness coming from uncertainty about the $n$ different sample paths $\Xi(\omega_1),\dots,\Xi(\omega_n)$, where the $\omega_i\in\Omega_B$ are unkown. Note that if these sample paths are known, everything about my model is determined. This is even reflected in my approach to numerically integrating the model. I generate the $n$ sample paths, then I integrate the model as if it were a deterministic differential equation with some weird forcing function.
+
+Thus, the randomness of the mean and variance of the mean traits in my model comes from unkown sample paths. That is, this randomness is due to uncertainty about the process and is not due to "true" stochasticity in nature (which I don't believe exists) or due to randomly sampling from some infinite set of communities containing $n$ species. The way your model is conceptualized, it actually does not take into account uncertainty in the process because every sample path would be observed by some species. That is, when you average over all mean traits, your framework literally implies computing an average over a vastly infinite number of species. In contrast, when I take an average, my framework implies averaging over all sample paths that could be observed, weighting each one by a measure of belief.
+
+We both know that infinitely rich communities and the space of all potential sample paths are not what we are actually trying to model. They're simply cognitive crutches leading to our goal. The advantage of your approach is its conceptual tractability. There's no need to think about drawing random functions and the subtleties therein. However, if one is willing to confront such technical details, they are rewarded with a more biologically accurate view of evolution in a _finite_ community.
+
+## Scott's approach
+
+### The model
+
+1) Derive a discrete time process that captures the evolution of an arbitrary species in the community:
+
+$$\bar z'=\bar z+GA(\theta-\bar z)+\xi$$
+
+where $\xi\sim\mathcal{N}(0,\eta)$.
+
+2) Calculate expectation $\mu\equiv\E(\bar z)$ and variance $V\equiv\Var(\bar z)$ of the process:
+
+$$\E(\bar z')=\E(\bar z+GA(\theta-\bar z)+\xi) \\ =\mu+(\theta-\mu)$$
+
+$$\Var(\bar z')=\Var(\bar z+GA(\theta-\bar z)+\xi) \\ =V-2GAV+G^2A^2V+\eta$$
+
+3) Compute equilibrium of $\mu$ and $V$
+
+$$\mu=\theta, \ V=\frac{\eta}{2GA-G^2A^2}\approx\frac{\eta}{2GA}$$
+
+Using standard QG assumption about drift 
+
+$$\eta=\frac{G}{N_e}\implies V=\frac{1}{2N_eA}$$
+
+### The inference
+
+4) Draw $n$ species $\bar z_1,\dots,\bar z_n$ from the community at random.
+
+5) Assuming these mean traits are iid $\mathcal{N}(\theta,\frac{1}{2N_eA})$, we can estimate $\theta$ and $A$ using maximum likelihood. The brute-force approach is to write down the general expression for the likelihood of the model parameters given the data: 
+
+$$\mathscr{L}(\theta,A|\bar z_1,\dots,\bar z_n)\equiv\prod_if(\bar z_i|\theta,A)$$
+
+where $f$ is the probability density of each datum. We are assuming the data follow a normal distribution with mean $\mu=\theta$ and variance $V=\frac{1}{2N_eA}$. Because $f$ is the probability density of the normal distribution, we know that the data $\bar z_1,\dots,\bar z_n$ are completely summarized by the sample mean
+
+$$\hat\mu\equiv\frac{1}{n}\sum_i\bar z_i$$
+
+and sample variance
+
+$$\hat V\equiv\frac{1}{n}\sum_i(\bar z_i-\hat\mu)^2$$
+
+We also know, due to normality of the data, that the maximum likelihood estimate of $\mu$ and $V$ are just $\hat\mu$ and $\hat V$ respectively. Hence, the maximum likelihood estimates of $\theta$ and $A$ are
+
+$$\hat\theta=\hat\mu, \ \hat A=\frac{1}{2N_e\hat V}$$
+
+Since we are modelling the data as random draws from an infinitely large community, we must treat $\hat\mu$ and $\hat V$ as random variables. The distributions of these random variables are well known:
+
+$$\hat\mu\sim\mathcal{N}\left(\mu,\frac{V}{n}\right)=\mathcal{N}\left(\theta,\frac{1}{2nN_eA}\right)$$
+
+$$\hat V\sim\frac{V}{n}\chi^2_{n-1}=\frac{1}{2nN_eA}\chi^2_{n-1}$$
+
+and hence $\E(\hat\mu)=\theta$ and $\E(\hat V)=\frac{n-1}{n}V$. As a final note, we can use the variances of the sample moments to compute confidence intervals around our estimates of $\theta$ and $A$.
+
+## Bob's approach
+
+### The model
+
+1) Derive a continuous time model of evolution for $n$ species simultaneously.
+
+$$\dot{\bar z}_i\equiv\frac{d}{dt}\bar z_i=GA(\theta-\bar z_i)+\dot\xi_i, \ \ i=1,\dots,n$$
+
+Technically speaking, the notation $\dot\xi_i$ is only suggestive of a time derivative, but it makes intuitive sense and the details work out exactly as one would hope. The stochastic process $\dot\xi_i$ is defined so that the random variable $\xi_i$ given by
+
+$$\xi_i\equiv\int_t^{t+1}\dot\xi_idt$$
+
+satisfies $\xi_i\sim\mathcal{N}(0,\eta)$.
+
+2) Calculate the expectation $\hat\mu\equiv\frac{1}{n}\sum_i\bar z_i$ and variance $\hat V\equiv\frac{1}{n}\sum_i(\bar z_i-\hat\mu)^2$ of the process using It&ocirc;'s lemma:
+
+$$\cdots$$
+
+$$\frac{d\hat\mu}{dt}=GA(\theta-\hat\mu)+\dot{\bar\xi}$$
+
+$$\frac{d\hat V}{dt}=2\left[\left(\frac{1}{N_eA}\right)\left(\frac{n-1}{n}\right)-\hat V\right]+\left(2\sqrt{\hat V}\right)\dot{\bar\xi}$$
+
+where $\bar\xi=\frac{1}{n}\sum_i\xi_i$ and $\dot{\bar\xi}=\frac{d}{dt}\bar\xi=\frac{1}{n}\sum_i\dot\xi_i$.
+
+3) Compute equilibrium of $\hat\mu$ and $\hat V$
+
+$$\hat\mu\sim\mathcal{N}\left(\theta,\frac{1}{2nN_eA}\right)$$
+
+$$\hat V\sim\Gamma\left(\frac{n-1}{2},nN_eA\right)$$
+
+### The inference
+
+4) Just as for the Nuismerian approach, we use maximum likelihood to infer the values of $\theta$ and $A$. Since the data $\bar z_1,\dots,\bar z_n$ are assumed to be normally distributed, they are completely summarized by $\hat\mu$ and $\hat V$. Furthermore, it is known that the random variables $\hat\mu$ and $\hat V$ are independent (a property unique to the normal distribution). Thus, the joint distribution of $(\hat\mu,\hat V)$, denoted by $h$, can be decomposed into the component densities ($f$ for $\hat\mu$ and $g$ for $\hat V$). That is,
+
+$$h(\hat\mu,\hat V)=f(\hat\mu)g(\hat V)$$
+
+In this case, I like thinking of likelihood as a function of the parameters $\theta$ and $A$ given the moments $\hat\mu$ and $\hat V$:
+
+$$\mathscr{L}(\theta,A|\hat\mu,\hat V)=f(\hat\mu)g(\hat V)$$
+
+Since we can think of $\hat\mu$ as a sample from a normal distribution with mean $\theta$, the maximum likelihood estimate for $\theta$ is clearly $\hat\theta=\hat\mu$. We can be extra confident about this result since $\theta$ appears nowhere in the parameterization of the distribution for $\hat V$. Similarly, we can show that the maximum likelihood estimate for $A$ corresponds to equating $\E\hat V$ with $\hat V$. This simplifies to $\hat A=1/2N_e\hat V$.
