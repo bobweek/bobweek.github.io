@@ -5,9 +5,9 @@
 % Feel free to distribute this template, but please keep the
 % referal to HowToTeX.com.
 % Date: July 2011
-% 
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  % How to use writeLaTeX: 
+  % How to use writeLaTeX:
   %
 % You edit the source code here on the left, and the preview on the
 % right shows you the result within a few seconds.
@@ -23,7 +23,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[paper=a4,fontsize=11pt]{scrartcl} % KOMA-article class
-\usepackage[top=.75in, bottom=1in, left=1in, right=1in]{geometry}							
+\usepackage[top=.75in, bottom=1in, left=1in, right=1in]{geometry}
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage[protrusion=true,expansion=true]{microtype}
@@ -65,7 +65,7 @@
 
 \newcommand{\MyContact}[1]{ % Contact Info (optional)
 \large \usefont{OT1}{phv}{n}{n}\hfill \textit{#1}
-\par \normalsize \normalfont}        
+\par \normalsize \normalfont}
 
 \newcommand{\NewPart}[1]{\section*{\uppercase{#1}}}
 
@@ -155,6 +155,14 @@
 \sepspace
 \EducationEntry{Undergraduate Research in Biology \& Mathematics (UBM)}{2013-2015}{University of Idaho}{Efforts focused on deriving a method of inference for the measurement of coevolution in nature.}
 
+%%% Publications
+%%% ------------------------------------------------------------
+\NewPart{Publications}{}
+
+\PublicationEntry{The measurement of coevolution in the wild}{In press}{Week, B.; Nuismer, S.L.}{Ecology Letters}
+
+\PublicationEntry{Coevolution slows the disassembly of mutualistic communities}{2018}{Nuismer, S.L.; Week, B.; Aizen, M.}{American Naturalist}
+
 %%% Talks
 %%% ------------------------------------------------------------
 \NewPart{Talks}{}
@@ -167,18 +175,7 @@
 
 \EducationEntry{The measurement of coevolution in nature}{2018}{EvoWibo - Port Townsend, Washington}{}
 
-\newpage
-
-%%% Publications
-%%% ------------------------------------------------------------
-\NewPart{Publications}{}
-
-\PublicationEntry{Coevolution slows the disassembly of mutualistic communities}{2018}{Nuismer, S.L.; Week, B.; Aizen, M.}{American Naturalist}
-
-%\PublicationEntry{The measurement of coevolution in the wild}{-}{Week, B.; Nuismer, S.L.}{-}
-
-
-%%% Publications
+%%% Service
 %%% ------------------------------------------------------------
 \NewPart{Service}{}
 \ReviewEntry{Reviewer for \emph{The American Naturalist}}{2018}
@@ -197,24 +194,21 @@
 \NewPart{Extracurricular}{}
 
 \EducationEntry{Math Club President}{2010-2012}{Clark Community College}{Responsibilities included organizing the college's mathematics colloquium, planning educational activities and providing a social platform for the mathematically curious.}
-  \sepspace
-  \EducationEntry{Washington Science Olympiad Volunteer}{2011}{Clark Community College}{Volunteer shift for a tournament inviting elementary school students to have fun and explore science. \url{washingtonscienceolympiad.com}}
-  
-  %%% Skills
-  %%% ------------------------------------------------------------
-  \NewPart{Skills/Experience}{}
-  
-  \SkillsEntry{Software}{\textsc{R}, \textsc{Python}, \textsc{Mathematica}, \textsc{C++}, \textsc{Java}, \LaTeX}
-  
-  \SkillsEntry{Mathematics}{measure theory, probability, elementary functional analysis, mathematical statistics, differential equations (ordinary, partial and stochastic), dynamical systems.}
-  
-  %%% Interests
-  %%% ------------------------------------------------------------
-  \NewPart{Interests and curiosities}{}
-  
-  \SkillsEntry{Cool stuff}{road bikes, sport climbing, building interactive art installations}
-  \sepspace
-  \SkillsEntry{Nerdy stuff}{equivariant bifurcation theory, differentiable manifolds, group theory (representation theory), modular synthesizers}
-  
-  \end{document}
-  
+
+%%% Skills
+%%% ------------------------------------------------------------
+\NewPart{Skills/Experience}{}
+
+\SkillsEntry{Software}{\textsc{R}, \textsc{Mathematica}, \textsc{C++}, \textsc{Java}, \LaTeX}
+
+\SkillsEntry{Mathematics}{measure theory, probability, elementary functional analysis, mathematical statistics, differential equations (ordinary, partial and stochastic), dynamical systems.}
+
+%%% Interests
+%%% ------------------------------------------------------------
+\NewPart{Interests and curiosities}{}
+
+\SkillsEntry{Cool stuff}{road bikes, sport climbing, building interactive art installations}
+\sepspace
+\SkillsEntry{Nerdy stuff}{equivariant bifurcation theory, differentiable manifolds, group theory (representation theory), modular synthesizers}
+
+\end{document}
