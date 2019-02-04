@@ -11,18 +11,17 @@ knitr::opts_chunk$set(echo = TRUE)
 rm(list=ls())
 ```
 
-This is a tutorial for employing the method of coevolutionary inference described in Week & Nuismer 2019. Please read the paper and its appendix to get an understanding of the model and its parameters before diving into this tutorial. Data used in this tutorial comes from [Toju & Sota (2006)](https://doi.org/10.1086/498277) and have been collected [here](https://github.com/bobweek/measuring.coevolution) for convenience. All analysis is done in the statistal programming language R.
+This is a tutorial for employing the method of coevolutionary inference described in Week & Nuismer ([2019](https://doi.org/10.1111/ele.13231)). Please read the paper and its appendix to get an understanding of the model and its parameters before diving into this tutorial. Data used in this tutorial comes from Toju & Sota ([2006](https://doi.org/10.1086/498277)) and have been collected [here](https://github.com/bobweek/measuring.coevolution) for convenience. All analysis is done in the statistical programming language R.
 
 ## Introduction to the biology and data
 
-To demonstrate the utility of our method, we walk through each step taken to obtain the results produced in the main text. We restrict our analysis in this document to the excellent data provided by [Toju & Sota (2006)](https://doi.org/10.1086/498277). This paper documents the antagonistic interaction between the female __Curculio camellia__ weevil and the __Camellia japonica__ fruit. Female weevils bore holes into the woody pericarps of the camellia to oviposit. Inside the fruit, weevil larvae feed on the seeds of the camellia up until the fourth instar, at which time they exit the fruit and overwinter. These two species co-occur across Japan, although camellia populations where the weevil is absent also exist.
+To demonstrate the utility of our method, we walk through each step taken to obtain the results produced in the main text. We restrict our analysis in this document to the excellent data provided by Toju & Sota (2006). This paper documents the antagonistic interaction between the female __Curculio camellia__ weevil and the __Camellia japonica__ fruit. Female weevils bore holes into the woody pericarps of the camellia to oviposit. Inside the fruit, weevil larvae feed on the seeds of the camellia up until the fourth instar, at which time they exit the fruit and overwinter. These two species co-occur across Japan, although camellia populations where the weevil is absent also exist.
 
 ## Phenotypic data
 
 Estimates of mean trait pairs across multiple locations comprise the core data required to utilize this method. With these data we calculate the metapopulation mean traits, variance of local mean traits across space, and the spatial covariance of local mean traits for the two interacting species. To begin we read in the trait data to a dataframe in R. Note that although the file is named __toju_pairs.Rda__, we refer to it within the R environment as __toju_df__.
 
 ```{r, message=FALSE, warning=FALSE}
-
 # read in data
 load("toju_pairs.Rda")
 head(toju_df)
@@ -44,7 +43,7 @@ Before we can infer the strengths of biotic selection we need to infer some key 
 
 ### Abiotic optimal trait values ($\theta_i$)
 
-These parameters represent the trait values that maximize fitness for each species ignoring the effects of the interaction. They are potentially the most difficult to estimate depending on the biological details of the system being studied. There are many ways one can choose to estimate these values which will likely differ for each of the species involved in the interaction. For example, in the camellia-weevil system analyzed here, we found estimates of average pericarp thicknesses from populations where the weevils were found to be absent. Measuring mean trait values in populations where the interaction has not been taking place over evolutionary time-scales will likely be a popular method for inferring the abiotic optima. Another approach is to identify members of the population that do not partake in the interaction. In the case of the weevils, the males do not oviposit and hence are not involved with the arms race between the rostrum lengths of the female weevils and the thickness of the pericarps. We therefore assume the average rostrum length of the male weeviles provides at least a crude estimate for the abiotic optimal trait value.
+These parameters represent the trait values that maximize fitness for each species ignoring the effects of the interaction. They are potentially the most difficult to estimate depending on the biological details of the system being studied. There are many ways one can choose to estimate these values which will likely differ for each of the species involved in the interaction. For example, in the camellia-weevil system analyzed here, we found estimates of average pericarp thicknesses from populations where the weevils were found to be absent. Measuring mean trait values in populations where the interaction has not been taking place over evolutionary time-scales will likely be a popular method for inferring the abiotic optima. Another approach is to identify members of the population that do not partake in the interaction. In the case of the weevils, the males do not oviposit and hence are not involved with the arms race between the rostrum lengths of the female weevils and the thickness of the pericarps. We therefore assume the average rostrum length of the male weevils provides at least a crude estimate for the abiotic optimal trait value.
 
 ### Effective population sizes ($n_i$)
 
@@ -54,7 +53,7 @@ $$\Theta_i=4n_i\eta_i$$
 
 where $\Theta_i$ is the fundamental parameter from population genetics (not to be confused with $\theta_i$ from above), $n_i$ is the effective population size and $\eta_i$ is the rate of mutation in species $i$. Of course there are other methods, but the literature on this subject is far too vast to review in this short tutorial.
 
-Using the above equation and the software package __Migrate-n__ ([Beerli 2006](https://doi.org/10.1093/bioinformatics/bti803)) [Toju & Sota (2011)](https://doi.org/10.1111/j.1558-5646.2011.01243.x) we were able to provide estimates of effective population sizes from multiple locations across Japan. However, our method requires a single estimate of the effective population size. In the appendix of the associated manuscript, we show that, given estimates from multiple locations, the harmonic mean of these values is the correct value to use. That is, if $n_{ij}$ is the effective population size of species $i$ in location $j$, then, given $N$ locations, we would set
+Using the above equation and the software package __Migrate-n__ ([Beerli 2006](https://doi.org/10.1093/bioinformatics/bti803)) Toju & Sota ([2011](https://doi.org/10.1111/j.1558-5646.2011.01243.x)) were able to provide estimates of effective population sizes from multiple locations across Japan. However, our method requires a single estimate of the effective population size. In the appendix of the associated manuscript, we show that, given estimates from multiple locations, the harmonic mean of these values is the correct value to use. That is, if $n_{ij}$ is the effective population size of species $i$ in location $j$, then, given $N$ locations, we would set
 
 $$n_i=\frac{N}{\sum_j\frac{1}{n_{ij}}}.$$
 
@@ -62,7 +61,7 @@ $$n_i=\frac{N}{\sum_j\frac{1}{n_{ij}}}.$$
 
 Heritabilities (in the narrow-sense) of traits are routinely estimated using parent-offspring regressions and other techniques. With an estimate of the heritability of the trait in species $i$ (denoted by $h_i^2$) and an estimate of the phenotypic variance ($\sigma_i^2$) we can calculate an estimate of the additive genetic variance using the relation $G_i=h_i^2\sigma_i^2$. 
 
-In [Toju & Sota (2011)](https://doi.org/10.1086/659624) estimates for the heritability of pericarp thickness in the camellia fruit were calculated. We used the average of the heritabilities calculated. In addition to these values estimates of phenotypic variances were provided in [Toju & Sota (2006)](https://doi.org/10.1086/498277) for multiple populations. As shown in the appendix of the associated manuscript, the arithmetic mean of additive genetic variances from multiple locations should be used as the effective additive genetic variance for our model. That is, given the additive genetic variance of species $i$ in locations $j=1,\dots,N$ ($G_{ij}$), we calculate the effective additive genetic variance as
+In Toju & Sota (2011) estimates for the heritability of pericarp thickness in the camellia fruit were calculated. We used the average of the heritabilities calculated. In addition to these values estimates of phenotypic variances were provided in Toju & Sota (2006) for multiple populations. As shown in the appendix of the associated manuscript, the arithmetic mean of additive genetic variances from multiple locations should be used as the effective additive genetic variance for our model. That is, given the additive genetic variance of species $i$ in locations $j=1,\dots,N$ ($G_{ij}$), we calculate the effective additive genetic variance as
 
 $$G_i=\frac{1}{N}\sum_jG_{ij}.$$
 
@@ -82,7 +81,7 @@ The column labelled __Gs__ contains the effective additive genetic variances for
 
 ## Estimating Selection
 
-Inferring selection parameters and the optimal offset with our method is very breif. All the heavy lifting has already been done (see the associated manuscript for details). With the data and background parameters prepared, we simply load in the relevant function for calculating the maximum likelihood estimated of biotic and abiotic selection strengths and the optimal offset. We begin by calculating the five statistical moments that describe a bivariate normal distribution: the means ($\mu_1,\mu_2$), the variances ($V_1,V_2$) and the covariance ($C$). Note that we adjust the sample moment calculations for the variances and covariance. This is because the actual maximum likelihood estimates of these moments do not have the correction factor $N-1$ in the denominator.
+Inferring selection parameters and the optimal offset with our method is very brief. All the heavy lifting has already been done (see the associated manuscript for details). With the data and background parameters prepared, we simply load in the relevant function for calculating the maximum likelihood estimated of biotic and abiotic selection strengths and the optimal offset. We begin by calculating the five statistical moments that describe a bivariate normal distribution: the means ($\mu_1,\mu_2$), the variances ($V_1,V_2$) and the covariance ($C$). Note that we adjust the sample moment calculations for the variances and covariance. This is because the actual maximum likelihood estimates of these moments do not have the correction factor $N-1$ in the denominator.
 
 ```{r, message=FALSE, warning=FALSE}
 N   <- dim(toju_df)[1]
@@ -149,8 +148,8 @@ p1 <- dchisq(Lambda1,1)
 p2 <- dchisq(Lambda2,1)
 
 # is coevolution significant?
-if( max(p1,p2) < 0.05 ) print("Coevolution yes")
 if( max(p1,p2) > 0.05 ) print("Coevolution no")
+if( max(p1,p2) < 0.05 ) print("Coevolution yes")
 ```
 
 We see that "Coevolution yes" printed and hence coevolution was detected in this system by our method.
