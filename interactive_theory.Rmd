@@ -49,17 +49,17 @@ $$d\bar z_2=\left\{G_2M_2(\bar z_1-\bar z_2)-G_2D_2+m_2\frac{\partial^2\bar z_2}
 
 The parameter $G_i$ denotes the additive genetic variance of the focal trait in species $i$, where as $M_i$ and $D_i$ denote the strengths of matching and differences selection respectively.
 
-The global mean trait of species $i$ at time $t$ is given by
+If $R\subset\mathbb{R}$ denotes the range of the species, then (assuming abundance is constant across space) the global mean trait of species $i$ at time $t$ is given by
 
-$$\mu_i(t)\equiv\lim_{\xi\rightarrow\infty}\frac{1}{2\xi}\int_{-\xi}^\xi\bar z_i(x,t)dx$$
+$$\mu_i(t)\equiv\frac{1}{|R|}\int_R\bar z_i(x,t)dx$$
 
 and the variance in local mean traits by
 
-$$V_i(t)\equiv\lim_{\xi\rightarrow\infty}\frac{1}{4\xi^2}\int_{-\xi}^\xi(\bar x_i(x,t)-\mu_i(t))^2dx$$
+$$V_i(t)\equiv\frac{1}{|R|}\int_R(\bar x_i(x,t)-\mu_i(t))^2dx$$
 
 and the covariance by
 
-$$C(t)\equiv\lim_{\xi\rightarrow\infty}\frac{1}{4\xi^2}\int_{-\xi}^\xi(\bar x_1(x,t)-\mu_1(t))(\bar x_2(x,t)-\mu_2(t))dx.$$
+$$C(t)\equiv\frac{1}{|R|}\int_R(\bar x_1(x,t)-\mu_1(t))(\bar x_2(x,t)-\mu_2(t))dx.$$
 
 Hence, the correlation can by tracked by computing $\rho(t)\equiv\frac{C(t)}{\sqrt{V_1(t)V_2(t)}}$.
 
