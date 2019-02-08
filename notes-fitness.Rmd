@@ -1,5 +1,5 @@
 ---
-title: "First Steps"
+title: "Fitness"
 output: 
   html_document: 
     toc: false
@@ -28,14 +28,9 @@ knitr::opts_chunk$set(echo = TRUE)
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\Var}{\mathrm{Var}}
 
+I denote the fitness of an individual by $\W$, a [Poisson](https://en.wikipedia.org/wiki/Poisson_distribution) distributed random variable. Why Poisson? Firstly, the fitness of an individual is the number of offspring it leaves, which is a non-negative integer. This coincides precisely with the support of the Poisson distribution. Secondly, the Poisson distribution has the property of maximizing [entropy](https://en.wikipedia.org/wiki/Principle_of_maximum_entropy) for all distributions that share its support under the constraint of having some specified mean. This is another of way stating that, aside from the first [statistical moment](https://en.wikipedia.org/wiki/Moment_(mathematics)), the Poisson distribution assumes the least information about the random variable it is modelling. If more information is known, a more precise distribution can be invoked.
 
-These notes are the result of the interplay between my background in mathematics and my development as a theoretical biologist. I have placed them here primarily for my own reference, but also offer them as a resource to other scientists. Much of what is provided in these notes are hard to procure from the main literature (if it exists in the main literature) and many books such as Burger (2000) or Rice (20XX) don't provide axiomatic (that is, straightforward) derivations and leave out many of what I've found to be the most general and beautiful results in the mathematical translation of the evolutionary process. Furthermore, it appears the most mathemtically competent evolutionary biologists I've met either don't understand what I mean when I ask about a general mathematical theory of evolution, believe my approach is not biologically motivated and therefore irrelevant, or think this has all been done before (and yet fail to point me towards the literature where such work exists). As a result, I've found my time is better spent focusing on my own derivations instead of slogging through an ad-hoc and often contradictory literature. This has led me to some beautiful convergences and insights. As an example of a nice convergence between my "weirdo" approach and some well accepted model is my stumbling upon what I realized later to be a generalization of Kimura's continuum of alleles model (Kimura 1965). A nice insight that sort of fell out of my "weirdo" approach is the relation between demographic stochasticity, hard/soft selection and drift (when selection is hard, drift does not disappear with large populations and when selection is soft, drift has the "typical" relation to population size). As I continue to learn and explore I will update these notes with my findings.
-
-## Fitness
-
-I denote the fitness of an individual by $\W$, a [Poisson](https://en.wikipedia.org/wiki/Poisson_distribution) distributed random variable. Why Poisson? Firstly, the fitness of an individual is the number of offspring it leaves, which is a non-negative integer. This coincides precisely with the support of the Poisson distribution. Secondly, the Poisson distribution has the property of maximizing [entropy](https://en.wikipedia.org/wiki/Principle_of_maximum_entropy) for all distributions that share its support under the constraint of having some specified mean. This is another of way stating that, aside from the first [statistical moment](https://en.wikipedia.org/wiki/Moment_(mathematics)), the Poisson distribution assumes the least information about the random variable it is modelling. If more information is known, a more precise distribution can be invoked. However, this would also make the resulting model less general.
-
-We denote expectation by $\mathbb{E}$ and $W\equiv\mathbb{E}\W$ so that $W$ represents the mean fitness of an individual ($\equiv$ is used for definitions). This individual mean fitness may depend on its genotype ($\gamma$) or, more mechanistically, its phenotype ($z$). In general genotypes will be modelled as elements of some discrete space, usually finite, and phenotypes will usually be modelled as elements of the real line $\mathbb{R}$, although at times we will restrict the range of phenotypes to be a countable or even finite subset of $\mathbb{R}$. In the case of a random phenotype $Z$ we write $W(z)\equiv\mathbb{E}(\W(Z)|Z=z)$, that is $W(z)$ is a conditional mean, conditioned on the phenotype $Z$ taking a particular value $z$. In the case of a continuously distributed trait, we will use $\phi(z)$ for the density function of the populations phenotypic distribution. Then the total expectation of fitness, or, population mean fitness is 
+We denote expectation by $\mathbb{E}$ and $W\equiv\mathbb{E}\W$ so that $W$ represents the mean fitness of an individual ($\equiv$ is used for definitions). This individual mean fitness may depend on its genotype ($\gamma$) or, more mechanistically, its phenotype ($z$). In general genotypes will be modelled as elements of some discrete space, usually finite, and phenotypes will usually be modelled as elements of the real line $\mathbb{R}$, although at times we will restrict the range of phenotypes to an interval and sometimes a countable subset of $\mathbb{R}$. In the case of a random phenotype $Z$ we write $W(z)\equiv\mathbb{E}(\W(Z)|Z=z)$, that is $W(z)$ is a conditional mean, conditioned on the phenotype $Z$ taking a particular value $z$. In the case of a continuously distributed trait, we will use $\phi(z)$ for the density function of the populations phenotypic distribution. Then the total expectation of fitness, or, population mean fitness is 
 
 $$\overline W=\E\W(Z)=\int W(z)\phi(z)dz.$$
 
@@ -57,7 +52,7 @@ For now, let's settle for deterministic dynamics. We'll return to the stochastic
 
 ### Continuous Time
 
-If we assume that selection is absent and mean fitness is constant with respect to time, we can derive continuous time mean dynamics of $N_t$. To do so, suppose that for $0<\delta<1$, $\mathbb{E}N_{t+\delta}=W^\delta\mathbb{E} N_t$. This implies that repdoction events are uniformly distributed throughout the year so that, in expectation, the population is continuously reproducing. Then $\mathbb{E}N_{t+0}=\mathbb{E}N_t$ and $\mathbb{E}N_{t+1}=W\mathbb{E}N_t$. Hence
+If we assume that selection is absent and mean fitness is constant with respect to time, we can derive continuous time mean dynamics of $N_t$. To do so, suppose that for $0<\delta<1$, $\mathbb{E}N_{t+\delta}=W^\delta\mathbb{E} N_t$. This implies that reproduction events are uniformly distributed throughout the year so that, in expectation, the population is continuously reproducing. Then $\mathbb{E}N_{t+0}=\mathbb{E}N_t$ and $\mathbb{E}N_{t+1}=W\mathbb{E}N_t$. Hence
 
 $$\mathbb{E}\frac{dN_t}{dt}=\mathbb{E}\lim_{\delta\rightarrow0}\frac{N_{t+\delta}-N_t}{\delta}=\lim_{\delta\rightarrow0}\frac{\mathbb{E}N_{t+\delta}-\mathbb{E}N_t}{\delta}$$
 
@@ -69,10 +64,14 @@ In typical notation one would write $r$ or $m$ in place of $\ln(W)$. This expose
 
 To solidify the connection between these two notions of fitness, consider a population that maintains a constant size of 100 but becomes extinct at a single instant (as shown below). This  corresponds to each individual at first having a fitness of 1 (remember we're assuming fitness is constant throughout the population) making the Malthusian fitness of the population zero (hence, constant population size). Then when the population drops each individual must suddenly have a Wrightian fitness of zero. The Malthusian fitness of the population will then be $\ln(0)$ which is $-\infty$, corresponding to the discontinuous drop in the population size. 
 
-```{r, echo=F, fig.height = 3, fig.width = 5, fig.align='center'}
+```{r, echo=F, fig.height = 3, fig.width = 5, fig.align='center', echo=F, message = F}
+require(ggpubr)
+require(ggplot2)
+require(ggthemes)
 time <- 1:1000
 N <- c(rep(100,800),rep(0,200))
-plot(time,N)
+df <- data.frame(time,N)
+ggplot(df,aes(x=time,y=N))+geom_line()+theme_wsj()+theme(axis.title=element_text(size=12))
 ```
 
 However, this result is a bit of an abuse of the above derivation as we had made the assumption that fitness is constant with respect to time. If we assume that $\frac{dN_t}{dt}=\ln(W_t)N_t$, where now $W_t$ is allowed to change with respect to time, then for consistency it would be good to reconcile this equation with the above assumption that $N_{t+1}-N_t=(W_{t+1}-1)N_t$. Doing so restricts the nature of $W_t$. Specifically, 
@@ -88,9 +87,13 @@ $$\frac{dW_{t+1}}{dt}=W_{t+1}\ln W_{t+1}-\ln W_t-W_{t+1}\ln W_t+\ln W_t.$$
 
 Shifting the time index and simplifying provides
 
-$$\frac{d\ln W_t}{dt}=\ln W_t - \ln W_{t-1}.$$
+$$\frac{d\ln W_t}{dt}=\ln W_t - \ln W_{t-1}$$
 
-This states that, in the absence of migration, if $W_t=0$ for some $t$, then $W_s=0$ for $s>t$. That is to say that without immigrants, if the population goes extinct, it remains extinct. There's another implication in this equation and to explore it I will assume that the general form of $W_t$ is $W_t=e^{r_t}$ for some function $r_t$. Note that this implies $\frac{dN_t}{dt}=r_tN_t$. Then the previously derived equation is equivalent to $\frac{dr_t}{dt}=r_t-r_{t-1}$. In the case that $r_t=k+r_{t-1}$ for some constant $k$, we get $r_t=kt+c$, making $\frac{dN_t}{dt}=(kt+c)N_t$. But we can also make $k_t$ a function $t$. Here we get 
+or equivalently
+
+$$\frac{dW_t}{dt}=W_t(\ln W_t-\ln W_{t-1}).$$
+
+This states that, in the absence of migration, if $W_t=0$ for some $t$, then $W_s=0$ for $s>t$. That is, without immigrants, if the population goes extinct, it remains extinct. There's another implication in this equation and to explore it I will assume that the general form of $W_t$ is $W_t=e^{r_t}$ for some function $r_t$. Note that this implies $\frac{dN_t}{dt}=r_tN_t$. The previously derived equation becomes equivalent to $\frac{dr_t}{dt}=r_t-r_{t-1}$. In the case that $r_t=k+r_{t-1}$ for some constant $k$, we get $r_t=kt+c$, making $\frac{dN_t}{dt}=(kt+c)N_t$. But we can also make $k_t$ a function of $t$. Here we get 
 
 $$\frac{dN_t}{dt}=\left(\int_0^tk_sds+c\right)N_t$$
 
@@ -168,13 +171,13 @@ $$\bigwedge_0^tW_s^{ds}\equiv \exp\left(\int_0^t\ln W_sds\right).$$
 
 Hence, this returns the same expected dynamics as above when $\ln W_t=r_t$. If $W_t=W$ is constant across time we have
 
-$$\bigwedge_0^tW_s^{ds}=\exp\left(t \ln W\right)$$
+$$\bigwedge_0^tW_s^{ds}=e^{tr}$$
 
 and
 
-$$\int_0^t\bigwedge_0^s W_u^{du}ds=\frac{1}{\ln W}\left\{\exp\left(t\ln W\right)-1\right\}.$$
+$$\int_0^t\bigwedge_0^s W_u^{du}ds=\frac{e^{tr}-1}{r}.$$
 
-In the case where $W=1$ we have a problem. We can solve it with [l'H&ocirc;pital's rule](https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule).
+In the case where $W=1\implies r=0$ we have a problem. We can solve it with [l'H&ocirc;pital's rule](https://en.wikipedia.org/wiki/L%27H%C3%B4pital%27s_rule).
 
 $$\lim_{x\rightarrow0}\frac{e^{tx}-1}{x}=\lim_{x\rightarrow0}te^{tx}=t.$$
 
@@ -201,15 +204,16 @@ For fitness that varies across time I hypothesize the following:
 $$D_t\Var(N_t)=\para{\bigwedge_0^t W_s^{ds}+
 \ln(W_t)\int_0^t\bigwedge_0^s W_u^{du}ds}\E(N_t).$$
 
-Differentiating the above hypothesized solution for $\Var(N_t)$ shows that these results are copacetic.
+This implies that at $t=0$ the rate of increase in the variance is equal to the number of initial individuals. For instance, if there's no individuals, the variance will be zero because we are certain there will be no offspring. Since each individual contributes uncertainty to the number of offspring the variance should increase faster with larger initial populations. However, if the fitness is less than one, the log will act to reduce the variance, most likely because extinction would happen quickly if the fitness is less than one long enough. 
 
-Also note this implies that at $t=0$ the rate of increase in the variance is equal to the number of initial individuals. For instance, if there's no individuals, the variance will be zero because we are certain there will be no offspring. Since each individual contributes uncertainty to the number of offspring the variance should increase faster with larger initial populations. However, if the fitness is less than one, the log will act to reduce the variance, most likely because extinction would happen quickly if the fitness is less than one long enough. 
+#### Testing the hypotheses
 
-#### Testing the results
+ - _The time homogeneous case:_
 
 Let's start off simple and assume $W_t=W=1$ for all $t$. Then we expect $\E(N_t)=N_0$ and $\Var(N_t)=tN_0$. I'll set $N_0=300$ and run 2000 replicates. Overlaying the trajectories for these replicates on the same scatter plot results in:
 
-```{r, fig.height = 3, fig.width = 5, fig.align='center'}
+```{r, fig.height = 3, fig.width = 5, fig.align='center', echo=F, message = F}
+
 N <- NULL
 N2 <- NULL
 W <- 1
@@ -227,12 +231,13 @@ t <- 0:30
 data <- data.frame(rep(t,2000),N2)
 colnames(data) <- c("t","N")
 require(ggplot2)
-ggplot(data,aes(x=t,y=N))+geom_point()
+require(ggthemes)
+ggplot(data,aes(x=t,y=N))+geom_jitter(size=.05)+theme_wsj()+theme(axis.title=element_text(size=12))
 ```
 
 Taking the means and variances of these replicates at each time step, we can compare the resulting trajectories of simulated population dynamics (represented by the dots) to the analytical results (represented by the solid lines).
 
-```{r, fig.height = 3, fig.width = 10, fig.align='center'}
+```{r, fig.height = 3, fig.width = 10, fig.align='center', echo=F, message = F}
 mN <- NULL
 for(i in (t+1)){
   mN <- c(mN,mean(N[,i]))
@@ -243,19 +248,23 @@ for(i in (t+1)){
 }
 dm <- data.frame(t,mN)
 dv <- data.frame(t,vN)
-plm <- ggplot(dm,aes(x=t,y=mN))+geom_point()+ylim(200,400)+ylab("mean(N)")+geom_abline(slope=0,intercept=300)
-plv <- ggplot(dv,aes(x=t,y=vN))+geom_point()+ylab("var(N)")+geom_abline(slope=300,intercept=0)
+plm <- ggplot(dm,aes(x=t,y=mN))+geom_point()+ylim(200,400)+ylab("mean(N)")+geom_abline(slope=0,intercept=300)+theme_wsj()+theme(axis.title=element_text(size=12))
+plv <- ggplot(dv,aes(x=t,y=vN))+geom_point()+ylab("var(N)")+geom_abline(slope=300,intercept=0)+theme_wsj()+theme(axis.title=element_text(size=12))
 require(gridExtra)
 grid.arrange(plm,plv,ncol=2)
 ```
 
+- _Fluctuating fitness in discrete time:_
+
+Set $W_t=W_0(1+\frac{1}{2}\sin(t))$
+
+- _Fluctuating fitness in continuous time:_
+
+Set $r_t=\sin(t)$
+
 ## Derivation from the birth-death framework
 
-## Other thoughts
-
-$$\dot N=rN\implies\dot{\ln N}=\dot n=r$$
-
-If we have $k$ categories with $N_1,\dots,N_k$ in each, what if we followed $N=\prod_i N_i$ instead of $N=\sum_i N_i$?
+We now take into account the life-history of individuals. That is, we model aspect of the development of an organism relevant to its reproductive output and lifespan. As a continuous function of time, we can assume reproductive events and deaths occur according to exponential waiting times. Under this assumption the framework easily leads to birth-death models familiar in phylogenetics. Here, we extend this framework to allow for fluctuating birth and death rates, depening on the age of the individual and the environment.
 
 
 

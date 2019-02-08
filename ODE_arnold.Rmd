@@ -22,7 +22,7 @@ output:
 
 Prove that a one-parameter group of transformations is a commutative group and that every mapping $g^t:M\rightarrow M$ is one-to-one.
 
-- Let $G$ denote the set of one-parameter transformations. Since $g^0\in G$ and $g^0g^t=g^tg^0=g^{t+0}=g^t$ we see that $g^0$ is an identity element. Note further that if $g^sg^t=g^tg^s=g^t$ then $g^s=g^0$ which implies the identity element is unique. By definition $g^t\in G$ $\forall$ $t\in\R$ and hence $g^{-t}\in G$ for every $g^t\in G$. That is, for every element in $G$ there exists an inverse also in $G$. Lastly, $(g^tg^s)g^u=g^t(g^sg^u)=g^tg^sg^u=g^{t+s+u}$ which implies the underlying binary operation is associative and hence $G$ is a group. Furthermore, $g^tg^s=g^{t+s}=g^sg^t$ which implies $G$ is a communtative group.
+- Let $G$ denote the set of one-parameter transformations. Since $g^0\in G$ and $g^0g^t=g^tg^0=g^{t+0}=g^t$ we see that $g^0$ is an identity element. Note further that if $g^sg^t=g^tg^s=g^t$ then $g^s=g^0$ which implies the identity element is unique. By definition $g^t\in G$ $\forall$ $t\in\R$ and hence $g^{-t}\in G$ for every $g^t\in G$. That is, for every element in $G$ there exists an inverse also in $G$. Lastly, $(g^tg^s)g^u=g^t(g^sg^u)=g^tg^sg^u=g^{t+s+u}$ which implies the underlying binary operation is associative and hence $G$ is a group. Furthermore, $g^tg^s=g^{t+s}=g^sg^t$ which implies $G$ is a commutative group.
 
 - For the second part of this problem, suppose $g^tx=g^ty$. Then it is a simple matter to transform by $g^{-t}$ to get $g^0x=x=g^0y=y$ and in particular $x=y$.
 
