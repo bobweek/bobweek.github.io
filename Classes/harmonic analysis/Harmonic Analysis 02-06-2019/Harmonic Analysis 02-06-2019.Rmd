@@ -1,0 +1,86 @@
+---
+title: "Harmonic Analysis 02-06-2019"
+output: radix::radix_article
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\SS}{\mathbb{S}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+
+# Completeness of the trigonometric system $\{e^{inx}\}$
+
+$$L^2[-\pi,\pi)=\left\{f:\int_{-\pi}^\pi|f(x)|^2dx<\infty\right\}$$
+
+$$\SS^1\sim[-\pi,\pi)$$
+
+$$\<f,g\>=\frac{1}{2\pi}\int_{-\pi}^\pi f(x)\bar g(x)dx$$
+
+$$\|f\|^2=\<f,f\>$$
+
+- $f,g$ are orthogonal if $\<f,g\>=0$, write as $f\perp g$.
+
+- if two sets $S_1,S_2$ are orthogonal then we write $S_1\perp S_2$ means that for any $f\in S_1$ and $g\in S_2$ we have $f\perp g$.
+
+- we know $\{e_n=e^{inx}\}_{n\in\Z}$ is orthonormal
+
+Let $\{f_n\}_{n=1}^\infty$ be an orthonormal family in $L^2[-\pi,\pi)$. The family $\{f_n\}$ is said to be complete, or a complete orthonormal system, or an orthonormal basis if for each $f\in L^2$ there exists $\{a_n\}_{n=1}^\infty\subset\R$ s.t.
+$$\|f-\sum_{n=1}^N a_n f_n\|\ra0$$
+as $N\ra\infty$.
+
+#### Equivalent conditions for completeness
+If $X=\{f_n\}$ is an orthonormal family in $L^2$, then the following are equivalent:
+
+i) $X$ is complete (or an ONB)
+
+ii) if $f\in L^2$ and $f\perp X$, then $f=0$
+
+iii) _Plancherel's Identity_: For each $f\in L^2$
+$$\|f\|^2=\sum_{n=1}^\infty|\<f,f_n\>|^2$$
+(In the special case when $f_n=e_n$, this identiy is called _Parseval's Identity_)
+
+#### _Lemma_ Uniqueness of coefficients
+If $\{f_n\}$ is an ONB in $L^2$, then $f$ can be written as $f=\sum a_nf_n$ where the coeff's are given by
+
+$$a_n=\<f,f_n\>.$$
+
+_Proof_: Let $f=\sum a_n f_n$. Fix $k\in\N$. Take inner product on both sides with $f_k$:
+$$\<f,f_k\>=\<\sum a_nf_n,f_k\>$$
+by Fubini
+$$a_k=\<f,f_k\>=\sum\<f_n,f_k\>=a_k. \ \square$$
+
+#### Stuff
+
+Take $\{f_n\}=\{e_n\}$ so that $S_N=\sum_{|n|\leq N}\hat f(n)e^{inx}$ and 
+
+$$\hat f(n)=\frac{1}{2\pi}\int_{-\pi}^\pi f(x)e^{-inx}dx=\<f,e_n\>.$$
+
+From the prev lectures:
+
+- $\|f-S_Nf\|\ra0$ as $N\ra\infty$. Thus $\{e_n\}$ is an ONB in $L^2$.
+
+$$(\star) \ \|f\|^2=\|f-S_Nf\|^2+\sum_{|n|\leq N}|\hat f(n)|^2=\|f-S_Nf\|^2+\|S_Nf\|^2$$
+
+This implies Bessel's ineq: $\|f\|^2\geq\|S_Nf\|^2$
+
+Take $N\ra\infty$ on each side of $(\star)$:
+
+$$\|f\|^2=0+\sum_{n\in\Z}|\<f,e_n\>|^2$$
+
+which is Parseval's. All of these hold for any ONB (Plancherel's).
+
+#### Another way to establish Plancherel's:
+
+Since $\{f_n\}$ is an ONB
+
+$$f=\sum\<f,f_n\>f_n\implies\<f,f\>=\<\sum\<f,f_n\>,f\>$$
+
+$$\|f\|^2=\sum\<f,f_n\>\<f_n,f\>$$
+
+$$\|f\|^2=\sum\<f,f_n\>\overline{\<f,f_n\>}$$
+
+$$\|f\|^2=\sum|\<f,f_n\>|^2$$

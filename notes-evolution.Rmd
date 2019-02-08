@@ -104,16 +104,6 @@ $$=\boxed{\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)-(\Delta\bar z_t)^2}$$
 
 Something to pay attention to in all of the above results is that they each depended on knowing how $\phi_t(i)$ changes. Here we only consider the effects of deterministic selection, but of course there are many other processes that can cause change in $\phi_t(i)$.
 
-## The Geometric Mean Fitness
-
-Could it be more appropriate to consider the geometric mean of the Wrightian fitness of a population instead of the arithmetic mean? After all, Wrightian fitness' canonical algebraic structure is multiplicative.
-
-Geometric mean fitness might be appropriate for the individual-level Wrightian fitness, not the population-level. To see this we can assume a set of $k$ effects that act multiplicatively on the individual fitness, $\{W_i\}_{i=1}^k$, so that fitness of the individual can be written
-
-$$W=\prod_{i=1}^kW_i^{w_i}$$
-
-where the $w_i$ are the weights of each effect and $\sum w_i=1$. Under certain conditions, as $k\rightarrow\infty$, $W\overset{d}{\rightarrow}\ln\mathcal{N}$... clt
-
 ## The inseparability of evolution and ecology
 
 As we saw, the evolutionary dynamics of a population were derived from the demographic dynamics of the various types within that population. The two sets of dynamics are entangled via fitness. The population as a whole grows as a function of mean fitness while evolution occurs due to the structure of fitness across types, which in turn manipulates mean fitness and hence the dynamics of demography. Hence, one cannot, in general, have evolution without ecology and so long as there is heritable variation within a population that covaries with fitness one cannot have ecology without evolution.

@@ -1,0 +1,96 @@
+---
+title: "Harmonic analysis - 1/28/19"
+output: radix::radix_article
+---
+
+$$f(x^+)\equiv\lim_{t\downarrow x}f(t)$$
+$$f(x^-)\equiv\lim_{t\uparrow x}f(t)$$
+
+$$f'_r(x)\equiv\lim_{t\downarrow x}\frac{f(t)-f(x^+)}{t-x}$$
+
+$$f'_l(x)\equiv\lim_{t\uparrow x}\frac{f(t)-f(x^-)}{t-x}$$
+
+Thm: let $f$ be intgble on $[-\pi,\pi)$ and let $x$ be a pt s.t. $f(x^+)$, $f(x^-)$, $f'_r(x)$ and $f_l'(x)$ all exist. Then
+
+$$S_Nf(x)\rightarrow\frac{f(x^+)+f(x^-)}{2}$$
+
+pt-wise.
+
+
+Example: The sawtooth function
+
+$$f(t)=t$$
+
+```{r}
+# insert code to plot f
+```
+
+The Fourier series is
+
+$$Sf=2\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}\sin(nt)$$
+
+and hence $Sf(-\pi)=0=\star$. By the above theorem, we also get
+
+$$\star=\frac{f(-\pi^+)+f(-\pi^-)}{2}=\frac{-\pi+\pi}{2}=0.$$
+
+Recall: The Riemann-Lebesgue lemma
+
+If $f\in C[-\pi,\pi)$ the $\hat f(n)\rightarrow0$ as $|n|\rightarrow\infty$:
+
+$$\hat f(n)=\frac{1}{2\pi}\int_{-\pi}^\pi f(t)e^{-int}dt$$
+
+$$=\frac{1}{2\pi}\int_0^{2\pi}f(t)[\cos(nt)-i\sin(nt)]dt\rightarrow0$$
+
+as $|n|\rightarrow\infty$ since $\cos(nt)$ and $\sin(nt)$ $\rightarrow0$.
+
+As a consequence: if $\phi$ is an integrable function, then
+
+$$(\triangle) \ \lim_{n\rightarrow\infty}\int_0^\pi\phi(t)\sin[(n+\frac{1}{2})t]dt=0.$$
+
+Proof of above theorem:
+
+$$S_Nf(x)=(f*D_N)(x)$$
+
+$$=\frac{1}{2\pi}\int_{-\pi}^\pi f(x-y)D_N(y)dy$$
+
+$$=\frac{1}{2\pi}\left(\int_{-\pi}^0 f(x-y)D_N(y)dy+\int_0^\pi f(x-y)D_N(y)dy\right)$$
+
+$$=\frac{1}{2\pi}\left(\int_0^\pi f(x+y)D_N(-y)dy+\int_0^\pi f(x-y)D_N(y)dy\right)$$
+
+$$=\frac{1}{2\pi}\int_0^\pi [f(x+y)+f(x-y)]D_N(y)dy$$
+
+Recall: since $D_N(x)$ is an even function
+
+$$\frac{1}{2\pi}\int_{-\pi}^\pi D_N(x)dx=1\implies\frac{1}{\pi}\int_0^\pi D_N(x)dx=1.$$
+
+Let $\phi(x)\equiv \frac{f(x^+)+f(x^-)}{2}$.
+
+$$S_Nf(x)-\phi(x)=\frac{1}{2\pi}\int_0^\pi [f(x+y)+f(x-y)]D_N(y)dy-\phi(x)\frac{1}{\pi}\int_0^\pi D_N(y)dy$$
+
+$$=\frac{1}{\pi}\int_0^\pi\left(\frac{f(x+y)+f(x-y)}{2}-\phi(x)\right)D_N(y)dy.$$
+
+To finish the proof, not we need to show $S_Nf(x)-\phi(x)\rightarrow0$ which requires
+
+$$\int_0^\pi\left(\frac{f(x+y)+f(x-y)}{2}-\phi(x)\right)D_N(y)dy\rightarrow0$$
+
+which requires
+
+$$\int_0^\pi\left(\frac{f(x+y)+f(x-y)}{2}-\frac{f(x^+)+f(x^-)}{2}\right)D_N(y)dy\rightarrow0$$
+
+which requires
+
+$$\int_0^\pi\frac{t}{2}\left(\frac{f(x+y)-f(x^-)}{t}+\frac{f(x-y)-f(x^-)}{t}\right)D_N(y)dy\rightarrow0.$$
+
+Let
+
+$$h(t)\equiv\frac{f(x+t)-f(x^+)+f(x-t)-f(x^-)}{t}\frac{t/2}{\sin(t/2)}$$
+
+by L'Hopital $\lim_{t\downarrow0}\frac{t/2}{\sin(t/2)}=1$ and hence
+
+$$\lim_{t\downarrow0}h(t)=f_r'(x)+f_l'(x)$$
+
+Hence, $h(t)$ is "well-behaved" near $t=0$. In particular, $h(t)$ is bounded on the interval $(0,\delta]$ for some $\delta>0$.
+
+On $(\delta,\pi)$: $f$ is integrable, $\frac{1}{\sin(t/2)}$ is bounded and, thus, $h(t)$ is integrable on $(\delta,\pi]$.
+
+Hence, $h$ is integrable on all of $(-\pi,\pi]$. In combination with result $(\triangle)$, the proof is complete.
