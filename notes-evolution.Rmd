@@ -27,68 +27,183 @@ knitr::opts_chunk$set(echo = TRUE)
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\Var}{\mathrm{Var}}
+\newcommand{\n}{\mathfrak{n}}
+
+In the first half of this document we assume asexual reproduction and perfect heritability in order to simplify our derivations. It turns out that many of the results proven extend to identical, or very similar, results for the cases of sexual reproduction and imperfect heritability.
 
 ## Populations of Types
 
 In terms of modelling, a population can be very abstract. Its concept is not restricted to a set of living things, as in the biological concept of a population. Here a population can be a set of biological populations, a set of species, replicating molecules, franchises, languages and so on. The members of the population may not be uniform, but can consist of various different types. For example, we can consider populations of individuals categorized by their phenotype or populations of species categorized by clades. We now derive how the distribution of types within a population fluctuates due to differential fitness, ie, selection.
 
-#### Continuous Time
+### A finite number of types
 
-Consider a population of $T$ different types, each type $i$ with $n_t(i)$ individuals at time $t$. If we denote $\phi_t(i)$ to be the proportion of individuals within type $i$ at time $t$ among the population, we have $\phi_t(i)=\frac{n_t(i)}{N_t}$ where $N_t=\sum_{i=1}^Tn_t(i)$. Denote the expected fitness of each individual within type $i$ as $W_t(i)$ and assume individuals of type $i$ only produce other individuals of type $i$. That is, the type of an individual is a perfectly heritable trait. Then, focusing on expected dynamics and adopting the notation $D_t$ in place of $\frac{d}{dt}$, we have (from our notes on population dynamics)
+#### Dynamics in continuous time
 
-$$D_tN_t=D_t\sum_in_t(i)=\sum_in_t(i)\ln W_t(i)=\overline{\ln W_t}N_t.$$
+Consider a population of $T$ different types, each type $\gamma$ with $\n_t(\gamma)$ individuals at time $t$. If we denote $\phi_t(\gamma)$ to be the proportion of individuals within the whole population of type $\gamma$ at time $t$ among the population, we have $\phi_t(\gamma)=\frac{\n_t(\gamma)}{n_t}$ where $n_t=\sum_{\gamma=1}^T\n_t(\gamma)$. Denote the expected fitness of each individual of type $\gamma$ as $W_t(\gamma)$ and assume individuals of type $\gamma$ only produce other individuals of type $\gamma$. That is, the type of an individual is a perfectly heritable trait. Then, assuming reproduction events are distributed uniformly across generations, focusing on expected dynamics and adopting the notation $D_t$ in place of $\frac{d}{dt}$, we have (from our notes on population dynamics)
 
-$$D_t\phi_t(i)=D_t\frac{n_t(i)}{N_t}=\frac{N_tD_tn_t(i)-n_t(i)D_tN_t}{N_t^2}$$
+$$D_tn_t=D_t\sum_\gamma\n_t(\gamma)=\sum_\gamma\n_t(\gamma)\ln W_t(\gamma)=\overline{\ln W_t}n_t.$$
 
-$$=\frac{n_t(i)\ln W_t(i)-n_t(i)\overline{\ln W_t}}{N_t}=\phi_t(i)\para{\ln W_t(i)-\overline{\ln W_t}}.$$
+$$D_t\phi_t(\gamma)=D_t\frac{\n_t(\gamma)}{n_t}=\frac{n_tD_t\n_t(\gamma)-\n_t(\gamma)D_tn_t}{n_t^2}$$
 
-Setting $\rho_t(i)=\ln W_t(i)-\overline{\ln W_t}$ (what I refer to as the "relative" Malthusian fitness) we can solve for $\phi_t(i)$ to get
+$$=\frac{\n_t(\gamma)\ln W_t(\gamma)-\n_t(\gamma)\overline{\ln W_t}}{n_t}=\phi_t(\gamma)\para{\ln W_t(\gamma)-\overline{\ln W_t}}.$$
 
-$$\phi_t(i)=\phi_0(i)\exp\left(\int_0^t\rho_s(i)ds\right)$$
+From here I will use the notation $m_t(\gamma)=\ln W_t(\gamma)$ and $\bar m_t=\overline{\ln W_t}$. Using these symbols, we have
+
+$$D_t\phi_t=\phi_t(m_t-\bar m_t)$$
+
+which is known as the _replicator equation_ in evolutionary game theory (see [Nowak & Page 2002](https://doi.org/10.1006/jtbi.2002.3112)). In general, we can solve for $\phi_t(\gamma)$ using
+
+$$\phi_t(\gamma)=\phi_0(\gamma)\exp\left(\int_0^t m_s(\gamma)-\bar m_sds\right).$$
 
 Just as a sanity check, we have
 
-$$D_tn_t=N_tD_t\phi_t+\phi_tD_tN_t=N_t\phi_t\para{\ln W_t-\overline{\ln W_t}}+\phi_tN_t\overline{\ln W_t}=N_t\phi_t\ln W_t=n_t\ln W_t.$$
+$$D_t\n_t=n_tD_t\phi_t+\phi_tD_tn_t$$
 
-#### Discrete Time (non-overlapping generations)
+$$=n_t\phi_t\para{m_t-\bar m_t}+\phi_tn_t\bar m_t=n_t\phi_tm_t=\n_tm_t.$$
 
-$$N_{t+1}=\sum_in_{t+1}(i)=\sum_iW_t(i)n_t(i)=\frac{N_t}{N_t}\sum_iW_t(i)n_t(i)$$
+#### Dynamics in discrete time
 
-$$=N_t\sum W_t(i)\frac{n_t(i)}{N_t}=N_t\sum W_t(i)\phi_t(i)=N_t\overline{W}_t$$
+$$n_{t+1}=\sum_\gamma \n_{t+1}(\gamma)=\sum_\gamma W_t(\gamma)\n_t(\gamma)=\frac{n_t}{n_t}\sum_\gamma W_t(\gamma)\n_t(\gamma)$$
 
-$$\phi_{t+1}(i)=\frac{n_{t+1}(i)}{N_{t+1}}=\frac{n_t(i)W_t(i)}{N_t\overline{W}_t}=\phi_t(i)\frac{W_t(i)}{\overline{W}_t}$$
+$$=n_t\sum W_t(\gamma)\frac{\n_t(\gamma)}{n_t}=n_t\sum W_t(\gamma)\phi_t(\gamma)=n_t\overline{W}_t$$
 
-$$\implies\phi_{t+1}(i)-\phi_t(i)=\para{\frac{W_t(i)}{\overline{W}_t}-1}\phi_t(i)$$
+$$\phi_{t+1}(\gamma)=\frac{\n_{t+1}(\gamma)}{n_{t+1}}=\frac{\n_t(\gamma)W_t(\gamma)}{n_t\overline{W}_t}=\phi_t(\gamma)\frac{W_t(\gamma)}{\overline{W}_t}$$
 
-  * Neat Observation: Compare the above to the Bayesian update; Given a hypothesis $\psi_n(x)$ and a likelihood $L(x)$, Bayes theorem provides the updated hypothesis $\psi_{n+1}$ as
+$$\implies\phi_{t+1}(\gamma)-\phi_t(\gamma)=\para{\frac{W_t(\gamma)}{\overline{W}_t}-1}\phi_t(\gamma)$$
 
-$$\psi_{n+1}(x)=\frac{\psi_n(x)L(x)}{\int\psi_n(x)L(x)dx}=\psi_n(x)\frac{L(x)}{\overline L}$$
+- Neat Observation 1: Compare the above to the Bayesian update; Given a hypothesis $H_n(x)$ and a likelihood $L(x)$, Bayes theorem provides the updated hypothesis $H_{n+1}$ as
+
+$$H_{n+1}(x)=\frac{H_n(x)L(x)}{\int H_n(x)L(x)dx}=H_n(x)\frac{L(x)}{\overline L}$$
+
+- Neat Observation 2: The fundamental theorem of calculus states
+
+$$\int_{t_0}^{t_1}D_sn_sds=n_{t_1}-n_{t_0}.$$
+
+Thus
+
+$$\Delta n_t=n_{t+1}-n_t=\int_t^{t+1}D_sn_sds$$
+
+$$=\int_t^{t+1}\bar m_sn_sds.$$
+
+### Infinite number of types
+
+We now consider dynamics in the case where the set of types is identified with the real line $\R$. Since each individual is associated with one value in $\R$, a finite population will be reflected by a finite subset of $\R$. Since we are not yet considering processes that generate new types, the situation reduces to a population with a finite number of types. We must therefore treat the case of an uncountably infinite population where each value in $\R$ has a density (as opposed to abundance) in the population. In this case we denote the types by $z\in\R$ (as opposed to $\gamma$) and their density by $\phi_t(z)$ at time $t$. Since the result
+
+$$D_t\phi_t(z)=\phi_t(z)(m_t(z)-\bar m_t)$$
+
+is independent of the population size $n_t$, this formula holds for $n_t\rightarrow\infty$. In what follows, the above equation is the key tool for deriving our formulas of evolutionary dynamics.
 
 ## Response in Mean and Variance
 
-Let's suppose each type is associated with a distinct value. If there's a finite number of types, there'll be a finite number of values. For types with a continuous index, there'll be a continuum of possible values. Let's stick with a continuum of types indexed by $\R$. Denote by $\bar z_t$ the average value of the population at time $t$ and $\sigma_t^2$ the variance of types at time $t$. Then
+For the sake of simplicity, we begin with results for a continuum of types taking values in $\R$ (and hence $n_t=\infty$). Any quantity $Q(z)$ that satisfies
 
-$$\bar z_t=\int_\R z\phi_t(z)dz, \ \text{and} \ \sigma_t^2=\int_\R(\bar z_t-z)^2\phi_t(z)dz.$$
+$$\int_\R |Q(z)|\phi_t(z)dz<\infty$$
 
-Using the above results we can derive dynamics for these quantities as follows
+is said to have a finite populational average. We denote this average by
 
-#### Continuous Time
+$$\overline{Q}_t\equiv\int_\R Q(z)\phi_t(z)dz.$$
 
-$$\frac{d\bar z_t}{dt}=\frac{d}{dt}\int_\R z\phi_t(z)dz=\int_\R z\frac{d}{dt}\phi_t(z)dz=\int_\R z(\ln W_t(z)-\overline{\ln W_t})\phi_t(z)dz$$
+We will always assume both Wrightian and Malthusian fitnesses have finite populational averages. We denote by $\bar z_t$ the average value of the population at time $t$ and $\sigma_t^2$, an exception to our notation, the variance of values at time $t$. That is, we make the following definitions
 
-$$=\overline{z\ln W_t(z)}-\bar z\overline{\ln W_t}=\boxed{\Cov(z,\ln W_t)}$$
+$$\bar z_t\equiv\int_\R z\phi_t(z)dz, \ \ \ \sigma_t^2\equiv\int_\R(\bar z_t-z)^2\phi_t(z)dz.$$
 
-$$\frac{d\sigma_t^2}{dt}=\frac{d}{dt}\int_\R (\bar z_t-z)^2\phi_t(z)dz=\int_\R 2(\bar z_t-z)\phi_t(z)\frac{d\bar z_t}{dt}+(\bar z_t-z)^2\frac{d\phi_t(z)}{dt}dz$$
+Clearly, we will be assuming the mean and variance remain finite in our populations. Using this notation along with the above results and assumptions we can derive dynamics for the mean and variance of values in a population as follows
 
-$$=\int_\R(\bar z_t-z)^2(\ln W_t(z)-\overline{\ln W_t})\phi_t(i)dz=\overline{(\bar z_t-z)^2\ln W_t(z)}-\overline{(\bar z_t-z)^2}\overline{\ln W_t}$$
+### Continuous Time
 
-$$=\boxed{\Cov((\bar z_t-z)^2,\ln W_t)}$$
+$$D_t\bar z_t=D_t\int_\R z\phi_t(z)dz=\int_\R z D_t\phi_t(z)dz=\int_\R z(m_t(z)-\bar m_t)\phi_t(z)dz$$
 
-#### Discrete Time
+$$=\overline{zm_t}-\bar z\bar m_t=\boxed{\Cov(z,m_t)}$$
 
-$$\Delta\bar z_t=\bar z_{t+1}-\bar z_t=\int_\R z\phi_{t+1}(z)dz-\int_\R z\phi_t(z)dz=\int_\R z\para{\frac{W_t(z)}{\overline{W}_t}-1}\phi_t(z)dz=\boxed{\frac{1}{\overline {W}_t}\Cov(z,W_t)}$$
+$$D_t\sigma_t^2=D_t\int_\R (\bar z_t-z)^2\phi_t(z)dz=\int_\R 2(\bar z_t-z)\phi_t(z)D_t\bar z_t+(\bar z_t-z)^2D_t\phi_t(z)dz$$
 
-$$\Delta\sigma_t^2=\sigma^2_{t+1}-\sigma^2_t=\int_\R (z-\bar z_{t+1})^2\phi_{t+1}(z)dz-\int_\R (z-\bar z_t)^2\phi_t(z)dz=\int_\R \para{(z-\bar z_{t+1})^2\frac{W_t(z)}{\overline{W}}-(z-\bar z_t)^2}\phi_t(z)dz=$$
+$$=\int_\R(\bar z_t-z)^2(m_t(z)-\bar m_t)\phi_t(z)dz=\overline{(\bar z_t-z)^2m_t}-\overline{(\bar z_t-z)^2}\bar m_t$$
+
+$$=\boxed{\Cov((\bar z_t-z)^2,m_t)}.$$
+
+#### _Gaussian population_
+
+We have
+
+$$\phi_t(z)=\frac{1}{\sqrt{2\pi\sigma_t^2}}\exp\left(-\frac{(\bar z_t-z)^2}{2\sigma_t^2}\right).$$
+
+With this information we can use Fubini's theorem (since $\int|m_t\phi_t|<\infty$) to state
+
+$$\frac{\partial\bar m_t}{\partial\bar z_t}
+=\int_\R\frac{\partial}{\partial\bar z_t}m_t(z)\phi_t(z)dz$$
+
+$$=\int_\R m_t\frac{\partial\phi_t}{\partial\bar z_t}+\frac{\partial m_t}{\partial\bar z_t}\phi_tdz$$
+
+$$=\int_\R m_t\frac{z-\bar z_t}{\sigma_t^2}\phi_tdz+\overline{\frac{\partial m_t}{\partial\bar z_t}}$$
+
+$$=\frac{\overline{m_tz_t}-\bar m_t\bar z_t}{\sigma_t^2}+\overline{\frac{\partial m_t}{\partial\bar z_t}}$$
+
+$$=\frac{1}{\sigma_t^2}\Cov(z,m_t)+\overline{\frac{\partial m_t}{\partial\bar z_t}}$$
+
+$$=\frac{1}{\sigma_t^2}\frac{d\bar z_t}{dt}+\overline{\frac{\partial m_t}{\partial\bar z_t}}.$$
+
+Hence, for Gaussian populations,
+
+$$\boxed{\frac{d\bar z_t}{dt}=\sigma_t^2\left(\frac{\partial\bar m_t}{\partial\bar z_t}-\overline{\frac{\partial m_t}{\partial\bar z_t}}\right)}.$$
+
+We can perform a similar maneuver to find
+
+$$\frac{\partial\bar m_t}{\partial\sigma_t^2}
+=\int_\R m_t\frac{\partial\phi_t}{\partial\sigma_t^2}+\frac{\partial\bar m_t}{\partial\sigma_t^2}\phi_tdz$$
+
+$$=\int_\R m_t\frac{(z-\bar z_t)^2-\sigma_t^2}{2\sigma_t^4}\phi_tdz
++\overline{\frac{\partial m_t}{\partial\sigma_t^2}}$$
+
+$$=\frac{\Cov((z-\bar z)^2,m_t)}{2\sigma_t^4}+\overline{\frac{\partial m_t}{\partial\sigma_t^2}}$$
+
+$$=\frac{1}{2\sigma_t^4}\frac{d\sigma_t^2}{dt}+\overline{\frac{\partial m_t}{\partial\sigma_t^2}}$$
+
+which implies
+
+$$\boxed{\frac{d\sigma_t^2}{dt}=2\sigma_t^4\left(\frac{\partial\bar m_t}{\partial\sigma_t^2}
+-\overline{\frac{\partial m_t}{\partial\sigma_t^2}}\right)}.$$
+
+These results are very convenient, and often times natural populations obey normality, although a suitable transformation may be required (especially a log-transform for non-negative traits such as height). However, to follow mathematical rigor, there is no gurantee that the distribution remains Gaussian after selection has acted. In fact, we can show that this only only holds when $W_t(z)$ is either Gaussian or exponential with respect to $z$. That is, $W$ is either of the form
+
+$$W_t(z)=C_t\exp\left(-\frac{(z-\theta_t)^2}{2\omega_t^2}\right)$$
+
+or
+
+$$W_t(z)=C_t\exp\left(\nu_t z\right).$$
+
+The latter choice has the disadvantage of not being bounded, but makes a decent candidate for unconstrained directional selection. For the first option, one finds
+
+$$\bar m_t=\int_\R \ln C_t-\frac{(z-\theta_t)^2}{2\omega_t^2}\phi_tdz$$
+
+$$=\ln C_t-\frac{(\bar z_t-\theta_t)^2+\sigma_t^2}{2\omega^2}.$$
+
+Hence
+
+$$\frac{d\bar z_t}{dt}=\frac{\sigma_t^2}{\omega_t^2}(\theta_t-\bar z_t)$$
+
+$$\frac{d\sigma_t^2}{dt}=-\frac{\sigma_t^2}{\omega_t^2}\sigma_t^2.$$
+
+Repeating for the model of directional selection, one finds
+
+$$\bar m_t=\int_\R \ln C_t+\nu_t z\phi_tdz=\ln C_t+\nu_t\bar z_t$$
+
+$$\frac{d\bar z_t}{dt}=\sigma_t^2\nu_t$$
+
+$$\frac{d\sigma_t^2}{dt}=0.$$
+
+Thus, we have some first results showing qualitative differences in the dynamics of variation.
+
+These results depend on more than the assumptions of Gaussian populations and fitness taking one of the two forms mentioned above. They also require perfect heritability so that phenotypic variation and additive genetic variation are equivalent. Along these lines, mutation is also ignored, which explains why these results indicate phenotypic variance never increases. We will relax these assumptions later using the notion of a breeding value for continuous characters. Depending on the mating structure, distribution of mutations and so on, we will gain a more complete picture of the dynamics of the distribution of phenotypes within a population. For now, we conclude our results focusing solely on selection with analogs in discrete time.
+
+### Discrete Time
+
+$$\Delta\bar z_t=\bar z_{t+1}-\bar z_t=\int_\R z\phi_{t+1}(z)dz-\int_\R z\phi_t(z)dz=\int_\R z\para{\frac{W_t(z)}{\overline{W}_t}-1}\phi_t(z)dz$$
+
+$$=\boxed{\frac{1}{\overline {W}_t}\Cov(z,W_t)}$$
+
+$$\Delta\sigma_t^2=\sigma^2_{t+1}-\sigma^2_t=\int_\R (z-\bar z_{t+1})^2\phi_{t+1}(z)dz-\int_\R (z-\bar z_t)^2\phi_t(z)dz$$
+
+$$=\int_\R \para{(z-\bar z_{t+1})^2\frac{W_t(z)}{\overline{W}}-(z-\bar z_t)^2}\phi_t(z)dz$$
 
 $$=\int_\R \para{(z-\bar z_t-\Delta\bar z_t)^2\frac{W_t(z)}{\overline{W}}-(z-\bar z_t)^2}\phi_t(z)dz=\star$$
 
@@ -96,17 +211,52 @@ $$(z-\bar z_t-\Delta\bar z_t)^2\frac{W_t(z)}{\overline{W}}-(z-\bar z_t)^2$$
 
 $$=(z-\bar z_t)^2\para{\frac{W_t(z)}{\overline{W}_t}-1}+\para{(\Delta\bar z_t)^2-2(z-\bar z_t)\Delta\bar z_t}\frac{W_t(z)}{\overline{W}_t}$$
 
-$$\star=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\Delta\bar z_t\para{\frac{\overline{z W_t}}{\overline{W_t}}-\bar z_t}$$
+$$\star=\frac{1}{\overline W}\Cov\left\}(\bar z_t-z)^2,W_t\right\}+(\Delta\bar z_t)^2-2\Delta\bar z_t\para{\frac{\overline{z W_t}}{\overline{W_t}}-\bar z_t}$$
 
-$$=\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)+(\Delta\bar z_t)^2-2\Delta\bar z_t\para{\frac{\Cov(z,W_t)+\bar z_t\overline{W}_t}{\overline{W_t}}-\bar z_t}$$
+$$=\frac{1}{\overline W}\Cov\left\{(\bar z_t-z)^2,W_t\right\}+(\Delta\bar z_t)^2-2\Delta\bar z_t\para{\frac{\Cov(z,W_t)+\bar z_t\overline{W}_t}{\overline{W_t}}-\bar z_t}$$
 
-$$=\boxed{\frac{1}{\overline W}\Cov((\bar z_t-z)^2,W_t)-(\Delta\bar z_t)^2}$$
+$$=\boxed{\frac{1}{\overline W}\Cov\left\{(\bar z_t-z)^2,W_t\right\}-(\Delta\bar z_t)^2}$$
 
-Something to pay attention to in all of the above results is that they each depended on knowing how $\phi_t(i)$ changes. Here we only consider the effects of deterministic selection, but of course there are many other processes that can cause change in $\phi_t(i)$.
+#### _Gaussian population_
+
+$$\frac{\partial\ln\overline{W}_t}{\partial\bar z_t}=\frac{1}{\overline{W}_t}\frac{\partial \overline{W}_t}{\partial \bar z_t}$$
+
+$$=\frac{1}{\overline{W}_t}\int_\R W_t\frac{\partial\phi_t}{\partial\bar z_t}+\frac{\partial W_t}{\partial\bar z}\phi_tdz$$
+
+$$=\frac{1}{\overline{W}_t}\left(\int_\R W_t\frac{z-\bar z_t}{\sigma_t^2}\phi_tdz+\overline{\frac{\partial W_t}{\partial\bar z_t}}\right)$$
+
+$$=\frac{1}{\overline{W}_t}\left(\frac{\Cov(z,W_t)}{\sigma_t^2}+\overline{\frac{\partial W_t}{\partial\bar z_t}}\right).$$
+
+$$=\frac{1}{\sigma^2}\Delta\bar z_t+\frac{1}{\overline{W}_t}\overline{\frac{\partial W_t}{\partial\bar z_t}}$$
+
+Hence
+
+$$\boxed{\Delta\bar z_t=\frac{\sigma_t^2}{\overline{W}_t}\left(\frac{\partial\overline{W}_t}{\partial\bar z_t}-\overline{\frac{\partial W_t}{\partial\bar z_t}}\right)}.$$
+
+Now for $\sigma_t^2$
+
+$$\frac{1}{\overline{W}_t}\frac{\partial\overline{W}_t}{\partial\sigma_t^2}
+=\frac{1}{\overline{W}_t}\int_\R W_t\frac{\partial\phi_t}{\partial\sigma_t^2}+\frac{\partial W_t}{\partial\sigma_t^2}\phi_tdz$$
+
+$$=\frac{1}{\overline{W}_t}\left(\int_\R W_t\frac{(\bar z-z)^2-\sigma_t^2}{2\sigma_t^4}dz+\overline{\frac{\partial W_t}{\partial\sigma_t^2}}\right)$$
+
+$$=\frac{1}{\overline{W}_t}\left(\frac{\Cov\left\{(\bar z-z)^2,W\right\}}{2\sigma_t^4}+\overline{\frac{\partial W_t}{\partial\sigma_t^2}}\right)$$
+
+$$=\frac{\Delta\sigma_t^2+(\Delta\bar z_t)^2}{2\sigma_t^4}+\frac{1}{\overline{W}_t}\overline{\frac{\partial W_t}{\partial\sigma_t^2}}$$
+
+Hence
+
+$$\boxed{\Delta\sigma_t^2=\frac{2\sigma_t^4}{\overline{W}_t}\left(\frac{\partial\overline{W}_t}{\partial\sigma_t^2}-\overline{\frac{\partial W_t}{\partial\sigma_t^2}}\right)-(\Delta\bar z_t)^2}$$
+
+Showing connection between cont and disc times
+
+Assuming $\sigma_t^2=\sigma^2$, $\theta_t=\theta$ and $\omega_t^2=\omega^2$
+
+$$\Delta\bar z_t=\int_t^{t+1}\frac{d\bar z_s}{ds}ds=\frac{\sigma^2}{\omega^2}($$
 
 ## The inseparability of evolution and ecology
 
-As we saw, the evolutionary dynamics of a population were derived from the demographic dynamics of the various types within that population. The two sets of dynamics are entangled via fitness. The population as a whole grows as a function of mean fitness while evolution occurs due to the structure of fitness across types, which in turn manipulates mean fitness and hence the dynamics of demography. Hence, one cannot, in general, have evolution without ecology and so long as there is heritable variation within a population that covaries with fitness one cannot have ecology without evolution.
+As we saw, the evolutionary dynamics of a population were derived from the demographic dynamics of the various types within that population. The two sets of dynamics are entangled via fitness. The population as a whole grows as a function of mean fitness while evolution occurs due to the structure of fitness across types, which in turn manipulates mean fitness and hence the dynamics of demography. Hence, one cannot, in general, have evolution without ecology. Of course, in the case of infinite populations, this argument in vacuous. However, I know of no such populations.
 
 ## Reproduction
 
@@ -120,7 +270,7 @@ Our goal is calculate a formula for $w_i$. Let $P_i$ be the set of all parental 
 
 $$w_i=2\sum_{\substack{z\in P_i}}\phi_p(z)\phi_p(2m_i-z).$$
 
-If we knew the exact set of parental phenotypes, this would not be difficult to calculate. But if we want to continue iterating this process, this calculation becomes very non-trivial. To simplify this, I will blur the exactness of each parents' phenotype. Instead of pretending that we know the exact value of each phenotype, I'll assume each parental phenotype is a random variable independent of one another and identically distributed throughout the population. With this uncertainty, the set of possible midparents becomes uncountably infinite and their distribution will become continuous instead of discrete. We will adjust our notation to reflect this so that $w(m)$ is the probability density for the offspring trait $m$ (which in this case is equivalent to the midparent, hence the $m$) whose domain is now all of $\R$. The above summation becomes the integral
+To simplify our calculations, assume an infinite population so that the set of possible midparents becomes uncountably infinite and their distribution becomes continuous instead of discrete. We will adjust our notation to reflect this so that $w(m)$ is the probability density for the offspring trait $m$ (which in this case is equivalent to the midparent, hence the $m$) whose domain is now all of $\R$. The above summation becomes the integral
 
 $$w(m)=2\int_\R \phi_p(z)\phi_p(2m-z)dz.$$
 
@@ -177,12 +327,7 @@ $$\frac{d\phi_t}{d t}=\phi_t(\ln\psi_t-\overline{\ln\psi_t}).$$
 
 #### Incorporating Heritability
 
-If we want to incorporate heritability into these calculations, one way I have thought to do so is by assuming that the result of heritability will be a weighted average between the parental distribution and what the offpsring distribution would be with perfect heritability. That is
-
-$$\phi_{t+1}=\frac{\hat\phi^{h^2}_{t+1}\phi_t^{1-h^2}}{\int_\R\hat\phi^{h^2}_{t+1}\phi_t^{1-h^2}dz}
-=\para{\int_\R\para{\frac{\hat\phi_{t+1}}{\phi_t}}^{h^2}\phi_tdz}^{-1}\para{\frac{\hat\phi_{t+1}}{\phi_t}}^{h^2}\phi_t$$
-
-One can work out the details to show that $\nu^2=\frac{\sigma^2}{h^2}\frac{1-\rho}{1+\rho}.$
+Use breeding values.
 
 ### Other Mating Patterns
 

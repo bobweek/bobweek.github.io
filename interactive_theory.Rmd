@@ -6,6 +6,16 @@ output:
     css: style.css
 ---
 
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\n}{\mathfrak{n}}
+
 I made some applications to visualize and interact with (co)evolutionary theory.
 
 ## 1-D Migration and Drift
@@ -24,13 +34,13 @@ Since any bounded subset $A$ of the real line can be expressed as the disjoint u
 
 $$\bar Z_t(A)\equiv\frac{1}{|A|}\int_A\bar z(x,t)dx.$$
 
-where $|A|=\sum_i|I_i|=\sum_i(b_i-a_i)$ denotes the Lebesgue measure (the sum of the lengths of component intervals). 
+where $|A|=\sum_i|I_i|=\sum_i(b_i-a_i)$ denotes the Lebesgue measure (the sum of the lengths of component intervals). These calcualtions assume a constant abundance density across space.
 
 Under diffusive migration with rate $m$ and random genetic drift with variance $\eta$ the evolution of $\bar z(x,t)$ is given by
 
-$$d\bar z=m\frac{\partial^2\bar z}{\partial x^2}dt+\eta\dot W$$
+$$\frac{d\bar z}{dt}=\frac{m}{2}\frac{\partial^2\bar z}{\partial x^2}+\eta\dot W$$
 
-where $\dot W$ is space-time white noise (that is, for each $x$, $W(x,t)$ is a Brownian motion with respect to $t$). The interaction between diffusion via local dispersal patterns and the stochasticity of genetic drift results in an ever shifting line. Somewhat surprisingly, although $\dot W(x,t)$ is nowhere continuous with respect $x$, the infinite propogation property of diffusion implies that for every fixed $t$, the curve $\bar z(x,t)$ is smooth in $x$ even though it is still random!
+where $\dot W$ is space-time white noise (that is, for each $x$, $W(x,t)$ is a Brownian motion with respect to $t$). The interaction between diffusion via local dispersal patterns and the stochasticity of genetic drift results in an ever shifting line. Somewhat surprisingly, although $\dot W(x,t)$ is nowhere continuous with respect $x$, the infinite propogation property of diffusion implies that for every fixed $t$, the curve $\bar z(x,t)$ is smooth in $x$ even though it is still random!^citation^ ^needed^
 
 ## 1-D Migration, Drift and Coevolution
 
@@ -49,19 +59,19 @@ $$d\bar z_2=\left\{G_2M_2(\bar z_1-\bar z_2)-G_2D_2+m_2\frac{\partial^2\bar z_2}
 
 The parameter $G_i$ denotes the additive genetic variance of the focal trait in species $i$, where as $M_i$ and $D_i$ denote the strengths of matching and differences selection respectively.
 
-If $R\subset\mathbb{R}$ denotes the range of the species, then (assuming abundance is constant across space) the global mean trait of species $i$ at time $t$ is given by
+If $n(x)$ denotes abundance density of the species, then (assuming abundance is constant across space) the global mean trait of species $i$ at time $t$ is given by
 
-$$\mu_i(t)\equiv\frac{1}{|R|}\int_R\bar z_i(x,t)dx$$
+$$\mu_i(t)\equiv\int_\R\bar z_i(x,t)n_i(x)dx$$
 
 and the variance in local mean traits by
 
-$$V_i(t)\equiv\frac{1}{|R|}\int_R(\bar x_i(x,t)-\mu_i(t))^2dx$$
+$$V_i(t)\equiv\int_\R(\bar x_i(x,t)-\mu_i(t))^2n_i(x)dx$$
 
 and the covariance by
 
-$$C(t)\equiv\frac{1}{|R|}\int_R(\bar x_1(x,t)-\mu_1(t))(\bar x_2(x,t)-\mu_2(t))dx.$$
+$$C(t)\equiv\frac{\int_\R(\bar x_1(x,t)-\mu_1(t))(\bar x_2(x,t)-\mu_2(t))n_1(x)n_2(x)dx}{\int_\R n_1(x)n_2(x)dx}.$$
 
-Hence, the correlation can by tracked by computing $\rho(t)\equiv\frac{C(t)}{\sqrt{V_1(t)V_2(t)}}$.
+Hence, the correlation can be tracked by computing $\rho(t)\equiv\frac{C(t)}{\sqrt{V_1(t)V_2(t)}}$ for each $t$.
 
 ## 2-D Migration, Drift and Coevolution
 
