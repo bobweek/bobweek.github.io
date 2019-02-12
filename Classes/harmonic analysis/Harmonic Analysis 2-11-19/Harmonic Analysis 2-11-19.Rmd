@@ -1,0 +1,73 @@
+---
+title: "Untitled"
+output: radix::radix_article
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+
+
+# The Fourier Transform
+
+The Fourier transform of $f$ is
+
+$$\hat f(\gamma)\equiv\int_{-\infty}^\infty f(x)e^{-2\pi i \gamma x}dx$$
+
+Want: to get back $f$ from $\hat f$ by some inversion formulat:
+
+$$f(x)=\int_{-\infty}^\infty\hat f(\gamma)e^{2\pi i x\gamma}d\gamma$$
+
+- _Obstacle:_ $\hat f$ may not be integrable
+
+- _Solution:_ The Schwarz space $S(\R)$ consists of all functions $f$ that are inf diffbl and for which $f$ and all of its derivatives are rapidly decreasing in the sense that
+
+$$\lim_{|x|\ra\infty}|x|^k|f^{(l)}|=0 \ \forall \ k,l>0$$
+
+In other words, the products $|x|^k|f^{(l)}|$ are bdd for all $k,l>0$ so that
+
+$$|x|^k|f^{(l)}|\leq C_{k,l}\implies |f^{(l)}|\leq\frac{C_{k,l}}{|x|^k}$$
+
+In otherwords: $f$ and all of it derivatives decrease faster than _any_ polymonial _inceases_.
+
+- _Note:_ If $f$ is a polynomial, then $f\in S(\R)$.
+
+- _Example:_ $f(x)=\exp(-x^2)$. This is justified since the derivatives are polynomial times $f$.
+
+- _Example:_ $\exp(-|x|)$ is also of rapid decreas, but is not diffbl at $x=0$.
+
+- _Notation:_ $\mathscr{F}(f)\equiv\hat f$ (as a mapping/operator)
+
+# Restricting to $S(\R)$
+
+Functions of _moderate_ decrease did not have Fourier transforms also of moderate decrease. However,
+
+- _Proposition:_ $f\in S(\R)$ then
+  i) $f(x+h)\mapsto \hat f(\gamma)e^{2\pi i h\gamma}, \ h\in\R$
+  ii) $f(x)e^{-2\pi i x h}\mapsto\hat f(\gamma+h)$
+  iii) $f(h x)\mapsto\frac{1}{h}\hat f(\frac{\gamma}{h}), h>0$
+  iv) $f'(x)\mapsto 2\pi i \gamma\hat f(\gamma)$
+  v) $-2\pi i x f(x)\mapsto\frac{d}{d\gamma}\hat f(\gamma)$
+  
+_Proof:_
+
+  i) $\mathscr{F}(f(x+h))=\int_{-\infty}^\infty f(x+h)e^{-2\pi i \gamma x}dx$
+
+just multiply the integrand by one...
+
+  v) We can use Fubini's
+  
+$$\frac{d}{d\gamma}\hat f(\gamma)=\int_{-\infty}^\infty \frac{d}{d\gamma} f(x)e^{-2\pi i x\gamma}dx$$
+
+$$=\int_{-\infty}^\infty f(x)(-2\pi i x)e^{2\pi i x\gamma}dx$$
+
+$$=\mathscr{F}\{(-2\pi i x)f(x)\}$$
+
+
+
+
+
