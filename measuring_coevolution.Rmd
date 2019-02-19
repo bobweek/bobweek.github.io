@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 rm(list=ls())
 ```
 
-This is a tutorial for employing the method of coevolutionary inference described in Week & Nuismer ([2019](https://doi.org/10.1111/ele.13231)). Data used in this tutorial comes from Toju & Sota ([2006](https://doi.org/10.1086/498277)) and have been collected [here](https://github.com/bobweek/measuring.coevolution) for convenience. All analysis is done in the statistical programming language R.
+This is a tutorial for employing the method of coevolutionary inference described in Week & Nuismer ([2019](https://doi.org/10.1111/ele.13231)). Data used in this tutorial comes from Toju & Sota ([2006](https://doi.org/10.1086/498277)) and have been collected [here](https://github.com/bobweek/measuring.coevolution), along with some useful code, for your convenience. A detailed treatment of our model, application of likelihood and analysis of data can be found in the appendix of Week & Nuismer (2019), [linked to here](appendix.pdf). Aside from the derivation of equilibrium expressions, all of our calculations have been carried out in the statistical programming language R.
 
 ## Introduction to the biology and data
 
