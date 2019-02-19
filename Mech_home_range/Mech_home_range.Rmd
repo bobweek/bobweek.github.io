@@ -1,0 +1,54 @@
+---
+title: "Mechanisitc Home Range Analysis"
+description: |
+  Notes
+output: radix::radix_article
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+
+### 1.1 Statistical home range analysis
+
+the methods
+
+1) minimum convex polygon (ie, convex hull)
+2) kernel density inference
+  - harmonic mean 
+    - has issues with negative numbers?
+  - bivariate normal distributions
+    - very restrictive/unrealistic
+  - perhaps using a mollifier with compact support would be best
+  - this is a nonparametric approach. are the results of nonpar stats being applied?
+3) resource selection analysis (johnson 1980)
+  - spatially implicit
+  - phenomenological
+  - identifies habitats/areas used disprop to availability
+  - "Statistical issues in resource selection studies with radio marked animals"
+    - 2001, Erickson et al
+  - "Accounting for variation in resource availability and animal behaviour in resource selection studies"
+    - 2001, Cooper & Millspaugh
+
+### 1.2 Mechanistic home range analysis
+
+- "Diffusion and ecological problems: modern perspectives" 2ed
+  - Okubo & Levin 2001
+
+
+
+
+
+
+
+
+
+
+
+
+
+

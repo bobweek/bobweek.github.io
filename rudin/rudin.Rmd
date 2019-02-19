@@ -1,0 +1,22 @@
+---
+title: "Real & Complex Analysis"
+description: |
+  Walter Rudin.
+output: radix::radix_article
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+
+# Examples of Banach space techniques
+
+  - _5.2 Def:_ Consider the linear transformation $\Lambda:X\ra Y$ where $X$ and $Y$ are normed linear spaces. The norm of $\Lambda$ is given by
+  
+  $$\|\Lambda\|\equiv\sup\{\|\Lambda x\|:x\in X, \|x\|\leq1\}$$
+
+
