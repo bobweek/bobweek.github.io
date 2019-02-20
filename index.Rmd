@@ -12,9 +12,9 @@ output:
 
 </div>
 
-I am a PhD candidate at the University of Idaho working with professor [Scott Nuismer](http://www.webpages.uidaho.edu/~snuismer/Nuismer_Lab/). My degree program is [Bioinformatics and Computational Biology](http://www.uidaho.edu/sci/bcb) (BCB) which is housed within [The Institute for Bioinformatics and Evolutionary Studies](http://www.ibest.uidaho.edu/) (IBEST).
+I am a PhD candidate at the University of Idaho working with professor [Scott Nuismer](https://www.leeef.org). My degree program is [Bioinformatics and Computational Biology](https://www.uidaho.edu/sci/bcb) (BCB) which is housed within [The Institute for Bioinformatics and Evolutionary Studies](http://www.ibest.uidaho.edu/) (IBEST).
 
-My dissertation is the development of a coevolutionary theory of community ecology in the context of plant-pollinator networks. In particular, I am working on mathematical models that predict the patterns of interspecific interactions across an ecological community and statistical methods to detect various forms of coevolution occuring within such communities. Stochastic differential equations and simulations are my primary weapons for confronting these tasks. However, working with empiricists such as [Paul CaraDonna](http://www.pauljcaradonna.com/) keeps me tethered to reality through fruitful conversations and excellent data.
+My dissertation is the development of a coevolutionary theory of community ecology in the context of plant-pollinator networks. In particular, I am working on mathematical models that predict the patterns of interspecific interactions across an ecological community and statistical methods to detect various forms of coevolution occuring within such communities. Stochastic differential equations and simulations are my primary weapons for confronting these tasks. However, working with empiricists such as [Paul CaraDonna](https://paulcaradonna.weebly.com/) keeps me tethered to reality through fruitful conversations and excellent data.
 
 My CV is available [here](cv.pdf).
 
