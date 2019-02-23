@@ -12,7 +12,7 @@ This is a tutorial for employing the method of coevolutionary inference introduc
 
 ## Introduction to the biology and data
 
-To demonstrate the utility of our method, we walk through each step taken to obtain the results produced in the main text. We restrict our analysis in this document to the data provided by Toju & Sota (2006). This paper documents the antagonistic interaction between the female __Curculio camellia__ weevil and the __Camellia japonica__ fruit. Female weevils bore holes into the woody pericarps of the camellia to oviposit. Inside the fruit, weevil larvae feed on the seeds of the camellia up until the fourth instar, at which time they exit the fruit and overwinter. These two species co-occur across Japan, although camellia populations where the weevil is absent have been documented.
+To demonstrate the utility of our method, we walk through each step taken to obtain the results produced in the main text. We restrict our analysis in this document to the data provided by Toju & Sota (2006). This paper documents the antagonistic interaction between the female <i>Curculio camellia</i> weevil and the <i>Camellia japonica</i> fruit. Female weevils bore holes into the woody pericarps of the camellia to oviposit. Inside the fruit, weevil larvae feed on the seeds of the camellia up until the fourth instar, at which time they exit the fruit and overwinter. These two species co-occur across Japan, although camellia populations where the weevil is absent have been documented.
 
 ## Phenotypic data
 
