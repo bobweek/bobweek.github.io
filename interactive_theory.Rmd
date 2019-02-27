@@ -32,11 +32,11 @@ This application simulates the evolution of a trait for a species on a single sp
 
 We write $\bar z(x,t)$ for the value of the local mean trait at the point in space $x$ and moment in time $t$. However, populations do not exist at points in space, but occupy regions. Hence, to evaluate the local mean trait on a bounded interval $I=[a,b]$, we compute the spatial average
 
-$$\bar Z_t(I)\equiv\frac{1}{b-a}\int_a^b\bar z(x,t)dx.$$
+$$\mu_t(I)\equiv\frac{1}{b-a}\int_a^b\bar z(x,t)dx.$$
 
 Since any bounded subset $A$ of the real line can be expressed as the disjoint union of bounded intevals (that is $A=\cup_i I_i$ where $I_i\cap I_j=\emptyset$ for each $i,j$), this definition is naturally extended as
 
-$$\bar Z_t(A)\equiv\frac{1}{|A|}\int_A\bar z(x,t)dx.$$
+$$\mu_t(A)\equiv\frac{1}{|A|}\int_A\bar z(x,t)dx.$$
 
 where $|A|=\sum_i|I_i|=\sum_i(b_i-a_i)$ denotes the Lebesgue measure (the sum of the lengths of component intervals). These calcualtions assume a constant abundance density across space.
 
@@ -67,17 +67,13 @@ $$+\frac{m_2}{2}\frac{\partial^2\bar z_2}{\partial x^2}+\eta_2\dot W_2$$
 
 The parameter $G_i$ denotes the additive genetic variance of the focal trait in species $i$, where as $M_i$ and $D_i$ denote the strengths of matching and differences selection respectively.
 
-If $n_i(x)$ denotes abundance density of species $i$, the global mean trait of species $i$ at time $t$ is given by
+The variance in local mean traits over a set $A$ can be written as
 
-$$\mu_i(t)\equiv\frac{\int_\R\bar z_i(x,t)n_i(x)dx}{\int_\R n_i(y)dy}$$
+$$V_i(t)\equiv\frac{1}{|A|}\int_\R(\bar z_i(x,t)-\mu_i(t))^2dx.$$
 
-and the variance in local mean traits by
+and the covariance
 
-$$V_i(t)\equiv\frac{\int_\R(\bar x_i(x,t)-\mu_i(t))^2n_i(x)dx}{\int_\R n_i(y)dy}$$
-
-and the covariance by
-
-$$C(t)\equiv\frac{\int_\R(\bar x_1(x,t)-\mu_1(t))(\bar x_2(x,t)-\mu_2(t))n_1(x)n_2(x)dx}{\int_\R n_1(y)n_2(y)dy}.$$
+$$C(t)\equiv\frac{1}{|A|}\int_\R(\bar z_1(x,t)-\mu_1(t))(\bar z_2(x,t)-\mu_2(t))dx.$$
 
 Hence, the correlation can be tracked by computing $\rho(t)\equiv\frac{C(t)}{\sqrt{V_1(t)V_2(t)}}$ for each $t$.
 
