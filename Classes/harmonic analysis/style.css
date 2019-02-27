@@ -1,0 +1,42 @@
+
+
+.nav.navbar-nav li a {
+  color: #d1d1d1;
+}
+
+
+.dropdown-menu li a {
+  /*color: #000 !important;*/
+}
+
+.dropdown-menu li:hover a:hover {
+  color: #ffffff !important;
+  background-color: #000;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    background-color: #222;
+}
+
+#TOC {
+  color: black; 
+}
+
+
+body{
+   color: white;
+   font-size: large;
+   background-image: url('home.jpg');
+   min-height: 500px;
+    /* Set background image to fixed (don't scroll along with the page) */
+    background-attachment: fixed;
+    background-position: right top;
+    /* Set the background image to no repeat */
+    background-repeat: no-repeat;
+    /* Scale the background image to be as large as possible */
+    background-size: cover;
+}
+
+a {
+    color: hotpink;
+}

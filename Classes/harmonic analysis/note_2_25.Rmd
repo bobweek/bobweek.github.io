@@ -1,0 +1,89 @@
+---
+title: "Harmonic Analysis 02-04-19"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+
+Review:
+
+- $e^{-\pi x^2}\mapsto e^{-\pi\gamma^2}$
+
+- $K_\delta(x)\equiv\frac{1}{\sqrt\delta}e^{-\pi x^2/\delta}\mapsto e^{-\pi\delta\gamma^2}, \ \delta>0$
+
+- $\{K_\delta\}$ is a family of approximate identities (or good kernels). That is:
+  - $\int_\R K_\delta=1$
+  - $\int_\R|K_\delta|\leq M$
+  - $\int_{|x|>\eta}|K_\delta|\ra0, \ \delta\ra0$
+  
+- If $f\in S(\R)$, then $(f*K_\delta)\ra f$ as $\delta\ra0$, uniformly.
+
+_Proposition:_ (Multiplication formula)
+
+If $f,g\in S(\R)$ then 
+
+$$\int_\R f\hat g=\int_\R\hat f g.$$
+
+_Proof:_ First we state some analogue of Fubini's theorem. Suppose $F(x,y)$ is continuous in $\R^2$. Assume
+
+$$|F(x,y)|\leq\frac{A}{(1+x^2)(1+y^2)}.$$
+
+- The set $M(\R)$ consists of functions $F(x)$ s.t. $|F(x)|\leq\frac{A}{1+x^2}$ and is called the set of functions of moderate decrease.
+
+Note that $F(x,y)\in M(\R)$ when either $x$ or $y$ are fixed. Further more
+
+$$F_1(x)\equiv\int_\R F(x,y)dy,F_2(y)\equiv\int_\R F(x,y)dx\in M(\R)$$
+
+and are continuous. Finally,
+
+$$(\star) \ \int_\R F_1=\int_\R F_2=\int_{\R^2}F$$
+
+which implies that the order of integration can be freely interchanged. Now set
+
+$$F(x,y)=f(x)g(x)e^{-2\pi i xy}$$
+
+Then $F_1=f\hat g$ and $F_2=\hat f g$. Hence, by $(\star)$, the proof is complete. $\square$
+
+_Theorem:_ (Fourier Inversion)
+
+If $f\in S(\R)$ then $f(x)=\int_\R\hat f(\gamma)e^{2\pi i x\gamma}dx$.
+
+_Proof:_
+
+Let $G_\delta(x)=e^{-\pi\delta x^2}$. Then $\hat G_\delta(\gamma)=\frac{1}{\sqrt\delta}e^{-\pi\gamma^2/\delta}=K_\delta(\gamma)$. By the multiplcation formula
+
+$$\int_\R f(x)\hat G_\delta(x)dx=\int_\R \hat f(\gamma) G_\delta(\gamma)d\gamma$$
+
+or
+
+$$\int_\R f(x)K_\delta(x)dx=\int_\R \hat f(\gamma) G_\delta(\gamma)d\gamma$$
+
+$$(f*K_\delta)(0)=\int_\R\hat f(\gamma)G_\delta(\gamma)d\gamma$$
+
+Recall: $\{K_\delta\}$ is a good kernel. So, as $\delta\ra0$
+
+$$f(0)=\int_\R\hat f(\gamma)d\gamma$$
+
+(requires interchange of limit and integral, justify by Lebesgue's dom conv).
+
+In general, $F(y)\equiv f(y+x)$. Then
+
+$$f(x)=F(0)=\int_\R\hat F(\gamma)d\gamma=\int_\R\hat f(\gamma)e^{2\pi i x\gamma}d\gamma. \ \square$$
+
+Define:
+
+  - $\mathscr{F}:S(\R)\ra S(\R), \  f(x)\mapsto\hat f(\gamma)=\int_\R f(x)e^{-2\pi i x\gamma}dx$
+  - $\mathscr{F}^*:S(\R)\ra S(\R), \  \hat f(\gamma)\mapsto f(x)=\int_\R \hat f(\gamma)e^{2\pi i x\gamma}dx$
+
+By the inversion formula $\mathscr{F}^*\circ\mathscr{F}=\mathscr{F}\circ\mathscr{F}^*=\mathrm{Id}$ and, hence, $\mathscr{F}$ is a bijection on $S(\R)$.
