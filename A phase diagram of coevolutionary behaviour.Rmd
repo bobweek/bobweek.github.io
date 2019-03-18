@@ -1,0 +1,546 @@
+---
+title: "All or nothing in Darwinian races"
+description: |
+  A synthesis of coevolutionary models & measurements
+author:
+  - name: Bob Week 
+    url: https://bobweek.github.io
+    affiliation: University of Idaho
+    affiliation_url: https://ibest.uidaho.edu
+  - name: Scott Nuismer
+    url: https://leeef.org
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: false
+    df_print: paged
+css: style.css
+editor_options: 
+  chunk_output_type: console
+bibliography: bibliography.bib
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\B}{\mathscr{B}}
+\newcommand{\ra}{\rightarrow}
+
+## Abstract
+
+Previously established evolutionary theory demonstrates that interspecific interactions are capable of generating a wide variety of coevolutionary dynamics including indefinite arms races, trait matching and cycles. In this paper we coalesce coevolutionary models derived from theoretical quantitative genetics under a single unified model using a concept we refer to as the optimal offset. Through this unification we explore trait matching dynamics and their connections to escalatory races by relating theoretical results to observed or hypothesized examples of coevolution in nature. We demonstrate the emergence of cycles using a natural multivariate generalization of this new model. After developing a conceptual phase diagram of coevolutionary behaviour, we introduce methods to measure offsets directly from fitness data and indirectly from spatially structured phenotypic data and demonstrate the use of these methods on data collected for a well studied fly-flower mutualism. Metrics for the importance of optimal offsets in forecasting contemporary coevolution over short time scales and for making historical inferences are are provided. These results, along with the unified model of coevolution they are founded in, have significant ramifications for our understanding of how contemporary phenotypic patterns have formed via historical interspecific interactions and inform projections of evolutionary change caused by contemporary coevolution.
+
+## Introduction
+
+Yada yada yada
+
+The Darwinian race is the poster-child of all coevolutionary dynamics. It has spurred many hypotheses including the Red Queen and has been documented in many contexts. Yet our understanding is somehow lacking and the current investigation somehow contributes to rectifying this issue.
+
+Yada yada yada
+
+In the first half of this paper we explore the full range of coevolutionary behaviour exhibited by this new model. For each qualitatively distinct set of behaviours we provide biological examples to demonstrate the existence of these processes in the wild and to provide biological intuition for the solutions of this model. In the second half of this paper, we discuss two categories of statistical applications that provide a bridge between abstract mathematical theory and empirical inference of coevolution occuring between real populations. The first category of applications are relevant for inferring and predicting coevolution over short periods of times, such as a few generations. The second category of applications are relevant for understanding the historical role of coevolution in shaping interactions that have been intact for long periods of time up to speciation.
+
+## The model
+
+To develop a mechanistic model of coevolution we begin by considering the structure of the underlying ecological interaction. In particular, we must start by quantifying a relationship between the coevolving traits, $z_1$, $z_2$, and the fitness consequences of interspecific interactions, $W_1(z_1,z_2)$, $W_2(z_2,z_1)$, for both species involved (labelled 1 and 2 in no particular order). Previous approaches to coevolutionary quantitative genetics have done so using a variety of fitness functions including exponential decay[@Houle2002], quartic exponential[@Gavrilets1997] and bimodal functions[@Doebeli1996]. However, due to their mathematical simplicity, the two fitness functions most commonly employed are:
+
+  (1) the Gaussian function centered on the trait value of the interactant[@Kiester1984] and 
+  
+  (2) the sigmoid (s-shaped) function[@Nuismer2007].
+  
+Fitness surface (1) leads to coevolutionary dynamics mediated by a trait matching mechanism and surface (2) leads to dynamics mediated by trait differences. The top row of Figure 1 displays contours of example trait matching (left) and trait difference (right) fitness surfaces for an individual of species 1.
+
+<div class="page-break"></div>
+
+A third fitness function, referred to as offset-matching, was introduced by Week & Nuismer[@Week2019] as an intermediate between phenotypic matching and differences. Under this scenario the fitness of the focal individual is maximized when its trait value is offset from the interacting individuals trait value by some optimal amount $\delta$. The resulting fitness surfaces can be captured using Gaussian functions which are in general not centered on the trait value of the interactant. When $\delta=0$ the fitness surfaces for both species reduce exactly to trait matching. Alternatively, if $\delta$ exceeds the range of phenotypic differences across all potentially interacting pairs of individuals, the offset-matching fitness surface provides a close approximation of the sigmoid (see Figure 1, bottom row). This occurs for Gaussian distributed traits when the means are near and variances not too large relative to the steepness of the sigmoid. In fact, the dynamical equations derived using a quadratic approximation of the sigmoid fitness surface become identical to those derived using the offset-matching fitness surface if we allow distinct offsets $\delta_1,\delta_2$ for each species and set $\delta_i=1/\sqrt{B_i}$. Here the $B_i$ denote the strength of selection caused by the interaction for species $i$ and determine the steepness of the fitness surface. Alternatively, this quadratic approximation holds when selection is weak $(|B_i|\ll1)$. This weak-selection assumption is commonly employed in previous investigations of coevolutionary arms races[@Nuismer2007;@Nuismer2010].
+
+```{r, echo=F, fig.align='center', message=F, fig.height=6, fig.cap="Top row: Contours of the fitness surfaces used to derive trait-matching dynamics (left) and escalation (right) for species 1. The values of these functions generally depend on both trait values mediating the interaction. Bottom row: The offset-matching fitness surface (yellow) closely approximates the sigmoid (maroon) when the range of trait differences does not include the optimal offset. The interval in grey repesents such a range."}
+require(mvtnorm)
+require(gridExtra)
+require(ggplot2)
+require(ggthemes)
+require(ggpubr)
+require(metR)
+
+x <- seq(-2,2,.1)
+y <- seq(-2,2,.1)
+thingus <- expand.grid(x=x, y=y)
+Fitness <- 2*pi*dmvnorm(thingus)
+thingus <- cbind(thingus,Fitness)
+colnames(thingus) <- c("x","y","Fitness")
+
+p1 <- ggplot(thingus,aes(x=x,y=y))+
+  geom_raster(aes(fill=Fitness),interpolate = T)+
+  scale_fill_gradientn(colours=c("maroon","#FFC300"))+
+  geom_contour(aes(z=Fitness),colour="white")+
+  geom_text_contour(aes(z = Fitness), stroke = 0.2,rotate=F,check_overlap=T,parse=T)+
+  theme_minimal()+
+  xlab("z\u2081")+ylab("z\u2082")+
+  theme(legend.position = "none")
+
+thingus <- expand.grid(x=x, y=y)
+sig <- function(x){
+  val <- 1/(1+exp(x[2]-x[1]))
+}
+Fitness <- sig(thingus)
+thingus <- cbind(thingus,Fitness)
+colnames(thingus) <- c("x","y","Fitness")
+
+p2 <- ggplot(thingus,aes(x=x,y=y))+
+  geom_raster(aes(fill=Fitness),interpolate = T)+
+  scale_fill_gradientn(colours=c("maroon","#FFC300"))+
+  geom_contour(aes(z=Fitness),colour="white")+
+  geom_text_contour(aes(z = Fitness), stroke = 0.2)+
+  theme_minimal()+
+  xlab("z\u2081")+ylab("z\u2082")+
+  scale_y_continuous(position = "right")+theme(legend.position = "none")
+
+
+traits <- seq(-15,15,by=.01)
+sig <- function(x){
+  val <- 1/(1+exp(-.5*x))
+  return(val)
+}
+
+interval <- seq(-10,10,by=.1)
+gauss <- function(x,m,B){
+  val <- exp(-B*(x-m)^2/2)
+  return(val)
+}
+fit_gauss <- function(X){
+  s <- 0
+  m <- X[1]
+  B <- exp(X[2])
+  for(i in interval) s <- s+ (sig(i)-gauss(i,m,B))^2
+  return(s)
+}
+fit <- optim(c(0,1),fit_gauss)
+m <- fit$par[1]
+B <- exp(fit$par[2])
+ptr <- NULL
+for(i in 1:length(traits)){
+  if( (traits[i] < -5) | (traits[i] > 5) ){
+    ptr <- c(ptr,NA)
+  }
+  if( (traits[i] >= -5) & (traits[i] <= 5) ){
+    ptr <- c(ptr,0)
+  }
+}
+sig_appr <- data.frame(traits,sig(traits),gauss(traits,m,B),ptr)
+colnames(sig_appr) <- c("traits","sig","appr","ptr")
+p3 <- ggplot(sig_appr,aes(x=traits,y=sig))+
+  geom_vline(xintercept=m)+geom_line(aes(y=ptr),lwd=1,col='grey',na.rm = T)+
+  geom_line(aes(y=appr),lwd=1,col='#FFC300')+geom_line(lwd=1,col='maroon')+
+  scale_x_continuous(breaks=c(-10,0,10,m),labels=c(-10,0,10,'\u03B4'))+
+  theme_pubclean()+ylab("Fitness")+xlab("Trait difference (z\u2081-z\u2082)")
+lay <- rbind(c(1,2),
+             c(3,3))
+grid.arrange(grobs = list(p1,p2,p3), layout_matrix = lay)
+```
+
+In Appendix S1 we show that the derivation of our model does not depend mathematically on weak selection assumptions, but instead on infinite population sizes and Gaussian selection surfaces. Technically, Gaussian mutational effects and an effectively infinite number of additively interacting loci, each of infinitesimal developmental effect, are also required but are the usual assumptions made in theoretical quantitative genetics[@fisher1918correlation; @Kimura1965; @burger2000mathematical; @bulmer1980mathematical; @Turelli2017]. If populations are of infinite size so that every possible phenotypic value is exhibited by an infinite number of individuals then populations respond to any kind of selection pressure even if selection appears to be absent within several standard deviations of the mean phenotype. In contrast, biological reasoning suggests populations with significant phenotypic overlap should exhibit a greater coevolutionary response (coevolutionary hotspots) than those with little phenotypic overlap (coevolutionary coldspots)[@Gomulkiewicz2000;@Pauw2009]. This discussion exposes the fact that, although our model can be derived without assuming weak selection, if the phenotypic distributions of interacting species do not overlap then a weak selection approximation is necessary. With this theoretical caveat in mind, we demonstrate below the wide-array of coevolutionary behaviour captured by this relatively simple model.
+
+### Interactions mediated by univariate traits
+
+We denote by $\bar z_i$, $G_i$ and $B_i$ the mean trait, additive genetic variance and strength of biotic selection for species $i$ respectively. For clarity, we condense two of these parameters in the single dimensionless quantity $\mathscr{B}_i=G_iB_i$ which, at the risk of abusing terminology, we will refer to as the strength of selection. This abuse is reasonable when $G_1\approx G_2>0$. Under this notation, when the genetic variances are at equilibrium, the offset-matching model becomes
+
+\begin{equation}
+\begin{matrix}&\frac{d}{dt}\bar z_1=\mathscr{B}_1\delta+\mathscr{B}_1(\bar z_2-\bar z_1)\\ & \frac{d}{dt}\bar z_2=\mathscr{B}_2\delta+\mathscr{B}_2(\bar z_1-\bar z_2).\end{matrix}
+\end{equation}
+
+In this form we can glean some insight into the behaviour of coevolution. The terms $\mathscr{B}_i(\bar z_j-\bar z_i)$ induce convergence of trait values when $\mathscr{B}_1,\mathscr{B}_2>0$ and divergence when $\mathscr{B}_1,\mathscr{B}_2<0$. When the strengths are mixed ($\mathscr{B}_1>0,\mathscr{B}_2<0$ or $\mathscr{B}_1<0,\mathscr{B}_2>0$), an evolutionary chase-escape dynamic ensues. The terms $\mathscr{B}_i\delta$ cause the traits to increase or decrease indefinitely depending on whether they are positive or negative respectively. Of course, this behaviour is not strictly biologically plausible. In nature we expect other evolutionary forces (such as physiological constraints and/or selection induced by the environment) to keep such arms races in check[@nuismer2017introduction]. However, for now we ignore these potential forces and focus solely on dynamics induced by the interaction.
+
+To perform a mathematical assessment of behaviour it is useful to rewrite our model in the matrix form
+
+\begin{equation}
+\frac{d}{dt}\left(\begin{matrix}\bar z_1\\\bar z_2\end{matrix}\right)=\left(\begin{matrix}-\mathscr{B}_1&\mathscr{B}_1\\\mathscr{B}_2&-\mathscr{B}_2\end{matrix}\right)\left(\begin{matrix}\bar z_1\\\bar z_2\end{matrix}\right)+\delta\left(\begin{matrix}\mathscr{B}_1\\\mathscr{B}_2\end{matrix}\right).
+\end{equation}
+
+In the following sections, we use this form to calculate the coevolutionary equilibria along with their stability. We refer to Scheinerman[@schei1996] for a gentle introduction to the analysis of dynamical systems.
+
+#### Trait matching
+
+To calculate the equilibrium of this model, we set the time derivatives to zero. Doing so implies $\delta=-\delta$ which is only satisfied when $\delta=0$, the trait matching case. In this case, the equilibrium of the system is not a single point, but the entire line defined in set builders notation[@cull2012] as 
+
+\begin{equation}
+\mathscr{E}\equiv\left\{(\bar z_1,\bar z_2)\in\R^2:\bar z_1=\bar z_2\right\}.
+\end{equation}
+
+When this line is stable, so that the pair of interacting species evolve towards it, the coordinates of the final resting position $\lim_{t\ra\infty}(\bar z_1(t),\bar z_2(t))$ depend on the initial condition $(\bar z_1(0),\bar z_2(0))$ such that
+
+\begin{equation}
+\lim_{t\ra\infty}(\bar z_1(t),\bar z_2(t))=\left(
+\frac{\B_1\bar z_2(0)+\B_2\bar z_1(0)}{\B_1+\B_2},
+\frac{\B_1\bar z_2(0)+\B_2\bar z_1(0)}{\B_1+\B_2}\right).
+\end{equation}
+
+We illustrate this result in Figure 2 by plotting $\mathscr{E}$ and a few solutions with randomly set initial conditions.
+
+```{r, echo=F, fig.width=3, fig.height=3, fig.align='center', fig.cap="The set of equilibria \u2130 (yellow) and a few solutions to the model with randomly chosen initial conditions (maroon). The solutions converge on \u2130 at an angle when \u212C\u2081\u2260\u212C\u2082. For this figure we set \u212C\u2081=0.1, \u212C\u2082=1.0. Time has been discretized into units of \u00B9\u002F\u2081\u2080th of a generation for computational purposes."}
+require(deSolve)
+
+z1  <- seq(-20,20,by=.1)
+E   <- seq(-20,20,by=.1)
+
+matching <- function(t, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    dz1 <-  B1*(z2-z1)
+    dz2 <-  B2*(z1-z2)
+    list(c(dz1, dz2))
+  })
+}
+
+parameters <- c(B1=0.1,B2=1)
+times      <- seq(0, 40, by = 0.1)
+ss <- list(1,2,3,4,5)
+
+
+for(i in 1:5){
+  state      <- runif(2,-20,20)
+  names(state) <- c("z1","z2")
+  s <- ode(y = state, times = times, func = matching, parms = parameters)
+  ss[[i]] <- data.frame(x=s[,'z1'],y=s[,'z2'])
+}
+
+stuffs <- data.frame(z1,E,
+                     x1=ss[[1]]$x,y1=ss[[1]]$y,
+                     x2=ss[[2]]$x,y2=ss[[2]]$y,
+                     x3=ss[[3]]$x,y3=ss[[3]]$y,
+                     x4=ss[[4]]$x,y4=ss[[4]]$y,
+                     x5=ss[[5]]$x,y5=ss[[5]]$y)
+
+ggplot(stuffs,aes(x=z1,y=E))+geom_line(colour="#FFC300")+
+  geom_point(aes(x=x1,y=y1),size=.1,colour="maroon")+
+  geom_point(aes(x=x2,y=y2),size=.1,colour="maroon")+
+  geom_point(aes(x=x3,y=y3),size=.1,colour="maroon")+
+  geom_point(aes(x=x4,y=y4),size=.1,colour="maroon")+
+  geom_point(aes(x=x5,y=y5),size=.1,colour="maroon")+
+  theme_minimal()+ylab("z\u2082")+xlab("z\u2081")+ylim(-20,20)+xlim(-20,20)
+
+```
+
+
+To determine when species evolve to or away from $\mathscr{E}$ we perform linear stability analysis. In general, determining the stability of an equilibrium involves computing the eigenvalues of a matrix $\mathscr{J}$, the Jacobian of the system evaluated at the equilibrium in question. When none of the eigenvalues have positive real parts and at least one has a negative real part the equilibrium will be stable and almost every initial condition will converge to it. For the univariate offset-matching model the Jacobian matrix evaluated for every point in $\mathscr{E}$ (and for every point in $\R^2$ since it is a linear system) is
+
+\begin{equation}
+\mathscr{J}=\left(\begin{matrix}-\mathscr{B}_1&\mathscr{B}_1\\\mathscr{B}_2&-\mathscr{B}_2\end{matrix}\right).
+\end{equation}
+
+The eigenvalues associated with this matrix are $0$ and $-(\mathscr{B}_1+\mathscr{B}_2)$. This implies the set of equilibria $\mathscr{E}$ is stable iff $\mathscr{B}_1+\mathscr{B}_2>0$. There are just two qualitatively distinct ways in which this can occur:
+
+  1) The first occurs when $\mathscr{B}_1,\mathscr{B}_2>0$, which leads to trait-convergence. For a biological example of when this may occur, we consider the phenology of mutualists. Since the interaction increases fitness for both partners, selection due to their interaction will favor overlapping phenologies for the two species[@CaraDonna2017;@Nuismer2018]. Summarizing individual phenologies with a single number, such as the peak activity time, our model can capture this process by setting $\bar z_i$ equal to the average peak activity time of each species. The importance of coevolution in shaping phenology in general has yet to be rigorously evaluated, but we expect this process to be especiablly pronounced in obligate mutualisms which are hypothesized to be under intense selection for syncronized phenologies[@Rafferty2014].
+
+  2) As noted above, when the selection strengths are of opposite signs this model exhibits chase-escape dynamics where the trait of one species tracks the other while the trait of the other species attempts to evade in any direction possible. Without loss of generality we assume $\mathscr{B}_1>0,\mathscr{B}_2<0$ (that is, the analogous results hold for swapping the indices of the species). The ability of one species to "capture" the other or for the other species to succesfully "evade", in an evolutionary sense, is sensitive to the dimensionality of traits underlying the interaction[@Gilman2012]. However, as a first pass we restrict our attention here to the unviarate case. Under this restriction the range of behaviours with a stable equilibrium exhibited by chase-escape dynamics are limited to just one possible outcome; when $\mathscr{B}_1>-\mathscr{B}_2$ species one "captures" species two. Chase-escape dynamics may be at work in the coevolution of predator search images and prey camoflauge mediating antagonistic interactions [@Ishii2009;@vanLeeuwen2010]. In particular, a very compelling example of this dynamic is the likely coevolution between egg colorations of warblers and the cuckoos that parasitize their brood and the ability of the warbler hosts to detect cuckoo eggs[@Stoddard2011;@Aviles2012].
+
+The analysis of solutions when the equilibrium is not stable (ie, when $\B_1+\B_2<0$) provides additional biological insight. Under the univariate trait-matching model, instability occurs in three distinct ways:
+
+   1) When $\mathscr{B}_1,\mathscr{B}_2<0$ traits will diverge. Considering phenology once more, when interacting populations compete for resources we may predict coevolution to result in phenological mismatches. As a generalization of phenology, we can apply the same idea to the evolution of niche breadth and/or niche location to form a bridge between our model and some coexistence results of theoretical community ecology[@Case1981; @Macarthur1967; @Roughgarden1976; @Abrams1975; @Taper1985].
+   
+   2) If $\mathscr{B}_1<-\mathscr{B}_2$, species two "escapes" species one. Referring back to predator-prey interactions, this would occur if the prey becomes effectively invisible to the predator.
+   
+   3) If $\mathscr{B}_1=-\mathscr{B}_2$, the species mean traits remain the same distance apart and neither "capture" nor "escape" are achieved. Although based on a trait-matching model, this behaviour is identical to escalation dynamics when $\bar z_1(0)\neq\bar z_2(0)$. However, as we show next, without other evolutionary processes, true escalation dynamics do not allow for equilibria.
+
+#### Non-zero offsets and indefinite arms races
+
+When $\delta\neq0$ the time derivatives of our model cannot be set to zero and hence no equilibrium can exist. In this simple linear system the absence of equilibria implies an indefinite coevolutionary arms race of ever increasing trait values when $\mathscr{B}_1\delta,\mathscr{B}_2\delta>0$ and ever decreasing values when $\mathscr{B}_1\delta,\mathscr{B}_2\delta<0$. When $\mathscr{B}_i\delta>0$ and $\mathscr{B}_j\delta<0$ this leads to indefinite increase for species $i$ and indefinite decrease for species $j$.
+
+The well-studied antagonism mediated by the pericarp thickness of the _Camellia japonica_ fruit and the rostrum length of the female _Curculio camelliae_ weevil provides a nice example of the first case. In this interaction female weevils bore holes into the woody pericarps of the camellia fruits to oviposit. The weevil larvae then feed on the seeds of the camellia fruit before exiting. Though evidence for coevolution in this system garnered via field work and genetic analysis are very compelling[@Toju2009; @Toju2011a; @Toju2011b], the strength and significance of coevolutionary escalation for the pericarp thickness and rostrum length have only recently been quantified[@Week2019;@Nuismer2019]. In Week & Nuismer[@Week2019], the authors provide a complement to the coevolutionary inference of this antagonism using data published for a pollination-based mutualism. This mutualism consists of the long-tongued fly _Moegistorhynchus longirostris_ and the long-tubed flower it pollinates _Lapeirousia anceps_[@Pauw2009]. Statistical results suggest the exaggeration of the proboscis length and corrola depth have also been produced by escalatory coevolution.
+
+In both of these cases the inferred values of $\mathscr{B}_1,\mathscr{B}_2$ and $\delta$ were all positive even though one interaction is an antagonism and the other is a mutualism. From this we see that the signs of selection strengths and of the optimal offset do not necessarily correspond to whether the interaction benefits fitness for either species. The sign of a selection strength is instead a result of a combination of the anatomical structure of the ecological interaction along with the impact the interaction has on fitness.
+
+### Multivariate generalization and limit cycles
+
+Arguably every interaction is mediated by multiple traits[@Dbarre2014]. At the very least, we can state that the existence of interactions depend on co-occurance in time and space and, given this condition is satisfied, the outcomes of interactions depend on some physical features of the interacting individuals. This implies any given interaction is mediated at least by a phenological trait and a morphological or physiological trait. In such cases our univariate model fails to capture the full extent of coevolutionary behaviour possible. 
+
+In particular, when interactions are assumed to be mediated by exactly one trait in each species, cyclical evolutionary races cannot be explained by our univariate model without incorporating some external evolutionary force such as abiotic stabilizing selection. To account for this limitation we suggest a natural extension of the univariate offset-matching model that incorporates multiple traits, correlated genetic components and co-selection strengths by extending the mean phenotypes to $d$-dimensional vectors (for interactions mediated by $d$ traits), the additive genetic variances to $d\times d$ covariance matrices and the biotic selection strengths to $d\times d$ matrices which are not necessarily positive-semidefinite. Our composite parameter is now formed by a matrix multiplication $\mathscr{B}_i=G_iB_i$ and thus is also a $d\times d$ matrix not necessarily positive-semidefinite. In Appendix S1 we use stability analysis to find a non-empty set of parameters which result in purely imaginary eigenvalues of the associated Jacobian matrix. Purely imaginary eigenvalues imply the existence of limit cycles. In particular, we find that cycles can emerge in this model if the two species have co-selection strengths of opposite sign and differing magnitudes. That is, denoting $\B_i^{(j,k)}$ the $(j,k)$th co-selection strength of species $i$, for cycles to emerge there must be some $j\neq k$ such that
+
+\begin{equation}
+\mathrm{sign}(\B_1^{(j,k)})=-\mathrm{sign}(\B_2^{(j,k)}), \ \ 
+|\B_1^{(j,k)}|\neq|\B_2^{(j,k)}|.
+\end{equation}
+
+While this condition is necessary for cycles to emerge, the sufficient conditions are more complex and can be found in Appendix S1. A wealth of well-studied examples in which coevolutionary cycles are known or theorized to occur are provided in the vast literature on host-parasite antagonisms[@Best2017; @Frank1994; @MacPherson2017].
+
+## Measuring optimal offsets and making coevolutionary predictions/inferences
+
+In these sections we describe two categories of statistical applications relevant for making predictions or inferences with respect to coevolutionary processes based on the offset-matching model introduced above. The first section covers methods relevant for understanding responses to coevolution over just a few generations. The second covers methods relevant for species that have coevolved for sufficiently long periods of time to have reached a statistical equilibrium. Throughout this second half of the paper, we find it convenient to relinquish our use of the metaparameter $\B_i$ and instead refer directly to the selection strength $B_i$.
+
+### Direct measurements and predictions for contemporary coevolution
+
+
+```{r, echo=F}
+require(knitr)
+require(kableExtra)
+require(xlsx)
+mamre <- read.xlsx("Mamre interaction for Bob.xlsx",1)
+mamre <- data.frame(mamre$nectar_volume_consumed,mamre$POLLEN_GRAINS_DEPOSITED,mamre$TONGUE.TUBE)
+colnames(mamre) <- c("nectar consumed","pollen grains deposited","tongue length - tube length")
+
+W <- function(D,c,B,d){
+  f <- c*exp(-B*(d+D)^2/2)
+  return(f)
+}
+
+# collect data
+W1 <- mamre$`nectar consumed`
+W2 <- mamre$`pollen grains deposited`
+D  <- mamre$`tongue length - tube length`
+n <- dim(mamre)[1]
+  
+L <- function(X){
+  
+  # unpack parameters
+  c1 <- exp(X[1])
+  c2 <- exp(X[2])
+  B1 <- exp(X[3])
+  B2 <- exp(X[4])
+  d  <- exp(X[5])
+  
+  l <- 0
+  # accumulate errors across M. longir
+  for(i in 1:n){
+    l <- l + ( W(-D[i],c1,B1,d) - W1[i] )^2
+  }
+  
+  # accumulate errors across L. anceps
+  for(i in 1:n){
+    l <- l + ( W(D[i],c2,B2,d) - W2[i] )^2
+  }
+  
+  return(sqrt(l))
+  
+}
+
+mins <- NULL
+vals <- NULL
+for(i in 1:100){
+  out <- try({optim(rnorm(5),L)})
+  while(!is.vector(out)){
+      out <- try({optim(rnorm(5),L)})
+  }
+  mins <- rbind(mins,out$par)
+  vals <- c(vals,out$value)
+}
+i <- which.min(vals)
+argmin <- exp(mins[i,])
+
+c1hat <- argmin[1]
+c2hat <- argmin[2]
+B1hat <- argmin[3]
+B2hat <- argmin[4]
+dhat  <- argmin[5]
+
+l1 <- 0
+# accumulate errors across M. longir
+for(i in 1:n){
+  l1 <- l1 + ( W(-D[i],c1hat,B1hat,dhat) - W1[i] )^2/n
+}
+l1 <- l1/var(W1)
+
+l2 <- 0
+# accumulate errors across L. anceps
+for(i in 1:n){
+  l2 <- l2 + ( W(D[i],c2hat,B2hat,dhat) - W2[i] )^2/n
+}
+l2 <- l2/var(W2)
+
+fits <- data.frame(c("M. longirostris","L. anceps"),c(c1hat,c2hat),
+                   c(B1hat,B2hat),c(dhat,dhat),c(1-l1,1-l2))
+colnames(fits) <- c("Species","c","B (mm\u207B\u00B2)","\u03B4 (mm)","R\u00B2")
+```
+
+The measurement of optimal offsets can be performed directly by measuring the consequences of interspecific interactions on individual fitness along with the difference in traits involved with the interaction. A large family of fitness function can be fit to this data by using numerical methods to minimize the sum of squared error terms across an appropriate set of parameter combinations. This approach depends on the same type of data as selective source analysis, a method that linearly partitions selection gradients with respect to their associated sources of selection [@Ridenhour2005]. To demonstrate we performed this analysis on data provided by Pauw (personal communications) to directly estimate the optimal offset which best fits the interaction between _M. longirostris_ and _L. anceps_. These data were originally collected as part of an elegant empirical study of coevolution in this sytem[@Pauw2009]. The exact steps taken in our analysis are outlined in Appendix S3. This approach suggests $\delta$ $\approx$ `r signif(dhat,3)`mm for this mutualism. Table 1 contains maxima of fitness surfaces $c_1,c_2$ (measured in volume nectar consumed for the fly and pollen grains deposited for the flower), biotic selection strengths $B_1,B_2$ and coefficients of determination for the fitness data of each species. Although our fitted surfaces explain relatively little of the variance exhibited by these data, Figure 3 demonstrates that the overall trend is well captured. This observation suggests tests of significance based on goodness of fit will provide little power to detect non-zero offsets. Developing methods to circumvent this shortcoming will undoubtedly be of interest to researchers of coevolution, but remains outside the scope of the current investigation.
+
+```{r, echo=F}
+kable(fits,caption="Inferred fitness parameters",digits=3) %>%
+  kable_styling(position = "center")
+```
+
+```{r, echo=F, fig.align='center', fig.cap="Fitted fitness surfaces"}
+diff <- seq(min(D),max(D),by=.1)
+fit <- data.frame(diff,W(-diff,c1hat,B1hat,dhat),W(diff,c2hat,B2hat,dhat))
+colnames(fit) <- c("diff","W1","W2")
+
+p1 <- ggplot(mamre,aes(x=`tongue length - tube length`,y=`nectar consumed`))+
+  geom_point(colour='maroon')+geom_line(data=fit,aes(x=diff,y=W1),lwd=1,colour='#FFC300')+
+  theme_pubclean()+ylab("nectar consumed mL")+xlab("tongue length - tube length (mm)")
+
+p2 <- ggplot(mamre,aes(x=`tongue length - tube length`,y=`pollen grains deposited`))+
+  geom_point(colour='#FFC300')+geom_line(data=fit,aes(x=diff,y=W2),lwd=1,colour='maroon')+
+  theme_pubclean()+ylab("pollen grains deposited")+xlab("tongue length - tube length (mm)")
+
+grid.arrange(p1,p2)
+```
+
+Regardless of future methods developed we can reason that power to detect offsets will decay as the true offset tends to zero. Yet, as we have shown above, a small non-zero offset has major qualitative ramifications for the outcomes of coevolutionary processes. This appears to create a dilemma for researchers seeking to predict short-term coevolutionary changes[@Stotz2016; @Leger2010; @Strauss2006]. To rectify this issue and to develop an understanding of when optimal offsets should be accounted for we calculate the effect on such predictions when a non-zero offset exists compared to predictions based on a zero offset. To do so, we solve a stochastic analog of our analytical model and derive a unitless error term (measured as a bivariate effect size) as a function of the magnitude of the offset $\delta$ over a given duration of time $t\geq0$ (measured in generations), which we denote by $\varepsilon_\delta(t)$. Details for this derivation are provided in Appendix S3 and the associated _Mathematica_ notebook. For weakly coevolving populations, this effect size is approximated by 
+
+\begin{equation}
+\varepsilon_\delta(t)\approx|\delta|\sqrt t\sqrt{
+{B_1}^2G_1n_1+
+{B_2}^2G_2n_2},
+\end{equation}
+
+```{r, echo=F}
+n1 <- 100
+n2 <- 1000
+G1 <- mean(c(4.6,4.4,5.9,5.8,1.6,6.8,6.5,7.4)^2)
+G2 <- mean(c(5.9,4.9,4.3,4.7,2.5,7.5,4.6,5.5)^2)
+z10 <- 54.8
+z20 <- 50.0
+epsd <- abs(dhat)*sqrt((n1*G1*B1hat^2)+
+                       (n2*G2*B2hat^2))
+epsC <- sqrt((n1*G1*B1hat^2)*(dhat+z20-z10)^2+
+                       (n2*G2*B2hat^2)*(dhat+z10-z20)^2)
+```
+
+
+where $n_i$ is the effective population size of species $i$. With $\varepsilon_\delta(t)$ in hand, we are ready to understand the role of $\delta$ in determining the coevolutionary outcomes of contemporary ecological interactions. However, this seems to be getting a bit ahead of itself. We should first develop an understanding of the effect of coevolution altogether on the evoutionary trajectories of interactin species. Hence, we also derived the effect of coevolution in total, denoted by $\varepsilon_\mathfrak{C}(t)$, and, under weak biotic selection, found
+
+\begin{equation}
+\varepsilon_\mathfrak{C}(t)\approx\sqrt t\sqrt{
+{B_1}^2G_1n_1\left(\delta+{\bar{z}_2}^0-{\bar{z}_1}^0\right)^2+
+{B_2}^2G_2n_2\left(\delta+{\bar{z}_1}^0-{\bar{z}_2}^0\right)^2},
+\end{equation}
+
+where $({\bar{z}_1}^0,{\bar{z}_2}^0)$ denotes the current local population mean traits. Using the same trait means, additive genetic variances and effective population sizes estimated by Week & Nuismer[@Week2019], we measure $\varepsilon_\delta(1)\approx$ `r signif(epsd, digits = 3)` and $\varepsilon_\mathfrak{C}(1)\approx$ `r signif(epsC, digits = 3)` in the fly-flower system over a single generation ($t=1$). 
+
+Both of these quantities measure effects on the evolutionary trajectories of the two populations involved in comparison to trajectories potentially produced by coevolution without an offset or, for $\varepsilon_\mathfrak{C}(t)$, to trajectories solely due to drift. Their relatively simple functional forms provide a formal expression synthesizing much of what we already know about coevolution. For instance, we expect larger evolutionary responses to increased biotic selection strengths or effective population sizes. Correspondingly, we see that both effect sizes increase with these parameters. We also expect greater responses to increased amounts of additive genetic variance. However, the effects of drift also increase with additive genetic variance and may swamp out the effects of selection. These effect sizes settle these contrasting roles of additive genetic variance and suggest that selection wins its favor.
+
+### Indirect measurements and inference of past coevolutionary processes
+
+In complement to this insight, we consider the effect of an optimal offset on interactions that have been intact for long periods of time and in relatively stable environments so that equilibrium can be safely assumed. As discussed above, in the absence of other evolutionary forces our model predicts indefinite escalation and hence no equilibria. To overcome this restriction Week & Nuismer[@Week2019] have incorporated the effects of ambient stabilizing selection as the net result of all other sources of selection acting on the coevolving populations. We parameterize abiotic selection by the abiotic optima $\theta_1,\theta_2$ with selection strengths $A_1,A_2$ for species one and two. In Appendix S4 we derive the effects of coevolution and optimal offsets for coevolutionary equilibria, which we denote by ${\varepsilon_\delta}^A(\infty)$ and ${\varepsilon_\mathfrak{C}}^A(\infty)$ respectively. Under weak biotic selection, these quantities are approximated by
+
+\begin{equation}
+{\varepsilon_\mathfrak{C}}^A(\infty)\approx\sqrt 2\sqrt{
+\frac{{B_1}^2}{A_1}n_1(\delta+\theta_2-\theta_1)^2+
+\frac{{B_2}^2}{A_2}n_2(\delta+\theta_1-\theta_2)^2}
+\end{equation}
+
+\begin{equation}
+{\varepsilon_\delta}^A(\infty)\approx|\delta|\sqrt 2\sqrt{
+\frac{{B_1}^2}{A_1}n_1+\frac{{B_2}^2}{A_2}n_2}.
+\end{equation}
+
+Hence, when abiotic stabilizing selection is very strong relative to coevolution, the effects of the optimal offset and coevolution in general become negligible. Therefore, although our above restriction to coevolutionary dynamics emphasizes the importance of non-zero offsets of any magnitude, measuring the effects of optimal offsets for contemporary coevolution and for old interactions that have reached coevolutionary equilibrium clearly demonstrate sufficiently small offsets can be safely ignored and replaced by models of pure matching.
+
+For species that have reached a coevolutionary equilibrium, the decision of whether or not an offset is sufficiently small can be formalized in terms of a statistical test. In particular, the methods of maximum likelihood coevolution (MLC) and approximate Bayesian coevolution (ABCc) introduced by Week & Nuismer [@Week2019] and Nuismer & Week [@Nuismer2019] respectively provide approaches to infer the optimal offset alongside the strengths of both abiotic and biotic selection from spatially structured phenotypic data. The nested structure of these models allows investigators to calculate the statistical significance of inferred model parameters. Hence, these methodologies are easily adapted to measure the significance of optimal offsets. We prove this statement by applying MLC to infer and measure the significance of the optimal offset for the same fly-flower system analyzed above using direct methods. Further details for this implementation are provided in Appendix S4.
+
+```{r, echo=F}
+source("functions.R")
+
+#      #############     
+#      #           #
+#      # Pauw data #     
+#      #           #
+#      #############     
+
+snout <- c(79.3,54.8,57.0,72.8,42.9,58.4,85.8,75.6)
+tubes <- c(77.0,mean(c(50.0,27.5)),49.1,52.6,41.1,58.6,60.8,68.0)
+data <- cbind(snout,tubes)
+
+G1 <- mean(c(4.6,4.4,5.9,5.8,1.6,6.8,6.5,7.4)^2)
+G2 <- mean(c(5.9,4.9,4.3,4.7,2.5,7.5,4.6,5.5)^2)
+
+siblings <- c(11.5,32,(38+44)/2)
+
+ancepsAsolo <- c(31.2,51.7)
+Moegestorynchus <- c(siblings,mean(siblings)) # brevirostris, perplexus, braunsi
+
+th1s <- Moegestorynchus
+th2 <- mean(ancepsAsolo)
+n1 <- 100
+n2 <- 1000
+
+N <- dim(data)[1]
+m <- colMeans(data)
+S <- (N-1)*var(data)/N
+
+######
+# ML #
+######
+
+B1s <- NULL
+B2s <- NULL
+A1s <- NULL
+A2s <- NULL
+ks <- NULL
+ps <- NULL
+for(th1 in th1s){
+  
+  ML  <- ml_sol(m[1],m[2],S[1,1],S[2,2],S[1,2],n1,n2,th1,th2,G1,G2)
+  lnL <- likelihood(data,m,S)
+  
+  A1s <- c(A1s,ML$A1)
+  A2s <- c(A2s,ML$A2)
+  B1s <- c(B1s,ML$B1)
+  B2s <- c(B2s,ML$B2)
+  ks  <- c(ks,ML$k)
+  
+  ########
+  # null #
+  ########
+  
+  ML_k0  <- ml_sol_k0(m[1],m[2],S[1,1],S[2,2],S[1,2],n1,n2,th1,th2,G1,G2)
+  
+  A1_k0 <- ML_k0$A1
+  A2_k0 <- ML_k0$A2
+  B1_k0 <- ML_k0$B1
+  B2_k0 <- ML_k0$B2
+  
+  mu_n <- mu(A1_k0,A2_k0,B1_k0,B2_k0,0,n1,n2,th1,th2)
+  S_n <- SIGMA(A1_k0,A2_k0,B1_k0,B2_k0,0,n1,n2,th1,th2,G1,G2)
+  lnL0  <- likelihood(data,mu_n,S_n)
+  
+  # chisqr
+  ps <- c(ps,1-pchisq(2*(lnL-lnL0),1))
+  
+}
+
+pval <- max(ps)
+
+B1 <- B1s[4]
+B2 <- B2s[4]
+A1 <- A1s[4]
+A2 <- A2s[4]
+d  <-  ks[4]
+
+epsCA <- sqrt(2)*
+  sqrt((B1)^2*n1*(d+th2-th1)^2/A1+
+       (B2)^2*n2*(d+th1-th2)^2/A2)
+epsdA <- abs(d)*sqrt(2)*
+  sqrt((B1)^2*n1/A1+(B2)^2*n2/A2)
+
+```
+
+
+The MLC reports $\delta$ $\approx$ `r signif(ks[4],digits=3)`mm (_p_-value $\approx$ `r signif(pval,3)`), which is `r signif(100*abs(dhat-d)/dhat,3)`% larger than the optimal-offset inferred directly from fitness data. This discrepancy may be due to the small sample size of data utilized by the MLC, the amount of noise and/or the proxies used in the fitness data, or potentially the fact that the MLC assumes statistical equilibrium, but the direct method does not. The true culprit responsible for this mismatch can only be identified through repeated comparisons of the results these two methods provide across various systems.
+
+With the same background parameters used for calculating the significance of $\delta$, we find ${\varepsilon_\delta}^A(\infty)\approx$ `r signif(epsdA,3)` and ${\varepsilon_\mathfrak{C}}^A(\infty)\approx$ `r signif(epsCA,3)`. Note that the effect sizes calculated in the current investigation assume equal background parameter values for both coevolution and offset cases as the no coevolution and no offset cases. In particular, these calculations assume the strengths of abiotic selection are equal for each case. This implies that ${\varepsilon_\mathfrak{C}}^A(\infty)$ differs from the effect size reported in Week & Nuismer[@Week2019], which inferred the values of $A_1$ and $A_2$ both with and without constraints on the strengths of biotic selection separately.
+
+## Summary/conclusion
+
+We have demonstrated the range of possible behaviour exhibited by the offset-matching model includes trait matching, divergence, escalation and cycles. Hence, this diversity of coevolutionary behaviour can be parsimoniously explained considering only selection due to the focal interaction without the need to consider the effects of demographic dynamics, external sources of selection, gene-flow, or any other ecological or evolutionary process. Of course, this does not imply that such processes are irrelevant for our understanding of coevolution, but that it is theoretically possible for such behaviour to occur without them. 
+
+We also breifly investigated the implications of optimal offsets for forecasting coevolutionary responses in newly formed interactions and for inferring the historical role offsets play in determining the exaggeration of traits mediating ecological interactions. Our results demonstrate a way to form precise, quantitative criterion to determine when offsets and coevolution in general should be measured in applied evolutionary biology and suggest methods for performing such measurements. Applying these new tools to an ideal data set collected for a fly-flower mutualism, we calculated effect sizes of coevolution and the optimal offset for both contemporary, short-term evolutionary change and for consequences on historical long-term evolution of these two species. By applying these tools to a variety of interactions (including as a control group interactions for which coevolution is absent), we can amass an empirical distribution of effect sizes to assemble a rubric for comparisons. Further empirical and theoretical investigations that 
+
+
+We hope this investigation contributes but a small portion to the development of a body of quantitative tools that can be used to uncover past and future dynamics of the coevolutionary process.
+
+### References
+
+
+
+
+
+
+
+
+

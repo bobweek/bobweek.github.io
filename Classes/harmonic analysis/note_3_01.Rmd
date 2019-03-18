@@ -1,0 +1,116 @@
+---
+title: "Harmonic Analysis 03-01-19"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sinc}{\mathrm{sinc}}
+\newcommand{\supp}{\mathrm{supp}}
+
+# The Sampling Formula
+
+__Def:__ A function is said to be band-limited if its Fourier transform is supported on a compact interval $[a,b]$.
+
+__Def:__ The $\sinc$ function is defined by
+
+$$\sinc (x)\equiv\left\{\begin{matrix}\frac{\sin(\pi x)}{\pi x} & x\neq 0 \\ 1 & x=0\end{matrix}\right..$$
+
+Note
+
+$$\int_{-1/2}^{1/2}e^{2\pi i x\gamma}d\gamma=\left.\frac{e^{2\pi i x\gamma}}{2\pi i x\gamma}\right|_{-1/2}^{1/2}$$
+
+$$=\frac{e^{\pi ix}-e^{-\pi x}}{2\pi i x}=\frac{\sin(\pi x)}{\pi x}$$
+
+$$\sinc(x).$$
+
+### _Theorem 8.4_ (Sampling Formula):
+
+Suppose that $f$ is continuous and in $M(\R)$ whose Fourier transform is supported on $[-1/2,1/2]$. Then
+
+$$f(x)=\sum_{n\in\Z}f(n)\sinc(x-n).$$
+
+_Proof:_
+
+Consider a 1-periodic extension of the Fourier transform $\hat f$ to $\R$.
+
+$$(\hat f)^{\hat.}(n)=\int_{-1/2}^{1/2}\hat f(x)e^{-2\pi i x n}dx$$
+
+$$=\int_\R \hat f(x)e^{i2\pi (-n)x}=f(-n)$$
+
+by the inversion theorem. Here the notation $g^{\hat.}$ denotes the Fourier coefficients of $g$. The Fourier series of $\hat f$ is $\sum_{n\in\Z}f(-n)e^{2\pi i n x}$.
+
+_Claim:_ This Fourier series is absolutely and unif convergent.
+
+_Proof of claim:_ $|f(x)|\leq\frac{A}{1+x^2}$ for all $x\in\R$ due to moderate decrease. Thus
+
+$$|f(-n)e^{2\pi i n x}|=|f(-n)|\leq\frac{A}{1+n^2}$$
+
+and by the $p$-series $\sum\frac{A}{1+n^2}$ is convergent. Then, by the Weierstrass $M$-test $\sum f(-n)e^{2\pi i nx}$ converges uniformly (also absolutely). That is the family $\{g_N\}$ defined by
+
+$$g_N=\sum_{|n|\leq N}f(n)e^{-2\pi i n\gamma}$$
+
+is uniformly convergent. Thus,
+
+$$\hat f(\gamma)=\sum_{n\in\Z}f(n)e^{-2\pi i n\gamma}.$$
+
+Then, by the inversion theorem
+
+$$f(x)=\int_{-1/2}^{1/2}\hat f(\gamma)e^{2\pi i x\gamma}d\gamma$$
+
+$$=\int_{-1/2}^{1/2}\left(f(n)e^{2\pi i x\gamma}\right)e^{2\pi i x\gamma}d\gamma$$
+
+$$=\sum_{n\in\Z}f(n)\int_{-1/2}^{1/2}e^{2\pi i \gamma(x-n)}d\gamma=\star$$
+
+Since the sum is uniformly convergent, the interchange of summation and integration is justified.
+
+$$\star=\sum_{n\in\Z}f(n)\sinc(x-n). \ \square$$
+
+__Remark:__ $\hat f$ need not be 1-periodic, as long as $\hat f$ is supported on an interval of length $L$, a similar calculation can be done.
+
+_Example 8.4.3_ $f$-cont, $f\in M(\R)$, $\supp\hat f\subset[-L/2,L/2]$. Then
+
+$$f(x)=\sum_{n\in\Z}f\left(\frac{n}{L}\right)\sinc\left(\frac{x-n}{L}\right).$$
+
+# _Heisenberg Uncertainty Principle:_
+
+Suppose that $f\in S(\R)$ and $\|f\|=1$. Then
+
+$$\left(\int_\R x^2|f(x)|^2dx\right)\left(\int_\R\gamma^2|\hat f(\gamma)|^2d\gamma\right)\geq\frac{1}{16\pi^2}$$
+
+## _Proof:_
+
+$$\frac{d}{dx}|f(x)|^2=\frac{d}{dx}f\bar f=f'\bar f+f\overline{f'}$$
+
+$$=f'\bar f+\overline{\bar f f'}$$
+
+$$=2\mathscr{R}(f'\bar f).$$
+
+By hypothesis and integration by parts
+
+$$1=\|f\|^2=\int_\R|f|^2dx=\left[x|f(x)|^2\right]_{-\infy}^\infty-\int_\R x\frac{d}{dx}|f|^2dx$$
+
+$$=-\int_\R x2\mathscr{R}(f'\bar f)dx\leq2\int_\R|x||f'||f|dx=\star$$
+
+since $\mathscr R z\leq |z|$. Note
+
+$$\<|x||f|,|f'|\>=\star/2.$$
+
+Then, by Cauchy-Schwartz
+
+$$1\leq2\|x|f(x)|\|\|f'(x)\|$$
+
+and by Parsevals ($\|\hat f\|=\|f\|$) and $f'\ra2\pi i\gamma\hat f(\gamma)$,
+
+
+$$1\leq2\|x|f(x)|\|\|2\pi i\gamma\hat f\|$$

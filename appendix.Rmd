@@ -1,0 +1,622 @@
+---
+title: "Supplementary Material"
+author:
+  - name: Bob Week 
+    url: https://bobweek.github.io
+    affiliation: University of Idaho
+    affiliation_url: https://ibest.uidaho.edu
+  - name: Scott Nuismer
+    url: https://leeef.org
+date: "`r Sys.Date()`"
+output:  
+  distill::distill_article:
+    toc: true
+    toc_depth: 3
+editor_options: 
+  chunk_output_type: console
+bibliography: bibliography.bib
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+
+## S1 Derivation of infinite population approximation
+
+This derivation follows closely to Kimura's for their contiuum of alleles model[@Kimura1965], but is sufficiently different that we provide our own treatment here.
+
+We start with an axiom of biological populations. If each individual produces $\mathscr W$ offspring, then, given $N$ parents, we have $\mathscr WN$ offpsring. For non-overlapping generations, this results in the dynamical equation $N_{t+1}=\mathscr WN_t$. For continuously reproducing populations, suppose $N_{t+h}={\mathscr W}^hN_t, \ h\in[0,1]$. Then
+
+$$\frac{d}{dt}N_t\equiv\lim_{h\ra0}\frac{N_{t+h}-N_t}{h}=(\ln \mathscr W)N_t.$$
+
+Now suppose that $\mathscr W(z)$ is a function of some phenotypic parameter $z\in\R$ and $n_t(z)$ denotes the abundance density of this value in the population. Restating the above equation
+
+$$\frac{d}{dt}n_t(z)=\ln \mathscr W(z)n_t(z).$$
+
+The total abundance of the population is $N_t=\int_\R n_t(z)dz$ and hence (applying the dominated convergence theorem)
+
+$$\frac{d}{dt}N_t=\int_\R\ln \mathscr W(z)n_t(z)dz$$
+
+$$=\left(\int_\R\ln \mathscr W(z)\phi_t(z)dz\right)N_t=\overline{\ln \mathscr W}N_t.$$
+
+Here $\phi_t(z)=n_t(z)/N_t$ denotes the relative density of trait value $z$ in the population. Using a similar trick one can calculate the continuous time response to selection as
+
+$$\frac{\partial\phi_t}{\partial t}=(\ln \mathscr W-\overline{\ln \mathscr W})\phi_t.$$
+
+In evolutionary game theory this is often referred to as the replicator equation[@PAGE2002]. Carefully note here that if the population is finite, $\phi_t(z)$ cannot be a true probability density function, but rather a probability mass function. If there is uncertainty in the phenotypic values of individuals, the density of $\phi_t(z)$ would reflect this, not true biological divesity. To circumvent this we must assume the population size is infinite such that every phenotypic value is expressed by an infinite number of individuals and therefore corresponds to a density and not an abundance. Since the replicator equation is independent of population size it holds in the limit $N_t\ra\infty$. Under this assumption, the response of the mean phenotype $\bar z_t$ to selection is (again applying the dominated convergence theorem whose mention we suppress for the remainder of this derivation)
+
+$$\frac{d\bar z_t}{dt}=\frac{d}{dt}\int_\R z\phi_t(z)dz=\int_\R z\frac{d}{dt}\phi_t(z)dz$$
+
+$$=\int_\R z(\ln\mathscr W(z)-\overline{\ln\mathscr W})\phi_t(z)dz=\mathrm{Cov}(z,\ln \mathscr W).$$
+
+When $\phi_t$ is Gaussian with variance $\sigma_t^2$, a direct calculation shows
+
+$$\frac{d\bar z_t}{dt}=\sigma_t^2\left(\frac{\partial\overline{\ln \mathscr W}}{\partial\bar z_t}-\frac{\overline{\partial\ln \mathscr W}}{\partial\bar z_t}\right).$$
+
+However, if $\mathscr W$ is not Gaussian, the replicator equation demonstrates that $\phi_t$ immediately diverges from being strictly Gaussian. Previous theory argues that random mating and Gaussian mutational effects retain at least approximate normality of $\phi_t$[@Slatkin1987]. So far our approach has not considered the effects of reproduction and imperfect heritability. To account for these processes we start by assuming each individual carries an expressed phenotype $z$ upon which selection acts. However, associated with this trait is a genotypic value $x$ related to $z$ by $z\sim\mathscr{N}(x,\nu^2)$ where the variance $\nu^2$ represents developmental noise. Offspring inherit the genotypic value stochastically so that if a parent has genotypic value $x$, its offspring will have genotypic value $x'\sim\mathscr{N}(x,\eta^2)$ where the variance $\eta^2$ represents the effects of mutation. Note this also assumes asexual selection, which we keep for now as a simplifying assumption.
+
+Since we are assuming infinite popualtions the abundance of these populations no longer concern us. Hence, we consider the Malthusian fitness of a genetic value $x$, (ie, $\ln\mathscr W(x)$), instead of the expected reproductive output of an individual with genetic value $x$, (ie, $\mathscr{W}(x)$). Taking into account the fact that selection acts on the expressed phenotype, this Malthusian parameter becomes
+
+$$(\ln\mathscr W)^*(x)=\int_\R\ln\mathscr W(z)\psi(x-z)dz$$
+
+where 
+
+$$\psi(x)=\frac{1}{\sqrt{2\pi\nu^2}}\exp\left(-\frac{x^2}{2\nu^2}\right)$$
+
+captures developmental noise. These assumptions imply the mutational extension of the replicator equation
+
+$$\frac{\partial\gamma_t}{\partial t}=\left((\ln\mathscr W)^*-\overline{(\ln\mathscr W)^*}\right)\gamma_t+\frac{\eta^2}{2}\frac{\partial^2\gamma_t}{\partial x^2}$$
+
+where
+
+$$\overline{(\ln\mathscr W)^*}=\int_\R(\ln\mathscr W)^*(x)\gamma_t(x)dx=\int_\R\int_\R\ln\mathscr W(z)\psi(z-x)\gamma_t(x)dzdx.$$
+
+The distribution of expressed phenotypes $\phi_t$ can then be written as
+
+$$\phi_t(z)=\int_\R\gamma_t(x)\psi(z-x)dx.$$
+
+The evolution of the mean breeding value $\bar x_t$ is derived via
+
+$$\frac{d\bar x_t}{d t}=\int_\R x\frac{\partial}{\partial t}\gamma_t(x)dx$$
+
+$$=\int_\R x\left(\left((\ln\mathscr W)^*-\overline{(\ln\mathscr W)^*}\right)\gamma_t(x)+\frac{\eta^2}{2}\frac{\partial^2}{\partial x^2}\gamma_t(x)\right)dx$$
+
+$$=\mathrm{Cov}_\gamma(x,(\ln\mathscr W)^*)+\frac{\eta^2}{2}\int_\R x\frac{\partial ^2}{\partial x^2}\gamma_t(x)dx.$$
+
+When $\gamma_t(x)$ is Gaussian s.t.
+
+$$\gamma_t(x)=\frac{1}{\sqrt{2\pi G_t}}\exp\left(-\frac{(x-\bar x_t)^2}{2G_t}\right)$$
+
+we have $\sigma_t^2=G_t+\nu^2$, but more importantly
+
+$$\frac{\partial^2\gamma_t}{\partial x^2}=\frac{(x-\bar x_t)^2-G_t}{{G_t}^2}\gamma_t$$
+
+and hence
+
+$$\int_\R x\frac{\partial ^2\gamma_t}{\partial x^2}dx=\frac{1}{{G_t}^2}\left(\bar x_t^3-G_t\bar x_t+\int_\R (x^3-2x^2\bar x_t)\gamma_tdx\right)$$
+
+$$=\frac{1}{{G_t}^2}\left(\bar x_t^3-G_t\bar x_t+\bar x_t^3+3\bar x_tG_t-2\bar x_t(\bar x_t^2+G_t)\right)=0.$$
+
+When $\gamma_t$ is Gaussian a direct calculation then shows
+
+$$\frac{d\bar x_t}{dt}=G_t\left(\frac{\partial\overline{(\ln \mathscr W)^*}}{\partial\bar x_t}-\frac{\overline{\partial(\ln \mathscr W)^*}}{\partial\bar x_t}\right).$$
+
+which is the formal continuous time analog of the well known breeders equation introduced by Lande[@Lande1976]. Since we assume mutation and developmental noise are unbiased and population size is infinite, the mean genotypic value $\bar x_t$ is equal to the mean expressed phenotype $\bar z_t$ whenever $\gamma_0$ is symmetric around its mean. If we also have a Gaussian $\mathscr{W}(z)$ so that
+
+$$\ln\mathscr W(z)=J-\frac{S}{2}(\theta-z)^2$$
+
+then
+
+$$\overline{(\ln\mathscr W)^*}=J-\frac{S}{2}\left((\theta-\bar x)^2+G_t+\nu^2\right)$$
+
+$$=J-\frac{S}{2}\left((\theta-\bar z)^2+\sigma_t^2\right)=\overline{\ln\mathscr W}.$$
+
+For now assume both $G_t=G$ and $\sigma_t^2=\sigma^2$ are constant with respect to time and ignore the rigorous mathematical implications of these constraints. Under the offset matching model, the Malthusian fitness of trait value $z_i$ in species $i$ interacting with species $j$ is[@Week2019]
+
+$$\ln\mathscr W_i(z_i)=\int_\R K_i-\frac{B_i}{2}(z_i- \zeta-\delta)^2\phi_j(\zeta)d\zeta$$
+
+$$=K_i-\frac{B_i}{2}\left((z_i-\bar z_j-\delta)^2+\sigma_j^2\right)$$
+
+for some value $K_i\in\R$. Hence
+
+$$\overline{\ln \mathscr W_i}=\ln K_i-\frac{B_i}{2}\left((\bar z_i-\bar z_j-\delta)^2+\sigma_i^2+\sigma_j^2\right)$$
+
+and
+
+$$\frac{d\bar z_i}{dt}=G_iB_i(\delta+\bar z_j-\bar z_i).$$
+
+Note that these results do _not_ depend on assumptions of weak selection.
+
+### Extension to evolving $G$
+
+Refering back to the mutational replicator equation, we derive the evolution of $G_t$ by
+
+$$\frac{d G_t}{dt}=\frac{d}{dt}\int_\R(x-\bar x_t)^2\gamma_tdx$$
+
+$$=\int_\R2(x-\bar x_t)\gamma_t(x)\frac{d\bar x_t}{dt}+(x-\bar x_t)^2\frac{d\gamma_t}{dt}dx$$
+
+$$=\mathrm{Cov}\left\{(x-\bar x_t)^2,(\ln \mathscr W)^*\right\}+\frac{\eta^2}{2}\int_\R(x-\bar x_t)^2\frac{\partial^2\gamma_t}{\partial x^2}dx.$$
+
+When $\gamma_t$ is Gaussian we have
+
+$$\int_\R(x-\bar x_t)^2\frac{\partial^2\gamma_t}{\partial x^2}dx=\int_\R(x-\bar x_t)^2\frac{(x-\bar x_t)^2-G_t}{{G_t}^2}\gamma_tdx=2$$
+
+and
+
+$$\frac{\partial\overline{(\ln\mathscr W)^*}}{\partial G_t}
+=\int_\R (\ln\mathscr W)^*\frac{\partial\gamma_t}{\partial G_t}+\frac{\partial\overline{(\ln\mathscr W)^*}}{\partial G_t}\gamma_tdx$$
+
+$$=\int_\R (\ln\mathscr W)^*\frac{(x-\bar x_t)^2-G_t}{2{G_t}^2}\gamma_tdx
++\overline{\frac{\partial (\ln\mathscr W)^*}{\partial G_t}}$$
+
+$$=\frac{\mathrm{Cov}\left\{(x-\bar x_t)^2,(\ln\mathscr W)^*\right\}}{2{G_t}^2}+\overline{\frac{\partial(\ln\mathscr W)^*}{\partial G_t}}$$
+
+$$=\frac{1}{2{G_t}^2}\left(\frac{dG_t}{dt}-\eta^2\right)+\overline{\frac{\partial(\ln\mathscr W)^*}{\partial G_t}}.$$
+
+Thus
+
+$$\frac{d G_t}{d t}=\eta^2+2{G_t}^2\left(\frac{\partial\overline{(\ln \mathscr W)^*}}{\partial G_t}-\frac{\overline{\partial(\ln \mathscr W)^*}}{\partial G_t}\right).$$
+
+The offset matching model can then be extended to include the additional equations
+
+$$\frac{d G_i}{d t}=\eta_i^2-B_i{G_i}^2.$$
+
+Thus, under the assumption of infinite populations, the variance of genetic values evolves independently of the value of the mean. Furthermore, this variance evolves directly to the mutation-selection equilibrium $\eta_i/\sqrt B_i$ when $B_i>0$. Assuming the $G_i$ have reached their equilibrium, we arrive back at the simple model derived above. Again, all of these results are exact for infinite population sizes and interactions mediated by exactly one trait. However, in reality interactions are likely mediated by syndromes of traits and hence to capture the full range of dynamics the offset-matching model is capable of, we must generalize our treatment to the case when $\bar z_1,\bar z_2\in\R^d$.
+
+### Extension to mulivariate traits
+
+To show that the offset-matching model captures the full range of coevolutionary dynamics discussed in the literature, we generalize the above formulation to $d$-dimensional traits. In this generalization we observe an additional behaviour; cycles. Since the formal derivation is analogous to the above treatment (using multivariate Gaussians instead of univariate ones), we suppress these details here and focus on the resulting model. We find
+
+$$\frac{d\bar z_i}{dt}=G_iB_i(\delta+\bar z_j-\bar z_i)$$
+
+$$\frac{d G_i}{d t}=\eta_i^2-B_i{G_i}^2$$
+
+where these equations are now interpreted as matrix equations. In particular, we have
+
+$$\bar z_i=\left(\begin{matrix}\bar z_i^{(1)}\\\vdots\\\bar z_i^{(d)}\end{matrix}\right), \ \  \delta=\left(\begin{matrix}\delta^{(1)}\\\vdots\\\delta^{(d)}\end{matrix}\right)\in\R^d$$
+
+$$B_i=\left(\begin{matrix}B_i^{(1,1)} & \cdots & B_i^{(1,d)}\\\vdots & \ddots & \vdots \\ B_i^{(d,1)} & \cdots & B_i^{(d,d)}\end{matrix}\right), \ \ G_i=\left(\begin{matrix}G_i^{(1,1)} & \cdots & G_i^{(1,d)}\\\vdots & \ddots & \vdots \\ G_i^{(d,1)} & \cdots & G_i^{(d,d)}\end{matrix}\right),$$
+
+$$\eta_i=\left(\begin{matrix}\eta_i^{(1,1)} & \cdots & \eta_i^{(1,d)}\\\vdots & \ddots & \vdots \\ \eta_i^{(d,1)} & \cdots & \eta_i^{(d,d)}\end{matrix}\right)\in\R^{d\times d}.$$
+
+To find cycles, we only need $d=2$. For simplicity, we assume the $G_i$ are at equilibrium and adopt the notation $\mathcal{B}_i=G_iB_i$. Rewriting the resulting system in matrix notation
+
+$$\frac{d}{dt}\left(\begin{matrix}\bar z_1^{(1)}\\\bar z_1^{(2)}\\\bar z_2^{(1)}\\\bar z_2^{(2)}\end{matrix}\right)
+=\left(\begin{matrix}-\B_1^{(1,1)} & -\B_1^{(1,2)} & \B_1^{(1,1)} & \B_1^{(1,2)} \\-\B_1^{(2,1)}&-\B_1^{(2,2)}&\B_1^{(2,1)}&\B_1^{(2,2)}\\\B_2^{(1,1)}&\B_2^{(1,2)}&-\B_2^{(1,1)}&-\B_2^{(1,2)}\\\B_2^{(2,1)}&\B_2^{(2,2)}&-\B_2^{(2,1)}&-\B_2^{(2,2)}\end{matrix}\right)
+\left(\begin{matrix}\bar z_1^{(1)}\\\bar z_1^{(2)}\\\bar z_2^{(1)}\\\bar z_2^{(2)}\end{matrix}\right)+\left(\begin{matrix}\B_1^{(1,1)}\delta^{(1)}+\B_1^{(1,2)}\delta^{(2)}\\\B_1^{(1,1)}\delta^{(1)}+\B_1^{(2,2)}\delta^{(2)}\\\B_2^{(1,1)}\delta^{(1)}+\B_2^{(1,2)}\delta^{(2)}\\\B_2^{(1,1)}\delta^{(1)}+\B_2^{(2,2)}\delta^{(2)}\end{matrix}\right)$$
+
+we can directly observe the Jacobian of the system and calculate the eigenvalues $0$ and
+
+$$\small{\frac{1}{2} \left(\pm\sqrt{(\B_1^{(1,1)}-\B_1^{(2,2)}-\B_2^{(1,1)}+B_2^{(2,2)})^2+4(\B_1^{(1,2)}-\B_2^{(1,2)})(\B_1^{(2,1)}-\B_2^{(2,1)})}-\B_1^{(1,1)}-\B_1^{(2,2)}+\B_2^{(1,1)}+\B_2^{(2,2)}\right)}.$$
+
+This model can therefore explain cycles when the underlying traits are multivariate and the co-selection strengths are not symmetric. As a numerical example suppose we only measure traits $\bar z_1^{(1)}$ and $\bar z_2^{(1)}$ and that the above conditions are satisfied with:
+
+Parameter      | Value
+---------------|-------
+$\delta^{(1)}$ | 0
+$\delta^{(2)}$ | 0
+$\B_1^{(1,1)}$ | 1
+$\B_1^{(2,2)}$ | 1
+$\B_2^{(1,1)}$ | 1
+$\B_2^{(2,2)}$ | 1
+$\B_1^{(1,2)}$ | 0
+$\B_1^{(2,1)}$ | 6
+$\B_2^{(1,2)}$ | 5
+$\B_2^{(2,1)}$ | 4
+
+Then the following dynamics will be observed:
+
+```{r}
+require(deSolve)
+require(ggplot2)
+require(ggthemes)
+twoDtrait <- function(t, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    dz11 <-  B111*(z21-z11)+B112*(z22-z12)
+    dz12 <-  B121*(z21-z11)+B122*(z22-z12)
+    dz21 <-  B211*(z21-z11)+B212*(z22-z12)
+    dz22 <-  B221*(z21-z11)+B222*(z22-z12)
+    list(c(dz11, dz12, dz21, dz22))
+  })
+}
+
+parameters <- c(B111 = 1, B112 = 0, B121 = 6, B122 = 1, B211 = 1, B212 = 5, B221 = 4, B222 = 1)
+state      <- c(z11=1, z12=1, z21=-1, z22=-1)
+times      <- seq(0, 20, by = 0.01)
+
+cycles <- ode(y = state, times = times, func = twoDtrait, parms = parameters)
+cycles <- data.frame(cycles)
+require(reshape2)
+melt(cycles)
+ggplot(cycles,aes(x=time,y=z11))+geom_line(colour="blue")+geom_line(aes(y=z21),colour="red")+
+  theme_pubclean()+ylab("trait value")+xlab("time")
+```
+
+For reproducibility we repeat the _R_ code used to generate the above figure here:
+
+```{r, eval=F, echo=T}
+require(deSolve)
+require(ggplot2)
+require(ggthemes)
+twoDtrait <- function(t, state, parameters) {
+  with(as.list(c(state, parameters)), {
+    dz11 <-  B111*(z21-z11)+B112*(z22-z12)
+    dz12 <-  B121*(z21-z11)+B122*(z22-z12)
+    dz21 <-  B211*(z21-z11)+B212*(z22-z12)
+    dz22 <-  B221*(z21-z11)+B222*(z22-z12)
+    list(c(dz11, dz12, dz21, dz22))
+  })
+}
+
+parameters <- c(B111 = 1, B112 = 0, B121 = 6, B122 = 1, B211 = 1, B212 = 5, B221 = 4, B222 = 1)
+state      <- c(z11=1, z12=1, z21=-1, z22=-1)
+times      <- seq(0, 20, by = 0.01)
+
+cycles <- ode(y = state, times = times, func = twoDtrait, parms = parameters)
+cycles <- data.frame(cycles)
+ggplot(cycles,aes(x=time,y=z11))+geom_line(colour="blue")+geom_line(aes(y=z21),colour="red")+
+  theme_economist()+ylab("trait value")
+```
+
+
+## S2 Evaluating performance across $N_e\times B$ in symmetric systems
+
+Our individual based simulations follow the same approach used in appendix S1 except for finite populations. That is, we assume each individual posses two traits, a genetic value and an expressed value. The genetic value is inherited as a normally distributed variable centered on the parental genetical value with variance $\eta^2$. The expressed phenotype is then distributed around the inherited genetic value normally with variance $\nu^2$. We assume each individual interacts with a binomially distributed number of individuals in the interacting species. Each individual is chosen at random with respect to their trait value. Net fitness of the individual is determined by calculating a geometric mean of the fitness effects caused by each interaction. The geometric mean is appropriate here since, as the number of interactions tends to infinity, this mean converges to the expected fitness of a trait in the infinite population approximation. To maintain constant population size $N_i$, genetic values are drawn, with repitition, from the parental population with each parental trait value weighted by fitness. To maintain relatively constant genetic variances we set the variance of the initial distribution equal to the equilibrium variance predicted by our model $G_i=\eta_i/\sqrt{B_i}$. This simulation repeats these steps for $\tt{its}$ iterations. Our code for this analysis is presented here:
+
+```{r, evol=F, echo=T}
+nu1 <- .1
+nu2 <- .1
+eta1 <- .1
+eta2 <- .1
+d <- 5
+p <- .5 # proportion of other species interacted with
+NN <- 50
+BB <- .01
+
+B1 <- BB
+B2 <- BB
+N1 <- NN
+N2 <- NN
+
+fitness <- function(z1,z2,B,d){
+  W <- exp(-B*(z2+d-z1)^2/2)
+  return(W)
+}
+
+# draw initial genetic values
+pop1g <- rnorm(N1)
+pop2g <- rnorm(N2)
+
+its <- 100
+histz1 <- NULL
+histz2 <- NULL
+for(i in 1:its){
+  
+  # draw expressed traits
+  pop1z <- NULL
+  pop2z <- NULL
+  for(i in pop1g){
+    pop1z <- c(pop1z,rnorm(1,i,nu1))
+  }
+  for(i in pop2g){
+    pop2z <- c(pop2z,rnorm(1,i,nu2))
+  }
+  
+  # collect for later analysis
+  histz1 <- c(histz1,mean(pop1z))
+  histz2 <- c(histz2,mean(pop2z))
+
+  # calculate fitnesses
+  fit1 <- NULL
+  for(i1 in pop1z){
+    f <- NULL
+    for(i2 in pop2z){
+      f <- c(f,fitness(i1,i2,B1,d))
+    }
+    f <- prod(f)^(1/N2)
+    fit1 <- c(fit1,f)
+  }
+  fit2 <- NULL
+  for(i2 in pop2z){
+    f <- NULL
+    for(i1 in pop1z){
+      f <- c(f,fitness(i2,i1,B2,d))
+    }
+    f <- prod(f)^(1/N1)
+    fit2 <- c(fit2,f)
+  }
+  
+  # sample parental population
+  bbs1 <- sample(1:N1,N1,replace=T,prob=fit1)
+  bbs2 <- sample(1:N2,N2,replace=T,prob=fit2)
+  pop1g <- pop1g[bbs1]
+  pop2g <- pop2g[bbs2]
+  
+  # draw offspring genetic values
+  pop1bb <- NULL
+  pop2bb <- NULL
+  for(i in pop1g){
+    pop1bb <- c(pop1bb,rnorm(1,i,eta1))
+  }
+  for(i in pop2g){
+    pop2bb <- c(pop2bb,rnorm(1,i,eta2))
+  }
+  
+}
+```
+
+Introduce diff approx
+
+Can also be used to determine relation to strength of selection. In particular, $N\times B$ contour plots of L2 norms.
+
+## S3 The direct measurement of an optimal offset
+
+Consider the Mamre interaction data set (Pauw, personal communications) replicated in table A1. This data summarizes the fitness effects of pollination-based interactions between individuals of the long-mouthed fly species _M. Longirostris_ and the long-tubed flower _L. anceps_.
+
+```{r, echo=F, warning=F}
+require(knitr)
+require(kableExtra)
+require(xlsx)
+mamre <- read.xlsx("Mamre interaction for Bob.xlsx",1)
+mamre <- data.frame(mamre$nectar_volume_consumed,mamre$POLLEN_GRAINS_DEPOSITED,mamre$TONGUE.TUBE)
+colnames(mamre) <- c("nectar consumed","pollen grains deposited","tongue length - tube length")
+kable(mamre,caption="Measurements of fitness and morphological differences")
+```
+
+To measure the optimal offset from these data, we simply minimize the sum of the square errors between the offset-matching fitness surfaces and the fitness of each species, constraining the $\delta$'s for each surface to be the same. That is, denoting $\hat W_i^j$ and $z_i^j$ the fitness and trait value of species $i$ during observation $j$, the data can be written as
+
+$D=\{\hat W^i,\Delta_i\}_{i=1}^n=\{\{\hat W_1^i,\hat W_2^i\},\{z_1^i-z_2^i\}\}_{i=1}^n$
+
+And hence we minimize the quantity
+
+$$L^2(W_1,W_2|D)\equiv\sum_{i=1}^n\left(W_1^i-W_1(\Delta_i)\right)^2+\left(\hat W_2^i-W_2(\Delta_i)\right)^2.$$
+
+The fitness functions can be written as
+
+$$W_i(z_i-z_j|c_i,B_i,\delta)=c_i\exp\left(-\frac{B_i}{2}(\delta+z_j-z_i)^2\right)$$
+
+and hence the goal is to compute
+
+$${\arg\min}_{c_1,c_2,B_1,B_2,\delta}(L^2).$$
+
+This can be performed numerically. For the data in table A1, we find
+
+```{r}
+W <- function(D,c,B,d){
+  f <- c*exp(-B*(d+D)/2)
+  return(f)
+}
+n <- dim(mamre)[1]
+L <- function(X){
+  
+  # unpack parameters
+  c1 <- exp(X[1])
+  c2 <- exp(X[2])
+  B1 <- exp(X[3])
+  B2 <- exp(X[4])
+  d  <- exp(X[5])
+  
+  # collect data
+  W1 <- mamre$`nectar consumed`
+  W2 <- mamre$`pollen grains deposited`
+  D  <- mamre$`tongue length - tube length`
+  
+  l <- 0
+  # accumulate errors across M. longir
+  for(i in 1:n){
+    l <- l + ( W(-D[i],c1,B1,d) - W1[i] )^2
+  }
+  
+  # accumulate errors across L. anceps
+  for(i in 1:n){
+    l <- l + ( W(D[i],c2,B2,d) - W2[i] )^2
+  }
+  
+  return(sqrt(l))
+  
+}
+
+mins <- NULL
+vals <- NULL
+for(i in 1:1000){
+  out <- optim(rnorm(5),L)
+  mins <- rbind(mins,out$par)
+  vals <- c(vals,out$value)
+}
+i <- which.min(vals)
+argmin <- exp(mins[i,])
+
+c1 <- argmin[1]
+c2 <- argmin[2]
+B1 <- argmin[3]
+B2 <- argmin[4]
+d  <- argmin[5]
+
+fits <- data.frame(c("M. longirostris","L. anceps"),c(c1,c2),c(B1,B2),c(d,d))
+colnames(fits) <- c("Species","c","B",'\u03B4')
+
+kable(fits,caption="Inferred fitness parameters")
+```
+
+To visualize how well this inference reflects the data, we plot our fitted surfaces onto the data in Figure AX. This demonstrates that this data contains a great deal of noise, but the overall trend is well captured.
+
+```{r}
+diff <- seq(min(D),max(D),by=.1)
+plot(D,W1,main="Goodness of fit")
+lines(diff,W(-diff,c1,B1,d),col='red')
+plot(D,W2)
+lines(diff,W(diff,c2,B2,d),col='blue')
+```
+
+The _R_ code used to produce these results is reproduced here:
+
+```{r, echo=T, eval=F}
+W <- function(D,c,B,d){
+  f <- c*exp(-B*(d+D)/2)
+  return(f)
+}
+n <- dim(mamre)[1]
+
+# collect data
+W1 <- mamre$`nectar consumed`
+W2 <- mamre$`pollen grains deposited`
+D  <- mamre$`tongue length - tube length`
+
+L <- function(X){
+  
+  # unpack parameters
+  c1 <- exp(X[1])
+  c2 <- exp(X[2])
+  B1 <- exp(X[3])
+  B2 <- exp(X[4])
+  d  <- exp(X[5])
+  
+  l <- 0
+  # accumulate errors across M. longir
+  for(i in 1:n){
+    l <- l + ( W(-D[i],c1,B1,d) - W1[i] )^2
+  }
+  
+  # accumulate errors across L. anceps
+  for(i in 1:n){
+    l <- l + ( W(D[i],c2,B2,d) - W2[i] )^2
+  }
+  
+  return(sqrt(l))
+  
+}
+
+mins <- NULL
+vals <- NULL
+for(i in 1:1000){
+  out <- optim(rnorm(5),L)
+  mins <- rbind(mins,out$par)
+  vals <- c(vals,out$value)
+}
+i <- which.min(vals)
+argmin <- exp(mins[i,])
+
+c1 <- argmin[1]
+c2 <- argmin[2]
+B1 <- argmin[3]
+B2 <- argmin[4]
+d  <- argmin[5]
+
+fits <- data.frame(c("M. longirostris","L. anceps"),c(c1,c2),c(B1,B2),c(d,d))
+colnames(fits) <- c("Species","c","B",'\u03B4')
+
+kable(fits,caption="Inferred fitness parameters")
+
+diff <- seq(min(D),max(D),by=.1)
+plot(D,W1,main="Goodness of fit")
+lines(diff,W(-diff,c1,B1,d),col='red')
+plot(D,W2)
+lines(diff,W(diff,c2,B2,d),col='blue')
+```
+
+## S4 The effect of optimal offsets for young interactions
+
+A multivariate generalization of effect size is based on the Mahalonobis metric (refs). If $\pmb\mu,\pmb\mu^*\in\R^d$ are the means of some $d$-dimensional sets of data with sample sizes $n,n^*$ and $\pmb\Sigma,\pmb\Sigma^*$ are corresponding covariance matrices, this effect size is calculated by
+
+$$\sqrt{(\pmb\mu-\pmb\mu^*)^\top\bar{\pmb\Sigma}^{-1}(\pmb\mu-\pmb\mu^*)}, \ \ \bar{\pmb\Sigma}=\frac{(n-1)\pmb\Sigma+(n^*-1)\pmb\Sigma^*}{n+n^*-2}.$$
+
+With respect to the offset-matching model data sets consist of sample paths taken by the model with and without an optimal offset. We therefore extend our model to incoporate stochastic effects. Hence, the means are two dimensional vectors representing the expected mean traits of the interacting species (ie, the solution to the deterministic model). The variance of our data results from uncertainty captured by random genetic drift. Since this analysis is performed across all potential sample paths, we formally take the limits $n,n^*\ra\infty$ which results in $\bar{\pmb\Sigma}=\frac{1}{2}(\pmb\Sigma+\pmb{\Sigma}^*)$. In particular, denoting $N_i$ the effective population size and $W_i$ a standard Brownian-motion process randomly perturbing the traits for species $i$, the model becomes
+
+$$\begin{matrix}&d\bar z_1=\left[\mathcal{B}_1\delta+\mathcal{B}_1(\bar z_2-\bar z_1)\right]dt+\sqrt\frac{G_i}{N_i}dW_1\\&d\bar z_2=\left[\mathcal{B}_2\delta+\mathcal{B}_2(\bar z_1-\bar z_2)\right]dt+\sqrt\frac{G_i}{N_i}dW_2.\end{matrix}$$
+
+These stochastic differential equations (SDE) can be formally derived as the diffusion approximation of the discrete-time model introduced in Week & Nuismer[@Week2019]. Because these SDE define a Gaussian process[@ksendal2003], the distribution of sample paths is completely characterized by the mean and covariance of this process[@Lifshits1995]. For $t\geq0$ the solutions of the means of these processes are given by
+
+$$\mu_1(t)\equiv\E(\bar z_1(t))=\left(2\delta\frac{\mathcal{B}_1\mathcal{B}_2}{\mathcal{B}_1+\mathcal{B}_2}\right)t+\left(\delta\mathcal{B}_1\frac{\mathcal{B}_1-\mathcal{B}_2}{(\mathcal{B}_1+\mathcal{B}_2)^2}\right)$$
+
+$$+\frac{\mathcal{B}_1\bar z_2(0)+\mathcal{B}_2\bar z_1(0)}{\mathcal{B}_1+\mathcal{B}_2}+\mathcal{B}_1\left[\frac{\bar z_1(0)-\bar z_2(0)}{\mathcal{B}_1+\mathcal{B}_2}+\delta\frac{\mathcal{B}_2-\mathcal{B}_1}{(\mathcal{B}_1+\mathcal{B}_2)^2}\right]e^{-(\mathcal{B}_1+\mathcal{B}_2)t}$$
+
+
+$$\mu_2(t)\equiv\E(\bar z_2(t))=\left(2\delta\frac{\mathcal{B}_1\mathcal{B}_2}{\mathcal{B}_1+\mathcal{B}_2}\right)t+\left(\delta\mathcal{B}_2\frac{\mathcal{B}_2-\mathcal{B}_1}{(\mathcal{B}_1+\mathcal{B}_2)^2}\right)$$
+
+$$+\frac{\mathcal{B}_1\bar z_2(0)+\mathcal{B}_2\bar z_1(0)}{\mathcal{B}_1+\mathcal{B}_2}+\mathcal{B}_2\left[\frac{\bar z_2(0)-\bar z_1(0)}{\mathcal{B}_1+\mathcal{B}_2}+\delta\frac{\mathcal{B}_1-\mathcal{B}_2}{(\mathcal{B}_1+\mathcal{B}_2)^2}\right]e^{-(\mathcal{B}_1+\mathcal{B}_2)t}$$
+
+Caclulating the variances and covariance of $(\bar z_1,\bar z_2)$ is not as straightforward. However, defining $g:\R^2\ra\R$ by
+
+$$g(\bar z_i,\bar z_j)=(\mu_i-\bar z_i)(\mu_j-\bar z_j)$$
+ 
+we can use It&ocirc;'s formula to derive
+ 
+$$\Sigma_{ij}\equiv\E g(\bar z_i,\bar z_j).$$
+
+This results in
+
+$$\Sigma_{11}(t)=\left(\Sigma_{12}(t)+\frac{G_1}{2N_1\mathcal{B}_1}\right)(1-e^{-2\mathcal{B}_1t})$$
+
+$$\Sigma_{22}(t)=\left(\Sigma_{12}(t)+\frac{G_2}{2N_2\mathcal{B}_2}\right)(1-e^{-2\mathcal{B}_2t})$$
+
+$$\Sigma_{12}(t)=\frac{G_2}{2N_2\mathcal{B}_2}(1-e^{-(\mathcal{B}_1+\mathcal{B}_2)t})$$
+
+We write $\mu_i^*$ and ${\Sigma_{ij}}^*$ for the mean and (co)variance of sample paths between the two species when $\delta=0$. Hence $\Sigma_{ij}={\Sigma_{ij}}^*$ for both $i=1,2$ and
+
+$$\frac{1}{2}(\Sigma_{ii}+{\Sigma_{ii}}^*)=\Sigma_{ii}=\frac{G_i}{2N_i\mathcal{B}_i}(1-e^{-2\mathcal{B}_it})$$
+
+$$\frac{1}{2}(\Sigma_{12}+{\Sigma_{12}}^*)=\Sigma_{12}=?$$
+
+The difference between the expected mean traits simplifies to
+
+$$\Delta_1\equiv|\mu_1-\mu_1^*|=\left|\left(2\delta\frac{\mathcal{B}_1\mathcal{B}_2}{\mathcal{B}_1+\mathcal{B}_2}\right)t+\left(\delta\mathcal{B}_1\frac{\mathcal{B}_1-\mathcal{B}_2}{(\mathcal{B}_1+\mathcal{B}_2)^2}\right)\left(1-e^{-(\mathcal{B}_1+\mathcal{B}_2)t}\right)\right|$$
+
+$$\Delta_2\equiv|\mu_2-\mu_2^*|=\left|\left(2\delta\frac{\mathcal{B}_1\mathcal{B}_2}{\mathcal{B}_1+\mathcal{B}_2}\right)t+\left(\delta\mathcal{B}_2\frac{\mathcal{B}_2-\mathcal{B}_1}{(\mathcal{B}_1+\mathcal{B}_2)^2}\right)\left(1-e^{-(\mathcal{B}_1+\mathcal{B}_2)t}\right)\right|.$$
+
+In this notation, the effect of the optimal offset reduces to
+
+$$\varepsilon(t,\delta)=\sqrt{\frac{\Delta_1^2}{\Sigma_{11}}+2\frac{\Delta_1\Delta_2}{\Sigma_{12}}+\frac{\Delta_2^2}{\Sigma_{22}}}.$$
+
+When the offset is small and the interaction is young we have the following simplifications
+
+$$\Delta_i\approx\delta\mathcal{B}_i\left(\frac{|\mathcal{B}_i-\mathcal{B}_j|}{\mathcal{B}_i+\mathcal{B}_j}\right)t$$
+
+$$\Sigma_{12}\approx0?$$
+
+$$\Sigma_{ii}\approx\frac{G_i}{N_i}t$$
+
+and hence
+
+$$\varepsilon(t,\delta)\approx\sqrt\frac{N_1}{tG_1}\delta\mathcal{B}_1\left(\frac{|\mathcal{B}_1-\mathcal{B}_2|}{\mathcal{B}_1+\mathcal{B}_2}\right)t+\sqrt\frac{N_2}{tG_2}\delta\mathcal{B}_2\left(\frac{|\mathcal{B}_2-\mathcal{B}_1|}{\mathcal{B}_1+\mathcal{B}_2}\right)t$$
+
+$$=\delta\frac{|\mathcal{B}_1-\mathcal{B}_2|}{\mathcal{B}_1+\mathcal{B}_2}\left(\mathcal{B}_1\sqrt\frac{N_1}{G_1}+\mathcal{B}_2\sqrt\frac{N_2}{G_2}\right)\sqrt t.$$
+
+## S5 The measurement and effect of an optimal offset for old interactions
+
+### Calculating effect size for old interactions
+
+For interactions taking place over extended periods of time, we must take into account coevolutionary races will be put in check by some other evolutionary forces. For parsimony, we assume this is performed by some abstract ambient stabilizing selection acting separately on each species. In particular, we extend the model derived in appendix S1 so that fitness of an individual with trait value $z_i$ in species $i$ becomes
+
+$$\mathscr W_i(z_i)=J_i\exp\left(-\frac{B_i}{2}(z_i-\bar z_j-\delta)^2\right)\exp\left(-\frac{A_i}{2}(z_i-\theta_i)^2\right)$$
+
+for some $J_i>0$. Setting $\mathcal{B}_i=B_iG_i$ and $\mathcal{A}_i=A_iG_i$ the equations of evolution, including our continuous time approximation of drift, become
+
+$$\begin{matrix}d\bar z_1=[\mathcal{B}_1\delta+\mathcal{B}_1(\bar z_2-\bar z_1)+\mathcal{A}_1(\theta_1-\bar z_1)]dt+\sqrt\frac{G_1}{N_1}d W_1\\d\bar z_1=[\mathcal{B}_2\delta+\mathcal{B}_2(\bar z_1-\bar z_2)+\mathcal{A}_2(\theta_2-\bar z_2)]dt+\sqrt\frac{G_2}{N_2}dW_2.\end{matrix}$$
+
+This process exhibits a bivariate normal stochastic equilibrium distribution defined by
+
+$$\mu_i=\frac{\mathcal{B}_i(\E(\bar z_j)+\delta)+\mathcal{A}_i\theta_i}{\mathcal{B}_i+\mathcal{A}_i}$$
+
+$$=\frac{\mathcal{B}_i\mathcal{A}_j+2\mathcal{B}_i\mathcal{B}_j}{(\mathcal{A}_j+\mathcal{B}_j)\mathcal{A}_i+\mathcal{B}_i\mathcal{A}_j}\delta+\frac{(\mathcal{A}_j+\mathcal{B}_j)\mathcal{A}_i\theta_i+\mathcal{B}_i\mathcal{A}_j\theta_j}{(\mathcal{A}_j+\mathcal{B}_j)\mathcal{A}_i+\mathcal{B}_i\mathcal{A}_j}$$
+
+$$\Sigma_{ii}=\frac{\mathcal{B}_i\Sigma_{12}+G_i/2N_i}{\mathcal{B}_i+\mathcal{A}_i}$$
+
+$$\Sigma_{12}=$$
+
+Just as above, we find $\Sigma_{ij}={\Sigma_{ij}}^*$. Hence, using the Mahalanobis metric once more, we can calculate the effect of the optimal offset on the traits of species that have coevolved in isolation for long periods of time by
+
+$$\varepsilon_\infty(\delta)=$$
+
+### Measuring the optimal offset for old interactions from spatial data
+
+To measure $\delta$ indirectly for such interactions, we can employ the maximum likelihood method of coevolution (MLC) introduced in Week & Nuismer [@Week2019]. MLC requires estimates of local population mean phenotypes across space and hence is not applicable for single populations. However, with satisfactory data, MLC returns reasonable estimates of biotic and abiotic selection strengths ($\mathcal{B}_1,\mathcal{B}_2,\mathcal{A}_1,\mathcal{A}_2$) as well as the optimal offset ($\delta$). Thus, MLC can easily be adapted to estimate the significance of the optimal offset $\delta$ using likelihood ratios analogous to those used to estimate the significance of $\mathcal{B}_1$ and $\mathcal{B}_2$. See Week & Nuismer[@Week2019] for further details.
+
+Applying this approach to the same fly-flower mutualism we used to directly measure the optimal offset, we infer an optimal offset of length $\hat\delta=4.XXmm$. Our MLC-based likelihood ratio test returns a $p$-value less than machine precision, reflecting the dramatic elongation of traits produced by coevolution in this system.
+

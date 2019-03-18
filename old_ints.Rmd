@@ -1,0 +1,143 @@
+---
+title: "S4: The measurement and effect of an optimal offset for old interactions"
+author:
+  - name: Bob Week 
+    url: https://bobweek.github.io
+    affiliation: University of Idaho
+    affiliation_url: https://ibest.uidaho.edu
+  - name: Scott Nuismer
+    url: https://leeef.org
+date: "`r Sys.Date()`"
+output:  
+  distill::distill_article:
+    toc: true
+    toc_depth: 3
+editor_options: 
+  chunk_output_type: console
+bibliography: bibliography.bib
+---
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\B}{\mathscr{B}}
+\newcommand{\ra}{\rightarrow}
+
+### Calculating effect size for old interactions
+
+For interactions taking place over extended periods of time, we must take into account coevolutionary races will be put in check by some other evolutionary forces. For parsimony, we assume this is performed by some abstract ambient stabilizing selection acting separately on each species. In particular, we extend the model derived in Appendix S1 so that fitness of an individual with trait value $z_i$ in species $i$ becomes
+
+$$\mathscr{W}_i(z_i)=J_i\exp\left(-\frac{B_i}{2}(z_i-\bar z_j-\delta)^2\right)\exp\left(-\frac{A_i}{2}(z_i-\theta_i)^2\right)$$
+
+for some $J_i>0$. The equations of evolution, including our continuous time approximation of drift, become
+
+$$\begin{matrix}
+d\bar z_1=G_1[B_1(\delta+\bar z_2-\bar z_1)+A_1(\theta_1-\bar z_1)]dt+\sqrt\frac{G_1}{n_1}dW_1\\
+d\bar z_1=G_2[B_2(\delta+\bar z_1-\bar z_2)+A_2(\theta_2-\bar z_2)]dt+\sqrt\frac{G_2}{n_2}dW_2.
+\end{matrix}$$
+
+This process exhibits a bivariate normal stochastic equilibrium distribution defined by
+
+$$\mu_i=\frac{B_i(\mu_j+\delta)+A_i\theta_i}{B_i+A_i}$$
+
+$$=\frac{B_iA_j+2B_iB_j}{(A_j+B_j)A_i+B_iA_j}\delta+\frac{(A_j+B_j)A_i\theta_i+B_iA_j\theta_j}{(A_j+B_j)A_i+B_iA_j}$$
+
+$$\Sigma_{ii}=\frac{B_i\Sigma_{12}+\frac{1}{2N_i}}{B_i+A_i}$$
+
+$$\Sigma_{12}=\frac{B_1(A_1+B_1)\frac{G_1}{2n_2}+
+B_2(A_2+B_2)\frac{G_2}{2n_1}}{(A_1A_2+A_1B_2+A_2B_1)((A_1+B_1)G_1+(A_2+B_2)G_2)}.$$
+
+Again, we find $\Sigma_{ij}={\Sigma_{ij}}^*$. Hence, using the Mahalanobis metric once more, we can calculate the effect of the optimal offset on the traits of species that have coevolved in isolation for long periods of time. Unfortunately, this measure is too cumbersome to express even in an appendix. We therefore leave its full glory in the associated _Mathematica_ notebook.
+
+### Measuring the optimal offset for old interactions from spatial data
+
+To measure $\delta$ indirectly for old interactions, we can employ the maximum likelihood method of coevolution (MLC) introduced in Week & Nuismer [@Week2019]. MLC requires estimates of local population mean phenotypes across space and hence is not applicable for single populations. However, with satisfactory data, MLC returns reasonable estimates of biotic and abiotic selection strengths ($B_1,B_2,A_1,A_2$) as well as the optimal offset ($\delta$). Thus, MLC can easily be adapted to estimate the significance of the optimal offset $\delta$ using likelihood ratios analogous to those used to estimate the significance of $B_1$ and $B_2$. In particular, defining $L_\delta$ the unconstrained likelihood of our model and $L_0$ the likelihood constrained to $\delta=0$, we compute the likelihood ratio statistic
+
+$$\Lambda=2(\ln L_\delta-\ln L_0)$$
+
+which is asymptotically $\chi^2_1$ (with df$=1$). Writing $F_1(x), \ x>0$ the cumulative density function of the $\chi^2_1$ distribution, the _p_-value associated with $\Lambda$ is just $F_1(\Lambda)$. To perform this calculation, we adapt lines 169-248 of the _R_ script $\tt{estimate.R}$ found in the repository:
+
+$\tt{https://github.com/bobweek/measuring.coevolution}$
+
+This script depends also on $\tt{functions.R}$ found in the same repository. The adapted code is printed at the end of this document.
+
+### _R_ code
+
+```{r, echo=T, eval=F}
+require(mvtnorm)
+source("functions.R")
+
+#      #############      ########################################################
+#      #           #
+#      # Pauw data #      ########################################################
+#      #           #
+#      #############      ########################################################
+
+snout <- c(79.3,54.8,57.0,72.8,42.9,58.4,85.8,75.6)
+tubes <- c(77.0,mean(c(50.0,27.5)),49.1,52.6,41.1,58.6,60.8,68.0)
+data <- cbind(snout,tubes)
+
+G1 <- mean(c(4.6,4.4,5.9,5.8,1.6,6.8,6.5,7.4)^2)
+G2 <- mean(c(5.9,4.9,4.3,4.7,2.5,7.5,4.6,5.5)^2)
+
+siblings <- c(11.5,32,(38+44)/2)
+
+ancepsAsolo <- c(31.2,51.7)
+Moegestorynchus <- c(siblings,mean(siblings)) # brevirostris, perplexus, braunsi
+
+th1s <- Moegestorynchus
+th2 <- mean(ancepsAsolo)
+n1 <- 100
+n2 <- 1000
+
+N <- dim(data)[1]
+m <- colMeans(data)
+S <- (N-1)*var(data)/N
+
+######
+# ML #
+######
+
+B1s <- NULL
+B2s <- NULL
+A1s <- NULL
+A2s <- NULL
+ks <- NULL
+ps <- NULL
+for(th1 in th1s){
+  
+  ML  <- ml_sol(m[1],m[2],S[1,1],S[2,2],S[1,2],n1,n2,th1,th2,G1,G2)
+  lnL <- likelihood(data,m,S)
+  
+  A1s <- c(A1s,ML$A1)
+  A2s <- c(A2s,ML$A2)
+  B1s <- c(B1s,ML$B1)
+  B2s <- c(B2s,ML$B2)
+  ks  <- c(ks,ML$k)
+  
+  ########
+  # null #
+  ########
+  
+  ML_k0  <- ml_sol_k0(m[1],m[2],S[1,1],S[2,2],S[1,2],n1,n2,th1,th2,G1,G2)
+  
+  A1_k0 <- ML_k0$A1
+  A2_k0 <- ML_k0$A2
+  B1_k0 <- ML_k0$B1
+  B2_k0 <- ML_k0$B2
+  
+  mu_n <- mu(A1_k0,A2_k0,B1_k0,B2_k0,0,n1,n2,th1,th2)
+  S_n <- SIGMA(A1_k0,A2_k0,B1_k0,B2_k0,0,n1,n2,th1,th2,G1,G2)
+  lnL0  <- likelihood(data,mu_n,S_n)
+  
+  # chisqr
+  ps <- c(ps,1-pchisq(2*(lnL-lnL0),1))
+  
+}
+
+pval <- max(ps)
+
+```
+

@@ -1,0 +1,41 @@
+---
+title: "S3: The effect of optimal offsets for young interactions"
+author:
+  - name: Bob Week 
+    url: https://bobweek.github.io
+    affiliation: University of Idaho
+    affiliation_url: https://ibest.uidaho.edu
+  - name: Scott Nuismer
+    url: https://leeef.org
+date: "`r Sys.Date()`"
+output:  
+  distill::distill_article:
+    toc: true
+    toc_depth: 3
+editor_options: 
+  chunk_output_type: console
+bibliography: bibliography.bib
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\B}{\mathscr{B}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+
+A multivariate generalization of effect size is based on the Mahalonobis metric[@marty2007mahalanobis;@mardiamultivariate]. If $\pmb\mu,\pmb\mu^*\in\R^d$ are the means of some $d$-dimensional sets of data with sample sizes $n,n^*$ and $\pmb\Sigma,\pmb\Sigma^*$ are corresponding covariance matrices, this effect size is calculated by
+
+$$\sqrt{(\pmb\mu-\pmb\mu^*)^\top\bar{\pmb\Sigma}^{-1}(\pmb\mu-\pmb\mu^*)}, \ \ \bar{\pmb\Sigma}=\frac{(n-1)\pmb\Sigma+(n^*-1)\pmb\Sigma^*}{n+n^*-2}.$$
+
+With respect to the offset-matching model data sets consist of sample paths taken by the model with and without an optimal offset. We therefore extend our model to incoporate stochastic effects. Hence, the means are two dimensional vectors representing the expected mean traits of the interacting species (ie, the solution to the deterministic model). The variance of our data results from uncertainty captured by random genetic drift. Since this analysis is performed across all potential sample paths, we formally set $n=n^*$ take the limit $n\ra\infty$ which results in $\bar{\pmb\Sigma}=\frac{1}{2}(\pmb\Sigma+\pmb{\Sigma}^*)$.
+
+Denoting $N_i$ the effective population size and $W_i$ a standard Brownian-motion process for species $i$, the model becomes
+
+$$\begin{matrix}&d\bar z_1=\left[\mathscr{B}_1\delta+\mathscr{B}_1(\bar z_2-\bar z_1)\right]dt+\sqrt\frac{G_i}{n_i}dW_1\\&d\bar z_2=\left[\mathscr{B}_2\delta+\mathscr{B}_2(\bar z_1-\bar z_2)\right]dt+\sqrt\frac{G_i}{n_i}dW_2.\end{matrix}$$
+
+These stochastic differential equations (SDE) can be formally derived as the diffusion approximation of the discrete-time model introduced in Week & Nuismer[@Week2019]. Because these SDE define a Gaussian process the distribution of sample paths is completely characterized by the mean and covariance of this process[@Lifshits1995]. Further details can be found in the _Mathematica_ notebook $\tt{effects.nb}$

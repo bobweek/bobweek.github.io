@@ -1,0 +1,98 @@
+---
+title: "Harmonic Analysis 02-27-19"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+
+# Plancherel's Formula
+
+Some properties of Schwars functions: $f,g\in S(\R)$
+
+  i) $f*g\in S(\R)$
+  ii) $f*g=g*f$
+  iii) $\mathcal{F}(f*g)=\mathcal{F}(f)\mathcal{F}(g)$
+  
+_Proof:_ (of iii))
+
+$$\mathcal{F}(f*g)=\int_\R f(y)\int_\R g(x-y)e^{-2\pi i x\gamma}dxdy$$
+
+$$=\int_\R f(y)\hat g(\gamma)e^{-2\pi i y\gamma}dy=\hat f(\gamma)\hat g(\gamma). \ \square$$
+
+The Schwarz space can be equipped with the inner product inherited from $\mathscr L^2(\R)$
+
+$$\<f,g\>\equiv\int_\R f(x)\bar g(x)dx$$
+
+and hence $\|f\|\equiv\sqrt{\<f,f\>}=\sqrt{\int_\R|f(x)|^2dx}.$
+
+- Remark: Compare with Parseval's equility of Fourier series:
+
+$$\|f\|_2=\sqrt{\sum_{n\in\Z}|\hat f(n)|^2}$$
+
+## _Plancherel's theorem:_ 
+
+If $f\in S(\R)$ then 
+
+$$\|\hat f\|=\|f\|.$$
+
+_Proof:_ Define $\tilde f(x)=\bar f(-x)$. Then
+
+$$\mathcal{F}(\tilde f)=\int_\R f(-x)e^{-2\pi i x \gamma}dx$$
+
+$$=\overline{\int_\R f(-x)e^{2\pi i x\gamma}dx}$$
+
+$$=-\overline{\int_\infty^{-\infty} f(y)e^{-2\pi i y \gamma}dy}$$
+
+$$=\overline{\int_{-\infty}^{\infty} f(y)e^{-2\pi i y \gamma}dy}=\overline{\mathcal{F}(\gamma)}.$$
+
+Let $h=f*\tilde f$. Then 
+
+$$\mathcal{F}(h)=\mathcal{F}(f)\mathcal{F}(\hat f)=\mathcal{F}(f)\overline{\mathcal{F}(f)}.$$
+
+Also, 
+
+$$h(0)=f*\tilde f(0)=\int_\R f(0-t)\tilde f(t)dt=\int_\R f(-t)\tilde f(t)dy$$
+
+$$=\int_\R f(-t)\overline{f(-t)}dt=\|f\|^2.$$
+
+By the inversion theorem:
+
+$$h(0)=\int_\R\hat h(\gamma)e^{2\pi i \gamma 0}d\gamma=\int_\R\hat h(\gamma)d\gamma$$
+
+$$=\int_\R|\hat f(\gamma)|^2d\gamma=\|\hat f\|^2. \ \square$$
+
+_Example:_ Solving differential equations
+
+$$f^{(3)}(x)+3f''(x)-2f'(x)-6f(x)=e^{-\pi x^2}$$
+
+$$\mathcal{F}\left\{f^{(3)}(x)+3f''(x)-2f'(x)-6f(x)\right\}=\mathcal{F}\left\{e^{-\pi x^2}\right\}$$
+
+$$\downarrow$$
+
+$$\hat f(\gamma)\left((2\pi i \gamma)^3+3(2\pi i \gamma)^2-2(2\pi i\gamma)-6\right)=e^{-\pi x^2}$$
+
+Set $t=2\pi i\gamma$
+
+$$\hat f(\gamma)(t+3)(t^2-2)=e^{-\pi x^2}\implies\hat f(\gamma)=\frac{e^{-\pi x^2}}{(t+3)(t^2-2)}$$
+
+Note that $(t+3)(t^2-2)$ does not have purely real roots. Hence, we can invert the above to find
+
+$$f(x)=\mathcal{F}^*\left\{\frac{e^{-\pi x^2}}{(t+3)(t^2-2)}\right\}.$$
+
+
+
+
+
+
+

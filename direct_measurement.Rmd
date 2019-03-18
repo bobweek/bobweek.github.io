@@ -1,0 +1,143 @@
+---
+title: "S2: The direct measurement of an optimal offset"
+author:
+  - name: Bob Week 
+    url: https://bobweek.github.io
+    affiliation: University of Idaho
+    affiliation_url: https://ibest.uidaho.edu
+  - name: Scott Nuismer
+    url: https://leeef.org
+date: "`r Sys.Date()`"
+output:  
+  distill::distill_article:
+    toc: true
+    toc_depth: 3
+editor_options: 
+  chunk_output_type: console
+bibliography: bibliography.bib
+---
+
+### Measuring $\delta$
+
+Consider the Mamre interaction data set (Pauw, personal communications) replicated in Table 1. This data summarizes the fitness effects of pollination-based interactions between individuals of the long-mouthed fly species _M. Longirostris_ and the long-tubed flower _L. anceps_. To measure the optimal offset from these data, we simply minimize the sum of the square errors between the offset-matching fitness surfaces and the fitness of each species, constraining the $\delta$'s for each surface to be the same. That is, denoting $\hat W_i^j$ and $z_i^j$ the fitness and trait value of species $i$ during observation $j$, the data can be written as
+
+$$D=\{\hat W^i,\Delta_i\}_{i=1}^n=\{\{\hat W_1^i,\hat W_2^i\},\{z_1^i-z_2^i\}\}_{i=1}^n$$
+
+And hence we minimize the quantity
+
+$$L(W_1,W_2|D)\equiv\sqrt{\sum_{i=1}^n\left(\hat W_1^i-W_1(\Delta_i)\right)^2+\left(\hat W_2^i-W_2(\Delta_i)\right)^2}.$$
+
+The fitness functions can be written as
+
+$$W_i(z_j-z_i)=c_i\exp\left(-\frac{B_i}{2}(\delta+z_j-z_i)^2\right)$$
+
+and hence the goal is to compute
+
+$${\arg\min}_{c_1,c_2,B_1,B_2,\delta}(L).$$
+
+To quantify how well our model fits the data for species $j$ we compute the coefficient of determination
+
+$${R_j}^2\equiv1-\frac{\sum_i\left(\hat W_j^i-W_j(\Delta_i)\right)^2}{\sum_i\left(\hat W_j^i-\overline{W}_j\right)^2}, \ \ \overline{W}_j=\frac{1}{n}\sum_i\hat W_j^i.$$
+
+These tasks can be performed numerically and _R_ code for their implementation is provided at the end of this document.
+
+```{r, echo=F, warning=F}
+require(knitr)
+require(kableExtra)
+require(xlsx)
+mamre <- read.xlsx("Mamre interaction for Bob.xlsx",1)
+mamre <- data.frame(mamre$nectar_volume_consumed,mamre$POLLEN_GRAINS_DEPOSITED,mamre$TONGUE.TUBE)
+colnames(mamre) <- c("nectar consumed (mL)","pollen grains deposited","tongue length - tube length (mm)")
+kable(mamre,caption="Measurements of fitness and morphological differences") %>%
+  kable_styling(position = "center")
+```
+
+### _R_ code
+
+```{r, echo=T, eval=F, layout="l-page"}
+require(xlsx)
+mamre <- read.xlsx("Mamre interaction for Bob.xlsx",1)
+mamre <- data.frame(mamre$nectar_volume_consumed,
+                    mamre$POLLEN_GRAINS_DEPOSITED,mamre$TONGUE.TUBE)
+colnames(mamre) <- c("nectar consumed (mL)","pollen grains deposited",
+                     "tongue length - tube length (mm)")
+head(mamre)
+
+W <- function(D,c,B,d){
+  f <- c*exp(-B*(d+D)^2/2)
+  return(f)
+}
+
+# collect data
+W1 <- mamre$`nectar consumed`
+W2 <- mamre$`pollen grains deposited`
+D  <- mamre$`tongue length - tube length`
+n <- dim(mamre)[1]
+  
+L <- function(X){
+  
+  # unpack parameters
+  c1 <- exp(X[1])
+  c2 <- exp(X[2])
+  B1 <- exp(X[3])
+  B2 <- exp(X[4])
+  d  <- exp(X[5])
+  
+  l <- 0
+  # accumulate errors across M. longir
+  for(i in 1:n){
+    l <- l + ( W(-D[i],c1,B1,d) - W1[i] )^2
+  }
+  
+  # accumulate errors across L. anceps
+  for(i in 1:n){
+    l <- l + ( W(D[i],c2,B2,d) - W2[i] )^2
+  }
+  
+  return(sqrt(l))
+  
+}
+
+mins <- NULL
+vals <- NULL
+for(i in 1:1000){
+  out <- try({optim(rnorm(5),L)})
+  while(!is.vector(out)){
+      out <- try({optim(rnorm(5),L)})
+  }
+  mins <- rbind(mins,out$par)
+  vals <- c(vals,out$value)
+}
+i <- which.min(vals)
+argmin <- exp(mins[i,])
+
+c1hat <- argmin[1]
+c2hat <- argmin[2]
+B1hat <- argmin[3]
+B2hat <- argmin[4]
+dhat  <- argmin[5]
+
+l1 <- 0
+# accumulate errors across M. longir
+for(i in 1:n){
+  l1 <- l1 + ( W(-D[i],c1hat,B1hat,dhat) - W1[i] )^2/n
+}
+l1 <- sqrt(l1/var(W1))
+
+l2 <- 0
+# accumulate errors across L. anceps
+for(i in 1:n){
+  l2 <- l2 + ( W(D[i],c2hat,B2hat,dhat) - W2[i] )^2/n
+}
+l2 <- sqrt(l2/var(W2))
+
+fits <- data.frame(c("M. longirostris","L. anceps"),c(c1hat,c2hat),
+                   c(B1hat,B2hat),c(dhat,dhat),c(1-l1,1-l2))
+colnames(fits) <- c("Species","c","B",'\u03B4','R\u00B2')
+
+kable(fits,caption="Inferred fitness parameters") %>%
+  kable_styling(position = "center")
+
+```
+
+

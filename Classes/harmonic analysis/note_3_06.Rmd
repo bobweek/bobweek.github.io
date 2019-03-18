@@ -1,0 +1,88 @@
+---
+title: "Harmonic Analysis 03-06-19"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sinc}{\mathrm{sinc}}
+\newcommand{\supp}{\mathrm{supp}}
+
+  - Recap:
+
+$$v=(z_0,\dots,z_{N-1})\in\C^N$$
+
+The discrete Fourier transform (DFT) of $v$ is $\hat v\in\C^N$ is defined by
+
+$$\hat v(n)\equiv\frac{1}{\sqrt N}\sum_{k=0}^{N-1}z_ke^{-2\pi ikn/N}$$
+
+Define the vectors $\{e_n\}_{n=0}^{N-1}\subset\C^N$ by
+
+$$e_n\equiv\frac{1}{\sqrt{N}}e^{2\pi ikn/N}.$$
+
+Then $\{e_n\}$ is an ONB of $\C^N$. Hence
+
+$$\sum_{n=0}^{N-1}\<v,e_n\>e_n(k)=\frac{1}{\sqrt N}\sum_{n=0}^{N-1}\<v,e_n\>e^{2\pi iknN}$$
+
+and $\hat v(n)=\<v,e_n\>$.
+
+## Parseval's/Plancherel's Identity:
+
+If $v\in\C^N$ then
+
+$$v(k)=\sum_n\hat v(n)e_n(k)$$
+
+and 
+
+$$\sum_n|\hat v(n)|^2=\sum_n|v(n)|^2$$
+
+ie, $\|\hat v\|=\|v\|$.
+
+  - _Proof:_
+  
+Since we already noted $\{e_n\}$ is an ONB, the first result is already demonstrated. For the second part note:
+
+$$|v(k)|^2=v(k)\overline{v(k)}$$
+
+$$=\sum_n\<v,e_n\>e_n(k)\sum_m\overline{\<v,e_m\>e_m(k)}$$
+
+$$=\sqrt{N}\sum_n\sum_m\<v,e_n\>\overline{\<v,e_m\>}e_{n-m}$$
+
+$$=\sqrt{N}\left(\sum_{n=m}\<v,e_n\>\overline{\<v,e_n\>}+\sum_{n\neq m}\<v,e_n\>\overline{\<v,e_m\>}e_{n-m}\right)$$
+
+$$=\sqrt{N}\left(\sum_{n=m}|\<v,e_n\>|^2+\sum_{n\neq m}\<v,e_n\>\overline{\<v,e_m\>}e_{n-m}\right)$$
+
+Then
+
+$$\sum_k|v(k)|^2=\sum_n|\<v,e_n\>|^2=\sum_n|\hat v(n)|^2.$$
+
+## DFT matrix
+
+We have $v=\sum_n\hat v(n)e_n$ and hence can be written in matrix form as
+
+$$v=\left(\begin{matrix}
+\vdots&\vdots&&\vdots\\
+e_0&e_1&\cdots&e_{N-1}\\
+\vdots&\vdots&&\vdots\end{matrix}\right)\hat v$$
+
+$$=F_N\hat v.$$
+
+The matrix $F_N$ is referred to as the Fourier matrix (or DFT matrix). Here are some nice properties:
+
+  - $\hat v=\bar{F_N}^\top v={F_N}^* v$, where $^*$ denotes Hermetian (adjoint)
+  
+Note that $F_N$ is always invertible since its columns are lin-ind by def. Furthermore, since $\hat v={F_N}^{-1} v$, we have
+
+  - ${F_N}^{-1}={F_N}^*\implies$ $F_N$ is unitary (hence isometry)
+  
+  - $F_N$ is symmetric
