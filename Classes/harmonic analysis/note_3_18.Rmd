@@ -1,0 +1,126 @@
+---
+title: "Harmonic Analysis 03-18-19"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sinc}{\mathrm{sinc}}
+\newcommand{\supp}{\mathrm{supp}}
+
+# The fast Fourier transform
+
+Fix $N$. Given $v=(v(0),\dots,v(N-1))\in\C^N$. The DFT of $v$ is
+
+$$\hat v(m)=\frac{1}{\sqrt N}\sum_n v(n)e_n(i).$$
+
+Set $\omega=e^{\frac{2\pi i}{N}}$. Then
+
+$$\hat v(m)=\frac{1}{\sqrt N}\sum_n v(n)\omega^{-mn}.$$
+
+It takes at most $N-2$ multiplications to compute $\omega^2,\dots,\omega^{N-1}$.
+
+For each $\hat v(m)$, there are $N+1$ multiplications and $N-1$ additions.
+
+In total to get $\hat v$, we need $N(N+1+N-1)+N-2=2(N^2-1)+N<2N^2+N$.
+
+The FFT reduces the number of operations needed to calculate the DFT.
+
+For the FFT we use vectors of length $N=2^i$ (powers of two). Otherswise
+add zeros to $v$ (zero padding).
+
+$$\hat v(m)=<v,e_m>$$
+
+Idea: 
+
+  1. Reduce $F_N$ to two copies of $F_{N/2}$.
+    
+  2. Iteratively apply this reduction
+    
+  F_N -> 2(F_{N/2}) -> 4(F_{N/4}) -> \dots -> $N_{2^j}$
+    
+  3. Stop when $N/{2^j}=1\implies j=log_2(N)$.
+    
+Then separating even and odd terms
+
+$$\hat v(m)=\frac{1}{\sqrt N}\sum_n v(n)e^{-2\pi i mn/N}$$
+
+$$=\sum_{n=0}^{N/2-1}\frac{v(2n)  }{\sqrt{n}}e^{-2\pi i m 2n    /N}+
+   \sum_{n=0}^{N/2-1}\frac{v(2n+1)}{\sqrt{n}}e^{-2\pi i m (2n+1)/N}$$
+   
+$$=\frac{1              }{\sqrt 2}\sum_{n=0}^{N/2-1}\frac{v(2n)  }{\sqrt{N/2}}e^{-2\pi i m 2n    /N}+
+   \frac{e^{-2\pi i m/N}}{\sqrt 2}\sum_{n=0}^{N/2-1}\frac{v(2n+1)}{\sqrt{N/2}}e^{-2\pi i m n/(N/2)}=\star$$
+   
+Set $v_0(n)\equiv v(2n)$ & $v_1\equiv v(2n+1)$.
+   
+$$\star=\frac{1}{\sqrt 2}\left(\hat v_0(m)+e^{-2\pi i m/N}\hat v_1(m)\right)$$
+   
+Note that $\hat v(m+N/2)$ is a linear combination of the same two sums. In particular
+
+
+$$\hat v(m+N/2)=\sum\frac{v(2n  )}{\sqrt N}e^{-2\pi i mn/(N/2)}-
+  e^{-2\pi im/N}\sum\frac{v(2n+1)}{\sqrt N}e^{-2\pi i mn/(N/2)}$$
+
+$$=\frac{1}{\sqrt 2}\left(\hat v_0(m)-e^{-2\pi i m/N}\hat v_1(m)\right)$$
+
+$\#N\equiv\min$ no. of operations needed to calculate Fourier coefficients in $\C^N$.
+
+Calculating $\omega,\omega^2,\dots,\omega^N$ requires no more than $N$ operations. So
+
+$$\#N\leq N+2*\#(N/2)+3N$$
+
+The $3N$ comes from the two multiplications and one addition involved with
+
+$$\frac{1}{\sqrt 2}\left(\hat v_0(m)-e^{-2\pi i m/N}\hat v_1(m)\right).$$
+
+## Theorem (Steins book)
+
+With $N=2^n$ it is possible to calculate the Fourier coefficients of vectors in $\C^N$
+with at most
+
+$$4*2^n*n=2Nlog_2 N=O(N log_2 N)$$
+
+#### Proof:
+
+Using induction and the above relation:
+
+  1. $n=1$, $N=2$. Then
+    
+  $$\hat v(0) = \frac{1}{sqrt 2}(\hat v_0(0)+\hat v_1(0))          = \frac{1}{sqrt 2}(\hat v(0)+\hat v(1))$$
+  $$\hat v(1) = \frac{1}{sqrt 2}(\hat v_0(0)+e^{-i\pi}\hat v_1(0)) = \frac{1}{sqrt 2}(\hat v(0)-\hat v(1))$$
+
+  making for up to 5 operations. 5<8 (result holds)
+
+  2. Assume the result holds for up to $N=2^{n-1}$. Then
+    
+  $$\#N=\#(2^{n-1})\leq 4*2^{n-1}(n-1).$$
+    
+  3. $\#(2^n)=\#(2*2^{n-1})\leq 2\#(2^{n-1})+42^n\leq 2*4*2^{n-1}+4*2^n$
+    
+  $$\#(2^n)\leq4*2^n(n-1)+4*2^n=4*2^nn.$$ 
+  
+  $\square$
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
