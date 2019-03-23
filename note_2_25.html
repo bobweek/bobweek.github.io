@@ -9,10 +9,9 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Kreyszig" />
 
 
-<title>Introductory Functional Analysis</title>
+<title>Harmonic Analysis 02-25-19</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -330,25 +329,58 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Introductory Functional Analysis</h1>
-<h4 class="author">Kreyszig</h4>
+<h1 class="title toc-ignore">Harmonic Analysis 02-25-19</h1>
 
 </div>
 
 
 
-<div id="spectral-theory-in-finite-dimensional-normed-spaces" class="section level1">
-<h1>7.1 Spectral theory in finite dimensional normed spaces</h1>
-<div id="show-that-the-eigenvalues-of-a-hermitian-matrix-aalpha_jk-are-real." class="section level3">
-<h3>2. Show that the eigenvalues of a Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are real.</h3>
-</div>
-<div id="show-that-the-eigenvalues-of-a-skew-hermitian-matrix-aalpha_jk-are-pure-imaginary-or-zero." class="section level3">
-<h3>3. Show that the eigenvalues of a skew-Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are pure imaginary or zero.</h3>
-</div>
-<div id="show-that-the-eigenvalues-of-a-unitary-matrix-aalpha_jk-have-absolute-value-1." class="section level3">
-<h3>2. Show that the eigenvalues of a unitary matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> have absolute value 1.</h3>
-</div>
-</div>
+<p>Review:</p>
+<ul>
+<li><p><span class="math inline">\(e^{-\pi x^2}\mapsto e^{-\pi\gamma^2}\)</span></p></li>
+<li><p><span class="math inline">\(K_\delta(x)\equiv\frac{1}{\sqrt\delta}e^{-\pi x^2/\delta}\mapsto e^{-\pi\delta\gamma^2}, \ \delta&gt;0\)</span></p></li>
+<li><span class="math inline">\(\{K_\delta\}\)</span> is a family of approximate identities (or good kernels). That is:
+<ul>
+<li><span class="math inline">\(\int_\mathbb{R}K_\delta=1\)</span></li>
+<li><span class="math inline">\(\int_\mathbb{R}|K_\delta|\leq M\)</span></li>
+<li><span class="math inline">\(\int_{|x|&gt;\eta}|K_\delta|\rightarrow 0, \ \delta\rightarrow 0\)</span></li>
+</ul></li>
+<li><p>If <span class="math inline">\(f\in S(\mathbb{R})\)</span>, then <span class="math inline">\((f*K_\delta)\rightarrow f\)</span> as <span class="math inline">\(\delta\rightarrow 0\)</span>, uniformly.</p></li>
+</ul>
+<p><em>Proposition:</em> (Multiplication formula)</p>
+<p>If <span class="math inline">\(f,g\in S(\mathbb{R})\)</span> then</p>
+<p><span class="math display">\[\int_\mathbb{R}f\hat g=\int_\mathbb{R}\hat f g.\]</span></p>
+<p><em>Proof:</em> First we state some analogue of Fubini’s theorem. Suppose <span class="math inline">\(F(x,y)\)</span> is continuous in <span class="math inline">\(\mathbb{R}^2\)</span>. Assume</p>
+<p><span class="math display">\[|F(x,y)|\leq\frac{A}{(1+x^2)(1+y^2)}.\]</span></p>
+<ul>
+<li>The set <span class="math inline">\(M(\mathbb{R})\)</span> consists of functions <span class="math inline">\(F(x)\)</span> s.t. <span class="math inline">\(|F(x)|\leq\frac{A}{1+x^2}\)</span> and is called the set of functions of moderate decrease.</li>
+</ul>
+<p>Note that <span class="math inline">\(F(x,y)\in M(\mathbb{R})\)</span> when either <span class="math inline">\(x\)</span> or <span class="math inline">\(y\)</span> are fixed. Further more</p>
+<p><span class="math display">\[F_1(x)\equiv\int_\mathbb{R}F(x,y)dy,F_2(y)\equiv\int_\mathbb{R}F(x,y)dx\in M(\mathbb{R})\]</span></p>
+<p>and are continuous. Finally,</p>
+<p><span class="math display">\[(\star) \ \int_\mathbb{R}F_1=\int_\mathbb{R}F_2=\int_{\mathbb{R}^2}F\]</span></p>
+<p>which implies that the order of integration can be freely interchanged. Now set</p>
+<p><span class="math display">\[F(x,y)=f(x)g(x)e^{-2\pi i xy}\]</span></p>
+<p>Then <span class="math inline">\(F_1=f\hat g\)</span> and <span class="math inline">\(F_2=\hat f g\)</span>. Hence, by <span class="math inline">\((\star)\)</span>, the proof is complete. <span class="math inline">\(\square\)</span></p>
+<p><em>Theorem:</em> (Fourier Inversion)</p>
+<p>If <span class="math inline">\(f\in S(\mathbb{R})\)</span> then <span class="math inline">\(f(x)=\int_\mathbb{R}\hat f(\gamma)e^{2\pi i x\gamma}dx\)</span>.</p>
+<p><em>Proof:</em></p>
+<p>Let <span class="math inline">\(G_\delta(x)=e^{-\pi\delta x^2}\)</span>. Then <span class="math inline">\(\hat G_\delta(\gamma)=\frac{1}{\sqrt\delta}e^{-\pi\gamma^2/\delta}=K_\delta(\gamma)\)</span>. By the multiplcation formula</p>
+<p><span class="math display">\[\int_\mathbb{R}f(x)\hat G_\delta(x)dx=\int_\mathbb{R}\hat f(\gamma) G_\delta(\gamma)d\gamma\]</span></p>
+<p>or</p>
+<p><span class="math display">\[\int_\mathbb{R}f(x)K_\delta(x)dx=\int_\mathbb{R}\hat f(\gamma) G_\delta(\gamma)d\gamma\]</span></p>
+<p><span class="math display">\[(f*K_\delta)(0)=\int_\mathbb{R}\hat f(\gamma)G_\delta(\gamma)d\gamma\]</span></p>
+<p>Recall: <span class="math inline">\(\{K_\delta\}\)</span> is a good kernel. So, as <span class="math inline">\(\delta\rightarrow 0\)</span></p>
+<p><span class="math display">\[f(0)=\int_\mathbb{R}\hat f(\gamma)d\gamma\]</span></p>
+<p>(requires interchange of limit and integral, justify by Lebesgue’s dom conv).</p>
+<p>In general, <span class="math inline">\(F(y)\equiv f(y+x)\)</span>. Then</p>
+<p><span class="math display">\[f(x)=F(0)=\int_\mathbb{R}\hat F(\gamma)d\gamma=\int_\mathbb{R}\hat f(\gamma)e^{2\pi i x\gamma}d\gamma. \ \square\]</span></p>
+<p>Define:</p>
+<ul>
+<li><span class="math inline">\(\mathscr{F}:S(\mathbb{R})\rightarrow S(\mathbb{R}), \  f(x)\mapsto\hat f(\gamma)=\int_\mathbb{R}f(x)e^{-2\pi i x\gamma}dx\)</span></li>
+<li><span class="math inline">\(\mathscr{F}^*:S(\mathbb{R})\rightarrow S(\mathbb{R}), \  \hat f(\gamma)\mapsto f(x)=\int_\mathbb{R}\hat f(\gamma)e^{2\pi i x\gamma}dx\)</span></li>
+</ul>
+<p>By the inversion formula <span class="math inline">\(\mathscr{F}^*\circ\mathscr{F}=\mathscr{F}\circ\mathscr{F}^*=\mathrm{Id}\)</span> and, hence, <span class="math inline">\(\mathscr{F}\)</span> is a bijection on <span class="math inline">\(S(\mathbb{R})\)</span>.</p>
 
 
 

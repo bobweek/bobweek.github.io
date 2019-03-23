@@ -1,0 +1,74 @@
+---
+title: "Harmonic Analysis 03-22-19"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sinc}{\mathrm{sinc}}
+\newcommand{\supp}{\mathrm{supp}}
+
+# The Windowed Fourier transform
+
+$$L^2(U), \ U=[0,1),\R$$
+
+The std Fourier transform of $f$
+
+$$\hat f(\gamma)=\int_\R f(t)e^{-2\pi i \gamma t}dt.$$
+
+Does not tell us which frequencies are present at a time-point $t_0$.
+
+  - __ex:__ in music you might want to know which notes are played at a particular moment.
+  
+Set $\chi_A(x)$ to be the characteristic function of $A$. We know that $\{e^{i2\pi nx}\}_{n\in\Z}$ is an ONB of $L^2[0,1)$.
+
+  - __Idea:__ $\{e^{i2\pi nx}\chi_{[k,k+1)}(x)\}_{n\in\Z}$ is an ONB of $L^2[k,k+1)$ for all $k\in\Z$.
+
+Or, as Somantika has done, $\{e^{i2\pi n(x-k)}\chi_{[0,1)}(x-k)\}_{n\in\Z}$ is an ONB of $L^2[0,1)$ for all $k\in\Z$. This simplifies to what I have written above.
+
+Thus, the set 
+
+$$\{e^{i2\pi nx}\chi_{[0,1)}(x-k)\}_{n,k\in\Z}$$
+
+is an ONB of $L^2(\R)$. Here each basis vector is a translation and modulation (multiplaction by an $n$th root of unity) of $\chi_{[0,1)}$.
+
+Set $g_{n,k}=e^{i2\pi nx}\chi_{[0,1)}(x-k)$.
+
+The windowed Fourier transform is a map $G$ given by
+
+$$(Gf)(n,k)\equiv\int_k^{k+1}f(x)e^{-2\pi i n x}dx=\<f,g_{n,k}\>$$
+
+This is time-frequency localization. $n$ is the freq and $k$ is the time-window.
+
+From above we have
+
+$$f=\sum_{n,k}\<f,g_{n,k}\>g_{n,k}.$$
+
+### Changing the size of the window
+
+Let $\{a_k\}_{k\in\Z}$ define the partition of $\R$, $\{[a_k,a_{k+1})\}_{k\in\Z}$. Set $L_k=a_{k+1}-a_k$ and on each window we use the Fourier basis
+
+$$\left\{\frac{1}{\sqrt{L_k}}e^{-\frac{2\pi i nx}{L_k}}\chi_{[a_k,a_{k+1})}(x)\right\}_{n,k\in\Z}.$$
+
+In this case, where $f$ changes a lot, we can take intervals of smaller size, and where $f$ does not change much, we can take intervals of larger size.
+
+### Swapping out $\chi$ for a smooth function (Gabor bases)
+
+One can take windows that are smoother than $\chi_{[0,1)}$. This gives further generalizations. 
+
+__Def:__ A function $g\in L^2(\R)$ is a Gabor function if the family of its modulated integer translates ($g_{n,k}(x)=e^{2\pi i nx}g(x-k), \ n,k\in\Z$) form an ONB for $L^2(\R)$. This basis is a Gabor basis.
+
+This is a bit different from wavelets, which involve scalings instead of translations.
+
+
+A trade-off between compactness and smoothness.

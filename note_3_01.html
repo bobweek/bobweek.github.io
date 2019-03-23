@@ -9,10 +9,9 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Kreyszig" />
 
 
-<title>Introductory Functional Analysis</title>
+<title>Harmonic Analysis 03-01-19</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -330,23 +329,66 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Introductory Functional Analysis</h1>
-<h4 class="author">Kreyszig</h4>
+<h1 class="title toc-ignore">Harmonic Analysis 03-01-19</h1>
 
 </div>
 
 
 
-<div id="spectral-theory-in-finite-dimensional-normed-spaces" class="section level1">
-<h1>7.1 Spectral theory in finite dimensional normed spaces</h1>
-<div id="show-that-the-eigenvalues-of-a-hermitian-matrix-aalpha_jk-are-real." class="section level3">
-<h3>2. Show that the eigenvalues of a Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are real.</h3>
+<div id="the-sampling-formula" class="section level1">
+<h1>The Sampling Formula</h1>
+<p><strong>Def:</strong> A function is said to be band-limited if its Fourier transform is supported on a compact interval <span class="math inline">\([a,b]\)</span>.</p>
+<p><strong>Def:</strong> The <span class="math inline">\(\mathrm{sinc}\)</span> function is defined by</p>
+<p><span class="math display">\[\mathrm{sinc}(x)\equiv\left\{\begin{matrix}\frac{\sin(\pi x)}{\pi x} &amp; x\neq 0 \\ 1 &amp; x=0\end{matrix}\right..\]</span></p>
+<p>Note</p>
+<p><span class="math display">\[\int_{-1/2}^{1/2}e^{2\pi i x\gamma}d\gamma=\left.\frac{e^{2\pi i x\gamma}}{2\pi i x\gamma}\right|_{-1/2}^{1/2}\]</span></p>
+<p><span class="math display">\[=\frac{e^{\pi ix}-e^{-\pi x}}{2\pi i x}=\frac{\sin(\pi x)}{\pi x}\]</span></p>
+<p><span class="math display">\[\mathrm{sinc}(x).\]</span></p>
+<div id="theorem-8.4-sampling-formula" class="section level3">
+<h3><em>Theorem 8.4</em> (Sampling Formula):</h3>
+<p>Suppose that <span class="math inline">\(f\)</span> is continuous and in <span class="math inline">\(M(\mathbb{R})\)</span> whose Fourier transform is supported on <span class="math inline">\([-1/2,1/2]\)</span>. Then</p>
+<p><span class="math display">\[f(x)=\sum_{n\in\mathbb{Z}}f(n)\mathrm{sinc}(x-n).\]</span></p>
+<p><em>Proof:</em></p>
+<p>Consider a 1-periodic extension of the Fourier transform <span class="math inline">\(\hat f\)</span> to <span class="math inline">\(\mathbb{R}\)</span>.</p>
+<p><span class="math display">\[(\hat f)^{\hat.}(n)=\int_{-1/2}^{1/2}\hat f(x)e^{-2\pi i x n}dx\]</span></p>
+<p><span class="math display">\[=\int_\mathbb{R}\hat f(x)e^{i2\pi (-n)x}=f(-n)\]</span></p>
+<p>by the inversion theorem. Here the notation <span class="math inline">\(g^{\hat.}\)</span> denotes the Fourier coefficients of <span class="math inline">\(g\)</span>. The Fourier series of <span class="math inline">\(\hat f\)</span> is <span class="math inline">\(\sum_{n\in\mathbb{Z}}f(-n)e^{2\pi i n x}\)</span>.</p>
+<p><em>Claim:</em> This Fourier series is absolutely and unif convergent.</p>
+<p><em>Proof of claim:</em> <span class="math inline">\(|f(x)|\leq\frac{A}{1+x^2}\)</span> for all <span class="math inline">\(x\in\mathbb{R}\)</span> due to moderate decrease. Thus</p>
+<p><span class="math display">\[|f(-n)e^{2\pi i n x}|=|f(-n)|\leq\frac{A}{1+n^2}\]</span></p>
+<p>and by the <span class="math inline">\(p\)</span>-series <span class="math inline">\(\sum\frac{A}{1+n^2}\)</span> is convergent. Then, by the Weierstrass <span class="math inline">\(M\)</span>-test <span class="math inline">\(\sum f(-n)e^{2\pi i nx}\)</span> converges uniformly (also absolutely). That is the family <span class="math inline">\(\{g_N\}\)</span> defined by</p>
+<p><span class="math display">\[g_N=\sum_{|n|\leq N}f(n)e^{-2\pi i n\gamma}\]</span></p>
+<p>is uniformly convergent. Thus,</p>
+<p><span class="math display">\[\hat f(\gamma)=\sum_{n\in\mathbb{Z}}f(n)e^{-2\pi i n\gamma}.\]</span></p>
+<p>Then, by the inversion theorem</p>
+<p><span class="math display">\[f(x)=\int_{-1/2}^{1/2}\hat f(\gamma)e^{2\pi i x\gamma}d\gamma\]</span></p>
+<p><span class="math display">\[=\int_{-1/2}^{1/2}\left(f(n)e^{2\pi i x\gamma}\right)e^{2\pi i x\gamma}d\gamma\]</span></p>
+<p><span class="math display">\[=\sum_{n\in\mathbb{Z}}f(n)\int_{-1/2}^{1/2}e^{2\pi i \gamma(x-n)}d\gamma=\star\]</span></p>
+<p>Since the sum is uniformly convergent, the interchange of summation and integration is justified.</p>
+<p><span class="math display">\[\star=\sum_{n\in\mathbb{Z}}f(n)\mathrm{sinc}(x-n). \ \square\]</span></p>
+<p><strong>Remark:</strong> <span class="math inline">\(\hat f\)</span> need not be 1-periodic, as long as <span class="math inline">\(\hat f\)</span> is supported on an interval of length <span class="math inline">\(L\)</span>, a similar calculation can be done.</p>
+<p><em>Example 8.4.3</em> <span class="math inline">\(f\)</span>-cont, <span class="math inline">\(f\in M(\mathbb{R})\)</span>, <span class="math inline">\(\mathrm{supp}\hat f\subset[-L/2,L/2]\)</span>. Then</p>
+<p><span class="math display">\[f(x)=\sum_{n\in\mathbb{Z}}f\left(\frac{n}{L}\right)\mathrm{sinc}\left(\frac{x-n}{L}\right).\]</span></p>
 </div>
-<div id="show-that-the-eigenvalues-of-a-skew-hermitian-matrix-aalpha_jk-are-pure-imaginary-or-zero." class="section level3">
-<h3>3. Show that the eigenvalues of a skew-Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are pure imaginary or zero.</h3>
 </div>
-<div id="show-that-the-eigenvalues-of-a-unitary-matrix-aalpha_jk-have-absolute-value-1." class="section level3">
-<h3>2. Show that the eigenvalues of a unitary matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> have absolute value 1.</h3>
+<div id="heisenberg-uncertainty-principle" class="section level1">
+<h1><em>Heisenberg Uncertainty Principle:</em></h1>
+<p>Suppose that <span class="math inline">\(f\in S(\mathbb{R})\)</span> and <span class="math inline">\(\|f\|=1\)</span>. Then</p>
+<p><span class="math display">\[\left(\int_\mathbb{R}x^2|f(x)|^2dx\right)\left(\int_\mathbb{R}\gamma^2|\hat f(\gamma)|^2d\gamma\right)\geq\frac{1}{16\pi^2}\]</span></p>
+<div id="proof" class="section level2">
+<h2><em>Proof:</em></h2>
+<p><span class="math display">\[\frac{d}{dx}|f(x)|^2=\frac{d}{dx}f\bar f=f&#39;\bar f+f\overline{f&#39;}\]</span></p>
+<p><span class="math display">\[=f&#39;\bar f+\overline{\bar f f&#39;}\]</span></p>
+<p><span class="math display">\[=2\mathscr{R}(f&#39;\bar f).\]</span></p>
+<p>By hypothesis and integration by parts</p>
+<p><span class="math display">\[1=\|f\|^2=\int_\mathbb{R}|f|^2dx=\left[x|f(x)|^2\right]_{-\infy}^\infty-\int_\mathbb{R}x\frac{d}{dx}|f|^2dx\]</span></p>
+<p><span class="math display">\[=-\int_\mathbb{R}x2\mathscr{R}(f&#39;\bar f)dx\leq2\int_\mathbb{R}|x||f&#39;||f|dx=\star\]</span></p>
+<p>since <span class="math inline">\(\mathscr R z\leq |z|\)</span>. Note</p>
+<p><span class="math display">\[\left&lt;|x||f|,|f&#39;|\right&gt;=\star/2.\]</span></p>
+<p>Then, by Cauchy-Schwartz</p>
+<p><span class="math display">\[1\leq2\|x|f(x)|\|\|f&#39;(x)\|\]</span></p>
+<p>and by Parsevals (<span class="math inline">\(\|\hat f\|=\|f\|\)</span>) and <span class="math inline">\(f&#39;\rightarrow 2\pi i\gamma\hat f(\gamma)\)</span>,</p>
+<p><span class="math display">\[1\leq2\|x|f(x)|\|\|2\pi i\gamma\hat f\|\]</span></p>
 </div>
 </div>
 

@@ -1,0 +1,47 @@
+---
+title: "Harmonic Analysis"
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+
+# Summary of convergence results
+
+1) $f\in C^2[-\pi,\pi)\implies |\hat f(n)|\leq c/n^2$ and 
+  
+$$S_Nf(x)\equiv\sum_{|n|\leq N}\hat f(n)e^{inx}\overset{\text{unif}}{\ra}f(x)$$
+  
+Works also for $f\in C^1[-\pi,\pi)$, but requires a more involved proof.
+
+Does not work for $C[-\pi,\pi)$. The sawtooth function is an example for why this is so.
+  
+2) $\exists \ f\in C$ s.t. $\lim S_Nf=\infty$ for some $x$
+
+3) $f\in C^k[-\pi,\pi)\implies|\hat f(n)|\leq c/n^k$ for $k\geq1$
+
+4) _Fey&eacute;rs theorem_: $f\in C[-\pi,\pi)\implies\sigma_Nf=\frac{1}{N}\sum_{i=0}^{N-1}S_if\overset{\text{unif}}{\ra}$
+  
+A trig polynomial is of the form $\sum_{|n|\leq N}a_ne^{int}=\sum_{n=0}^Nb_n\cos(nt)+c_n\sin(nt)$ and therefore $\sigma_N$ is an $N-1$ trig polyn.
+
+- _Weierstrass Thm_: Any cont fct on $[-\pi,\pi)$ can be approx by trig polyns. (a corr of Fey&eacute;r's thm)
+
+- _Riemann Lebesgue lemma_: if $f\in C[-\pi,\pi)$ then $\hat f(n)\ra0$ as $|n|\ra\infty$.
+
+5) pt-wise conv:
+
+_Thm_: $f$ is intgble on $[-\pi,\pi)$. let $x\in[-\pi,\pi)$ where $f(x^+),f(x^-),f'_r(x),f'_l(x)$ exist. Then
+
+$$S_Nf(x)\overset{\text{pt-wise}}{\ra}\frac{f(x^+)+f(x^-)}{2}$$
+
+if $f$ is cont as (at $x$), then $S_Nf(x)\ra f(x)$ pt-wise.
+  
+  

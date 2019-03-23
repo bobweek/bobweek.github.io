@@ -9,10 +9,9 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Kreyszig" />
 
 
-<title>Introductory Functional Analysis</title>
+<title>Harmonic Analysis 03-20-19</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -330,23 +329,59 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Introductory Functional Analysis</h1>
-<h4 class="author">Kreyszig</h4>
+<h1 class="title toc-ignore">Harmonic Analysis 03-20-19</h1>
 
 </div>
 
 
 
-<div id="spectral-theory-in-finite-dimensional-normed-spaces" class="section level1">
-<h1>7.1 Spectral theory in finite dimensional normed spaces</h1>
-<div id="show-that-the-eigenvalues-of-a-hermitian-matrix-aalpha_jk-are-real." class="section level3">
-<h3>2. Show that the eigenvalues of a Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are real.</h3>
+<div id="discrete-haar-basis-inmathbbcn" class="section level1">
+<h1>Discrete Haar Basis (<span class="math inline">\(\in\mathbb{C}^N\)</span>)</h1>
+<p>Recall the Fourier basis <span class="math inline">\(\{e_n\}_{n=0}^{N-1}\)</span> given by</p>
+<p><span class="math display">\[e_n(k)\equiv\frac{1}{\sqrt N}e^{\frac{2\pi ikn}{N}}\equiv\frac{1}{\sqrt N}\omega^{kn}\]</span></p>
+<p><span class="math display">\[e_n\equiv\frac{1}{\sqrt N}\left(\begin{matrix}1\\\omega^n\\\omega^{2n}\\\vdots\\\omega^{(N-1)n}\end{matrix}\right).\]</span></p>
+<ul>
+<li>Observation: <span class="math inline">\(e_n\)</span> has stictly non-zero entries. The Fourier basis vectors are not <em>localized</em></li>
+</ul>
+<p>The standard basis:</p>
+<p><span class="math display">\[\{S_n\}\equiv\left\{\left(\begin{matrix}1\\0\\\vdots\\0\end{matrix}\right),\cdots,\left(\begin{matrix}0\\\vdots\\0\\1\end{matrix}\right)\right\}\]</span></p>
+<p>is as localized as possible.</p>
+<ul>
+<li>Observation: <span class="math inline">\(\hat e_j=S_j\)</span> &amp; <span class="math inline">\(\hat S_j=e_j\)</span>. This is another manifestation of the uncertainty principle (<span class="math inline">\(f\)</span> &amp; <span class="math inline">\(\hat f\)</span> cannot both have cmpct sppt).</li>
+</ul>
+<div id="the-haar-basis" class="section level3">
+<h3>The Haar Basis</h3>
+<ul>
+<li><strong>ex:</strong> <span class="math inline">\(N=2^3=8\)</span></li>
+</ul>
+<p><img src="haar.jpg" /></p>
+<p>The <span class="math inline">\(N\)</span>th Haar basis for <span class="math inline">\(\mathbb{C}^N\)</span> is given by:</p>
+<p><span class="math display">\[N=2^i, \ 0\leq k&lt;i, \ 0\leq m&lt;2^k\]</span></p>
+<p><span class="math display">\[\tilde h_n(l)\equiv\left\{\begin{matrix}
+-1 &amp;  m             N2^{-k}\leq l&lt;(m+\frac{1}{2})N2^{-k} \\
+1  &amp; (m+\frac{1}{2})N2^{-k}\leq l&lt;(m+      1    )N2^{-k} \\
+0  &amp; \text{otherwise}
+\end{matrix}\right.\]</span></p>
+<p><span class="math inline">\(k,m\)</span> uniquely defined by <span class="math inline">\(n=2^k+m, \ 1\leq n&lt;N\)</span>.</p>
+<p><span class="math display">\[h_n=2^{k/2}N^{-1/2}\tilde h_n, \ 0\leq n=2^k+m\leq N-1, \ 0\leq m\leq 2^k\]</span></p>
 </div>
-<div id="show-that-the-eigenvalues-of-a-skew-hermitian-matrix-aalpha_jk-are-pure-imaginary-or-zero." class="section level3">
-<h3>3. Show that the eigenvalues of a skew-Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are pure imaginary or zero.</h3>
-</div>
-<div id="show-that-the-eigenvalues-of-a-unitary-matrix-aalpha_jk-have-absolute-value-1." class="section level3">
-<h3>2. Show that the eigenvalues of a unitary matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> have absolute value 1.</h3>
+<div id="haar-transform" class="section level3">
+<h3>Haar transform</h3>
+<p><span class="math display">\[H_N\equiv\left(\begin{matrix}\vdots &amp; \vdots &amp; \vdots \\ h_0 &amp; \cdots &amp; h_{N-1} \\ \vdots &amp; \vdots &amp; \vdots\end{matrix}\right)\]</span></p>
+<p><span class="math display">\[{H_N}^{-1}={H_N}^\top\]</span></p>
+<p>so its unitary</p>
+<ul>
+<li>can make FHT just like FFT. ex:</li>
+</ul>
+<p><span class="math display">\[{H_4}^\top=\left(\begin{matrix}
+ \frac{1}{\sqrt 2} &amp; 0 &amp; \frac{1}{\sqrt 2} &amp; 0 \\
+-\frac{1}{\sqrt 2} &amp; 0 &amp; \frac{1}{\sqrt 2} &amp; 0 \\
+                0  &amp; 1 &amp;                0  &amp; 0 \\
+                0  &amp; 0 &amp;                0  &amp; 1
+\end{matrix}\right)\left(\begin{matrix}
+{H_2}^\top &amp; 0         \\
+         0 &amp; {H_2}^\top
+\end{matrix}\right)\]</span></p>
 </div>
 </div>
 

@@ -9,10 +9,9 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Kreyszig" />
 
 
-<title>Introductory Functional Analysis</title>
+<title>Harmonic Analysis 02-06-2019</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -330,23 +329,60 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Introductory Functional Analysis</h1>
-<h4 class="author">Kreyszig</h4>
+<h1 class="title toc-ignore">Harmonic Analysis 02-06-2019</h1>
 
 </div>
 
 
 
-<div id="spectral-theory-in-finite-dimensional-normed-spaces" class="section level1">
-<h1>7.1 Spectral theory in finite dimensional normed spaces</h1>
-<div id="show-that-the-eigenvalues-of-a-hermitian-matrix-aalpha_jk-are-real." class="section level3">
-<h3>2. Show that the eigenvalues of a Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are real.</h3>
+<div id="completeness-of-the-trigonometric-system-einx" class="section level1">
+<h1>Completeness of the trigonometric system <span class="math inline">\(\{e^{inx}\}\)</span></h1>
+<p><span class="math display">\[L^2[-\pi,\pi)=\left\{f:\int_{-\pi}^\pi|f(x)|^2dx&lt;\infty\right\}\]</span></p>
+<p><span class="math display">\[\mathbb{S}^1\sim[-\pi,\pi)\]</span></p>
+<p><span class="math display">\[\left&lt;f,g\right&gt;=\frac{1}{2\pi}\int_{-\pi}^\pi f(x)\bar g(x)dx\]</span></p>
+<p><span class="math display">\[\|f\|^2=\left&lt;f,f\right&gt;\]</span></p>
+<ul>
+<li><p><span class="math inline">\(f,g\)</span> are orthogonal if <span class="math inline">\(\left&lt;f,g\right&gt;=0\)</span>, write as <span class="math inline">\(f\perp g\)</span>.</p></li>
+<li><p>if two sets <span class="math inline">\(S_1,S_2\)</span> are orthogonal then we write <span class="math inline">\(S_1\perp S_2\)</span> means that for any <span class="math inline">\(f\in S_1\)</span> and <span class="math inline">\(g\in S_2\)</span> we have <span class="math inline">\(f\perp g\)</span>.</p></li>
+<li><p>we know <span class="math inline">\(\{e_n=e^{inx}\}_{n\in\mathbb{Z}}\)</span> is orthonormal</p></li>
+</ul>
+<p>Let <span class="math inline">\(\{f_n\}_{n=1}^\infty\)</span> be an orthonormal family in <span class="math inline">\(L^2[-\pi,\pi)\)</span>. The family <span class="math inline">\(\{f_n\}\)</span> is said to be complete, or a complete orthonormal system, or an orthonormal basis if for each <span class="math inline">\(f\in L^2\)</span> there exists <span class="math inline">\(\{a_n\}_{n=1}^\infty\subset\mathbb{R}\)</span> s.t. <span class="math display">\[\|f-\sum_{n=1}^N a_n f_n\|\rightarrow 0\]</span> as <span class="math inline">\(N\rightarrow\infty\)</span>.</p>
+<div id="equivalent-conditions-for-completeness" class="section level4">
+<h4>Equivalent conditions for completeness</h4>
+<p>If <span class="math inline">\(X=\{f_n\}\)</span> is an orthonormal family in <span class="math inline">\(L^2\)</span>, then the following are equivalent:</p>
+<ol style="list-style-type: lower-roman">
+<li><p><span class="math inline">\(X\)</span> is complete (or an ONB)</p></li>
+<li><p>if <span class="math inline">\(f\in L^2\)</span> and <span class="math inline">\(f\perp X\)</span>, then <span class="math inline">\(f=0\)</span></p></li>
+<li><p><em>Plancherel’s Identity</em>: For each <span class="math inline">\(f\in L^2\)</span> <span class="math display">\[\|f\|^2=\sum_{n=1}^\infty|\left&lt;f,f_n\right&gt;|^2\]</span> (In the special case when <span class="math inline">\(f_n=e_n\)</span>, this identiy is called <em>Parseval’s Identity</em>)</p></li>
+</ol>
 </div>
-<div id="show-that-the-eigenvalues-of-a-skew-hermitian-matrix-aalpha_jk-are-pure-imaginary-or-zero." class="section level3">
-<h3>3. Show that the eigenvalues of a skew-Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are pure imaginary or zero.</h3>
+<div id="lemma-uniqueness-of-coefficients" class="section level4">
+<h4><em>Lemma</em> Uniqueness of coefficients</h4>
+<p>If <span class="math inline">\(\{f_n\}\)</span> is an ONB in <span class="math inline">\(L^2\)</span>, then <span class="math inline">\(f\)</span> can be written as <span class="math inline">\(f=\sum a_nf_n\)</span> where the coeff’s are given by</p>
+<p><span class="math display">\[a_n=\left&lt;f,f_n\right&gt;.\]</span></p>
+<p><em>Proof</em>: Let <span class="math inline">\(f=\sum a_n f_n\)</span>. Fix <span class="math inline">\(k\in\mathbb{N}\)</span>. Take inner product on both sides with <span class="math inline">\(f_k\)</span>: <span class="math display">\[\left&lt;f,f_k\right&gt;=\left&lt;\sum a_nf_n,f_k\right&gt;\]</span> by Fubini <span class="math display">\[a_k=\left&lt;f,f_k\right&gt;=\sum\left&lt;f_n,f_k\right&gt;=a_k. \ \square\]</span></p>
 </div>
-<div id="show-that-the-eigenvalues-of-a-unitary-matrix-aalpha_jk-have-absolute-value-1." class="section level3">
-<h3>2. Show that the eigenvalues of a unitary matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> have absolute value 1.</h3>
+<div id="stuff" class="section level4">
+<h4>Stuff</h4>
+<p>Take <span class="math inline">\(\{f_n\}=\{e_n\}\)</span> so that <span class="math inline">\(S_N=\sum_{|n|\leq N}\hat f(n)e^{inx}\)</span> and</p>
+<p><span class="math display">\[\hat f(n)=\frac{1}{2\pi}\int_{-\pi}^\pi f(x)e^{-inx}dx=\left&lt;f,e_n\right&gt;.\]</span></p>
+<p>From the prev lectures:</p>
+<ul>
+<li><span class="math inline">\(\|f-S_Nf\|\rightarrow 0\)</span> as <span class="math inline">\(N\rightarrow\infty\)</span>. Thus <span class="math inline">\(\{e_n\}\)</span> is an ONB in <span class="math inline">\(L^2\)</span>.</li>
+</ul>
+<p><span class="math display">\[(\star) \ \|f\|^2=\|f-S_Nf\|^2+\sum_{|n|\leq N}|\hat f(n)|^2=\|f-S_Nf\|^2+\|S_Nf\|^2\]</span></p>
+<p>This implies Bessel’s ineq: <span class="math inline">\(\|f\|^2\geq\|S_Nf\|^2\)</span></p>
+<p>Take <span class="math inline">\(N\rightarrow\infty\)</span> on each side of <span class="math inline">\((\star)\)</span>:</p>
+<p><span class="math display">\[\|f\|^2=0+\sum_{n\in\mathbb{Z}}|\left&lt;f,e_n\right&gt;|^2\]</span></p>
+<p>which is Parseval’s. All of these hold for any ONB (Plancherel’s).</p>
+</div>
+<div id="another-way-to-establish-plancherels" class="section level4">
+<h4>Another way to establish Plancherel’s:</h4>
+<p>Since <span class="math inline">\(\{f_n\}\)</span> is an ONB</p>
+<p><span class="math display">\[f=\sum\left&lt;f,f_n\right&gt;f_n\implies\left&lt;f,f\right&gt;=\left&lt;\sum\left&lt;f,f_n\right&gt;,f\right&gt;\]</span></p>
+<p><span class="math display">\[\|f\|^2=\sum\left&lt;f,f_n\right&gt;\left&lt;f_n,f\right&gt;\]</span></p>
+<p><span class="math display">\[\|f\|^2=\sum\left&lt;f,f_n\right&gt;\overline{\left&lt;f,f_n\right&gt;}\]</span></p>
+<p><span class="math display">\[\|f\|^2=\sum|\left&lt;f,f_n\right&gt;|^2\]</span></p>
 </div>
 </div>
 

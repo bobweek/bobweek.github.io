@@ -9,10 +9,9 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Kreyszig" />
 
 
-<title>Introductory Functional Analysis</title>
+<title>Harmonic analysis - 1/28/19</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -330,25 +329,55 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Introductory Functional Analysis</h1>
-<h4 class="author">Kreyszig</h4>
+<h1 class="title toc-ignore">Harmonic analysis - 1/28/19</h1>
 
 </div>
 
 
-
-<div id="spectral-theory-in-finite-dimensional-normed-spaces" class="section level1">
-<h1>7.1 Spectral theory in finite dimensional normed spaces</h1>
-<div id="show-that-the-eigenvalues-of-a-hermitian-matrix-aalpha_jk-are-real." class="section level3">
-<h3>2. Show that the eigenvalues of a Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are real.</h3>
-</div>
-<div id="show-that-the-eigenvalues-of-a-skew-hermitian-matrix-aalpha_jk-are-pure-imaginary-or-zero." class="section level3">
-<h3>3. Show that the eigenvalues of a skew-Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are pure imaginary or zero.</h3>
-</div>
-<div id="show-that-the-eigenvalues-of-a-unitary-matrix-aalpha_jk-have-absolute-value-1." class="section level3">
-<h3>2. Show that the eigenvalues of a unitary matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> have absolute value 1.</h3>
-</div>
-</div>
+<p><span class="math display">\[f(x^+)\equiv\lim_{t\downarrow x}f(t)\]</span> <span class="math display">\[f(x^-)\equiv\lim_{t\uparrow x}f(t)\]</span></p>
+<p><span class="math display">\[f&#39;_r(x)\equiv\lim_{t\downarrow x}\frac{f(t)-f(x^+)}{t-x}\]</span></p>
+<p><span class="math display">\[f&#39;_l(x)\equiv\lim_{t\uparrow x}\frac{f(t)-f(x^-)}{t-x}\]</span></p>
+<p>Thm: let <span class="math inline">\(f\)</span> be intgble on <span class="math inline">\([-\pi,\pi)\)</span> and let <span class="math inline">\(x\)</span> be a pt s.t. <span class="math inline">\(f(x^+)\)</span>, <span class="math inline">\(f(x^-)\)</span>, <span class="math inline">\(f&#39;_r(x)\)</span> and <span class="math inline">\(f_l&#39;(x)\)</span> all exist. Then</p>
+<p><span class="math display">\[S_Nf(x)\rightarrow\frac{f(x^+)+f(x^-)}{2}\]</span></p>
+<p>pt-wise.</p>
+<p>Example: The sawtooth function</p>
+<p><span class="math display">\[f(t)=t\]</span></p>
+<pre class="r"><code># insert code to plot f</code></pre>
+<p>The Fourier series is</p>
+<p><span class="math display">\[Sf=2\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}\sin(nt)\]</span></p>
+<p>and hence <span class="math inline">\(Sf(-\pi)=0=\star\)</span>. By the above theorem, we also get</p>
+<p><span class="math display">\[\star=\frac{f(-\pi^+)+f(-\pi^-)}{2}=\frac{-\pi+\pi}{2}=0.\]</span></p>
+<p>Recall: The Riemann-Lebesgue lemma</p>
+<p>If <span class="math inline">\(f\in C[-\pi,\pi)\)</span> the <span class="math inline">\(\hat f(n)\rightarrow0\)</span> as <span class="math inline">\(|n|\rightarrow\infty\)</span>:</p>
+<p><span class="math display">\[\hat f(n)=\frac{1}{2\pi}\int_{-\pi}^\pi f(t)e^{-int}dt\]</span></p>
+<p><span class="math display">\[=\frac{1}{2\pi}\int_0^{2\pi}f(t)[\cos(nt)-i\sin(nt)]dt\rightarrow0\]</span></p>
+<p>as <span class="math inline">\(|n|\rightarrow\infty\)</span> since <span class="math inline">\(\cos(nt)\)</span> and <span class="math inline">\(\sin(nt)\)</span> <span class="math inline">\(\rightarrow0\)</span>.</p>
+<p>As a consequence: if <span class="math inline">\(\phi\)</span> is an integrable function, then</p>
+<p><span class="math display">\[(\triangle) \ \lim_{n\rightarrow\infty}\int_0^\pi\phi(t)\sin[(n+\frac{1}{2})t]dt=0.\]</span></p>
+<p>Proof of above theorem:</p>
+<p><span class="math display">\[S_Nf(x)=(f*D_N)(x)\]</span></p>
+<p><span class="math display">\[=\frac{1}{2\pi}\int_{-\pi}^\pi f(x-y)D_N(y)dy\]</span></p>
+<p><span class="math display">\[=\frac{1}{2\pi}\left(\int_{-\pi}^0 f(x-y)D_N(y)dy+\int_0^\pi f(x-y)D_N(y)dy\right)\]</span></p>
+<p><span class="math display">\[=\frac{1}{2\pi}\left(\int_0^\pi f(x+y)D_N(-y)dy+\int_0^\pi f(x-y)D_N(y)dy\right)\]</span></p>
+<p><span class="math display">\[=\frac{1}{2\pi}\int_0^\pi [f(x+y)+f(x-y)]D_N(y)dy\]</span></p>
+<p>Recall: since <span class="math inline">\(D_N(x)\)</span> is an even function</p>
+<p><span class="math display">\[\frac{1}{2\pi}\int_{-\pi}^\pi D_N(x)dx=1\implies\frac{1}{\pi}\int_0^\pi D_N(x)dx=1.\]</span></p>
+<p>Let <span class="math inline">\(\phi(x)\equiv \frac{f(x^+)+f(x^-)}{2}\)</span>.</p>
+<p><span class="math display">\[S_Nf(x)-\phi(x)=\frac{1}{2\pi}\int_0^\pi [f(x+y)+f(x-y)]D_N(y)dy-\phi(x)\frac{1}{\pi}\int_0^\pi D_N(y)dy\]</span></p>
+<p><span class="math display">\[=\frac{1}{\pi}\int_0^\pi\left(\frac{f(x+y)+f(x-y)}{2}-\phi(x)\right)D_N(y)dy.\]</span></p>
+<p>To finish the proof, not we need to show <span class="math inline">\(S_Nf(x)-\phi(x)\rightarrow0\)</span> which requires</p>
+<p><span class="math display">\[\int_0^\pi\left(\frac{f(x+y)+f(x-y)}{2}-\phi(x)\right)D_N(y)dy\rightarrow0\]</span></p>
+<p>which requires</p>
+<p><span class="math display">\[\int_0^\pi\left(\frac{f(x+y)+f(x-y)}{2}-\frac{f(x^+)+f(x^-)}{2}\right)D_N(y)dy\rightarrow0\]</span></p>
+<p>which requires</p>
+<p><span class="math display">\[\int_0^\pi\frac{t}{2}\left(\frac{f(x+y)-f(x^-)}{t}+\frac{f(x-y)-f(x^-)}{t}\right)D_N(y)dy\rightarrow0.\]</span></p>
+<p>Let</p>
+<p><span class="math display">\[h(t)\equiv\frac{f(x+t)-f(x^+)+f(x-t)-f(x^-)}{t}\frac{t/2}{\sin(t/2)}\]</span></p>
+<p>by L’Hopital <span class="math inline">\(\lim_{t\downarrow0}\frac{t/2}{\sin(t/2)}=1\)</span> and hence</p>
+<p><span class="math display">\[\lim_{t\downarrow0}h(t)=f_r&#39;(x)+f_l&#39;(x)\]</span></p>
+<p>Hence, <span class="math inline">\(h(t)\)</span> is “well-behaved” near <span class="math inline">\(t=0\)</span>. In particular, <span class="math inline">\(h(t)\)</span> is bounded on the interval <span class="math inline">\((0,\delta]\)</span> for some <span class="math inline">\(\delta&gt;0\)</span>.</p>
+<p>On <span class="math inline">\((\delta,\pi)\)</span>: <span class="math inline">\(f\)</span> is integrable, <span class="math inline">\(\frac{1}{\sin(t/2)}\)</span> is bounded and, thus, <span class="math inline">\(h(t)\)</span> is integrable on <span class="math inline">\((\delta,\pi]\)</span>.</p>
+<p>Hence, <span class="math inline">\(h\)</span> is integrable on all of <span class="math inline">\((-\pi,\pi]\)</span>. In combination with result <span class="math inline">\((\triangle)\)</span>, the proof is complete.</p>
 
 
 

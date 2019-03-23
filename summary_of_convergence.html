@@ -9,10 +9,9 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Kreyszig" />
 
 
-<title>Introductory Functional Analysis</title>
+<title>Harmonic Analysis</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -330,24 +329,36 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Introductory Functional Analysis</h1>
-<h4 class="author">Kreyszig</h4>
+<h1 class="title toc-ignore">Harmonic Analysis</h1>
 
 </div>
 
 
 
-<div id="spectral-theory-in-finite-dimensional-normed-spaces" class="section level1">
-<h1>7.1 Spectral theory in finite dimensional normed spaces</h1>
-<div id="show-that-the-eigenvalues-of-a-hermitian-matrix-aalpha_jk-are-real." class="section level3">
-<h3>2. Show that the eigenvalues of a Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are real.</h3>
-</div>
-<div id="show-that-the-eigenvalues-of-a-skew-hermitian-matrix-aalpha_jk-are-pure-imaginary-or-zero." class="section level3">
-<h3>3. Show that the eigenvalues of a skew-Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are pure imaginary or zero.</h3>
-</div>
-<div id="show-that-the-eigenvalues-of-a-unitary-matrix-aalpha_jk-have-absolute-value-1." class="section level3">
-<h3>2. Show that the eigenvalues of a unitary matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> have absolute value 1.</h3>
-</div>
+<div id="summary-of-convergence-results" class="section level1">
+<h1>Summary of convergence results</h1>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(f\in C^2[-\pi,\pi)\implies |\hat f(n)|\leq c/n^2\)</span> and</li>
+</ol>
+<p><span class="math display">\[S_Nf(x)\equiv\sum_{|n|\leq N}\hat f(n)e^{inx}\overset{\text{unif}}{\rightarrow}f(x)\]</span></p>
+<p>Works also for <span class="math inline">\(f\in C^1[-\pi,\pi)\)</span>, but requires a more involved proof.</p>
+<p>Does not work for <span class="math inline">\(C[-\pi,\pi)\)</span>. The sawtooth function is an example for why this is so.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p><span class="math inline">\(\exists \ f\in C\)</span> s.t. <span class="math inline">\(\lim S_Nf=\infty\)</span> for some <span class="math inline">\(x\)</span></p></li>
+<li><p><span class="math inline">\(f\in C^k[-\pi,\pi)\implies|\hat f(n)|\leq c/n^k\)</span> for <span class="math inline">\(k\geq1\)</span></p></li>
+<li><p><em>Feyérs theorem</em>: <span class="math inline">\(f\in C[-\pi,\pi)\implies\sigma_Nf=\frac{1}{N}\sum_{i=0}^{N-1}S_if\overset{\text{unif}}{\rightarrow}\)</span></p></li>
+</ol>
+<p>A trig polynomial is of the form <span class="math inline">\(\sum_{|n|\leq N}a_ne^{int}=\sum_{n=0}^Nb_n\cos(nt)+c_n\sin(nt)\)</span> and therefore <span class="math inline">\(\sigma_N\)</span> is an <span class="math inline">\(N-1\)</span> trig polyn.</p>
+<ul>
+<li><p><em>Weierstrass Thm</em>: Any cont fct on <span class="math inline">\([-\pi,\pi)\)</span> can be approx by trig polyns. (a corr of Feyér’s thm)</p></li>
+<li><p><em>Riemann Lebesgue lemma</em>: if <span class="math inline">\(f\in C[-\pi,\pi)\)</span> then <span class="math inline">\(\hat f(n)\rightarrow 0\)</span> as <span class="math inline">\(|n|\rightarrow\infty\)</span>.</p></li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li>pt-wise conv:</li>
+</ol>
+<p><em>Thm</em>: <span class="math inline">\(f\)</span> is intgble on <span class="math inline">\([-\pi,\pi)\)</span>. let <span class="math inline">\(x\in[-\pi,\pi)\)</span> where <span class="math inline">\(f(x^+),f(x^-),f&#39;_r(x),f&#39;_l(x)\)</span> exist. Then</p>
+<p><span class="math display">\[S_Nf(x)\overset{\text{pt-wise}}{\rightarrow}\frac{f(x^+)+f(x^-)}{2}\]</span></p>
+<p>if <span class="math inline">\(f\)</span> is cont as (at <span class="math inline">\(x\)</span>), then <span class="math inline">\(S_Nf(x)\rightarrow f(x)\)</span> pt-wise.</p>
 </div>
 
 

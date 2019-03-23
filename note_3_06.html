@@ -9,10 +9,9 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Kreyszig" />
 
 
-<title>Introductory Functional Analysis</title>
+<title>Harmonic Analysis 03-06-19</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -330,24 +329,59 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Introductory Functional Analysis</h1>
-<h4 class="author">Kreyszig</h4>
+<h1 class="title toc-ignore">Harmonic Analysis 03-06-19</h1>
 
 </div>
 
 
 
-<div id="spectral-theory-in-finite-dimensional-normed-spaces" class="section level1">
-<h1>7.1 Spectral theory in finite dimensional normed spaces</h1>
-<div id="show-that-the-eigenvalues-of-a-hermitian-matrix-aalpha_jk-are-real." class="section level3">
-<h3>2. Show that the eigenvalues of a Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are real.</h3>
+<ul>
+<li>Recap:</li>
+</ul>
+<p><span class="math display">\[v=(z_0,\dots,z_{N-1})\in\mathbb{C}^N\]</span></p>
+<p>The discrete Fourier transform (DFT) of <span class="math inline">\(v\)</span> is <span class="math inline">\(\hat v\in\mathbb{C}^N\)</span> is defined by</p>
+<p><span class="math display">\[\hat v(n)\equiv\frac{1}{\sqrt N}\sum_{k=0}^{N-1}z_ke^{-2\pi ikn/N}\]</span></p>
+<p>Define the vectors <span class="math inline">\(\{e_n\}_{n=0}^{N-1}\subset\mathbb{C}^N\)</span> by</p>
+<p><span class="math display">\[e_n\equiv\frac{1}{\sqrt{N}}e^{2\pi ikn/N}.\]</span></p>
+<p>Then <span class="math inline">\(\{e_n\}\)</span> is an ONB of <span class="math inline">\(\mathbb{C}^N\)</span>. Hence</p>
+<p><span class="math display">\[\sum_{n=0}^{N-1}\left&lt;v,e_n\right&gt;e_n(k)=\frac{1}{\sqrt N}\sum_{n=0}^{N-1}\left&lt;v,e_n\right&gt;e^{2\pi iknN}\]</span></p>
+<p>and <span class="math inline">\(\hat v(n)=\left&lt;v,e_n\right&gt;\)</span>.</p>
+<div id="parsevalsplancherels-identity" class="section level2">
+<h2>Parseval’s/Plancherel’s Identity:</h2>
+<p>If <span class="math inline">\(v\in\mathbb{C}^N\)</span> then</p>
+<p><span class="math display">\[v(k)=\sum_n\hat v(n)e_n(k)\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\sum_n|\hat v(n)|^2=\sum_n|v(n)|^2\]</span></p>
+<p>ie, <span class="math inline">\(\|\hat v\|=\|v\|\)</span>.</p>
+<ul>
+<li><em>Proof:</em></li>
+</ul>
+<p>Since we already noted <span class="math inline">\(\{e_n\}\)</span> is an ONB, the first result is already demonstrated. For the second part note:</p>
+<p><span class="math display">\[|v(k)|^2=v(k)\overline{v(k)}\]</span></p>
+<p><span class="math display">\[=\sum_n\left&lt;v,e_n\right&gt;e_n(k)\sum_m\overline{\left&lt;v,e_m\right&gt;e_m(k)}\]</span></p>
+<p><span class="math display">\[=\sqrt{N}\sum_n\sum_m\left&lt;v,e_n\right&gt;\overline{\left&lt;v,e_m\right&gt;}e_{n-m}\]</span></p>
+<p><span class="math display">\[=\sqrt{N}\left(\sum_{n=m}\left&lt;v,e_n\right&gt;\overline{\left&lt;v,e_n\right&gt;}+\sum_{n\neq m}\left&lt;v,e_n\right&gt;\overline{\left&lt;v,e_m\right&gt;}e_{n-m}\right)\]</span></p>
+<p><span class="math display">\[=\sqrt{N}\left(\sum_{n=m}|\left&lt;v,e_n\right&gt;|^2+\sum_{n\neq m}\left&lt;v,e_n\right&gt;\overline{\left&lt;v,e_m\right&gt;}e_{n-m}\right)\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[\sum_k|v(k)|^2=\sum_n|\left&lt;v,e_n\right&gt;|^2=\sum_n|\hat v(n)|^2.\]</span></p>
 </div>
-<div id="show-that-the-eigenvalues-of-a-skew-hermitian-matrix-aalpha_jk-are-pure-imaginary-or-zero." class="section level3">
-<h3>3. Show that the eigenvalues of a skew-Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are pure imaginary or zero.</h3>
-</div>
-<div id="show-that-the-eigenvalues-of-a-unitary-matrix-aalpha_jk-have-absolute-value-1." class="section level3">
-<h3>2. Show that the eigenvalues of a unitary matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> have absolute value 1.</h3>
-</div>
+<div id="dft-matrix" class="section level2">
+<h2>DFT matrix</h2>
+<p>We have <span class="math inline">\(v=\sum_n\hat v(n)e_n\)</span> and hence can be written in matrix form as</p>
+<p><span class="math display">\[v=\left(\begin{matrix}
+\vdots&amp;\vdots&amp;&amp;\vdots\\
+e_0&amp;e_1&amp;\cdots&amp;e_{N-1}\\
+\vdots&amp;\vdots&amp;&amp;\vdots\end{matrix}\right)\hat v\]</span></p>
+<p><span class="math display">\[=F_N\hat v.\]</span></p>
+<p>The matrix <span class="math inline">\(F_N\)</span> is referred to as the Fourier matrix (or DFT matrix). Here are some nice properties:</p>
+<ul>
+<li><span class="math inline">\(\hat v=\bar{F_N}^\top v={F_N}^* v\)</span>, where <span class="math inline">\(^*\)</span> denotes Hermetian (adjoint)</li>
+</ul>
+<p>Note that <span class="math inline">\(F_N\)</span> is always invertible since its columns are lin-ind by def. Furthermore, since <span class="math inline">\(\hat v={F_N}^{-1} v\)</span>, we have</p>
+<ul>
+<li><p><span class="math inline">\({F_N}^{-1}={F_N}^*\implies\)</span> <span class="math inline">\(F_N\)</span> is unitary (hence isometry)</p></li>
+<li><p><span class="math inline">\(F_N\)</span> is symmetric</p></li>
+</ul>
 </div>
 
 

@@ -1,6 +1,7 @@
-name: "Bob Week | Evolution - Ecology - Math"
+name: "bobweek-site"
 output_dir: "."
-navbar: 
+navbar:
+  title: "Bob Week"
   left:
     - text: "Home"
       href: index.html

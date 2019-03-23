@@ -1,0 +1,19 @@
+---
+title: "Function spaces"
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+
+  - $C^\infty(U)\equiv$
+
+  - $L^p(U)\equiv\{f:\int_U|f|^p<\infty\}$

@@ -21,8 +21,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -31,10 +31,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -69,9 +71,7 @@ h6 {
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -90,8 +90,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -107,7 +113,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -127,6 +132,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -148,19 +190,85 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -184,10 +292,23 @@ $(document).ready(function () {
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Math <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="ODE_arnold.html">ODE</a></li>
-            <li><a href="diffman.html">DM</a></li>
-            <li><a href="kreyszig.html">FA</a></li>
             <li><a href="da_prato_and_zabczyk.html">SPDE</a></li>
-          </ul>
+            <li class="dropdown-submenu">
+            <a class="test" href="#">Harmonic Analysis<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="summary_of_convergence.html">conv</a></li>
+              <li><a href="note_1_28.html">Jan 28</a></li>
+              <li><a href="note_2_04.html">Feb 04</a></li>
+              <li><a href="note_2_25.html">Feb 25</a></li>
+              <li><a href="note_2_27.html">Feb 27</a></li>
+              <li><a href="note_3_01.html">Mar 01</a></li>
+              <li><a href="note_3_06.html">Mar 06</a></li>
+              <li><a href="note_3_18.html">Mar 18</a></li>
+              <li><a href="note_3_20.html">Mar 20</a></li>
+              <li><a href="note_3_22.html">Mar 22</a></li>
+            </ul>
+          </li>
+        </ul>
         </li><!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
@@ -210,9 +331,10 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Ordinary Differential Equations</h1>
-<h4 class="author"><em>V.I. Arnold</em></h4>
+<h4 class="author">V.I. Arnold</h4>
 
 </div>
+
 
 
 <div id="section" class="section level2">
@@ -221,7 +343,7 @@ $(document).ready(function () {
 <h4>Problem 2</h4>
 <p>Prove that a one-parameter group of transformations is a commutative group and that every mapping <span class="math inline">\(g^t:M\rightarrow M\)</span> is one-to-one.</p>
 <ul>
-<li><p>Let <span class="math inline">\(G\)</span> denote the set of one-parameter transformations. Since <span class="math inline">\(g^0\in G\)</span> and <span class="math inline">\(g^0g^t=g^tg^0=g^{t+0}=g^t\)</span> we see that <span class="math inline">\(g^0\)</span> is an identity element. Note further that if <span class="math inline">\(g^sg^t=g^tg^s=g^t\)</span> then <span class="math inline">\(g^s=g^0\)</span> which implies the identity element is unique. By definition <span class="math inline">\(g^t\in G\)</span> <span class="math inline">\(\forall\)</span> <span class="math inline">\(t\in{\mathbb{R}}\)</span> and hence <span class="math inline">\(g^{-t}\in G\)</span> for every <span class="math inline">\(g^t\in G\)</span>. That is, for every element in <span class="math inline">\(G\)</span> there exists an inverse also in <span class="math inline">\(G\)</span>. Lastly, <span class="math inline">\((g^tg^s)g^u=g^t(g^sg^u)=g^tg^sg^u=g^{t+s+u}\)</span> which implies the underlying binary operation is associative and hence <span class="math inline">\(G\)</span> is a group. Furthermore, <span class="math inline">\(g^tg^s=g^{t+s}=g^sg^t\)</span> which implies <span class="math inline">\(G\)</span> is a communtative group.</p></li>
+<li><p>Let <span class="math inline">\(G\)</span> denote the set of one-parameter transformations. Since <span class="math inline">\(g^0\in G\)</span> and <span class="math inline">\(g^0g^t=g^tg^0=g^{t+0}=g^t\)</span> we see that <span class="math inline">\(g^0\)</span> is an identity element. Note further that if <span class="math inline">\(g^sg^t=g^tg^s=g^t\)</span> then <span class="math inline">\(g^s=g^0\)</span> which implies the identity element is unique. By definition <span class="math inline">\(g^t\in G\)</span> <span class="math inline">\(\forall\)</span> <span class="math inline">\(t\in\mathbb{R}\)</span> and hence <span class="math inline">\(g^{-t}\in G\)</span> for every <span class="math inline">\(g^t\in G\)</span>. That is, for every element in <span class="math inline">\(G\)</span> there exists an inverse also in <span class="math inline">\(G\)</span>. Lastly, <span class="math inline">\((g^tg^s)g^u=g^t(g^sg^u)=g^tg^sg^u=g^{t+s+u}\)</span> which implies the underlying binary operation is associative and hence <span class="math inline">\(G\)</span> is a group. Furthermore, <span class="math inline">\(g^tg^s=g^{t+s}=g^sg^t\)</span> which implies <span class="math inline">\(G\)</span> is a commutative group.</p></li>
 <li><p>For the second part of this problem, suppose <span class="math inline">\(g^tx=g^ty\)</span>. Then it is a simple matter to transform by <span class="math inline">\(g^{-t}\)</span> to get <span class="math inline">\(g^0x=x=g^0y=y\)</span> and in particular <span class="math inline">\(x=y\)</span>.</p></li>
 </ul>
 </div>
@@ -229,26 +351,26 @@ $(document).ready(function () {
 <h4>Problem 3</h4>
 <p>Prove that there is one and only one phase curve passing through every point of phase space.</p>
 <ul>
-<li>Since <span class="math inline">\(g^t\)</span> is defined on all of <span class="math inline">\(M\)</span> for each <span class="math inline">\(t\)</span>, then, for any <span class="math inline">\(x\in M\)</span>, we can calculate the phase curve passing through <span class="math inline">\(x\)</span> via <span class="math inline">\(\{g^tx:t\in{\mathbb{R}}\}\)</span>. Since <span class="math inline">\(g^t\)</span> is one-to-one, there can only be one such phase curve.</li>
+<li>Since <span class="math inline">\(g^t\)</span> is defined on all of <span class="math inline">\(M\)</span> for each <span class="math inline">\(t\)</span>, then, for any <span class="math inline">\(x\in M\)</span>, we can calculate the phase curve passing through <span class="math inline">\(x\)</span> via <span class="math inline">\(\{g^tx:t\in\mathbb{R}\}\)</span>. Since <span class="math inline">\(g^t\)</span> is one-to-one, there can only be one such phase curve.</li>
 </ul>
 </div>
 <div id="problem-4" class="section level4">
 <h4>Problem 4</h4>
 <p>Prove there is one and only one integral curve passing through every point of extended phase space</p>
 <ul>
-<li>Let <span class="math inline">\((t,x)\in {\mathbb{R}}\times M\)</span>. We know that <span class="math inline">\(x\)</span> has exactly one phase curve passing through it. Denote this curve by <span class="math inline">\(\{g^tx:t\in{\mathbb{R}}\}\)</span>. Then the integral curve passing through <span class="math inline">\((t,x)\)</span> is just <span class="math inline">\({\mathbb{R}}\times\{g^tx\}\)</span>. From this we see that there is exactly one integral curve passing through every point in extended phase space.</li>
+<li>Let <span class="math inline">\((t,x)\in \mathbb{R}\times M\)</span>. We know that <span class="math inline">\(x\)</span> has exactly one phase curve passing through it. Denote this curve by <span class="math inline">\(\{g^tx:t\in\mathbb{R}\}\)</span>. Then the integral curve passing through <span class="math inline">\((t,x)\)</span> is just <span class="math inline">\(\mathbb{R}\times\{g^tx\}\)</span>. From this we see that there is exactly one integral curve passing through every point in extended phase space.</li>
 </ul>
 </div>
 <div id="problem-5" class="section level4">
 <h4>Problem 5</h4>
-<p>Prove that the horizontal line <span class="math inline">\({\mathbb{R}}\times x, \ x\in M\)</span> is an integal curve iff <span class="math inline">\(x\)</span> is an equilibrium position.</p>
+<p>Prove that the horizontal line <span class="math inline">\(\mathbb{R}\times x, \ x\in M\)</span> is an integal curve iff <span class="math inline">\(x\)</span> is an equilibrium position.</p>
 <ul>
-<li>If <span class="math inline">\(x\)</span> is an equilibrium position then <span class="math inline">\(g^tx=x\)</span> for any <span class="math inline">\(t\in {\mathbb{R}}\)</span> and hence the integral curve passing through <span class="math inline">\(x\)</span> is the horizontal line <span class="math inline">\({\mathbb{R}}\times x\)</span>. On the other hand, if the horizontal line <span class="math inline">\({\mathbb{R}}\times x\)</span> is an integral curve then <span class="math inline">\(g^tx=x\)</span> for all <span class="math inline">\(t\)</span> and hence <span class="math inline">\(x\)</span> is an equilibrium position.</li>
+<li>If <span class="math inline">\(x\)</span> is an equilibrium position then <span class="math inline">\(g^tx=x\)</span> for any <span class="math inline">\(t\in \mathbb{R}\)</span> and hence the integral curve passing through <span class="math inline">\(x\)</span> is the horizontal line <span class="math inline">\(\mathbb{R}\times x\)</span>. On the other hand, if the horizontal line <span class="math inline">\(\mathbb{R}\times x\)</span> is an integral curve then <span class="math inline">\(g^tx=x\)</span> for all <span class="math inline">\(t\)</span> and hence <span class="math inline">\(x\)</span> is an equilibrium position.</li>
 </ul>
 </div>
 <div id="problem-6" class="section level4">
 <h4>Problem 6</h4>
-<p>Prove that a shift <span class="math inline">\(h^s:({\mathbb{R}}\times M)\rightarrow({\mathbb{R}}\times M), \ h^s(t,x)=(t+s,x)\)</span> of extended phase space along the time axis carries integral curves into integral curves.</p>
+<p>Prove that a shift <span class="math inline">\(h^s:(\mathbb{R}\times M)\rightarrow(\mathbb{R}\times M), \ h^s(t,x)=(t+s,x)\)</span> of extended phase space along the time axis carries integral curves into integral curves.</p>
 <ul>
 <li>We know there is exactly one integral curve passing through the point <span class="math inline">\((t,x)\)</span> of extended phase space and that every point of extended phase space has an integral curve passing through it. Hence, <span class="math inline">\((t+s,x)\)</span> is the point along some other integral curve and so <span class="math inline">\(h^s\)</span> carries integral curves into integral curves.</li>
 </ul>
@@ -258,7 +380,7 @@ $(document).ready(function () {
 <h2>1.3</h2>
 <div id="problem-1" class="section level4">
 <h4>Problem 1</h4>
-<p>Which of the functions specify a diffeomorphism <span class="math inline">\(f:{\mathbb{R}}\rightarrow{\mathbb{R}}\)</span> on the line:</p>
+<p>Which of the functions specify a diffeomorphism <span class="math inline">\(f:\mathbb{R}\rightarrow\mathbb{R}\)</span> on the line:</p>
 <p><span class="math display">\[f(x)=2x,x^2,x^3,e^x,e^x+x\]</span></p>
 <ul>
 <li>yes, no, yes, no, yes</li>
@@ -304,14 +426,14 @@ $(document).ready(function () {
 <div id="section-3" class="section level2">
 <h2>33.2</h2>
 <div id="d1-a-map-of-a-manifold-m-is-the-pair-uphi-s.t.-usubsetmathbbrn-and-phiwrightarrow-u-is-a-mapping-of-wsubset-m-onto-u." class="section level4">
-<h4>D1: A <em>map</em> of a manifold <span class="math inline">\(M\)</span> is the pair <span class="math inline">\((U,\phi)\)</span> s.t. <span class="math inline">\(U\subset{\mathbb{R}}^n\)</span> and <span class="math inline">\(\phi:W\rightarrow U\)</span> is a mapping of <span class="math inline">\(W\subset M\)</span> onto <span class="math inline">\(U\)</span>.</h4>
+<h4>D1: A <em>map</em> of a manifold <span class="math inline">\(M\)</span> is the pair <span class="math inline">\((U,\phi)\)</span> s.t. <span class="math inline">\(U\subset\mathbb{R}^n\)</span> and <span class="math inline">\(\phi:W\rightarrow U\)</span> is a mapping of <span class="math inline">\(W\subset M\)</span> onto <span class="math inline">\(U\)</span>.</h4>
 <p>For two maps <span class="math inline">\((U_1,\phi_1),(U_2,\phi_2)\)</span> such that <span class="math inline">\(\phi_i:W_i\rightarrow U_i\)</span> we write <span class="math inline">\(U_{ij}\equiv\phi_i(W_i\cap W_j)\)</span> and <span class="math inline">\(\phi_{ij}:U_{ij}\rightarrow U_{ji}, \ x\mapsto (\phi_j\circ\phi_i^{-1})(x)\)</span>.</p>
 </div>
 <div id="d2-the-maps-phi_1phi_2-are-compatible-if" class="section level4">
 <h4>D2: The maps <span class="math inline">\(\phi_1,\phi_2\)</span> are <em>compatible</em> if</h4>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(U_{12},U_{21}\)</span> are open.</li>
-<li><span class="math inline">\(\phi_{12},\phi_{21}\)</span> are diffeomorphisms on domains of <span class="math inline">\({\mathbb{R}}^n\)</span> when <span class="math inline">\(W_1\cap W_2\)</span> is nonempty.</li>
+<li><span class="math inline">\(\phi_{12},\phi_{21}\)</span> are diffeomorphisms on domains of <span class="math inline">\(\mathbb{R}^n\)</span> when <span class="math inline">\(W_1\cap W_2\)</span> is nonempty.</li>
 </ol>
 </div>
 <div id="d3-an-atlas-of-a-manifold-m-is-a-collection-of-maps-mathcalau_iphi_i-on-m-s.t." class="section level4">

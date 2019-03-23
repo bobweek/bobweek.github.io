@@ -9,10 +9,9 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Kreyszig" />
 
 
-<title>Introductory Functional Analysis</title>
+<title>Harmonic Analysis 02-11-2019</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -330,24 +329,57 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Introductory Functional Analysis</h1>
-<h4 class="author">Kreyszig</h4>
+<h1 class="title toc-ignore">Harmonic Analysis 02-11-2019</h1>
 
 </div>
 
 
 
-<div id="spectral-theory-in-finite-dimensional-normed-spaces" class="section level1">
-<h1>7.1 Spectral theory in finite dimensional normed spaces</h1>
-<div id="show-that-the-eigenvalues-of-a-hermitian-matrix-aalpha_jk-are-real." class="section level3">
-<h3>2. Show that the eigenvalues of a Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are real.</h3>
+<div id="the-fourier-transform" class="section level1">
+<h1>The Fourier Transform</h1>
+<p>The Fourier transform of <span class="math inline">\(f\)</span> is</p>
+<p><span class="math display">\[\hat f(\gamma)\equiv\int_{-\infty}^\infty f(x)e^{-2\pi i \gamma x}dx\]</span></p>
+<p>Want: to get back <span class="math inline">\(f\)</span> from <span class="math inline">\(\hat f\)</span> by some inversion formulat:</p>
+<p><span class="math display">\[f(x)=\int_{-\infty}^\infty\hat f(\gamma)e^{2\pi i x\gamma}d\gamma\]</span></p>
+<ul>
+<li><p><em>Obstacle:</em> <span class="math inline">\(\hat f\)</span> may not be integrable</p></li>
+<li><p><em>Solution:</em> The Schwarz space <span class="math inline">\(S(\mathbb{R})\)</span> consists of all functions <span class="math inline">\(f\)</span> that are inf diffbl and for which <span class="math inline">\(f\)</span> and all of its derivatives are rapidly decreasing in the sense that</p></li>
+</ul>
+<p><span class="math display">\[\lim_{|x|\rightarrow\infty}|x|^k|f^{(l)}|=0 \ \forall \ k,l&gt;0\]</span></p>
+<p>In other words, the products <span class="math inline">\(|x|^k|f^{(l)}|\)</span> are bdd for all <span class="math inline">\(k,l&gt;0\)</span> so that</p>
+<p><span class="math display">\[|x|^k|f^{(l)}|\leq C_{k,l}\implies |f^{(l)}|\leq\frac{C_{k,l}}{|x|^k}\]</span></p>
+<p>In otherwords: <span class="math inline">\(f\)</span> and all of it derivatives decrease faster than <em>any</em> polymonial <em>inceases</em>.</p>
+<ul>
+<li><p><em>Note:</em> If <span class="math inline">\(f\)</span> is a polynomial, then <span class="math inline">\(f\in S(\mathbb{R})\)</span>.</p></li>
+<li><p><em>Example:</em> <span class="math inline">\(f(x)=\exp(-x^2)\)</span>. This is justified since the derivatives are polynomial times <span class="math inline">\(f\)</span>.</p></li>
+<li><p><em>Example:</em> <span class="math inline">\(\exp(-|x|)\)</span> is also of rapid decreas, but is not diffbl at <span class="math inline">\(x=0\)</span>.</p></li>
+<li><p><em>Notation:</em> <span class="math inline">\(\mathscr{F}(f)\equiv\hat f\)</span> (as a mapping/operator)</p></li>
+</ul>
 </div>
-<div id="show-that-the-eigenvalues-of-a-skew-hermitian-matrix-aalpha_jk-are-pure-imaginary-or-zero." class="section level3">
-<h3>3. Show that the eigenvalues of a skew-Hermitian matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> are pure imaginary or zero.</h3>
-</div>
-<div id="show-that-the-eigenvalues-of-a-unitary-matrix-aalpha_jk-have-absolute-value-1." class="section level3">
-<h3>2. Show that the eigenvalues of a unitary matrix <span class="math inline">\(A=(\alpha_{jk})\)</span> have absolute value 1.</h3>
-</div>
+<div id="restricting-to-smathbbr" class="section level1">
+<h1>Restricting to <span class="math inline">\(S(\mathbb{R})\)</span></h1>
+<p>Functions of <em>moderate</em> decrease did not have Fourier transforms also of moderate decrease. However,</p>
+<ul>
+<li><em>Proposition:</em> <span class="math inline">\(f\in S(\mathbb{R})\)</span> then
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(f(x+h)\mapsto \hat f(\gamma)e^{2\pi i h\gamma}, \ h\in\mathbb{R}\)</span></li>
+<li><span class="math inline">\(f(x)e^{-2\pi i x h}\mapsto\hat f(\gamma+h)\)</span></li>
+<li><span class="math inline">\(f(h x)\mapsto\frac{1}{h}\hat f(\frac{\gamma}{h}), h&gt;0\)</span></li>
+<li><span class="math inline">\(f&#39;(x)\mapsto 2\pi i \gamma\hat f(\gamma)\)</span></li>
+<li><span class="math inline">\(-2\pi i x f(x)\mapsto\frac{d}{d\gamma}\hat f(\gamma)\)</span></li>
+</ol></li>
+</ul>
+<p><em>Proof:</em></p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(\mathscr{F}(f(x+h))=\int_{-\infty}^\infty f(x+h)e^{-2\pi i \gamma x}dx\)</span></li>
+</ol>
+<p>just multiply the integrand by one…</p>
+<ol start="22" style="list-style-type: lower-alpha">
+<li>We can use Fubini’s</li>
+</ol>
+<p><span class="math display">\[\frac{d}{d\gamma}\hat f(\gamma)=\int_{-\infty}^\infty \frac{d}{d\gamma} f(x)e^{-2\pi i x\gamma}dx\]</span></p>
+<p><span class="math display">\[=\int_{-\infty}^\infty f(x)(-2\pi i x)e^{2\pi i x\gamma}dx\]</span></p>
+<p><span class="math display">\[=\mathscr{F}\{(-2\pi i x)f(x)\}\]</span></p>
 </div>
 
 

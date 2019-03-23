@@ -1,0 +1,93 @@
+---
+title: "Harmonic analysis - 1/25/19"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+# Approximate idetities
+
+A family of functions $\{K_n\}$ is an approximate identity if
+
+  1) $\forall \ n\geq1 \ \implies \ \frac{1}{2\pi}\int_{-\pi}^\pi K_n(x)dx=1$
+
+  2) $\exists \ M \ \forall \ n\geq1 \int|K_n|\leq M$
+  
+  3) For each $\delta>0$, $\int_{\delta\leq|x|\leq\pi}|K_n|\rightarrow0$ as $n\rightarrow\infty$
+
+
+Recall: If $f\in C^k[-\pi,\pi)$ and $g$ is integrable, then $f*g\in C^k[-\pi,\pi)$
+
+Theorem: Let $\{K_n\}$ be an approximate identity. If $f$ is integrable on $[-\pi,\pi)$ and continuous at some $x$, then
+
+$$\lim_{n\rightarrow\infty}(K_n*f)(x)=f(x).$$
+
+Furthermore, if $f$ is cont on $[-\pi,\pi)$ then the convergence is uniform.
+
+Proof: Let $f$ be cont at $x\in[-\pi,\pi)$. Then, given $\epsilon>0,\exists \ \delta>0$ s.t.
+
+$$|f(x-y)-f(x)|<\epsilon$$
+
+when $|y|<\delta$. Then
+
+$$(K_n*f)(x)-f(x)=\frac{1}{2\pi}\int_{-\pi}^\pi K_n(y)f(x-y)dy-f(x)\left(\frac{1}{2\pi}\int_{-\pi}^\pi K_n(y)dy\right)$$
+
+$$=\frac{1}{2\pi}\int_{-\pi}^\pi[f(x-y)-f(x)]K_n(y)dy$$
+
+$$\implies\frac{1}{2\pi}\left|\int_{-\pi}^\pi[f(x-y)-f(x)]K_n(y)dy\right|$$
+
+$$\leq\frac{1}{2\pi}\int_{|y|<\delta}|K_n(y)||f(x-y)-f(x)|dy$$
+
+$$+\frac{1}{2\pi}\int_{\delta\leq|y|\leq\pi}|K_n(y)||f(x-y)-f(x)|dy=\star$$
+
+Since $|f|$ is cont on a cmpct interval, it is bounded. Let $B$ be a bound for $|f|$. Then
+
+$$\star<\frac{\epsilon}{2\pi}\int_{|y|\leq\delta}|K_n(y)|dy+\frac{2B}{2\pi}\int_{\delta\leq|y|\leq\pi}|K_n(y)|dy$$
+
+$$\leq\frac{\epsilon M+2B\tilde\epsilon}{2\pi}$$
+
+for any $\tilde\epsilon>0$. Since $\epsilon$ and $\tilde\epsilon$ can be made arbitrarily small given large enough $n$, we have the result.  $\square$
+
+Recall
+
+$$S_N(f)=f*D_n, \ \ D_N=\sum_{n=-N}^Ne^{inx}.$$
+
+However, even though $\frac{1}{2\pi}\int_{-\pi}^\pi D_N(x)dx=1$, property 2) of approximate identities does not hold. Thus, $\{D_N\}$ is not an approximate identity and $\{S_N\}$ need not converge point-wise.
+
+Look at the Cesaro means
+
+$$\sigma_N(f)=\frac{\sum_{n=0}^{N-1}S_n(f)}{N}$$
+
+$$\frac{\sum_{n=0}^{N-1}f*D_n}{N}=f*\left(\frac{\sum_{n=0}^{N-1}D_n}{N}\right).$$
+
+Def: The $N$th Fejer kernal is
+
+$$F_N\equiv\frac{\sum_{n=0}^{N-1}D_n}{N}$$
+
+and hence $\sigma_N(f)=f*F_N$.
+
+Result: $\{F_N\}$ is an approximate identity.
+
+Proof:
+
+  1) show that $F_N(x)=\frac{1}{N}\frac{\sin^2(Nx/2)}{\sin^2(x/2)}$.
+
+  2) To show that $\{F_N\}$ is an approximate identity we just need to show property 1) and 3) of approximate identities.
+
+Since $\int D_N(x)=1$ (requires proof) we have $\int F_N(x)=1$. 
+
+  3) Given $\delta, \exists \ c_\delta$ s.t. $\sin^2(x/2)\geq c_\delta>0$ if $\delta\leq|x|\leq\pi$. We get
+  
+$$F_N(x)\leq\frac{1}{N c_\delta}$$
+
+which implies $\int_{\delta\leq|x|\leq\pi}|F_N(x)|dx\rightarrow0$ as $N\rightarrow\infty$.
+
+Cor: $\sigma_n(f)$ converges uniformly to $f$.
+
+
+
+
+
