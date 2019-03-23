@@ -11,7 +11,7 @@
 
 
 
-<title>Harmonic Analysis 02-04-19</title>
+<title>Function spaces</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -330,69 +330,48 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Harmonic Analysis 02-04-19</h1>
+<h1 class="title toc-ignore">Function spaces</h1>
 
 </div>
 
 
 
-<p><span class="math display">\[P_N=\left\{\sum_{|n|\leq N}c_ne^{ixn}|c_n\in\mathbb{C}\right\}\]</span></p>
 <ul>
-<li>the set of all trig. polynomials of degree <span class="math inline">\(\leq N\)</span></li>
-</ul>
-<p><span class="math display">\[S_N f=\sum_{|n|\leq N}\hat f(n)e^{ixn}\in P_N\]</span></p>
-<p>In what follows, let <span class="math inline">\(f\in L^2[-\pi,\pi)\)</span>.</p>
+<li><p><span class="math inline">\(U\subset\mathbb{R}^n\)</span></p></li>
+<li><p><span class="math inline">\(C(U)\equiv\)</span> continuous function</p></li>
+<li><p><span class="math inline">\(C_c(U)\equiv\)</span> continuous functions with compact support</p></li>
+<li><p><span class="math inline">\(C_0(U)\equiv\)</span> continuous functions that vanish at infinity</p></li>
+<li><p><span class="math inline">\(B(U)\equiv\)</span> bounded function, <span class="math inline">\(|f|\leq M\)</span></p></li>
+<li><p><span class="math inline">\(C^\infty(U)\equiv\)</span> smooth functions</p></li>
+<li><p><span class="math inline">\(C_c^\infty(U)\equiv\)</span> smooth functions with compact support</p></li>
+<li><p><span class="math inline">\(C^{k,\alpha}\equiv\{f : |f(x)-f(y)|\leq C\|x-y\|^\alpha\}\)</span></p>
 <ul>
-<li><p><em>Lemma (1)</em>: <span class="math inline">\(f-S_Nf\)</span> is orhtogonal to any polynomial in <span class="math inline">\(P_N\)</span>. In particular, <span class="math inline">\(f-S_Nf\)</span> is orhtogonal to <span class="math inline">\(S_Nf\)</span>.</p></li>
-<li><p><em>Pythagorean identity</em>: If <span class="math inline">\(f\)</span> &amp; <span class="math inline">\(g\)</span> are orth, then</p></li>
-</ul>
-<p><span class="math display">\[\|f+g\|^2=\|f\|^2+\|g\|^2\]</span></p>
+<li><span class="math inline">\(|f|_{C^{0,\alpha}}\equiv\sup_{x\neq y\in\Omega}\frac{|f(x)-f(y)|}{\|x-y\|^\alpha}\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(\mathscr{S}(U)\equiv\)</span> smooth functions of rapid decrease</p>
 <ul>
-<li><p><em>Lemma (2)</em>: <span class="math inline">\(\|f\|^2=\|f-S_Nf\|^2+\sum_{|n|\leq N}|\hat f(n)|^2\)</span></p></li>
-<li><p><em>Bessels ineq</em>: <span class="math inline">\(\sum_{n\in\mathbb{Z}}|\hat f(n)|^2\leq\|f\|^2\)</span></p></li>
-<li><p><em>Best approx lemma</em>: For ea. <span class="math inline">\(N\geq0\)</span> and all <span class="math inline">\(p\in P_N\)</span></p></li>
-</ul>
-<p><span class="math display">\[\|f-S_Nf\|\leq\|f-p\|\]</span></p>
-<p>Equality holds iff <span class="math inline">\(p=S_Nf\)</span></p>
-<p><em>Proof</em>: Denote <span class="math inline">\(e^{inx}\)</span> by <span class="math inline">\(e_n\)</span>. Let <span class="math inline">\(p\in P_N\)</span>. Then <span class="math inline">\(p=\sum_{|n|\leq N}c_ne_n\)</span> where <span class="math inline">\(c_n\in\mathbb{C}\)</span>.</p>
-<p><span class="math display">\[f-p=f-\sum_{|n|\leq N}c_ne_n+S_Nf-S_Nf\]</span></p>
-<p><span class="math display">\[=f-S_Nf+\sum(\hat f(n)-c_n)e_n\]</span></p>
-<p>Note <span class="math inline">\(\sum(\hat f(n)-c_n)e_n\in P_N\)</span>. Thus, by Lemma (1), <span class="math inline">\(f-S_Nf\)</span> is orth to <span class="math inline">\(\sum(\hat f(n)-c_n)e_n\)</span>. Using the Pyth ident</p>
-<p><span class="math display">\[\|f-p\|^2=\|f-S_Nf\|^2+\|\sum(\hat f(n)-c_n)e_n\|^2.\]</span></p>
-<p>Thus, the claimed inequality holds. Now we must show the condition for equality is both necessary and sufficient. Since <span class="math inline">\(p=S_Nf\)</span> implies <span class="math inline">\(c_n=\hat f(n)\)</span> for each <span class="math inline">\(|n|\leq N\)</span>, we have that this condition is sufficient. Similarly, if</p>
-<p><span class="math display">\[\|\sum(\hat f(n)-c_n)e_n\|=0\]</span></p>
-<p>then <span class="math inline">\(\left&lt;\sum_{|n|\leq N}(\hat f(n)-c_n)e_n,\sum_{|l|\leq N}(\hat f(l)-c_l)e_l\right&gt;=0\)</span>. Since <span class="math inline">\(\{e^{inx}\}\)</span> is an orthonormal set, we can use linearity to expand the inner product to find</p>
-<p><span class="math display">\[\sum_{|n|\leq N}|\hat f(n)-c_n|^2=0\]</span></p>
-<p>which clearly implies <span class="math inline">\(\hat f(n)=c_n\)</span> for each <span class="math inline">\(|n|\leq N\)</span>. This in turn implies <span class="math inline">\(p=S_Nf\)</span>. <span class="math inline">\(\square\)</span></p>
+<li><p>Schwartz space</p></li>
+<li><p><span class="math inline">\(\|f\|_{\alpha,\beta}=\sup_{x\in U}|x^\alpha D^\beta f(x)|\)</span></p></li>
+<li><p><span class="math inline">\(\mathscr{S}=\{C^\infty:\|f\|_{\alpha,\beta}&lt;\infty, \ \forall \ \alpha,\beta\in\mathbb{N}^n\}\)</span></p></li>
+<li><p><span class="math inline">\(\mathscr{S}^*=\)</span> tempered distributions</p></li>
+</ul></li>
+<li><p><span class="math inline">\(L^p(U)\equiv\{f \ | \ \int_U|f|^pd\mu&lt;\infty\}\)</span></p>
 <ul>
-<li><p>Note: <span class="math inline">\(p\)</span> might depend on the orthonormal set chosen to represent the Fourier expansion.</p></li>
-<li><p>Remark: In all the results we have used the fact that <span class="math inline">\(\{e_n=e^{inx}\}\)</span> is orthonormal in <span class="math inline">\(L^2[-\pi,\pi)\)</span>. All these results have counterparts for any orthonormal system <span class="math inline">\(\{\psi_n\}_{n=1}^\infty\subset L^2[-\pi,\pi)\)</span>. The space <span class="math inline">\(P_N\)</span> is replaced by <span class="math inline">\(W_N=\{f\in L^2|f=\sum_{n=1}^Na_n\psi_n\}\)</span>. Also <span class="math inline">\(\hat f(n)\)</span> wrt <span class="math inline">\(\{\psi_n\}\)</span> is <span class="math inline">\(\left&lt;f,\psi_n\right&gt;\)</span> instead <span class="math inline">\(\left&lt;f,e_n\right&gt;\)</span>.</p></li>
-</ul>
-<p>Our main goal is to prove</p>
+<li><p><span class="math inline">\((L^p)^*=L^{1-\frac{1}{p}}, \ 1\leq p\leq\infty\)</span></p></li>
+<li><p><span class="math inline">\((L^2)^*=L^2\)</span></p></li>
+</ul></li>
+<li><p><span class="math inline">\(W^{k,p}(U)\equiv\)</span> <span class="math inline">\(L^p\)</span> function with <span class="math inline">\(k\)</span>th order weak derivatives</p>
 <ul>
-<li><em>Mean sqr conv thm</em>: If <span class="math inline">\(f\in L^2[-\pi,\pi)\)</span> then</li>
+<li><p>Sobolov space</p></li>
+<li><p><span class="math inline">\(\|f\|_{W^{k,p}}=\left(\sum_{|\alpha|\leq k}\|D^\alpha f\|_p^p\right)^{1/p}, \ 1\leq p&lt;\infty\)</span></p></li>
+<li><p><span class="math inline">\(\|f\|_{W^{k,p}}=\max_{|\alpha|\leq k}\|D^\alpha f\|_\infty, \ \ p=\infty\)</span></p></li>
+</ul></li>
+<li><p><span class="math inline">\(L^p_{\text{loc}}(U)=\{f:f\in L^p(K) \ \forall K\subset_c U\}\)</span></p>
+<ul>
+<li><span class="math inline">\(\{f:\int_U|f\phi|d\mu&lt;\infty \ \forall \ \phi\in C_c^\infty\}\)</span></li>
+</ul></li>
+<li><p>càdlàg, RCLL, Skorohod space</p></li>
 </ul>
-<p><span class="math display">\[\int_{-\pi}^\pi|f(x)-S_Nf(x)|^2dx\rightarrow 0\]</span></p>
-<p>as <span class="math inline">\(N\rightarrow\infty\)</span>. That is, the partial Fourier sums converge to <span class="math inline">\(f\)</span> in the <span class="math inline">\(L^2\)</span> sense. In terms of norm, we have</p>
-<p><span class="math display">\[\|f-S_Nf\|\rightarrow 0\]</span></p>
-<p>as <span class="math inline">\(N\rightarrow 0\)</span>.</p>
-<p><em>Proof</em>:</p>
-<ol style="list-style-type: decimal">
-<li>First prove for cont functions. Let <span class="math inline">\(g\in C[-\pi,\pi)\)</span> Show that <span class="math inline">\(\|g-S_Ng\|\rightarrow 0\)</span> as <span class="math inline">\(N\rightarrow 0\)</span>. Fix <span class="math inline">\(\epsilon&gt;0\)</span>. By Fejér’s thm, the Cesáro sums <span class="math inline">\(\sigma_Ng\)</span> converge unif to <span class="math inline">\(g\)</span>. That is, there is a <span class="math inline">\(M\in\mathbb{N}\)</span> s.t.</li>
-</ol>
-<p><span class="math display">\[|g(x)-\sigma_Mg(x)|\leq\epsilon, \ \forall \ x\in[-\pi,\pi).\]</span></p>
-<p>Hence</p>
-<p><span class="math display">\[\|g-\sigma_Mg\|=\frac{1}{2\pi}\int_{-\pi}^\pi|g(x)-\sigma_Mg(x)|^2dx\epsilon^2.\]</span></p>
-<p>Note that, for all <span class="math inline">\(N\geq M\)</span>, <span class="math inline">\(\sigma_Mg\in P_N\)</span>. Then, by the best approx lemma, we have</p>
-<p><span class="math display">\[\|g-S_Ng\|\leq\|g-\sigma_Mg\|&lt;\epsilon \ \forall \ N\geq M.\]</span></p>
-<p>This implies that <span class="math inline">\(\|g-S_Ng\|\rightarrow 0\)</span> as <span class="math inline">\(N\rightarrow\infty\)</span>.</p>
-<ol start="2" style="list-style-type: decimal">
-<li>Now prove for <span class="math inline">\(f\in L^2[-\pi,\pi)\)</span>. We use the fact that continuous functions are dense in <span class="math inline">\(L^2[-\pi,\pi)\)</span>. This means that for each <span class="math inline">\(f\in L^2\)</span> and <span class="math inline">\(\epsilon&gt;0\)</span>, there is a cont function <span class="math inline">\(g\)</span> s.t.</li>
-</ol>
-<p><span class="math display">\[\|f-g\|\leq\epsilon.\]</span></p>
-<p>For <span class="math inline">\(g\)</span> cont, we can find <span class="math inline">\(M\in\mathbb{N}\)</span> s.t. <span class="math inline">\(\|g-S_Mg\|&lt;\epsilon\)</span>. This all implies:</p>
-<p><span class="math display">\[\|f-S_Mg\|\leq\|f-g\|+\|g-S_Mg\|\leq2\epsilon.\]</span></p>
-<p>For <span class="math inline">\(N\geq M\)</span>, <span class="math inline">\(\|f-S_Nf\||leq\|f-S_Mg\|\leq2\epsilon\)</span> by the best approx lemma. Thus, <span class="math inline">\(\|f-S_Nf\|\rightarrow 0\)</span> as <span class="math inline">\(N\rightarrow\infty\)</span>. <span class="math inline">\(\square\)</span></p>
 
 
 

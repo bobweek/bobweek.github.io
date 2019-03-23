@@ -14,6 +14,50 @@ output:
 \newcommand{\>}{\right>}
 \newcommand{\ra}{\rightarrow}
 
-  - $C^\infty(U)\equiv$
+  - $U\subset\R^n$
 
-  - $L^p(U)\equiv\{f:\int_U|f|^p<\infty\}$
+  - $C(U)\equiv$ continuous function
+
+  - $C_c(U)\equiv$ continuous functions with compact support
+
+  - $C_0(U)\equiv$ continuous functions that vanish at infinity
+
+  - $B(U)\equiv$ bounded function, $|f|\leq M$
+
+  - $C^\infty(U)\equiv$ smooth functions
+
+  - $C_c^\infty(U)\equiv$ smooth functions with compact support
+
+  - $C^{k,\alpha}\equiv\{f : |f(x)-f(y)|\leq C\|x-y\|^\alpha\}$
+  
+    - $|f|_{C^{0,\alpha}}\equiv\sup_{x\neq y\in\Omega}\frac{|f(x)-f(y)|}{\|x-y\|^\alpha}$
+
+  - $\mathscr{S}(U)\equiv$ smooth functions of rapid decrease
+  
+    - Schwartz space
+  
+    - $\|f\|_{\alpha,\beta}=\sup_{x\in U}|x^\alpha D^\beta f(x)|$
+  
+    - $\mathscr{S}=\{C^\infty:\|f\|_{\alpha,\beta}<\infty, \ \forall \ \alpha,\beta\in\N^n\}$
+  
+    - $\mathscr{S}^*=$ tempered distributions
+
+  - $L^p(U)\equiv\{f \ | \ \int_U|f|^pd\mu<\infty\}$
+  
+    - $(L^p)^*=L^{1-\frac{1}{p}}, \ 1\leq p\leq\infty$
+
+    - $(L^2)^*=L^2$
+
+  - $W^{k,p}(U)\equiv$ $L^p$ function with $k$th order weak derivatives
+  
+    - Sobolov space
+    
+    - $\|f\|_{W^{k,p}}=\left(\sum_{|\alpha|\leq k}\|D^\alpha f\|_p^p\right)^{1/p}, \ 1\leq p<\infty$
+    
+    - $\|f\|_{W^{k,p}}=\max_{|\alpha|\leq k}\|D^\alpha f\|_\infty, \ \ p=\infty$
+    
+  - $L^p_{\text{loc}}(U)=\{f:f\in L^p(K) \ \forall K\subset_c U\}$
+  
+    - $\{f:\int_U|f\phi|d\mu<\infty \ \forall \ \phi\in C_c^\infty\}$
+    
+  - càdlàg, RCLL, Skorohod space
