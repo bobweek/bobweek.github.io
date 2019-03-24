@@ -4,19 +4,18 @@
   color: #d1d1d1;
 }
 
-
 .dropdown-submenu .dropdown-menu li a {
   color: #000 !important;
   background-color: #ffffff;
 }
 
 .dropdown-submenu .dropdown-menu li:hover a:hover {
-  color: #ffffff !important;
-  background-color: #000;
+  color: #000 !important;
+  background-color: #ffffff;
 }
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
-    background-color: #222;
+    background-color: #000;
 }
 
 #TOC {
@@ -33,7 +32,7 @@ body{
     background-attachment: fixed;
     background-position: right top;
     /* Set the background image to no repeat */
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     /* Scale the background image to be as large as possible */
     background-size: cover;
 }

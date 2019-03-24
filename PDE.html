@@ -350,26 +350,29 @@ MathJax.Hub.Config({
 
 <div id="second-order-elliptic-equations" class="section level2">
 <h2>6.1 Second-order elliptic equations</h2>
-<p>We study problems of the form</p>
+<p>We study problems with Dirichlet boundary conditions:</p>
 <p><span class="math display">\[\begin{equation}
 \left\{\begin{matrix}
 Lu = f &amp; x\in U \\
 u = 0 &amp; x\in \partial U
-\end{matrix}\right.
+\end{matrix}\right. .
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(L\)</span> is a second order partial differential operator appearing as</p>
 <ul>
-<li>divergence form:</li>
+<li>divergence form (best used with energy methods):</li>
 </ul>
 <p><span class="math display">\[\begin{equation}
 Lu = -\sum_{i,j}\left(a^{ij}(x)u_{x_i}\right)_{x_j}+\sum_ib^i()u_{x_i}+c(x)u
 \end{equation}\]</span></p>
 <ul>
-<li>nondivergence form:</li>
+<li>nondivergence form (best used with maximum principle techs:</li>
 </ul>
 <p><span class="math display">\[\begin{equation}
 Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i()u_{x_i}+c(x)u
 \end{equation}\]</span></p>
+<p><strong>Def:</strong> <span class="math inline">\(L\)</span> is uniformly <em>elliptic</em> if there exists a constant <span class="math inline">\(\theta&gt;0\)</span> s.t.</p>
+<p><span class="math display">\[\sum_{i,j}a^{ij}(x)\xi_i\xi_j\geq\theta|\xi|^2\]</span></p>
+<p>for a.e. <span class="math inline">\(x\in U\)</span> and for all <span class="math inline">\(\xi\in\mathbb{R}^n\)</span>.</p>
 </div>
 
 

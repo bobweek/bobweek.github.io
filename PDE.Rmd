@@ -23,25 +23,32 @@ MathJax.Hub.Config({
 
 ## 6.1 Second-order elliptic equations
 
-We study problems of the form
+We study problems with Dirichlet boundary conditions:
 
 \begin{equation}
 \left\{\begin{matrix}
 Lu = f & x\in U \\
 u = 0 & x\in \partial U
-\end{matrix}\right.
+\end{matrix}\right. .
 \end{equation}
 
 where $L$ is a second order partial differential operator appearing as
 
-  - divergence form:
+  - divergence form (best used with energy methods):
 
 \begin{equation}
 Lu = -\sum_{i,j}\left(a^{ij}(x)u_{x_i}\right)_{x_j}+\sum_ib^i()u_{x_i}+c(x)u
 \end{equation}
 
-  - nondivergence form:
+  - nondivergence form (best used with maximum principle techs:
 
 \begin{equation}
 Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i()u_{x_i}+c(x)u
 \end{equation}
+
+__Def:__ $L$ is uniformly _elliptic_ if there exists a constant $\theta>0$ s.t.
+
+$$\sum_{i,j}a^{ij}(x)\xi_i\xi_j\geq\theta|\xi|^2$$
+
+for a.e. $x\in U$ and for all $\xi\in\R^n$.
+

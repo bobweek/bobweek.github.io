@@ -342,23 +342,65 @@ $(document).ready(function () {
 
 <div id="interactive-theory" class="section level1 tabset tabset-fade tabset-pills">
 <h1>Interactive theory</h1>
-<p>I made some applications to visualize and interact with (co)evolutionary theory.</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> I made some applications to visualize and interact with (co)evolutionary theory. </b>
+</p>
 <div id="d-migration-and-drift" class="section level2">
 <h2>1-D Migration and Drift</h2>
 <div align="middle">
 <p><a href="https://www.openprocessing.org/sketch/386248"><img src="images/driftMig.png" height="300" width="400"/></a></p>
 </div>
-<p>This application simulates the evolution of a trait for a species on a single spatial axis, the horizontal axis. Migration is modeled with a stepping stone model where migrants can move to neighboring sites only. The vertical displacement of the white dots shown represents trait values at each site. Two sliders are provided to allow the user to manipulate the migration rate and the variance of drift.</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> This application simulates the evolution of a trait for a species on a single spatial axis, the horizontal axis. Migration is modeled with a stepping stone model where migrants can move to neighboring sites only. The vertical displacement of the white dots shown represents trait values at each site. Two sliders are provided to allow the user to manipulate the migration rate and the variance of drift. </b>
+</p>
 <div id="mathematical-background" class="section level3">
 <h3>Mathematical background</h3>
-<p>We write <span class="math inline">\(\bar z(x,t)\)</span> for the value of the local mean trait at the point in space <span class="math inline">\(x\)</span> and moment in time <span class="math inline">\(t\)</span>. However, populations do not exist at points in space, but occupy regions. Hence, to evaluate the local mean trait on a bounded interval <span class="math inline">\(I=[a,b]\)</span>, we compute the spatial average</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> We write <span class="math inline">\(\bar z(x,t)\)</span> for the value of the local mean trait at the point in space <span class="math inline">\(x\)</span> and moment in time <span class="math inline">\(t\)</span>. However, populations do not exist at points in space, but occupy regions. Hence, to evaluate the local mean trait on a bounded interval <span class="math inline">\(I=[a,b]\)</span>, we compute the spatial average </b>
+</p>
 <p><span class="math display">\[\mu_t(I)\equiv\frac{1}{b-a}\int_a^b\bar z(x,t)dx.\]</span></p>
-<p>Since any bounded subset <span class="math inline">\(A\)</span> of the real line can be expressed as the disjoint union of bounded intevals (that is <span class="math inline">\(A=\cup_i I_i\)</span> where <span class="math inline">\(I_i\cap I_j=\emptyset\)</span> for each <span class="math inline">\(i,j\)</span>), this definition is naturally extended as</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Since any bounded subset <span class="math inline">\(A\)</span> of the real line can be expressed as the disjoint union of bounded intevals (that is <span class="math inline">\(A=\cup_i I_i\)</span> where <span class="math inline">\(I_i\cap I_j=\emptyset\)</span> for each <span class="math inline">\(i,j\)</span>), this definition is naturally extended as </b>
+</p>
 <p><span class="math display">\[\mu_t(A)\equiv\frac{1}{|A|}\int_A\bar z(x,t)dx.\]</span></p>
-<p>where <span class="math inline">\(|A|=\sum_i|I_i|=\sum_i(b_i-a_i)\)</span> denotes the Lebesgue measure (the sum of the lengths of component intervals). These calcualtions assume a constant abundance density across space.</p>
-<p>Under diffusive migration with rate <span class="math inline">\(m\)</span> and random genetic drift with variance <span class="math inline">\(\eta^2\)</span> the evolution of <span class="math inline">\(\bar z(x,t)\)</span> is given by</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> where <span class="math inline">\(|A|=\sum_i|I_i|=\sum_i(b_i-a_i)\)</span> denotes the Lebesgue measure (the sum of the lengths of component intervals). These calcualtions assume a constant abundance density across space. </b>
+</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Under diffusive migration with rate <span class="math inline">\(m\)</span> and random genetic drift with variance <span class="math inline">\(\eta^2\)</span> the evolution of <span class="math inline">\(\bar z(x,t)\)</span> is given by </b>
+</p>
 <p><span class="math display">\[\frac{d\bar z}{dt}=\frac{m}{2}\frac{\partial^2\bar z}{\partial x^2}+\eta\dot W\]</span></p>
-<p>where <span class="math inline">\(\dot W\)</span> is space-time white noise (that is, for each <span class="math inline">\(x\)</span>, <span class="math inline">\(W(x,t)\)</span> is a Brownian motion with respect to <span class="math inline">\(t\)</span>). The interaction between diffusion via local dispersal patterns and the stochasticity of genetic drift results in an ever shifting line. Somewhat surprisingly, although <span class="math inline">\(\dot W(x,t)\)</span> is nowhere continuous with respect <span class="math inline">\(x\)</span>, the infinite propogation property of diffusion implies that for every fixed <span class="math inline">\(t\)</span>, the curve <span class="math inline">\(\bar z(x,t)\)</span> is smooth in <span class="math inline">\(x\)</span> even though it is still random!</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> where <span class="math inline">\(\dot W\)</span> is space-time white noise (that is, for each <span class="math inline">\(x\)</span>, <span class="math inline">\(W(x,t)\)</span> is a Brownian motion with respect to <span class="math inline">\(t\)</span>). The interaction between diffusion via local dispersal patterns and the stochasticity of genetic drift results in an ever shifting line. Somewhat surprisingly, although <span class="math inline">\(\dot W(x,t)\)</span> is nowhere continuous with respect <span class="math inline">\(x\)</span>, the infinite propogation property of diffusion implies that for every fixed <span class="math inline">\(t\)</span>, the curve <span class="math inline">\(\bar z(x,t)\)</span> is smooth in <span class="math inline">\(x\)</span> even though it is still random! </b>
+</p>
 </div>
 </div>
 <div id="d-migration-drift-and-coevolution" class="section level2">
@@ -366,18 +408,54 @@ $(document).ready(function () {
 <div align="middle">
 <p><a href="https://www.openprocessing.org/sketch/401086"><img src="images/coev.png" height="300" width="600"/></a></p>
 </div>
-<p>This application simulates the coevolution of two species on a single spatial axis as a generalization of the above application. The traits involved for each species are colored red and green. At the bottom of the application is a time-series plot of the instantaneous spatial correlation between traits and the running average of this correlation. Spatial correlations have historically been used to determine support for a coevolutionary hypothesis, so it is an interesting quantity to track.</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> This application simulates the coevolution of two species on a single spatial axis as a generalization of the above application. The traits involved for each species are colored red and green. At the bottom of the application is a time-series plot of the instantaneous spatial correlation between traits and the running average of this correlation. Spatial correlations have historically been used to determine support for a coevolutionary hypothesis, so it is an interesting quantity to track. </b>
+</p>
 <div id="mathematical-background-1" class="section level3">
 <h3>Mathematical background</h3>
-<p>The model used here is a direct extension of the one developed above, except now we include biotic selection. I leave out the detailed derivation starting from the effects of interactions on the fitnesses of pairs of individuals and skip to the final system of differential equations that model the evolution of <span class="math inline">\(\bar z_1(x,t)\)</span> and <span class="math inline">\(\bar z_2(x,t)\)</span>.</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> The model used here is a direct extension of the one developed above, except now we include biotic selection. I leave out the detailed derivation starting from the effects of interactions on the fitnesses of pairs of individuals and skip to the final system of differential equations that model the evolution of <span class="math inline">\(\bar z_1(x,t)\)</span> and <span class="math inline">\(\bar z_2(x,t)\)</span>. </b>
+</p>
 <p><span class="math display">\[\frac{d\bar z_1}{dt}=G_1M_1(\bar z_2-\bar z_1)+G_1D_1\]</span> <span class="math display">\[+\frac{m_1}{2}\frac{\partial^2\bar z_1}{\partial x^2}+\eta_1\dot W_1\]</span></p>
 <p><span class="math display">\[\frac{d\bar z_2}{dt}=G_2M_2(\bar z_1-\bar z_2)-G_2D_2\]</span> <span class="math display">\[+\frac{m_2}{2}\frac{\partial^2\bar z_2}{\partial x^2}+\eta_2\dot W_2\]</span></p>
-<p>The parameter <span class="math inline">\(G_i\)</span> denotes the additive genetic variance of the focal trait in species <span class="math inline">\(i\)</span>, where as <span class="math inline">\(M_i\)</span> and <span class="math inline">\(D_i\)</span> denote the strengths of matching and differences selection respectively.</p>
-<p>The variance in local mean traits over a set <span class="math inline">\(A\)</span> can be written as</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> The parameter <span class="math inline">\(G_i\)</span> denotes the additive genetic variance of the focal trait in species <span class="math inline">\(i\)</span>, where as <span class="math inline">\(M_i\)</span> and <span class="math inline">\(D_i\)</span> denote the strengths of matching and differences selection respectively. </b>
+</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> The variance in local mean traits over a set <span class="math inline">\(A\)</span> can be written as </b>
+</p>
 <p><span class="math display">\[V_i(t)\equiv\frac{1}{|A|}\int_\mathbb{R}(\bar z_i(x,t)-\mu_i(t))^2dx.\]</span></p>
-<p>and the covariance</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> and the covariance </b>
+</p>
 <p><span class="math display">\[C(t)\equiv\frac{1}{|A|}\int_\mathbb{R}(\bar z_1(x,t)-\mu_1(t))(\bar z_2(x,t)-\mu_2(t))dx.\]</span></p>
-<p>Hence, the correlation can be tracked by computing <span class="math inline">\(\rho(t)\equiv\frac{C(t)}{\sqrt{V_1(t)V_2(t)}}\)</span> for each <span class="math inline">\(t\)</span>.</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Hence, the correlation can be tracked by computing <span class="math inline">\(\rho(t)\equiv\frac{C(t)}{\sqrt{V_1(t)V_2(t)}}\)</span> for each <span class="math inline">\(t\)</span>. </b>
+</p>
 </div>
 </div>
 <div id="d-migration-drift-and-coevolution-1" class="section level2">
@@ -385,10 +463,22 @@ $(document).ready(function () {
 <div align="middle">
 <p><a href="https://www.openprocessing.org/sketch/396443"><img src="images/three.png" height="300" width="500"/></a></p>
 </div>
-<p>Here three species coevolve across a two dimensional continuum (discretized into a grid for computational purposes). One species is colored blue, one red and one green. The trait values that evolve are brightness. To summarize these properties within each pixel, a weighted average of red, blue and green is computed, weighted by the mean brightness of each species within that pixel. The result is a colorful, evolving grid. The interactions between the three species can be thought of as a circular trophic system where each level consumes the next level and is consumed by the previous level. Because the three color values are bounded above and below, this induces an oscillating coevolutionary chase.</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Here three species coevolve across a two dimensional continuum (discretized into a grid for computational purposes). One species is colored blue, one red and one green. The trait values that evolve are brightness. To summarize these properties within each pixel, a weighted average of red, blue and green is computed, weighted by the mean brightness of each species within that pixel. The result is a colorful, evolving grid. The interactions between the three species can be thought of as a circular trophic system where each level consumes the next level and is consumed by the previous level. Because the three color values are bounded above and below, this induces an oscillating coevolutionary chase. </b>
+</p>
 <div id="mathematical-background-2" class="section level3">
 <h3>Mathematical background</h3>
-<p>The model invoked here builds directly upon the previously established chain of models given above. However, now <span class="math inline">\(x\in\mathbb{R}^2\)</span> and a third species is included in the interaction. The resulting spatial patterns are characteristic of classic reaction-diffusion processes. Indeed upon inspection, even with the complexity of three coevolving species and the intimidating theory of stochastic partial differential equations, the system is simply a linear set of reaction-diffusion equations. Hence, the math is about as tame as possible for the diversity of dynamics and patterns exhibited.</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> The model invoked here builds directly upon the previously established chain of models given above. However, now <span class="math inline">\(x\in\mathbb{R}^2\)</span> and a third species is included in the interaction. The resulting spatial patterns are characteristic of classic reaction-diffusion processes. Indeed upon inspection, even with the complexity of three coevolving species and the intimidating theory of stochastic partial differential equations, the system is simply a linear set of reaction-diffusion equations. Hence, the math is about as tame as possible for the diversity of dynamics and patterns exhibited. </b>
+</p>
 </div>
 </div>
 </div>

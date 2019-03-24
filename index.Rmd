@@ -14,13 +14,27 @@ output:
 
 </div>
 
-I am a PhD candidate at the University of Idaho working with professor [Scott Nuismer](https://www.leeef.org). My degree program is [Bioinformatics and Computational Biology](https://www.uidaho.edu/sci/bcb) (BCB) which is housed within [The Institute for Bioinformatics and Evolutionary Studies](http://www.ibest.uidaho.edu/) (IBEST).
+### What about Bob
 
-My CV is available [here](cv.pdf).
+<p align=justify style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;"><b>
+I am a PhD candidate at the University of Idaho working with professor [Scott Nuismer](https://www.leeef.org). My degree program is [Bioinformatics and Computational Biology](https://www.uidaho.edu/sci/bcb) (BCB) which is housed within [The Institute for Bioinformatics and Evolutionary Studies](http://www.ibest.uidaho.edu/) (IBEST). My CV is available [here](cv.pdf).
+</b>
+</p>
 
 ### PhD work
 
-My dissertation contributes to a coevolutionary theory of community ecology in the context of plant-pollinator networks. In particular, I am working on mathematical models that predict the patterns of interspecific interactions across an ecological community and developing statistical methods to detect various forms of coevolution occuring within such communities. Stochastic differential equations and simulations are my primary weapons for confronting these tasks. However, working with empiricists such as [Paul CaraDonna](https://paulcaradonna.weebly.com/) keeps me tethered to reality through fruitful conversations and excellent data.
+<p align=justify style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;"><b>
+My dissertation contributes to a coevolutionary theory of community ecology in the context of plant-pollinator networks. In particular, I am working on mathematical models that predict the patterns of interspecific interactions across ecological communities and developing statistical methods to measure various forms of coevolution occuring within such communities. Stochastic differential equations and simulations are my primary weapons for confronting these tasks. However, working with empiricists such as [Paul CaraDonna](https://paulcaradonna.weebly.com/) keeps me tethered to reality through fruitful conversations and excellent data.
+</b>
+</p>
 
 <!---
 

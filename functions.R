@@ -1,3 +1,5 @@
+require(mvtnorm)
+
 OR <- function(thing){
   thing <- as.vector(thing)
   ln <- length(thing)
