@@ -13,8 +13,12 @@ output:
 \newcommand{\<}{\left<}
 \newcommand{\>}{\right>}
 \newcommand{\ra}{\rightarrow}
+  
+### Spaces common in general analysis & PDE
+    
+  - $U\subset\R^n\dots$ an open Euclidean domain
 
-  - $U\subset\R^n$
+  - $B(U)\equiv$ bounded function, $|f|\leq M$
 
   - $C(U)\equiv$ continuous function
 
@@ -22,42 +26,138 @@ output:
 
   - $C_0(U)\equiv$ continuous functions that vanish at infinity
 
-  - $B(U)\equiv$ bounded function, $|f|\leq M$
+  - $C^k(U)\equiv$ $k$-times continuously differentiable functions
+  
+  - $C^k(\bar U)\equiv$ functions s.t $D^\alpha f$ is uniformly continuous on bounded subsets of $U$ for every $|\alpha|\leq k$.
 
   - $C^\infty(U)\equiv$ smooth functions
 
-  - $C_c^\infty(U)\equiv$ smooth functions with compact support
+  - $C^\infty(\bar U)\equiv\cap_{k=0}^\infty C^k(\bar U)$
 
-  - $C^{k,\alpha}\equiv\{f : |f(x)-f(y)|\leq C\|x-y\|^\alpha\}$
+  - $C_c^\infty(U)\equiv$ smooth functions with compact support (test functions)
   
-    - $|f|_{C^{0,\alpha}}\equiv\sup_{x\neq y\in\Omega}\frac{|f(x)-f(y)|}{\|x-y\|^\alpha}$
+  - $C^{0,\gamma}\equiv\{f : |f(x)-f(y)|\leq C\|x-y\|^\gamma\}$ the H&ouml;lder continuous functions
+  
+      - For $f\in B\cap C$, $\|f\|_{C(\bar U)}\equiv\sup_{x\in U}|f(x)|$
+  
+      - $[f]_{C^{0,\gamma}(\bar U)}\equiv\sup_{x\neq y\in U}\frac{|f(x)-f(y)|}{\|x-y\|^\gamma}$ the H&ouml;lder coefficient(seminorm)
+    
+      - $\|f\|_{C^{0,\gamma}(\bar U)}\equiv\|f\|_{C(\bar U)}+[f]_{C^{0,\gamma}(\bar U)}$
+    
+      - $\|f\|_{C^{k,\gamma}(\bar U)}\equiv\sum_{|\alpha|\leq k}\|D^\alpha f\|_{C(\bar U)}+\sum_{|\alpha|=k}\left[D^\alpha f\right]_{C^{0,\gamma}(\bar U)}$
+    
+    - $C^{k,\gamma}(\bar U)\equiv\{f:\|f\|_{C^{k,\gamma}}<\infty\}\dots$ H&ouml;lder space
+    
+      - $C^{k,\gamma}$ is a Banach space
+    
+  - $C^{k,1}$ are Lipschitz continuous (and analogous Lipschitz coeff)
+    
+    - $C(U)\subset C^{k,1}(U)$
 
-  - $\mathscr{S}(U)\equiv$ smooth functions of rapid decrease
-  
-    - Schwartz space
+  - $\mathscr{S}(U)\equiv$ smooth functions of rapid decrease (Schwartz space)
+    
+    - also used as a space of test functions
   
     - $\|f\|_{\alpha,\beta}=\sup_{x\in U}|x^\alpha D^\beta f(x)|$
   
-    - $\mathscr{S}=\{C^\infty:\|f\|_{\alpha,\beta}<\infty, \ \forall \ \alpha,\beta\in\N^n\}$
+    - $\mathscr{S}=\{f\in C^\infty:\|f\|_{\alpha,\beta}<\infty, \ \forall \ \alpha,\beta\in\N^n\}$
   
     - $\mathscr{S}^*=$ tempered distributions
 
-  - $L^p(U)\equiv\{f \ | \ \int_U|f|^pd\mu<\infty\}$
+  - Lebesgue spaces
+  
+    $$\|f\|_p\equiv\left\{\begin{matrix}
+    \left(\int_U|f|^pd\mu\right)^{1/p} & 1\leq p <\infty \\
+    \mathrm{ess}\sup_U|f| & p=\infty
+    \end{matrix}\right.$$
+  
+    - $\mathrm{ess}\sup_U|f|=\inf\{a:\mu(\{f>a\})=0, \ \{f>a\}\in \mathcal{B}(U)\}$
+  
+    - $L^p(U)\equiv\{f : \|f\|_p<\infty\}$
   
     - $(L^p)^*=L^{1-\frac{1}{p}}, \ 1\leq p\leq\infty$
 
-    - $(L^2)^*=L^2$
+      - $(L^2)^*=L^2$
 
-  - $W^{k,p}(U)\equiv$ $L^p$ function with $k$th order weak derivatives
+  - $L^p_{\text{loc}}(U)=\{f:f\in L^p(K) \ \forall \ K\subset_c U\}$
   
-    - Sobolov space
-    
-    - $\|f\|_{W^{k,p}}=\left(\sum_{|\alpha|\leq k}\|D^\alpha f\|_p^p\right)^{1/p}, \ 1\leq p<\infty$
-    
-    - $\|f\|_{W^{k,p}}=\max_{|\alpha|\leq k}\|D^\alpha f\|_\infty, \ \ p=\infty$
-    
-  - $L^p_{\text{loc}}(U)=\{f:f\in L^p(K) \ \forall K\subset_c U\}$
+    - $=\{f:\int_U|f|^p|\phi|d\mu<\infty \ \forall \ \phi\in C_c^\infty\}$
+
+  - Sobolov spaces
   
-    - $\{f:\int_U|f\phi|d\mu<\infty \ \forall \ \phi\in C_c^\infty\}$
+    - For $u,v\in L^p_{\text{loc}}(U)$, $D^\alpha u=v$ when 
     
-  - càdlàg, RCLL, Skorohod space
+      $$\int_UuD^\alpha\phi dx=(-1)^{|\alpha|}\int_Uv\phi dx \ \forall \ \phi\in C_c^\infty(U).$$
+  
+    - $W^{k,p}(U)\equiv\{f:f,D^\alpha f\in L^p \ \forall \ |\alpha|\leq k\}$
+    
+  $$\|f\|_{W^{k,p}}=\left\{\begin{matrix}
+      \left(\sum_{|\alpha|\leq k}\|D^\alpha f\|_p^p\right)^{1/p} & 1\leq p<\infty \\
+      \sum_{|\alpha|\leq k}\|D^\alpha f\|_\infty & p=\infty
+      \end{matrix}\right.$$
+  
+  - Sobolov spaces are Banach spaces    
+  
+  - $W_0^{k,p}=$ closure of $C_c^\infty$ in $W^{k,p}$.
+  
+    - $f\in W^{k,p}_0$ iff there exists $f_m\in C_c^\infty(U)$ s.t. $f_m\ra f$ in $W^{k,p}$. 
+  
+    - interpet as functions $f\in W^{k,p}$ s.t. "$D^\alpha f=0$ on $\partial U$" for all $|\alpha|\leq k-1$.
+
+### Spaces common in stochastic analysis & SDE
+  
+  - $(\Omega,\mathscr{F},P)\dots$ a probability space  
+  
+  - càdlàg, $RCLL$, Skorohod space: right continuous ($RC$) with left limits ($LL$)
+  
+    - $RC\implies f(t+)\equiv\lim_{s\downarrow t}f(s)=f(t)$.
+
+    - $LL\implies f(t-)\equiv\lim_{s\uparrow t}f(s)$ exists.
+  
+    - ex: Poisson process
+    
+  - Bernoulli process of the stopping time $T$:
+  
+    - $T(\omega)$ a nonnegative rv on $\Omega$
+  
+      $$\pmb{1}_{[0,T)}(t,\omega)=\left\{\begin{matrix}
+      1 & t< T(\omega) \\
+      0 & t\geq T(\omega)
+      \end{matrix}\right.$$
+  
+    - If $\pmb{1}_{[0,T)}(t)\in\mathscr{F}_t \ \forall \ t\geq0$ then $T$ is a stopping time.
+  
+    - If there exists a sequence of stopping times $T_1<T_2<\dots$ s.t. $T_n(\omega)\ra T(\omega)$, then $T$ is a predictable stopping time.
+  
+    - Let $T$ be a predictable stopping time. Then the following is a Bernoulli process
+    
+      $$\pmb{1}_{[0,T]}(t)=\left\{\begin{matrix}
+      1 & t\leq T \\
+      0 & t>T
+      \end{matrix}\right.$$
+    
+    - The space of all adapted processes forms a vector space $\mathscr{A}$.
+    
+    - $\pmb{G}\equiv$ smallest subspace of $\mathscr{A}$ which contains all predictable Bernoulli processes.
+    
+      - $\pmb{G}$ is the class of predictable processes.
+  
+  - class $D\equiv\{X\in RC: \{X_T\}_{T\in\mathcal{S}}$ is uniformly integrable $\}$
+  
+    - $\mathcal{S}\equiv$ stopping times $T$ of the filtration $\{\mathscr{F}_t\}$ s.t. $P(T<\infty)=1$.
+
+  - class $DL\equiv\{X\in RC: \{X_T\}_{T\in\mathcal{S_a}}$ is uniformly integrable $\forall \ 0<a<\infty\}$
+    
+    - $\mathcal{S}_a\equiv$ stopping times $T$ of the filtration $\{\mathscr{F}_t\}$ s.t. $P(T<a)=1$ for some finite $a$.
+  
+  - $\mathscr{M}_2\equiv\{X\in RC : X_0=0 \text{ a.s.}, \ EX_t^2<\infty \ \forall \ t\geq0\}$
+  
+    - Class of square integrable martingales
+    
+    - $\mathscr{M}_2^c\equiv\{X\in\mathscr{M}_2:X\text{ is continuous}\}$
+    
+### Spaces relevant for SPDE
+
+  - for $\rho\in L^1(U)$, $L_\rho^p(U)\equiv\{f:\int_U|f(x)|^p\rho(x) dx<\infty\}$
+  
+    - $L^p_\rho(U)=L^p(U,\mu)$ for $\mu(\mathcal{U})\equiv\int_\mathcal{U}\rho(x)dx$ for all $\mathcal{U}\in\mathcal{B}(U)$.

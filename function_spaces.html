@@ -288,13 +288,18 @@ $(document).ready(function () {
         <li><a href="interactive_theory.html">Interactive theory</a></li>
         <li><a href="measuring_coevolution.html">Measuring coevolution</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Math <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="ODE_arnold.html">ODE</a></li>
             <li><a href="da_prato_and_zabczyk.html">SPDE</a></li>
-            <li><a href="function_spaces.html">&210B</a></li>
             <li class="dropdown-submenu">
-            <a class="test" href="#">Harmonic Analysis<span class="caret"></span></a>
+            <a class="test" href="#">Cheat sheets<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="function_spaces.html">Function Spaces</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a class="test" href="#">Harmonic analysis<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="summary_of_convergence.html">conv</a></li>
               <li><a href="note_1_28.html">Jan 28</a></li>
@@ -336,42 +341,132 @@ $(document).ready(function () {
 
 
 
+<div id="spaces-common-in-general-analysis-pde" class="section level3">
+<h3>Spaces common in general analysis &amp; PDE</h3>
 <ul>
-<li><p><span class="math inline">\(U\subset\mathbb{R}^n\)</span></p></li>
+<li><p><span class="math inline">\(U\subset\mathbb{R}^n\dots\)</span> an open Euclidean domain</p></li>
+<li><p><span class="math inline">\(B(U)\equiv\)</span> bounded function, <span class="math inline">\(|f|\leq M\)</span></p></li>
 <li><p><span class="math inline">\(C(U)\equiv\)</span> continuous function</p></li>
 <li><p><span class="math inline">\(C_c(U)\equiv\)</span> continuous functions with compact support</p></li>
 <li><p><span class="math inline">\(C_0(U)\equiv\)</span> continuous functions that vanish at infinity</p></li>
-<li><p><span class="math inline">\(B(U)\equiv\)</span> bounded function, <span class="math inline">\(|f|\leq M\)</span></p></li>
+<li><p><span class="math inline">\(C^k(U)\equiv\)</span> <span class="math inline">\(k\)</span>-times continuously differentiable functions</p></li>
+<li><p><span class="math inline">\(C^k(\bar U)\equiv\)</span> functions s.t <span class="math inline">\(D^\alpha f\)</span> is uniformly continuous on bounded subsets of <span class="math inline">\(U\)</span> for every <span class="math inline">\(|\alpha|\leq k\)</span>.</p></li>
 <li><p><span class="math inline">\(C^\infty(U)\equiv\)</span> smooth functions</p></li>
-<li><p><span class="math inline">\(C_c^\infty(U)\equiv\)</span> smooth functions with compact support</p></li>
-<li><p><span class="math inline">\(C^{k,\alpha}\equiv\{f : |f(x)-f(y)|\leq C\|x-y\|^\alpha\}\)</span></p>
+<li><p><span class="math inline">\(C^\infty(\bar U)\equiv\cap_{k=0}^\infty C^k(\bar U)\)</span></p></li>
+<li><p><span class="math inline">\(C_c^\infty(U)\equiv\)</span> smooth functions with compact support (test functions)</p></li>
+<li><p><span class="math inline">\(C^{0,\gamma}\equiv\{f : |f(x)-f(y)|\leq C\|x-y\|^\gamma\}\)</span> the Hölder continuous functions</p>
 <ul>
-<li><span class="math inline">\(|f|_{C^{0,\alpha}}\equiv\sup_{x\neq y\in\Omega}\frac{|f(x)-f(y)|}{\|x-y\|^\alpha}\)</span></li>
+<li><p>For <span class="math inline">\(f\in B\cap C\)</span>, <span class="math inline">\(\|f\|_{C(\bar U)}\equiv\sup_{x\in U}|f(x)|\)</span></p></li>
+<li><p><span class="math inline">\([f]_{C^{0,\gamma}(\bar U)}\equiv\sup_{x\neq y\in U}\frac{|f(x)-f(y)|}{\|x-y\|^\gamma}\)</span> the Hölder coefficient(seminorm)</p></li>
+<li><p><span class="math inline">\(\|f\|_{C^{0,\gamma}(\bar U)}\equiv\|f\|_{C(\bar U)}+[f]_{C^{0,\gamma}(\bar U)}\)</span></p></li>
+<li><p><span class="math inline">\(\|f\|_{C^{k,\gamma}(\bar U)}\equiv\sum_{|\alpha|\leq k}\|D^\alpha f\|_{C(\bar U)}+\sum_{|\alpha|=k}\left[D^\alpha f\right]_{C^{0,\gamma}(\bar U)}\)</span></p></li>
+<li><p><span class="math inline">\(C^{k,\gamma}(\bar U)\equiv\{f:\|f\|_{C^{k,\gamma}}&lt;\infty\}\dots\)</span> Hölder space</p>
+<ul>
+<li><span class="math inline">\(C^{k,\gamma}\)</span> is a Banach space</li>
 </ul></li>
-<li><p><span class="math inline">\(\mathscr{S}(U)\equiv\)</span> smooth functions of rapid decrease</p>
+</ul></li>
+<li><p><span class="math inline">\(C^{k,1}\)</span> are Lipschitz continuous (and analogous Lipschitz coeff)</p>
 <ul>
-<li><p>Schwartz space</p></li>
+<li><span class="math inline">\(C(U)\subset C^{k,1}(U)\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(\mathscr{S}(U)\equiv\)</span> smooth functions of rapid decrease (Schwartz space)</p>
+<ul>
+<li><p>also used as a space of test functions</p></li>
 <li><p><span class="math inline">\(\|f\|_{\alpha,\beta}=\sup_{x\in U}|x^\alpha D^\beta f(x)|\)</span></p></li>
-<li><p><span class="math inline">\(\mathscr{S}=\{C^\infty:\|f\|_{\alpha,\beta}&lt;\infty, \ \forall \ \alpha,\beta\in\mathbb{N}^n\}\)</span></p></li>
+<li><p><span class="math inline">\(\mathscr{S}=\{f\in C^\infty:\|f\|_{\alpha,\beta}&lt;\infty, \ \forall \ \alpha,\beta\in\mathbb{N}^n\}\)</span></p></li>
 <li><p><span class="math inline">\(\mathscr{S}^*=\)</span> tempered distributions</p></li>
 </ul></li>
-<li><p><span class="math inline">\(L^p(U)\equiv\{f \ | \ \int_U|f|^pd\mu&lt;\infty\}\)</span></p>
+<li><p>Lebesgue spaces</p>
+<p><span class="math display">\[\|f\|_p\equiv\left\{\begin{matrix}
+\left(\int_U|f|^pd\mu\right)^{1/p} &amp; 1\leq p &lt;\infty \\
+\mathrm{ess}\sup_U|f| &amp; p=\infty
+\end{matrix}\right.\]</span></p>
 <ul>
-<li><p><span class="math inline">\((L^p)^*=L^{1-\frac{1}{p}}, \ 1\leq p\leq\infty\)</span></p></li>
-<li><p><span class="math inline">\((L^2)^*=L^2\)</span></p></li>
-</ul></li>
-<li><p><span class="math inline">\(W^{k,p}(U)\equiv\)</span> <span class="math inline">\(L^p\)</span> function with <span class="math inline">\(k\)</span>th order weak derivatives</p>
+<li><p><span class="math inline">\(\mathrm{ess}\sup_U|f|=\inf\{a:\mu(\{f&gt;a\})=0, \ \{f&gt;a\}\in \mathcal{B}(U)\}\)</span></p></li>
+<li><p><span class="math inline">\(L^p(U)\equiv\{f : \|f\|_p&lt;\infty\}\)</span></p></li>
+<li><p><span class="math inline">\((L^p)^*=L^{1-\frac{1}{p}}, \ 1\leq p\leq\infty\)</span></p>
 <ul>
-<li><p>Sobolov space</p></li>
-<li><p><span class="math inline">\(\|f\|_{W^{k,p}}=\left(\sum_{|\alpha|\leq k}\|D^\alpha f\|_p^p\right)^{1/p}, \ 1\leq p&lt;\infty\)</span></p></li>
-<li><p><span class="math inline">\(\|f\|_{W^{k,p}}=\max_{|\alpha|\leq k}\|D^\alpha f\|_\infty, \ \ p=\infty\)</span></p></li>
+<li><span class="math inline">\((L^2)^*=L^2\)</span></li>
 </ul></li>
-<li><p><span class="math inline">\(L^p_{\text{loc}}(U)=\{f:f\in L^p(K) \ \forall K\subset_c U\}\)</span></p>
+</ul></li>
+<li><p><span class="math inline">\(L^p_{\text{loc}}(U)=\{f:f\in L^p(K) \ \forall \ K\subset_c U\}\)</span></p>
 <ul>
-<li><span class="math inline">\(\{f:\int_U|f\phi|d\mu&lt;\infty \ \forall \ \phi\in C_c^\infty\}\)</span></li>
+<li><span class="math inline">\(=\{f:\int_U|f|^p|\phi|d\mu&lt;\infty \ \forall \ \phi\in C_c^\infty\}\)</span></li>
 </ul></li>
-<li><p>càdlàg, RCLL, Skorohod space</p></li>
+<li><p>Sobolov spaces</p>
+<ul>
+<li><p>For <span class="math inline">\(u,v\in L^p_{\text{loc}}(U)\)</span>, <span class="math inline">\(D^\alpha u=v\)</span> when</p>
+<p><span class="math display">\[\int_UuD^\alpha\phi dx=(-1)^{|\alpha|}\int_Uv\phi dx \ \forall \ \phi\in C_c^\infty(U).\]</span></p></li>
+<li><p><span class="math inline">\(W^{k,p}(U)\equiv\{f:f,D^\alpha f\in L^p \ \forall \ |\alpha|\leq k\}\)</span></p></li>
+</ul></li>
 </ul>
+<p><span class="math display">\[\|f\|_{W^{k,p}}=\left\{\begin{matrix}
+      \left(\sum_{|\alpha|\leq k}\|D^\alpha f\|_p^p\right)^{1/p} &amp; 1\leq p&lt;\infty \\
+      \sum_{|\alpha|\leq k}\|D^\alpha f\|_\infty &amp; p=\infty
+      \end{matrix}\right.\]</span></p>
+<ul>
+<li><p>Sobolov spaces are Banach spaces</p></li>
+<li><p><span class="math inline">\(W_0^{k,p}=\)</span> closure of <span class="math inline">\(C_c^\infty\)</span> in <span class="math inline">\(W^{k,p}\)</span>.</p>
+<ul>
+<li><p><span class="math inline">\(f\in W^{k,p}_0\)</span> iff there exists <span class="math inline">\(f_m\in C_c^\infty(U)\)</span> s.t. <span class="math inline">\(f_m\rightarrow f\)</span> in <span class="math inline">\(W^{k,p}\)</span>.</p></li>
+<li><p>interpet as functions <span class="math inline">\(f\in W^{k,p}\)</span> s.t. “<span class="math inline">\(D^\alpha f=0\)</span> on <span class="math inline">\(\partial U\)</span>” for all <span class="math inline">\(|\alpha|\leq k-1\)</span>.</p></li>
+</ul></li>
+</ul>
+</div>
+<div id="spaces-common-in-stochastic-analysis-sde" class="section level3">
+<h3>Spaces common in stochastic analysis &amp; SDE</h3>
+<ul>
+<li><p><span class="math inline">\((\Omega,\mathscr{F},P)\dots\)</span> a probability space</p></li>
+<li><p>càdlàg, <span class="math inline">\(RCLL\)</span>, Skorohod space: right continuous (<span class="math inline">\(RC\)</span>) with left limits (<span class="math inline">\(LL\)</span>)</p>
+<ul>
+<li><p><span class="math inline">\(RC\implies f(t+)\equiv\lim_{s\downarrow t}f(s)=f(t)\)</span>.</p></li>
+<li><p><span class="math inline">\(LL\implies f(t-)\equiv\lim_{s\uparrow t}f(s)\)</span> exists.</p></li>
+<li><p>ex: Poisson process</p></li>
+</ul></li>
+<li><p>Bernoulli process of the stopping time <span class="math inline">\(T\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(T(\omega)\)</span> a nonnegative rv on <span class="math inline">\(\Omega\)</span></p>
+<p><span class="math display">\[\pmb{1}_{[0,T)}(t,\omega)=\left\{\begin{matrix}
+1 &amp; t&lt; T(\omega) \\
+0 &amp; t\geq T(\omega)
+\end{matrix}\right.\]</span></p></li>
+<li><p>If <span class="math inline">\(\pmb{1}_{[0,T)}(t)\in\mathscr{F}_t \ \forall \ t\geq0\)</span> then <span class="math inline">\(T\)</span> is a stopping time.</p></li>
+<li><p>If there exists a sequence of stopping times <span class="math inline">\(T_1&lt;T_2&lt;\dots\)</span> s.t. <span class="math inline">\(T_n(\omega)\rightarrow T(\omega)\)</span>, then <span class="math inline">\(T\)</span> is a predictable stopping time.</p></li>
+<li><p>Let <span class="math inline">\(T\)</span> be a predictable stopping time. Then the following is a Bernoulli process</p>
+<p><span class="math display">\[\pmb{1}_{[0,T]}(t)=\left\{\begin{matrix}
+1 &amp; t\leq T \\
+0 &amp; t&gt;T
+\end{matrix}\right.\]</span></p></li>
+<li><p>The space of all adapted processes forms a vector space <span class="math inline">\(\mathscr{A}\)</span>.</p></li>
+<li><p><span class="math inline">\(\pmb{G}\equiv\)</span> smallest subspace of <span class="math inline">\(\mathscr{A}\)</span> which contains all predictable Bernoulli processes.</p>
+<ul>
+<li><span class="math inline">\(\pmb{G}\)</span> is the class of predictable processes.</li>
+</ul></li>
+</ul></li>
+<li><p>class <span class="math inline">\(D\equiv\{X\in RC: \{X_T\}_{T\in\mathcal{S}}\)</span> is uniformly integrable <span class="math inline">\(\}\)</span></p>
+<ul>
+<li><span class="math inline">\(\mathcal{S}\equiv\)</span> stopping times <span class="math inline">\(T\)</span> of the filtration <span class="math inline">\(\{\mathscr{F}_t\}\)</span> s.t. <span class="math inline">\(P(T&lt;\infty)=1\)</span>.</li>
+</ul></li>
+<li><p>class <span class="math inline">\(DL\equiv\{X\in RC: \{X_T\}_{T\in\mathcal{S_a}}\)</span> is uniformly integrable <span class="math inline">\(\forall \ 0&lt;a&lt;\infty\}\)</span></p>
+<ul>
+<li><span class="math inline">\(\mathcal{S}_a\equiv\)</span> stopping times <span class="math inline">\(T\)</span> of the filtration <span class="math inline">\(\{\mathscr{F}_t\}\)</span> s.t. <span class="math inline">\(P(T&lt;a)=1\)</span> for some finite <span class="math inline">\(a\)</span>.</li>
+</ul></li>
+<li><p><span class="math inline">\(\mathscr{M}_2\equiv\{X\in RC : X_0=0 \text{ a.s.}, \ EX_t^2&lt;\infty \ \forall \ t\geq0\}\)</span></p>
+<ul>
+<li><p>Class of square integrable martingales</p></li>
+<li><p><span class="math inline">\(\mathscr{M}_2^c\equiv\{X\in\mathscr{M}_2:X\text{ is continuous}\}\)</span></p></li>
+</ul></li>
+</ul>
+</div>
+<div id="spaces-relevant-for-spde" class="section level3">
+<h3>Spaces relevant for SPDE</h3>
+<ul>
+<li><p>for <span class="math inline">\(\rho\in L^1(U)\)</span>, <span class="math inline">\(L_\rho^p(U)\equiv\{f:\int_U|f(x)|^p\rho(x) dx&lt;\infty\}\)</span></p>
+<ul>
+<li><span class="math inline">\(L^p_\rho(U)=L^p(U,\mu)\)</span> for <span class="math inline">\(\mu(\mathcal{U})\equiv\int_\mathcal{U}\rho(x)dx\)</span> for all <span class="math inline">\(\mathcal{U}\in\mathcal{B}(U)\)</span>.</li>
+</ul></li>
+</ul>
+</div>
 
 
 

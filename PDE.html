@@ -9,9 +9,10 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Lawrence C. Evans" />
 
 
-<title>Harmonic Analysis 03-22-19</title>
+<title>Partial differential equations</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -335,48 +336,40 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Harmonic Analysis 03-22-19</h1>
+<h1 class="title toc-ignore">Partial differential equations</h1>
+<h4 class="author">Lawrence C. Evans</h4>
 
 </div>
 
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
 
-<div id="the-windowed-fourier-transform" class="section level1">
-<h1>The Windowed Fourier transform</h1>
-<p><span class="math display">\[L^2(U), \ U=[0,1),\mathbb{R}\]</span></p>
-<p>The std Fourier transform of <span class="math inline">\(f\)</span></p>
-<p><span class="math display">\[\hat f(\gamma)=\int_\mathbb{R}f(t)e^{-2\pi i \gamma t}dt.\]</span></p>
-<p>Does not tell us which frequencies are present at a time-point <span class="math inline">\(t_0\)</span>.</p>
+<div id="second-order-elliptic-equations" class="section level2">
+<h2>6.1 Second-order elliptic equations</h2>
+<p>We study problems of the form</p>
+<p><span class="math display">\[\begin{equation}
+\left\{\begin{matrix}
+Lu = f &amp; x\in U \\
+u = 0 &amp; x\in \partial U
+\end{matrix}\right.
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(L\)</span> is a second order partial differential operator appearing as</p>
 <ul>
-<li><strong>ex:</strong> in music you might want to know which notes are played at a particular moment.</li>
+<li>divergence form:</li>
 </ul>
-<p>Set <span class="math inline">\(\chi_A(x)\)</span> to be the characteristic function of <span class="math inline">\(A\)</span>. We know that <span class="math inline">\(\{e^{i2\pi nx}\}_{n\in\mathbb{Z}}\)</span> is an ONB of <span class="math inline">\(L^2[0,1)\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+Lu = -\sum_{i,j}\left(a^{ij}(x)u_{x_i}\right)_{x_j}+\sum_ib^i()u_{x_i}+c(x)u
+\end{equation}\]</span></p>
 <ul>
-<li><strong>Idea:</strong> <span class="math inline">\(\{e^{i2\pi nx}\chi_{[k,k+1)}(x)\}_{n\in\mathbb{Z}}\)</span> is an ONB of <span class="math inline">\(L^2[k,k+1)\)</span> for all <span class="math inline">\(k\in\mathbb{Z}\)</span>.</li>
+<li>nondivergence form:</li>
 </ul>
-<p>Or, as Somantika has done, <span class="math inline">\(\{e^{i2\pi n(x-k)}\chi_{[0,1)}(x-k)\}_{n\in\mathbb{Z}}\)</span> is an ONB of <span class="math inline">\(L^2[0,1)\)</span> for all <span class="math inline">\(k\in\mathbb{Z}\)</span>. This simplifies to what I have written above.</p>
-<p>Thus, the set</p>
-<p><span class="math display">\[\{e^{i2\pi nx}\chi_{[0,1)}(x-k)\}_{n,k\in\mathbb{Z}}\]</span></p>
-<p>is an ONB of <span class="math inline">\(L^2(\mathbb{R})\)</span>. Here each basis vector is a translation and modulation (multiplaction by an <span class="math inline">\(n\)</span>th root of unity) of <span class="math inline">\(\chi_{[0,1)}\)</span>.</p>
-<p>Set <span class="math inline">\(g_{n,k}=e^{i2\pi nx}\chi_{[0,1)}(x-k)\)</span>.</p>
-<p>The windowed Fourier transform is a map <span class="math inline">\(G\)</span> given by</p>
-<p><span class="math display">\[(Gf)(n,k)\equiv\int_k^{k+1}f(x)e^{-2\pi i n x}dx=\left&lt;f,g_{n,k}\right&gt;\]</span></p>
-<p>This is time-frequency localization. <span class="math inline">\(n\)</span> is the freq and <span class="math inline">\(k\)</span> is the time-window.</p>
-<p>From above we have</p>
-<p><span class="math display">\[f=\sum_{n,k}\left&lt;f,g_{n,k}\right&gt;g_{n,k}.\]</span></p>
-<div id="changing-the-size-of-the-window" class="section level3">
-<h3>Changing the size of the window</h3>
-<p>Let <span class="math inline">\(\{a_k\}_{k\in\mathbb{Z}}\)</span> define the partition of <span class="math inline">\(\mathbb{R}\)</span>, <span class="math inline">\(\{[a_k,a_{k+1})\}_{k\in\mathbb{Z}}\)</span>. Set <span class="math inline">\(L_k=a_{k+1}-a_k\)</span> and on each window we use the Fourier basis</p>
-<p><span class="math display">\[\left\{\frac{1}{\sqrt{L_k}}e^{-\frac{2\pi i nx}{L_k}}\chi_{[a_k,a_{k+1})}(x)\right\}_{n,k\in\mathbb{Z}}.\]</span></p>
-<p>In this case, where <span class="math inline">\(f\)</span> changes a lot, we can take intervals of smaller size, and where <span class="math inline">\(f\)</span> does not change much, we can take intervals of larger size.</p>
-</div>
-<div id="swapping-out-chi-for-a-smooth-function-gabor-bases" class="section level3">
-<h3>Swapping out <span class="math inline">\(\chi\)</span> for a smooth function (Gabor bases)</h3>
-<p>One can take windows that are smoother than <span class="math inline">\(\chi_{[0,1)}\)</span>. This gives further generalizations.</p>
-<p><strong>Def:</strong> A function <span class="math inline">\(g\in L^2(\mathbb{R})\)</span> is a Gabor function if the family of its modulated integer translates (<span class="math inline">\(g_{n,k}(x)=e^{2\pi i nx}g(x-k), \ n,k\in\mathbb{Z}\)</span>) form an ONB for <span class="math inline">\(L^2(\mathbb{R})\)</span>. This basis is a Gabor basis.</p>
-<p>This is a bit different from wavelets, which involve scalings instead of translations.</p>
-<p>A trade-off between compactness and smoothness.</p>
-</div>
+<p><span class="math display">\[\begin{equation}
+Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i()u_{x_i}+c(x)u
+\end{equation}\]</span></p>
 </div>
 
 

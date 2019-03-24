@@ -1,0 +1,47 @@
+---
+title: "Partial differential equations"
+author: "Lawrence C. Evans"
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+
+## 6.1 Second-order elliptic equations
+
+We study problems of the form
+
+\begin{equation}
+\left\{\begin{matrix}
+Lu = f & x\in U \\
+u = 0 & x\in \partial U
+\end{matrix}\right.
+\end{equation}
+
+where $L$ is a second order partial differential operator appearing as
+
+  - divergence form:
+
+\begin{equation}
+Lu = -\sum_{i,j}\left(a^{ij}(x)u_{x_i}\right)_{x_j}+\sum_ib^i()u_{x_i}+c(x)u
+\end{equation}
+
+  - nondivergence form:
+
+\begin{equation}
+Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i()u_{x_i}+c(x)u
+\end{equation}
