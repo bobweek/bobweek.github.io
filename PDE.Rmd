@@ -48,7 +48,58 @@ Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i()u_{x_i}+c(x)u
 
 __Def:__ $L$ is uniformly _elliptic_ if there exists a constant $\theta>0$ s.t.
 
-$$\sum_{i,j}a^{ij}(x)\xi_i\xi_j\geq\theta|\xi|^2$$
+\begin{equation}
+\sum_{i,j}a^{ij}(x)\xi_i\xi_j\geq\theta|\xi|^2
+\end{equation}
 
-for a.e. $x\in U$ and for all $\xi\in\R^n$.
+for a.e. $x\in U$ and for all $\xi\in\R^n$. $\diamond$
+
+  - If $L$ is elliptic, then for each $x\in U$ the matrix $\pmb{A}(x)=(a^{ij}(x))$ is positive definite, with smallest eigenvalue $\geq0$.
+  
+  - If $a^{ij}=\delta_{ij}, \ b^i=0, \ c=0$, then $L=-\Delta$
+  
+  - __Population dynamics:__ If we set $f=u_t$, the terms $a$ represent diffusive migration, $b$ directional migration/taxis, $c$ the Malthusian fitness. However, this is not technically an elliptic equation...
+  
+### 6.1.2 Weak solutions
+
+Assume $a^{ij},b^i,c\in L^\infty(U)$ & $f\in L^2(U)$ and that $L$ is in divergence form $(2)$.
+
+__Def:__
+
+  i) The _bilinear form_ $B[ \ , \ ]$ associated with the divergence form elliptic operator $L$ is
+  
+  $$B[u,v]\equiv\int_U\left(\sum_{ij}a^{ij}u_{x_i}u_{x_j}+\sum_ib^iu_{x_i}v+cuv\right)dx$$
+
+for $u,v\in H_0^1(U)$.
+
+  ii) $u\in H_0^1(U)$ is a _weak solution_ of the BVP $(1)$ if
+  
+  $$B[u,v]=(f,v)\equiv\int_U f(x)v(x)dx$$
+  
+for all $v\in H_0^1(U)$.
+
+--------------------------------------
+  
+#### Characterization of $H^{-1}$
+
+  i) For $f\in H^{-1}$ there exist functions $f^0,\dots,f^n\in L^2$ ($n=\dim(U)$) s.t.
+  
+  $$\left<f,v\right>=\int_U\left(f^0v+\sum_if^iv_{x_i}\right)dx, \ (v\in H_0^1)$$
+
+  ii) Also,
+  
+  $$\|f\|_{H^{-1}}=\inf\left\{\left(\int_U\sum_i|f^i|^2dx\right)^{1/2}:
+  f\text{ satisfies i. for the specified }f^0,\dots,f^n\in L^2\right\}$$
+
+  iii) In particular,
+  
+  $$(v,u)_{L^2}=\left<v,u\right>$$
+
+  for all $u\in H^1_0, \ v\in L^2\subset H^{-1}$.
+
+__Notation:__ Write "$f=f^0-\sum_if^i_{x_i}$" whenever i. holds.
+
+--------------------------------------
+
+Consider the boundary value problem
 

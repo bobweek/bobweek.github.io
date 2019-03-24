@@ -103,6 +103,20 @@ output:
     - $f\in W^{k,p}_0$ iff there exists $f_m\in C_c^\infty(U)$ s.t. $f_m\ra f$ in $W^{k,p}$. 
   
     - interpet as functions $f\in W^{k,p}$ s.t. "$D^\alpha f=0$ on $\partial U$" for all $|\alpha|\leq k-1$.
+    
+  - $H^k(U)=W^{k,2}(U)$
+  
+    - $H^0(U)=L^2(U)$
+    
+    - $H^k_0(U)=W^{k,2}_0(U)$
+    
+    - $H^{-1}\equiv(H_0^1)^*$, although $H^k_0$ is a Hilbert space, we do not identify it with it dual $H^{-1}$.
+    
+    $$H_0^1\subset L^2\subset H^{-1}$$
+
+      - $\left<f,g\right>$ is the "inner-product" between $H^{-1}$ and $H^1_0$ for $f\in H^{-1}$ and $v\in H_0^1$.
+
+      - $\|f\|_{H^{-1}}\equiv\sup\{\left<f,u\right>:u\in H_0^1,\|u\|\leq1\}$
 
 ### Spaces common in stochastic analysis & SDE
   

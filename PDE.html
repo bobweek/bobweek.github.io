@@ -292,6 +292,7 @@ $(document).ready(function () {
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="ODE_arnold.html">ODE</a></li>
+            <li><a href="PDE.html">PDE</a></li>
             <li><a href="da_prato_and_zabczyk.html">SPDE</a></li>
             <li class="dropdown-submenu">
             <a class="test" href="#">Cheat sheets<span class="caret"></span></a>
@@ -371,8 +372,51 @@ Lu = -\sum_{i,j}\left(a^{ij}(x)u_{x_i}\right)_{x_j}+\sum_ib^i()u_{x_i}+c(x)u
 Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i()u_{x_i}+c(x)u
 \end{equation}\]</span></p>
 <p><strong>Def:</strong> <span class="math inline">\(L\)</span> is uniformly <em>elliptic</em> if there exists a constant <span class="math inline">\(\theta&gt;0\)</span> s.t.</p>
-<p><span class="math display">\[\sum_{i,j}a^{ij}(x)\xi_i\xi_j\geq\theta|\xi|^2\]</span></p>
-<p>for a.e. <span class="math inline">\(x\in U\)</span> and for all <span class="math inline">\(\xi\in\mathbb{R}^n\)</span>.</p>
+<p><span class="math display">\[\begin{equation}
+\sum_{i,j}a^{ij}(x)\xi_i\xi_j\geq\theta|\xi|^2
+\end{equation}\]</span></p>
+<p>for a.e. <span class="math inline">\(x\in U\)</span> and for all <span class="math inline">\(\xi\in\mathbb{R}^n\)</span>. <span class="math inline">\(\diamond\)</span></p>
+<ul>
+<li><p>If <span class="math inline">\(L\)</span> is elliptic, then for each <span class="math inline">\(x\in U\)</span> the matrix <span class="math inline">\(\pmb{A}(x)=(a^{ij}(x))\)</span> is positive definite, with smallest eigenvalue <span class="math inline">\(\geq0\)</span>.</p></li>
+<li><p>If <span class="math inline">\(a^{ij}=\delta_{ij}, \ b^i=0, \ c=0\)</span>, then <span class="math inline">\(L=-\Delta\)</span></p></li>
+<li><p><strong>Population dynamics:</strong> If we set <span class="math inline">\(f=u_t\)</span>, the terms <span class="math inline">\(a\)</span> represent diffusive migration, <span class="math inline">\(b\)</span> directional migration/taxis, <span class="math inline">\(c\)</span> the Malthusian fitness. However, this is not technically an elliptic equation…</p></li>
+</ul>
+<div id="weak-solutions" class="section level3">
+<h3>6.1.2 Weak solutions</h3>
+<p>Assume <span class="math inline">\(a^{ij},b^i,c\in L^\infty(U)\)</span> &amp; <span class="math inline">\(f\in L^2(U)\)</span> and that <span class="math inline">\(L\)</span> is in divergence form <span class="math inline">\((2)\)</span>.</p>
+<p><strong>Def:</strong></p>
+<ol style="list-style-type: lower-roman">
+<li>The <em>bilinear form</em> <span class="math inline">\(B[ \ , \ ]\)</span> associated with the divergence form elliptic operator <span class="math inline">\(L\)</span> is</li>
+</ol>
+<p><span class="math display">\[B[u,v]\equiv\int_U\left(\sum_{ij}a^{ij}u_{x_i}u_{x_j}+\sum_ib^iu_{x_i}v+cuv\right)dx\]</span></p>
+<p>for <span class="math inline">\(u,v\in H_0^1(U)\)</span>.</p>
+<ol start="2" style="list-style-type: lower-roman">
+<li><span class="math inline">\(u\in H_0^1(U)\)</span> is a <em>weak solution</em> of the BVP <span class="math inline">\((1)\)</span> if</li>
+</ol>
+<p><span class="math display">\[B[u,v]=(f,v)\equiv\int_U f(x)v(x)dx\]</span></p>
+<p>for all <span class="math inline">\(v\in H_0^1(U)\)</span>.</p>
+<hr />
+<div id="characterization-of-h-1" class="section level4">
+<h4>Characterization of <span class="math inline">\(H^{-1}\)</span></h4>
+<ol style="list-style-type: lower-roman">
+<li>For <span class="math inline">\(f\in H^{-1}\)</span> there exist functions <span class="math inline">\(f^0,\dots,f^n\in L^2\)</span> (<span class="math inline">\(n=\dim(U)\)</span>) s.t.</li>
+</ol>
+<p><span class="math display">\[\left&lt;f,v\right&gt;=\int_U\left(f^0v+\sum_if^iv_{x_i}\right)dx, \ (v\in H_0^1)\]</span></p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>Also,</li>
+</ol>
+<p><span class="math display">\[\|f\|_{H^{-1}}=\inf\left\{\left(\int_U\sum_i|f^i|^2dx\right)^{1/2}:
+  f\text{ satisfies i. for the specified }f^0,\dots,f^n\in L^2\right\}\]</span></p>
+<ol start="3" style="list-style-type: lower-roman">
+<li>In particular,</li>
+</ol>
+<p><span class="math display">\[(v,u)_{L^2}=\left&lt;v,u\right&gt;\]</span></p>
+<p>for all <span class="math inline">\(u\in H^1_0, \ v\in L^2\subset H^{-1}\)</span>.</p>
+<p><strong>Notation:</strong> Write “<span class="math inline">\(f=f^0-\sum_if^i_{x_i}\)</span>” whenever i. holds.</p>
+<hr />
+<p>Consider the boundary value problem</p>
+</div>
+</div>
 </div>
 
 

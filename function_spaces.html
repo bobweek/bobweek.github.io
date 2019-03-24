@@ -291,6 +291,7 @@ $(document).ready(function () {
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="ODE_arnold.html">ODE</a></li>
+            <li><a href="PDE.html">PDE</a></li>
             <li><a href="da_prato_and_zabczyk.html">SPDE</a></li>
             <li class="dropdown-submenu">
             <a class="test" href="#">Cheat sheets<span class="caret"></span></a>
@@ -410,6 +411,17 @@ $(document).ready(function () {
 <ul>
 <li><p><span class="math inline">\(f\in W^{k,p}_0\)</span> iff there exists <span class="math inline">\(f_m\in C_c^\infty(U)\)</span> s.t. <span class="math inline">\(f_m\rightarrow f\)</span> in <span class="math inline">\(W^{k,p}\)</span>.</p></li>
 <li><p>interpet as functions <span class="math inline">\(f\in W^{k,p}\)</span> s.t. “<span class="math inline">\(D^\alpha f=0\)</span> on <span class="math inline">\(\partial U\)</span>” for all <span class="math inline">\(|\alpha|\leq k-1\)</span>.</p></li>
+</ul></li>
+<li><p><span class="math inline">\(H^k(U)=W^{k,2}(U)\)</span></p>
+<ul>
+<li><p><span class="math inline">\(H^0(U)=L^2(U)\)</span></p></li>
+<li><p><span class="math inline">\(H^k_0(U)=W^{k,2}_0(U)\)</span></p></li>
+<li><p><span class="math inline">\(H^{-1}\equiv(H_0^1)^*\)</span>, although <span class="math inline">\(H^k_0\)</span> is a Hilbert space, we do not identify it with it dual <span class="math inline">\(H^{-1}\)</span>.</p></li>
+</ul>
+<p><span class="math display">\[H_0^1\subset L^2\subset H^{-1}\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\left&lt;f,g\right&gt;\)</span> is the “inner-product” between <span class="math inline">\(H^{-1}\)</span> and <span class="math inline">\(H^1_0\)</span> for <span class="math inline">\(f\in H^{-1}\)</span> and <span class="math inline">\(v\in H_0^1\)</span>.</p></li>
+<li><p><span class="math inline">\(\|f\|_{H^{-1}}\equiv\sup\{\left&lt;f,u\right&gt;:u\in H_0^1,\|u\|\leq1\}\)</span></p></li>
 </ul></li>
 </ul>
 </div>
