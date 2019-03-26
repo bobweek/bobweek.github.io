@@ -169,9 +169,14 @@ output:
     - Class of square integrable martingales
     
     - $\mathscr{M}_2^c\equiv\{X\in\mathscr{M}_2:X\text{ is continuous}\}$
+
+  - Topological vector space (TVS: a vector space with a topological structure)
+  
+    - 
     
 ### Spaces relevant for SPDE
 
   - for $\rho\in L^1(U)$, $L_\rho^p(U)\equiv\{f:\int_U|f(x)|^p\rho(x) dx<\infty\}$
   
     - $L^p_\rho(U)=L^p(U,\mu)$ for $\mu(\mathcal{U})\equiv\int_\mathcal{U}\rho(x)dx$ for all $\mathcal{U}\in\mathcal{B}(U)$.
+

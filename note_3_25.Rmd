@@ -1,0 +1,119 @@
+---
+title: "Harmonic Analysis 03-25-19"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sinc}{\mathrm{sinc}}
+\newcommand{\supp}{\mathrm{supp}}
+
+## Gabor bases (for $L^2$)
+
+__Def:__ A function $g\in L^2$ is a _Gabor function_ if the family 
+
+$$\{g_{n,k}(x)=g(x-k)e^{i2\pi nx}\}$$
+
+is an ONB of $L^2$. The family is then referred to as _Gabor basis_. 
+
+  - ex: $\chi_[0,1)$ is Gabor function
+
+__Recall:__
+
+$$\hat f(\gamma)=\mathscr{F}(f)=\int_\R f(x)e^{-2\pi i x\gamma}dx$$
+
+$$\mathscr{F}^{-1}(g)=\int_\R g(\gamma)e^{2\pi i x \gamma}d\gamma$$
+
+In particular, $\mathscr{F}\circ\mathscr{F}^{-1}=\mathscr{F}^{-1}\circ\mathscr{F}=I$.
+
+__Def:__ The adjoint of a linear transformation $T$ is, denoted by $T^*$, is defined to satisfy
+
+$$\left<Tf,g\right>=\left<f,T^*g\right>.$$
+
+  - finding the adjoint of $\mathscr{F}$:
+  
+$$\left<\mathscr{F}f,g\right>=\int_\R\hat f(\gamma)\bar g(\gamma)d\gamma$$
+
+$$=\int_\R\int_\R f(x)e^{-2\pi i x\gamma}\bar g(\gamma)dxd\gamma$$
+
+$$=\int_\R f(x)\int_\R\bar g(\gamma)e^{-2\pi i x\gamma}d\gamma dx$$
+
+$$=\int_\R f(x)\overline{\int_\R g(\gamma)e^{2\pi i x\gamma}d\gamma dx}$$
+
+$$=\int_\R f(x)\overline{\left(\mathscr{F}^{-1}g\right)(x)}dx$$
+
+$$=\left< f,\mathscr{F}^{-1}g\right>.$$
+
+Hence $\mathscr{F}^*=\mathscr{F}^{-1}$.
+
+Note that this was a bit unneccessary since it is know that $\mathscr{F}$ is unitary and the adjoint and inverse of unitary operators are the same.
+
+  
+__Lemma 9.7:__ A family $\{\psi_n\}_{n\in\N}$ is an ONB iff $\{\hat \psi_n\}$ is an ONB.
+
+
+__Proof:__ $\left<\hat\psi_n,\hat\psi_m\right>=\left<\mathscr{F}\psi_n,\mathscr{F}\psi_m\right>=\left<\mathscr{F}^*\mathscr{F}\psi_n,\psi_m\right>=\left<\psi_n,\psi_m\right>.$
+
+This implies that orthogonality is preserved under $\mathscr F$.
+
+An ONB is an orthornormal family with completeness. Completeness implies that if $\left<f,\psi_n\right>=0$ for all $n$, then $f=0$.
+
+Hence, $\mathscr F$ preserves completeness. $\square$
+
+Using Lemma 9.7, if we are given a Gabor basis $\{g_{n,k}\}_{n,k\in\Z}$, then the Fourier transforms $\{\hat g_{n,k}\}$ also form an ONB. However, is $\{\hat g_{n,k}\}$ a Gabor basis?
+
+  - Recall:
+  - $f(x+h)\ra\hat f(\gamma)e^{2\pi ih \gamma}$
+  - $f(x)e^{-2\pi ix h}\ra\hat f(\gamma+h)$
+  
+Hence
+  
+$$\mathscr{F}( g_{n,k}(\gamma))=\mathscr{F}(g(x-k)e^{2\pi inx})=\hat g(\gamma-n)e^{-2\pi ik\gamma}=\hat g_{-k,n}(\gamma)$$
+
+Thus $\{\hat g_{n,k}\}$ is not just an ONB, but also a Gabor basis.
+
+__Lemma 9.9__ A function $g$ generates a Gabor basis, ie $\{g_{n,k}\}$ is an ONB of $L^2$, iff $\hat g$ generates a Gabor basis.
+
+Hence, Gabor bases come in pairs.
+
+  - ex: The Fourier transform of $g=\chi_[0,1)$ is 
+  
+$$-\left.\frac{e^{-2\pi i\gamma x}}{2\pi i\gamma}\right|_0^1=\frac{1-e^{-2\pi i\gamma}}{2\pi i\gamma}=\frac{e^{-\pi i\gamma}(e^{\pi i\gamma}-e^{-2\pi i\gamma})}{2\pi i\gamma}$$
+
+$$=e^{-\pi i\gamma}\frac{\sin(\pi\gamma)}{\pi\gamma}=e^{-\pi i\gamma}\sinc(\gamma).$$
+
+Note that $\hat g$ is differentiable, but $g$ is not even continuous. On the other hand, $g$ is compactly supported, but $\hat g$ is not compactly supported. This is just a manifestation of the uncertainty principle.
+
+It is not possible to find a Gabor function that is both smooth and compactly supported. This is due to _the Balian-Low theorem_.
+
+__BLT:__ If $g\in L^2$ is a Gabor function, then either
+
+$$\int_\R x^2|g(x)|^2dx=\infty$$
+OR
+
+$$\int_\R\gamma^2|\hat g(\gamma)|^2d\gamma=\infty$$
+
+Recall: $\|f\|=\|\hat f\|$ and $g'(x)\ra2\pi i\gamma\hat g(\gamma)$.
+
+These imply
+
+$$\int_\R\gamma^2|\hat g(\gamma)|^2d\gamma=\int_\R|g'(x)|^2dx. \ \square$$
+
+  - Cannot have localization in both time and frequency.
+
+  - The Gaussian $f(x)=e^{-\pi x^2}$ cannot be a Gabor function since it is its own Fourier transform.
+
+  - Apparently there are ways to modify the Gaussian function into a Gabor function.
+  
+Using $f(x-ak)e^{2\pi in bx}, \ a,b>0$ does not form an ONB, but a frame.
+

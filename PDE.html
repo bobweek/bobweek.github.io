@@ -313,6 +313,7 @@ $(document).ready(function () {
               <li><a href="note_3_18.html">Mar 18</a></li>
               <li><a href="note_3_20.html">Mar 20</a></li>
               <li><a href="note_3_22.html">Mar 22</a></li>
+              <li><a href="note_3_25.html">Mar 25</a></li>
             </ul>
           </li>
         </ul>
@@ -349,8 +350,11 @@ MathJax.Hub.Config({
 });
 </script>
 
-<div id="second-order-elliptic-equations" class="section level2">
-<h2>6.1 Second-order elliptic equations</h2>
+<div id="second-order-elliptic-equations" class="section level1">
+<h1><strong>Second-Order Elliptic Equations</strong></h1>
+</div>
+<div id="definitions" class="section level1">
+<h1>6.1 Definitions</h1>
 <p>We study problems with Dirichlet boundary conditions:</p>
 <p><span class="math display">\[\begin{equation}
 \left\{\begin{matrix}
@@ -363,13 +367,13 @@ u = 0 &amp; x\in \partial U
 <li>divergence form (best used with energy methods):</li>
 </ul>
 <p><span class="math display">\[\begin{equation}
-Lu = -\sum_{i,j}\left(a^{ij}(x)u_{x_i}\right)_{x_j}+\sum_ib^i()u_{x_i}+c(x)u
+Lu = -\sum_{i,j}\left(a^{ij}(x)u_{x_i}\right)_{x_j}+\sum_ib^i(x)u_{x_i}+c(x)u
 \end{equation}\]</span></p>
 <ul>
 <li>nondivergence form (best used with maximum principle techs:</li>
 </ul>
 <p><span class="math display">\[\begin{equation}
-Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i()u_{x_i}+c(x)u
+Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i(x)u_{x_i}+c(x)u
 \end{equation}\]</span></p>
 <p><strong>Def:</strong> <span class="math inline">\(L\)</span> is uniformly <em>elliptic</em> if there exists a constant <span class="math inline">\(\theta&gt;0\)</span> s.t.</p>
 <p><span class="math display">\[\begin{equation}
@@ -381,14 +385,14 @@ Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i()u_{x_i}+c(x)u
 <li><p>If <span class="math inline">\(a^{ij}=\delta_{ij}, \ b^i=0, \ c=0\)</span>, then <span class="math inline">\(L=-\Delta\)</span></p></li>
 <li><p><strong>Population dynamics:</strong> If we set <span class="math inline">\(f=u_t\)</span>, the terms <span class="math inline">\(a\)</span> represent diffusive migration, <span class="math inline">\(b\)</span> directional migration/taxis, <span class="math inline">\(c\)</span> the Malthusian fitness. However, this is not technically an elliptic equation…</p></li>
 </ul>
-<div id="weak-solutions" class="section level3">
-<h3>6.1.2 Weak solutions</h3>
+<div id="weak-solutions" class="section level2">
+<h2>6.1.2 Weak solutions</h2>
 <p>Assume <span class="math inline">\(a^{ij},b^i,c\in L^\infty(U)\)</span> &amp; <span class="math inline">\(f\in L^2(U)\)</span> and that <span class="math inline">\(L\)</span> is in divergence form <span class="math inline">\((2)\)</span>.</p>
 <p><strong>Def:</strong></p>
 <ol style="list-style-type: lower-roman">
 <li>The <em>bilinear form</em> <span class="math inline">\(B[ \ , \ ]\)</span> associated with the divergence form elliptic operator <span class="math inline">\(L\)</span> is</li>
 </ol>
-<p><span class="math display">\[B[u,v]\equiv\int_U\left(\sum_{ij}a^{ij}u_{x_i}u_{x_j}+\sum_ib^iu_{x_i}v+cuv\right)dx\]</span></p>
+<p><span class="math display">\[B[u,v]\equiv\int_U\left(\sum_{ij}a^{ij}u_{x_i}v_{x_j}+\sum_ib^iu_{x_i}v+cuv\right)dx\]</span></p>
 <p>for <span class="math inline">\(u,v\in H_0^1(U)\)</span>.</p>
 <ol start="2" style="list-style-type: lower-roman">
 <li><span class="math inline">\(u\in H_0^1(U)\)</span> is a <em>weak solution</em> of the BVP <span class="math inline">\((1)\)</span> if</li>
@@ -396,8 +400,8 @@ Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i()u_{x_i}+c(x)u
 <p><span class="math display">\[B[u,v]=(f,v)\equiv\int_U f(x)v(x)dx\]</span></p>
 <p>for all <span class="math inline">\(v\in H_0^1(U)\)</span>.</p>
 <hr />
-<div id="characterization-of-h-1" class="section level4">
-<h4>Characterization of <span class="math inline">\(H^{-1}\)</span></h4>
+<div id="characterization-of-h-1" class="section level3">
+<h3>Characterization of <span class="math inline">\(H^{-1}\)</span></h3>
 <ol style="list-style-type: lower-roman">
 <li>For <span class="math inline">\(f\in H^{-1}\)</span> there exist functions <span class="math inline">\(f^0,\dots,f^n\in L^2\)</span> (<span class="math inline">\(n=\dim(U)\)</span>) s.t.</li>
 </ol>
@@ -415,8 +419,234 @@ Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i()u_{x_i}+c(x)u
 <p><strong>Notation:</strong> Write “<span class="math inline">\(f=f^0-\sum_if^i_{x_i}\)</span>” whenever i. holds.</p>
 <hr />
 <p>Consider the boundary value problem</p>
+<p><span class="math display">\[\begin{equation}
+\left\{
+\begin{matrix}
+Lu = f^0-\sum_i f^i_{x_i} &amp; x\in U \\
+ u = 0                    &amp; x\in\partial U 
+\end{matrix}
+\right.
+\end{equation}\]</span></p>
+<p>with <span class="math inline">\(L\)</span> in divergence form and <span class="math inline">\(f^i\in L^2(U)\)</span>. From above we see <span class="math inline">\(f=f^0-\sum_if^i_{x_i}\in H^{-1}(U)\)</span>.</p>
+<p><strong>Def:</strong> <span class="math inline">\(u\in H_0^1(U)\)</span> is a <em>weak solution</em> of (5) if</p>
+<p><span class="math display">\[B[u,v]=\left&lt;f,v\right&gt;\]</span></p>
+<p>for every <span class="math inline">\(v\in H_0^1(U)\)</span>, where <span class="math inline">\(\left&lt;,vf\right&gt;\equiv\int_Uf^0v+\sum_if^iv_{x_i}dx\)</span> and <span class="math inline">\(\left&lt; \ , \ \right&gt;\)</span> is a “pairing” (like an innder-product) between <span class="math inline">\(H^{-1}\)</span> and <span class="math inline">\(H_0^1\)</span>.</p>
+<ul>
+<li><p>If a BVP has condition <span class="math inline">\(u=g\)</span> on <span class="math inline">\(\partial U\)</span>, so long as <span class="math inline">\(g\)</span> is the trace of some <span class="math inline">\(w\in H^1\)</span> so that <span class="math inline">\(u-w\in H_0^1\)</span>, the BVP can be rephrased with a Dirichlet condition be subtracting <span class="math inline">\(g\)</span> from both equations.</p></li>
+<li><p>Because of this we focus on Dirichlet boundary conditions.</p></li>
+</ul>
 </div>
 </div>
+</div>
+<div id="existence-of-weak-solutions" class="section level1">
+<h1>6.2 Existence of weak solutions</h1>
+<p><strong>Lax-Milgram Theorem:</strong> If <span class="math inline">\(B:H\times H\rightarrow\mathbb{R}\)</span> is a bilinear form for which there exists <span class="math inline">\(\alpha,\beta&gt;0\)</span> s.t.</p>
+<ol style="list-style-type: lower-roman">
+<li><p><span class="math inline">\(|B[u,v]|\leq\alpha\|u\| \ \|v\|, \ \ \ (u,v\in H)\)</span></p></li>
+<li><p><span class="math inline">\(\beta\|u\|^2\leq B[u,u], \ \ \ (u\in H)\)</span></p></li>
+</ol>
+<p>and if <span class="math inline">\(f:H\rightarrow\mathbb{R}\)</span> is a bounded linear functional on <span class="math inline">\(H\)</span>, then there exists a unique element <span class="math inline">\(u\in H\)</span> s.t. <span class="math inline">\(B[u,v]=\left&lt;f,v\right&gt;\)</span> for all <span class="math inline">\(v\in H\)</span>. <span class="math inline">\(\diamond\)</span></p>
+<ul>
+<li>This theorem is just Riesz representation if <span class="math inline">\(B\)</span> is symmetric. Hence, it its significance is that it works for asymmetric <span class="math inline">\(B\)</span>.</li>
+</ul>
+<div id="energy-estimates-applying-lax-milgram" class="section level2">
+<h2>6.2.2 Energy estimates (applying Lax-Milgram)</h2>
+<p>Assume <span class="math inline">\(B\)</span> is the bilinear form associated with <span class="math inline">\(L\)</span>.</p>
+<p><strong>Theorem 2 (Energy estimates):</strong> There exists <span class="math inline">\(\alpha,\beta&gt;0\)</span> and <span class="math inline">\(\gamma\geq0\)</span> s.t.</p>
+<ol style="list-style-type: lower-roman">
+<li><p><span class="math inline">\(|B[u,v]|\leq\alpha\|u\|_{H_0^1} \ \|v\|_{H_0^1}\)</span></p></li>
+<li><p><span class="math inline">\(\beta\|u\|_{H_0^1}^2\leq B[u,u]+\gamma\|u\|^2_{L^2}\)</span></p></li>
+</ol>
+<p><strong>Proof:</strong> Checking the first condition is just a straightforward use of <span class="math inline">\(|\int f|\leq\int|f|\)</span>. The second requires the ellipticity condition <span class="math inline">\((4)\)</span>. <span class="math inline">\(\square\)</span></p>
+<ul>
+<li>When <span class="math inline">\(\gamma&gt;0\)</span>, <span class="math inline">\(B\)</span> does not satisfy hypothesis of Lax-Milgram. So we need the following:</li>
+</ul>
+<p><strong>Theorem 3 (first existence theorem):</strong> There is a number <span class="math inline">\(\gamma\geq0\)</span> s.t. for all <span class="math inline">\(\mu\geq\gamma\)</span> and each <span class="math inline">\(f\in L^2(U)\)</span>, there is a unique weak solution <span class="math inline">\(u\in H_0^1\)</span> of the BVP</p>
+<p><span class="math display">\[\begin{equation}
+\left\{
+\begin{matrix}
+Lu+\mu u=f &amp; x\in U \\
+u = 0      &amp; x\in\partial U.
+\end{matrix}
+\right.
+\end{equation}\]</span></p>
+<p><strong>Proof:</strong> Set <span class="math inline">\(L_\mu=Lu+\mu u\)</span>. Then the associated <span class="math inline">\(B_\mu\)</span> satisfies Lax-Milgram. With <span class="math inline">\(f\)</span> fixed in <span class="math inline">\(L^2\)</span>, setting <span class="math inline">\(\left&lt;f,v\right&gt;=(f,v)\)</span> defines a bounded linear functional on <span class="math inline">\(L^2\)</span>. Apply Lax-Milgram to find unique <span class="math inline">\(u\in H_0^1\)</span> satisfying <span class="math inline">\(B_\mu[u,v]=\left&lt;f,v\right&gt;\)</span> for all <span class="math inline">\(v\in H_0^1\)</span>. <span class="math inline">\(\square\)</span></p>
+<p><strong><span class="math inline">\(H_0^1\sim H^{-1}\)</span>:</strong></p>
+<ul>
+<li>For all <span class="math inline">\(f^i\in L^2\)</span>, <span class="math inline">\((i=0,\dots,n)\)</span>, <span class="math inline">\(\left&lt;f,v\right&gt;=\int_U f^0v+\sum_i f^iv_{x_i}\)</span> is a bounded linear functional on <span class="math inline">\(H_0^1\)</span>. Hence, there is a weak solution <span class="math inline">\(u\)</span> of the PDE</li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+\left\{
+\begin{matrix}
+Lu+\mu u=f^0-\sum_if^i_{x_i} &amp; x\in U \\
+u = 0      &amp; x\in\partial U.
+\end{matrix}
+\right.
+\end{equation}\]</span></p>
+<ul>
+<li>In particular, <span class="math inline">\(L_\mu=L+\mu I:H_0^1\rightarrow H^{-1}\)</span> is an <em>isomorphism</em>.</li>
+</ul>
+</div>
+<div id="fredholm-alternative" class="section level2">
+<h2>6.2.3. Fredholm alternative</h2>
+<p>We first collect some results from the appendix.</p>
+<hr />
+<ul>
+<li><span class="math inline">\(X,Y\)</span> are Banach spaces</li>
+</ul>
+<p><strong>Def:</strong> An operator <span class="math inline">\(A:X\rightarrow Y\)</span> is <em>closed</em> if whenever <span class="math inline">\(u_k\rightarrow u\)</span> and <span class="math inline">\(Au_k\rightarrow v\)</span>, then <span class="math inline">\(Au=v\)</span>.</p>
+<p><strong>Theorem (closed graph theorem):</strong> If <span class="math inline">\(A\)</span> is a closed linear operator, then it is bounded.</p>
+<p><strong>Def:</strong> <span class="math inline">\(A:X\rightarrow X\)</span> is a bounded operator.</p>
+<ol style="list-style-type: lower-roman">
+<li><p>The <em>resolvent</em> of <span class="math inline">\(A\)</span> is <span class="math inline">\(\rho(A)=\{\eta\in\mathbb{R}:(A-\eta I)\text{ is a bijection }\}\)</span>.</p></li>
+<li><p>The <em>spectrum</em> of <span class="math inline">\(A\)</span> is <span class="math inline">\(\sigma(A)=\mathbb{R}-\rho(A)\)</span>.</p></li>
+<li><p>(eigenvalues) The <em>point spectrum</em> of <span class="math inline">\(A\)</span> is <span class="math inline">\(\sigma_p(A)=\{\eta\in\sigma:N(A-\eta I)\neq\{0\}\}\)</span></p></li>
+</ol>
+<p><span class="math display">\[\diamond\]</span></p>
+<ul>
+<li>If <span class="math inline">\(\eta\in\rho\)</span>, the closed graph theorem implies that <span class="math inline">\((A-\eta I)^{-1}:X\rightarrow X\)</span> is a bounded linear operator.</li>
+</ul>
+<p><strong>Def:</strong> Weak convergence is denoted by <span class="math inline">\(u_k\rightharpoonup u\)</span> which implies <span class="math inline">\(\left&lt;u^*,u_k\right&gt;\rightarrow\left&lt;u^*,u\right&gt;\)</span> for every bounded linear functional <span class="math inline">\(u^*\in X^*\)</span>.</p>
+<p><strong>Def:</strong> A bounded linear operator <span class="math inline">\(K:X\rightarrow Y\)</span> is <em>compact</em> if for every bounded sequence <span class="math inline">\(\{u_k\}\subset X\)</span>, the sequence <span class="math inline">\(\{Ku_k\}\)</span> is <em>precompact</em> in <span class="math inline">\(Y\)</span> (which occurs when there exists a subsequence <span class="math inline">\(\{u_{k_j}\}\)</span> s.t. <span class="math inline">\(\{Ku_{k_j}\}\)</span> converges in <span class="math inline">\(Y\)</span>).</p>
+<ul>
+<li>If a linear operator <span class="math inline">\(K:H\rightarrow H\)</span> is compact and <span class="math inline">\(u_k\rightharpoonup u\)</span>, <span class="math inline">\(Ku_k\rightarrow Ku\)</span>.</li>
+</ul>
+<p><strong>Def:</strong> The adjoint of an operator <span class="math inline">\(K\)</span> is defined by <span class="math inline">\(\left&lt;Ku,v\right&gt;=\left&lt;f,K^* v\right&gt;\)</span>.</p>
+<p><strong>Theorem:</strong> If <span class="math inline">\(K\)</span> is compact, so is <span class="math inline">\(K^*\)</span>.</p>
+<p><strong>Theorem (Fredholm alternative:</strong> <span class="math inline">\(K:H\rightarrow H\)</span> a compact operator. Then</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(N(I-K)\)</span> is finite dimensional</li>
+<li><span class="math inline">\(R(I-K)\)</span> is closed</li>
+<li><span class="math inline">\(R(I-K)=N(I-K^*)^\bot\)</span></li>
+<li><span class="math inline">\(N(I-K)=\{0\}\)</span> iff <span class="math inline">\(R(I-K)=H\)</span></li>
+<li><span class="math inline">\(\dim N(I-K)=\dim N(I-K^*)\)</span></li>
+</ol>
+<p><span class="math display">\[\diamond\]</span></p>
+<p>The Fredholm alternative implies precisely one of the two statements:</p>
+<ol style="list-style-type: lower-roman">
+<li><p>For each <span class="math inline">\(f\in H\)</span>, the equation <span class="math inline">\(u-Ku=f\)</span> has a unique solution.</p></li>
+<li><p>The homogeneous equation <span class="math inline">\(u-Ku=0\)</span> has solutions <span class="math inline">\(u\neq0\)</span>. The space of these solutions is finite-dimensional and the nonhomogeneous equation <span class="math inline">\(u-Ku=f\)</span> has a solution iff <span class="math inline">\(f\in N(I-K^*)^\bot\)</span>.</p></li>
+</ol>
+<p><strong>Theorem:</strong> If <span class="math inline">\(\dim H=\infty\)</span> and <span class="math inline">\(K\)</span> is compact, then</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(0\in\sigma(K)\)</span></li>
+<li><span class="math inline">\(\sigma(K)-\{0\}=\sigma_p(K)-\{0\}\)</span></li>
+<li><span class="math inline">\(\sigma(K)-\{0\}\)</span> is finite or else is a sequnce tending to <span class="math inline">\(0\)</span>.</li>
+</ol>
+<p><strong>Def:</strong> For linear bounded symmetric <span class="math inline">\(S:H\rightarrow H\)</span> denote</p>
+<p><span class="math display">\[m\equiv\inf_{\begin{matrix} u\in H \\ \|u\|=1 \end{matrix}}(Su,u), \ \ \ M\equiv\sup_{\begin{matrix} u\in H \\ \|u\|=1 \end{matrix}}(Su,u).\]</span></p>
+<p><strong>Lemma:</strong> <span class="math inline">\(\sigma(S)\subset[m,M]\)</span> and <span class="math inline">\(m,M\in\sigma(S)\)</span>.</p>
+<p><strong>Theorem:</strong> <span class="math inline">\(H\)</span> a separable Hilbert space, <span class="math inline">\(S\)</span> a symmetric compact operator on <span class="math inline">\(H\)</span>. Then there exists an ONB of <span class="math inline">\(H\)</span> consisting of eigenvectors of <span class="math inline">\(S\)</span>.</p>
+<hr />
+<p><strong>Def:</strong></p>
+<ol style="list-style-type: lower-roman">
+<li>The <em>formal adjoint</em> of <span class="math inline">\(L\)</span>, denoted by <span class="math inline">\(L^*\)</span>, is</li>
+</ol>
+<p><span class="math display">\[L^*v\equiv\sum_{ij}(a^{ij}v_{x_j})_{x_i}\]</span></p>
+<ol start="2" style="list-style-type: lower-roman">
+<li><p>The <em>adjoint bilinear form</em> <span class="math inline">\(B^*:H_0^1\times H_0^1\rightarrow\mathbb{R}\)</span> is <span class="math inline">\(B^*[v,u]\equiv B[u,v]\)</span> for all <span class="math inline">\(u,v\in H_0^1\)</span>.</p></li>
+<li><p>If <span class="math inline">\(v\in H_0^1\)</span> satisfies <span class="math inline">\(B^*[v,u]=(f,u)\)</span> for all <span class="math inline">\(u\in H_0^1\)</span> then it is a weak solution of the <em>adjoint problem</em></p></li>
+</ol>
+<p><span class="math display">\[\left\{\begin{matrix}L^*v=f &amp; x\in U \\ v=0 &amp; x\in\partial U.\end{matrix}\right.\]</span></p>
+<p><span class="math display">\[\diamond\]</span></p>
+<ul>
+<li><p><span class="math inline">\(N=\{u\in H_0^1: u \text{ is a weak solution of the homogeneous problem} \}\)</span></p></li>
+<li><p><span class="math inline">\(N^*=\{v\in H_0^1: u \text{ is a weak solution of the homogeneous adjoint problem} \}\)</span></p></li>
+</ul>
+<p><strong>Theorem 4 (second existence theorem):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><p>Precisely one of the following</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>for each <span class="math inline">\(f\in L^2\)</span> there is a unique weak solution <span class="math inline">\(u\)</span> of the BVP <span class="math inline">\((1)\)</span></p></li>
+<li><p>there exists a weak solution <span class="math inline">\(u\neq0\)</span> of <span class="math inline">\((1)\)</span> when <span class="math inline">\(f=0\)</span> (homogeneous)</p></li>
+</ol></li>
+<li>If b. holds, <span class="math inline">\(\dim N=\dim N^*&lt;\infty\)</span></li>
+<li><p>The BVP <span class="math inline">\((1)\)</span> has a weak solution iff <span class="math inline">\((f,v)=0\)</span> for all <span class="math inline">\(v\in N^*\)</span>.</p></li>
+</ol>
+<p><span class="math display">\[\diamond\]</span></p>
+<p><strong>Theorem 5 (third existence theorem):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li>There exists an at most countable set <span class="math inline">\(\Sigma\subset\mathbb{R}\)</span> s.t. the BVP</li>
+</ol>
+<p><span class="math display">\[\left\{\begin{matrix}Lu=\lambda u+f &amp; x\in U \\ u=0 &amp; x\in\partial U\end{matrix}\right.\]</span></p>
+<p>has a weak solution for each <span class="math inline">\(f\in L^2\)</span> iff <span class="math inline">\(\lambda\notin\Sigma\)</span>.</p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>If <span class="math inline">\(\Sigma\)</span> is infinite, then <span class="math inline">\(\Sigma=\{\lambda_k\}\)</span> is nondecreasing with <span class="math inline">\(\lambda_k\rightarrow\infty\)</span>.</li>
+</ol>
+<p><strong>Def:</strong> <span class="math inline">\(\Sigma\)</span> is the <em>real spectrum</em> of <span class="math inline">\(L\)</span>. The BVP</p>
+<p><span class="math display">\[\left\{\begin{matrix}Lu=\lambda u &amp; x\in U \\ u=0 &amp; x\in\partial U\end{matrix}\right.\]</span></p>
+<p>has a nontrivial solution <span class="math inline">\(w\neq0\)</span> iff <span class="math inline">\(\lambda\in\Sigma\)</span>. In this case <span class="math inline">\(\lambda\)</span> is an <em>eigenvalue</em> of <span class="math inline">\(L\)</span> corresponding to the <em>eigenfunction</em> <span class="math inline">\(w\)</span>. The PDE <span class="math inline">\(Lu=\lambda u\)</span> for <span class="math inline">\(L=-\Delta\)</span> is called <em>Helmholtz’s equation</em>.</p>
+<p><strong>Theorem 6 (boundedness of the inverse):</strong> If <span class="math inline">\(\lambda\notin\Sigma\)</span> there exists a constant <span class="math inline">\(C\)</span> s.t.</p>
+<p><span class="math display">\[\|u\|_{L^2}\leq C\|f\|_{L^2}\]</span></p>
+<p>whenever <span class="math inline">\(f\in L^2\)</span> and <span class="math inline">\(u\in H_0^1\)</span> is the unique weak solution of</p>
+<p><span class="math display">\[\left\{\begin{matrix}Lu=\lambda u+f &amp; x\in U \\ u=0 &amp; x\in\partial U.\end{matrix}\right.\]</span></p>
+<p>The constant <span class="math inline">\(C\)</span> depends only on <span class="math inline">\(\lambda,U\)</span> and the coefficients of <span class="math inline">\(L\)</span>. The constant <span class="math inline">\(C\)</span> blows up when <span class="math inline">\(\lambda\)</span> approaches an eigenvalue.</p>
+</div>
+</div>
+<div id="eigenvalues-and-eigenfunctions" class="section level1">
+<h1>6.5 Eigenvalues and eigenfunctions</h1>
+<p>We consider</p>
+<p><span class="math display">\[\begin{equation}
+\left\{\begin{matrix}
+Lw = \lambda w &amp; x\in U \\
+w = 0          &amp; x\in\partial U,
+\end{matrix}\right.
+\end{equation}\]</span></p>
+<p>with <span class="math inline">\(U\)</span> open and bounded.</p>
+<div id="eigenvalues-of-symmetric-elliptic-operators" class="section level2">
+<h2>6.5.1 Eigenvalues of symmetric elliptic operators</h2>
+<p>Restrict attention to the divergence form <span class="math inline">\(Lu=-\sum_{ij}\left(a^{ij}u_{x_i}\right)_{x_j}\)</span> with <span class="math inline">\(a^{ij}\in C^\infty(\bar U)\)</span>. Further suppose that the elliptic condition is satisfied and <span class="math inline">\(a^{ij}=a^{ji}\)</span>. Then the operator <span class="math inline">\(L\)</span> is symmetric and, in particular, <span class="math inline">\(B[u,v]=B[v,u]\)</span> (<span class="math inline">\(L\)</span> is equal to its adjoint).</p>
+<p>Assume also that <span class="math inline">\(U\)</span> is connected.</p>
+<p><strong>Theorem 1 (eigenvalues of symmetric elliptic operators):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li>each eigenvalue of <span class="math inline">\(L\)</span> is real</li>
+<li>repeating each eigenvalue according to its multiplicity, we get <span class="math inline">\(\Sigma=\{\lambda_k\}\)</span> s.t.</li>
+</ol>
+<p><span class="math display">\[0&lt;\lambda_1\leq\lambda_2\leq\cdots, \ \ \ \lambda_k\rightarrow\infty.\]</span></p>
+<ol start="3" style="list-style-type: lower-roman">
+<li>There exists an ONB <span class="math inline">\(\{w_k\}\)</span> of <span class="math inline">\(L^2(U)\)</span>, where <span class="math inline">\(w_k\in H_0^1\)</span> is an eigenfunction corresponding to <span class="math inline">\(\lambda_k\)</span>:</li>
+</ol>
+<p><span class="math display">\[\left\{\begin{matrix}Lw_k=\lambda_k w_k &amp; x\in U \\ w_k=0 &amp; x\in\partial U\end{matrix}\right., \ \ \ k=1,2,\dots\]</span></p>
+<ul>
+<li><span class="math inline">\(w_k\in C^\infty(U)\)</span> and if <span class="math inline">\(\partial U\)</span> is smooth, <span class="math inline">\(w_k\in C^\infty(\bar U)\)</span>.</li>
+</ul>
+<p><strong>Weyl’s law:</strong> The eigenvalues of the Laplacian in a smooth bounded open set <span class="math inline">\(U\subset\mathbb{R}\)</span> satisfy</p>
+<p><span class="math display">\[\lim_{k\rightarrow\infty}\frac{\lambda_k^{n/2}}{k}=\frac{(2\pi)^n}{|U|\alpha(n)}\]</span></p>
+<p>where <span class="math inline">\(|U|\)</span> is the volume of <span class="math inline">\(U\)</span> and <span class="math inline">\(\alpha(n)=\frac{\pi^{n/2}}{\Gamma(\frac{n}{2}+1)}\)</span> is the volume of a unit ball in <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
+<p><strong>Def:</strong> We call <span class="math inline">\(\lambda_1&gt;0\)</span> the <em>principle eigenvalue</em> of <span class="math inline">\(L\)</span>.</p>
+<p><strong>Theorem 2 (variational principle for the principle eigenvalue):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><p><span class="math inline">\(\lambda_1=\min\{B[u,u]:u\in H_0^1,\|u\|_{L^2}=1\}\)</span></p></li>
+<li><p><span class="math inline">\(\lambda_1\)</span> is obtained for a function <span class="math inline">\(w_1&gt;0\)</span> in <span class="math inline">\(U\)</span> and solves</p></li>
+</ol>
+<p><span class="math display">\[\left\{\begin{matrix}Lw_1=\lambda_1 w_1 &amp; x\in U \\ w_1=0 &amp; x\in\partial U\end{matrix}\right.\]</span></p>
+<ol start="3" style="list-style-type: lower-roman">
+<li>if <span class="math inline">\(u\in H_0^1\)</span> is any weak solution of</li>
+</ol>
+<p><span class="math display">\[\left\{\begin{matrix}Lu=\lambda_1 u &amp; x\in U \\ u=0 &amp; x\in\partial U\end{matrix}\right.\]</span></p>
+<p>then <span class="math inline">\(u\)</span> is a multiple of <span class="math inline">\(w_1\)</span>.</p>
+<ul>
+<li>remarks: assertion iii. states that <span class="math inline">\(\lambda_1\)</span> has multiplicity one (<span class="math inline">\(0&lt;\lambda&lt;\lambda_2\leq\lambda_3\leq\dots\)</span>, its eigenspace is one-dimensional). the expression involving a minimum is called <em>Rayleigh’s formula</em> and is equivalent to</li>
+</ul>
+<p><span class="math display">\[\lambda_1=\min_{\begin{matrix} u\in H_0^1 \\ u\neq0 \end{matrix}}\frac{B[u,u]}{\|u\|^2_{L^2}}.\]</span></p>
+</div>
+<div id="eigenvalues-of-nonsymmetric-elliptic-operators" class="section level2">
+<h2>6.5.2 Eigenvalues of nonsymmetric elliptic operators</h2>
+<p>Consider the nondivergence form <span class="math inline">\(Lu=-\sum_{ij}a^{ij}u_{x_ix_j}+\sum_ib^iu_{x_i}+cu\)</span>. Assume <span class="math inline">\(a^{ij},^i,c\in C^\infty(\bar U)\)</span>, <span class="math inline">\(U\)</span> is open bounded and connected and <span class="math inline">\(\partial U\)</span> is smooth. Suppose also that <span class="math inline">\(a^{ij}=a^{ji}\)</span> and <span class="math inline">\(c\geq0\)</span> in <span class="math inline">\(U\)</span>.</p>
+<p>In this case <span class="math inline">\(L\)</span> does not equal its adjoint.</p>
+<p><strong>Theorem 3 (principle eigenvalues for nonsymmetric elliptic operators):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li>there exists a real eigenvalue <span class="math inline">\(\lambda_1\)</span> for the operator <span class="math inline">\(L\)</span>, taken with zero boundary conditions, s.t. if <span class="math inline">\(\lambda\in C\)</span> is any other eigenvalue, we have</li>
+</ol>
+<p><span class="math display">\[\mathscr{R}(\lambda)\geq\lambda_1.\]</span></p>
+<ol start="2" style="list-style-type: lower-roman">
+<li><p>there exists a corresponding eigenfunction <span class="math inline">\(w_1\)</span> which is positive in <span class="math inline">\(U\)</span>.</p></li>
+<li><p>The eigenvalue <span class="math inline">\(\lambda_1\)</span> is simple.</p></li>
+</ol>
+</div>
+</div>
+<div id="linear-evolution-equations" class="section level1">
+<h1><strong>Linear Evolution Equations</strong></h1>
 </div>
 
 

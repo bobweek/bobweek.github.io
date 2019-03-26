@@ -21,7 +21,9 @@ MathJax.Hub.Config({
 \newcommand{\>}{\right>}
 \newcommand{\ra}{\rightarrow}
 
-## 6.1 Second-order elliptic equations
+# __Second-Order Elliptic Equations__
+
+# 6.1 Definitions
 
 We study problems with Dirichlet boundary conditions:
 
@@ -37,13 +39,13 @@ where $L$ is a second order partial differential operator appearing as
   - divergence form (best used with energy methods):
 
 \begin{equation}
-Lu = -\sum_{i,j}\left(a^{ij}(x)u_{x_i}\right)_{x_j}+\sum_ib^i()u_{x_i}+c(x)u
+Lu = -\sum_{i,j}\left(a^{ij}(x)u_{x_i}\right)_{x_j}+\sum_ib^i(x)u_{x_i}+c(x)u
 \end{equation}
 
   - nondivergence form (best used with maximum principle techs:
 
 \begin{equation}
-Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i()u_{x_i}+c(x)u
+Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i(x)u_{x_i}+c(x)u
 \end{equation}
 
 __Def:__ $L$ is uniformly _elliptic_ if there exists a constant $\theta>0$ s.t.
@@ -60,7 +62,7 @@ for a.e. $x\in U$ and for all $\xi\in\R^n$. $\diamond$
   
   - __Population dynamics:__ If we set $f=u_t$, the terms $a$ represent diffusive migration, $b$ directional migration/taxis, $c$ the Malthusian fitness. However, this is not technically an elliptic equation...
   
-### 6.1.2 Weak solutions
+## 6.1.2 Weak solutions
 
 Assume $a^{ij},b^i,c\in L^\infty(U)$ & $f\in L^2(U)$ and that $L$ is in divergence form $(2)$.
 
@@ -68,7 +70,7 @@ __Def:__
 
   i) The _bilinear form_ $B[ \ , \ ]$ associated with the divergence form elliptic operator $L$ is
   
-  $$B[u,v]\equiv\int_U\left(\sum_{ij}a^{ij}u_{x_i}u_{x_j}+\sum_ib^iu_{x_i}v+cuv\right)dx$$
+  $$B[u,v]\equiv\int_U\left(\sum_{ij}a^{ij}u_{x_i}v_{x_j}+\sum_ib^iu_{x_i}v+cuv\right)dx$$
 
 for $u,v\in H_0^1(U)$.
 
@@ -80,7 +82,7 @@ for all $v\in H_0^1(U)$.
 
 --------------------------------------
   
-#### Characterization of $H^{-1}$
+### Characterization of $H^{-1}$
 
   i) For $f\in H^{-1}$ there exist functions $f^0,\dots,f^n\in L^2$ ($n=\dim(U)$) s.t.
   
@@ -103,3 +105,279 @@ __Notation:__ Write "$f=f^0-\sum_if^i_{x_i}$" whenever i. holds.
 
 Consider the boundary value problem
 
+\begin{equation}
+\left\{
+\begin{matrix}
+Lu = f^0-\sum_i f^i_{x_i} & x\in U \\
+ u = 0                    & x\in\partial U 
+\end{matrix}
+\right.
+\end{equation}
+
+with $L$ in divergence form and $f^i\in L^2(U)$. From above we see $f=f^0-\sum_if^i_{x_i}\in H^{-1}(U)$.
+
+__Def:__ $u\in H_0^1(U)$ is a _weak solution_ of (5) if
+
+$$B[u,v]=\left<f,v\right>$$
+
+for every $v\in H_0^1(U)$, where $\left<,vf\right>\equiv\int_Uf^0v+\sum_if^iv_{x_i}dx$ and $\left< \ , \ \right>$ is a "pairing" (like an innder-product) between $H^{-1}$ and $H_0^1$.
+
+  - If a BVP has condition $u=g$ on $\partial U$, so long as $g$ is the trace of some $w\in H^1$ so that $u-w\in H_0^1$, the BVP can be rephrased with a Dirichlet condition be subtracting $g$ from both equations.
+  
+  - Because of this we focus on Dirichlet boundary conditions.
+  
+# 6.2 Existence of weak solutions
+
+__Lax-Milgram Theorem:__ If $B:H\times H\ra \R$ is a bilinear form for which there exists $\alpha,\beta>0$ s.t.
+
+  i. $|B[u,v]|\leq\alpha\|u\| \ \|v\|, \ \ \ (u,v\in H)$
+
+  ii. $\beta\|u\|^2\leq B[u,u], \ \ \ (u\in H)$
+
+and if $f:H\ra\R$ is a bounded linear functional on $H$, then there exists a unique element $u\in H$ s.t. $B[u,v]=\left<f,v\right>$ for all $v\in H$. $\diamond$
+
+ - This theorem is just Riesz representation if $B$ is symmetric. Hence, it its significance is that it works for asymmetric $B$.
+ 
+## 6.2.2 Energy estimates (applying Lax-Milgram)
+
+Assume $B$ is the bilinear form associated with $L$.
+
+__Theorem 2 (Energy estimates):__ There exists $\alpha,\beta>0$ and $\gamma\geq0$ s.t.
+
+  i. $|B[u,v]|\leq\alpha\|u\|_{H_0^1} \ \|v\|_{H_0^1}$
+
+  ii. $\beta\|u\|_{H_0^1}^2\leq B[u,u]+\gamma\|u\|^2_{L^2}$
+
+__Proof:__ Checking the first condition is just a straightforward use of $|\int f|\leq\int|f|$. The second requires the ellipticity condition $(4)$. $\square$
+
+  - When $\gamma>0$, $B$ does not satisfy hypothesis of Lax-Milgram. So we need the following:
+  
+__Theorem 3 (first existence theorem):__ There is a number $\gamma\geq0$ s.t. for all $\mu\geq\gamma$ and each $f\in L^2(U)$, there is a unique weak solution $u\in H_0^1$ of the BVP
+
+\begin{equation}
+\left\{
+\begin{matrix}
+Lu+\mu u=f & x\in U \\
+u = 0      & x\in\partial U.
+\end{matrix}
+\right.
+\end{equation}
+
+__Proof:__ Set $L_\mu=Lu+\mu u$. Then the associated $B_\mu$ satisfies Lax-Milgram. With $f$ fixed in $L^2$, setting $\left<f,v\right>=(f,v)$ defines a bounded linear functional on $L^2$. Apply Lax-Milgram to find unique $u\in H_0^1$ satisfying $B_\mu[u,v]=\left<f,v\right>$ for all $v\in H_0^1$. $\square$
+
+__$H_0^1\sim H^{-1}$:__
+
+  - For all $f^i\in L^2$, $(i=0,\dots,n)$, $\left<f,v\right>=\int_U f^0v+\sum_i f^iv_{x_i}$ is a bounded linear functional on $H_0^1$. Hence, there is a weak solution $u$ of the PDE
+  
+\begin{equation}
+\left\{
+\begin{matrix}
+Lu+\mu u=f^0-\sum_if^i_{x_i} & x\in U \\
+u = 0      & x\in\partial U.
+\end{matrix}
+\right.
+\end{equation}
+
+  - In particular, $L_\mu=L+\mu I:H_0^1\ra H^{-1}$ is an _isomorphism_.
+  
+## 6.2.3. Fredholm alternative
+
+We first collect some results from the appendix.
+
+---------------------------------------------------------------------
+
+  - $X,Y$ are Banach spaces
+
+__Def:__ An operator $A:X\ra Y$ is _closed_ if whenever $u_k\ra u$ and $Au_k\ra v$, then $Au=v$.
+
+__Theorem (closed graph theorem):__ If $A$ is a closed linear operator, then it is bounded.
+
+__Def:__ $A:X\ra X$ is a bounded operator.
+
+  i. The _resolvent_ of $A$ is $\rho(A)=\{\eta\in\R:(A-\eta I)\text{ is a bijection }\}$.
+  
+  ii. The _spectrum_ of $A$ is $\sigma(A)=\R-\rho(A)$.
+  
+  iii. (eigenvalues) The _point spectrum_ of $A$ is $\sigma_p(A)=\{\eta\in\sigma:N(A-\eta I)\neq\{0\}\}$
+  
+$$\diamond$$
+
+  - If $\eta\in\rho$, the closed graph theorem implies that $(A-\eta I)^{-1}:X\ra X$ is a bounded linear operator.
+
+__Def:__ Weak convergence is denoted by $u_k\rightharpoonup u$ which implies $\left<u^*,u_k\right>\ra\left<u^*,u\right>$ for every bounded linear functional $u^*\in X^*$.
+
+__Def:__ A bounded linear operator $K:X\ra Y$ is _compact_ if for every bounded sequence $\{u_k\}\subset X$, the sequence $\{Ku_k\}$ is _precompact_ in $Y$ (which occurs when there exists a subsequence $\{u_{k_j}\}$ s.t. $\{Ku_{k_j}\}$ converges in $Y$).
+
+  - If a linear operator $K:H\ra H$ is compact and $u_k\rightharpoonup u$, $Ku_k\ra Ku$.
+
+__Def:__ The adjoint of an operator $K$ is defined by $\left<Ku,v\right>=\left<f,K^* v\right>$.
+
+__Theorem:__ If $K$ is compact, so is $K^*$.
+
+__Theorem (Fredholm alternative:__ $K:H\ra H$ a compact operator. Then
+
+  i. $N(I-K)$ is finite dimensional
+  ii. $R(I-K)$ is closed
+  iii. $R(I-K)=N(I-K^*)^\bot$
+  iv. $N(I-K)=\{0\}$ iff $R(I-K)=H$
+  v. $\dim N(I-K)=\dim N(I-K^*)$
+  
+  $$\diamond$$
+  
+The Fredholm alternative implies precisely one of the two statements:
+
+  i. For each $f\in H$, the equation $u-Ku=f$ has a unique solution.
+  
+  ii. The homogeneous equation $u-Ku=0$ has solutions $u\neq0$. The space of these solutions is finite-dimensional and the nonhomogeneous equation $u-Ku=f$ has a solution iff $f\in N(I-K^*)^\bot$.
+  
+__Theorem:__ If $\dim H=\infty$ and $K$ is compact, then
+
+  i. $0\in\sigma(K)$
+  ii. $\sigma(K)-\{0\}=\sigma_p(K)-\{0\}$
+  iii. $\sigma(K)-\{0\}$ is finite or else is a sequnce tending to $0$.
+  
+__Def:__ For linear bounded symmetric $S:H\ra H$ denote
+
+$$m\equiv\inf_{\begin{matrix} u\in H \\ \|u\|=1 \end{matrix}}(Su,u), \ \ \ M\equiv\sup_{\begin{matrix} u\in H \\ \|u\|=1 \end{matrix}}(Su,u).$$
+  
+__Lemma:__ $\sigma(S)\subset[m,M]$ and $m,M\in\sigma(S)$.
+  
+__Theorem:__ $H$ a separable Hilbert space, $S$ a symmetric compact operator on $H$. Then there exists an ONB of $H$ consisting of eigenvectors of $S$.
+  
+---------------------------------------------------------------------
+
+__Def:__
+
+  i. The _formal adjoint_ of $L$, denoted by $L^*$, is
+  
+  $$L^*v\equiv\sum_{ij}(a^{ij}v_{x_j})_{x_i}$$
+  
+  ii. The _adjoint bilinear form_ $B^*:H_0^1\times H_0^1\ra\R$ is $B^*[v,u]\equiv B[u,v]$ for all $u,v\in H_0^1$.
+
+  iii. If  $v\in H_0^1$ satisfies $B^*[v,u]=(f,u)$ for all $u\in H_0^1$ then it is a weak solution of the _adjoint problem_
+  
+  $$\left\{\begin{matrix}L^*v=f & x\in U \\ v=0 & x\in\partial U.\end{matrix}\right.$$
+
+$$\diamond$$
+
+  - $N=\{u\in H_0^1: u \text{ is a weak solution of the homogeneous problem} \}$
+
+  - $N^*=\{v\in H_0^1: u \text{ is a weak solution of the homogeneous adjoint problem} \}$
+  
+__Theorem 4 (second existence theorem):__
+  
+  i. Precisely one of the following
+
+      a. for each $f\in L^2$ there is a unique weak solution $u$ of the BVP $(1)$
+      
+      b. there exists a weak solution $u\neq0$ of $(1)$ when $f=0$ (homogeneous)
+
+  ii. If b. holds, $\dim N=\dim N^*<\infty$ 
+  iii. The BVP $(1)$ has a weak solution iff $(f,v)=0$ for all $v\in N^*$.
+  
+  $$\diamond$$
+  
+__Theorem 5 (third existence theorem):__
+
+  i.  There exists an at most countable set $\Sigma\subset\R$ s.t. the BVP
+  
+  $$\left\{\begin{matrix}Lu=\lambda u+f & x\in U \\ u=0 & x\in\partial U\end{matrix}\right.$$
+
+  has a weak solution for each $f\in L^2$ iff $\lambda\notin\Sigma$.
+
+  ii. If $\Sigma$ is infinite, then $\Sigma=\{\lambda_k\}$ is nondecreasing with $\lambda_k\ra\infty$.
+  
+__Def:__ $\Sigma$ is the _real spectrum_ of $L$. The BVP
+
+  $$\left\{\begin{matrix}Lu=\lambda u & x\in U \\ u=0 & x\in\partial U\end{matrix}\right.$$
+
+has a nontrivial solution $w\neq0$ iff $\lambda\in\Sigma$. In this case $\lambda$ is an _eigenvalue_ of $L$ corresponding to the _eigenfunction_ $w$. The PDE $Lu=\lambda u$ for $L=-\Delta$ is called _Helmholtz's equation_.
+
+__Theorem 6 (boundedness of the inverse):__ If $\lambda\notin\Sigma$ there exists a constant $C$ s.t.
+
+$$\|u\|_{L^2}\leq C\|f\|_{L^2}$$
+
+whenever $f\in L^2$ and $u\in H_0^1$ is the unique weak solution of
+
+  $$\left\{\begin{matrix}Lu=\lambda u+f & x\in U \\ u=0 & x\in\partial U.\end{matrix}\right.$$
+
+The constant $C$ depends only on $\lambda,U$ and the coefficients of $L$. The constant $C$ blows up when $\lambda$ approaches an eigenvalue.
+
+# 6.5 Eigenvalues and eigenfunctions
+
+We consider
+
+\begin{equation}
+\left\{\begin{matrix}
+Lw = \lambda w & x\in U \\
+w = 0          & x\in\partial U,
+\end{matrix}\right.
+\end{equation}
+
+with $U$ open and bounded.
+
+## 6.5.1 Eigenvalues of symmetric elliptic operators
+
+Restrict attention to the divergence form $Lu=-\sum_{ij}\left(a^{ij}u_{x_i}\right)_{x_j}$ with $a^{ij}\in C^\infty(\bar U)$. Further suppose that the elliptic condition is satisfied and $a^{ij}=a^{ji}$. Then the operator $L$ is symmetric and, in particular, $B[u,v]=B[v,u]$ ($L$ is equal to its adjoint).
+
+Assume also that $U$ is connected.
+
+__Theorem 1 (eigenvalues of symmetric elliptic operators):__
+
+  i. each eigenvalue of $L$ is real
+  ii. repeating each eigenvalue according to its multiplicity, we get $\Sigma=\{\lambda_k\}$ s.t. 
+  
+  $$0<\lambda_1\leq\lambda_2\leq\cdots, \ \ \ \lambda_k\ra\infty.$$
+  
+  iii. There exists an ONB $\{w_k\}$ of $L^2(U)$, where $w_k\in H_0^1$ is an eigenfunction corresponding to $\lambda_k$:
+  
+  $$\left\{\begin{matrix}Lw_k=\lambda_k w_k & x\in U \\ w_k=0 & x\in\partial U\end{matrix}\right., \ \ \ k=1,2,\dots$$
+
+  - $w_k\in C^\infty(U)$ and if $\partial U$ is smooth, $w_k\in C^\infty(\bar U)$.
+  
+__Weyl's law:__ The eigenvalues of the Laplacian in a smooth bounded open set $U\subset\R$ satisfy
+
+$$\lim_{k\ra\infty}\frac{\lambda_k^{n/2}}{k}=\frac{(2\pi)^n}{|U|\alpha(n)}$$
+  
+where $|U|$ is the volume of $U$ and $\alpha(n)=\frac{\pi^{n/2}}{\Gamma(\frac{n}{2}+1)}$ is the volume of a unit ball in $\R^n$.
+
+__Def:__ We call $\lambda_1>0$ the _principle eigenvalue_ of $L$.
+
+__Theorem 2 (variational principle for the principle eigenvalue):__
+
+  i. $\lambda_1=\min\{B[u,u]:u\in H_0^1,\|u\|_{L^2}=1\}$
+  
+  ii. $\lambda_1$ is obtained for a function $w_1>0$ in $U$ and solves
+  
+  $$\left\{\begin{matrix}Lw_1=\lambda_1 w_1 & x\in U \\ w_1=0 & x\in\partial U\end{matrix}\right.$$
+  
+  iii. if $u\in H_0^1$ is any weak solution of 
+
+  $$\left\{\begin{matrix}Lu=\lambda_1 u & x\in U \\ u=0 & x\in\partial U\end{matrix}\right.$$
+
+then $u$ is a multiple of $w_1$.
+
+  - remarks: assertion iii. states that $\lambda_1$ has multiplicity one ($0<\lambda<\lambda_2\leq\lambda_3\leq\dots$, its eigenspace is one-dimensional). the expression involving a minimum is called _Rayleigh's formula_ and is equivalent to
+  
+  $$\lambda_1=\min_{\begin{matrix} u\in H_0^1 \\ u\neq0 \end{matrix}}\frac{B[u,u]}{\|u\|^2_{L^2}}.$$
+
+## 6.5.2 Eigenvalues of nonsymmetric elliptic operators
+
+Consider the nondivergence form $Lu=-\sum_{ij}a^{ij}u_{x_ix_j}+\sum_ib^iu_{x_i}+cu$. Assume $a^{ij},^i,c\in C^\infty(\bar U)$, $U$ is open bounded and connected and $\partial U$ is smooth. Suppose also that $a^{ij}=a^{ji}$ and $c\geq0$ in $U$.
+
+In this case $L$ does not equal its adjoint.
+
+__Theorem 3 (principle eigenvalues for nonsymmetric elliptic operators):__
+
+  i. there exists a real eigenvalue $\lambda_1$ for the operator $L$, taken with zero boundary conditions, s.t. if $\lambda\in C$ is any other eigenvalue, we have
+  
+  $$\mathscr{R}(\lambda)\geq\lambda_1.$$
+  
+  ii. there exists a corresponding eigenfunction $w_1$ which is positive in $U$.
+  
+  iii. The eigenvalue $\lambda_1$ is simple.
+  
+# __Linear Evolution Equations__
+  
+  
+  

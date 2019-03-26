@@ -11,7 +11,7 @@
 
 
 
-<title>Harmonic Analysis</title>
+<title>Harmonic Analysis 03-25-19</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -337,36 +337,72 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Harmonic Analysis</h1>
+<h1 class="title toc-ignore">Harmonic Analysis 03-25-19</h1>
 
 </div>
 
 
 
-<div id="summary-of-convergence-results" class="section level1">
-<h1>Summary of convergence results</h1>
-<ol style="list-style-type: decimal">
-<li><span class="math inline">\(f\in C^2[-\pi,\pi)\implies |\hat f(n)|\leq c/n^2\)</span> and</li>
-</ol>
-<p><span class="math display">\[S_Nf(x)\equiv\sum_{|n|\leq N}\hat f(n)e^{inx}\overset{\text{unif}}{\rightarrow}f(x)\]</span></p>
-<p>Works also for <span class="math inline">\(f\in C^1[-\pi,\pi)\)</span>, but requires a more involved proof.</p>
-<p>Does not work for <span class="math inline">\(C[-\pi,\pi)\)</span>. The sawtooth function is an example for why this is so.</p>
-<ol start="2" style="list-style-type: decimal">
-<li><p><span class="math inline">\(\exists \ f\in C\)</span> s.t. <span class="math inline">\(\lim S_Nf=\infty\)</span> for some <span class="math inline">\(x\)</span></p></li>
-<li><p><span class="math inline">\(f\in C^k[-\pi,\pi)\implies|\hat f(n)|\leq c/n^k\)</span> for <span class="math inline">\(k\geq1\)</span></p></li>
-<li><p><em>Feyérs theorem</em>: <span class="math inline">\(f\in C[-\pi,\pi)\implies\sigma_Nf=\frac{1}{N}\sum_{i=0}^{N-1}S_if\overset{\text{unif}}{\rightarrow}\)</span></p></li>
-</ol>
-<p>A trig polynomial is of the form <span class="math inline">\(\sum_{|n|\leq N}a_ne^{int}=\sum_{n=0}^Nb_n\cos(nt)+c_n\sin(nt)\)</span> and therefore <span class="math inline">\(\sigma_N\)</span> is an <span class="math inline">\(N-1\)</span> trig polyn.</p>
+<div id="gabor-bases-for-l2" class="section level2">
+<h2>Gabor bases (for <span class="math inline">\(L^2\)</span>)</h2>
+<p><strong>Def:</strong> A function <span class="math inline">\(g\in L^2\)</span> is a <em>Gabor function</em> if the family</p>
+<p><span class="math display">\[\{g_{n,k}(x)=g(x-k)e^{i2\pi nx}\}\]</span></p>
+<p>is an ONB of <span class="math inline">\(L^2\)</span>. The family is then referred to as <em>Gabor basis</em>.</p>
 <ul>
-<li><p><em>Weierstrass Thm</em>: Any cont fct on <span class="math inline">\([-\pi,\pi)\)</span> can be approx by trig polyns. (a corr of Feyér’s thm)</p></li>
-<li><p><em>Riemann Lebesgue lemma</em>: if <span class="math inline">\(f\in C[-\pi,\pi)\)</span> then <span class="math inline">\(\hat f(n)\rightarrow 0\)</span> as <span class="math inline">\(|n|\rightarrow\infty\)</span>.</p></li>
+<li>ex: <span class="math inline">\(\chi_[0,1)\)</span> is Gabor function</li>
 </ul>
-<ol start="5" style="list-style-type: decimal">
-<li>pt-wise conv:</li>
-</ol>
-<p><em>Thm</em>: <span class="math inline">\(f\)</span> is intgble on <span class="math inline">\([-\pi,\pi)\)</span>. let <span class="math inline">\(x\in[-\pi,\pi)\)</span> where <span class="math inline">\(f(x^+),f(x^-),f&#39;_r(x),f&#39;_l(x)\)</span> exist. Then</p>
-<p><span class="math display">\[S_Nf(x)\overset{\text{pt-wise}}{\rightarrow}\frac{f(x^+)+f(x^-)}{2}\]</span></p>
-<p>if <span class="math inline">\(f\)</span> is cont as (at <span class="math inline">\(x\)</span>), then <span class="math inline">\(S_Nf(x)\rightarrow f(x)\)</span> pt-wise.</p>
+<p><strong>Recall:</strong></p>
+<p><span class="math display">\[\hat f(\gamma)=\mathscr{F}(f)=\int_\mathbb{R}f(x)e^{-2\pi i x\gamma}dx\]</span></p>
+<p><span class="math display">\[\mathscr{F}^{-1}(g)=\int_\mathbb{R}g(\gamma)e^{2\pi i x \gamma}d\gamma\]</span></p>
+<p>In particular, <span class="math inline">\(\mathscr{F}\circ\mathscr{F}^{-1}=\mathscr{F}^{-1}\circ\mathscr{F}=I\)</span>.</p>
+<p><strong>Def:</strong> The adjoint of a linear transformation <span class="math inline">\(T\)</span> is, denoted by <span class="math inline">\(T^*\)</span>, is defined to satisfy</p>
+<p><span class="math display">\[\left&lt;Tf,g\right&gt;=\left&lt;f,T^*g\right&gt;.\]</span></p>
+<ul>
+<li>finding the adjoint of <span class="math inline">\(\mathscr{F}\)</span>:</li>
+</ul>
+<p><span class="math display">\[\left&lt;\mathscr{F}f,g\right&gt;=\int_\mathbb{R}\hat f(\gamma)\bar g(\gamma)d\gamma\]</span></p>
+<p><span class="math display">\[=\int_\mathbb{R}\int_\mathbb{R}f(x)e^{-2\pi i x\gamma}\bar g(\gamma)dxd\gamma\]</span></p>
+<p><span class="math display">\[=\int_\mathbb{R}f(x)\int_\mathbb{R}\bar g(\gamma)e^{-2\pi i x\gamma}d\gamma dx\]</span></p>
+<p><span class="math display">\[=\int_\mathbb{R}f(x)\overline{\int_\mathbb{R}g(\gamma)e^{2\pi i x\gamma}d\gamma dx}\]</span></p>
+<p><span class="math display">\[=\int_\mathbb{R}f(x)\overline{\left(\mathscr{F}^{-1}g\right)(x)}dx\]</span></p>
+<p><span class="math display">\[=\left&lt; f,\mathscr{F}^{-1}g\right&gt;.\]</span></p>
+<p>Hence <span class="math inline">\(\mathscr{F}^*=\mathscr{F}^{-1}\)</span>.</p>
+<p>Note that this was a bit unneccessary since it is know that <span class="math inline">\(\mathscr{F}\)</span> is unitary and the adjoint and inverse of unitary operators are the same.</p>
+<p><strong>Lemma 9.7:</strong> A family <span class="math inline">\(\{\psi_n\}_{n\in\mathbb{N}}\)</span> is an ONB iff <span class="math inline">\(\{\hat \psi_n\}\)</span> is an ONB.</p>
+<p><strong>Proof:</strong> <span class="math inline">\(\left&lt;\hat\psi_n,\hat\psi_m\right&gt;=\left&lt;\mathscr{F}\psi_n,\mathscr{F}\psi_m\right&gt;=\left&lt;\mathscr{F}^*\mathscr{F}\psi_n,\psi_m\right&gt;=\left&lt;\psi_n,\psi_m\right&gt;.\)</span></p>
+<p>This implies that orthogonality is preserved under <span class="math inline">\(\mathscr F\)</span>.</p>
+<p>An ONB is an orthornormal family with completeness. Completeness implies that if <span class="math inline">\(\left&lt;f,\psi_n\right&gt;=0\)</span> for all <span class="math inline">\(n\)</span>, then <span class="math inline">\(f=0\)</span>.</p>
+<p>Hence, <span class="math inline">\(\mathscr F\)</span> preserves completeness. <span class="math inline">\(\square\)</span></p>
+<p>Using Lemma 9.7, if we are given a Gabor basis <span class="math inline">\(\{g_{n,k}\}_{n,k\in\mathbb{Z}}\)</span>, then the Fourier transforms <span class="math inline">\(\{\hat g_{n,k}\}\)</span> also form an ONB. However, is <span class="math inline">\(\{\hat g_{n,k}\}\)</span> a Gabor basis?</p>
+<ul>
+<li>Recall:</li>
+<li><span class="math inline">\(f(x+h)\rightarrow\hat f(\gamma)e^{2\pi ih \gamma}\)</span></li>
+<li><span class="math inline">\(f(x)e^{-2\pi ix h}\rightarrow\hat f(\gamma+h)\)</span></li>
+</ul>
+<p>Hence</p>
+<p><span class="math display">\[\mathscr{F}( g_{n,k}(\gamma))=\mathscr{F}(g(x-k)e^{2\pi inx})=\hat g(\gamma-n)e^{-2\pi ik\gamma}=\hat g_{-k,n}(\gamma)\]</span></p>
+<p>Thus <span class="math inline">\(\{\hat g_{n,k}\}\)</span> is not just an ONB, but also a Gabor basis.</p>
+<p><strong>Lemma 9.9</strong> A function <span class="math inline">\(g\)</span> generates a Gabor basis, ie <span class="math inline">\(\{g_{n,k}\}\)</span> is an ONB of <span class="math inline">\(L^2\)</span>, iff <span class="math inline">\(\hat g\)</span> generates a Gabor basis.</p>
+<p>Hence, Gabor bases come in pairs.</p>
+<ul>
+<li>ex: The Fourier transform of <span class="math inline">\(g=\chi_[0,1)\)</span> is</li>
+</ul>
+<p><span class="math display">\[-\left.\frac{e^{-2\pi i\gamma x}}{2\pi i\gamma}\right|_0^1=\frac{1-e^{-2\pi i\gamma}}{2\pi i\gamma}=\frac{e^{-\pi i\gamma}(e^{\pi i\gamma}-e^{-2\pi i\gamma})}{2\pi i\gamma}\]</span></p>
+<p><span class="math display">\[=e^{-\pi i\gamma}\frac{\sin(\pi\gamma)}{\pi\gamma}=e^{-\pi i\gamma}\mathrm{sinc}(\gamma).\]</span></p>
+<p>Note that <span class="math inline">\(\hat g\)</span> is differentiable, but <span class="math inline">\(g\)</span> is not even continuous. On the other hand, <span class="math inline">\(g\)</span> is compactly supported, but <span class="math inline">\(\hat g\)</span> is not compactly supported. This is just a manifestation of the uncertainty principle.</p>
+<p>It is not possible to find a Gabor function that is both smooth and compactly supported. This is due to <em>the Balian-Low theorem</em>.</p>
+<p><strong>BLT:</strong> If <span class="math inline">\(g\in L^2\)</span> is a Gabor function, then either</p>
+<p><span class="math display">\[\int_\mathbb{R}x^2|g(x)|^2dx=\infty\]</span> OR</p>
+<p><span class="math display">\[\int_\mathbb{R}\gamma^2|\hat g(\gamma)|^2d\gamma=\infty\]</span></p>
+<p>Recall: <span class="math inline">\(\|f\|=\|\hat f\|\)</span> and <span class="math inline">\(g&#39;(x)\rightarrow 2\pi i\gamma\hat g(\gamma)\)</span>.</p>
+<p>These imply</p>
+<p><span class="math display">\[\int_\mathbb{R}\gamma^2|\hat g(\gamma)|^2d\gamma=\int_\mathbb{R}|g&#39;(x)|^2dx. \ \square\]</span></p>
+<ul>
+<li><p>Cannot have localization in both time and frequency.</p></li>
+<li><p>The Gaussian <span class="math inline">\(f(x)=e^{-\pi x^2}\)</span> cannot be a Gabor function since it is its own Fourier transform.</p></li>
+<li><p>Apparently there are ways to modify the Gaussian function into a Gabor function.</p></li>
+</ul>
+<p>Using <span class="math inline">\(f(x-ak)e^{2\pi in bx}, \ a,b&gt;0\)</span> does not form an ONB, but a frame.</p>
 </div>
 
 
