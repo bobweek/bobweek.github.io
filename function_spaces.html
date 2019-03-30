@@ -313,6 +313,8 @@ $(document).ready(function () {
               <li><a href="note_3_20.html">Mar 20</a></li>
               <li><a href="note_3_22.html">Mar 22</a></li>
               <li><a href="note_3_25.html">Mar 25</a></li>
+              <li><a href="note_3_27.html">Mar 22</a></li>
+              <li><a href="note_3_29.html">Mar 25</a></li>
             </ul>
           </li>
         </ul>
@@ -424,6 +426,18 @@ $(document).ready(function () {
 <li><p><span class="math inline">\(\left&lt;f,g\right&gt;\)</span> is the “inner-product” between <span class="math inline">\(H^{-1}\)</span> and <span class="math inline">\(H^1_0\)</span> for <span class="math inline">\(f\in H^{-1}\)</span> and <span class="math inline">\(v\in H_0^1\)</span>.</p></li>
 <li><p><span class="math inline">\(\|f\|_{H^{-1}}\equiv\sup\{\left&lt;f,u\right&gt;:u\in H_0^1,\|u\|\leq1\}\)</span></p></li>
 </ul></li>
+<li><p>Spaces with time</p>
+<ul>
+<li><p><span class="math inline">\(X\)</span> is a real Banach space with norm <span class="math inline">\(\|\cdot\|_X\)</span></p></li>
+<li><p><span class="math inline">\(L^p(0,T;X)=\{\pmb u:[0,T]\rightarrow X : \|\pmb u\|_{L^p(0,T;X)}&lt;\infty\}\)</span> (Bochner integrable mappings?)</p>
+<ul>
+<li><span class="math inline">\(\|\pmb u\|_{L^p(0,T;X)}=\left(\int_0^T(\|\pmb u(t)\|_X)^p\right)^{1/p}\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(C([0,T]:X)=\{\pmb u:[0,T]\rightarrow X:\pmb u\text{ is continuous and } \|\pmb u\|_{C([0,T];X)}&lt;\infty\}\)</span></p>
+<ul>
+<li><span class="math inline">\(\|\pmb u\|_{C([0,T];X)}\equiv\max_{0\leq t\leq T}\|\pmb u(t)\|_X\)</span></li>
+</ul></li>
+</ul></li>
 </ul>
 </div>
 <div id="spaces-common-in-stochastic-analysis-sde" class="section level3">
@@ -473,6 +487,7 @@ $(document).ready(function () {
 <ul>
 <li></li>
 </ul></li>
+<li><p>Locally convex space (LCS: a TVS with a base consisting of convex sets)</p></li>
 </ul>
 </div>
 <div id="spaces-relevant-for-spde" class="section level3">

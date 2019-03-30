@@ -11,7 +11,7 @@
 
 
 
-<title>Harmonic Analysis</title>
+<title>Harmonic Analysis 03-29-19</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -339,36 +339,43 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Harmonic Analysis</h1>
+<h1 class="title toc-ignore">Harmonic Analysis 03-29-19</h1>
 
 </div>
 
 
 
-<div id="summary-of-convergence-results" class="section level1">
-<h1>Summary of convergence results</h1>
-<ol style="list-style-type: decimal">
-<li><span class="math inline">\(f\in C^2[-\pi,\pi)\implies |\hat f(n)|\leq c/n^2\)</span> and</li>
+<div id="wavelets-multiresolution-analysis-mra" class="section level2">
+<h2>Wavelets: Multiresolution analysis (MRA)</h2>
+<p>Recall <strong>Def:</strong> <span class="math inline">\(\psi\)</span> is a wavelet if <span class="math inline">\(\{\psi_{ij}(x)\}=\{2^{j/2}\psi(2^jx-k)\}\)</span> is an ONB of <span class="math inline">\(L^2(\mathbb{R})\)</span>.</p>
+<p>An MRA is a general framework for constructing functions <span class="math inline">\(\psi\)</span> that form wavelets.</p>
+<p>A multiresolution analysis consists of a sequence <span class="math inline">\(\{V_j\}_{j\in\mathbb{Z}}\)</span> of closed subspaces of <span class="math inline">\(L^2(\mathbb{R})\)</span> and a function <span class="math inline">\(\varphi\in V_0\)</span>, satisfying</p>
+<ol style="list-style-type: lower-roman">
+<li><p><span class="math inline">\(\dots\subset V_{-1}\subset V_0\subset V_1\subset \dots\)</span></p></li>
+<li><p><span class="math inline">\(\overline{\cup_j V_j}=L^2(\mathbb{R})\)</span> and <span class="math inline">\(\cap_j V_j=\{0\}\)</span></p></li>
+<li><p><span class="math inline">\(f\in V_j\)</span> iff <span class="math inline">\(f(2x)\in V_{j+1}\)</span> (which is the same as <span class="math inline">\(f(2^{-j}x)\in V_0\)</span>)</p></li>
+<li><p><span class="math inline">\(f\in V_0\)</span> iff <span class="math inline">\(f(x-k)\in V_0\)</span> for each <span class="math inline">\(k\in \mathbb{Z}\)</span></p></li>
+<li><p><span class="math inline">\(\{\phi(x-k)\}_{k\in\mathbb{Z}}\)</span> is an ONB of <span class="math inline">\(V_0\)</span>.</p></li>
 </ol>
-<p><span class="math display">\[S_Nf(x)\equiv\sum_{|n|\leq N}\hat f(n)e^{inx}\overset{\text{unif}}{\rightarrow}f(x)\]</span></p>
-<p>Works also for <span class="math inline">\(f\in C^1[-\pi,\pi)\)</span>, but requires a more involved proof.</p>
-<p>Does not work for <span class="math inline">\(C[-\pi,\pi)\)</span>. The sawtooth function is an example for why this is so.</p>
-<ol start="2" style="list-style-type: decimal">
-<li><p><span class="math inline">\(\exists \ f\in C\)</span> s.t. <span class="math inline">\(\lim S_Nf=\infty\)</span> for some <span class="math inline">\(x\)</span></p></li>
-<li><p><span class="math inline">\(f\in C^k[-\pi,\pi)\implies|\hat f(n)|\leq c/n^k\)</span> for <span class="math inline">\(k\geq1\)</span></p></li>
-<li><p><em>Feyérs theorem</em>: <span class="math inline">\(f\in C[-\pi,\pi)\implies\sigma_Nf=\frac{1}{N}\sum_{i=0}^{N-1}S_if\overset{\text{unif}}{\rightarrow}\)</span></p></li>
-</ol>
-<p>A trig polynomial is of the form <span class="math inline">\(\sum_{|n|\leq N}a_ne^{int}=\sum_{n=0}^Nb_n\cos(nt)+c_n\sin(nt)\)</span> and therefore <span class="math inline">\(\sigma_N\)</span> is an <span class="math inline">\(N-1\)</span> trig polyn.</p>
+<p>Property iii. is known as the <em>Dilation-by-two feature</em>. This and property iv. are the key properties for constructing wavelets. Combining these properties, we see that if <span class="math inline">\(f\in V_j\)</span>, then <span class="math inline">\(\{f(x-k)\}\subset V_j\)</span> and <span class="math inline">\(\{f(2x),f(2x-k)\}\subset V_{j+1}\)</span>.</p>
+<p><strong>Remark:</strong> Take <span class="math inline">\(f\in L^2\)</span>. An approximation of <span class="math inline">\(f\)</span> at <em>level</em> <span class="math inline">\(j\)</span> is in <span class="math inline">\(V_j\)</span>. The <span class="math inline">\(V_j\)</span>’s are called <em>approximation spaces</em>. <span class="math inline">\(\phi\)</span> is called a <em>scaling function</em>.</p>
+<p><strong>Example:</strong> <span class="math inline">\(I_{jk}=[2^{-j}k,2^{-j}(k+1))\)</span></p>
+<p><span class="math display">\[V_j=\{f\in L^2:\exists \ c\in\mathbb{R}\text{ s.t. } f|_{I_{jk}}=c \ \forall k\in \mathbb{Z}\}\]</span></p>
 <ul>
-<li><p><em>Weierstrass Thm</em>: Any cont fct on <span class="math inline">\([-\pi,\pi)\)</span> can be approx by trig polyns. (a corr of Feyér’s thm)</p></li>
-<li><p><em>Riemann Lebesgue lemma</em>: if <span class="math inline">\(f\in C[-\pi,\pi)\)</span> then <span class="math inline">\(\hat f(n)\rightarrow 0\)</span> as <span class="math inline">\(|n|\rightarrow\infty\)</span>.</p></li>
+<li>these are the piecewise constant functions</li>
+<li>this is just approximation by simple functions</li>
+<li>associated with the Haar wavelet: <span class="math inline">\(\mathrm{supp} \ \psi_{jk}\subset I_{jk}\)</span></li>
+<li><span class="math inline">\(\varphi(x)=\chi_{_{[0,1)}}(x)\implies \psi(x)=\varphi(2x)-\varphi(2x-1)\)</span></li>
 </ul>
-<ol start="5" style="list-style-type: decimal">
-<li>pt-wise conv:</li>
-</ol>
-<p><em>Thm</em>: <span class="math inline">\(f\)</span> is intgble on <span class="math inline">\([-\pi,\pi)\)</span>. let <span class="math inline">\(x\in[-\pi,\pi)\)</span> where <span class="math inline">\(f(x^+),f(x^-),f&#39;_r(x),f&#39;_l(x)\)</span> exist. Then</p>
-<p><span class="math display">\[S_Nf(x)\overset{\text{pt-wise}}{\rightarrow}\frac{f(x^+)+f(x^-)}{2}\]</span></p>
-<p>if <span class="math inline">\(f\)</span> is cont as (at <span class="math inline">\(x\)</span>), then <span class="math inline">\(S_Nf(x)\rightarrow f(x)\)</span> pt-wise.</p>
+<p><span class="math inline">\(V_{j+1}\)</span> has more detail than <span class="math inline">\(V_j\)</span>. The difference is denoted by <span class="math inline">\(W_j\)</span>. That is,</p>
+<p><span class="math display">\[V_{j+1}=V_j\oplus W_j=\{v_j+w_j:v_j\in V_j, w_j\in W_j, v_j\perp w_j\}\]</span></p>
+<p>Think of <span class="math inline">\(v_j\)</span> the orthogonal projection of <span class="math inline">\(f\)</span> onto <span class="math inline">\(V_j\)</span>. What’s left over is <span class="math inline">\(w_j\)</span>. Thus, we can write</p>
+<p><span class="math display">\[V_k=V_l\oplus W_l\oplus\dots\oplus W_{k-1}\]</span></p>
+<p>for <span class="math inline">\(l&lt;k\in\mathbb{Z}\)</span>. In particular, <span class="math inline">\(L^2=\bigoplus_j W_j\)</span>. The scaling function <span class="math inline">\(\varphi\)</span> generates a basis for <span class="math inline">\(V_j\)</span>. If <span class="math inline">\(\psi\)</span> is the wavelet for <span class="math inline">\(V_j\)</span>, then the <span class="math inline">\(W_j\)</span>’s are generated by <span class="math inline">\(\psi\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\varphi\)</span> determines the approximation (the <span class="math inline">\(V_j\)</span>’s)</li>
+<li>the wavelets determine the “details” (the differences between <span class="math inline">\(V_j\)</span>’s)</li>
+</ul>
 </div>
 
 

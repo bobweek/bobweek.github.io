@@ -11,7 +11,7 @@
 
 
 
-<title>Harmonic Analysis</title>
+<title>Harmonic Analysis 03-27-19</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -339,36 +339,54 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Harmonic Analysis</h1>
+<h1 class="title toc-ignore">Harmonic Analysis 03-27-19</h1>
 
 </div>
 
 
 
-<div id="summary-of-convergence-results" class="section level1">
-<h1>Summary of convergence results</h1>
-<ol style="list-style-type: decimal">
-<li><span class="math inline">\(f\in C^2[-\pi,\pi)\implies |\hat f(n)|\leq c/n^2\)</span> and</li>
-</ol>
-<p><span class="math display">\[S_Nf(x)\equiv\sum_{|n|\leq N}\hat f(n)e^{inx}\overset{\text{unif}}{\rightarrow}f(x)\]</span></p>
-<p>Works also for <span class="math inline">\(f\in C^1[-\pi,\pi)\)</span>, but requires a more involved proof.</p>
-<p>Does not work for <span class="math inline">\(C[-\pi,\pi)\)</span>. The sawtooth function is an example for why this is so.</p>
-<ol start="2" style="list-style-type: decimal">
-<li><p><span class="math inline">\(\exists \ f\in C\)</span> s.t. <span class="math inline">\(\lim S_Nf=\infty\)</span> for some <span class="math inline">\(x\)</span></p></li>
-<li><p><span class="math inline">\(f\in C^k[-\pi,\pi)\implies|\hat f(n)|\leq c/n^k\)</span> for <span class="math inline">\(k\geq1\)</span></p></li>
-<li><p><em>Feyérs theorem</em>: <span class="math inline">\(f\in C[-\pi,\pi)\implies\sigma_Nf=\frac{1}{N}\sum_{i=0}^{N-1}S_if\overset{\text{unif}}{\rightarrow}\)</span></p></li>
-</ol>
-<p>A trig polynomial is of the form <span class="math inline">\(\sum_{|n|\leq N}a_ne^{int}=\sum_{n=0}^Nb_n\cos(nt)+c_n\sin(nt)\)</span> and therefore <span class="math inline">\(\sigma_N\)</span> is an <span class="math inline">\(N-1\)</span> trig polyn.</p>
+<div id="the-wavelet-transform" class="section level2">
+<h2>The Wavelet transform</h2>
 <ul>
-<li><p><em>Weierstrass Thm</em>: Any cont fct on <span class="math inline">\([-\pi,\pi)\)</span> can be approx by trig polyns. (a corr of Feyér’s thm)</p></li>
-<li><p><em>Riemann Lebesgue lemma</em>: if <span class="math inline">\(f\in C[-\pi,\pi)\)</span> then <span class="math inline">\(\hat f(n)\rightarrow 0\)</span> as <span class="math inline">\(|n|\rightarrow\infty\)</span>.</p></li>
+<li><p>wavelet - a little wave, <span class="math inline">\(\psi\)</span>, (that starts and stops) unlike the sine/cosine that go on forever.</p></li>
+<li><p>key idea: express functions as sums of this wave and its translates and dilates.</p></li>
 </ul>
-<ol start="5" style="list-style-type: decimal">
-<li>pt-wise conv:</li>
-</ol>
-<p><em>Thm</em>: <span class="math inline">\(f\)</span> is intgble on <span class="math inline">\([-\pi,\pi)\)</span>. let <span class="math inline">\(x\in[-\pi,\pi)\)</span> where <span class="math inline">\(f(x^+),f(x^-),f&#39;_r(x),f&#39;_l(x)\)</span> exist. Then</p>
-<p><span class="math display">\[S_Nf(x)\overset{\text{pt-wise}}{\rightarrow}\frac{f(x^+)+f(x^-)}{2}\]</span></p>
-<p>if <span class="math inline">\(f\)</span> is cont as (at <span class="math inline">\(x\)</span>), then <span class="math inline">\(S_Nf(x)\rightarrow f(x)\)</span> pt-wise.</p>
+<p><strong>Dilation:</strong> <span class="math inline">\(f_\lambda(x)\equiv\lambda f(\lambda x)\)</span>.</p>
+<ul>
+<li><p>ex: dilate <span class="math inline">\(\sin(x)|_{[0,2\pi]}\)</span> by <span class="math inline">\(2\)</span> and by <span class="math inline">\(1/2\)</span></p>
+<ul>
+<li><p><span class="math inline">\(2\sin(2x)|_{[0,\pi]}\)</span></p></li>
+<li><p><span class="math inline">\(\frac{1}{2}\sin(\frac{x}{2})|_{[0,4\pi]}\)</span></p></li>
+</ul></li>
+</ul>
+<p>Dilation gives rise to a “zooming action”.</p>
+<p><strong>Def:</strong> A function <span class="math inline">\(\psi\in L^2(\mathbb{R})\)</span> is called a wavelet if the family</p>
+<p><span class="math display">\[\psi_{j,k}(x)=2^{j/2}\psi(2^jx-k), \ j,k\in\mathbb{Z}\]</span></p>
+<p>forms an ONB of <span class="math inline">\(L^2(\mathbb{R})\)</span>. If so, the basis is called a <em>wavelet basis</em>.</p>
+<p><strong>Proposition:</strong> If <span class="math inline">\(\psi\in L^2(\mathbb{R})\)</span> is a wavelet, then the following reconstruction formula holds:</p>
+<p><span class="math display">\[f(x)=\sum_{j,k}\left&lt;f,\psi_{j,k}\right&gt;\psi_{j,k}, \ f\in L^2(\mathbb{R})\]</span></p>
+<p>in <span class="math inline">\(L^2\)</span>. <span class="math inline">\(\diamond\)</span></p>
+<ul>
+<li>The inner products above are the <em>wavelet coefficients</em> of <span class="math inline">\(f\)</span>.</li>
+</ul>
+<p>The wavelet transform is given by</p>
+<p><span class="math display">\[W f(j,k)\equiv\left&lt;f,\psi_{j,k}\right&gt;=\int_\mathbb{R}f(x)\bar \psi(x)_{j,k}(x)dx.\]</span></p>
+<p><strong>Example:</strong> The Haar wavelet <span class="math inline">\(h(x)\)</span> on the unit interval is given by</p>
+<p><span class="math display">\[h(x)\equiv-\chi_{[0,1/2)}+\chi_{[1/2,1)}.\]</span></p>
+<p>The family <span class="math inline">\(\{h_{j,k}(x)=2^{j/2}h(2^jx-k)\}\)</span> is an ONB for <span class="math inline">\(L^2(\mathbb{R})\)</span>.</p>
+<p><strong>Shannon wavelet:</strong> The wavelet <span class="math inline">\(\psi\)</span> is given by</p>
+<p><span class="math display">\[\hat\psi(\gamma)\equiv e^{2\pi i \gamma}\chi_{[-1,-1.2)\cup[1/2,1)}(\gamma)\]</span></p>
+<p>which is more of a manifestation for a common technique of constructing wavelets: by constructing the Fourier transform first, and then inverting to get the wavelet. The family <span class="math inline">\(\{\psi_{j,k}\}\)</span> is called the Shannon basis.</p>
+<p><strong>Q:</strong> Do we get another ONB via <span class="math inline">\(\mathscr{F}\)</span>-transforms?</p>
+<ul>
+<li>Yes! This is just due to the preservation of orthoganality.</li>
+<li>However, this is no longer a wavelet basis.</li>
+</ul>
+<p>Recall <span class="math inline">\(f(\lambda x)\rightarrow\frac{1}{\lambda}\hat f(\gamma/\lambda)\)</span> and <span class="math inline">\(f(x+h)\rightarrow\hat f(\gamma)e^{2\pi i h\gamma}\)</span>.</p>
+<p>Instead, the ONB <span class="math inline">\(\{\hat\psi_{j,k}\}\)</span> consists of dilations and modulations of <span class="math inline">\(\hat\psi\)</span> rather than dilations and translations.</p>
+<ul>
+<li>NOTE: The Haar wavelet is compactly supported, but the Shannon wavelet is not.</li>
+</ul>
 </div>
 
 

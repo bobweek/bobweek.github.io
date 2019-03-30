@@ -1,0 +1,80 @@
+---
+title: "Harmonic Analysis 03-27-19"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sinc}{\mathrm{sinc}}
+\newcommand{\supp}{\mathrm{supp}}
+
+## The Wavelet transform
+
+  - wavelet - a little wave, $\psi$, (that starts and stops) unlike the sine/cosine that go on forever.
+  
+  - key idea: express functions as sums of this wave and its translates and dilates.
+  
+__Dilation:__ $f_\lambda(x)\equiv\lambda f(\lambda x)$.
+
+  - ex: dilate $\sin(x)|_{[0,2\pi]}$ by $2$ and by $1/2$
+  
+    - $2\sin(2x)|_{[0,\pi]}$
+    
+    - $\frac{1}{2}\sin(\frac{x}{2})|_{[0,4\pi]}$
+    
+Dilation gives rise to a "zooming action".
+
+__Def:__ A function $\psi\in L^2(\R)$ is called a wavelet if the family
+
+$$\psi_{j,k}(x)=2^{j/2}\psi(2^jx-k), \ j,k\in\Z$$
+
+forms an ONB of $L^2(\R)$. If so, the basis is called a _wavelet basis_.
+  
+__Proposition:__ If $\psi\in L^2(\R)$ is a wavelet, then the following reconstruction formula holds:
+
+$$f(x)=\sum_{j,k}\left<f,\psi_{j,k}\right>\psi_{j,k}, \ f\in L^2(\R)$$
+
+in $L^2$. $\diamond$
+
+
+ - The inner products above are the _wavelet coefficients_ of $f$.
+
+The wavelet transform is given by
+
+$$W f(j,k)\equiv\left<f,\psi_{j,k}\right>=\int_\R f(x)\bar \psi(x)_{j,k}(x)dx.$$
+
+__Example:__ The Haar wavelet $h(x)$ on the unit interval is given by
+
+$$h(x)\equiv-\chi_{[0,1/2)}+\chi_{[1/2,1)}.$$
+
+The family $\{h_{j,k}(x)=2^{j/2}h(2^jx-k)\}$ is an ONB for $L^2(\R)$.
+
+__Shannon wavelet:__ The wavelet $\psi$ is given by
+
+$$\hat\psi(\gamma)\equiv e^{2\pi i \gamma}\chi_{[-1,-1.2)\cup[1/2,1)}(\gamma)$$
+
+which is more of a manifestation for a common technique of constructing wavelets: by constructing the Fourier transform first, and then inverting to get the wavelet. The family $\{\psi_{j,k}\}$ is called the Shannon basis.
+
+__Q:__ Do we get another ONB via $\mathscr{F}$-transforms?
+
+  - Yes! This is just due to the preservation of orthoganality.
+  - However, this is no longer a wavelet basis.
+  
+Recall $f(\lambda x)\ra\frac{1}{\lambda}\hat f(\gamma/\lambda)$ and $f(x+h)\ra\hat f(\gamma)e^{2\pi i h\gamma}$.
+
+Instead, the ONB $\{\hat\psi_{j,k}\}$ consists of dilations and modulations of $\hat\psi$ rather than dilations and translations. 
+
+  - NOTE: The Haar wavelet is compactly supported, but the Shannon wavelet is not.
+
+
+

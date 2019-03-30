@@ -118,6 +118,18 @@ output:
 
       - $\|f\|_{H^{-1}}\equiv\sup\{\left<f,u\right>:u\in H_0^1,\|u\|\leq1\}$
 
+  - Spaces with time
+  
+    - $X$ is a real Banach space with norm $\|\cdot\|_X$
+  
+    - $L^p(0,T;X)=\{\pmb u:[0,T]\ra X : \|\pmb u\|_{L^p(0,T;X)}<\infty\}$ (Bochner integrable mappings?)
+    
+      - $\|\pmb u\|_{L^p(0,T;X)}=\left(\int_0^T(\|\pmb u(t)\|_X)^p\right)^{1/p}$
+      
+    - $C([0,T]:X)=\{\pmb u:[0,T]\ra X:\pmb u\text{ is continuous and } \|\pmb u\|_{C([0,T];X)}<\infty\}$
+    
+      - $\|\pmb u\|_{C([0,T];X)}\equiv\max_{0\leq t\leq T}\|\pmb u(t)\|_X$
+
 ### Spaces common in stochastic analysis & SDE
   
   - $(\Omega,\mathscr{F},P)\dots$ a probability space  
@@ -173,6 +185,8 @@ output:
   - Topological vector space (TVS: a vector space with a topological structure)
   
     - 
+    
+  - Locally convex space (LCS: a TVS with a base consisting of convex sets)
     
 ### Spaces relevant for SPDE
 

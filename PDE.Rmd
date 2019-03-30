@@ -9,7 +9,10 @@ output:
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  TeX: { 
+    TagSide: "left",
+    equationNumbers: { autoNumber: "AMS" } 
+  }
 });
 </script>
 
@@ -42,7 +45,7 @@ where $L$ is a second order partial differential operator appearing as
 Lu = -\sum_{i,j}\left(a^{ij}(x)u_{x_i}\right)_{x_j}+\sum_ib^i(x)u_{x_i}+c(x)u
 \end{equation}
 
-  - nondivergence form (best used with maximum principle techs:
+  - nondivergence form (best used with maximum principle techniques):
 
 \begin{equation}
 Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i(x)u_{x_i}+c(x)u
@@ -378,6 +381,65 @@ __Theorem 3 (principle eigenvalues for nonsymmetric elliptic operators):__
   iii. The eigenvalue $\lambda_1$ is simple.
   
 # __Linear Evolution Equations__
+
+## 7.1 Second-order parabolic equations
+
+### 7.1.1 Definitions
+
+  - $U\subset\R^n$, open and bounded
+
+  - $U_T=U\times[0,T]$, for some fixed $T>0$.
+
+\begin{equation}
+\left\{\begin{matrix}
+u_t+Lu=f & x\in U_T \\
+u = 0 & x\in\partial U\times[0,T] \\
+u = g & x\in U\times\{t=0\}
+\end{matrix}\right.
+\end{equation}
+  
+The coefficients $a^{ij}$ and $b^i$ of $L$ are now functions of time as well as space. We call $L$ parabolic if it is uniformly elliptic for each $t\in[0,T]$.
+
+  - $\pmb u:[0,T]\ra H_0^1(U)$ s.t. $[\pmb u(t)](x)\equiv u(x,t)$, \ $x\in U, t\in[0,T]$
+
+  - $\pmb f:[0,T]\ra L^2(U)$ s.t. $[\pmb f(t)](x)=f(x,t)$
+  
+$$B[u,v;t]\equiv\int_U\left(\sum_{ij}a^{ij}(\cdot,t)u_{x_i}v_{x_j}+\sum_ib^i(\cdot)u_{x_i}v+c(\cdot,t)uv\right)dx, \ \ u,v\in H_0^1(U), \ \text{ ae } \ t\in [0,T]$$
   
   
+
+__Def:__ The function $\pmb u\in L^2(0,T; H_0^1(U))$, with $\pmb u'\in L^2(0,T;H^{-1}(U))$, is a weak solution of $(9)$ if
+
+  i. $\left<\pmb u',v\right>+B[\pmb u,v;t]=(\pmb f,v)$ for all $v\in H^1_0(U)$ and a.e. $t\in[0,T]$
   
+  ii. $\pmb u(0)=g$
+  
+## 7.4 Semigroup theory
+
+### 7.4.1 Definitions
+
+$X$ is a real Banach space. Consider the ODE
+
+$$\left\{\begin{matrix}\pmb u'(t)=A\pmb u(t), & t\geq0 \\ \pmb u(0)=u, & u\in X \end{matrix}\right.$$
+
+where $A:D(A)\ra X$ is a possibly unbounded operator whose domain is a linear subspace of $X$. We consider the existence and uniqueness of a mapping $\pmb u:[0,\infty)\ra X$ that satisfies the above ODE (in the weak sense). 
+
+  - we keep $X=L^p$ in mind. in this case $A$ is neccessarily unbounded.
+  
+__Notation:__ $\pmb u(t)\equiv S(t)u, \ t\geq0$ to emphasize dependence on $u$. $S(t)$ is a mapping of $X$ into $X$.
+
+  a. $S(t):X\ra X$ is linear
+  
+  b. $S(0)u=u$
+  
+  c. $S(t+s)u=S(t)S(s)u=S(s)S(t)u$ (unique solution at each point)
+  
+  d. $t\mapsto S(t)u$ is continuous from $[0,\infty)$ into $X$
+
+__Def:__ 
+
+  i. A family $\{S(t)\}_{t\geq0}$ of bounded linear operators on $X$ is a _semigroup_ if a.-d. are satisfied.
+  
+  ii. $\{S(t)\}$ is a _contraction semigroup_ if in addition $\|S(t)\|\leq1$ where
+  
+$$\|S(t)\|\equiv\sup_{u\in X}\frac{\|S(t)u\|_X}{\|u\|_X}$$

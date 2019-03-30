@@ -314,6 +314,8 @@ $(document).ready(function () {
               <li><a href="note_3_20.html">Mar 20</a></li>
               <li><a href="note_3_22.html">Mar 22</a></li>
               <li><a href="note_3_25.html">Mar 25</a></li>
+              <li><a href="note_3_27.html">Mar 22</a></li>
+              <li><a href="note_3_29.html">Mar 25</a></li>
             </ul>
           </li>
         </ul>
@@ -346,7 +348,10 @@ $(document).ready(function () {
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  TeX: { 
+    TagSide: "left",
+    equationNumbers: { autoNumber: "AMS" } 
+  }
 });
 </script>
 
@@ -370,7 +375,7 @@ u = 0 &amp; x\in \partial U
 Lu = -\sum_{i,j}\left(a^{ij}(x)u_{x_i}\right)_{x_j}+\sum_ib^i(x)u_{x_i}+c(x)u
 \end{equation}\]</span></p>
 <ul>
-<li>nondivergence form (best used with maximum principle techs:</li>
+<li>nondivergence form (best used with maximum principle techniques):</li>
 </ul>
 <p><span class="math display">\[\begin{equation}
 Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i(x)u_{x_i}+c(x)u
@@ -647,6 +652,59 @@ w = 0          &amp; x\in\partial U,
 </div>
 <div id="linear-evolution-equations" class="section level1">
 <h1><strong>Linear Evolution Equations</strong></h1>
+<div id="second-order-parabolic-equations" class="section level2">
+<h2>7.1 Second-order parabolic equations</h2>
+<div id="definitions-1" class="section level3">
+<h3>7.1.1 Definitions</h3>
+<ul>
+<li><p><span class="math inline">\(U\subset\mathbb{R}^n\)</span>, open and bounded</p></li>
+<li><p><span class="math inline">\(U_T=U\times[0,T]\)</span>, for some fixed <span class="math inline">\(T&gt;0\)</span>.</p></li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+\left\{\begin{matrix}
+u_t+Lu=f &amp; x\in U_T \\
+u = 0 &amp; x\in\partial U\times[0,T] \\
+u = g &amp; x\in U\times\{t=0\}
+\end{matrix}\right.
+\end{equation}\]</span></p>
+<p>The coefficients <span class="math inline">\(a^{ij}\)</span> and <span class="math inline">\(b^i\)</span> of <span class="math inline">\(L\)</span> are now functions of time as well as space. We call <span class="math inline">\(L\)</span> parabolic if it is uniformly elliptic for each <span class="math inline">\(t\in[0,T]\)</span>.</p>
+<ul>
+<li><p><span class="math inline">\(\pmb u:[0,T]\rightarrow H_0^1(U)\)</span> s.t. <span class="math inline">\([\pmb u(t)](x)\equiv u(x,t)\)</span>,  <span class="math inline">\(x\in U, t\in[0,T]\)</span></p></li>
+<li><p><span class="math inline">\(\pmb f:[0,T]\rightarrow L^2(U)\)</span> s.t. <span class="math inline">\([\pmb f(t)](x)=f(x,t)\)</span></p></li>
+</ul>
+<p><span class="math display">\[B[u,v;t]\equiv\int_U\left(\sum_{ij}a^{ij}(\cdot,t)u_{x_i}v_{x_j}+\sum_ib^i(\cdot)u_{x_i}v+c(\cdot,t)uv\right)dx, \ \ u,v\in H_0^1(U), \ \text{ ae } \ t\in [0,T]\]</span></p>
+<p><strong>Def:</strong> The function <span class="math inline">\(\pmb u\in L^2(0,T; H_0^1(U))\)</span>, with <span class="math inline">\(\pmb u&#39;\in L^2(0,T;H^{-1}(U))\)</span>, is a weak solution of <span class="math inline">\((9)\)</span> if</p>
+<ol style="list-style-type: lower-roman">
+<li><p><span class="math inline">\(\left&lt;\pmb u&#39;,v\right&gt;+B[\pmb u,v;t]=(\pmb f,v)\)</span> for all <span class="math inline">\(v\in H^1_0(U)\)</span> and a.e. <span class="math inline">\(t\in[0,T]\)</span></p></li>
+<li><p><span class="math inline">\(\pmb u(0)=g\)</span></p></li>
+</ol>
+</div>
+</div>
+<div id="semigroup-theory" class="section level2">
+<h2>7.4 Semigroup theory</h2>
+<div id="definitions-2" class="section level3">
+<h3>7.4.1 Definitions</h3>
+<p><span class="math inline">\(X\)</span> is a real Banach space. Consider the ODE</p>
+<p><span class="math display">\[\left\{\begin{matrix}\pmb u&#39;(t)=A\pmb u(t), &amp; t\geq0 \\ \pmb u(0)=u, &amp; u\in X \end{matrix}\right.\]</span></p>
+<p>where <span class="math inline">\(A:D(A)\rightarrow X\)</span> is a possibly unbounded operator whose domain is a linear subspace of <span class="math inline">\(X\)</span>. We consider the existence and uniqueness of a mapping <span class="math inline">\(\pmb u:[0,\infty)\rightarrow X\)</span> that satisfies the above ODE (in the weak sense).</p>
+<ul>
+<li>we keep <span class="math inline">\(X=L^p\)</span> in mind. in this case <span class="math inline">\(A\)</span> is neccessarily unbounded.</li>
+</ul>
+<p><strong>Notation:</strong> <span class="math inline">\(\pmb u(t)\equiv S(t)u, \ t\geq0\)</span> to emphasize dependence on <span class="math inline">\(u\)</span>. <span class="math inline">\(S(t)\)</span> is a mapping of <span class="math inline">\(X\)</span> into <span class="math inline">\(X\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math inline">\(S(t):X\rightarrow X\)</span> is linear</p></li>
+<li><p><span class="math inline">\(S(0)u=u\)</span></p></li>
+<li><p><span class="math inline">\(S(t+s)u=S(t)S(s)u=S(s)S(t)u\)</span> (unique solution at each point)</p></li>
+<li><p><span class="math inline">\(t\mapsto S(t)u\)</span> is continuous from <span class="math inline">\([0,\infty)\)</span> into <span class="math inline">\(X\)</span></p></li>
+</ol>
+<p><strong>Def:</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><p>A family <span class="math inline">\(\{S(t)\}_{t\geq0}\)</span> of bounded linear operators on <span class="math inline">\(X\)</span> is a <em>semigroup</em> if a.-d. are satisfied.</p></li>
+<li><p><span class="math inline">\(\{S(t)\}\)</span> is a <em>contraction semigroup</em> if in addition <span class="math inline">\(\|S(t)\|\leq1\)</span> where</p></li>
+</ol>
+<p><span class="math display">\[\|S(t)\|\equiv\sup_{u\in X}\frac{\|S(t)u\|_X}{\|u\|_X}\]</span></p>
+</div>
+</div>
 </div>
 
 

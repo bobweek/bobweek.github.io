@@ -1,0 +1,106 @@
+---
+title: "Deriving evolutionary models of quantitative characters from genetic details"
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+
+## The genetic basis
+
+Assume a trait $z\in\R$ is determined by $n$ loci with $a_l$ alleles at locus $l$ occuring within the population. Upon mutation an allele can happen to be replaced by the same allele or with one of the other $a_l-1$ variants or take some novel value. Denote $\mathscr{G}_l$ the set of all possible alleles that locus $i$ can exhibit. If $\mathscr{G}_l$ is a finite set, then $a_l\leq|\mathscr{G}_l|$. Assuming a diploid population, equality can hold only if the population size $N$ is at least as large as $|\mathscr{G}_l|/2$. In the extreme case that $2N=|\mathscr{G}_l|$ and $a_l=|\mathscr{G}_l|$, every chromosome in the population has a unique allele at locus $l$. 
+
+Since our goal is to understand the genetic structure of a real valued trait, we will be focusing on the real valued effects of each allele. We can order $\mathscr{G}_l$ based on the effects each of its alleles has on the phenotype $z$. However, this ordering may depend on the genetic background and quality of environment. The effects of these interactions can be partitioned into additive (linear) and non-additive (non-linear) effects. If the effects between loci and environment are all additive, then an allele at locus $l$ that increases (decreases) the value of trait $z$ will also increase (decrease) this value in any environment and in any genetic background. Hence, we can order $\mathscr{G}_l$ based on the _additive_ effects each of its alleles and this ordering will be independent of genetic background and environmental conditions. At this point it makes sense to identify $\mathscr{G}_l$ with some subset of $\R$. In this case the elements of $\mathscr{G}_l$ will consist of the additive effects of each of its alleles.
+
+<!--
+
+  > __Determining the additive effect of an allele:__ Crux to the above argument is the calculation for determining the additive component of an allelic effect. Suppose the genetic background and environmental variables can be summarized by a quantity $x$ and that an allele $\alpha$ exhibits effect $\alpha(x)$ in this enviro-genetic background. Let $\varepsilon(x)$ denote the culmulative effect on $z$ of the entire enviro-genetic background. In the case that $\alpha$ interacts additively with alleles at other loci and each environmental variable, we have $z=\alpha+\varepsilon(x)$. Otherwise write $z=\alpha_++\alpha_\circ(x)+\varepsilon(x)$ where $\alpha_+$ represents the additive component of $\alpha$ and $\alpha_\circ(x)$ is the effect of non-additive interactions between $\alpha$ and the enviro-genetic background $x$.
+
+-->
+
+If $\mathscr{G}_l$ is countable, denote the probability that this locus mutates to allele $\beta\in\mathscr{G}_l$, given that a mutation occurs at locus $l$ and that the current allele is $\alpha\in\mathscr{G}_l$, by $\mu_l(\alpha,\beta)$. In general $\mu_l(\alpha,\beta)\neq\mu_l(\beta,\alpha)$. Alternatively, if $\mathscr{G}_l$ is uncountable, we can identify $\mathscr{G}_l$ with all of $\R$. In this case we denote $\mu_l(A,B)$ to be the probability that, also given that a mutation has occured and that the current allele belongs to the (Borel) subset $A\subset\R$, the locus mutates to an allele in the (Borel) subset $B$. We assume $\mu_l(A,B)=0$ when $B$ is a singleton (ie, $\mu_l$ is non-atomic). This works well if the set of real numbers for which no allelic effect is associated is at most countable. However, we acknowledge the possibility that there may be subsets (of positive measure) of $\R$ that are not exhibited by any additive allelic effects (ie, _genomic holes_). Denote that collection of genomic holes at locus $l$ by $\mathscr{H}_l$. When $\mathscr{H}\neq\emptyset$, we keep $\mathscr{G}_l=\R$ but set $\mu_l(A,B)=0$ for each (Borel) subset $A\subset\R$ and each hole $B\in\mathscr{H}_l$. This occurs, for example, when $z$ is height, weight, or some other positive number. In such cases $(-\infty,0]\in\mathscr{H}_l$ for every $l$. Also in these cases, if no other holes occur, we can log-transform $z$ and consider instead the additive allelic effects of the transformed variable $\ln(z)$. This _removes_ the hole $(-\infty,0]$.
+
+Denote by $m(X)$ the Lebesgue measure of a (Borel) subset of $\R$. If there are holes then replace $m(X)$ with $m(X)(1-\chi_{\mathscr{H}_l}(X))$ where $\chi_{\mathscr{H}_l}(X)=1$ where $X\in\mathscr{H}_l$ and $\chi_{\mathscr{H}_l}(X)=0$ when $X\notin\mathscr{H}_l$. Without confusion, $\mu_l(A,\beta)$ denotes the density of the measure $\mu_l(A,B)$ with respect to its second argument and $\mu_l(\alpha,B)$ the density with respect to the first argument. Given that $\mu_l(\alpha,\beta)$ is the density of $\mu_l(A,\beta)$ with respect to the first argument and $\mu_l'(\alpha,\beta)$ the density of $\mu_l(\alpha,B)$ with respect to the second argument, we can invoke Lebesgues dominate convergence to show $\mu_l'(\alpha,\beta)=\mu_l(\alpha,\beta)$. Hence,
+
+$$\mu_l(A,B)=\int_B\mu_l(A,\beta)dm(\beta)=\int_A\mu_l(\alpha,B)dm(\alpha)=\int_A\int_B\mu_l(\alpha,\beta)dm(\alpha)dm(\beta).$$
+
+Thus, for a continuum of allelic effects, $\mu_l(\alpha,\beta)$ can still be thought of as the probability of mutating from $\alpha$ to $\beta$, but is actually a density. For the remainder of this document we focus only on continuums of allelic effects. A simple example of $\mu_l(\alpha,\beta)$ comes from the so-called _Gaussian allelic model_:
+
+$$\mu_l(\alpha,\beta)=\frac{1}{\sqrt{2\pi{M_l}^2}}\exp\left(-\frac{(\alpha-\beta)^2}{2{M_l}^2}\right).$$
+
+Under this model, a mutation leads to a new allelic effect that is normally distributed around the previous allelic effect. This model, and its generalization to multivaritate mutations, is at the core of all modern quantitative genetics, though it was met with some hostility in its youth.
+
+An alternative to this model, known as the _House of cards_ model, assumes $\mu_l(\alpha,\beta)=g_l(\beta)$. That is, the allelic effect being mutated to is independent of the current effect $\alpha$. This model was heavily investigated for its apparently greater biological realism than the Gaussian allelic model.
+
+Of course, there is a vast space of density functions $\mu_l(\alpha,\beta)$ that can be invoked, but for historical reasons we analyze just these two models and, in particular, focus on the case when
+
+$$g_l(\beta)=\frac{1}{\sqrt{2\pi{M_l}^2}}\exp\left(-\frac{(\kappa_l-\beta)^2}{2{M_l}^2}\right)$$
+
+for some fixed vector $\pmb\kappa=(\kappa_1,\dots,\kappa_n)\in\R^n$.
+
+## Life history & mutation
+
+Generations may be non-overlapping and reproduction occurs in a relatively discretized fashion, but organisms live in continuous time. Hence, we formulate life history as a continuous time development. In particular, reproduction and death are allowed to occur at arbitrary times, instead of discrete intervals. These events are best captured by non-homogeneous Poisson processes.
+
+In a homogeneous Poisson process, given a birth rate $b\geq0$ and a death rate $d>0$, the interarrival times between births and between the final birth and death are given by exponentially distributed random variables. At each birth event, multiple offspring may be produced, but for now we focus on the case where just one offspring is produced. The counting process of births has mean $b\tau$ for an age $\tau\in(0,D)$, where $D$ is the (random) age at death. Hence, the total number of births is $bD$ which has expectation $b/d$. This final number is the Wrightian fitness, ie, the total number of offspring expected to be produced by an individual. Non-homogeneous Poisson processes allow $b_\tau$ and $d_\tau$ to vary throughout the life-time of the individual. Theory exists that allows us to work with such non-homogeneous parameters in an analytically tractable way, but increase the complexity of our working model. Since life-history is not the focus of this work, we assume homogeneous birth-death parameters.
+
+Given a population of size $N_t$, the expected dynamics are just
+
+$$\frac{dN_t}{dt}=bN_t-dN_t.$$
+
+To derive equations of evolution, we let the birth and death parameters vary the with the value of the expressed phenotype of an individual, $b(z)-d(z)=r(z)$. Denote $\mathfrak{n}_t(z)$ the number of individuals with trait $z$. To motivate the following, we derive a basic result for finite populations. To do so, we momentarily assume asexual reproduction, perfect heritability and categorical traits. Denote the trait categories by $1,\dots,k$. Then we have the following expected dynamics
+
+$$\frac{d\mathfrak{n}_t(i)}{dt}=r(i)\mathfrak{n}_t(i), \ \ \ \mathfrak{n}_0(i)=1, \ \ i=1,\dots,k$$ 
+
+and $N_t=\sum_{i=1}^k\mathfrak{n}_t(i)$, which leads to
+
+$$\frac{dN_t}{dt}=\frac{d}{dt}\sum_l\mathfrak{n}_t(i)=\sum_l r(i)\mathfrak{n}_t(i)=\bar r_tN_t.$$
+
+Hence, the phenotypic distribution, $\phi_t(i)=\mathfrak{n}_t(i)/N_t$, has dynamics given by
+
+$$\frac{d}{dt}\phi_t=\frac{d}{dt}\frac{\mathfrak{n}_t}{N_t}=\frac{N_t\frac{d}{dt}\mathfrak{n}_t-\mathfrak{n}_t\frac{d}{dt}N_t}{{N_t}^2}$$
+
+$$=(r-\bar r_t)\frac{\mathfrak{n}_t}{N_t}=(r-\bar r_t)\phi_t.$$
+
+The result $\frac{d}{dt}\phi_t=(r-\bar r_t)\phi_t$ is independent of total population size and thus holds in the limit $N_t\ra\infty$. This equations captures nicely the dynamics of selection in continuous time, but does not account for mutation or recombination.
+
+To incorporate the effects of mutation, we can add to our life-history mutation events that occur along the germ line. That is, we include another counting process that counts the mutations occuring within an individual during its development. For simplicity, we assume the genomes of all gemetes produced by an individual at a given stage of its development are independent and identically distributed. This allows us to focus on the distribution of a single gamete instead working with correlated mutations caused by inheritance within the germ line. With $n$ loci, we can consider the chromosome to be a vector in $\R^n$. Denote the initial chromosome of an individual by $\pmb\alpha=(\alpha_1,\dots,\alpha_n)$ and the chromosome at some birth event $\pmb\beta=(\beta_1,\dots,\beta_n)$.
+
+Given that $k$ mutations have occured at locus $l$, under the Gaussian allelic model, we have $\beta_l=\alpha_l+\sum_{j=1}^kX_j$ where $X_j\sim\mathscr{N}(0,{M_l}^2)$ are the effects of each mutation. Hence, $\beta_l\sim\mathscr{N}(\alpha_l,k{M_l}^2)$. Looking at the chromosome as a whole, we can consider chromosome-wide mutations, where every locus is affected and the effects may be correlated between loci, or mutations that affect only a subset of the chromosome. For simplicity, we consider only chromosome-wide mutations. The result is analoguous to the single locus case, but instead we have $\pmb\beta=\pmb\alpha+\sum_{j=1}^k\pmb X_j$ where now $\pmb X_j\sim\mathscr{N}_n(\pmb 0,\pmb M)$ with $\pmb 0=(0,\dots,0)$ and
+
+$$\pmb M=\left(\begin{matrix}
+{M_{11}}^2 & \dots  & {M_{1n}}^2 \\
+\vdots    & \ddots & \vdots    \\
+{M_{n1}}^2 & \dots  & {M_{nn}}^2
+\end{matrix}\right).$$
+
+Hence $\pmb\beta\sim\mathscr{N}_n(\pmb\alpha,k\pmb M)$. We now let $k$ be an exponentially distributed waiting, just as birth and death, with rate $\lambda$. Then, given that a birth occurs at age $\tau$ and averaging over all numbers of mutations, the offspring will inherit a chromosome distributed by $\mathscr{N}_n(\pmb\alpha,\tau \lambda\pmb M)$. If we were to replace the Gaussian allelic model of mutation with the house of cards model using a multivariate Gaussian $g$, then we would find the similar result that offspring chromosomes are distributed by $\mathscr{N}_n(\pmb\kappa,\tau \lambda\pmb M)$.
+
+## Genotype-phenotype map
+
+Let some zygote have the two chromosomes $\pmb\alpha^1$ and $\pmb\alpha^2$ and denote $|\pmb\alpha^i|=\sum_l\alpha_l^i$. In the case of pure additivity (no dominance, no epistasis), we have
+
+$$z=\frac{|\pmb\alpha^1|+|\pmb\alpha^2|}{2}.$$
+
+This is known as blending inheritance and causes the total phenotypic diversity to halve each generation (in randomly mating populations). The patterns of dominance, epistasis and so forth can be very complex. Formulating detailed, but tractable, genotype-phenotype maps would be of great service to this research agenda. However, the focus of this study is to derive the dynamics of trait means and variances with the aim at injecting these results into work on coevolutionary community ecology. Thus, we keep our model here quite simple. To circumvent blending inheritance, we simply add a normally distributed random variable that accounts for all the other non-additive processes. Thus, our genotype-phenotype map is just
+
+$$z\sim\mathscr{N}\left(\frac{|\pmb\alpha^1|+|\pmb\alpha^2|}{2},\eta^2\right).$$
+
+We call the value $x\equiv\frac{|\pmb\alpha^1|+|\pmb\alpha^2|}{2}$ the genetic value of the individual.
+
+## Mating
+
+To determine which chromosomes an individual inherits from gene pool, we consider a model of mate preference. In particular, assuming a hermaphroditic population, if $(Z_1,Z_2)$ denotes the expressed phenotypes of a randomly drawn mating pair, then we can calculate $\Cov(Z_1,Z_2)=\rho\sigma^2$ where $\sigma^2=\Var(Z_1)=\Var(Z_2)$.
+
+
+
