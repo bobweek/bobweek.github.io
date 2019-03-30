@@ -10,8 +10,6 @@ output:
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
-\newcommand{\<}{\left<}
-\newcommand{\>}{\right>}
 \newcommand{\ra}{\rightarrow}
 \newcommand{\Cov}{\mathrm{Cov}}
 \newcommand{\Var}{\mathrm{Var}}
