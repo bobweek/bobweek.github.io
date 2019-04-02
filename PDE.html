@@ -20,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -262,6 +265,92 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -269,6 +358,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -702,13 +801,74 @@ u = g &amp; x\in U\times\{t=0\}
 <li><p>A family <span class="math inline">\(\{S(t)\}_{t\geq0}\)</span> of bounded linear operators on <span class="math inline">\(X\)</span> is a <em>semigroup</em> if a.-d. are satisfied.</p></li>
 <li><p><span class="math inline">\(\{S(t)\}\)</span> is a <em>contraction semigroup</em> if in addition <span class="math inline">\(\|S(t)\|\leq1\)</span> where</p></li>
 </ol>
-<p><span class="math display">\[\|S(t)\|\equiv\sup_{u\in X}\frac{\|S(t)u\|_X}{\|u\|_X}\]</span></p>
+<p><span class="math display">\[\|S(t)\|\equiv\sup_{u\in X}\frac{\|S(t)u\|}{\|u\|}\]</span></p>
+<p>Since <span class="math inline">\(\|S(t)u\|\leq\|S(t)\|\|u\|\)</span>, this implies <span class="math inline">\(\|S(t)u\|\leq\|u\|\)</span>.</p>
+<p><strong>Def:</strong></p>
+<p><span class="math display">\[D(A)\equiv\left\{u\in X:\lim_{t\downarrow 0}\frac{S(t)u-u}{t}\text{ exists in }X\right\}\]</span></p>
+<p><span class="math display">\[Au\equiv\lim_{t\downarrow 0}\frac{S(t)u-u}{t}, \ \ \ u\in D(A).\]</span></p>
+<p>The operator <span class="math inline">\(A\)</span> is the <em>infinitesimal generator</em> of the semigroup <span class="math inline">\(\{S(t)\}\)</span>.</p>
+<p><strong>Theorem 1 (differentiable properties of semigroups):</strong></p>
+<p>If <span class="math inline">\(u\in D(A)\)</span> then</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(S(t)u\in D(A)\)</span> for each <span class="math inline">\(t\geq0\)</span></li>
+<li><span class="math inline">\(AS(t)u=S(t)Au\)</span> for each <span class="math inline">\(t\geq0\)</span></li>
+<li><span class="math inline">\(t\mapsto S(t)u\)</span> is differentiable for each <span class="math inline">\(t&gt;0\)</span>.</li>
+<li><span class="math inline">\(\frac{d}{dt}S(t)u=AS(t)u\)</span> for <span class="math inline">\(t&gt;0\)</span></li>
+</ol>
+<p><strong>Proof:</strong> exercise for bob</p>
+<p><strong>Remark:</strong> The mapping <span class="math inline">\(t\mapsto S(t)\)</span> is <span class="math inline">\(C^1\)</span> in <span class="math inline">\((0,\infty)\)</span> when <span class="math inline">\(u\in D(A)\)</span>.</p>
+<p><strong>Theorem 2 (properties of generators):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(D(A)\)</span> is dense in <span class="math inline">\(X\)</span></li>
+<li><span class="math inline">\(A\)</span> is a closed operator</li>
+</ol>
+<p><strong>Remark:</strong> <span class="math inline">\(A\)</span> is closed if whenever <span class="math inline">\(\{u_k\}\subset D(A)\)</span> and <span class="math inline">\(u_k\rightarrow u\)</span>, <span class="math inline">\(Au_k\rightarrow v\)</span>, then</p>
+<p><span class="math display">\[u\in D(A), \ \ v=Au.\]</span></p>
+<p><strong>Proof:</strong> exercise for bob</p>
+<div id="resolvents" class="section level4">
+<h4>Resolvents</h4>
+<p>Let <span class="math inline">\(A\)</span> be a closed linear operator on <span class="math inline">\(X\)</span> with domain <span class="math inline">\(D(A)\)</span>.</p>
+<p><strong>Def:</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(\lambda\in\rho(A)\)</span> (<span class="math inline">\(\rho(A)\)</span> is the <em>resolvent set</em> of <span class="math inline">\(A\)</span>) if</li>
+</ol>
+<p><span class="math display">\[\lambda I-A:D(A)\rightarrow X\]</span></p>
+<p>is a bijection.</p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>If <span class="math inline">\(\lambda\in\rho(A)\)</span>, then <span class="math inline">\(R_\lambda:X\rightarrow X\)</span> given by <span class="math inline">\(R_\lambda u\equiv(\lambda I-A)^{-1}u\)</span> is called the <em>resolvent operator</em> of <span class="math inline">\(A\)</span>.</li>
+</ol>
+<p>By the closed graph theorem, <span class="math inline">\(R_\lambda\)</span> is a bounded linear operator. Also, <span class="math inline">\(R_\lambda\)</span> and <span class="math inline">\(A\)</span> commute.</p>
+<p><strong>Theorem 3 (properties of resolvent operators):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><p>if <span class="math inline">\(\lambda,\mu\in\rho(A)\)</span>, then <span class="math inline">\(R_\lambda\)</span> and <span class="math inline">\(R_\mu\)</span> commute.</p></li>
+<li><p>if <span class="math inline">\(\lambda&gt;0\)</span>, then <span class="math inline">\(\lambda\in\rho(A)\)</span> and</p></li>
+</ol>
+<p><span class="math display">\[R_\lambda u=\int_0^\infty e^{-\lambda t}S(t)udt, \ \ \ u\in X.\]</span></p>
+<p>Since</p>
+<p><span class="math display">\[\|R_\lambda u\|=\left\|\int_0^\infty e^{-\lambda t}S(t)udt\right\|\leq\left|\int_0^\infty e^{-\lambda t}\|S(t)\|\|u\|dt\right|\]</span></p>
+<p><span class="math display">\[\leq\|u\|\int_0^\infty e^{-\lambda t}dt=\frac{\|u\|}{\lambda}e^{-\lambda t}\]</span></p>
+<p>we have <span class="math inline">\(\|R_\lambda\|\leq\frac{1}{\lambda}\)</span> for all <span class="math inline">\(\lambda\in\rho(A)\cap(0,\infty)\)</span>.</p>
+<p>Hence, the resolvent operator is the Laplace transform of the semigroup.</p>
+</div>
+</div>
+<div id="generating-contraction-semigroups" class="section level3">
+<h3>Generating contraction semigroups</h3>
+<p><strong>Theorem 4 (Hill-Yosida)</strong> Let <span class="math inline">\(A\)</span> be a closed, densely-defined linear operator on <span class="math inline">\(X\)</span>. Then <span class="math inline">\(A\)</span> is the generator of a contraction semigroup <span class="math inline">\(\{S(t)\}\)</span> iff</p>
+<p><span class="math display">\[(0,\infty)\subset\rho(A), \ \ \ \|R_\lambda\|\leq\frac{1}{\lambda} \text{ for } \lambda&gt;0.\]</span></p>
+<p><strong>Proof:</strong> later</p>
+<p><strong>Remark:</strong> Let <span class="math inline">\(\omega\in\mathbb{R}\)</span>. A semigroup <span class="math inline">\(\{S(t)\}\)</span> is called <span class="math inline">\(\omega\)</span>-contractive if <span class="math inline">\(\|S(t)\|\leq e^{\omega t}\)</span> for all <span class="math inline">\(t\geq0\)</span>. A variant of theorem 4 states that a closed, densely-defined linear operator <span class="math inline">\(A\)</span> generates an <span class="math inline">\(\omega\)</span>-contractive semigroup iff</p>
+<p><span class="math display">\[(\omega,\infty)\subset\rho(A), \ \ \ \|R_\lambda\|\leq\frac{1}{\lambda-\omega}\text{ for }\lambda&gt;\omega\]</span></p>
+</div>
+<div id="applications" class="section level3">
+<h3>7.4.3 Applications</h3>
 </div>
 </div>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 

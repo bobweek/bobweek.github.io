@@ -1,0 +1,131 @@
+---
+title: "Adapting G. Coop's work for coevolutionary inference"
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+---
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { 
+    TagSide: "left",
+    equationNumbers: { autoNumber: "AMS" } 
+  }
+});
+</script>
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\logit}{\mathrm{logit}}
+
+## Coop et al 2010
+
+### Notation
+
+  - $L$ unlinked biallelic loci (breaking the unlinked assumption could be very useful)
+  - $K$ populations
+  - $\pmb n=(n_{kl})$, counts of allele one in locations $k$ at locus $l$ 
+  - $\pmb m=(m_{kl})$, counts of allele two in locations $k$ at locus $l$ 
+  - $\pmb x=(x_{kl})$, frequency of allele one in location $k$ at locus $l$
+  - $x_l$, vector of $k$ allele frequencies at locus $l$ treated as a random variable across space
+  - $\pmb\theta_l$, a normally distributed random vector s.t. $x_{kl}=\theta_{kl}$ when $\theta_{kl}\in[0,1]$.
+    - $\pmb\theta_l\sim\mathscr{N}_K(\pmb\varepsilon_l,\varepsilon_l(1-\varepsilon_l)\Omega)$
+    - $\varepsilon_l$ is a scalar (each location has the same mean)
+    - $\varepsilon_l(1-\pmb\varepsilon_l)$ is the variance of a Bernoulli rv with mean $\varepsilon_l$
+    - is $\Omega$ a correlation matrix and not a covariance matrix????
+
+### Model
+
+Coop assumes approximate normality of $x_l$ across space. Hence, this is a spatially implicit model. However, the point of this work is to correct for relatedness due to correlated environments and gene-flow which are both likely to be more significant for nearby populations. Instead of using explicit spatial information (coordinates of each location), dispersion kernels and measurements of environmental correlations, Coop uses $\Omega$ to capture pairwise correlations between locations. This is purely phenomenological but significantly reduces the number of parameters and information required to implement this method. It is assumed that $\Omega$ can be inferred using a random subset of loci (the training data). Inference is done using an MCMC to generate posteriors.
+
+An alternative model is then formulated by assuming
+
+$$\theta_l\sim\mathscr{N}_K(\varepsilon_l+\beta Y,\varepsilon_l(1-\varepsilon_l)\Omega)$$
+
+where $Y$ represents an environmental variable standardized with mean zero and variance one. Priors are placed on $\beta,\Omega,\varepsilon_l$ and a Bayes factor is formed with the "likelihood" of the alternative in the numerator and the "likelihood" of the null in the denominator (note the similarity to likelihood-ratios). This Bayes factor is computed for all control loci and aggregated into an empirical distribution from which the Bayes factors for the SNPs of interests are compared. This can be used the exact same way one calculates a $p$-value from likelihood ratio statistics.
+
+### Potential pitfalls
+
+seems like this method will be very sensitive to priors chosen for $\beta$ and each of the $\varepsilon_l$.
+
+### Amendments
+
+I suggest using the logit-normal distribution instead. That is,
+
+$$\logit(x_{kl})=\ln\left(\frac{x_{kl}}{1-x_{kl}}\right)\sim\mathscr{N}.$$
+
+This prevents the awkward truncating of truly normally distributed random variables. Unfortunately, given then mean and variance of each $x_l$, there is no analytical formula relating such moments to the mean and variance of $\logit(x_{kl})$. However, it would be straightforward and not too time costly to implement a numerical method for these calculations.
+
+Another model to consider is the Beta distribution, which has ML solutions given in terms of the digamma function. 
+
+Using a more analytically tractable approach (where numerical integration is necessary only to implement the digamma function, etc) we may be able to skip the need for MCMC. Posteriors can be formed numerically by doing this inversion for randomly drawn parameters from their priors. 
+
+### Coevolution
+
+The obvious approach here is to consider $y_l$ to be a random vector of allele frequencies across the $K$ locations at locus $l$ in an interacting species. We'll have two $\Omega$'s to be inferred separately for each species. The Bayes factor (or likelihood ratio) can then be computed for each location and each species. Locations where where this quantity is significant for both species are locations where these loci are given evidence to be coevolving.
+
+### Comparison to the MLC
+
+In Coop's approach they consider pairwise correlations between loci. In the MLC we only considered the correlation among locations. That is, while Coop models locations $1,\dots,K$ and assumes the allele frequency at each location is normally distributed with different means across space, we assume the mean trait at each location is independent and identically distributed.
+
+However, we also derive this from a model (that ignores gene-flow), while Coop et al's approach is purely phenomenological.
+
+  - realization: MLC does not capture sampling error within locations. this can account for additional variance, increasing the values of the selection strengths.
+    - in particular, both toju & sota as well as pauw et al report sample sizes per location. these can be used to simulate sampling error.
+
+## G&uuml;nther & Coop 2013
+
+In this paper they provide the equation
+
+$$P(n_{kl}|\varepsilon_l,n_{kl}+m_{kl})=\left(\begin{matrix}n_{kl} \\ n_{kl}+m_{kl}\end{matrix}\right){\varepsilon_l}^{n_{kl}}(1-\varepsilon_l)^{m_{kl}}$$
+
+I'm questioning whether or not this model requires assumptions of pop size or HW eq...
+
+### Basing this method on a model
+
+We can assume that $\varepsilon_l$ evolves by some population genetic model. Suppose individuals homozygous of allele one have fitness $W_{11}$ and those homozygous of allele two have fitness $W_{22}$ and heterozygous individuals have fitness $W_{12}=W_{21}$. We linearize popgen models using the logit and then capture drift by Brownian motion.
+
+Starting with a haploid asexual model...
+
+$N=n_1+n_2$
+
+$$\frac{dN}{dt}=m_1n_2+m_2n_2$$
+
+$$\varepsilon=\frac{n_1}{N}\implies\frac{d\varepsilon}{dt}=(m_1-\bar m)\varepsilon=\left(m_1-m_1\varepsilon-m_2(1-\varepsilon)\right)\varepsilon$$
+
+$$=(m_1-m_2)(1-\varepsilon_1)\varepsilon_1.$$
+
+Let $x=\ln\left(\frac{\varepsilon}{1-\varepsilon}\right)$. Then
+
+$$\frac{dx}{dt}=\frac{(1-\varepsilon)}{\varepsilon}\frac{(1-\varepsilon)(m_1-m_2)(1-\varepsilon)\varepsilon+\varepsilon(m_1-m_2)(1-\varepsilon)\varepsilon}{(1-\varepsilon)^2}$$
+
+$$=(m_1-m_2)(1-\varepsilon)+(m_1-m_2)\varepsilon=m_1-m_2.$$
+
+Adding stochasticity
+
+$$d\varepsilon=(m_1-m_2)(1-\varepsilon)\varepsilon dt+(1-\varepsilon)\varepsilon dB$$
+
+use It&ocirc;'s lemma to determine $dx$...
+
+
+Try the same trick on a diploid sexually reproducing model (need to incorporate recomb and such...)
+
+$$\frac{d}{dt}n_{ij}=m_{ij}n_{ij}$$
+
+$$\frac{d}{dt}N=m_{11}n_{11}+m_{12}n_{12}+m_{22}n_{22}=\bar m N$$
+
+$$\varepsilon_{11}=\frac{n_{11}+\frac{1}{2}n_{12}}{N}, \ \varepsilon_{22}=\frac{n_{22}+\frac{1}{2}n_{12}}{N}, \ \varepsilon_{12}=\frac{n_{11}+n_{12}+n_{22}}{2N}$$
+
+$$\frac{d}{dt}\varepsilon_{11}=\frac{N\left(m_{11}n_{11}+\frac{1}{2}m_{12}n_{12}\right)-\left(n_{11}+\frac{1}{2}n_{12}\right)\left(m_{11}n_{11}+m_{12}n_{12}+m_{22}n_{22}\right)}{(N)^2}$$
+
+$$=\dots$$
+
+

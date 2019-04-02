@@ -348,7 +348,9 @@ $(document).ready(function () {
 <div id="wavelets-multiresolution-analysis-mra" class="section level2">
 <h2>Wavelets: Multiresolution analysis (MRA)</h2>
 <p>Recall <strong>Def:</strong> <span class="math inline">\(\psi\)</span> is a wavelet if <span class="math inline">\(\{\psi_{ij}(x)\}=\{2^{j/2}\psi(2^jx-k)\}\)</span> is an ONB of <span class="math inline">\(L^2(\mathbb{R})\)</span>.</p>
-<p>An MRA is a general framework for constructing functions <span class="math inline">\(\psi\)</span> that form wavelets.</p>
+<ul>
+<li>An MRA is a general framework for constructing functions <span class="math inline">\(\psi\)</span> that form wavelets.</li>
+</ul>
 <p>A multiresolution analysis consists of a sequence <span class="math inline">\(\{V_j\}_{j\in\mathbb{Z}}\)</span> of closed subspaces of <span class="math inline">\(L^2(\mathbb{R})\)</span> and a function <span class="math inline">\(\varphi\in V_0\)</span>, satisfying</p>
 <ol style="list-style-type: lower-roman">
 <li><p><span class="math inline">\(\dots\subset V_{-1}\subset V_0\subset V_1\subset \dots\)</span></p></li>
@@ -376,6 +378,48 @@ $(document).ready(function () {
 <li><span class="math inline">\(\varphi\)</span> determines the approximation (the <span class="math inline">\(V_j\)</span>’s)</li>
 <li>the wavelets determine the “details” (the differences between <span class="math inline">\(V_j\)</span>’s)</li>
 </ul>
+</div>
+<div id="section" class="section level1">
+<h1>04-01-2019</h1>
+<div id="multiresolution-analysis" class="section level2">
+<h2>Multiresolution analysis</h2>
+<p><strong>Def:</strong> Given <span class="math inline">\(f\in L^2(\mathbb{R})\)</span>. Let</p>
+<p><span class="math display">\[P_jf\equiv\text{ orth proj of }f\text{ onto }V_j\]</span></p>
+<p>Since <span class="math inline">\(\varphi\)</span> (the scaling function) gives an ONB for <span class="math inline">\(V_0\)</span> by <span class="math inline">\(\{\varphi(x-k)\}_k\)</span>. Then</p>
+<p><span class="math display">\[\varphi_{j,k}(x)=2^{j/2}\varphi(2^jx-k), \ k\in\mathbb{Z}\]</span></p>
+<p>is an ONB for <span class="math inline">\(V_j\)</span> (requires proof). Thus,</p>
+<p><span class="math display">\[P_jf(x)=\sum_k\left&lt;f,\varphi_{j,k}\right&gt;\varphi_{j,k}(x)\]</span></p>
+<p>where <span class="math inline">\(j\)</span> is fixed. Now, <span class="math inline">\(P_jf\)</span> is the approximation of <span class="math inline">\(f\)</span> at scale <span class="math inline">\(2^{-j}\)</span>. Furthermore, <span class="math inline">\(P_jf\)</span> is the <em>best</em> approximation of <span class="math inline">\(f\)</span> in <span class="math inline">\(V_j\)</span> (it uniquely minimizes the <span class="math inline">\(L^2\)</span> norm).</p>
+<div id="how-to-go-from-p_jf-to-p_j1f" class="section level4">
+<h4>How to go from <span class="math inline">\(P_jf\)</span> to <span class="math inline">\(P_{j+1}f\)</span>?</h4>
+<p>Define the difference operator <span class="math inline">\(Q_j\)</span> by</p>
+<p><span class="math display">\[Q_jf\equiv P_{j+1}f-P_jf.\]</span></p>
+<p>Let <span class="math inline">\(W_j\)</span> be the orthogonal complement of <span class="math inline">\(V_j\)</span> in <span class="math inline">\(V_{j+1}\)</span>. That is,</p>
+<p><span class="math display">\[W_j=\{h\in V_{j+1}:\left&lt;h,g\right&gt;=0 \ \forall \ g\in V_j\}\]</span></p>
+<p><strong>Lemma:</strong> <span class="math inline">\(Q_jf\)</span> is the orthogonal projection of <span class="math inline">\(f\)</span> onto <span class="math inline">\(W_j\)</span>. The follows from</p>
+<p><strong>Theorem:</strong> Let <span class="math inline">\(H\)</span> be a separable Hilbert space. Let <span class="math inline">\(V\)</span> be a closed subspace and <span class="math inline">\(V^\perp\)</span> the orthongonal complement of <span class="math inline">\(V\)</span> in <span class="math inline">\(H\)</span>. Take any <span class="math inline">\(x\in H\)</span>. Let <span class="math inline">\(P_Vx\)</span> be the projection of <span class="math inline">\(x\)</span> onto <span class="math inline">\(V\)</span>. Then there exists unique <span class="math inline">\(z\in V^\perp\)</span> s.t.</p>
+<p><span class="math display">\[x=P_Vx+z.\]</span></p>
+<p><strong>Proof:</strong> Show that <span class="math inline">\(x-P_Vx\in V^\perp\)</span>. Let <span class="math inline">\(\{x_n\}\)</span> be an ONB of <span class="math inline">\(V\)</span> then it is enough to show that <span class="math inline">\(\left&lt;x-P_Vx,x_n\right&gt;=0\)</span> for all <span class="math inline">\(n\)</span>:</p>
+<p><span class="math display">\[\left&lt;x-P_Vx,x_n\right&gt;=\left&lt;x-\sum_k\left&lt;x,x_k\right&gt;x_kx_n\right&gt;\]</span></p>
+<p><span class="math display">\[=\left&lt;x,x_n\right&gt;-\sum_k\left&lt;x,x_k\right&gt;\left&lt;x_k,x_n\right&gt;\]</span></p>
+<p><span class="math display">\[=\left&lt;x,x_n\right&gt;-\sum_k\left&lt;x,x_k\right&gt;\delta_{kn}=\left&lt;x,x_n\right&gt;-\left&lt;x,x_n\right&gt;=0. \ \square\]</span></p>
+<hr />
+<p>Any <span class="math inline">\(x\in H\)</span> can be written as the unique sum of a vector in <span class="math inline">\(V\)</span> (such as <span class="math inline">\(P_Vx\)</span>) and a vector in <span class="math inline">\(V^\perp\)</span> (ie, <span class="math inline">\(z\)</span>):</p>
+<p><span class="math display">\[H=V\oplus V^\perp.\]</span></p>
+<hr />
+<p>If <span class="math inline">\(f_j\in V_{j+1}\)</span>, there is a unique <span class="math inline">\(g\in V_j\)</span> and <span class="math inline">\(h\in W_j\)</span> s.t. <span class="math inline">\(f=g+h\)</span> where <span class="math inline">\(g=P_jf\)</span> and <span class="math inline">\(h=Q_jf\in W_j\)</span>.</p>
+<p>Thus <span class="math inline">\(V_{j+1}=V_j\oplus W_j=V_n\oplus W_n\oplus\cdots\oplus W_j\)</span> for <span class="math inline">\(n&lt;j\)</span>. Informally, this implies</p>
+<p><span class="math display">\[L^2(\mathbb{R})=\overline{\bigoplus_{j\in \mathbb{Z}}W_j}\]</span></p>
+<p>It can be shown that the scaling function <span class="math inline">\(\varphi\)</span> determines a wavelet <span class="math inline">\(\psi\)</span> s.t. <span class="math inline">\(\{\pi(x-k)\}_{k\in\mathbb{Z}}\)</span> is an ONB of <span class="math inline">\(W_0\)</span>.</p>
+<ul>
+<li><strong>Ex:</strong> The Haar wavelet has scaling function equal to the characteristic function of the unit interval.</li>
+</ul>
+<p>Also, fixing <span class="math inline">\(j\)</span>, <span class="math inline">\(\{\psi_{j,k}\}=\{2^{j/2}\psi(2^jx-k)\}\subset W_j\)</span> is an ONB for <span class="math inline">\(W_j\)</span>. Then</p>
+<p><span class="math display">\[Q_jf=\sum_k\left&lt;f,\psi_{j,k}\right&gt;\psi_{j,k}.\]</span></p>
+<p>Together <span class="math inline">\(\{\psi_{j,k}\}_{j,k\in \mathbb{Z}}\)</span> is an ONB for <span class="math inline">\(L^2(\mathbb{R})\)</span>.</p>
+<p><strong>Theorem:</strong> Given an MRA with scaling function <span class="math inline">\(\varphi\)</span> there is a wavelet <span class="math inline">\(\psi\in L^2(\mathbb{R})\)</span> s.t. for each <span class="math inline">\(j\)</span> <span class="math inline">\(\{\psi_{j,k}\}_k\)</span> is an ONB for <span class="math inline">\(W_j\)</span>. Hence <span class="math inline">\(\{\psi_{j,k}\}_{j,k}\)</span> is an ONB for <span class="math inline">\(L^2(\mathbb{R})\)</span>.</p>
+</div>
+</div>
 </div>
 
 

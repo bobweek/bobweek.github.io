@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Adapting G. Coop’s work for coevolutionary inference</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="interactive_theory.html">Interactive theory</a></li>
+        <li><a href="measuring_coevolution.html">Measuring coevolution</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="ODE_arnold.html">ODE</a></li>
+            <li><a href="PDE.html">PDE</a></li>
+            <li><a href="da_prato_and_zabczyk.html">SPDE</a></li>
+            <li class="dropdown-submenu">
+            <a class="test" href="#">Cheat sheets<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="function_spaces.html">Function Spaces</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a class="test" href="#">Harmonic analysis<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="summary_of_convergence.html">conv</a></li>
+              <li><a href="note_1_28.html">Jan 28</a></li>
+              <li><a href="note_2_04.html">Feb 04</a></li>
+              <li><a href="note_2_25.html">Feb 25</a></li>
+              <li><a href="note_2_27.html">Feb 27</a></li>
+              <li><a href="note_3_01.html">Mar 01</a></li>
+              <li><a href="note_3_06.html">Mar 06</a></li>
+              <li><a href="note_3_18.html">Mar 18</a></li>
+              <li><a href="note_3_20.html">Mar 20</a></li>
+              <li><a href="note_3_22.html">Mar 22</a></li>
+              <li><a href="note_3_25.html">Mar 25</a></li>
+              <li><a href="note_3_27.html">Mar 22</a></li>
+              <li><a href="note_3_29.html">Mar 25</a></li>
+            </ul>
+          </li>
+        </ul>
+        </li><!--
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="notes-fitness.html">First Steps</a></li>
+            <li><a href="notes-evolution.html">Evolution</a></li>
+            <li><a href="notes-examples.html">Examples</a></li>
+            <li><a href="notes-misc.html">Misc</a></li>
+          </ul>
+        </li>
+        -->
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Adapting G. Coop’s work for coevolutionary inference</h1>
+
+</div>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { 
+    TagSide: "left",
+    equationNumbers: { autoNumber: "AMS" } 
+  }
+});
+</script>
+
+<div id="coop-et-al-2010" class="section level2">
+<h2>Coop et al 2010</h2>
+<div id="notation" class="section level3">
+<h3>Notation</h3>
+<ul>
+<li><span class="math inline">\(L\)</span> unlinked biallelic loci (breaking the unlinked assumption could be very useful)</li>
+<li><span class="math inline">\(K\)</span> populations</li>
+<li><span class="math inline">\(\pmb n=(n_{kl})\)</span>, counts of allele one in locations <span class="math inline">\(k\)</span> at locus <span class="math inline">\(l\)</span></li>
+<li><span class="math inline">\(\pmb m=(m_{kl})\)</span>, counts of allele two in locations <span class="math inline">\(k\)</span> at locus <span class="math inline">\(l\)</span></li>
+<li><span class="math inline">\(\pmb x=(x_{kl})\)</span>, frequency of allele one in location <span class="math inline">\(k\)</span> at locus <span class="math inline">\(l\)</span></li>
+<li><span class="math inline">\(x_l\)</span>, vector of <span class="math inline">\(k\)</span> allele frequencies at locus <span class="math inline">\(l\)</span> treated as a random variable across space</li>
+<li><span class="math inline">\(\pmb\theta_l\)</span>, a normally distributed random vector s.t. <span class="math inline">\(x_{kl}=\theta_{kl}\)</span> when <span class="math inline">\(\theta_{kl}\in[0,1]\)</span>.
+<ul>
+<li><span class="math inline">\(\pmb\theta_l\sim\mathscr{N}_K(\pmb\varepsilon_l,\varepsilon_l(1-\varepsilon_l)\Omega)\)</span></li>
+<li><span class="math inline">\(\varepsilon_l\)</span> is a scalar (each location has the same mean)</li>
+<li><span class="math inline">\(\varepsilon_l(1-\pmb\varepsilon_l)\)</span> is the variance of a Bernoulli rv with mean <span class="math inline">\(\varepsilon_l\)</span></li>
+<li>is <span class="math inline">\(\Omega\)</span> a correlation matrix and not a covariance matrix????</li>
+</ul></li>
+</ul>
+</div>
+<div id="model" class="section level3">
+<h3>Model</h3>
+<p>Coop assumes approximate normality of <span class="math inline">\(x_l\)</span> across space. Hence, this is a spatially implicit model. However, the point of this work is to correct for relatedness due to correlated environments and gene-flow which are both likely to be more significant for nearby populations. Instead of using explicit spatial information (coordinates of each location), dispersion kernels and measurements of environmental correlations, Coop uses <span class="math inline">\(\Omega\)</span> to capture pairwise correlations between locations. This is purely phenomenological but significantly reduces the number of parameters and information required to implement this method. It is assumed that <span class="math inline">\(\Omega\)</span> can be inferred using a random subset of loci (the training data). Inference is done using an MCMC to generate posteriors.</p>
+<p>An alternative model is then formulated by assuming</p>
+<p><span class="math display">\[\theta_l\sim\mathscr{N}_K(\varepsilon_l+\beta Y,\varepsilon_l(1-\varepsilon_l)\Omega)\]</span></p>
+<p>where <span class="math inline">\(Y\)</span> represents an environmental variable standardized with mean zero and variance one. Priors are placed on <span class="math inline">\(\beta,\Omega,\varepsilon_l\)</span> and a Bayes factor is formed with the “likelihood” of the alternative in the numerator and the “likelihood” of the null in the denominator (note the similarity to likelihood-ratios). This Bayes factor is computed for all control loci and aggregated into an empirical distribution from which the Bayes factors for the SNPs of interests are compared. This can be used the exact same way one calculates a <span class="math inline">\(p\)</span>-value from likelihood ratio statistics.</p>
+</div>
+<div id="potential-pitfalls" class="section level3">
+<h3>Potential pitfalls</h3>
+<p>seems like this method will be very sensitive to priors chosen for <span class="math inline">\(\beta\)</span> and each of the <span class="math inline">\(\varepsilon_l\)</span>.</p>
+</div>
+<div id="amendments" class="section level3">
+<h3>Amendments</h3>
+<p>I suggest using the logit-normal distribution instead. That is,</p>
+<p><span class="math display">\[\mathrm{logit}(x_{kl})=\ln\left(\frac{x_{kl}}{1-x_{kl}}\right)\sim\mathscr{N}.\]</span></p>
+<p>This prevents the awkward truncating of truly normally distributed random variables. Unfortunately, given then mean and variance of each <span class="math inline">\(x_l\)</span>, there is no analytical formula relating such moments to the mean and variance of <span class="math inline">\(\mathrm{logit}(x_{kl})\)</span>. However, it would be straightforward and not too time costly to implement a numerical method for these calculations.</p>
+<p>Another model to consider is the Beta distribution, which has ML solutions given in terms of the digamma function.</p>
+<p>Using a more analytically tractable approach (where numerical integration is necessary only to implement the digamma function, etc) we may be able to skip the need for MCMC. Posteriors can be formed numerically by doing this inversion for randomly drawn parameters from their priors.</p>
+</div>
+<div id="coevolution" class="section level3">
+<h3>Coevolution</h3>
+<p>The obvious approach here is to consider <span class="math inline">\(y_l\)</span> to be a random vector of allele frequencies across the <span class="math inline">\(K\)</span> locations at locus <span class="math inline">\(l\)</span> in an interacting species. We’ll have two <span class="math inline">\(\Omega\)</span>’s to be inferred separately for each species. The Bayes factor (or likelihood ratio) can then be computed for each location and each species. Locations where where this quantity is significant for both species are locations where these loci are given evidence to be coevolving.</p>
+</div>
+<div id="comparison-to-the-mlc" class="section level3">
+<h3>Comparison to the MLC</h3>
+<p>In Coop’s approach they consider pairwise correlations between loci. In the MLC we only considered the correlation among locations. That is, while Coop models locations <span class="math inline">\(1,\dots,K\)</span> and assumes the allele frequency at each location is normally distributed with different means across space, we assume the mean trait at each location is independent and identically distributed.</p>
+<p>However, we also derive this from a model (that ignores gene-flow), while Coop et al’s approach is purely phenomenological.</p>
+<ul>
+<li>realization: MLC does not capture sampling error within locations. this can account for additional variance, increasing the values of the selection strengths.
+<ul>
+<li>in particular, both toju &amp; sota as well as pauw et al report sample sizes per location. these can be used to simulate sampling error.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="gunther-coop-2013" class="section level2">
+<h2>Günther &amp; Coop 2013</h2>
+<p>In this paper they provide the equation</p>
+<p><span class="math display">\[P(n_{kl}|\varepsilon_l,n_{kl}+m_{kl})=\left(\begin{matrix}n_{kl} \\ n_{kl}+m_{kl}\end{matrix}\right){\varepsilon_l}^{n_{kl}}(1-\varepsilon_l)^{m_{kl}}\]</span></p>
+<p>I’m questioning whether or not this model requires assumptions of pop size or HW eq…</p>
+<div id="basing-this-method-on-a-model" class="section level3">
+<h3>Basing this method on a model</h3>
+<p>We can assume that <span class="math inline">\(\varepsilon_l\)</span> evolves by some population genetic model. Suppose individuals homozygous of allele one have fitness <span class="math inline">\(W_{11}\)</span> and those homozygous of allele two have fitness <span class="math inline">\(W_{22}\)</span> and heterozygous individuals have fitness <span class="math inline">\(W_{12}=W_{21}\)</span>. We linearize popgen models using the logit and then capture drift by Brownian motion.</p>
+<p>Starting with a haploid asexual model…</p>
+<p><span class="math inline">\(N=n_1+n_2\)</span></p>
+<p><span class="math display">\[\frac{dN}{dt}=m_1n_2+m_2n_2\]</span></p>
+<p><span class="math display">\[\varepsilon=\frac{n_1}{N}\implies\frac{d\varepsilon}{dt}=(m_1-\bar m)\varepsilon=\left(m_1-m_1\varepsilon-m_2(1-\varepsilon)\right)\varepsilon\]</span></p>
+<p><span class="math display">\[=(m_1-m_2)(1-\varepsilon_1)\varepsilon_1.\]</span></p>
+<p>Let <span class="math inline">\(x=\ln\left(\frac{\varepsilon}{1-\varepsilon}\right)\)</span>. Then</p>
+<p><span class="math display">\[\frac{dx}{dt}=\frac{(1-\varepsilon)}{\varepsilon}\frac{(1-\varepsilon)(m_1-m_2)(1-\varepsilon)\varepsilon+\varepsilon(m_1-m_2)(1-\varepsilon)\varepsilon}{(1-\varepsilon)^2}\]</span></p>
+<p><span class="math display">\[=(m_1-m_2)(1-\varepsilon)+(m_1-m_2)\varepsilon=m_1-m_2.\]</span></p>
+<p>Adding stochasticity</p>
+<p><span class="math display">\[d\varepsilon=(m_1-m_2)(1-\varepsilon)\varepsilon dt+(1-\varepsilon)\varepsilon dB\]</span></p>
+<p>use Itô’s lemma to determine <span class="math inline">\(dx\)</span>…</p>
+<p>Try the same trick on a diploid sexually reproducing model (need to incorporate recomb and such…)</p>
+<p><span class="math display">\[\frac{d}{dt}n_{ij}=m_{ij}n_{ij}\]</span></p>
+<p><span class="math display">\[\frac{d}{dt}N=m_{11}n_{11}+m_{12}n_{12}+m_{22}n_{22}=\bar m N\]</span></p>
+<p><span class="math display">\[\varepsilon_{11}=\frac{n_{11}+\frac{1}{2}n_{12}}{N}, \ \varepsilon_{22}=\frac{n_{22}+\frac{1}{2}n_{12}}{N}, \ \varepsilon_{12}=\frac{n_{11}+n_{12}+n_{22}}{2N}\]</span></p>
+<p><span class="math display">\[\frac{d}{dt}\varepsilon_{11}=\frac{N\left(m_{11}n_{11}+\frac{1}{2}m_{12}n_{12}\right)-\left(n_{11}+\frac{1}{2}n_{12}\right)\left(m_{11}n_{11}+m_{12}n_{12}+m_{22}n_{22}\right)}{(N)^2}\]</span></p>
+<p><span class="math display">\[=\dots\]</span></p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

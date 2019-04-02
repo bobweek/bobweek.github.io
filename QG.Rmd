@@ -6,6 +6,16 @@ output:
     css: style.css
 ---
 
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { 
+    TagSide: "left",
+    equationNumbers: { autoNumber: "AMS" } 
+  }
+});
+</script>
+
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -30,7 +40,9 @@ If $\mathscr{G}_l$ is countable, denote the probability that this locus mutates 
 
 Denote by $m(X)$ the Lebesgue measure of a (Borel) subset of $\R$. If there are holes then replace $m(X)$ with $m(X)(1-\chi_{\mathscr{H}_l}(X))$ where $\chi_{\mathscr{H}_l}(X)=1$ where $X\in\mathscr{H}_l$ and $\chi_{\mathscr{H}_l}(X)=0$ when $X\notin\mathscr{H}_l$. Without confusion, $\mu_l(A,\beta)$ denotes the density of the measure $\mu_l(A,B)$ with respect to its second argument and $\mu_l(\alpha,B)$ the density with respect to the first argument. Given that $\mu_l(\alpha,\beta)$ is the density of $\mu_l(A,\beta)$ with respect to the first argument and $\mu_l'(\alpha,\beta)$ the density of $\mu_l(\alpha,B)$ with respect to the second argument, we can invoke Lebesgues dominate convergence to show $\mu_l'(\alpha,\beta)=\mu_l(\alpha,\beta)$. Hence,
 
-$$\mu_l(A,B)=\int_B\mu_l(A,\beta)dm(\beta)=\int_A\mu_l(\alpha,B)dm(\alpha)=\int_A\int_B\mu_l(\alpha,\beta)dm(\alpha)dm(\beta).$$
+$$\mu_l(A,B)=\int_B\mu_l(A,\beta)dm(\beta)=\int_A\mu_l(\alpha,B)dm(\alpha)$$
+
+$$=\int_A\int_B\mu_l(\alpha,\beta)dm(\alpha)dm(\beta).$$
 
 Thus, for a continuum of allelic effects, $\mu_l(\alpha,\beta)$ can still be thought of as the probability of mutating from $\alpha$ to $\beta$, but is actually a density. For the remainder of this document we focus only on continuums of allelic effects. A simple example of $\mu_l(\alpha,\beta)$ comes from the so-called _Gaussian allelic model_:
 

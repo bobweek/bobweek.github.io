@@ -22,7 +22,7 @@ output:
 
 Recall __Def:__ $\psi$ is a wavelet if $\{\psi_{ij}(x)\}=\{2^{j/2}\psi(2^jx-k)\}$ is an ONB of $L^2(\R)$.
 
-An MRA is a general framework for constructing functions $\psi$ that form wavelets.
+  - An MRA is a general framework for constructing functions $\psi$ that form wavelets.
 
 A multiresolution analysis consists of a sequence $\{V_j\}_{j\in\Z}$ of closed subspaces of $L^2(\R)$ and a function $\varphi\in V_0$, satisfying 
 
@@ -62,6 +62,74 @@ for $l<k\in\Z$. In particular, $L^2=\bigoplus_j W_j$. The scaling function $\var
   - $\varphi$ determines the approximation (the $V_j$'s)
   - the wavelets determine the "details" (the differences between $V_j$'s)
 
+
+# 04-01-2019
+
+## Multiresolution analysis
+
+__Def:__ Given $f\in L^2(\R)$. Let
+
+$$P_jf\equiv\text{ orth proj of }f\text{ onto }V_j$$
+
+Since $\varphi$ (the scaling function) gives an ONB for $V_0$ by $\{\varphi(x-k)\}_k$. Then
+
+$$\varphi_{j,k}(x)=2^{j/2}\varphi(2^jx-k), \ k\in\Z$$
+
+is an ONB for $V_j$ (requires proof). Thus,
+
+$$P_jf(x)=\sum_k\left<f,\varphi_{j,k}\right>\varphi_{j,k}(x)$$
+
+where $j$ is fixed. Now, $P_jf$ is the approximation of $f$ at scale $2^{-j}$. Furthermore, $P_jf$ is the _best_ approximation of $f$ in $V_j$ (it uniquely minimizes the $L^2$ norm).
+
+#### How to go from $P_jf$ to $P_{j+1}f$?
+
+Define the difference operator $Q_j$ by
+
+$$Q_jf\equiv P_{j+1}f-P_jf.$$
+
+Let $W_j$ be the orthogonal complement of $V_j$ in $V_{j+1}$. That is,
+
+$$W_j=\{h\in V_{j+1}:\left<h,g\right>=0 \ \forall \ g\in V_j\}$$
+
+__Lemma:__ $Q_jf$ is the orthogonal projection of $f$ onto $W_j$. The follows from
+
+__Theorem:__ Let $H$ be a separable Hilbert space. Let $V$ be a closed subspace and $V^\perp$ the orthongonal complement of $V$ in $H$. Take any $x\in H$. Let $P_Vx$ be the projection of $x$ onto $V$. Then there exists unique $z\in V^\perp$ s.t.
+
+$$x=P_Vx+z.$$
+
+__Proof:__ Show that $x-P_Vx\in V^\perp$. Let $\{x_n\}$ be an ONB of $V$ then it is enough to show that $\left<x-P_Vx,x_n\right>=0$ for all $n$:
+
+$$\left<x-P_Vx,x_n\right>=\left<x-\sum_k\left<x,x_k\right>x_kx_n\right>$$
+
+$$=\left<x,x_n\right>-\sum_k\left<x,x_k\right>\left<x_k,x_n\right>$$
+
+$$=\left<x,x_n\right>-\sum_k\left<x,x_k\right>\delta_{kn}=\left<x,x_n\right>-\left<x,x_n\right>=0. \ \square$$
+
+-----------------------------------------------
+
+Any $x\in H$ can be written as the unique sum of a vector in $V$ (such as $P_Vx$) and a vector in $V^\perp$ (ie, $z$):
+
+$$H=V\oplus V^\perp.$$
+
+-----------------------------------------------
+
+If $f_j\in V_{j+1}$, there is a unique $g\in V_j$ and $h\in W_j$ s.t. $f=g+h$ where $g=P_jf$ and $h=Q_jf\in W_j$.
+
+Thus $V_{j+1}=V_j\oplus W_j=V_n\oplus W_n\oplus\cdots\oplus W_j$ for $n<j$. Informally, this implies
+
+$$L^2(\R)=\overline{\bigoplus_{j\in \Z}W_j}$$
+
+It can be shown that the scaling function $\varphi$ determines a wavelet $\psi$ s.t. $\{\pi(x-k)\}_{k\in\Z}$ is an ONB of $W_0$.
+
+  - __Ex:__ The Haar wavelet has scaling function equal to the characteristic function of the unit interval.
+
+Also, fixing $j$, $\{\psi_{j,k}\}=\{2^{j/2}\psi(2^jx-k)\}\subset W_j$ is an ONB for $W_j$. Then
+
+$$Q_jf=\sum_k\left<f,\psi_{j,k}\right>\psi_{j,k}.$$
+
+Together $\{\psi_{j,k}\}_{j,k\in \Z}$ is an ONB for $L^2(\R)$.
+
+__Theorem:__ Given an MRA with scaling function $\varphi$ there is a wavelet $\psi\in L^2(\R)$ s.t. for each $j$ $\{\psi_{j,k}\}_k$ is an ONB for $W_j$. Hence $\{\psi_{j,k}\}_{j,k}$ is an ONB for $L^2(\R)$.
 
 
 

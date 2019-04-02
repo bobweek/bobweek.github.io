@@ -5,6 +5,9 @@ output:
   html_document:
     theme: cosmo
     css: style.css
+    toc: true
+    toc_depth: 2
+    toc_float: true
 ---
 
 <script type="text/x-mathjax-config">
@@ -20,8 +23,6 @@ MathJax.Hub.Config({
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
-\newcommand{\<}{\left<}
-\newcommand{\>}{\right>}
 \newcommand{\ra}{\rightarrow}
 
 # __Second-Order Elliptic Equations__
@@ -442,4 +443,88 @@ __Def:__
   
   ii. $\{S(t)\}$ is a _contraction semigroup_ if in addition $\|S(t)\|\leq1$ where
   
-$$\|S(t)\|\equiv\sup_{u\in X}\frac{\|S(t)u\|_X}{\|u\|_X}$$
+$$\|S(t)\|\equiv\sup_{u\in X}\frac{\|S(t)u\|}{\|u\|}$$
+
+Since $\|S(t)u\|\leq\|S(t)\|\|u\|$, this implies $\|S(t)u\|\leq\|u\|$.
+
+__Def:__ 
+
+$$D(A)\equiv\left\{u\in X:\lim_{t\downarrow 0}\frac{S(t)u-u}{t}\text{ exists in }X\right\}$$
+
+$$Au\equiv\lim_{t\downarrow 0}\frac{S(t)u-u}{t}, \ \ \ u\in D(A).$$
+
+The operator $A$ is the _infinitesimal generator_ of the semigroup $\{S(t)\}$.
+
+__Theorem 1 (differentiable properties of semigroups):__
+
+If $u\in D(A)$ then
+
+  i. $S(t)u\in D(A)$ for each $t\geq0$
+  ii. $AS(t)u=S(t)Au$ for each $t\geq0$
+  iii. $t\mapsto S(t)u$ is differentiable for each $t>0$.
+  iv. $\frac{d}{dt}S(t)u=AS(t)u$ for $t>0$
+  
+__Proof:__ exercise for bob
+
+__Remark:__ The mapping $t\mapsto S(t)$ is $C^1$ in $(0,\infty)$ when $u\in D(A)$.
+
+__Theorem 2 (properties of generators):__
+
+  i. $D(A)$ is dense in $X$
+  ii. $A$ is a closed operator
+  
+__Remark:__ $A$ is closed if whenever $\{u_k\}\subset D(A)$ and $u_k\ra u$, $Au_k\ra v$, then
+
+$$u\in D(A), \ \ v=Au.$$
+
+__Proof:__ exercise for bob
+
+#### Resolvents
+
+Let $A$ be a closed linear operator on $X$ with domain $D(A)$.
+
+__Def:__
+
+  i. $\lambda\in\rho(A)$ ($\rho(A)$ is the _resolvent set_ of $A$) if
+  
+$$\lambda I-A:D(A)\ra X$$
+
+is a bijection.
+
+  ii. If $\lambda\in\rho(A)$, then $R_\lambda:X\ra X$ given by $R_\lambda u\equiv(\lambda I-A)^{-1}u$ is called the _resolvent operator_ of $A$.
+
+By the closed graph theorem, $R_\lambda$ is a bounded linear operator. Also, $R_\lambda$ and $A$ commute.
+
+__Theorem 3 (properties of resolvent operators):__ 
+
+  i. if $\lambda,\mu\in\rho(A)$, then $R_\lambda$ and $R_\mu$ commute.
+  
+  ii. if $\lambda>0$, then $\lambda\in\rho(A)$ and
+  
+$$R_\lambda u=\int_0^\infty e^{-\lambda t}S(t)udt, \ \ \ u\in X.$$
+
+Since 
+
+$$\|R_\lambda u\|=\left\|\int_0^\infty e^{-\lambda t}S(t)udt\right\|\leq\left|\int_0^\infty e^{-\lambda t}\|S(t)\|\|u\|dt\right|$$
+
+$$\leq\|u\|\int_0^\infty e^{-\lambda t}dt=\frac{\|u\|}{\lambda}e^{-\lambda t}$$
+
+we have $\|R_\lambda\|\leq\frac{1}{\lambda}$ for all $\lambda\in\rho(A)\cap(0,\infty)$.
+  
+  
+
+Hence, the resolvent operator is the Laplace transform of the semigroup.
+
+### Generating contraction semigroups
+
+__Theorem 4 (Hill-Yosida)__ Let $A$ be a closed, densely-defined linear operator on $X$. Then $A$ is the generator of a contraction semigroup $\{S(t)\}$ iff 
+
+$$(0,\infty)\subset\rho(A), \ \ \ \|R_\lambda\|\leq\frac{1}{\lambda} \text{ for } \lambda>0.$$
+
+__Proof:__ later
+
+__Remark:__ Let $\omega\in\R$. A semigroup $\{S(t)\}$ is called $\omega$-contractive if $\|S(t)\|\leq e^{\omega t}$ for all $t\geq0$. A variant of theorem 4 states that a closed, densely-defined linear operator $A$ generates an $\omega$-contractive semigroup iff
+
+$$(\omega,\infty)\subset\rho(A), \ \ \ \|R_\lambda\|\leq\frac{1}{\lambda-\omega}\text{ for }\lambda>\omega$$
+
+### 7.4.3 Applications
