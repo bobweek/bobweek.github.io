@@ -61,7 +61,7 @@ Note the column names in this data frame. The column __rostrum__ contains the me
 </b>
 </p>
 
-```{r}
+```{r, fig.align='center', fig.cap="Figure 2: Displayed in this scatter plot are mean trait pairs for various locations across Japan. The colours indicate which island these locations belong to."}
 # plot data
 library(ggplot2)
 ggplot(toju_df,aes(x=rostrum,y=pericarp,color=island))+geom_point()+theme_bw()
