@@ -78,7 +78,7 @@ $$\frac{dN_t}{dt}=\frac{d}{dt}\sum_l\mathfrak{n}_t(i)=\sum_l r(i)\mathfrak{n}_t(
 
 Hence, the phenotypic distribution, $\phi_t(i)=\mathfrak{n}_t(i)/N_t$, has dynamics given by
 
-$$\frac{d}{dt}\phi_t=\frac{d}{dt}\frac{\mathfrak{n}_t}{N_t}=\frac{N_t\frac{d}{dt}\mathfrak{n}_t-\mathfrak{n}_t\frac{d}{dt}N_t}{{N_t}^2}$$
+$$\frac{d}{dt}\phi_t=\frac{d}{dt}\frac{\mathfrak{n}_t}{N_t}=\frac{N_t\frac{d}{dt}\mathfrak{n}_t-\mathfrak{n}_t\frac{d}{dt}N_t}{N_t ^2}$$
 
 $$=(r-\bar r_t)\frac{\mathfrak{n}_t}{N_t}=(r-\bar r_t)\phi_t.$$
 
