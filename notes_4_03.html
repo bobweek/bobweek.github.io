@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Harmonic Analysis 03-29-19</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="interactive_theory.html">Interactive theory</a></li>
+        <li><a href="measuring_coevolution.html">Measuring coevolution</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="ODE_arnold.html">ODE</a></li>
+            <li><a href="PDE.html">PDE</a></li>
+            <li><a href="da_prato_and_zabczyk.html">SPDE</a></li>
+            <li class="dropdown-submenu">
+            <a class="test" href="#">Cheat sheets<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="function_spaces.html">Function Spaces</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a class="test" href="#">Harmonic analysis<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="summary_of_convergence.html">conv</a></li>
+              <li><a href="note_1_28.html">Jan 28</a></li>
+              <li><a href="note_2_04.html">Feb 04</a></li>
+              <li><a href="note_2_25.html">Feb 25</a></li>
+              <li><a href="note_2_27.html">Feb 27</a></li>
+              <li><a href="note_3_01.html">Mar 01</a></li>
+              <li><a href="note_3_06.html">Mar 06</a></li>
+              <li><a href="note_3_18.html">Mar 18</a></li>
+              <li><a href="note_3_20.html">Mar 20</a></li>
+              <li><a href="note_3_22.html">Mar 22</a></li>
+              <li><a href="note_3_25.html">Mar 25</a></li>
+              <li><a href="note_3_27.html">Mar 22</a></li>
+              <li><a href="note_3_29.html">Mar 25</a></li>
+            </ul>
+          </li>
+        </ul>
+        </li><!--
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="notes-fitness.html">First Steps</a></li>
+            <li><a href="notes-evolution.html">Evolution</a></li>
+            <li><a href="notes-examples.html">Examples</a></li>
+            <li><a href="notes-misc.html">Misc</a></li>
+          </ul>
+        </li>
+        -->
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Harmonic Analysis 03-29-19</h1>
+
+</div>
+
+
+
+<div id="from-mra-to-wavelets" class="section level1">
+<h1>From MRA to wavelets:</h1>
+<p>Need a family <span class="math inline">\(\{\psi_{j,k}\equiv2^{j/2}\psi(2^jx-k)\}_{j,k\in\mathbb{Z}}\)</span> that is an ONB of <span class="math inline">\(L^2(\mathbb{R})\)</span>. This comes from an MRA:</p>
+<p><span class="math display">\[\dots\subset V_{-1}\subset V_0\subset V_1\subset\dots\]</span></p>
+<p>with a scaling function <span class="math inline">\(\varphi\)</span> s.t. <span class="math inline">\(\{\varphi(x-k)\}_{k\in\mathbb{Z}}\)</span> is an ONB of <span class="math inline">\(V_0\)</span>. This means that <span class="math inline">\(\{\varphi_{j,k}\}_k\)</span> is an ONB of <span class="math inline">\(V_j\)</span>. Furthermore <span class="math inline">\(V_{j+1}=V_j\oplus W_j\)</span>; for each <span class="math inline">\(\varphi\)</span> there is a corresponding <span class="math inline">\(\psi\)</span> s.t. <span class="math inline">\(\{\psi_{j,k}\}_k\)</span> is an ONB of <span class="math inline">\(W_j\)</span>. Considering all possible <span class="math inline">\(j\)</span>; <span class="math inline">\(L^2(\mathbb{R})=\overline{\bigoplus_j W_j}\)</span> and <span class="math inline">\(\{\psi_{j,k}\}_{j,k}\)</span> is an ONB of <span class="math inline">\(L^2(\mathbb{R})\)</span>.</p>
+<p><strong>Question:</strong> what is the relationship between <span class="math inline">\(\varphi\)</span> and <span class="math inline">\(\psi\)</span>?</p>
+<p><strong>Comment:</strong> we may think Fourier analysis is outdated given all this modern wavelet stuff. however, the Fourier transform is essential for constructing wavelets.</p>
+<p>By the requirements of <span class="math inline">\(\varphi\)</span>, we have</p>
+<p><span class="math display">\[\int_\mathbb{R}\varphi(x-k)\varphi(x-l)dx=\delta_{kl}.\]</span></p>
+<p>This is equivalent to <span class="math inline">\(\sum_{k\in\mathbb{Z}}|\hat\varphi(\gamma+k)|^2=1\)</span> (for any <span class="math inline">\(\gamma\in\mathbb{R}\)</span>) since</p>
+<p><strong>Lemma:</strong> Let <span class="math inline">\(f\in L^2(\mathbb{R})\)</span>. The family <span class="math inline">\(\{f(x-k)\}_k\)</span> is orthonormal iff</p>
+<p><span class="math display">\[\sum_{k\in\mathbb{Z}}|\hat f(\gamma+n)|^2=1, \ \gamma\in\mathbb{R}\]</span></p>
+<p><strong>Proof:</strong> Set <span class="math inline">\(\tau_k\)</span> the translation by <span class="math inline">\(k\)</span> operator so that <span class="math inline">\(\tau_k f=f(x-k)\)</span>. By change of variables (and translation invariance of Lebesgue integration)</p>
+<p><span class="math display">\[\left&lt;\tau_kf,\tau_mf\right&gt;=\left&lt;\tau_{k-m}f,f\right&gt;\]</span></p>
+<p>The orthonormality of <span class="math inline">\(\{\tau_kf\}\)</span> is equivalent to</p>
+<p><span class="math display">\[\left&lt;\tau_kf,f\right&gt;=\delta_0(k)\]</span></p>
+<p><span class="math display">\[=\left&lt;\mathscr F(\tau_kf),\mathscr F(f)\right&gt;=\int_\mathbb{R}\mathscr{F}(\tau_kf)\overline{\mathscr{F}(f)}d\gamma\]</span></p>
+<p><span class="math display">\[=\int_\mathbb{R}e^{-2\pi ik\gamma}\hat f\overline{\hat f}d\gamma=\int_\mathbb{R}e^{-2\pi i k\gamma}|\hat f|^2d\gamma\]</span></p>
+<p><span class="math display">\[=\sum_{n\in\mathbb{Z}}\int_n^{n+1}e^{-2\pi i k\gamma}|\hat f|^2d\gamma=\star\]</span></p>
+<p>Let <span class="math inline">\(\nu=\gamma-n\)</span> for each interval <span class="math inline">\((n,n+1)\)</span> in the partition of <span class="math inline">\(\mathbb{R}\)</span>:</p>
+<p><span class="math display">\[\star=\sum_n\int_0^1 e^{-2\pi i k(\nu+n)}|\hat f(\nu+n)|^2d\nu\]</span></p>
+<p><span class="math display">\[=\sum_n\int_0^1 e^{-2\pi i k\nu}|\hat f(\nu+n)|^2d\nu\]</span></p>
+<p><span class="math display">\[=\int_0^1e^{-2\pi i k\nu}\sum_n|\hat f(\nu+n)|^2d\nu=\star\]</span></p>
+<p>The function <span class="math inline">\(F(\nu)\equiv\sum_n|\hat f(\nu+n)|^2\)</span> is 1-periodic and <span class="math inline">\(\star\)</span> calculates the <span class="math inline">\(k\)</span>th Fourier coeff of <span class="math inline">\(F(\nu)\)</span> and is equal to <span class="math inline">\(\delta_0(k)\)</span>.</p>
+<p>Let <span class="math inline">\(h\equiv1\)</span> on <span class="math inline">\([0,1)\)</span>:</p>
+<p><span class="math display">\[\hat h(k)=\int_0^1 e^{-2\pi ikt}dt=\left.\frac{e^{-2\pi ikt}}{-2\pi ik}\right|_0^1\]</span></p>
+<p><span class="math display">\[=\frac{1-e^{-2\pi ik}}{2\pi ik}=\delta_0(k)\]</span></p>
+<p>Thus <span class="math inline">\(F=h\)</span> (ae) by the uniqueness of Fourier transform. <span class="math inline">\(\square\)</span></p>
+<div id="two-important-properties-the-scaling-function-must-hold" class="section level4">
+<h4>Two important properties the scaling function must hold</h4>
+<ol style="list-style-type: lower-roman">
+<li><p><span class="math inline">\(\sum_{n\in\mathbb{Z}}|\hat\varphi(\gamma+n)|^2=1\)</span></p></li>
+<li><p>there is <span class="math inline">\(\{h_k\}\)</span> s.t. <span class="math inline">\(\sum_{k\in\mathbb{Z}}|h_k|^2&lt;\infty\)</span> and</p></li>
+</ol>
+<p><span class="math display">\[\varphi(x)=\sqrt 2\sum_kh_k\varphi(2x-k)=\sum_k h_k\varphi_{1,j}\]</span></p>
+<p>This is because <span class="math inline">\(\varphi\in V_0\subset V_1\)</span> and <span class="math inline">\(\{\varphi_{1,k}\}\)</span> is an ONB of <span class="math inline">\(V_1\)</span>. Note <span class="math inline">\(h_k=\left&lt;\varphi,\varphi_{1,k}\right&gt;\)</span>.</p>
+<p>Take the Fourier transform of <span class="math inline">\(\varphi\)</span></p>
+<p><span class="math display">\[\hat\varphi(\gamma)=\sum_k h_k\hat\varphi_{1,k}\]</span></p>
+<p><span class="math display">\[\hat\varphi_{1,k}=\sqrt{2}e^{-2\pi ik\gamma}\frac{1}{2}\hat\varphi(\gamma/2)\]</span></p>
+<p><span class="math display">\[=\frac{e^{-2\pi ik\gamma}}{\sqrt 2}\hat \varphi(\gamma/2)\]</span></p>
+<p>and thus</p>
+<p><span class="math display">\[\hat\varphi(\gamma)=\hat \varphi(\gamma/2)H(\gamma)\]</span></p>
+<p>where <span class="math inline">\(H(\gamma)=\frac{1}{\sqrt 2}\sum_kh_ke^{-2\pi ik\gamma}\)</span> is a 1-periodic function, a trigonometric function.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

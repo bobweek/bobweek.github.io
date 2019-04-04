@@ -1,0 +1,98 @@
+---
+title: "Harmonic Analysis 03-29-19"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sinc}{\mathrm{sinc}}
+\newcommand{\supp}{\mathrm{supp}}
+
+# From MRA to wavelets:
+
+Need a family $\{\psi_{j,k}\equiv2^{j/2}\psi(2^jx-k)\}_{j,k\in\Z}$ that is an ONB of $L^2(\R)$. This comes from an MRA: 
+
+$$\dots\subset V_{-1}\subset V_0\subset V_1\subset\dots$$
+
+with a scaling function $\varphi$ s.t. $\{\varphi(x-k)\}_{k\in\Z}$ is an ONB of $V_0$. This means that $\{\varphi_{j,k}\}_k$ is an ONB of $V_j$. Furthermore $V_{j+1}=V_j\oplus W_j$; for each $\varphi$ there is a corresponding $\psi$ s.t. $\{\psi_{j,k}\}_k$ is an ONB of $W_j$. Considering all possible $j$; $L^2(\R)=\overline{\bigoplus_j W_j}$ and $\{\psi_{j,k}\}_{j,k}$ is an ONB of $L^2(\R)$.
+
+__Question:__ what is the relationship between $\varphi$ and $\psi$?
+
+__Comment:__ we may think Fourier analysis is outdated given all this modern wavelet stuff. however, the Fourier transform is essential for constructing wavelets.
+
+By the requirements of $\varphi$, we have
+
+$$\int_\R\varphi(x-k)\varphi(x-l)dx=\delta_{kl}.$$
+
+This is equivalent to $\sum_{k\in\Z}|\hat\varphi(\gamma+k)|^2=1$ (for any $\gamma\in\R$) since
+
+__Lemma:__ Let $f\in L^2(\R)$. The family $\{f(x-k)\}_k$ is orthonormal iff
+
+$$\sum_{k\in\Z}|\hat f(\gamma+n)|^2=1, \ \gamma\in\R$$
+
+__Proof:__ Set $\tau_k$ the translation by $k$ operator so that $\tau_k f=f(x-k)$. By change of variables (and translation invariance of Lebesgue integration)
+
+$$\left<\tau_kf,\tau_mf\right>=\left<\tau_{k-m}f,f\right>$$
+
+The orthonormality of $\{\tau_kf\}$ is equivalent to 
+
+$$\left<\tau_kf,f\right>=\delta_0(k)$$
+
+$$=\left<\mathscr F(\tau_kf),\mathscr F(f)\right>=\int_\R\mathscr{F}(\tau_kf)\overline{\mathscr{F}(f)}d\gamma$$
+
+$$=\int_\R e^{-2\pi ik\gamma}\hat f\overline{\hat f}d\gamma=\int_\R e^{-2\pi i k\gamma}|\hat f|^2d\gamma$$
+
+$$=\sum_{n\in\Z}\int_n^{n+1}e^{-2\pi i k\gamma}|\hat f|^2d\gamma=\star$$
+
+Let $\nu=\gamma-n$ for each interval $(n,n+1)$ in the partition of $\R$:
+
+$$\star=\sum_n\int_0^1 e^{-2\pi i k(\nu+n)}|\hat f(\nu+n)|^2d\nu$$
+
+$$=\sum_n\int_0^1 e^{-2\pi i k\nu}|\hat f(\nu+n)|^2d\nu$$
+
+$$=\int_0^1e^{-2\pi i k\nu}\sum_n|\hat f(\nu+n)|^2d\nu=\star$$
+
+The function $F(\nu)\equiv\sum_n|\hat f(\nu+n)|^2$ is 1-periodic and $\star$ calculates the $k$th Fourier coeff of $F(\nu)$ and is equal to $\delta_0(k)$.
+
+Let $h\equiv1$ on $[0,1)$:
+
+$$\hat h(k)=\int_0^1 e^{-2\pi ikt}dt=\left.\frac{e^{-2\pi ikt}}{-2\pi ik}\right|_0^1$$
+
+$$=\frac{1-e^{-2\pi ik}}{2\pi ik}=\delta_0(k)$$
+
+Thus $F=h$ (ae) by the uniqueness of Fourier transform. $\square$
+
+#### Two important properties the scaling function must hold
+
+  i. $\sum_{n\in\Z}|\hat\varphi(\gamma+n)|^2=1$
+  
+  ii. there is $\{h_k\}$ s.t. $\sum_{k\in\Z}|h_k|^2<\infty$ and
+  
+  $$\varphi(x)=\sqrt 2\sum_kh_k\varphi(2x-k)=\sum_k h_k\varphi_{1,j}$$
+
+This is because $\varphi\in V_0\subset V_1$ and $\{\varphi_{1,k}\}$ is an ONB of $V_1$. Note $h_k=\left<\varphi,\varphi_{1,k}\right>$.
+
+Take the Fourier transform of $\varphi$
+
+$$\hat\varphi(\gamma)=\sum_k h_k\hat\varphi_{1,k}$$
+
+$$\hat\varphi_{1,k}=\sqrt{2}e^{-2\pi ik\gamma}\frac{1}{2}\hat\varphi(\gamma/2)$$
+
+$$=\frac{e^{-2\pi ik\gamma}}{\sqrt 2}\hat \varphi(\gamma/2)$$
+
+and thus
+
+$$\hat\varphi(\gamma)=\hat \varphi(\gamma/2)H(\gamma)$$
+
+where $H(\gamma)=\frac{1}{\sqrt 2}\sum_kh_ke^{-2\pi ik\gamma}$ is a 1-periodic function, a trigonometric function.
+

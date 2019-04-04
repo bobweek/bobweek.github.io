@@ -447,6 +447,8 @@ $$\|S(t)\|\equiv\sup_{u\in X}\frac{\|S(t)u\|}{\|u\|}$$
 
 Since $\|S(t)u\|\leq\|S(t)\|\|u\|$, this implies $\|S(t)u\|\leq\|u\|$.
 
+- __NOTE:__ __From here we assume that $\{S(t)\}$ is a contraction semigroup__
+
 __Def:__ 
 
 $$D(A)\equiv\left\{u\in X:\lim_{t\downarrow 0}\frac{S(t)u-u}{t}\text{ exists in }X\right\}$$
@@ -464,7 +466,24 @@ If $u\in D(A)$ then
   iii. $t\mapsto S(t)u$ is differentiable for each $t>0$.
   iv. $\frac{d}{dt}S(t)u=AS(t)u$ for $t>0$
   
-__Proof:__ exercise for bob
+__Proof:__ 
+
+  i. & ii. Since $u\in D(A)$, we know that
+
+$$\lim_{t\downarrow0}\frac{S(t)u-u}{t}\equiv Au\in X.$$
+
+Replacing $u$ with $S(t)u$ and applying the semigroup property (commutivity)
+
+$$\lim_{s\downarrow0}\frac{S(s)S(t)u-S(t)u}{s}=\lim_{s\downarrow 0}\frac{S(t)(S(s)u-u)}{s}=S(t)Au.$$
+
+Since $A:D(A)\rightarrow X$ and $S(t):X\rightarrow X$, we have $S(t)A: D(A)\rightarrow X$ so the above limit exists in $X$. Hence, $S(t)u\in D(A)$ and thus it makes sense to write $S(t)Au=AS(t)u$.
+
+  iii. & iv.
+  
+$$\lim_{h\downarrow0}\left\|\frac{S(t+h)u-S(t)u}{h}-AS(t)u\right\|=\lim_{h\downarrow0}\left\|\frac{S(t)S(h)u-S(t)u}{h}-AS(t)u\right\|$$
+
+$$\leq\|S(t)\|\lim_{h\downarrow0}\left\|\frac{S(h)u-u}{h}-Au\right\|=0$$
+
 
 __Remark:__ The mapping $t\mapsto S(t)$ is $C^1$ in $(0,\infty)$ when $u\in D(A)$.
 
@@ -528,3 +547,31 @@ __Remark:__ Let $\omega\in\R$. A semigroup $\{S(t)\}$ is called $\omega$-contrac
 $$(\omega,\infty)\subset\rho(A), \ \ \ \|R_\lambda\|\leq\frac{1}{\lambda-\omega}\text{ for }\lambda>\omega$$
 
 ### 7.4.3 Applications
+
+#### a. Second order parabolic PDE
+
+\begin{equation}
+\left\{
+\begin{matrix}
+u_t+Lu=0 & x\in U_T \\
+u=0      & x\in \partial U\times[0,T]
+u=g      & x\in U\times\{t=0\}
+\end{matrix}
+\right.
+\end{equation}
+
+Assume $L$ has divergence form with smooth coefficients and satisfies the strong ellipticity condition. Assume $U$ is open, bounded and has smooth boundary. Wish to reinterpret $(10)$ as a flow determined by a semigroup on $X=L^2(U)$. Set
+
+$$D(A)\equiv H_0^1(U)\cap H^2(U)$$
+
+- __Recall:__ $H^2=W^{k,2}$
+
+Define $Au\equiv Lu$ when $u\in D(A)$. Then $A$ is unbounded and linear on $X$.
+
+- __Recall:__ from 6.2.2 (Theorem 2): $\beta\|u\|^2_{H_0^1}\leq B[u,u]+\gamma\|u\|^2_{L^2}$ for some $\beta>0,\gamma\geq0$.
+
+__Theorem 5 (second-order parabolic PDE as semigroups):__  The operator $A$ generates a $\gamma$-contraction semigroup $\{S(t)\}_{t\geq0}$ on $L^2(U)$.
+
+__Proof:__ later
+
+- __Note:__ it appears that Craig is not very fond of semigroups. they assert that although semigroups provide more regular solutions on the outset than Galerkins approximation method, it can be shown that the weak solutions constructed by Galerkins approach are actually more regular than those constructed via semigroups. what's interesting, however, is the book on semigroups that i own which emphasizes the centrality of semigroups for linear evolution equations.

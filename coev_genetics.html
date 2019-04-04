@@ -421,18 +421,47 @@ MathJax.Hub.Config({
 <p><span class="math display">\[\frac{dN}{dt}=m_1n_2+m_2n_2\]</span></p>
 <p><span class="math display">\[\varepsilon=\frac{n_1}{N}\implies\frac{d\varepsilon}{dt}=(m_1-\bar m)\varepsilon=\left(m_1-m_1\varepsilon-m_2(1-\varepsilon)\right)\varepsilon\]</span></p>
 <p><span class="math display">\[=(m_1-m_2)(1-\varepsilon_1)\varepsilon_1.\]</span></p>
-<p>Let <span class="math inline">\(x=\ln\left(\frac{\varepsilon}{1-\varepsilon}\right)\)</span>. Then</p>
-<p><span class="math display">\[\frac{dx}{dt}=\frac{(1-\varepsilon)}{\varepsilon}\frac{(1-\varepsilon)(m_1-m_2)(1-\varepsilon)\varepsilon+\varepsilon(m_1-m_2)(1-\varepsilon)\varepsilon}{(1-\varepsilon)^2}\]</span></p>
+<p>Let <span class="math inline">\(z=\ln\left(\frac{\varepsilon}{1-\varepsilon}\right)\)</span>. Then</p>
+<p><span class="math display">\[\frac{dz}{dt}=\frac{(1-\varepsilon)}{\varepsilon}\frac{(1-\varepsilon)(m_1-m_2)(1-\varepsilon)\varepsilon+\varepsilon(m_1-m_2)(1-\varepsilon)\varepsilon}{(1-\varepsilon)^2}\]</span></p>
 <p><span class="math display">\[=(m_1-m_2)(1-\varepsilon)+(m_1-m_2)\varepsilon=m_1-m_2.\]</span></p>
 <p>Adding stochasticity</p>
-<p><span class="math display">\[d\varepsilon=(m_1-m_2)(1-\varepsilon)\varepsilon dt+(1-\varepsilon)\varepsilon dB\]</span></p>
-<p>use Itô’s lemma to determine <span class="math inline">\(dx\)</span>…</p>
-<p>Try the same trick on a diploid sexually reproducing model (need to incorporate recomb and such…)</p>
-<p><span class="math display">\[\frac{d}{dt}n_{ij}=m_{ij}n_{ij}\]</span></p>
-<p><span class="math display">\[\frac{d}{dt}N=m_{11}n_{11}+m_{12}n_{12}+m_{22}n_{22}=\bar m N\]</span></p>
-<p><span class="math display">\[\varepsilon_{11}=\frac{n_{11}+\frac{1}{2}n_{12}}{N}, \ \varepsilon_{22}=\frac{n_{22}+\frac{1}{2}n_{12}}{N}, \ \varepsilon_{12}=\frac{n_{11}+n_{12}+n_{22}}{2N}\]</span></p>
-<p><span class="math display">\[\frac{d}{dt}\varepsilon_{11}=\frac{N\left(m_{11}n_{11}+\frac{1}{2}m_{12}n_{12}\right)-\left(n_{11}+\frac{1}{2}n_{12}\right)\left(m_{11}n_{11}+m_{12}n_{12}+m_{22}n_{22}\right)}{(N)^2}\]</span></p>
-<p><span class="math display">\[=\dots\]</span></p>
+<p><span class="math display">\[d\varepsilon=(m_1-m_2)(1-\varepsilon)\varepsilon dt+\frac{(1-\varepsilon)\varepsilon}{\sqrt {N_e}} dB\]</span></p>
+<p>use Itô’s lemma to determine <span class="math inline">\(dz\)</span>…</p>
+<p><span class="math display">\[z(\varepsilon)=\ln\left(\frac{\varepsilon}{1-\varepsilon}\right)\]</span></p>
+<p><span class="math display">\[\frac{\partial^2z}{\partial\varepsilon^2}=\frac{\partial}{\partial\varepsilon}\frac{(1-\varepsilon)}{\varepsilon}\frac{(1-\varepsilon)+\varepsilon}{(1-\varepsilon)^2}=\frac{\partial}{\partial\varepsilon}\frac{1}{\varepsilon(1-\varepsilon)}\]</span></p>
+<p><span class="math display">\[=\frac{-(1-2\varepsilon)}{\varepsilon^2(1-\varepsilon)^2}=\frac{\varepsilon-(1-\varepsilon)}{\varepsilon^2(1-\varepsilon)^2}=\frac{1}{\varepsilon(1-\varepsilon)}\left(\frac{1}{(1-\varepsilon)}-\frac{1}{\varepsilon}\right).\]</span></p>
+<p>Thus,</p>
+<p><span class="math display">\[dz=\left((m_1-m_2)\frac{\varepsilon(1-\varepsilon)}{\varepsilon(1-\varepsilon)}+\frac{\varepsilon^2(1-\varepsilon)^2}{2N_e}\frac{2\varepsilon-1}{\varepsilon^2(1-\varepsilon)^2}\right)dt\]</span></p>
+<p><span class="math display">\[+\frac{\varepsilon(1-\varepsilon)}{\varepsilon(1-\varepsilon)}\frac{1}{\sqrt{N_e}}dB\]</span></p>
+<p><span class="math display">\[=\left((m_1-m_2)+\frac{1}{N_e}\left(\varepsilon-\frac{1}{2}\right)\right)dt+\frac{1}{\sqrt{N_e}}dB\]</span></p>
+<p><span class="math display">\[\frac{\varepsilon}{1-\varepsilon}=e^z\implies\frac{1}{\varepsilon}-1=e^{-z}\]</span></p>
+<p><span class="math display">\[\implies\varepsilon=\frac{1}{1+e^{-z}}\]</span></p>
+<p><span class="math display">\[\implies dz=\left(m_1-m_2+\frac{1}{2N_e}\frac{1-e^{-z}}{1+e^{-z}}\right)dt+\frac{1}{\sqrt{N_e}}dB\]</span></p>
+<p><span class="math display">\[=\left(m_1-m_2+\frac{1}{2N_e}\tanh\left(\frac{z}{2}\right)\right)dt+\frac{1}{\sqrt{N_e}}dB.\]</span></p>
+<ul>
+<li><p>NOTE: since <span class="math inline">\(\tanh\)</span> is bounded between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>, we see the dynamics are approximately linear when <span class="math inline">\(|m_1-m_2|\gg1\)</span>, ie, when selection is strong.</p></li>
+<li><p>NOTE: we can also ignore <span class="math inline">\(\tanh\)</span> if <span class="math inline">\(N_e\)</span> is large enough. the stochastic effects remain since they disappear at a slower order.</p></li>
+</ul>
+<p>Since this model ignores polyploidy, we can pose that there is some ideal value for <span class="math inline">\(x\)</span> being selected for by the environment. This represents potential selection for heterozygotes, frequency dependence, and other interesting polymorphic maintaining selective schemes. Let this optimal amount be denoted by <span class="math inline">\(\theta\)</span>. Under this scheme, we can set</p>
+<p><span class="math display">\[m_1(z)-m_2(z)=S(\theta-z).\]</span></p>
+<p>where <span class="math inline">\(S\)</span> is the strength of selection for the polymorphism <span class="math inline">\(\theta\)</span>. When <span class="math inline">\(N_e\)</span> is large enough so we can ignore <span class="math inline">\(\tanh\)</span>, this reduces to an OU model.</p>
+<div id="adding-gene-flow" class="section level4">
+<h4>Adding gene-flow</h4>
+<p>We focus on the deterministic aspect of gene-flow. In particular, consider <span class="math inline">\(K\)</span> populations, let <span class="math inline">\(\omega_{ji}\)</span> be the rate of gene-flow from population <span class="math inline">\(j\)</span> to population <span class="math inline">\(i\)</span>. Then our model becomes</p>
+<p><span class="math display">\[dz_i=\left(S(\theta-z_i)+\sum_j\omega_{ji}(z_j-z_i)\right)dt+\frac{1}{\sqrt{N_e}}dB\]</span></p>
+<p>This remains and OU model, but now a multivariate one (in <span class="math inline">\(K\)</span> dimensions). This model can be simplified to</p>
+<p><span class="math display">\[dz_i=\left(S(\theta-z_i)+\Omega_i(\mu_i-z_i)\right)dt+\frac{1}{\sqrt{N_e}}dB\]</span></p>
+<p>where</p>
+<p><span class="math display">\[\Omega_i=\sum_j\Omega_{ji},\ \ \ \mu_i=\frac{1}{\Omega_i}\sum_j\omega_{ji}(z_j-z_i).\]</span></p>
+<p>If we assume rates of migration are symmetric and equal across all pairs of populations, then <span class="math inline">\(\mu=\mu_i=\mu_j\)</span> and <span class="math inline">\(\Omega=\Omega_i=\Omega_j\)</span> for each <span class="math inline">\(i,j\)</span>. Hence, we find</p>
+<p><span class="math display">\[dz_i=\left(S(\theta-z_i)+\Omega(\mu-z_i)\right)dt+\frac{1}{\sqrt{N_e}}dB\]</span></p>
+<p>and taking Itô’s lemma once more to find <span class="math inline">\(d\mu\)</span> and <span class="math inline">\(dV\)</span> (where <span class="math inline">\(V=\mathrm{Var}(z)\)</span>), then I have successfully recreated the MLC for population genetics.</p>
+<ul>
+<li><p>NOTE: to apply this to data, one would take the logit of the mean of allele frequencies across space (even though we model the mean of the logit). if this mean is one or zero, our method assume directional selection (no equilibrium).</p></li>
+<li><p>this seems like a pretty useless method…</p></li>
+<li><p>taking a few steps back, perhaps applying the logit is totally unneccessary, even though its cool. maybe we can get an equilibrium distribution of allele freq’s across space using a regular pop-gen model. otherwise we run into problems with species that are fixed for an allele. on second thought, loci that are fixed species-wide tell us this is probably due to selection (or remnants of drift past), but contains zero information otherwise. there’s no way to know how strong selection was (if indeed that was the agent) unless we had time-series data.</p></li>
+</ul>
+</div>
 </div>
 </div>
 

@@ -103,29 +103,73 @@ $$\varepsilon=\frac{n_1}{N}\implies\frac{d\varepsilon}{dt}=(m_1-\bar m)\varepsil
 
 $$=(m_1-m_2)(1-\varepsilon_1)\varepsilon_1.$$
 
-Let $x=\ln\left(\frac{\varepsilon}{1-\varepsilon}\right)$. Then
+Let $z=\ln\left(\frac{\varepsilon}{1-\varepsilon}\right)$. Then
 
-$$\frac{dx}{dt}=\frac{(1-\varepsilon)}{\varepsilon}\frac{(1-\varepsilon)(m_1-m_2)(1-\varepsilon)\varepsilon+\varepsilon(m_1-m_2)(1-\varepsilon)\varepsilon}{(1-\varepsilon)^2}$$
+$$\frac{dz}{dt}=\frac{(1-\varepsilon)}{\varepsilon}\frac{(1-\varepsilon)(m_1-m_2)(1-\varepsilon)\varepsilon+\varepsilon(m_1-m_2)(1-\varepsilon)\varepsilon}{(1-\varepsilon)^2}$$
 
 $$=(m_1-m_2)(1-\varepsilon)+(m_1-m_2)\varepsilon=m_1-m_2.$$
 
 Adding stochasticity
 
-$$d\varepsilon=(m_1-m_2)(1-\varepsilon)\varepsilon dt+(1-\varepsilon)\varepsilon dB$$
+$$d\varepsilon=(m_1-m_2)(1-\varepsilon)\varepsilon dt+\frac{(1-\varepsilon)\varepsilon}{\sqrt {N_e}} dB$$
 
-use It&ocirc;'s lemma to determine $dx$...
+use It&ocirc;'s lemma to determine $dz$...
+
+$$z(\varepsilon)=\ln\left(\frac{\varepsilon}{1-\varepsilon}\right)$$
+
+$$\frac{\partial^2z}{\partial\varepsilon^2}=\frac{\partial}{\partial\varepsilon}\frac{(1-\varepsilon)}{\varepsilon}\frac{(1-\varepsilon)+\varepsilon}{(1-\varepsilon)^2}=\frac{\partial}{\partial\varepsilon}\frac{1}{\varepsilon(1-\varepsilon)}$$
+
+$$=\frac{-(1-2\varepsilon)}{\varepsilon^2(1-\varepsilon)^2}=\frac{\varepsilon-(1-\varepsilon)}{\varepsilon^2(1-\varepsilon)^2}=\frac{1}{\varepsilon(1-\varepsilon)}\left(\frac{1}{(1-\varepsilon)}-\frac{1}{\varepsilon}\right).$$
+
+Thus,
+
+$$dz=\left((m_1-m_2)\frac{\varepsilon(1-\varepsilon)}{\varepsilon(1-\varepsilon)}+\frac{\varepsilon^2(1-\varepsilon)^2}{2N_e}\frac{2\varepsilon-1}{\varepsilon^2(1-\varepsilon)^2}\right)dt$$
+
+$$+\frac{\varepsilon(1-\varepsilon)}{\varepsilon(1-\varepsilon)}\frac{1}{\sqrt{N_e}}dB$$
+
+$$=\left((m_1-m_2)+\frac{1}{N_e}\left(\varepsilon-\frac{1}{2}\right)\right)dt+\frac{1}{\sqrt{N_e}}dB$$
+
+$$\frac{\varepsilon}{1-\varepsilon}=e^z\implies\frac{1}{\varepsilon}-1=e^{-z}$$
+
+$$\implies\varepsilon=\frac{1}{1+e^{-z}}$$
+
+$$\implies dz=\left(m_1-m_2+\frac{1}{2N_e}\frac{1-e^{-z}}{1+e^{-z}}\right)dt+\frac{1}{\sqrt{N_e}}dB$$
+
+$$=\left(m_1-m_2+\frac{1}{2N_e}\tanh\left(\frac{z}{2}\right)\right)dt+\frac{1}{\sqrt{N_e}}dB.$$
+
+  - NOTE: since $\tanh$ is bounded between $-1$ and $1$, we see the dynamics are approximately linear when $|m_1-m_2|\gg1$, ie, when selection is strong.
+  
+  - NOTE: we can also ignore $\tanh$ if $N_e$ is large enough. the stochastic effects remain since they disappear at a slower order.
+
+Since this model ignores polyploidy, we can pose that there is some ideal value for $x$ being selected for by the environment. This represents potential selection for heterozygotes, frequency dependence, and other interesting polymorphic maintaining selective schemes. Let this optimal amount be denoted by $\theta$. Under this scheme, we can set
+
+$$m_1(z)-m_2(z)=S(\theta-z).$$
+
+where $S$ is the strength of selection for the polymorphism $\theta$. When $N_e$ is large enough so we can ignore $\tanh$, this reduces to an OU model.
+
+#### Adding gene-flow
+
+We focus on the deterministic aspect of gene-flow. In particular, consider $K$ populations, let $\omega_{ji}$ be the rate of gene-flow from population $j$ to population $i$. Then our model becomes
+
+$$dz_i=\left(S(\theta-z_i)+\sum_j\omega_{ji}(z_j-z_i)\right)dt+\frac{1}{\sqrt{N_e}}dB$$
+
+This remains and OU model, but now a multivariate one (in $K$ dimensions). This model can be simplified to
 
 
-Try the same trick on a diploid sexually reproducing model (need to incorporate recomb and such...)
+$$dz_i=\left(S(\theta-z_i)+\Omega_i(\mu_i-z_i)\right)dt+\frac{1}{\sqrt{N_e}}dB$$
 
-$$\frac{d}{dt}n_{ij}=m_{ij}n_{ij}$$
+where 
 
-$$\frac{d}{dt}N=m_{11}n_{11}+m_{12}n_{12}+m_{22}n_{22}=\bar m N$$
+$$\Omega_i=\sum_j\Omega_{ji},\ \ \ \mu_i=\frac{1}{\Omega_i}\sum_j\omega_{ji}(z_j-z_i).$$
 
-$$\varepsilon_{11}=\frac{n_{11}+\frac{1}{2}n_{12}}{N}, \ \varepsilon_{22}=\frac{n_{22}+\frac{1}{2}n_{12}}{N}, \ \varepsilon_{12}=\frac{n_{11}+n_{12}+n_{22}}{2N}$$
+If we assume rates of migration are symmetric and equal across all pairs of populations, then $\mu=\mu_i=\mu_j$ and $\Omega=\Omega_i=\Omega_j$ for each $i,j$. Hence, we find
 
-$$\frac{d}{dt}\varepsilon_{11}=\frac{N\left(m_{11}n_{11}+\frac{1}{2}m_{12}n_{12}\right)-\left(n_{11}+\frac{1}{2}n_{12}\right)\left(m_{11}n_{11}+m_{12}n_{12}+m_{22}n_{22}\right)}{(N)^2}$$
+$$dz_i=\left(S(\theta-z_i)+\Omega(\mu-z_i)\right)dt+\frac{1}{\sqrt{N_e}}dB$$
 
-$$=\dots$$
+and taking It&ocirc;'s lemma once more to find $d\mu$ and $dV$ (where $V=\Var(z)$), then I have successfully recreated the MLC for population genetics.
 
-
+  - NOTE: to apply this to data, one would take the logit of the mean of allele frequencies across space (even though we model the mean of the logit). if this mean is one or zero, our method assume directional selection (no equilibrium).
+  
+  - this seems like a pretty useless method...
+  
+  - taking a few steps back, perhaps applying the logit is totally unneccessary, even though its cool. maybe we can get an equilibrium distribution of allele freq's across space using a regular pop-gen model. otherwise we run into problems with species that are fixed for an allele. on second thought, loci that are fixed species-wide tell us this is probably due to selection (or remnants of drift past), but contains zero information otherwise. there's no way to know how strong selection was (if indeed that was the agent) unless we had time-series data.
