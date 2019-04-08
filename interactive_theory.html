@@ -397,7 +397,7 @@ padding:15px;
 margin:5px;">
 <b> Under diffusive migration with rate <span class="math inline">\(m\)</span> and random genetic drift with variance <span class="math inline">\(\eta^2\)</span> the evolution of <span class="math inline">\(\bar z(x,t)\)</span> is given by </b>
 </p>
-<p><span class="math display">\[\frac{d\bar z}{dt}=\frac{m}{2}\frac{\partial^2\bar z}{\partial x^2}+\eta\dot W\]</span></p>
+<p><span class="math display">\[\frac{\partial\bar z}{\partial t}=\frac{m}{2}\frac{\partial^2\bar z}{\partial x^2}+\eta\dot W\]</span></p>
 <p align="justify" style="background-color:#2E2E2E;
 border-radius:4px;
 font-size:16px;
@@ -428,8 +428,8 @@ padding:15px;
 margin:5px;">
 <b> The model used here is a direct extension of the one developed above, except now we include biotic selection. I leave out the detailed derivation starting from the effects of interactions on the fitnesses of pairs of individuals and skip to the final system of differential equations that model the evolution of <span class="math inline">\(\bar z_1(x,t)\)</span> and <span class="math inline">\(\bar z_2(x,t)\)</span>. </b>
 </p>
-<p><span class="math display">\[\frac{d\bar z_1}{dt}=G_1M_1(\bar z_2-\bar z_1)+G_1D_1\]</span> <span class="math display">\[+\frac{m_1}{2}\frac{\partial^2\bar z_1}{\partial x^2}+\eta_1\dot W_1\]</span></p>
-<p><span class="math display">\[\frac{d\bar z_2}{dt}=G_2M_2(\bar z_1-\bar z_2)-G_2D_2\]</span> <span class="math display">\[+\frac{m_2}{2}\frac{\partial^2\bar z_2}{\partial x^2}+\eta_2\dot W_2\]</span></p>
+<p><span class="math display">\[\frac{\partial\bar z_1}{\partial t}=G_1M_1(\bar z_2-\bar z_1)+G_1D_1\]</span> <span class="math display">\[+\frac{m_1}{2}\frac{\partial^2\bar z_1}{\partial x^2}+\eta_1\dot W_1\]</span></p>
+<p><span class="math display">\[\frac{\partial\bar z_2}{\partial t}=G_2M_2(\bar z_1-\bar z_2)-G_2D_2\]</span> <span class="math display">\[+\frac{m_2}{2}\frac{\partial^2\bar z_2}{\partial x^2}+\eta_2\dot W_2\]</span></p>
 <p align="justify" style="background-color:#2E2E2E;
 border-radius:4px;
 font-size:16px;

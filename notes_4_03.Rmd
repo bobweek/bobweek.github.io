@@ -86,13 +86,103 @@ Take the Fourier transform of $\varphi$
 
 $$\hat\varphi(\gamma)=\sum_k h_k\hat\varphi_{1,k}$$
 
-$$\hat\varphi_{1,k}=\sqrt{2}e^{-2\pi ik\gamma}\frac{1}{2}\hat\varphi(\gamma/2)$$
+$$\hat\varphi_{1,k}=\sqrt{2}e^{-2\pi ik\gamma/2}\frac{1}{2}\hat\varphi(\gamma/2)$$
 
-$$=\frac{e^{-2\pi ik\gamma}}{\sqrt 2}\hat \varphi(\gamma/2)$$
+$$=\frac{e^{-2\pi ik\gamma/2}}{\sqrt 2}\hat \varphi(\gamma/2)$$
 
 and thus
 
-$$\hat\varphi(\gamma)=\hat \varphi(\gamma/2)H(\gamma)$$
+$$\hat\varphi(\gamma)=\hat \varphi(\gamma/2)H(\gamma/2)$$
 
-where $H(\gamma)=\frac{1}{\sqrt 2}\sum_kh_ke^{-2\pi ik\gamma}$ is a 1-periodic function, a trigonometric function.
+where $H(\gamma)=\frac{1}{\sqrt 2}\sum_kh_ke^{-2\pi ik\gamma}$ is a 1-periodic function, a trigonometric function. This is the transfer function of a low pass filter. This is just property ii. and only requires $\varphi\in V_1$ and thus holds for any $f\in V_1$. The following depends also on property i.
+
+__Lemma:__ Given an MRA with scaling function $\varphi$ and a corresponding filter $H$:
+
+$$|H(\gamma)|^2+|H(\gamma+1/2)|^2=1, \ \ \ \gamma\in\R.$$
+
+__Proof:__  From i. we have $1=\sum_n|\varphi(\gamma+n)|^2$ which is
+
+$$=\sum_n|H(\frac{\gamma+n}{2})|^2|\hat\varphi(\frac{\gamma+n}{2})|^2$$
+
+$$=\sum_{n\text{ odd }}|H(\frac{\gamma+n}{2})|^2|\hat\varphi(\frac{\gamma+n}{2})|^2+\sum_{n\text{ even }}|H(\frac{\gamma}{2})|^2|\hat\varphi(\frac{\gamma}{2}+\frac{n}{2})|^2$$
+
+period 1
+
+$$=|H(\frac{\gamma}{2}+\frac{1}{2})|^2\sum_{n\text{ odd}}|\hat\varphi(\frac{\gamma}{2}+\frac{n}{2})|^2+\sum_{k\in\Z}|H(\gamma/2)|^2|\hat\varphi(k+\gamma/2)|^2$$
+
+$$=|H(\frac{\gamma}{2}+\frac{1}{2})|^2\sum_{k\in\Z}|\hat\varphi(\frac{\gamma+2k+1}{2})|^2+\sum_{k\in\Z}|H(\gamma/2)|^2|\hat\varphi(k+\gamma/2)|^2$$
+
+$$=|H(\frac{\gamma}{2}+\frac{1}{2})|^2\sum_{k\in\Z}|\hat\varphi(\frac{\gamma+1}{2}+k)|^2+\sum_{k\in\Z}|H(\gamma/2)|^2|\hat\varphi(k+\gamma/2)|^2$$
+
+$$=|H(\gamma/2+1/2)|^2+|H(\gamma/2)|^2 \ \ \square$$
+
+Let $f\in V_1$, by the previous argument for $\varphi$
+
+$$\hat f(\gamma)=m_f(\gamma/2)\varphi(\gamma/2)$$
+
+where $m_f$ is of period 1.
+
+__Lemma:__ $f\in W_0$ iff there is $v(\gamma)$ of period one s.t.
+
+$$\hat f(\gamma)=e^{i\pi\gamma}\overline{H(\gamma/2+1/2)}\hat\varphi(\gamma/2)$$
+
+__Proof sketch:__ $f\in W_0$ iff $f\in V_1$ and $f\in {V_0}^\perp$.
+
+  i. since $f\in V_1$, we need to show that the filter $m_f(\gamma)$ satisfies
+  
+$$m_f(\gamma)=e^{2\pi i\gamma}\sigma(\gamma)\overline{H(\gamma+1/2)}$$
+
+where $\sigma$ is a function of period $1/2$.
+
+  ii. $f\perp V_0$ iff $\left<f,\varphi(x-k)\right>=0$ for $k\in\Z$
+  
+  $$0=\left<\hat f,\hat \varphi(x-k)\right>=\int_\R\hat f(\gamma)e^{2\pi ik\gamma}\overline{\hat\varphi(\gamma)}d\gamma$$
+
+$$=\int_\R m_f(\gamma/2)\hat\varphi(\gamma/2)\overline{H(\gamma/2)} \ \overline{\hat\varphi(\gamma)}d\gamma$$
+
+$$\dots \ \square$$
+
+__Want:__ to find $\psi$ (the wavelet) s.t. $\{\psi_{j,k}\}$ is an ONB of $L^2(\R)$. Since $\psi\in W_0$, we have
+
+$$\hat\psi(\gamma)=m_\psi(\gamma/2)\hat\varphi(\gamma/2)$$
+
+where $m_\psi(\gamma)=e^{2\pi i \gamma}\sigma(\gamma)\overline{H(\gamma+1/2)}$ where $\sigma$ has period $1/2$.
+
+Applying an above lemma to $m_\psi$ (instead of $H$) we have
+
+$$|m_\psi(\gamma)|^2+|m_\psi(\gamma+1/2)|^2=1.$$
+
+That is, 
+
+$$|\sigma(\gamma)|^2|H(\gamma+1/2)|^2+|\sigma(\gamma+1/2)|^2|H(\gamma)|^2=1.$$
+
+Then $\sigma$ must have modulus $1$. The MRA is given, so $H$ is determined. Pick $\sigma\equiv 1$ and define $\psi\in W_0$ as
+
+$$\hat\psi(\gamma)=m_\psi(\gamma/2)\hat\varphi(\gamma/2)$$
+
+where $m_\psi(\gamma)=e^{2\pi i \gamma}\overline{H(\gamma+1/2)}$.
+
+$$\hat\psi_{0,k}=e^{-2\pi ik\gamma}m_\psi(\gamma/2)\hat\varphi(\gamma/2)$$
+
+and $\psi_{0,k}$ is also in $W_0$ for each $k$.
+
+Let $f\in W_0\implies \ \exists \ v(\gamma)$ of period one s.t.
+
+$$\hat f(\gamma)=v(\gamma)e^{\pi i \gamma}\overline{H(\gamma/2+1/2)}\hat\varphi(\gamma/2)$$
+
+$$v(\gamma)=\sum_{k\in\Z}a_ke^{-2\pi ik\gamma}$$
+
+$$\hat f(\gamma)=\sum_k a_ke^{-2\pi ik\gamma}\hat\psi(\gamma)$$
+
+$$\hat f(\gamma)=\sum_k a_k\hat\psi_{0,k}(\gamma)$$
+
+and thus, $f(x)=\sum_k a_k\psi_{0,k}$ when $f\in W_0$. If $f$ belongs to some other space $W_j$, then $f$ can be written as $f=\sum a_k\psi_{j,k}$.
+
+
+
+
+
+
+
+
 

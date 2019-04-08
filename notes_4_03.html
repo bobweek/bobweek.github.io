@@ -383,11 +383,56 @@ $(document).ready(function () {
 <p>This is because <span class="math inline">\(\varphi\in V_0\subset V_1\)</span> and <span class="math inline">\(\{\varphi_{1,k}\}\)</span> is an ONB of <span class="math inline">\(V_1\)</span>. Note <span class="math inline">\(h_k=\left&lt;\varphi,\varphi_{1,k}\right&gt;\)</span>.</p>
 <p>Take the Fourier transform of <span class="math inline">\(\varphi\)</span></p>
 <p><span class="math display">\[\hat\varphi(\gamma)=\sum_k h_k\hat\varphi_{1,k}\]</span></p>
-<p><span class="math display">\[\hat\varphi_{1,k}=\sqrt{2}e^{-2\pi ik\gamma}\frac{1}{2}\hat\varphi(\gamma/2)\]</span></p>
-<p><span class="math display">\[=\frac{e^{-2\pi ik\gamma}}{\sqrt 2}\hat \varphi(\gamma/2)\]</span></p>
+<p><span class="math display">\[\hat\varphi_{1,k}=\sqrt{2}e^{-2\pi ik\gamma/2}\frac{1}{2}\hat\varphi(\gamma/2)\]</span></p>
+<p><span class="math display">\[=\frac{e^{-2\pi ik\gamma/2}}{\sqrt 2}\hat \varphi(\gamma/2)\]</span></p>
 <p>and thus</p>
-<p><span class="math display">\[\hat\varphi(\gamma)=\hat \varphi(\gamma/2)H(\gamma)\]</span></p>
-<p>where <span class="math inline">\(H(\gamma)=\frac{1}{\sqrt 2}\sum_kh_ke^{-2\pi ik\gamma}\)</span> is a 1-periodic function, a trigonometric function.</p>
+<p><span class="math display">\[\hat\varphi(\gamma)=\hat \varphi(\gamma/2)H(\gamma/2)\]</span></p>
+<p>where <span class="math inline">\(H(\gamma)=\frac{1}{\sqrt 2}\sum_kh_ke^{-2\pi ik\gamma}\)</span> is a 1-periodic function, a trigonometric function. This is the transfer function of a low pass filter. This is just property ii. and only requires <span class="math inline">\(\varphi\in V_1\)</span> and thus holds for any <span class="math inline">\(f\in V_1\)</span>. The following depends also on property i.</p>
+<p><strong>Lemma:</strong> Given an MRA with scaling function <span class="math inline">\(\varphi\)</span> and a corresponding filter <span class="math inline">\(H\)</span>:</p>
+<p><span class="math display">\[|H(\gamma)|^2+|H(\gamma+1/2)|^2=1, \ \ \ \gamma\in\mathbb{R}.\]</span></p>
+<p><strong>Proof:</strong> From i. we have <span class="math inline">\(1=\sum_n|\varphi(\gamma+n)|^2\)</span> which is</p>
+<p><span class="math display">\[=\sum_n|H(\frac{\gamma+n}{2})|^2|\hat\varphi(\frac{\gamma+n}{2})|^2\]</span></p>
+<p><span class="math display">\[=\sum_{n\text{ odd }}|H(\frac{\gamma+n}{2})|^2|\hat\varphi(\frac{\gamma+n}{2})|^2+\sum_{n\text{ even }}|H(\frac{\gamma}{2})|^2|\hat\varphi(\frac{\gamma}{2}+\frac{n}{2})|^2\]</span></p>
+<p>period 1</p>
+<p><span class="math display">\[=|H(\frac{\gamma}{2}+\frac{1}{2})|^2\sum_{n\text{ odd}}|\hat\varphi(\frac{\gamma}{2}+\frac{n}{2})|^2+\sum_{k\in\mathbb{Z}}|H(\gamma/2)|^2|\hat\varphi(k+\gamma/2)|^2\]</span></p>
+<p><span class="math display">\[=|H(\frac{\gamma}{2}+\frac{1}{2})|^2\sum_{k\in\mathbb{Z}}|\hat\varphi(\frac{\gamma+2k+1}{2})|^2+\sum_{k\in\mathbb{Z}}|H(\gamma/2)|^2|\hat\varphi(k+\gamma/2)|^2\]</span></p>
+<p><span class="math display">\[=|H(\frac{\gamma}{2}+\frac{1}{2})|^2\sum_{k\in\mathbb{Z}}|\hat\varphi(\frac{\gamma+1}{2}+k)|^2+\sum_{k\in\mathbb{Z}}|H(\gamma/2)|^2|\hat\varphi(k+\gamma/2)|^2\]</span></p>
+<p><span class="math display">\[=|H(\gamma/2+1/2)|^2+|H(\gamma/2)|^2 \ \ \square\]</span></p>
+<p>Let <span class="math inline">\(f\in V_1\)</span>, by the previous argument for <span class="math inline">\(\varphi\)</span></p>
+<p><span class="math display">\[\hat f(\gamma)=m_f(\gamma/2)\varphi(\gamma/2)\]</span></p>
+<p>where <span class="math inline">\(m_f\)</span> is of period 1.</p>
+<p><strong>Lemma:</strong> <span class="math inline">\(f\in W_0\)</span> iff there is <span class="math inline">\(v(\gamma)\)</span> of period one s.t.</p>
+<p><span class="math display">\[\hat f(\gamma)=e^{i\pi\gamma}\overline{H(\gamma/2+1/2)}\hat\varphi(\gamma/2)\]</span></p>
+<p><strong>Proof sketch:</strong> <span class="math inline">\(f\in W_0\)</span> iff <span class="math inline">\(f\in V_1\)</span> and <span class="math inline">\(f\in {V_0}^\perp\)</span>.</p>
+<ol style="list-style-type: lower-roman">
+<li>since <span class="math inline">\(f\in V_1\)</span>, we need to show that the filter <span class="math inline">\(m_f(\gamma)\)</span> satisfies</li>
+</ol>
+<p><span class="math display">\[m_f(\gamma)=e^{2\pi i\gamma}\sigma(\gamma)\overline{H(\gamma+1/2)}\]</span></p>
+<p>where <span class="math inline">\(\sigma\)</span> is a function of period <span class="math inline">\(1/2\)</span>.</p>
+<ol start="2" style="list-style-type: lower-roman">
+<li><span class="math inline">\(f\perp V_0\)</span> iff <span class="math inline">\(\left&lt;f,\varphi(x-k)\right&gt;=0\)</span> for <span class="math inline">\(k\in\mathbb{Z}\)</span></li>
+</ol>
+<p><span class="math display">\[0=\left&lt;\hat f,\hat \varphi(x-k)\right&gt;=\int_\mathbb{R}\hat f(\gamma)e^{2\pi ik\gamma}\overline{\hat\varphi(\gamma)}d\gamma\]</span></p>
+<p><span class="math display">\[=\int_\mathbb{R}m_f(\gamma/2)\hat\varphi(\gamma/2)\overline{H(\gamma/2)} \ \overline{\hat\varphi(\gamma)}d\gamma\]</span></p>
+<p><span class="math display">\[\dots \ \square\]</span></p>
+<p>Want: to find <span class="math inline">\(\psi\)</span> (the wavelet) s.t. <span class="math inline">\(\{\psi_{j,k}\}\)</span> is an ONB of <span class="math inline">\(L^2(\mathbb{R})\)</span>. Since <span class="math inline">\(\psi\in W_0\)</span>, we have</p>
+<p><span class="math display">\[\hat\psi(\gamma)=m_\psi(\gamma/2)\hat\varphi(\gamma/2)\]</span></p>
+<p>where <span class="math inline">\(m_\psi(\gamma)=e^{2\pi i \gamma}\sigma(\gamma)\overline{H(\gamma+1/2)}\)</span> where <span class="math inline">\(\sigma\)</span> has period <span class="math inline">\(1/2\)</span>.</p>
+<p>Applying an above lemma to <span class="math inline">\(m_\psi\)</span> (instead of <span class="math inline">\(H\)</span>) we have</p>
+<p><span class="math display">\[|m_\psi(\gamma)|^2+|m_\psi(\gamma+1/2)|^2=1.\]</span></p>
+<p>That is,</p>
+<p><span class="math display">\[|\sigma(\gamma)|^2|H(\gamma+1/2)|^2+|\sigma(\gamma+1/2)|^2|H(\gamma)|^2=1.\]</span></p>
+<p>Then <span class="math inline">\(\sigma\)</span> must have modulus <span class="math inline">\(1\)</span>. The MRA is given, so <span class="math inline">\(H\)</span> is determined. Pick <span class="math inline">\(\sigma\equiv 1\)</span> and define <span class="math inline">\(\psi\in W_0\)</span> as</p>
+<p><span class="math display">\[\hat\psi(\gamma)=m_\psi(\gamma/2)\hat\varphi(\gamma/2)\]</span></p>
+<p>where <span class="math inline">\(m_\psi(\gamma)=e^{2\pi i \gamma}\overline{H(\gamma+1/2)}\)</span>.</p>
+<p><span class="math display">\[\hat\psi_{0,k}=e^{-2\pi ik\gamma}m_\psi(\gamma/2)\hat\varphi(\gamma/2)\]</span></p>
+<p>and <span class="math inline">\(\psi_{0,k}\)</span> is also in <span class="math inline">\(W_0\)</span> for each <span class="math inline">\(k\)</span>.</p>
+<p>Let <span class="math inline">\(f\in W_0\implies \ \exists \ v(\gamma)\)</span> of period one s.t.</p>
+<p><span class="math display">\[\hat f(\gamma)=v(\gamma)e^{\pi i \gamma}\overline{H(\gamma/2+1/2)}\hat\varphi(\gamma/2)\]</span></p>
+<p><span class="math display">\[v(\gamma)=\sum_{k\in\mathbb{Z}}a_ke^{-2\pi ik\gamma}\]</span></p>
+<p><span class="math display">\[\hat f(\gamma)=\sum_k a_ke^{-2\pi ik\gamma}\hat\psi(\gamma)\]</span></p>
+<p><span class="math display">\[\hat f(\gamma)=\sum_k a_k\hat\psi_{0,k}(\gamma)\]</span></p>
+<p>and thus, <span class="math inline">\(f(x)=\sum_k a_k\psi_{0,k}\)</span> when <span class="math inline">\(f\in W_0\)</span>. If <span class="math inline">\(f\)</span> belongs to some other space <span class="math inline">\(W_j\)</span>, then <span class="math inline">\(f\)</span> can be written as <span class="math inline">\(f=\sum a_k\psi_{j,k}\)</span>.</p>
 </div>
 </div>
 

@@ -87,7 +87,7 @@ Under diffusive migration with rate $m$ and random genetic drift with variance $
 </b>
 </p>
 
-$$\frac{d\bar z}{dt}=\frac{m}{2}\frac{\partial^2\bar z}{\partial x^2}+\eta\dot W$$
+$$\frac{\partial\bar z}{\partial t}=\frac{m}{2}\frac{\partial^2\bar z}{\partial x^2}+\eta\dot W$$
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
@@ -125,10 +125,10 @@ The model used here is a direct extension of the one developed above, except now
 </b>
 </p>
 
-$$\frac{d\bar z_1}{dt}=G_1M_1(\bar z_2-\bar z_1)+G_1D_1$$
+$$\frac{\partial\bar z_1}{\partial t}=G_1M_1(\bar z_2-\bar z_1)+G_1D_1$$
 $$+\frac{m_1}{2}\frac{\partial^2\bar z_1}{\partial x^2}+\eta_1\dot W_1$$
 
-$$\frac{d\bar z_2}{dt}=G_2M_2(\bar z_1-\bar z_2)-G_2D_2$$
+$$\frac{\partial\bar z_2}{\partial t}=G_2M_2(\bar z_1-\bar z_2)-G_2D_2$$
 $$+\frac{m_2}{2}\frac{\partial^2\bar z_2}{\partial x^2}+\eta_2\dot W_2$$
 
 <p align=justify style="background-color:#2E2E2E;
