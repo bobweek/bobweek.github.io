@@ -178,10 +178,40 @@ $$\hat f(\gamma)=\sum_k a_k\hat\psi_{0,k}(\gamma)$$
 
 and thus, $f(x)=\sum_k a_k\psi_{0,k}$ when $f\in W_0$. If $f$ belongs to some other space $W_j$, then $f$ can be written as $f=\sum a_k\psi_{j,k}$.
 
+# 4-10-2019: Expansion using Haar wavelets
 
+__Thm__ Let $f:[0,1]\rightarrow\R$ be cont. Then 
 
+$$f(x)=\left<f,\chi_{[0,1)}\right>\chi_{[0,1)}+\sum_{j=0}^\infty\sum_{k=0}^{2^j-1}\left<f,\psi_{j,k}\right>\psi_{j,k}$$
 
+__Proof:__ THe approximation of $f$ at level $J$ is
 
+$$f_J(x)=a\chi_{[0,1)}(x)+\sum_{j=0}^{J-1}\sum_kd_{j,k}$$
+
+(where the $d_{i,j}$ were found in the previous lecture, which I missed) and
+
+$$a=\int_0^1 f(x)dx=\left<f,\chi_{[0,1)}\right>$$
+
+$$d_{j,k}=\frac{a_{j+1,2k}-a_{j+1,2k+1}}{2}$$
+ 
+and the $a_{j,k}=\int_{k2^{-j}}^{(k+1)2^{-j}}f(x)dx$, which is a sort of average. Then
+
+$$d_{j,k}=\frac{2^{j+1}}{2}\left[\int_{2k2^{j+1}}^{(2k+1)2^{-(j+1)}}f(x)dx-\int_{(2k+1)2^{j+1}}^{(2k+2)2^{-(j+1)}}f(x)dx\right].$$
+$$=2^{j/2}\int_{k2^{-j}}^{(k+1)2^{-j}}f\psi_{j,k}(x)dx=2^{j/2}\left<f,\psi_{j,k}\right>.$$
+
+this just comes from $0\leq 2^jx-k<1/2\implies k2^{-j}\leq x<(k+1/2)2^{-j}$ etc. Thus,
+
+$$f_J=\left<f,\chi_{[0,1)}\right>\chi_{[0,1)}+\sum_{j=0}^{J-1}\sum_{k=0}^{2^j-1}2^{j/2}\psi(2^jx-k).$$
+
+Since this is being done on a compact set, $f$ cont implies unif cont. Thus, we simply take the limit $J\rightarrow\infty$.
+
+__Notes:__
+
+  - For Haar wavelets, the lower level of resolution at a discontinuity is equal to the average of the next level of resolution as that discontinuity.
+
+  - This result can be extended from $[0,1]$ to $\R$ simply by taking the lower bounds on $j$ and $k$ in the above sums from $0$ to $-\infty$.
+  
+  - $j$ represents freq, $k$ represents location (time)
 
 
 

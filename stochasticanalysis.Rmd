@@ -1,0 +1,121 @@
+---
+title: "Stochastic analysis"
+author: "Giuseppe Da Prato"
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+
+- $L(H)=$ set of all linear bounded operators on $H$
+- $L(H)\supset L^+(H)$
+    - $\{T\in L(H):\left<Tx,y\right>=\left<x,Ty\right>, \ \left<Tx,x\right>\geq0\}$
+    - set of all symmetric, positive opertors on $H$
+- $L^+(H)\subset L_1^+(H)$
+    - $\{T\in L^+(H):\sum_i\left<Te_i,e_i\right><\infty\}$
+    - set of all trace class operators on $H$
+
+### Exercise 1.3
+
+Assume the second moment of $\mu$ is finite and has mean $m$ and covariance $Q$.
+
+__Claim:__ $\int_H|x|^2\mu(dx)=\mathrm{Tr}Q+|m|^2$
+
+__Proof:__
+
+$$\mathrm{Tr}Q=\sum_j\left<Qe_j,e_j\right>=\sum_j\int_H\left<e_j,z-m\right>^2\mu(dz)$$
+
+$$=\sum_j\int_H\left(\left<e_j,z\right>-\left<e_j,m\right>\right)^2\mu(dz)$$
+
+$$=\sum_j\int_H\left<e_j,z\right>^2-2\left<e_j,z\right>\left<e_j,m\right>+\left<e_j,m\right>^2\mu(dz)$$
+
+(monotone conv & something else)
+
+$$=\int_H|z|^2-2\sum_j\left<e_j,z\right>\left<e_j,m\right>+|m|^2\mu(dz)$$
+
+$$=\int_H|z|^2\mu(dz)+|m|^2-2\sum_j\left<e_j,m\right>\int_H\left<e_j,z\right>\mu(dz)$$
+
+$$=\int_H|z|^2\mu(dz)+|m|^2-2\sum_j\left<e_j,m\right>\int_H\left<e_j,z\right>\mu(dz)$$
+
+$$=\int_H|z|^2\mu(dz)+|m|^2-2\sum_j\left<e_j,m\right>^2=\int_H|z|^2\mu(dz)-|m|^2. \ \ \square$$
+
+__Def:__ A pr msr $\mu$ on $(H,\mathscr{B}(H))$ is _Gaussian_ if there exists $m\in H$ and $Q\in L^+_1(H)$ s.t.
+
+$$\hat\mu(h)=e^{i\left<m,h\right>-\frac{1}{2}\left<Qh,h\right>}.$$
+
+This measure is denoted by $N_{m,Q}$.
+
+### Excercise 1.7
+
+__Claim:__ For any $\lambda>0$ and $k\in\N$,
+
+$$\int x^{2k}N_\lambda(dx)=\frac{(2k)!}{2^kk!}\lambda^k.$$
+
+__Proof:__ 
+
+Consider
+
+$$\int x^{2k}e^{-\frac{x^2}{2\lambda}}dx.$$
+
+Recall the integration by parts formula:
+
+$$\int_a^b udv=vu|_a^b-\int_a^b vdu.$$
+
+Set
+
+$$v=e^{-\frac{x^2}{2\lambda}}, \ dv=-\frac{x}{\lambda}vdx\implies u=-\lambda x^{2k-1}$$
+
+then
+
+$$uv|_{-\infty}^\infty=0-0$$
+
+and
+
+$$-\int_{-\infty}^\infty e^{-\frac{x^2}{2\lambda}}(-\lambda)(2k-1)x^{2k-2}dx
+=\lambda(2k-1)\int x^{2(k-1)}e^{-\frac{x^2}{2\lambda}}dx.$$
+
+Repeat $k-1$ times total to get
+
+$$\star=\lambda^{k-1}(2k-1)(2(k-1)-1)\cdots(2(k-k+1)-1)\int x^{2(k-k+1)}e^{-\frac{x^2}{2\lambda}}dx$$
+
+$$=\lambda^k\sqrt{2\pi\lambda}\prod_{i=0}^{k-1}(2(k-i)-1)$$
+
+$$=\lambda^k\sqrt{2\pi\lambda}\prod_{i=0}^{k-1}(2k-i)-(i+1)$$
+
+
+### Exercise 1.8
+
+__Claim:__ For any $\alpha\in\R$ and $\lambda>0$
+
+$$\int e^{\alpha x^2}N_\lambda(dx)=\left\{\begin{matrix}
+(1-2\lambda\alpha)^{-1/2} & \alpha<1/2\lambda \\ 
+\infty & \alpha\geq1/2\lambda
+\end{matrix}\right.$$
+
+__Proof:__ 
+
+$$e^{\alpha x^2}e^{-\frac{x^2}{2\lambda}}=e^{\frac{2\lambda\alpha-1}{2\lambda}x^2}$$
+
+Set $\beta=\frac{\lambda}{2\lambda\alpha-1}$. Then, when $\alpha<1/2\lambda$, $\beta>0$ and
+
+$$\int e^{\alpha x^2}N_\lambda(dx)=\frac{1}{\sqrt{1-2\lambda\alpha}}\int\frac{1}{\sqrt{2\pi\beta}}e^{-\frac{x^2}{2\beta}}dx.$$
+
+When $\alpha\geq1/2\lambda$
+
+$$e^{\alpha x^2}e^{-\frac{x^2}{2\lambda}}\geq 1. \ \ \square$$
+
+### Exercise 1.10
+
+__Claim:__ Let $n\in\N$ and $Q\in L_1^+(\R^n)$ st $\det Q>0$. Show that $N_Q\ll\lambda_n$ (where $\lambda_n$ is the $n$-dimensional Lebesgue measure) and the Radon-Nikodym derivative is
+
+$$\frac{dN_Q}{d\lambda_n}(x)=(2\pi\det Q)^{-1/2}e^{-\frac{1}{2}\left<Q^{-1}x,x\right>}$$
+
+__Proof:__ Use the definition of Gaussian measures (the Fourier transform).
+

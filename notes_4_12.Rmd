@@ -1,0 +1,53 @@
+---
+title: "Harmonic Analysis 03-29-19"
+output: 
+  html_document: 
+    toc: false
+    toc_float: true
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\sinc}{\mathrm{sinc}}
+\newcommand{\supp}{\mathrm{supp}}
+
+
+# Frames
+
+Recall ONB's: 
+
+  - $L^2[0,1):\{e^{2\pi i x}\}_{k\in\Z}$
+  
+  - By translation $\{e^{2\pi ikx}\chi_{[0,1)}(x-n)\}_{k\in\Z}$ is an ONB for $L^2[n,n+1)$.
+  
+  - Together $\{e^{2\pi ikx}\chi_{[0,1)}(x-n)\}_{k,n\in\Z}$ is an ONB for $L^2(\R)$.
+  
+    - a Gabor basis (defined by modulation instead of dilation)
+    
+  - For $\psi$ the Haar mother wavelet, we also have $\{\psi_{j,k}\}_{j,k\in\Z}$ is an ONB for $L^2(\R)$.
+  
+  - For $\R^2$ we have $\{e_1,e_2\}$ is an ONB.
+  
+Fun facts: if $\{e_k\}$ is an ONB of some Hilbert space $\mathscr{H}$, the for any $f\in\mathscr{H}$ we  have
+
+$$f=\left<f,e_k\right>e_k, \ \ \|f\|^2=\sum_k|\left<f,e_k\right>|^2$$
+
+### Why frames?
+
+In $\R^2$, once $e_1$ is chosen, $e_2$ is determined (up to sign). If we just want a basis instead, there are infinitely many choices (the only restricting being not colinear with $e_1$), leaving a bit more flexibility. If $\{b_i\}$ is a basis, it provides a _unique_ representation for any vector. This is another restriction that may become a nuisance. In this case, we may consider a _redundant set_. 
+
+Suppose $f=\sum c_kb_k+d\varphi$ for some $\varphi\in\mathscr{H}$. If $f=\sum c_kb_k$ then we can take $d=0$. Alternatively, we can set $f-\varphi=\sum c_kb_k$ with $d=1$. The redundant set is now $\{b_k\}\cup\{\varphi\}$.
+
+A problem with using a basis - missing flexibility. 
+
+
+
+
+

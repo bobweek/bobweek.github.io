@@ -415,7 +415,7 @@ $(document).ready(function () {
 <p><span class="math display">\[0=\left&lt;\hat f,\hat \varphi(x-k)\right&gt;=\int_\mathbb{R}\hat f(\gamma)e^{2\pi ik\gamma}\overline{\hat\varphi(\gamma)}d\gamma\]</span></p>
 <p><span class="math display">\[=\int_\mathbb{R}m_f(\gamma/2)\hat\varphi(\gamma/2)\overline{H(\gamma/2)} \ \overline{\hat\varphi(\gamma)}d\gamma\]</span></p>
 <p><span class="math display">\[\dots \ \square\]</span></p>
-<p>Want: to find <span class="math inline">\(\psi\)</span> (the wavelet) s.t. <span class="math inline">\(\{\psi_{j,k}\}\)</span> is an ONB of <span class="math inline">\(L^2(\mathbb{R})\)</span>. Since <span class="math inline">\(\psi\in W_0\)</span>, we have</p>
+<p><strong>Want:</strong> to find <span class="math inline">\(\psi\)</span> (the wavelet) s.t. <span class="math inline">\(\{\psi_{j,k}\}\)</span> is an ONB of <span class="math inline">\(L^2(\mathbb{R})\)</span>. Since <span class="math inline">\(\psi\in W_0\)</span>, we have</p>
 <p><span class="math display">\[\hat\psi(\gamma)=m_\psi(\gamma/2)\hat\varphi(\gamma/2)\]</span></p>
 <p>where <span class="math inline">\(m_\psi(\gamma)=e^{2\pi i \gamma}\sigma(\gamma)\overline{H(\gamma+1/2)}\)</span> where <span class="math inline">\(\sigma\)</span> has period <span class="math inline">\(1/2\)</span>.</p>
 <p>Applying an above lemma to <span class="math inline">\(m_\psi\)</span> (instead of <span class="math inline">\(H\)</span>) we have</p>
@@ -434,6 +434,21 @@ $(document).ready(function () {
 <p><span class="math display">\[\hat f(\gamma)=\sum_k a_k\hat\psi_{0,k}(\gamma)\]</span></p>
 <p>and thus, <span class="math inline">\(f(x)=\sum_k a_k\psi_{0,k}\)</span> when <span class="math inline">\(f\in W_0\)</span>. If <span class="math inline">\(f\)</span> belongs to some other space <span class="math inline">\(W_j\)</span>, then <span class="math inline">\(f\)</span> can be written as <span class="math inline">\(f=\sum a_k\psi_{j,k}\)</span>.</p>
 </div>
+</div>
+<div id="expansion-using-haar-wavelets" class="section level1">
+<h1>4-10-2019: Expansion using Haar wavelets</h1>
+<p><strong>Thm</strong> Let <span class="math inline">\(f:[0,1]\rightarrow\mathbb{R}\)</span> be cont. Then</p>
+<p><span class="math display">\[f(x)=\left&lt;f,\chi_{[0,1)}\right&gt;\chi_{[0,1)}+\sum_{j=0}^\infty\sum_{k=0}^{2^j-1}\left&lt;f,\psi_{j,k}\right&gt;\psi_{j,k}\]</span></p>
+<p><strong>Proof:</strong> THe approximation of <span class="math inline">\(f\)</span> at level <span class="math inline">\(J\)</span> is</p>
+<p><span class="math display">\[f_J(x)=a\chi_{[0,1)}(x)+\sum_{j=0}^{J-1}\sum_kd_{j,k}\]</span></p>
+<p>(where the <span class="math inline">\(d_{i,j}\)</span> were found in the previous lecture, which I missed) and</p>
+<p><span class="math display">\[a=\int_0^1 f(x)dx=\left&lt;f,\chi_{[0,1)}\right&gt;\]</span></p>
+<p><span class="math display">\[d_{j,k}=\frac{a_{j+1,2k}-a_{j+1,2k+1}}{2}\]</span></p>
+<p>and the <span class="math inline">\(a_{j,k}=\int_{k2^{-j}}^{(k+1)2^{-j}}f(x)dx\)</span>, which is a sort of average. Then</p>
+<p><span class="math display">\[d_{j,k}=\frac{2^{j+1}}{2}\left[\int_{2k2^{j+1}}^{(2k+1)2^{-(j+1)}}f(x)dx-\int_{(2k+1)2^{j+1}}^{(2k+2)2^{-(j+1)}}f(x)dx\right].\]</span> <span class="math display">\[=2^{j/2}\int_{k2^{-j}}^{(k+1)2^{-j}}f\psi_{j,k}(x)dx=2^{j/2}\left&lt;f,\psi_{j,k}\right&gt;.\]</span></p>
+<p>this just comes from <span class="math inline">\(0\leq 2^jx-k&lt;1/2\implies k2^{-j}\leq x&lt;(k+1/2)2^{-j}\)</span> etc. Thus,</p>
+<p><span class="math display">\[f_J=\left&lt;f,\chi_{[0,1)}\right&gt;\chi_{[0,1)}+\sum_{j=0}^{J-1}\sum_{k=0}^{2^j-1}2^{j/2}\psi(2^jx-k).\]</span></p>
+<p>Since this is being done on a compact set, <span class="math inline">\(f\)</span> cont implies unif cont. Thus, we simply take the limit <span class="math inline">\(J\rightarrow\infty\)</span>.</p>
 </div>
 
 

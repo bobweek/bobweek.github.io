@@ -1,0 +1,49 @@
+---
+title: "One-parameter semigroups"
+author: "Engel & Nagel"
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { 
+    TagSide: "left",
+    equationNumbers: { autoNumber: "AMS" } 
+  }
+});
+</script>
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+# 1 Linear dynamical systems
+
+## 3 Uniformly continuous operator semigroups
+
+- $\mathcal{L}(X)\equiv$ Banach algebra of bounded linear operators on the complex Banach space $X$
+
+- for $A\in\mathcal{L}(X)$, $e^{tA}=\sum_{k=0}^\infty\frac{t^k}{k!}A^k$
+
+__Def (operator topologies)__  If
+
+- $\|T_n-T\|\rightarrow0$, then $T_n$ converges to $T$ in _the uniform operator topology_.
+
+- $T_nx\rightarrow x$ (ie, $\|T_nx-Tx\|\rightarrow0$), then $T_n$ converges to $T$ in _the strong operator topology_.
+
+- $\left<T_nx,x'\right>\rightarrow\left<Tx,x'\right>$ for all $x\in X$, $x'\in X'$, then $T_n$ converges to $T$ in _the weak operator topology_.
+
+- 
+
+__Def 3.6__ A one-parameter semigroup $\{T(t)\}_{t\geq0}$ on a Bancah space $X$ is called _uniformly continuous_ if
+
+$$\R_+\ni t\mapsto T(t)\in\mathcal{L}(X)$$
+
+is continuous wrt the uniform operator topology on $\mathcal{L}(X)$.

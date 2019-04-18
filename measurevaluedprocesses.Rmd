@@ -1,0 +1,38 @@
+---
+title: "Measure-valued processes"
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+---
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\<}{\left<}
+\newcommand{\>}{\right>}
+
+## Hochberg
+
+  - $S$, a locally compact complete separable (Polish) space
+  
+  - $M(S)$, space of all bounded Radon measures on $S$
+  
+    - includes a metric that also makes it a Polish space with a weak topology (weak conv of msrs)
+  
+  - $E\subset_{cl}M(S)$, $B(E)=\sigma$-algebra of Borel sets
+
+  - $C_b(E)$, space of cont-bounded fcts on $E$ (fcts of msrs)
+
+  - $L_\infty(E)$, space of bounded-mbl fcts on $E$
+
+  - $\Omega_C^E=C(\R_+,E)$, continuous $E$-valued fcts
+
+  - $\Omega_D^E=D(\R_+,E)$, RCLL $E$-valued fcts 
+
+$$X:[0,\infty]\times\Omega^E\rightarrow E, \ \ \ X(t,\omega)\equiv\omega(t), \ \ \omega(t)\in\Omega^E \ \forall t\geq0$$
+
+  - The law of $X$ is given by a mbl mapping $\mu\rightarrow P_\mu$ taking $E$ into the space of probability msrs on $\Omega^E$, $P(\Omega^E)$.
+
+  - $P(\Omega^E)$ also has the weak topology
