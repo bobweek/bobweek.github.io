@@ -94,7 +94,7 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-where $\dot W$ is space-time white noise (that is, for each $x$, $W(x,t)$ is a Brownian motion with respect to $t$). The interaction between diffusion via local dispersal patterns and the stochasticity of genetic drift results in an ever shifting line. Somewhat surprisingly, although $\dot W(x,t)$ is nowhere continuous with respect $x$, the infinite propogation property of diffusion implies that for every fixed $t$, the curve $\bar z(x,t)$ is smooth in $x$ even though it is still random!
+where $\dot W$ is space-time white noise (that is, for each $x$, $W(x,t)$ is a Brownian motion with respect to $t$). The interaction between diffusion via local dispersal patterns and the stochasticity of genetic drift results in an ever shifting line.
 </b>
 </p>
 
