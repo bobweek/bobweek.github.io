@@ -288,48 +288,6 @@ $(document).ready(function () {
         <li><a href="index.html">Home</a></li>
         <li><a href="interactive_theory.html">Interactive theory</a></li>
         <li><a href="measuring_coevolution.html">Measuring coevolution</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="ODE_arnold.html">ODE</a></li>
-            <li><a href="PDE.html">PDE</a></li>
-            <li><a href="da_prato_and_zabczyk.html">SPDE</a></li>
-            <li class="dropdown-submenu">
-            <a class="test" href="#">Cheat sheets<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="function_spaces.html">Function Spaces</a></li>
-            </ul>
-          </li>
-          <li class="dropdown-submenu">
-            <a class="test" href="#">Harmonic analysis<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="summary_of_convergence.html">conv</a></li>
-              <li><a href="note_1_28.html">Jan 28</a></li>
-              <li><a href="note_2_04.html">Feb 04</a></li>
-              <li><a href="note_2_25.html">Feb 25</a></li>
-              <li><a href="note_2_27.html">Feb 27</a></li>
-              <li><a href="note_3_01.html">Mar 01</a></li>
-              <li><a href="note_3_06.html">Mar 06</a></li>
-              <li><a href="note_3_18.html">Mar 18</a></li>
-              <li><a href="note_3_20.html">Mar 20</a></li>
-              <li><a href="note_3_22.html">Mar 22</a></li>
-              <li><a href="note_3_25.html">Mar 25</a></li>
-              <li><a href="note_3_27.html">Mar 22</a></li>
-              <li><a href="note_3_29.html">Mar 25</a></li>
-            </ul>
-          </li>
-        </ul>
-        </li><!--
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notes <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="notes-fitness.html">First Steps</a></li>
-            <li><a href="notes-evolution.html">Evolution</a></li>
-            <li><a href="notes-examples.html">Examples</a></li>
-            <li><a href="notes-misc.html">Misc</a></li>
-          </ul>
-        </li>
-        -->
         
       </ul>
     </div><!--/.nav-collapse -->
@@ -414,8 +372,9 @@ $(document).ready(function () {
 </div>
 <div id="exercise-1.10" class="section level3">
 <h3>Exercise 1.10</h3>
-<p>Let <span class="math inline">\(n\in\mathbb{N}\)</span> and <span class="math inline">\(Q\in L_1^+(\mathbb{R}^n)\)</span> st <span class="math inline">\(\det Q&gt;0\)</span>. Show that <span class="math inline">\(N_Q\ll\lambda_n\)</span> (where <span class="math inline">\(\lambda_n\)</span> is the <span class="math inline">\(n\)</span>-dimensional Lebesgue measure) and the Radon-Nikodym derivative is</p>
+<p><strong>Claim:</strong> Let <span class="math inline">\(n\in\mathbb{N}\)</span> and <span class="math inline">\(Q\in L_1^+(\mathbb{R}^n)\)</span> st <span class="math inline">\(\det Q&gt;0\)</span>. Show that <span class="math inline">\(N_Q\ll\lambda_n\)</span> (where <span class="math inline">\(\lambda_n\)</span> is the <span class="math inline">\(n\)</span>-dimensional Lebesgue measure) and the Radon-Nikodym derivative is</p>
 <p><span class="math display">\[\frac{dN_Q}{d\lambda_n}(x)=(2\pi\det Q)^{-1/2}e^{-\frac{1}{2}\left&lt;Q^{-1}x,x\right&gt;}\]</span></p>
+<p><strong>Proof:</strong> Use the definition of Gaussian measures (the Fourier transform).</p>
 </div>
 
 
