@@ -8,7 +8,7 @@ author:
     affiliation: University of Idaho
     affiliation_url: https://ibest.uidaho.edu
 date: "`r Sys.Date()`"
-output: radix::radix_article
+output: distill::distill_article
 ---
 
 ### Opening questions
