@@ -6,25 +6,42 @@ output:
     css: style.css
 ---
 
-[bandcamp](http://blobbot.bandcamp.com) [instagram](https://instagram.com/blobbot)
-
+<p align=justify style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;"><b>
 in my spare time i use my background in electronics, computers and mathematics for diy audio and video synthesis, interactive installations, and customized soft/hardware. i am always looking for someone with expertise in fabrication to share skills with. please contact me if you are interested in collaborating.
-
-here is a sample of some of the things i do
+</b>
+</p>
 
 ## music/sound
 
 <center><img src="small.png" alt="suitcase synthesizer" width="300"/></center>
 <center><iframe style="border: 0; width: 300px; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/track=3974532652/size=small/bgcol=333333/linkcol=fe7eaf/artwork=none/transparent=true/" seamless><a href="http://blobbot.bandcamp.com/track/thanks-for-all-the-lizards">thanks for all the lizards by bb</a></iframe></center>
 
-this is a relatively recent development in my life. now that i have assembled a decent sized eurorack, i am only just beginning to explore my abilities as a musician and, more generally, as a sound designer. luckily i have several encouraging friends aiding me in this journey.
+<p align=justify style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;"><b>
+this is a relatively recent development in my life. now that i have assembled a decent sized eurorack, i am only just beginning to explore the realms of music and, more generally, sound design. luckily i have several encouraging friends aiding me in this journey.
+</b>
+</p>
 
 ## video/projections
 
  - examples coming soon!
- 
-this is the longest running artistic theme in my life. as a child i dreamed of becoming a filmmaker. as a young adult i discovered the incredible range of dynamics and patterns exhibit by video feedback. ever since i have been exploring the technical aspects of this medium, learning to express myself through it. along the way i have set up interactive feedback loops that turn even the most hardened adults into children, and have performed alongside musicians to complement their work with some visual stimulus. since most of this work is performed live, there are few reasonable recordings of it. i am hoping that before too long i will have time to put out a video album for increased accessibility.
 
+<p align=justify style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;"><b>
+this is the longest running artistic theme in my life. as a child i dreamed of becoming a filmmaker. as a young adult i discovered the incredible range of dynamics and patterns exhibit by video feedback. ever since i have been exploring the technical aspects of this medium, learning to express myself through it. along the way i have set up interactive feedback loops that turn even the most hardened adults into children, and have performed alongside musicians to complement their work with some visual stimulus. since most of this work is performed live, there are few reasonable recordings of it. i am hoping that before too long i will have time to put out a video album for increased accessibility.
+</b>
+</p>
+ 
 ## the portal
 
 <center>
@@ -33,4 +50,24 @@ this is the longest running artistic theme in my life. as a child i dreamed of b
 <img src="blinded.jpg" alt="me" width="300"/>
 </center>
 
+<p align=justify style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;"><b>
 the portal was an interactive projection housed in a large podium and lit by hundreds of hue shifting led's. the image projected was a system of stochastic partial differential equations being solved numerically in real time. six knobs allow visitors to interact with parameters of the equations as they are being solved. these parameters include diffusion rates, interaction strengths, symmetry, stochasticity and a video input. a button in the center of the podium randomizes the values of each pixel and also the led's inside the podium. this was one of my most celebrated works. one day it will come back to life...
+</b>
+</p>
+
+## more
+
+<p align=justify style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;"><b>
+to stay up to date on my musical/sonic adventures please follow my [bandcamp](http://blobbot.bandcamp.com). for a random smattering of a/v art find me on [instagram](https://instagram.com/blobbot).
+</b>
+</p>
+
+
