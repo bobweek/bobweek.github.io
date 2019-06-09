@@ -8,13 +8,14 @@ output:
 
 [bandcamp](http://blobbot.bandcamp.com) [instagram](https://instagram.com/blobbot)
 
-in my spare time i use my background in electronics, computers and mathematics for diy audio and video synthesis, interactive installations, and customized soft/hardware. i am always looking for someone with expertise in frabrication to share skills with. please contact me if you are interested in collaborating.
+in my spare time i use my background in electronics, computers and mathematics for diy audio and video synthesis, interactive installations, and customized soft/hardware. i am always looking for someone with expertise in fabrication to share skills with. please contact me if you are interested in collaborating.
 
 here is a sample of some of the things i do
 
 ## music/sound
 
-<center><iframe style="border: 0; width: 60%; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/track=3974532652/size=small/bgcol=333333/linkcol=fe7eaf/artwork=none/transparent=true/" seamless><a href="http://blobbot.bandcamp.com/track/thanks-for-all-the-lizards">thanks for all the lizards by bb</a></iframe></center>
+<center><img src="small.png" alt="suitcase synthesizer" width="300"/></center>
+<center><iframe style="border: 0; width: 300px; height: 42px;" src="https://bandcamp.com/EmbeddedPlayer/track=3974532652/size=small/bgcol=333333/linkcol=fe7eaf/artwork=none/transparent=true/" seamless><a href="http://blobbot.bandcamp.com/track/thanks-for-all-the-lizards">thanks for all the lizards by bb</a></iframe></center>
 
 this is a relatively recent development in my life. now that i have assembled a decent sized eurorack, i am only just beginning to explore my abilities as a musician and, more generally, as a sound designer. luckily i have several encouraging friends aiding me in this journey.
 
@@ -27,9 +28,9 @@ this is the longest running artistic theme in my life. as a child i dreamed of b
 ## the portal
 
 <center>
-<img src="front.jpg" alt="drawing" width="300"/>
-<img src="theInvestigation.jpg" alt="drawing" width="300"/>
-<img src="blinded.jpg" alt="drawing" width="300"/>
+<img src="front.jpg" alt="front" width="300"/>
+<img src="theInvestigation.jpg" alt="visitor" width="300"/>
+<img src="blinded.jpg" alt="me" width="300"/>
 </center>
 
 the portal was an interactive projection housed in a large podium and lit by hundreds of hue shifting led's. the image being projected is a system of three stochastic partial differential equations being solved numerically in real time. six knobs allow visitors to interact with parameters of the equations as they are being solved. these parameters include diffusion rates, interaction strengths, symmetry, stochasticity and a video input. a button in the center of the podium randomizes the values of each pixel and also the led's inside the podium. this was one of my most celebrated works. one day it will come back to life...
