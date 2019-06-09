@@ -451,13 +451,8 @@ margin:5px;">
 <b> Note the column names in this data frame. The column <strong>rostrum</strong> contains the mean rostrum lengths at each location used in our analysis. Column <strong>body</strong> contains the mean body sizes of weevils in each population. Column <strong>pericarp</strong> contains the mean pericarp thickness at each location. Column <strong>location</strong> contains the names of each location which we keep identical to those used in Toju &amp; Sota 2006. Finally, the <strong>island</strong> column contains the islands for which each of these locations belong. We can visualize these data with following line of code: </b>
 </p>
 <pre class="r"><code># plot data
-library(ggplot2)</code></pre>
-<pre><code>## Registered S3 methods overwritten by &#39;ggplot2&#39;:
-##   method         from 
-##   [.quosures     rlang
-##   c.quosures     rlang
-##   print.quosures rlang</code></pre>
-<pre class="r"><code>ggplot(toju_df,aes(x=rostrum,y=pericarp,color=island))+geom_point()+theme_bw()</code></pre>
+library(ggplot2)
+ggplot(toju_df,aes(x=rostrum,y=pericarp,color=island))+geom_point()+theme_bw()</code></pre>
 <div class="figure" style="text-align: center">
 <img src="measuring_coevolution_files/figure-html/unnamed-chunk-2-1.png" alt="Figure 2: Displayed in this scatter plot are mean trait pairs for various locations across Japan. The colours indicate which island these locations belong to." width="672" />
 <p class="caption">
