@@ -19,9 +19,10 @@
 
 
 body{
-   color: black;
+   color: white;
    font-size: large;
    background-image: url('home.jpg');
+   background-color: black;
    min-height: 500px;
     /* Set background image to fixed (don't scroll along with the page) */
     background-attachment: fixed;
