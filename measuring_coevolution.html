@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -261,6 +264,90 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -268,6 +355,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -302,7 +399,7 @@ $(document).ready(function () {
 </div>
 
 
-<div id="the-measurement-of-coevolution-in-the-wild" class="section level1 tabset tabset-fade tabset-pills">
+<div id="the-measurement-of-coevolution-in-the-wild" class="section level1">
 <h1>The measurement of coevolution in the wild</h1>
 <p align="justify" style="background-color:#2E2E2E;
 border-radius:4px;
@@ -311,8 +408,8 @@ padding:15px;
 margin:5px;">
 <b> This is a tutorial for employing the method of coevolutionary inference introduced in Week &amp; Nuismer (<a href="https://doi.org/10.1111/ele.13231">2019</a>). Data used in this tutorial comes from Toju &amp; Sota (<a href="https://doi.org/10.1086/498277">2006</a>) and have been collected <a href="https://github.com/bobweek/measuring.coevolution">here</a>, along with some useful code, for your convenience. A detailed treatment of our model, application of likelihood and analysis of data can be found in the appendix of Week &amp; Nuismer (2019), linked to <a href="appendix.pdf">here</a>. Aside from the derivation of equilibrium expressions, all of our calculations have been carried out in the statistical programming language R. </b>
 </p>
-<div id="introduction-to-the-biology-and-data" class="section level2">
-<h2>Introduction to the biology and data</h2>
+<div id="introduction-to-the-biology" class="section level2">
+<h2>Introduction to the biology</h2>
 <p align="justify" style="background-color:#2E2E2E;
 border-radius:4px;
 font-size:16px;
@@ -354,8 +451,13 @@ margin:5px;">
 <b> Note the column names in this data frame. The column <strong>rostrum</strong> contains the mean rostrum lengths at each location used in our analysis. Column <strong>body</strong> contains the mean body sizes of weevils in each population. Column <strong>pericarp</strong> contains the mean pericarp thickness at each location. Column <strong>location</strong> contains the names of each location which we keep identical to those used in Toju &amp; Sota 2006. Finally, the <strong>island</strong> column contains the islands for which each of these locations belong. We can visualize these data with following line of code: </b>
 </p>
 <pre class="r"><code># plot data
-library(ggplot2)
-ggplot(toju_df,aes(x=rostrum,y=pericarp,color=island))+geom_point()+theme_bw()</code></pre>
+library(ggplot2)</code></pre>
+<pre><code>## Registered S3 methods overwritten by &#39;ggplot2&#39;:
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang</code></pre>
+<pre class="r"><code>ggplot(toju_df,aes(x=rostrum,y=pericarp,color=island))+geom_point()+theme_bw()</code></pre>
 <div class="figure" style="text-align: center">
 <img src="measuring_coevolution_files/figure-html/unnamed-chunk-2-1.png" alt="Figure 2: Displayed in this scatter plot are mean trait pairs for various locations across Japan. The colours indicate which island these locations belong to." width="672" />
 <p class="caption">
@@ -577,6 +679,8 @@ margin:5px;">
 
 
 
+</div>
+</div>
 
 </div>
 

@@ -2,11 +2,14 @@
 title: ""
 output: 
   html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
     theme: cosmo
     css: style.css
 ---
 
-# The measurement of coevolution in the wild {.tabset .tabset-fade .tabset-pills}
+# The measurement of coevolution in the wild
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
@@ -17,7 +20,7 @@ This is a tutorial for employing the method of coevolutionary inference introduc
 </b>
 </p>
 
-## Introduction to the biology and data
+## Introduction to the biology
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;

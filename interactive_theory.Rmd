@@ -2,6 +2,9 @@
 title: ""
 output: 
   html_document: 
+    toc: true
+    toc_float: true
+    toc_depth: 2
     theme: cosmo
     css: style.css
 ---
@@ -16,7 +19,7 @@ output:
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\n}{\mathfrak{n}}
 
-# Interactive theory {.tabset .tabset-fade .tabset-pills}
+# Interactive theory
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
@@ -27,8 +30,9 @@ I made some applications to visualize and interact with (co)evolutionary theory.
 </b>
 </p>
 
+## scenario 1
 
-## 1-D Migration and Drift
+### 1-D Migration and Drift
 
 <div align="middle">
 <a href="https://www.openprocessing.org/sketch/386248"><img src="images/driftMig.png" height="300" width="400"/></a>
@@ -43,8 +47,7 @@ This application simulates the evolution of a trait for a species on a single sp
 </b>
 </p>
 
-### Mathematical background
-
+### Mathematical details
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
@@ -98,7 +101,9 @@ where $\dot W$ is space-time white noise (that is, for each $x$, $W(x,t)$ is a B
 </b>
 </p>
 
-## 1-D Migration, Drift and Coevolution
+## scenario 2
+
+### 1-D Migration, Drift and Coevolution
 
 <div align="middle">
 <a href="https://www.openprocessing.org/sketch/401086"><img src="images/coev.png" height="300" width="600"/></a>
@@ -114,7 +119,7 @@ This application simulates the coevolution of two species on a single spatial ax
 </b>
 </p>
 
-### Mathematical background
+### Mathematical details
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
@@ -171,7 +176,9 @@ Hence, the correlation can be tracked by computing $\rho(t)\equiv\frac{C(t)}{\sq
 </b>
 </p>
 
-## 2-D Migration, Drift and Coevolution
+## scenario 3
+
+### 2-D Migration, Drift and Coevolution
 
 <div align="middle">
 <a href="https://www.openprocessing.org/sketch/396443"><img src="images/three.png" height="300" width="500"/></a>
@@ -186,7 +193,7 @@ Here three species coevolve across a two dimensional continuum (discretized into
 </b>
 </p>
 
-### Mathematical background
+### Mathematical details
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
