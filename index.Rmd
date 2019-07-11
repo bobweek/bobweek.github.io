@@ -10,18 +10,18 @@ output:
 
 <div style="text-align:center" markdown="1">
 
-![](me.jpg)
+![](me2.jpg)
 
 </div>
 
-### What about Bob
+### Current position
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-I am a PhD candidate at the University of Idaho working with professor [Scott Nuismer](https://www.leeef.org). My degree program is [Bioinformatics and Computational Biology](https://www.uidaho.edu/sci/bcb) (BCB) which is housed within [The Institute for Bioinformatics and Evolutionary Studies](http://www.ibest.uidaho.edu/) (IBEST). My CV is available [here](cv.pdf).
+I am a PhD candidate at the University of Idaho working with professor [Scott Nuismer](https://www.leeef.org) with plans to graduate May 2020. My degree program is [Bioinformatics and Computational Biology](https://www.uidaho.edu/sci/bcb) (BCB) which is housed within [The Institute for Bioinformatics and Evolutionary Studies](http://www.ibest.uidaho.edu/) (IBEST). I am currently searching for a post-doc where I can excersice my mathematical training to develop methods for evolutionary community ecologists and landscape geneticists. My CV is available [here](cv.pdf).
 </b>
 </p>
 
