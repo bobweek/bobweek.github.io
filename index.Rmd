@@ -6,13 +6,9 @@ output:
     css: style.css
 ---
 
+#
+
 # Bob Week <!---{.tabset .tabset-fade .tabset-pills}--->
-
-<div style="text-align:center" markdown="1">
-
-![](me2.jpg)
-
-</div>
 
 ### Current position
 
