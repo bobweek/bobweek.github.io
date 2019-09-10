@@ -8,7 +8,7 @@ output:
 
 #
 
-# Bob Week <!---{.tabset .tabset-fade .tabset-pills}--->
+# Bob Week
 
 ### Current position
 
