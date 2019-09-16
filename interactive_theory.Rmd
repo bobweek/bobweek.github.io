@@ -47,60 +47,6 @@ This application simulates the evolution of a trait for a species on a single sp
 </b>
 </p>
 
-### Mathematical details
-
-<p align=justify style="background-color:#2E2E2E;
-border-radius:4px;
-font-size:16px;
-padding:15px;
-margin:5px;"><b>
-We write $\bar z(x,t)$ for the value of the local mean trait at the point in space $x$ and moment in time $t$. However, populations do not exist at points in space, but occupy regions. Hence, to evaluate the local mean trait on a bounded interval $I=[a,b]$, we compute the spatial average
-</b>
-</p>
-
-$$\mu_t(I)\equiv\frac{1}{b-a}\int_a^b\bar z(x,t)dx.$$
-
-<p align=justify style="background-color:#2E2E2E;
-border-radius:4px;
-font-size:16px;
-padding:15px;
-margin:5px;"><b>
-Since any bounded subset $A$ of the real line can be expressed as the disjoint union of bounded intevals (that is $A=\cup_i I_i$ where $I_i\cap I_j=\emptyset$ for each $i,j$), this definition is naturally extended as
-</b>
-</p>
-
-$$\mu_t(A)\equiv\frac{1}{|A|}\int_A\bar z(x,t)dx.$$
-
-
-<p align=justify style="background-color:#2E2E2E;
-border-radius:4px;
-font-size:16px;
-padding:15px;
-margin:5px;"><b>
-where $|A|=\sum_i|I_i|=\sum_i(b_i-a_i)$ denotes the Lebesgue measure (the sum of the lengths of component intervals). These calcualtions assume a constant abundance density across space.
-</b>
-</p>
-
-<p align=justify style="background-color:#2E2E2E;
-border-radius:4px;
-font-size:16px;
-padding:15px;
-margin:5px;"><b>
-Under diffusive migration with rate $m$ and random genetic drift with variance $\eta^2$ the evolution of $\bar z(x,t)$ is given by
-</b>
-</p>
-
-$$\frac{\partial\bar z}{\partial t}=\frac{m}{2}\frac{\partial^2\bar z}{\partial x^2}+\eta\dot W$$
-
-<p align=justify style="background-color:#2E2E2E;
-border-radius:4px;
-font-size:16px;
-padding:15px;
-margin:5px;"><b>
-where $\dot W$ is space-time white noise (that is, for each $x$, $W(x,t)$ is a Brownian motion with respect to $t$). The interaction between diffusion via local dispersal patterns and the stochasticity of genetic drift results in an ever shifting line.
-</b>
-</p>
-
 ## scenario 2
 
 ### 1-D Migration, Drift and Coevolution
@@ -109,70 +55,12 @@ where $\dot W$ is space-time white noise (that is, for each $x$, $W(x,t)$ is a B
 <a href="https://www.openprocessing.org/sketch/401086"><img src="images/coev.png" height="300" width="600"/></a>
 </div>
 
-
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
 This application simulates the coevolution of two species on a single spatial axis as a generalization of the above application. The traits involved for each species are colored red and green.  At the bottom of the application is a time-series plot of the instantaneous spatial correlation between traits and the running average of this correlation. Spatial correlations have historically been used to determine support for a coevolutionary hypothesis, so it is an interesting quantity to track.
-</b>
-</p>
-
-### Mathematical details
-
-<p align=justify style="background-color:#2E2E2E;
-border-radius:4px;
-font-size:16px;
-padding:15px;
-margin:5px;"><b>
-The model used here is a direct extension of the one developed above, except now we include biotic selection. I leave out the detailed derivation starting from the effects of interactions on the fitnesses of pairs of individuals and skip to the final system of differential equations that model the evolution of $\bar z_1(x,t)$ and $\bar z_2(x,t)$.
-</b>
-</p>
-
-$$\frac{\partial\bar z_1}{\partial t}=G_1M_1(\bar z_2-\bar z_1)+G_1D_1$$
-$$+\frac{m_1}{2}\frac{\partial^2\bar z_1}{\partial x^2}+\eta_1\dot W_1$$
-
-$$\frac{\partial\bar z_2}{\partial t}=G_2M_2(\bar z_1-\bar z_2)-G_2D_2$$
-$$+\frac{m_2}{2}\frac{\partial^2\bar z_2}{\partial x^2}+\eta_2\dot W_2$$
-
-<p align=justify style="background-color:#2E2E2E;
-border-radius:4px;
-font-size:16px;
-padding:15px;
-margin:5px;"><b>
-The parameter $G_i$ denotes the additive genetic variance of the focal trait in species $i$, where as $M_i$ and $D_i$ denote the strengths of matching and differences selection respectively.
-</b>
-</p>
-
-<p align=justify style="background-color:#2E2E2E;
-border-radius:4px;
-font-size:16px;
-padding:15px;
-margin:5px;"><b>
-The variance in local mean traits over a set $A$ can be written as
-</b>
-</p>
-
-$$V_i(t)\equiv\frac{1}{|A|}\int_\R(\bar z_i(x,t)-\mu_i(t))^2dx.$$
-
-<p align=justify style="background-color:#2E2E2E;
-border-radius:4px;
-font-size:16px;
-padding:15px;
-margin:5px;"><b>
-and the covariance
-</b>
-</p>
-
-$$C(t)\equiv\frac{1}{|A|}\int_\R(\bar z_1(x,t)-\mu_1(t))(\bar z_2(x,t)-\mu_2(t))dx.$$
-
-<p align=justify style="background-color:#2E2E2E;
-border-radius:4px;
-font-size:16px;
-padding:15px;
-margin:5px;"><b>
-Hence, the correlation can be tracked by computing $\rho(t)\equiv\frac{C(t)}{\sqrt{V_1(t)V_2(t)}}$ for each $t$.
 </b>
 </p>
 
@@ -190,16 +78,5 @@ font-size:16px;
 padding:15px;
 margin:5px;"><b>
 Here three species coevolve across a two dimensional continuum (discretized into a grid for computational purposes). One species is colored blue, one red and one green. The trait values that evolve are brightness. To summarize these properties within each pixel, a weighted average of red, blue and green is computed, weighted by the mean brightness of each species within that pixel. The result is a colorful, evolving grid. The interactions between the three species can be thought of as a circular trophic system where each level consumes the next level and is consumed by the previous level. Because the three color values are bounded above and below, this induces an oscillating coevolutionary chase.
-</b>
-</p>
-
-### Mathematical details
-
-<p align=justify style="background-color:#2E2E2E;
-border-radius:4px;
-font-size:16px;
-padding:15px;
-margin:5px;"><b>
-The model invoked here builds directly upon the previously established chain of models given above. However, now $x\in\mathbb{R}^2$ and a third species is included in the interaction. The resulting spatial patterns are characteristic of classic reaction-diffusion processes. Indeed upon inspection, even with the complexity of three coevolving species and the intimidating theory of stochastic partial differential equations, the system is simply a linear set of reaction-diffusion equations. Hence, the math is about as tame as possible for the diversity of dynamics and patterns exhibited.
 </b>
 </p>
