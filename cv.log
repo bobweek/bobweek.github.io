@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.22)  7 MAY 2019 16:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.22)  17 SEP 2019 12:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -519,28 +519,20 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 159.
+ne 161.
 
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 165.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 167.
 [1
 
-{/home/bob/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+{/home/bob/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              You've used the KOMA-Script implementation of \@ssect
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 173.
-
-
-Class scrartcl Warning: incompatible usage of \@ssect detected.
-(scrartcl)              You've used the KOMA-Script implementation of \@ssect
-(scrartcl)              from within a non compatible caller, that does not
-(scrartcl)              \scr@s@ct@@nn@m@ locally.
-(scrartcl)              This could result in several error messages on input li
-ne 179.
+ne 175.
 
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
@@ -548,7 +540,7 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 185.
+ne 181.
 
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
@@ -556,9 +548,17 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 192.
+ne 187.
 
-[2] (./cv.aux)
+
+Class scrartcl Warning: incompatible usage of \@ssect detected.
+(scrartcl)              You've used the KOMA-Script implementation of \@ssect
+(scrartcl)              from within a non compatible caller, that does not
+(scrartcl)              \scr@s@ct@@nn@m@ locally.
+(scrartcl)              This could result in several error messages on input li
+ne 194.
+
+[3] (./cv.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -570,7 +570,7 @@ Here is how much of TeX's memory you used:
  11299 multiletter control sequences out of 15000+600000
  23851 words of font info for 83 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 51i,5n,51p,9146b,286s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 51i,6n,51p,9146b,286s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/bob/.TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}</home/bob/.TinyTe
 X/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></home/bob/.TinyTeX/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></home/bob/.TinyTeX/texmf-di
@@ -582,10 +582,10 @@ onts/cm/cmtt10.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmtt12.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb
 ></home/bob/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/bob/
 .TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on cv.pdf (2 pages, 116799 bytes).
+Output written on cv.pdf (3 pages, 119155 bytes).
 PDF statistics:
- 56 PDF objects out of 1000 (max. 8388607)
- 40 compressed objects within 1 object stream
+ 59 PDF objects out of 1000 (max. 8388607)
+ 42 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21505 words of extra memory for PDF output out of 24883 (max. 10000000)
 
