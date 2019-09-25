@@ -99,13 +99,14 @@
 \noindent\hangindent=2em\hangafter=0 \small #5 % Description
 \normalsize \par}
 
-\newcommand{\PublicationEntry}[4]{
+\newcommand{\PublicationEntry}[5]{
 \noindent \textbf{#1} \hfill      % Title
 \colorbox{White}{%
 \parbox{6em}{%
-\hfill\color{Black}#2}} \par  % Date
+\hfill\color{Black}#2}} \par      % Date
 \noindent \small #3 \par          % Authors
 \noindent \textit{#4} \par        % Journal
+\noindent \url{#5} \par        % DOI
 \normalsize \par}
 
 \newcommand{\ReviewEntry}[2]{
@@ -142,30 +143,30 @@
 
 \SpecialEducationEntry{PhD Bioinformatics \& Computational Biology (BCB)}{\emph{In progress}}{University of Idaho,}{Advised by Scott L. Nuismer}{My dissertation is the development of a coevolutionary theory of community ecology and methods of inference in the context of plant-pollinator networks.}
 \sepspace
-\EducationEntry{BS Mathematics}{2015}{University of Idaho}{A general mathematics degree including traditional coursework such as Abstract Algebra and Analysis but also applied/engineering courses such as Numerical Methods as well as Signals \& Systems.}
+\EducationEntry{BS Mathematics}{2015}{University of Idaho}{A general mathematics degree including traditional coursework such as Abstract Algebra and Analysis but also applied/engineering courses such as Numerical Methods and Physics.}
 
 %%% Publications
 %%% ------------------------------------------------------------
 \NewPart{Publications}{}
 
-\PublicationEntry{Dynamics of Assembly and Coexistence in Evolved \\ Versus Assembled Communities}{Forthcoming}{Overcast, I.; Ruffley, M.; Rosindell, J.; Harmon, L.; Borges, P.; Chase, J.; Emerson, B.; Etienne, R.S.; Gillespie, R.; Krehenwinkel, H.; Mahler, L.; Massol, F.; McGill, B.; Parent, K.; Pati\~{n}o, J.; Peter, B.; Week, B.; Wagner, C.; Hickerson, M.J.; Rominger, A.}{-}
+\PublicationEntry{Dynamics of Assembly and Coexistence in Evolved \\ Versus Assembled Communities}{Forthcoming}{Overcast, I.; Ruffley, M.; Rosindell, J.; Harmon, L.; Borges, P.; Chase, J.; Emerson, B.; Etienne, R.S.; Gillespie, R.; Krehenwinkel, H.; Mahler, L.; Massol, F.; McGill, B.; Parent, K.; Pati\~{n}o, J.; Peter, B.; Week, B.; Wagner, C.; Hickerson, M.J.; Rominger, A.}{-}{-}
 
-\PublicationEntry{Identifying Models of Trait-Mediated Community Assembly \\ Using Random Forests and Approximate Bayesian Computation}{In Press}{Ruffley, M.; Peterson, K.; Week, B.; Tank, D.; Harmon, L.}{Ecology and Evolution}
+\PublicationEntry{Identifying Models of Trait-Mediated Community Assembly \\ Using Random Forests and Approximate Bayesian Computation}{In Press}{Ruffley, M.; Peterson, K.; Week, B.; Tank, D.; Harmon, L.}{Ecology and Evolution}{-}
 
-\PublicationEntry{Approximate Bayesian Estimation of Coevolutionary Arms Races}{2019}{Nuismer, S.L.; Week, B.}{PLOS}
+\PublicationEntry{Approximate Bayesian Estimation of Coevolutionary Arms Races}{2019}{Nuismer, S.L.; Week, B.}{PLOS Computational Biology}{https://doi.org/10.1371/journal.pcbi.1006988}
 
-\PublicationEntry{The Measurement of Coevolution in the Wild}{2019}{Week, B.; Nuismer, S.L.}{Ecology Letters}
+\PublicationEntry{The Measurement of Coevolution in the Wild}{2019}{Week, B.; Nuismer, S.L.}{Ecology Letters}{https://doi.org/10.1111/ele.13231}
 
-\PublicationEntry{Coevolution Slows the Disassembly of Mutualistic Communities}{2018}{Nuismer, S.L.; Week, B.; Aizen, M.}{American Naturalist}
+\PublicationEntry{Coevolution Slows the Disassembly of Mutualistic Communities}{2018}{Nuismer, S.L.; Week, B.; Aizen, M.}{American Naturalist}{https://doi.org/10.1086/699218}
 
 %%% Awards
 %%% ------------------------------------------------------------
 \NewPart{Awards}{}
 
 \EducationEntry{BCB/IBEST Fellowship}{2018-2019}{University of Idaho}{Proposed project aims to model the duration of coevolutionary associations as a function of the mechanism mediating the underlying interaction.}
-\sepspace
-\EducationEntry{Paul Joyce Memorial BCB Fellowship Endowment}{2017}{University of Idaho}{Nominated by Dr. Nuismer because of my ``love for mathematics and helping others to appreciate how it can be used to understand biological processes.''}
 \newpage
+\EducationEntry{Paul Joyce Memorial BCB Fellowship Endowment}{2017}{University of Idaho}{Nominated by Dr. Nuismer because of my ``love for mathematics and helping others to appreciate how it can be used to understand biological processes.''}
+\sepspace
 \EducationEntry{BCB/IBEST Fellowship, \url{http://www.ibest.uidaho.edu/}}{2017-2018}{University of Idaho}{Proposed work seeks to derive a continuous space (isolation by distance) model of coevolution and a method of inference for this model.}
 \sepspace
 \EducationEntry{Undergraduate Research in Biology \& Mathematics (UBM)}{2013-2015}{University of Idaho}{Efforts focused on deriving a method of inference for the measurement of coevolution in nature.}
