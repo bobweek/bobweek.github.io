@@ -1,544 +1,421 @@
 <!DOCTYPE html>
-<html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="generator" content="pandoc">
-  <meta name="author" content="Bob Week" />
-  <title>Committee meeting</title>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="site_libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
 
 
-
-<link rel="stylesheet" href="site_libs/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
-
-
-  <!-- some tweaks to reveal css -->
-  <style type="text/css">
-    .reveal h1 { font-size: 2.0em; }
-    .reveal h2 { font-size: 1.5em;  }
-    .reveal h3 { font-size: 1.25em;	}
-    .reveal h4 { font-size: 1em;	}
-
-    .reveal .slides>section,
-    .reveal .slides>section>section {
-      padding: 0px 0px;
-    }
+<meta name="author" content="Bob Week" />
 
 
+<title>Committee meeting</title>
 
-    .reveal table {
-      border-width: 1px;
-      border-spacing: 2px;
-      border-style: dotted;
-      border-color: gray;
-      border-collapse: collapse;
-      font-size: 0.7em;
-    }
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
-    .reveal table th {
-      border-width: 1px;
-      padding-left: 10px;
-      padding-right: 25px;
-      font-weight: bold;
-      border-style: dotted;
-      border-color: gray;
-    }
-
-    .reveal table td {
-      border-width: 1px;
-      padding-left: 10px;
-      padding-right: 25px;
-      border-style: dotted;
-      border-color: gray;
-    }
-
-
-  </style>
-
-    <style type="text/css">code{white-space: pre;}</style>
-
-
-<!-- Printing and PDF exports -->
-<script id="paper-css" type="application/dynamic-css">
-
-/* Default Print Stylesheet Template
-   by Rob Glazebrook of CSSnewbie.com
-   Last Updated: June 4, 2008
-
-   Feel free (nay, compelled) to edit, append, and
-   manipulate this file as you see fit. */
-
-
-@media print {
-
-	/* SECTION 1: Set default width, margin, float, and
-	   background. This prevents elements from extending
-	   beyond the edge of the printed page, and prevents
-	   unnecessary background images from printing */
-	html {
-		background: #fff;
-		width: auto;
-		height: auto;
-		overflow: visible;
-	}
-	body {
-		background: #fff;
-		font-size: 20pt;
-		width: auto;
-		height: auto;
-		border: 0;
-		margin: 0 5%;
-		padding: 0;
-		overflow: visible;
-		float: none !important;
-	}
-
-	/* SECTION 2: Remove any elements not needed in print.
-	   This would include navigation, ads, sidebars, etc. */
-	.nestedarrow,
-	.controls,
-	.fork-reveal,
-	.share-reveal,
-	.state-background,
-	.reveal .progress,
-	.reveal .backgrounds {
-		display: none !important;
-	}
-
-	/* SECTION 3: Set body font face, size, and color.
-	   Consider using a serif font for readability. */
-	body, p, td, li, div {
-		font-size: 20pt!important;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
-		color: #000;
-	}
-
-	/* SECTION 4: Set heading font face, sizes, and color.
-	   Differentiate your headings from your body text.
-	   Perhaps use a large sans-serif for distinction. */
-	h1,h2,h3,h4,h5,h6 {
-		color: #000!important;
-		height: auto;
-		line-height: normal;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
-		text-shadow: 0 0 0 #000 !important;
-		text-align: left;
-		letter-spacing: normal;
-	}
-	/* Need to reduce the size of the fonts for printing */
-	h1 { font-size: 28pt !important;  }
-	h2 { font-size: 24pt !important; }
-	h3 { font-size: 22pt !important; }
-	h4 { font-size: 22pt !important; font-variant: small-caps; }
-	h5 { font-size: 21pt !important; }
-	h6 { font-size: 20pt !important; font-style: italic; }
-
-	/* SECTION 5: Make hyperlinks more usable.
-	   Ensure links are underlined, and consider appending
-	   the URL to the end of the link for usability. */
-	a:link,
-	a:visited {
-		color: #000 !important;
-		font-weight: bold;
-		text-decoration: underline;
-	}
-	/*
-	.reveal a:link:after,
-	.reveal a:visited:after {
-		content: " (" attr(href) ") ";
-		color: #222 !important;
-		font-size: 90%;
-	}
-	*/
-
-
-	/* SECTION 6: more reveal.js specific additions by @skypanther */
-	ul, ol, div, p {
-		visibility: visible;
-		position: static;
-		width: auto;
-		height: auto;
-		display: block;
-		overflow: visible;
-		margin: 0;
-		text-align: left !important;
-	}
-	.reveal pre,
-	.reveal table {
-		margin-left: 0;
-		margin-right: 0;
-	}
-	.reveal pre code {
-		padding: 20px;
-		border: 1px solid #ddd;
-	}
-	.reveal blockquote {
-		margin: 20px 0;
-	}
-	.reveal .slides {
-		position: static !important;
-		width: auto !important;
-		height: auto !important;
-
-		left: 0 !important;
-		top: 0 !important;
-		margin-left: 0 !important;
-		margin-top: 0 !important;
-		padding: 0 !important;
-		zoom: 1 !important;
-
-		overflow: visible !important;
-		display: block !important;
-
-		text-align: left !important;
-		-webkit-perspective: none;
-		   -moz-perspective: none;
-		    -ms-perspective: none;
-		        perspective: none;
-
-		-webkit-perspective-origin: 50% 50%;
-		   -moz-perspective-origin: 50% 50%;
-		    -ms-perspective-origin: 50% 50%;
-		        perspective-origin: 50% 50%;
-	}
-	.reveal .slides section {
-		visibility: visible !important;
-		position: static !important;
-		width: auto !important;
-		height: auto !important;
-		display: block !important;
-		overflow: visible !important;
-
-		left: 0 !important;
-		top: 0 !important;
-		margin-left: 0 !important;
-		margin-top: 0 !important;
-		padding: 60px 20px !important;
-		z-index: auto !important;
-
-		opacity: 1 !important;
-
-		page-break-after: always !important;
-
-		-webkit-transform-style: flat !important;
-		   -moz-transform-style: flat !important;
-		    -ms-transform-style: flat !important;
-		        transform-style: flat !important;
-
-		-webkit-transform: none !important;
-		   -moz-transform: none !important;
-		    -ms-transform: none !important;
-		        transform: none !important;
-
-		-webkit-transition: none !important;
-		   -moz-transition: none !important;
-		    -ms-transition: none !important;
-		        transition: none !important;
-	}
-	.reveal .slides section.stack {
-		padding: 0 !important;
-	}
-	.reveal section:last-of-type {
-		page-break-after: avoid !important;
-	}
-	.reveal section .fragment {
-		opacity: 1 !important;
-		visibility: visible !important;
-
-		-webkit-transform: none !important;
-		   -moz-transform: none !important;
-		    -ms-transform: none !important;
-		        transform: none !important;
-	}
-	.reveal section img {
-		display: block;
-		margin: 15px 0px;
-		background: rgba(255,255,255,1);
-		border: 1px solid #666;
-		box-shadow: none;
-	}
-
-	.reveal section small {
-		font-size: 0.8em;
-	}
-
-}  
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
 </script>
 
 
-<script id="pdf-css" type="application/dynamic-css">
-    
-/**
- * This stylesheet is used to print reveal.js
- * presentations to PDF.
- *
- * https://github.com/hakimel/reveal.js#pdf-export
- */
 
-* {
-	-webkit-print-color-adjust: exact;
+<style type="text/css">
+h1 {
+  font-size: 34px;
 }
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
 
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
 body {
-	margin: 0 auto !important;
-	border: 0;
-	padding: 0;
-	float: none !important;
-	overflow: visible;
+  padding-top: 51px;
+  padding-bottom: 40px;
 }
-
-html {
-	width: 100%;
-	height: 100%;
-	overflow: visible;
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
 }
-
-/* Remove any elements not needed in print. */
-.nestedarrow,
-.reveal .controls,
-.reveal .progress,
-.reveal .playback,
-.reveal.overview,
-.fork-reveal,
-.share-reveal,
-.state-background {
-	display: none !important;
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
 }
-
-h1, h2, h3, h4, h5, h6 {
-	text-shadow: 0 0 0 #000 !important;
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
 }
-
-.reveal pre code {
-	overflow: hidden !important;
-	font-family: Courier, 'Courier New', monospace !important;
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
 }
-
-ul, ol, div, p {
-	visibility: visible;
-	position: static;
-	width: auto;
-	height: auto;
-	display: block;
-	overflow: visible;
-	margin: auto;
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
 }
-.reveal {
-	width: auto !important;
-	height: auto !important;
-	overflow: hidden !important;
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
 }
-.reveal .slides {
-	position: static;
-	width: 100%;
-	height: auto;
-
-	left: auto;
-	top: auto;
-	margin: 0 !important;
-	padding: 0 !important;
-
-	overflow: visible;
-	display: block;
-
-	-webkit-perspective: none;
-	   -moz-perspective: none;
-	    -ms-perspective: none;
-	        perspective: none;
-
-	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
-	   -moz-perspective-origin: 50% 50%;
-	    -ms-perspective-origin: 50% 50%;
-	        perspective-origin: 50% 50%;
+.dropdown-submenu {
+  position: relative;
 }
-
-.reveal .slides section {
-	page-break-after: always !important;
-
-	visibility: visible !important;
-	position: relative !important;
-	display: block !important;
-	position: relative !important;
-
-	margin: 0 !important;
-	padding: 0 !important;
-	box-sizing: border-box !important;
-	min-height: 1px;
-
-	opacity: 1 !important;
-
-	-webkit-transform-style: flat !important;
-	   -moz-transform-style: flat !important;
-	    -ms-transform-style: flat !important;
-	        transform-style: flat !important;
-
-	-webkit-transform: none !important;
-	   -moz-transform: none !important;
-	    -ms-transform: none !important;
-	        transform: none !important;
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
 }
-
-.reveal section.stack {
-	margin: 0 !important;
-	padding: 0 !important;
-	page-break-after: avoid !important;
-	height: auto !important;
-	min-height: auto !important;
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
 }
-
-.reveal img {
-	box-shadow: none;
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
 }
-
-.reveal .roll {
-	overflow: visible;
-	line-height: 1em;
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
 }
-
-/* Slide backgrounds are placed inside of their slide when exporting to PDF */
-.reveal section .slide-background {
-	display: block !important;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: -1;
+.dropdown-submenu.pull-left {
+  float: none;
 }
-
-/* All elements should be above the slide-background */
-.reveal section>* {
-	position: relative;
-	z-index: 1;
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
-
-/* Display slide speaker notes when 'showNotes' is enabled */
-.reveal .speaker-notes-pdf {
-	display: block;
-	width: 100%;
-	max-height: none;
-	left: auto;
-	top: auto;
-	z-index: 100;
-}
-
-/* Display slide numbers when 'slideNumber' is enabled */
-.reveal .slide-number-pdf {
-	display: block;
-	position: absolute;
-	font-size: 14px;
-}
-
-</script>
-
+</style>
 
 <script>
-var style = document.createElement( 'style' );
-style.type = 'text/css';
-var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
-var style_script = document.getElementById(style_script_id).text;
-style.innerHTML = style_script;
-document.getElementsByTagName('head')[0].appendChild(style);
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
 </script>
 
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
 </head>
+
 <body>
-  <div class="reveal">
-    <div class="slides">
 
-<section>
-    <h1 class="title">Committee meeting</h1>
-    <h2 class="author">Bob Week</h2>
-    <h3 class="date">4/18/2019</h3>
-</section>
 
-<section><section id="primary-themes" class="title-slide slide level1"><h1>Primary themes</h1></section><section id="coevolutionary-theory" class="slide level2">
+<div class="container-fluid main-container">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="interactive_theory.html">Interactive theory</a></li>
+        <li><a href="measuring_coevolution.html">Measuring coevolution</a></li>
+
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Committee meeting</h1>
+<h4 class="author">Bob Week</h4>
+<h4 class="date">4/18/2019</h4>
+
+</div>
+
+
+<div id="primary-themes" class="section level1">
+<h1>Primary themes</h1>
+<div id="coevolutionary-theory" class="section level2">
 <h2>Coevolutionary theory</h2>
 <ul>
-<li class="fragment">theoretical quantitative genetics</li>
-<li class="fragment">the shape of fitness surfaces</li>
+<li>theoretical quantitative genetics</li>
+<li>the shape of fitness surfaces</li>
 </ul>
-</section><section id="microevolutionary-community-ecology" class="slide level2">
+</div>
+<div id="microevolutionary-community-ecology" class="section level2">
 <h2>(Micro)evolutionary community ecology</h2>
 <ul>
-<li class="fragment">focusing on patterns of interaction &amp; abundance
+<li>focusing on patterns of interaction &amp; abundance
 <ul>
-<li class="fragment">implications of coevolution for these patterns</li>
+<li>implications of coevolution for these patterns</li>
 </ul></li>
-<li class="fragment">not focusing on richness or coexistence</li>
+<li>not focusing on richness or coexistence</li>
 </ul>
-</section><section id="plant-pollinator-networks" class="slide level2">
+</div>
+<div id="plant-pollinator-networks" class="section level2">
 <h2>Plant-pollinator networks</h2>
 <ul>
-<li class="fragment">the “proving grounds” of the above work</li>
-<li class="fragment">modelling the coevolution of phenology</li>
-<li class="fragment">developing methods to measure pairwise coevolution for each species pair across the entire community</li>
+<li>the “proving grounds” of the above work</li>
+<li>modelling the coevolution of phenology</li>
+<li>developing methods to measure pairwise coevolution for each species pair across the entire community</li>
 </ul>
-</section><section id="outline" class="slide level2">
+</div>
+<div id="outline" class="section level2">
 <h2>Outline</h2>
 <ul>
-<li class="fragment">Ch1: Patterns of mismatched traits explained by an <em>optimal offset</em></li>
-<li class="fragment">Ch2: A likelihood-based method for coevolutionary inference</li>
-<li class="fragment">Ch3: Guild-by-guild coevolution in a plant-pollinator community</li>
+<li>Ch1: Patterns of mismatched traits explained by an <em>optimal offset</em></li>
+<li>Ch2: A likelihood-based method for coevolutionary inference</li>
+<li>Ch3: Guild-by-guild coevolution in a plant-pollinator community</li>
 </ul>
-</section></section>
-<section><section id="chapter-1-patterns-of-trait-mismatching" class="title-slide slide level1"><h1>Chapter 1: Patterns of trait mismatching</h1></section><section id="intraspecific-matching-across-space-and-interspecific-matching-across-taxa" class="slide level2">
+</div>
+</div>
+<div id="chapter-1-patterns-of-trait-mismatching" class="section level1">
+<h1>Chapter 1: Patterns of trait mismatching</h1>
+<div id="intraspecific-matching-across-space-and-interspecific-matching-across-taxa" class="section level2">
 <h2>Intraspecific matching across space and interspecific matching across taxa</h2>
-<p><img data-src="population-level.jpg" style="width:42.0%" /> <img data-src="species-level.jpg" style="width:40.0%" /></p>
+<p><img src="population-level.jpg" style="width:42.0%" /> <img src="species-level.jpg" style="width:40.0%" /></p>
 <p>Anderson et al 2010</p>
-</section><section id="explanations" class="slide level2">
+</div>
+<div id="explanations" class="section level2">
 <h2>Explanations</h2>
 <ul>
-<li class="fragment">asymmetric selection pressure
+<li>asymmetric selection pressure
 <ul>
-<li class="fragment">generalization/specialization
+<li>generalization/specialization
 <ul>
-<li class="fragment">generalized species will exhibit less exaggeration</li>
+<li>generalized species will exhibit less exaggeration</li>
 </ul></li>
-<li class="fragment">life-dinner principle
+<li>life-dinner principle
 <ul>
-<li class="fragment">plants should be winning since they have more at stake</li>
+<li>plants should be winning since they have more at stake</li>
 </ul></li>
-<li class="fragment">alternative to these explanations
+<li>alternative to these explanations
 <ul>
-<li class="fragment">the anatomy of the phenotypic interface</li>
+<li>the anatomy of the phenotypic interface</li>
 </ul></li>
 </ul></li>
 </ul>
-</section><section id="the-phenotypic-interface" class="slide level2">
+</div>
+<div id="the-phenotypic-interface" class="section level2">
 <h2>The phenotypic interface</h2>
-<p><img data-src="Pauw.jpg" style="width:52.0%" /> <img data-src="gaussian_offset.png" style="width:42.0%" /></p>
-</section><section id="what-is-an-optimal-offset" class="slide level2">
+<p><img src="Pauw.jpg" style="width:52.0%" /> <img src="gaussian_offset.png" style="width:42.0%" /></p>
+</div>
+<div id="what-is-an-optimal-offset" class="section level2">
 <h2>What is an optimal offset?</h2>
 <ul>
-<li class="fragment"><p><strong>Def:</strong> An <em>optimal offset</em> is the difference (<span class="math inline">\(\delta_1\)</span>) between the focal individuals trait value (<span class="math inline">\(z_1\)</span>) and the non-focal individuals trait value (<span class="math inline">\(z_2\)</span>) that maximizes fitness for the focal individual.</p></li>
-<li class="fragment"><p>A mathematically convenient fitness surface that captures this interface is <span class="math display">\[\exp\left(-\frac{B_1}{2}(z_2+\delta_1-z_1)^2\right)\]</span></p></li>
+<li><p><strong>Def:</strong> An <em>optimal offset</em> is the difference (<span class="math inline">\(\delta_1\)</span>) between the focal individuals trait value (<span class="math inline">\(z_1\)</span>) and the non-focal individuals trait value (<span class="math inline">\(z_2\)</span>) that maximizes fitness for the focal individual.</p></li>
+<li><p>A mathematically convenient fitness surface that captures this interface is <span class="math display">\[\exp\left(-\frac{B_1}{2}(z_2+\delta_1-z_1)^2\right)\]</span></p></li>
 </ul>
-</section><section id="comparison-to-the-sigmoid" class="slide level2">
+</div>
+<div id="comparison-to-the-sigmoid" class="section level2">
 <h2>Comparison to the sigmoid</h2>
-<p><img data-src="f1.png" style="width:60.0%" /></p>
-</section><section id="coevolutionary-dynamics" class="slide level2">
+<p><img src="f1.png" style="width:60.0%" /></p>
+</div>
+<div id="coevolutionary-dynamics" class="section level2">
 <h2>Coevolutionary dynamics</h2>
 <p><span class="math display">\[\frac{d\bar z_1}{dt}=\mathscr{B}_1(\bar z_2+\delta_1-\bar z_1)\]</span></p>
 <p><span class="math display">\[\frac{d\bar z_2}{dt}=\mathscr{B}_2(\bar z_1+\delta_2-\bar z_2)\]</span></p>
 <ul>
-<li class="fragment"><span class="math inline">\(\mathscr{B}_i=G_iB_i\)</span></li>
+<li><span class="math inline">\(\mathscr{B}_i=G_iB_i\)</span></li>
 </ul>
-</section><section id="model-properties" class="slide level2">
+</div>
+<div id="model-properties" class="section level2">
 <h2>Model properties</h2>
 <ul>
-<li class="fragment"><p>When <span class="math inline">\(\delta_1,\delta_2\)</span> have the same sign this leads to an indefinite arms race.</p></li>
-<li class="fragment"><p>However, <span class="math inline">\(\bar z_1-\bar z_2\)</span> converges to <span class="math inline">\(\frac{\mathscr{B}_1\delta_1-\mathscr{B}_2\delta_2}{\mathscr{B}_1+\mathscr{B}_2}\)</span>.</p></li>
-<li class="fragment"><p>Thus, measuring <span class="math inline">\(\mathscr{B}_i\)</span> and <span class="math inline">\(\delta_i\)</span> enables one to predict winners of Darwinian races.</p></li>
+<li><p>When <span class="math inline">\(\delta_1,\delta_2\)</span> have the same sign this leads to an indefinite arms race.</p></li>
+<li><p>However, <span class="math inline">\(\bar z_1-\bar z_2\)</span> converges to <span class="math inline">\(\frac{\mathscr{B}_1\delta_1-\mathscr{B}_2\delta_2}{\mathscr{B}_1+\mathscr{B}_2}\)</span>.</p></li>
+<li><p>Thus, measuring <span class="math inline">\(\mathscr{B}_i\)</span> and <span class="math inline">\(\delta_i\)</span> enables one to predict winners of Darwinian races.</p></li>
 </ul>
-</section></section>
-<section><section id="chapter-2-a-likelihood-based-method-for-coevolutionary-inference" class="title-slide slide level1"><h1>Chapter 2: A likelihood-based method for coevolutionary inference</h1></section><section id="the-model" class="slide level2">
+</div>
+</div>
+<div id="chapter-2-a-likelihood-based-method-for-coevolutionary-inference" class="section level1">
+<h1>Chapter 2: A likelihood-based method for coevolutionary inference</h1>
+<ul>
+<li>basic idea:
+<ul>
+<li>data on geographical patterns of trait matching</li>
+<li>models of geographical patterns of trait matching</li>
+<li>tie model to data with likelihood</li>
+</ul></li>
+</ul>
+<div id="the-model" class="section level2">
 <h2>The model</h2>
 <p><span class="math display">\[\frac{d\bar z_1}{dt}=\mathscr{A}_1(\theta_1-\bar z_1)+\mathscr{B}_1(\bar z_2+\delta-\bar z_1)+\sqrt\frac{G_1}{N_1}\frac{d\xi_1}{dt}\]</span></p>
 <p><span class="math display">\[\frac{d\bar z_2}{dt}=\mathscr{A}_2(\theta_2-\bar z_2)+\mathscr{B}_2(\bar z_1+\delta-\bar z_2)+\sqrt\frac{G_2}{N_2}\frac{d\xi_2}{dt}\]</span></p>
-</section><section id="equilibrium" class="slide level2">
+</div>
+<div id="equilibrium" class="section level2">
 <h2>Equilibrium</h2>
 <p><span class="math display">\[\left(\begin{matrix}
 \bar z_1\\\bar z_2
@@ -548,139 +425,135 @@ document.getElementsByTagName('head')[0].appendChild(style);
 V_1 &amp; C \\ C &amp; V_2
 \end{matrix}\right)\right\}\]</span></p>
 <ul>
-<li class="fragment"><span class="math inline">\(\mu_i,V_i,C\)</span>… functions of <span class="math inline">\(A_i,B_i,\delta\)</span>.</li>
+<li><span class="math inline">\(\mu_i,V_i,C\)</span>… functions of <span class="math inline">\(A_i,B_i,\delta\)</span>.</li>
 </ul>
-</section><section id="likelihood" class="slide level2">
+</div>
+<div id="likelihood" class="section level2">
 <h2>Likelihood</h2>
 <p>Suppose <span class="math inline">\(X_1,\dots,X_n\)</span> iid <span class="math inline">\(\mathcal{N}(\mu,\sigma^2)\)</span>.</p>
 <ul>
-<li class="fragment">Denote <span class="math inline">\(\hat\mu\)</span> and <span class="math inline">\(\hat\sigma^2\)</span> the ML estimates.</li>
-<li class="fragment">Then <span class="math inline">\(\hat\mu=\frac{1}{n}\sum_iX_i\)</span></li>
-<li class="fragment"><p>and <span class="math inline">\(\hat\sigma^2=\frac{1}{n}\sum_i\left(X_i-\hat\mu\right)^2\)</span>.</p></li>
-<li class="fragment"><p>These results can be extended to <span class="math inline">\(d\)</span>-dimensional Gaussian random variables.</p></li>
+<li>Denote <span class="math inline">\(\hat\mu\)</span> and <span class="math inline">\(\hat\sigma^2\)</span> the ML estimates.</li>
+<li>Then <span class="math inline">\(\hat\mu=\frac{1}{n}\sum_iX_i\)</span></li>
+<li><p>and <span class="math inline">\(\hat\sigma^2=\frac{1}{n}\sum_i\left(X_i-\hat\mu\right)^2\)</span>.</p></li>
+<li><p>These results can be extended to <span class="math inline">\(d\)</span>-dimensional Gaussian random variables.</p></li>
 </ul>
-</section><section id="inference" class="slide level2">
+</div>
+<div id="inference" class="section level2">
 <h2>Inference</h2>
 <ul>
-<li class="fragment"><p><span class="math inline">\(\left(\begin{smallmatrix}\bar z_1\\\bar z_2\end{smallmatrix}\right)_1,\dots,\left(\begin{smallmatrix}\bar z_1\\\bar z_2\end{smallmatrix}\right)_n\)</span></p></li>
-<li class="fragment">Calculate <span class="math inline">\(\hat\mu_i,\hat V_i,\hat C\)</span>.</li>
-<li class="fragment">Recall <span class="math inline">\(\hat\mu_i,\hat V_i,\hat C\)</span> are functions of <span class="math inline">\(A_i,B_i,\delta\)</span>.</li>
-<li class="fragment"><p>Invert these functions to solve for <span class="math inline">\(\hat A_i,\hat B_i,\hat\delta\)</span>.</p></li>
+<li><p><span class="math inline">\(\left(\begin{smallmatrix}\bar z_1\\\bar z_2\end{smallmatrix}\right)_1,\dots,\left(\begin{smallmatrix}\bar z_1\\\bar z_2\end{smallmatrix}\right)_n\)</span></p></li>
+<li>Calculate <span class="math inline">\(\hat\mu_i,\hat V_i,\hat C\)</span>.</li>
+<li>Recall <span class="math inline">\(\hat\mu_i,\hat V_i,\hat C\)</span> are functions of <span class="math inline">\(A_i,B_i,\delta\)</span>.</li>
+<li><p>Invert these functions to solve for <span class="math inline">\(\hat A_i,\hat B_i,\hat\delta\)</span>.</p></li>
 </ul>
-</section><section id="results" class="slide level2">
+</div>
+<div id="results" class="section level2">
 <h2>Results</h2>
-<p><img data-src="slp_sample.png" style="width:50.0%" /> <img data-src="r2_sample.png" style="width:50.0%" /></p>
-</section><section id="application" class="slide level2">
+<p><img src="slp_sample.png" style="width:50.0%" /> <img src="r2_sample.png" style="width:50.0%" /></p>
+</div>
+<div id="application" class="section level2">
 <h2>Application</h2>
-<p><img data-src="strengths.png" style="width:75.0%" /></p>
-</section><section id="finished" class="slide level2">
+<p><img src="strengths.png" style="width:75.0%" /></p>
+</div>
+<div id="finished" class="section level2">
 <h2>Finished!</h2>
-<p><img data-src="Screenshot%202019-04-15%20at%2012.58.05%20PM.png" /></p>
-</section></section>
-<section><section id="chapter-3-guild-by-guild-coevolution-in-a-plant-pollinator-community" class="title-slide slide level1"><h1>Chapter 3: Guild-by-guild coevolution in a plant-pollinator community</h1></section><section id="the-data" class="slide level2">
+<p><img src="Screenshot%202019-04-15%20at%2012.58.05%20PM.png" /></p>
+</div>
+</div>
+<div id="chapter-3-guild-by-guild-coevolution-in-a-plant-pollinator-community" class="section level1">
+<h1>Chapter 3: Guild-by-guild coevolution in a plant-pollinator community</h1>
+<div id="the-data" class="section level2">
 <h2>The data</h2>
-<p><img data-src="actual%20network.png" style="width:30.0%" /> <img data-src="phenologies.png" style="width:51.0%" /></p>
-</section><section id="formal-connection-to-community-ecology" class="slide level2">
+<p><img src="actual%20network.png" style="width:30.0%" /> <img src="phenologies.png" style="width:51.0%" /></p>
+</div>
+<div id="formal-connection-to-community-ecology" class="section level2">
 <h2>Formal connection to community ecology</h2>
 <p>phenology = niche</p>
 <ul>
-<li class="fragment"><p>Classic MacArthurian calculations hold:</p>
+<li><p>Classic MacArthurian calculations hold:</p>
 <ul>
-<li class="fragment"><p>If <span class="math inline">\(\alpha_i(t)\)</span> is the phenology of species <span class="math inline">\(i\)</span> (ie, resource utilization curve),</p></li>
-<li class="fragment"><p>then <span class="math inline">\(\int\alpha_i(t)\alpha_j(t)dt\)</span> measures the intensity of interaction.</p></li>
+<li><p>If <span class="math inline">\(\alpha_i(t)\)</span> is the phenology of species <span class="math inline">\(i\)</span> (ie, resource utilization curve),</p></li>
+<li><p>then <span class="math inline">\(\int\alpha_i(t)\alpha_j(t)dt\)</span> measures the intensity of interaction.</p></li>
 </ul></li>
 </ul>
-</section><section id="structure-of-fitness-surface" class="slide level2">
+</div>
+<div id="structure-of-fitness-surface" class="section level2">
 <h2>Structure of fitness surface</h2>
 <ul>
-<li class="fragment">Phenology determines whether or not an interaction occurs.</li>
-<li class="fragment">Some suite of morphological traits determine the outcome of the interaction.
+<li>Phenology determines whether or not an interaction occurs.</li>
+<li>Some suite of morphological traits determine the outcome of the interaction.
 <ul>
-<li class="fragment">Potential extremes include nectar robbing and floral trickery.</li>
-<li class="fragment">These extremes reduce fitness, creating “variable” mutualisms.</li>
+<li>Potential extremes include nectar robbing and floral trickery.</li>
+<li>These extremes reduce fitness, creating “variable” mutualisms.</li>
 </ul></li>
 </ul>
-</section><section id="the-simulation" class="slide level2">
+</div>
+<div id="the-simulation" class="section level2">
 <h2>The simulation</h2>
 <ul>
-<li class="fragment">Simulate the evolution of phenology based on the above fitness surface, <span class="math inline">\(W\)</span>.</li>
-<li class="fragment">Heterogeneous representation of species in network not assumed to be due to chance.
+<li>Simulate the evolution of phenology based on the above fitness surface, <span class="math inline">\(W\)</span>.</li>
+<li>Heterogeneous representation of species in network not assumed to be due to chance.
 <ul>
-<li class="fragment">This is captured by simultaneously simulating abundance dynamics.</li>
-<li class="fragment">Fitness is taken literally s.t. <span class="math inline">\(N_{t+1}=\overline{W}N_t\)</span>.</li>
+<li>This is captured by simultaneously simulating abundance dynamics.</li>
+<li>Fitness is taken literally s.t. <span class="math inline">\(N_{t+1}=\overline{W}N_t\)</span>.</li>
 </ul></li>
 </ul>
-</section><section id="a-sample-path" class="slide level2">
+</div>
+<div id="a-sample-path" class="section level2">
 <h2>A sample path</h2>
-<p><img data-src="history.png" /></p>
-</section><section id="abc" class="slide level2">
+<p><img src="history.png" /></p>
+</div>
+<div id="abc" class="section level2">
 <h2>ABC</h2>
 <p>A basic sample-rejection algorithm:</p>
-<ol type="1">
-<li class="fragment">Draw random selection parameters (<span class="math inline">\(\psi\sim\pi\)</span>).</li>
-<li class="fragment">Simulate for a fixed number of generations (<span class="math inline">\(t\leq T\)</span>).</li>
-<li class="fragment">Compute Euclidean norm between measured p.a.t.’s and simulated p.a.t.’s (<span class="math inline">\(\nu\equiv\sqrt{\sum(x_i-\hat x_i)^2}\)</span>).</li>
-<li class="fragment">If norm is less than some fixed threshold, include parameters in posterior (<span class="math inline">\(\nu\overset{?}{&lt;}\varepsilon\)</span>).</li>
-<li class="fragment">Repeat until posterior is sufficiently populated (<span class="math inline">\(n\leq N\)</span>).</li>
+<ol style="list-style-type: decimal">
+<li>Draw random selection parameters (<span class="math inline">\(\psi\sim\pi\)</span>).</li>
+<li>Simulate for a fixed number of generations (<span class="math inline">\(t\leq T\)</span>).</li>
+<li>Compute Euclidean norm between measured p.a.t.’s and simulated p.a.t.’s (<span class="math inline">\(\nu\equiv\sqrt{\sum(x_i-\hat x_i)^2}\)</span>).</li>
+<li>If norm is less than some fixed threshold, include parameters in posterior (<span class="math inline">\(\nu\overset{?}{&lt;}\varepsilon\)</span>).</li>
+<li>Repeat until posterior is sufficiently populated (<span class="math inline">\(n\leq N\)</span>).</li>
 </ol>
-</section><section id="hypothetical-results" class="slide level2">
+</div>
+<div id="hypothetical-results" class="section level2">
 <h2>Hypothetical results</h2>
 <ul>
-<li class="fragment">Species-specific selection parameters.</li>
-<li class="fragment">Can calculate many things, but in particular…</li>
+<li>Species-specific selection parameters.</li>
+<li>Can calculate many things, but in particular…</li>
 </ul>
-</section><section id="the-distribution-of-pairwise-coevolution" class="slide level2">
+</div>
+<div id="the-distribution-of-pairwise-coevolution" class="section level2">
 <h2>The distribution of pairwise coevolution</h2>
-<p><img src="4182019_files/figure-revealjs/unnamed-chunk-1-1.png" width="768" /></p>
-</section></section>
-    </div>
-  </div>
-
-  <script src="site_libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
-  <script src="site_libs/reveal.js-3.3.0.1/js/reveal.js"></script>
-
-  <script>
-
-      // Full list of configuration options available at:
-      // https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        // Push each slide change to the browser history
-        history: true,
-        // Vertical centering of slides
-        center: true,
-        // Transition style
-        transition: 'default', // none/fade/slide/convex/concave/zoom
-        // Transition style for full page slide backgrounds
-        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+<p><img src="4182019_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+</div>
 
 
 
-        // Optional reveal.js plugins
-        dependencies: [
-        ]
-      });
-    </script>
-  <!-- dynamically load mathjax for compatibility with self-contained -->
-  <script>
-    (function () {
-      var script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-      document.getElementsByTagName("head")[0].appendChild(script);
-    })();
-  </script>
+
+</div>
 
 <script>
-  (function() {
-    if (window.jQuery) {
-      Reveal.addEventListener( 'slidechanged', function(event) {  
-        window.jQuery(event.previousSlide).trigger('hidden');
-        window.jQuery(event.currentSlide).trigger('shown');
-      });
-    }
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
 
-
-  </body>
+</body>
 </html>
