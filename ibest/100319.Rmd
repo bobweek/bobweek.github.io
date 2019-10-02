@@ -1,0 +1,146 @@
+---
+title: "measuring coevolution in ecological communities"
+author: "bob week"
+output: 
+  revealjs::revealjs_presentation:
+    center: true
+    transition: fade
+    incremental: true
+---
+
+## why care about coevolution?
+
+- it plays a pivotal role in eco-evolutionary feedbacks
+- it can help or hinder species' response to climate change
+- it has consequences for agriculture
+- it is fun to think about
+
+## how can we measure coevolution?
+
+- create a model that predicts observed patterns
+- develop a method to infer model parameters from observations
+
+# underlying principles
+
+## communities are collections of species
+
+![](IMG_20191001_133654.jpg){ width=84% }
+
+## these species tend to interact
+
+![](IMG_20191001_133721.jpg){ width=84% }
+
+
+## interspecific interactions have consequences
+
+![](IMG_20191001_133834.jpg){ width=84% }
+
+## interspecific interactions have consequences
+
+![](IMG_20191001_133941.jpg){ width=84% }
+
+
+## how do we model these consequences
+
+![](IMG_20191001_132232.jpg){ width=84% }
+
+
+## with well known relationships
+
+![](IMG_20191001_132318.jpg){ width=84% }
+
+
+## fitness is fundamental
+
+![](IMG_20191001_132400.jpg){ width=84% }
+
+
+
+## but what art thou form?
+
+![](IMG_20191001_132624.jpg){ width=84% }
+
+
+## theory of the niche
+
+![](IMG_20191001_134239.jpg){ width=84% }
+
+
+## mean trait as niche center
+
+![](IMG_20191001_134308.jpg){ width=84% }
+
+
+## resource utilization curves
+
+![](IMG_20191001_134617.jpg){ width=84% }
+
+
+
+## niche overlap
+
+![](IMG_20191001_135024.jpg){ width=84% }
+
+
+
+## fitness as a function of niche overlap
+
+![](IMG_20191001_141413.jpg){ width=84% }
+
+
+## competition
+
+![](IMG_20191001_141616.jpg){ width=84% }
+
+
+
+## mutualism
+
+![](IMG_20191001_141724.jpg){ width=84% }
+
+
+
+## host/parasite
+
+![](IMG_20191001_141757.jpg){ width=84% }
+
+
+
+## parasite/host
+
+![](IMG_20191001_141842.jpg){ width=84% }
+
+
+# the model
+
+## in it's full glory!
+
+![](gory.jpeg){ width=100% }
+
+
+## two sample paths
+
+![](community_dynamics.png){ width=90% }
+
+## a snapshot at $t=1000.0$
+
+![](community_dynamics.png){ width=90% }
+
+
+## distributions of abundance and phenotype
+
+![](distributions.png){ width=60% }
+
+
+## network of interactions
+
+![](interaction_networks.png){ width=60% }
+
+## inference
+
+- the data = interaction frequencies, traits, abundances
+- competition and niche parameters can be solved directly
+- evolutionary parameters cannot
+  - working on an simulation based approach (ABC)
+
+# thanks!
