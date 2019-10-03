@@ -8,19 +8,12 @@ output:
     incremental: true
 ---
 
-## why care about coevolution?
-
-- it plays a pivotal role in eco-evolutionary feedbacks
-- it can help or hinder species' response to climate change
-- it has consequences for agriculture
-- it is fun to think about
-
 ## how can we measure coevolution?
 
 - create a model that predicts observed patterns
-- develop a method to infer model parameters from observations
+- use observed patterns to infer model parameters
 
-# underlying principles
+# the model
 
 ## communities are collections of species
 
@@ -56,7 +49,7 @@ output:
 
 
 
-## but what art thou form?
+## fitness as a function of phenotype
 
 ![](IMG_20191001_132624.jpg){ width=84% }
 
@@ -111,12 +104,7 @@ output:
 ![](IMG_20191001_141842.jpg){ width=84% }
 
 
-# the model
-
-## in it's full glory!
-
-![](gory.jpeg){ width=100% }
-
+# the patterns
 
 ## two sample paths
 
@@ -144,3 +132,7 @@ output:
   - working on an simulation based approach (ABC)
 
 # thanks!
+
+# in it's full glory!
+
+![](gory.jpeg){ width=100% }
