@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.10.21)  21 OCT 2019 15:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.10.21)  22 OCT 2019 12:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**cv.tex
-(./cv.tex
+**bob_week.tex
+(./bob_week.tex
 LaTeX2e <2018-12-01>
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/koma-script/scrartcl.cls
 Document Class: scrartcl 2019/02/01 v3.26b KOMA-Script document class (article)
@@ -433,23 +433,23 @@ Package: sectsty 2002/02/25 v2.0.2 Commands to change all sectional heading sty
 les
 )
 \spacebox=\skip65
- (./cv.aux)
-\openout1 = `cv.aux'.
+ (./bob_week.aux)
+\openout1 = `bob_week.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 150.
-LaTeX Font Info:    ... okay on input line 150.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 161.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 161.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 161.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 161.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 161.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 161.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 161.
+LaTeX Font Info:    ... okay on input line 161.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -488,7 +488,7 @@ LaTeX Font Info:    ... okay on input line 150.
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
-LaTeX Info: Redefining \microtypecontext on input line 150.
+LaTeX Info: Redefining \microtypecontext on input line 161.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -521,7 +521,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box31
-Package hyperref Info: Link coloring OFF on input line 150.
+Package hyperref Info: Link coloring OFF on input line 161.
 
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -531,13 +531,13 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count119
 )
-LaTeX Info: Redefining \ref on input line 150.
-LaTeX Info: Redefining \pageref on input line 150.
-LaTeX Info: Redefining \nameref on input line 150.
+LaTeX Info: Redefining \ref on input line 161.
+LaTeX Info: Redefining \pageref on input line 161.
+LaTeX Info: Redefining \nameref on input line 161.
 
-(./cv.out) (./cv.out)
+(./bob_week.out) (./bob_week.out)
 \@outlinefile=\write3
-\openout3 = `cv.out'.
+\openout3 = `bob_week.out'.
 
 Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           Using `bookmark' together with `hyperref' is recommended,
@@ -545,7 +545,7 @@ Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           You can avoid loading `bookmark' with KOMA-Script option
 (scrartcl)           `bookmarkpackage=false' before \begin{document} and
 (scrartcl)           you can avoid this message with `\usepackage{bookmark}'
-(scrartcl)           before \begin{document} on input line 150.
+(scrartcl)           before \begin{document} on input line 161.
 
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/oberdiek/bookmark.sty
 Package: bookmark 2016/05/17 v1.26 PDF bookmarks (HO)
@@ -563,13 +563,13 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 157.
+ne 168.
 
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 157.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 168.
 
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
@@ -579,14 +579,14 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <10> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 157.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 168.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <12> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 158.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 169.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Try loading font information for U+msa on input line 158.
+LaTeX Font Info:    Try loading font information for U+msa on input line 169.
 
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -594,7 +594,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 158.
+LaTeX Font Info:    Try loading font information for U+msb on input line 169.
 
 (/home/bob/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -608,17 +608,17 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 163.
+ne 174.
 
 LaTeX Font Info:    Font shape `OT1/phv/b/it' in size <14.4> not available
-(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 163.
+(Font)              Font shape `OT1/phv/b/sl' tried instead on input line 174.
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              You've used the KOMA-Script implementation of \@ssect
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 171.
+ne 182.
 
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
@@ -626,7 +626,7 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 181.
+ne 192.
 
 [1
 
@@ -637,7 +637,7 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 191.
+ne 202.
 
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
@@ -645,15 +645,7 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 203.
-
-
-Class scrartcl Warning: incompatible usage of \@ssect detected.
-(scrartcl)              You've used the KOMA-Script implementation of \@ssect
-(scrartcl)              from within a non compatible caller, that does not
-(scrartcl)              \scr@s@ct@@nn@m@ locally.
-(scrartcl)              This could result in several error messages on input li
-ne 212.
+ne 214.
 
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
@@ -663,38 +655,53 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              This could result in several error messages on input li
 ne 222.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 231.
+
+Class scrartcl Warning: incompatible usage of \@ssect detected.
+(scrartcl)              You've used the KOMA-Script implementation of \@ssect
+(scrartcl)              from within a non compatible caller, that does not
+(scrartcl)              \scr@s@ct@@nn@m@ locally.
+(scrartcl)              This could result in several error messages on input li
+ne 228.
+
+
+Class scrartcl Warning: incompatible usage of \@ssect detected.
+(scrartcl)              You've used the KOMA-Script implementation of \@ssect
+(scrartcl)              from within a non compatible caller, that does not
+(scrartcl)              \scr@s@ct@@nn@m@ locally.
+(scrartcl)              This could result in several error messages on input li
+ne 237.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 244.
 [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 231.
- (./cv.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 231.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 231.
-Package rerunfilecheck Info: File `cv.out' has not changed.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 244.
+ (./bob_week.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 244.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 244.
+Package rerunfilecheck Info: File `bob_week.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 231.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 244.
  ) 
 Here is how much of TeX's memory you used:
  11375 strings out of 494562
- 183985 string characters out of 6177410
- 456394 words of memory out of 5000000
+ 184044 string characters out of 6177410
+ 455400 words of memory out of 5000000
  14838 multiletter control sequences out of 15000+600000
- 24592 words of font info for 80 fonts, out of 8000000 for 9000
+ 24233 words of font info for 79 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 41i,5n,51p,9146b,348s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,5n,51p,9152b,348s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/bob/.TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}</home/bob/.TinyTe
 X/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></home/bob/.TinyTeX/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></home/bob/.TinyTeX/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/bob/.TinyTeX/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr7.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmti10.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmtt10.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmtt12.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8
-a.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></hom
-e/bob/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on cv.pdf (2 pages, 121226 bytes).
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/bob/.TinyTeX/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr7.pfb></home/bob/.TinyTeX/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmti10.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmtt10.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmtt12.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/u
+hvb8a.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb><
+/home/bob/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on bob_week.pdf (2 pages, 109696 bytes).
 PDF statistics:
- 81 PDF objects out of 1000 (max. 8388607)
- 66 compressed objects within 1 object stream
- 11 named destinations out of 1000 (max. 500000)
- 20481 words of extra memory for PDF output out of 20736 (max. 10000000)
+ 77 PDF objects out of 1000 (max. 8388607)
+ 63 compressed objects within 1 object stream
+ 12 named destinations out of 1000 (max. 500000)
+ 19969 words of extra memory for PDF output out of 20736 (max. 10000000)
 

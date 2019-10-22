@@ -89,6 +89,11 @@
 \noindent\hangindent=2em\hangafter=0 \small #2 % Description
 \normalsize \par}
 
+\newcommand{\ExpEntry}[5]{      % Same as \PersonalEntry
+\noindent \textbf{#1}, \textit{#2}, #3, \hfill #4  \par        % School
+\noindent\hangindent=2em\hangafter=0 \small #5 % Description
+\normalsize \par}
+
 \newcommand{\EducationEntry}[4]{
 \noindent \textbf{#1} \hfill      % Study
 \colorbox{White}{%
@@ -98,12 +103,12 @@
 \noindent\hangindent=2em\hangafter=0 \small #4 % Description
 \normalsize \par}
 
-\newcommand{\PresentationEntry}[3]{
-\noindent \textbf{#1} \hfill      % Study
+\newcommand{\PresentationEntry}[4]{
+\noindent \textbf{#1} (#2) \hfill      % Study
 \colorbox{White}{%
 \parbox{6em}{%
-\hfill\color{Black}#2}} \par  % Duration
-\noindent \textit{#3}
+\hfill\color{Black}#3}} \par  % Duration
+\noindent \textit{#4}
 \normalsize \par}
 
 \newcommand{\SpecialEducationEntry}[5]{
@@ -121,22 +126,28 @@
 \colorbox{White}{%
 \parbox{6em}{%
 \hfill\color{Black}#2}} \par      % Date
-\noindent \small #3 \par          % Authors
-\noindent \textit{#4} \par        % Journal
-\noindent \url{#5} \par        % DOI
+\noindent\hangindent=2em\hangafter=0  \small #3 \par          % Authors
+\noindent\hangindent=2em\hangafter=0  \textit{#4} \hfill #5 \par        % DOI
 \normalsize \par}
 
 \newcommand{\InPrep}[2]{
 \noindent \textbf{#1} \hfill \par      % Title
-\noindent \small #2 \par          % Authors
+\noindent\hangindent=2em\hangafter=0 \small #2 \par          % Authors
 \normalsize \par}
 
-\newcommand{\ReviewEntry}[3]{
-\noindent \textbf{\emph{#1}} \normalsize{#2} \hfill      % Title
+\newcommand{\ServiceTopic}[1]{
+\noindent \textit{#1}\par
+}
+
+
+\newcommand{\ReviewEntry}[2]{
+\noindent\hangindent=2em\hangafter=0 #1 \hfill      % Title
 \colorbox{White}{%
 \parbox{6em}{%
-\hfill\color{Black}#3}} \par  % Date
+\hfill\color{Black}#2}} \par  % Date
 \normalsize \par}
+
+
 
 \newcommand{\WorkEntry}[4]{				  % Same as \EducationEntry
 \noindent \textbf{#1} \hfill      % Jobname
@@ -170,13 +181,13 @@
 %%% ------------------------------------------------------------
 \NewPart{\emph{Peer-Reviewed Publications}}{}
 
-\PublicationEntry{Identifying Models of Trait-Mediated Community Assembly \\ Using Random Forests and Approximate Bayesian Computation}{2019}{Ruffley, M.; Peterson, K.; \textbf{Week, B.}; Tank, D.; Harmon, L.}{Ecology and Evolution}{In Press}
+\PublicationEntry{Identifying Models of Trait-Mediated Community Assembly \\ Using Random Forests and Approximate Bayesian Computation}{2019}{Ruffley, M.; Peterson, K.; \textbf{Week, B.}; Tank, D.; Harmon, L.}{Ecology and Evolution}{\texttt{In Press}}
 \sepspace
-\PublicationEntry{Approximate Bayesian Estimation of Coevolutionary Arms Races}{2019}{Nuismer, S.L.; \textbf{Week, B.}}{PLOS Computational Biology}{https://doi.org/10.1371/journal.pcbi.1006988}
+\PublicationEntry{Approximate Bayesian Estimation of Coevolutionary Arms Races}{2019}{Nuismer, S.L.; \textbf{Week, B.}}{PLOS Computational Biology}{\url{https://doi.org/10.1371/journal.pcbi.1006988}}
 \sepspace
-\PublicationEntry{The Measurement of Coevolution in the Wild}{2019}{\textbf{Week, B.}; Nuismer, S.L.}{Ecology Letters}{https://doi.org/10.1111/ele.13231}
+\PublicationEntry{The Measurement of Coevolution in the Wild}{2019}{\textbf{Week, B.}; Nuismer, S.L.}{Ecology Letters}{\url{https://doi.org/10.1111/ele.13231}}
 \sepspace
-\PublicationEntry{Coevolution Slows the Disassembly of Mutualistic Communities}{2018}{Nuismer, S.L.; \textbf{Week, B.}; Aizen, M.}{American Naturalist}{https://doi.org/10.1086/699218}
+\PublicationEntry{Coevolution Slows the Disassembly of Mutualistic Communities}{2018}{Nuismer, S.L.; \textbf{Week, B.}; Aizen, M.}{American Naturalist}{\url{https://doi.org/10.1086/699218}}
 
 \NewPart{\emph{Manuscripts in Preparation}}{}
 
@@ -190,11 +201,11 @@
 %%% ------------------------------------------------------------
 \NewPart{\emph{Awards}}{}
 
-\EducationEntry{\href{https://www.uidaho.edu/sci/bcb/student-resources/bcb-fellowship}{BCB/IBEST Fellowship}}{2018-2019}{University of Idaho}{Proposed project aims to model the duration of coevolutionary associations as a function of the mechanism mediating the underlying interaction.}
+\EducationEntry{\href{https://www.uidaho.edu/sci/bcb/student-resources/bcb-fellowship}{BCB Fellowship}}{2018-2019}{University of Idaho}{Proposed project aims to model the duration of coevolutionary associations as a function of the mechanism mediating the underlying interaction.}
 \sepspace
 \EducationEntry{\href{https://www.uidaho.edu/news/archive/faculty-staff-news/2016-april/042516-pauljoyce}{Paul Joyce Memorial BCB Fellowship Endowment}}{2017}{University of Idaho}{Nominated by Dr. Nuismer because of my ``love for mathematics and helping others to appreciate how it can be used to understand biological processes.''}
 \sepspace
-\EducationEntry{\href{https://www.uidaho.edu/sci/bcb/student-resources/bcb-fellowship}{BCB/IBEST Fellowship}}{2017-2018}{University of Idaho}{Proposed work seeks to derive a continuous space (isolation by distance) model of coevolution and a method of inference for this model.}
+\EducationEntry{\href{https://www.uidaho.edu/sci/bcb/student-resources/bcb-fellowship}{BCB Fellowship}}{2017-2018}{University of Idaho}{Proposed work seeks to derive a continuous space (isolation by distance) model of coevolution and a method of inference for this model.}
 \sepspace
 \EducationEntry{\href{https://vivo.nkn.uidaho.edu/vivo/display/g1029485}{Undergraduate Research in Biology \& Mathematics (UBM)}}{2013-2015}{University of Idaho}{Efforts focused on deriving a method of inference for the measurement of coevolution in nature.}
 
@@ -202,30 +213,32 @@
 %%% ------------------------------------------------------------
 \NewPart{\emph{Presentations}}{}
 
-\PresentationEntry{The Measurement of Coevolution in Mutualisms (Talk)}{2017}{\href{http://www.evolutionmeetings.org/}{Evolution} - Portland, Oregon}
+\PresentationEntry{The Measurement of Coevolution in Nature}{Poster}{2018}{\href{https://www.zoology.ubc.ca/evo-wibo/}{EvoWibo} - Port Townsend, Washington}
 \sepspace
-\PresentationEntry{The Measurement of Coevolution in Nature (Poster)}{2018}{\href{https://www.zoology.ubc.ca/evo-wibo/}{EvoWibo} - Port Townsend, Washington}
+\PresentationEntry{The Measurement of Coevolution in Mutualisms}{Talk}{2017}{\href{http://www.evolutionmeetings.org/}{Evolution} - Portland, Oregon}
 
+%%% Experience
+%%% ------------------------------------------------------------
+\NewPart{\emph{Professional Experience}}{}
+
+\ExpEntry{Visiting Scientist}{P.J. CaraDonna Lab}{Rocky Mountain Biological Laboratory}{2018}{Field ecology training focused on estimating floral abundance and phenology, recording plant-pollinator interactions and estimating percent cover.}
 
 %%% Service
 %%% ------------------------------------------------------------
 \NewPart{\emph{Professional Service}}{}
 
-\ReviewEntry{Population Ecology}{(Manuscript Reviewer)}{2019}
-\sepspace
-\ReviewEntry{The American Naturalist}{(Manuscript Reviewer)}{2018}
-\sepspace
-\ReviewEntry{Evolution}{(Manuscript Reviewer)}{2018}
+\ServiceTopic{Manuscript Reviewer}
+\ReviewEntry{Population Ecology}{2019}
+\ReviewEntry{The American Naturalist}{2018}
+\ReviewEntry{Evolution}{2018}
 
 %%% Skills
 %%% ------------------------------------------------------------
-\NewPart{\emph{Technical Skills/Experience}}{}
+\NewPart{\emph{Technical Skills}}{}
 
 \SkillsEntry{Software}{julia, \textit{R}, Mathematica, \texttt{C++}, \LaTeX}
 \sepspace
-\SkillsEntry{Mathematics}{Theoretical Population and Quantitative Genetics, Measure Theory, Probability, Functional Analysis, Mathematical Statistics, Ordinary, Partial and Stochastic Differential Equations}
+\SkillsEntry{Mathematics}{Theoretical Quantitative and forward-time Population Genetics, Measure Theory, Probability, Functional Analysis, Mathematical Statistics, Ordinary, Partial and Stochastic Differential Equations}
 \sepspace
-\SkillsEntry{Field Ecology}{Three weeks of training at the Rocky Mountain Biological Laboratory with Professor Paul J. CaraDonna focusing on estimating Floral Abundance and Phenology, recording Plant-Pollinator Interactions and estimating Percent Cover.}
-
 
 \end{document}
