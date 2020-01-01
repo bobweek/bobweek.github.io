@@ -1,6 +1,9 @@
 ---
-title: "measuring coevolution in ecological communities"
-author: "bob week"
+title: "Measuring Coevolution in Ecological Communities"
+author: |
+  | __Bob Week__
+  | University of Idaho
+date: 1/5/20
 output: 
   revealjs::revealjs_presentation:
     center: true
@@ -8,131 +11,214 @@ output:
     incremental: true
 ---
 
-## how can we measure coevolution?
+# What is coevolution and how do we measure it?
 
-- create a model that predicts observed patterns
-- use observed patterns to infer model parameters
+## What is coevolution?
 
-# the model
+- Two notions:
+  1. Pairwise coevolution
+  2. Diffuse coevolution
 
-## communities are collections of species
+## Pairwise coevolution
+
+- The reciprocal evolutionary response of a pair of species due to an ecological interaction
+
+## Example: _Moegistorhynchus longirostris_ and _Lapeirousia anceps_
+
+![](flyflwr.jpg)
+
+## Diffuse coevolution
+
+- The reciprocal evolutionary response of a community of species involved in a common ecological interaction
+
+## Example: Plant-pollinator communities
+
+
+
+## How can we measure diffuse coevolution?
+
+- Create a model that predicts observed patterns
+- Use observed patterns to infer model parameters
+
+# The model
+
+## Communities are collections of species
 
 ![](IMG_20191001_133654.jpg){ width=84% }
 
-## these species tend to interact
+## These species tend to interact
 
 ![](IMG_20191001_133721.jpg){ width=84% }
 
 
-## interspecific interactions have consequences
+## Interspecific interactions have consequences
 
 ![](IMG_20191001_133834.jpg){ width=84% }
 
-## interspecific interactions have consequences
+## Interspecific interactions have consequences
 
 ![](IMG_20191001_133941.jpg){ width=84% }
 
 
-## how do we model these consequences
+## How do we model these consequences?
 
 ![](IMG_20191001_132232.jpg){ width=84% }
 
 
-## with well known relationships
+## With well known relationships
 
 ![](IMG_20191001_132318.jpg){ width=84% }
 
 
-## fitness is fundamental
+## Fitness is fundamental
 
 ![](IMG_20191001_132400.jpg){ width=84% }
 
 
 
-## fitness as a function of phenotype
+## Fitness as a function of phenotype
 
 ![](IMG_20191001_132624.jpg){ width=84% }
 
 
-## theory of the niche
+## Theory of the niche
 
 ![](IMG_20191001_134239.jpg){ width=84% }
 
 
-## mean trait as niche center
+## Mean trait as niche center
 
 ![](IMG_20191001_134308.jpg){ width=84% }
 
 
-## resource utilization curves
+## Resource utilization curves
 
 ![](IMG_20191001_134617.jpg){ width=84% }
 
 
 
-## niche overlap
+## Niche overlap
 
 ![](IMG_20191001_135024.jpg){ width=84% }
 
 
 
-## fitness as a function of niche overlap
+## Fitness as a function of niche overlap
 
 ![](IMG_20191001_141413.jpg){ width=84% }
 
 
-## competition
+## Competition
 
 ![](IMG_20191001_141616.jpg){ width=84% }
 
 
 
-## mutualism
+## Mutualism
 
 ![](IMG_20191001_141724.jpg){ width=84% }
 
 
 
-## host/parasite
+## Host-Parasite/Prey-Predator
 
 ![](IMG_20191001_141757.jpg){ width=84% }
 
 
 
-## parasite/host
+## Parasite-Host/Predator-Prey
 
 ![](IMG_20191001_141842.jpg){ width=84% }
 
 
-# the patterns
+## Other components of the model
 
-## two sample paths
+- Abiotic stabilizing selection
+- Demographic stochasticity
+- Mutation
+- Imperfect inheritance
+- Evolution of additive genetic variance
+
+# The patterns
+
+## Two sample paths
 
 ![](community_dynamics.png){ width=90% }
 
-## a snapshot at $t=1000.0$
+## A snapshot at $t=\mathtt{1000.0}$
 
 ![](community_dynamics.png){ width=90% }
 
 
-## distributions of abundance and phenotype
+## Distributions of abundance and phenotype
 
 ![](distributions.png){ width=60% }
 
 
-## network of interactions
+## Network of interactions
 
 ![](interaction_networks.png){ width=60% }
 
-## inference
+# Inference
 
-- the data = interaction frequencies, traits, abundances
-- competition and niche parameters can be solved directly
-- evolutionary parameters cannot
-  - working on an simulation based approach (ABC)
+## Rates of interaction
 
-# thanks!
+$R_{ij}=\frac{N_iN_jU_iU_j}{\sqrt{2\pi(w_i+w_j+\sigma_i^2+\sigma_j^2)}}\exp\left(-\frac{(\bar x_i-\bar x_j)^2}{2(w_i+w_j+\sigma_i^2+\sigma_j^2)}\right)$
 
-# in it's full glory!
+- $\left[\begin{matrix}\bar x_i\dots&\text{ mean trait } \\ \sigma_i^2\dots&\text{ phenotypic variance } \\  N_i\dots&\text{ abundance }\end{matrix}\right\}$ DATA
 
-![](gory.jpeg){ width=100% }
+- $\left[\begin{matrix}U_i\dots&\text{ total niche use } \\ w_i\dots&\text{ niche breadth }\end{matrix}\right\}$ PARAMETERS
+
+## Inferring niche use and niche breadth
+
+- Calculate expected and observe frequencies of interaction:
+
+  - $\rho_{ij}=\frac{R_{ij}}{\sum_{k=1}^S\sum_{l>k}R_{kl}}\dots$ theoretical expectation
+
+  - $\hat\rho_{ij}\dots$ empirical observation
+
+- Solve for the $U_i$ and $w_i$ that minimize the Kullback-Leibler divergence:
+
+  - $\mathcal{D}_{\mathrm{KL}}(\hat\rho\|\rho)=\sum_{i=1}^S\sum_{j>i}\hat\rho_{ij}\ln\left(\frac{\hat\rho_{ij}}{\rho_{ij}}\right)$
+
+## Implementation
+
+## Inferring remaining model parameters
+
+- What remains?
+  
+  - $c\dots$ strength of competition
+  - $a\dots$ strength of abiotic stabilizing selection
+  - $\theta\dots$ abiotic phenotypic optimum
+  - $r\dots$ intrinsic rate of growth
+  - $\mu\dots$ rate of mutation
+  - $\eta\dots$ segregation variances
+    - (imperfect inheritance)
+  - $\nu\dots$ variance in reproductive output
+    - (demographic stochasticity)
+
+## How can we infer these parameters?
+
+  - Using a Bayesian approach called a Markov chain Monte Carlo (MCMC) method
+
+## What is a MCMC method?
+  
+  - A numerical method to compute posteriors of model parameters
+  
+  - Markov chain:
+  
+    - A random walk through parameter space
+    
+  - Montel Carlo:
+  
+    - Probabilistic acceptance criteria of sampled parameters
+    
+  - Requires calculation of likelihood
+
+## Approximating the likelihood
+
+
+
+## Thanks!
+
+![](IbestLogo.png){width=%10}![](NSF_4-Color_bitmap_Logo.png){width=%1}
