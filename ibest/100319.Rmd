@@ -3,15 +3,17 @@ title: "Measuring Coevolution in Ecological Communities"
 author: |
   | __Bob Week__
   | University of Idaho
-date: 1/5/20
+date: 01/05/20
 output: 
   revealjs::revealjs_presentation:
     center: true
     transition: fade
     incremental: true
+header-includes:
+  - \usepackage{xcolor}
 ---
 
-# What is coevolution and how do we measure it?
+# What is coevolution and how can we measure it?
 
 ## What is coevolution?
 
@@ -46,18 +48,24 @@ output:
 
 ![](IMG_20191001_133654.jpg){ width=84% }
 
+
+
 ## These species tend to interact
 
 ![](IMG_20191001_133721.jpg){ width=84% }
+
 
 
 ## Interspecific interactions have consequences
 
 ![](IMG_20191001_133834.jpg){ width=84% }
 
+
+
 ## Interspecific interactions have consequences
 
 ![](IMG_20191001_133941.jpg){ width=84% }
+
 
 
 ## How do we model these consequences?
@@ -65,9 +73,11 @@ output:
 ![](IMG_20191001_132232.jpg){ width=84% }
 
 
+
 ## With well known relationships
 
 ![](IMG_20191001_132318.jpg){ width=84% }
+
 
 
 ## Fitness is fundamental
@@ -81,14 +91,17 @@ output:
 ![](IMG_20191001_132624.jpg){ width=84% }
 
 
+
 ## Theory of the niche
 
 ![](IMG_20191001_134239.jpg){ width=84% }
 
 
+
 ## Mean trait as niche center
 
 ![](IMG_20191001_134308.jpg){ width=84% }
+
 
 
 ## Resource utilization curves
@@ -106,6 +119,7 @@ output:
 ## Fitness as a function of niche overlap
 
 ![](IMG_20191001_141413.jpg){ width=84% }
+
 
 
 ## Competition
@@ -139,6 +153,39 @@ output:
 - Imperfect inheritance
 - Evolution of additive genetic variance
 
+## Parameters
+
+  - $U_i\dots$ niche use
+  - $c\dots$ strength of competition
+  - $a\dots$ strength of abiotic stabilizing selection
+  - $\theta\dots$ abiotic phenotypic optimum
+  - $r\dots$ intrinsic rate of growth
+  - $\mu\dots$ rate of mutation
+  - $\eta\dots$ segregation variance
+    - (imperfect inheritance)
+  - $\nu\dots$ variance in reproductive output
+    - (demographic stochasticity)
+    
+## Abundance dynamics
+
+$\frac{dN_i}{dt} = \left\{r\color{#F5793A}{-\frac{a}{2}\Big((\bar x_i-\theta)^2+G_i+\eta N_i\Big)}\right.$
+
+$\left. \color{#A95AA1}{ - c\left(-\sqrt{\frac{b_{ii}}{2\pi}}+\sum_{j=1}^SN_j\sqrt{\frac{b_{ij}}{2\pi}}e^{-\frac{b_{ij}}{2}(\bar x_i-\bar x_j)^2}\right)}\right\}N_i\color{#85C0F9}{+\nu\sqrt{N_i} \frac{d\xi_{i1}}{dt} }$
+
+## Mean trait dynamics
+
+$\frac{d\bar{x}_i}{dt} = \color{#F5793A}{aG_i(\theta-\bar x_i)}$
+
+$\color{#A95AA1}{+cG_i\sum_{j=1}^SN_jb_{ij}(\bar x_i-\bar x_j)\sqrt{\frac{b_{ij}}{2\pi}}e^{-\frac{b_{ij}}{2}(\bar x_i-\bar x_j)^2}}\color{#85C0F9}{+\nu\sqrt{\frac{G_i}{N_i}} \frac{d\xi_{i2}}{dt} }$
+
+## Dynamics of additive genetic variance
+
+$\frac{dG_i}{dt} = \mu\color{#F5793A}{-a{G_i}^2}$
+
+$\color{#A95AA1}{+c{G_i}^2\left(\sum_{j=1}^SN_jb_{ij}\left(1-b_{ij}(\bar x_i-\bar x_j)^2\right)\sqrt{\frac{b_{ij}}{2\pi}}e^{-\frac{b_{ij}}{2}(\bar x_i-\bar x_j)^2}\right)}$
+
+$\color{#85C0F9}{-\frac{\nu^2G_i}{N_i}+\nu G_i\sqrt{\frac{2}{N_i}} \frac{d\xi_{i3}}{dt} }$
+
 # The patterns
 
 ## Two sample paths
@@ -163,13 +210,13 @@ output:
 
 ## Rates of interaction
 
-$R_{ij}=\frac{N_iN_jU_iU_j}{\sqrt{2\pi(w_i+w_j+\sigma_i^2+\sigma_j^2)}}\exp\left(-\frac{(\bar x_i-\bar x_j)^2}{2(w_i+w_j+\sigma_i^2+\sigma_j^2)}\right)$
+$R_{ij}=\frac{N_iN_jU_iU_j}{\sqrt{2\pi(\sigma_i^2+\sigma_j^2)}}\exp\left(-\frac{(\bar x_i-\bar x_j)^2}{2(\sigma_i^2+\sigma_j^2)}\right)$
 
 - $\left[\begin{matrix}\bar x_i\dots&\text{ mean trait } \\ \sigma_i^2\dots&\text{ phenotypic variance } \\  N_i\dots&\text{ abundance }\end{matrix}\right\}$ DATA
 
-- $\left[\begin{matrix}U_i\dots&\text{ total niche use } \\ w_i\dots&\text{ niche breadth }\end{matrix}\right\}$ PARAMETERS
+- $\left[\begin{matrix}U_i\dots&\text{ niche use }\end{matrix}\right\}$ PARAMETERS
 
-## Inferring niche use and niche breadth
+## Inferring niche use
 
 - Calculate expected and observe frequencies of interaction:
 
@@ -177,27 +224,17 @@ $R_{ij}=\frac{N_iN_jU_iU_j}{\sqrt{2\pi(w_i+w_j+\sigma_i^2+\sigma_j^2)}}\exp\left
 
   - $\hat\rho_{ij}\dots$ empirical observation
 
-- Solve for the $U_i$ and $w_i$ that minimize the Kullback-Leibler divergence:
+- Solve for $U_1,\dots,U_S$ that minimize the Kullback-Leibler divergence:
 
   - $\mathcal{D}_{\mathrm{KL}}(\hat\rho\|\rho)=\sum_{i=1}^S\sum_{j>i}\hat\rho_{ij}\ln\left(\frac{\hat\rho_{ij}}{\rho_{ij}}\right)$
 
 ## Implementation
 
-## Inferring remaining model parameters
+![](ecol_plt.png)
 
-- What remains?
-  
-  - $c\dots$ strength of competition
-  - $a\dots$ strength of abiotic stabilizing selection
-  - $\theta\dots$ abiotic phenotypic optimum
-  - $r\dots$ intrinsic rate of growth
-  - $\mu\dots$ rate of mutation
-  - $\eta\dots$ segregation variances
-    - (imperfect inheritance)
-  - $\nu\dots$ variance in reproductive output
-    - (demographic stochasticity)
+Sample sizes: $\mathtt{100}\sim(\bar x_i,{\sigma_i}^2), \ \mathtt{1000}\sim N_i, \ \mathtt{5000}\sim \rho_{ij}$
 
-## How can we infer these parameters?
+## How can we infer remaining parameters?
 
   - Using a Bayesian approach called a Markov chain Monte Carlo (MCMC) method
 
@@ -214,11 +251,32 @@ $R_{ij}=\frac{N_iN_jU_iU_j}{\sqrt{2\pi(w_i+w_j+\sigma_i^2+\sigma_j^2)}}\exp\left
     - Probabilistic acceptance criteria of sampled parameters
     
   - Requires calculation of likelihood
+  
+## Approximating likelihood
 
-## Approximating the likelihood
+![](x1_plt_whiteout.png)
 
+## Approximating likelihood
 
+![](x1_plt.png)
+
+## What is left?
+
+- Optimize likelihood calculation
+- Implement MCMC
+- Extend the whole approach to bipartite networks
+- Apply to data on plant-pollinator networks
+
+## Data
+
+```{r echo=F, fig.show = "hold", out.width = "70%", fig.align = "center", fig.caption="Interaction rewiring and the rapid turnover of plant–pollinator networks, CaraDonna et al 2017"}
+knitr::include_graphics("caradonna_network.png")
+```
+
+"Interaction rewiring and the rapid turnover of plant–pollinator networks", CaraDonna et al 2017
 
 ## Thanks!
 
-![](IbestLogo.png){width=%10}![](NSF_4-Color_bitmap_Logo.png){width=%1}
+```{r image_grobs, echo=F, fig.show = "hold", out.width = "70%", fig.align = "center"}
+knitr::include_graphics("image.png")
+```
