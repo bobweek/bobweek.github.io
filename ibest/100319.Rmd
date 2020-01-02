@@ -33,9 +33,9 @@ header-includes:
 
 - The reciprocal evolutionary response of a community of species involved in a common ecological interaction
 
-## Example: Plant-pollinator communities
+## Example: Plant-pollinator networks
 
-
+![](actual network.png)
 
 ## How can we measure diffuse coevolution?
 
@@ -176,7 +176,7 @@ $\left. \color{#A95AA1}{ - c\left(-\sqrt{\frac{b_{ii}}{2\pi}}+\sum_{j=1}^SN_j\sq
 
 $\frac{d\bar{x}_i}{dt} = \color{#F5793A}{aG_i(\theta-\bar x_i)}$
 
-$\color{#A95AA1}{+cG_i\sum_{j=1}^SN_jb_{ij}(\bar x_i-\bar x_j)\sqrt{\frac{b_{ij}}{2\pi}}e^{-\frac{b_{ij}}{2}(\bar x_i-\bar x_j)^2}}\color{#85C0F9}{+\nu\sqrt{\frac{G_i}{N_i}} \frac{d\xi_{i2}}{dt} }$
+$\color{#A95AA1}{-cG_i\sum_{j=1}^SN_jb_{ij}(\bar x_j-\bar x_i)\sqrt{\frac{b_{ij}}{2\pi}}e^{-\frac{b_{ij}}{2}(\bar x_i-\bar x_j)^2}}\color{#85C0F9}{+\nu\sqrt{\frac{G_i}{N_i}} \frac{d\xi_{i2}}{dt} }$
 
 ## Dynamics of additive genetic variance
 
