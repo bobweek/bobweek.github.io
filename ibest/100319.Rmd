@@ -11,6 +11,7 @@ output:
     incremental: true
 header-includes:
   - \usepackage{xcolor}
+  - \usepackage{tikz}
 ---
 
 # What is coevolution and how can we measure it?
@@ -23,7 +24,7 @@ header-includes:
 
 ## Pairwise coevolution
 
-- The reciprocal evolutionary response of a pair of species due to an ecological interaction
+- Reciprocal evolutionary response of a pair of species due to a direct ecological interaction
 
 ## Example: _Moegistorhynchus longirostris_ and _Lapeirousia anceps_
 
@@ -31,7 +32,7 @@ header-includes:
 
 ## Diffuse coevolution
 
-- The reciprocal evolutionary response of a community of species involved in a common ecological interaction
+- Reciprocal evolutionary response of a pair of species due to an indirect ecological interaction
 
 ## Example: Plant-pollinator networks
 
