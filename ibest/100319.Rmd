@@ -18,27 +18,20 @@ header-includes:
 
 ## What is coevolution?
 
-- Two notions:
-  1. Pairwise coevolution
-  2. Diffuse coevolution
+1. Pairwise coevolution
+2. Diffuse coevolution
 
 ## Pairwise coevolution
 
-- Reciprocal evolutionary response of a pair of species due to a direct ecological interaction
+Reciprocal evolutionary response of a pair of species due to a direct ecological interaction
+
+![](2spp.png)
 
 ## Example: _Moegistorhynchus longirostris_ and _Lapeirousia anceps_
 
 ![](flyflwr.jpg)
 
-## Diffuse coevolution
-
-- Reciprocal evolutionary response of a pair of species due to an indirect ecological interaction
-
-## Example: Plant-pollinator networks
-
-![](actual network.png)
-
-## How can we measure diffuse coevolution?
+## How can we measure pairwise coevolution throughout a community?
 
 - Create a model that predicts observed patterns
 - Use observed patterns to infer model parameters
