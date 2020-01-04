@@ -14,22 +14,9 @@ header-includes:
   - \usepackage{tikz}
 ---
 
-# What is coevolution and how can we measure it?
-
-## What is coevolution?
-
-1. Pairwise coevolution
-2. Diffuse coevolution
-
 ## Pairwise coevolution
 
-Reciprocal evolutionary response of a pair of species due to a direct ecological interaction
-
-![](2spp.png)
-
-## Example: _Moegistorhynchus longirostris_ and _Lapeirousia anceps_
-
-![](flyflwr.jpg)
+Reciprocal evolutionary response of a pair of species due to an ecological interaction
 
 ## How can we measure pairwise coevolution throughout a community?
 
@@ -128,13 +115,13 @@ Reciprocal evolutionary response of a pair of species due to a direct ecological
 
 
 
-## Host-Parasite/Prey-Predator
+## Predator-Prey
 
 ![](IMG_20191001_141757.jpg){ width=84% }
 
 
 
-## Parasite-Host/Predator-Prey
+## Prey-Predator
 
 ![](IMG_20191001_141842.jpg){ width=84% }
 
@@ -143,9 +130,9 @@ Reciprocal evolutionary response of a pair of species due to a direct ecological
 
 - Abiotic stabilizing selection
 - Demographic stochasticity
-- Mutation
+- Mutation (Gaussian allelic)
 - Imperfect inheritance
-- Evolution of additive genetic variance
+- Evolution of additive genetic variance ($G$)
 
 ## Parameters
 
@@ -162,7 +149,7 @@ Reciprocal evolutionary response of a pair of species due to a direct ecological
     
 ## Abundance dynamics
 
-$\frac{dN_i}{dt} = \left\{r\color{#F5793A}{-\frac{a}{2}\Big((\bar x_i-\theta)^2+G_i+\eta N_i\Big)}\right.$
+$\frac{dN_i}{dt} = \left\{r\color{#F5793A}{-\frac{a}{2}\Big((\bar x_i-\theta)^2+{\sigma_i}^2\Big)}\right.$
 
 $\left. \color{#A95AA1}{ - c\left(-\sqrt{\frac{b_{ii}}{2\pi}}+\sum_{j=1}^SN_j\sqrt{\frac{b_{ij}}{2\pi}}e^{-\frac{b_{ij}}{2}(\bar x_i-\bar x_j)^2}\right)}\right\}N_i\color{#85C0F9}{+\nu\sqrt{N_i} \frac{d\xi_{i1}}{dt} }$
 
@@ -186,25 +173,15 @@ $\color{#85C0F9}{-\frac{\nu^2G_i}{N_i}+\nu G_i\sqrt{\frac{2}{N_i}} \frac{d\xi_{i
 
 ![](community_dynamics.png){ width=90% }
 
-## A snapshot at $t=\mathtt{1000.0}$
-
-![](community_dynamics.png){ width=90% }
-
-
-## Distributions of abundance and phenotype
-
-![](distributions.png){ width=60% }
-
-
 ## Network of interactions
 
 ![](interaction_networks.png){ width=60% }
 
 # Inference
 
-## Rates of interaction
+## Expressions of niche overalp
 
-$R_{ij}=\frac{N_iN_jU_iU_j}{\sqrt{2\pi(\sigma_i^2+\sigma_j^2)}}\exp\left(-\frac{(\bar x_i-\bar x_j)^2}{2(\sigma_i^2+\sigma_j^2)}\right)$
+$\mathcal{O}_{ij}=\frac{N_iN_jU_iU_j}{\sqrt{2\pi(\sigma_i^2+\sigma_j^2)}}\exp\left(-\frac{(\bar x_i-\bar x_j)^2}{2(\sigma_i^2+\sigma_j^2)}\right)$
 
 - $\left[\begin{matrix}\bar x_i\dots&\text{ mean trait } \\ \sigma_i^2\dots&\text{ phenotypic variance } \\  N_i\dots&\text{ abundance }\end{matrix}\right\}$ DATA
 
@@ -212,13 +189,13 @@ $R_{ij}=\frac{N_iN_jU_iU_j}{\sqrt{2\pi(\sigma_i^2+\sigma_j^2)}}\exp\left(-\frac{
 
 ## Inferring niche use
 
-- Calculate expected and observe frequencies of interaction:
+1. Calculate/collect expected/observed frequencies of interaction:
 
-  - $\rho_{ij}=\frac{R_{ij}}{\sum_{k=1}^S\sum_{l>k}R_{kl}}\dots$ theoretical expectation
+  - $\rho_{ij}=\frac{\mathcal{O}_{ij}}{\sum_{k=1}^S\sum_{l>k}\mathcal{O}_{kl}}\dots$ theoretical expectation
 
-  - $\hat\rho_{ij}\dots$ empirical observation
-
-- Solve for $U_1,\dots,U_S$ that minimize the Kullback-Leibler divergence:
+  - $\hat\rho_{ij}\dots$ observed frequencies
+  
+2. Solve for $U_1,\dots,U_S$ that minimize the Kullback-Leibler divergence:
 
   - $\mathcal{D}_{\mathrm{KL}}(\hat\rho\|\rho)=\sum_{i=1}^S\sum_{j>i}\hat\rho_{ij}\ln\left(\frac{\hat\rho_{ij}}{\rho_{ij}}\right)$
 
