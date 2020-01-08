@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.10.21)  22 NOV 2019 09:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.10.21)  8 JAN 2020 10:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -628,6 +628,22 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              This could result in several error messages on input li
 ne 192.
 
+
+Class scrartcl Warning: incompatible usage of \@ssect detected.
+(scrartcl)              You've used the KOMA-Script implementation of \@ssect
+(scrartcl)              from within a non compatible caller, that does not
+(scrartcl)              \scr@s@ct@@nn@m@ locally.
+(scrartcl)              This could result in several error messages on input li
+ne 201.
+
+
+Class scrartcl Warning: incompatible usage of \@ssect detected.
+(scrartcl)              You've used the KOMA-Script implementation of \@ssect
+(scrartcl)              from within a non compatible caller, that does not
+(scrartcl)              \scr@s@ct@@nn@m@ locally.
+(scrartcl)              This could result in several error messages on input li
+ne 207.
+
 [1
 
 {/home/bob/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
@@ -637,7 +653,7 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 202.
+ne 219.
 
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
@@ -645,7 +661,7 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 214.
+ne 231.
 
 
 Class scrartcl Warning: incompatible usage of \@ssect detected.
@@ -653,42 +669,26 @@ Class scrartcl Warning: incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 222.
+ne 240.
 
-
-Class scrartcl Warning: incompatible usage of \@ssect detected.
-(scrartcl)              You've used the KOMA-Script implementation of \@ssect
-(scrartcl)              from within a non compatible caller, that does not
-(scrartcl)              \scr@s@ct@@nn@m@ locally.
-(scrartcl)              This could result in several error messages on input li
-ne 228.
-
-
-Class scrartcl Warning: incompatible usage of \@ssect detected.
-(scrartcl)              You've used the KOMA-Script implementation of \@ssect
-(scrartcl)              from within a non compatible caller, that does not
-(scrartcl)              \scr@s@ct@@nn@m@ locally.
-(scrartcl)              This could result in several error messages on input li
-ne 237.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 244.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 247.
 [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 244.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 247.
  (./bob_week.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 244.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 244.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 247.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 247.
 Package rerunfilecheck Info: File `bob_week.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 244.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 247.
  ) 
 Here is how much of TeX's memory you used:
  11375 strings out of 494562
  184044 string characters out of 6177410
- 455400 words of memory out of 5000000
+ 456400 words of memory out of 5000000
  14838 multiletter control sequences out of 15000+600000
  24233 words of font info for 79 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 41i,5n,51p,9152b,348s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,6n,51p,9152b,409s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/bob/.TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}</home/bob/.TinyTe
 X/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></home/bob/.TinyTeX/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></home/bob/.TinyTeX/texmf-dist/
@@ -698,10 +698,10 @@ blic/amsfonts/cm/cmtt10.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmtt12.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/u
 hvb8a.pfb></home/bob/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb><
 /home/bob/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on bob_week.pdf (2 pages, 109662 bytes).
+Output written on bob_week.pdf (2 pages, 110905 bytes).
 PDF statistics:
- 78 PDF objects out of 1000 (max. 8388607)
- 64 compressed objects within 1 object stream
+ 79 PDF objects out of 1000 (max. 8388607)
+ 65 compressed objects within 1 object stream
  12 named destinations out of 1000 (max. 500000)
  19969 words of extra memory for PDF output out of 20736 (max. 10000000)
 
