@@ -1,9 +1,9 @@
 ---
-title: "Measuring Coevolution in Ecological Communities"
+title: "Coevolution in Ecological Communities"
 author: |
   | __Bob Week__
   | University of Idaho
-date: 01/05/20
+date: 02/20/20
 output: 
   revealjs::revealjs_presentation:
     center: true
@@ -13,17 +13,6 @@ header-includes:
   - \usepackage{xcolor}
   - \usepackage{tikz}
 ---
-
-## Pairwise coevolution
-
-Reciprocal evolutionary response of a pair of species due to an ecological interaction
-
-## How can we measure pairwise coevolution throughout a community?
-
-- Create a model that predicts observed patterns
-- Use observed patterns to infer model parameters
-
-# The model
 
 ## Communities are collections of species
 
@@ -144,28 +133,30 @@ Reciprocal evolutionary response of a pair of species due to an ecological inter
   - $\mu\dots$ rate of mutation
   - $\eta\dots$ segregation variance
     - (imperfect inheritance)
-  - $\nu\dots$ variance in reproductive output
+  - $V\dots$ variance in reproductive output
     - (demographic stochasticity)
     
 ## Abundance dynamics
 
-$\frac{dN_i}{dt} = \left\{r\color{#F5793A}{-\frac{a}{2}\Big((\bar x_i-\theta)^2+{\sigma_i}^2\Big)}\right.$
+$\frac{dN_i}{dt} = \left\{r\color{#F5793A}{-\frac{a}{2}\Big((\bar x_i-\theta)^2+G_i+\eta\Big)}\right.$
 
-$\left. \color{#A95AA1}{ - c\left(-\sqrt{\frac{b_{ii}}{2\pi}}+\sum_{j=1}^SN_j\sqrt{\frac{b_{ij}}{2\pi}}e^{-\frac{b_{ij}}{2}(\bar x_i-\bar x_j)^2}\right)}\right\}N_i\color{#85C0F9}{+\nu\sqrt{N_i} \frac{d\xi_{i1}}{dt} }$
+$\left. \color{#A95AA1}{ - c\sum_{j=1}^SN_j\sqrt{\frac{b_{ij}}{2\pi}}e^{-\frac{b_{ij}}{2}(\bar x_i-\bar x_j)^2}}\right\}N_i\color{#85C0F9}{+\sqrt{VN_i} \frac{dW_{i1}}{dt} }$
 
 ## Mean trait dynamics
 
 $\frac{d\bar{x}_i}{dt} = \color{#F5793A}{aG_i(\theta-\bar x_i)}$
 
-$\color{#A95AA1}{-cG_i\sum_{j=1}^SN_jb_{ij}(\bar x_j-\bar x_i)\sqrt{\frac{b_{ij}}{2\pi}}e^{-\frac{b_{ij}}{2}(\bar x_i-\bar x_j)^2}}\color{#85C0F9}{+\nu\sqrt{\frac{G_i}{N_i}} \frac{d\xi_{i2}}{dt} }$
+$\color{#A95AA1}{-cG_i\sum_{j=1}^SN_jb_{ij}(\bar x_j-\bar x_i)\sqrt{\frac{b_{ij}}{2\pi}}e^{-\frac{b_{ij}}{2}(\bar x_i-\bar x_j)^2}}\color{#85C0F9}{+\sqrt{V\frac{G_i}{N_i}} \frac{dW_{i2}}{dt} }$
 
 ## Dynamics of additive genetic variance
 
 $\frac{dG_i}{dt} = \mu\color{#F5793A}{-a{G_i}^2}$
 
-$\color{#A95AA1}{+c{G_i}^2\left(\sum_{j=1}^SN_jb_{ij}\left(1-b_{ij}(\bar x_i-\bar x_j)^2\right)\sqrt{\frac{b_{ij}}{2\pi}}e^{-\frac{b_{ij}}{2}(\bar x_i-\bar x_j)^2}\right)}$
+$\color{#A95AA1}{+c{G_i}^2\left(N_ib_{ii}\sqrt\frac{b_{ii}}{2\pi}\right.}$
 
-$\color{#85C0F9}{-\frac{\nu^2G_i}{N_i}+\nu G_i\sqrt{\frac{2}{N_i}} \frac{d\xi_{i3}}{dt} }$
+$\color{#A95AA1}{+\left.\sum_{j=1}^SN_jb_{ij}\left(1-b_{ij}(\bar x_i-\bar x_j)^2\right)\sqrt{\frac{b_{ij}}{2\pi}}e^{-\frac{b_{ij}}{2}(\bar x_i-\bar x_j)^2}\right)}$
+
+$\color{#85C0F9}{-\frac{VG_i}{N_i}+G_i\sqrt{\frac{2V}{N_i}} \frac{dW_{i3}}{dt} }$
 
 # The patterns
 
@@ -176,67 +167,6 @@ $\color{#85C0F9}{-\frac{\nu^2G_i}{N_i}+\nu G_i\sqrt{\frac{2}{N_i}} \frac{d\xi_{i
 ## Network of interactions
 
 ![](interaction_networks.png){ width=60% }
-
-# Inference
-
-## Expressions of niche overalp
-
-$\mathcal{O}_{ij}=\frac{N_iN_jU_iU_j}{\sqrt{2\pi(\sigma_i^2+\sigma_j^2)}}\exp\left(-\frac{(\bar x_i-\bar x_j)^2}{2(\sigma_i^2+\sigma_j^2)}\right)$
-
-- $\left[\begin{matrix}\bar x_i\dots&\text{ mean trait } \\ \sigma_i^2\dots&\text{ phenotypic variance } \\  N_i\dots&\text{ abundance }\end{matrix}\right\}$ DATA
-
-- $\left[\begin{matrix}U_i\dots&\text{ niche use }\end{matrix}\right\}$ PARAMETERS
-
-## Inferring niche use
-
-1. Calculate/collect expected/observed frequencies of interaction:
-
-  - $\rho_{ij}=\frac{\mathcal{O}_{ij}}{\sum_{k=1}^S\sum_{l>k}\mathcal{O}_{kl}}\dots$ theoretical expectation
-
-  - $\hat\rho_{ij}\dots$ observed frequencies
-  
-2. Solve for $U_1,\dots,U_S$ that minimize the Kullback-Leibler divergence:
-
-  - $\mathcal{D}_{\mathrm{KL}}(\hat\rho\|\rho)=\sum_{i=1}^S\sum_{j>i}\hat\rho_{ij}\ln\left(\frac{\hat\rho_{ij}}{\rho_{ij}}\right)$
-
-## Implementation
-
-![](ecol_plt.png)
-
-Sample sizes: $\mathtt{100}\sim(\bar x_i,{\sigma_i}^2), \ \mathtt{1000}\sim N_i, \ \mathtt{5000}\sim \rho_{ij}$
-
-## How can we infer remaining parameters?
-
-  - Using a Bayesian approach called a Markov chain Monte Carlo (MCMC) method
-
-## What is a MCMC method?
-  
-  - A numerical method to compute posteriors of model parameters
-  
-  - Markov chain:
-  
-    - A random walk through parameter space
-    
-  - Montel Carlo:
-  
-    - Probabilistic acceptance criteria of sampled parameters
-    
-  - Requires calculation of likelihood
-  
-## Approximating likelihood
-
-![](x1_plt_whiteout.png)
-
-## Approximating likelihood
-
-![](x1_plt.png)
-
-## What is left?
-
-- Optimize likelihood calculation
-- Implement MCMC
-- Extend the whole approach to bipartite networks
-- Apply to data on plant-pollinator networks
 
 ## Data
 
