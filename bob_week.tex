@@ -85,8 +85,8 @@
 \hspace{1.5em} #2 \par}    % Entry value
 
 \newcommand{\SkillsEntry}[2]{      % Same as \PersonalEntry
-\noindent \textit{#1} \par        % School
-\noindent\hangindent=2em\hangafter=0 \small #2 % Description
+\noindent \textit{#1} \par       % School
+\noindent\hangindent=2em\hangafter=0\small #2 % Description
 \normalsize \par}
 
 \newcommand{\ExpEntry}[5]{      % Same as \PersonalEntry
@@ -134,6 +134,15 @@
 \noindent \textbf{#1} \hfill \par      % Title
 \noindent\hangindent=2em\hangafter=0 \small #2 \par          % Authors
 \normalsize \par}
+
+\newcommand{\InPrepWithDoi}[4]{
+\noindent \textbf{#1} \hfill      % Title
+\colorbox{White}{%
+\parbox{6em}{%
+\hfill\color{Black}#2}} \par      % Date
+\noindent\hangindent=2em\hangafter=0 \small #3          % Authors
+\hfill #4        % DOI
+\normalsize}
 
 \newcommand{\ServiceTopic}[1]{
 \noindent \textit{#1}\par
@@ -189,12 +198,11 @@
 \sepspace
 \PublicationEntry{Coevolution Slows the Disassembly of Mutualistic Communities}{2018}{Nuismer, S.L.; \textbf{Week, B.}; Aizen, M.}{American Naturalist}{\url{https://doi.org/10.1086/699218}}
 
-\NewPart{\emph{Manuscripts in Preparation}}{}
+\NewPart{\emph{Manuscripts in Preparation \& Preprints}}{}
 
 \InPrep{A White Noise Approach to Evolutionary Ecology}{\textbf{Week, B.}; Nuismer, S.L.; Krone, S.}
 \sepspace
-\InPrep{Dynamics of Assembly and Coexistence in Evolved \\ Versus Assembled Communities}{Overcast, I.; Ruffley, M.; Rosindell, J.; Harmon, L.; Borges, P.; Chase, J.; Emerson, B.; Etienne, R.S.; Gillespie, R.; Krehenwinkel, H.; Mahler, L.; Massol, F.; McGill, B.; Parent, K.; Pati\~{n}o, J.; Peter, B.; \textbf{Week, B.}; Wagner, C.; Hickerson, M.J.; Rominger, A.}
-
+\InPrepWithDoi{A Unified Model of Species Abundance, Genetic Diversity, and Functional Diversity Reveals the Mechanisms Structuring Ecological Communities}{2020}{Overcast, I.; Ruffley, M.; Rosindell, J.; Harmon, L.; Borges, P.; Emerson, B.; Etienne, R.S.; Gillespie, R.; Krehenwinkel, H.; Mahler, L.; Massol, F.; Parent, K.; Pati\~{n}o, J.; Peter, B.; \textbf{Week, B.}; Wagner, C.; Hickerson, M.J.; Rominger, A.}{\url{http://dx.doi.org/10.1101/2020.01.30.927236}}
 
 %%% Experience
 %%% ------------------------------------------------------------
@@ -240,8 +248,6 @@ Ecological Communities}{Talk}{2020}{\href{https://amnat2020.com/}{AmNat2020} - P
 \NewPart{\emph{Technical Skills}}{}
 
 \SkillsEntry{Software}{Julia, \textit{R}, Mathematica, \texttt{C++}, \LaTeX}
-\sepspace
 \SkillsEntry{Mathematics}{Theoretical Quantitative and Population Genetics, Measure Theory, Probability, Functional Analysis, Mathematical Statistics, Ordinary, Partial and Stochastic Differential Equations}
-\sepspace
 
 \end{document}
