@@ -158,8 +158,6 @@ $\color{#A95AA1}{+\left.\sum_{j=1}^SN_jb_{ij}\left(1-b_{ij}(\bar x_i-\bar x_j)^2
 
 $\color{#85C0F9}{-\frac{VG_i}{N_i}+G_i\sqrt{\frac{2V}{N_i}} \frac{dW_{i3}}{dt} }$
 
-# The patterns
-
 ## Two sample paths
 
 ![](community_dynamics.png){ width=90% }
@@ -167,6 +165,48 @@ $\color{#85C0F9}{-\frac{VG_i}{N_i}+G_i\sqrt{\frac{2V}{N_i}} \frac{dW_{i3}}{dt} }
 ## Network of interactions
 
 ![](interaction_networks.png){ width=60% }
+
+## Data
+
+$$\left[\begin{matrix}
+\bar x_i\dots & \text{mean traits}\\
+\sigma^2_i\dots & \text{trait variances} \\
+N_i\dots & \text{abundances} \\
+\rho_{ij}\dots & \text{rates of interspecific interations}
+\end{matrix}\right\}$$
+
+## Inference
+
+## Estimating total niche use
+
+$$\mathcal{O}_{ij}=\frac{U_iU_j}{\sqrt{2\pi(\sigma_i^2+\sigma_j^2)}}\exp\left(-\frac{(\bar x_i-\bar x_j)^2}{2(\sigma_i^2+\sigma_j^2)}\right)\dots\text{predicted niche overlap}$$
+
+$$\rho_{ij}=\frac{\mathcal{O}_{ij}}{\sum_{k=1}^S\mathcal{O}_{ik}}\dots\text{predicted rates of interspecific interactions}$$
+
+$$(\hat U_1,\dots,\hat U_S)={\arg\min}_{U_1.\dots,U_S}D_{KL}(\rho_{ij}||\hat\rho_{ij})$$
+
+## Sample results
+
+```{r echo=F, fig.show = "hold", out.width = "70%", fig.align = "center"}
+knitr::include_graphics("ecol_plt.png")
+```
+
+## Estimating remaining model parameters
+
+  - No analytical formula
+  -
+
+## A Markov Chain
+
+```{r echo=F, fig.show = "hold", out.width = "70%", fig.align = "center"}
+knitr::include_graphics("x1_plt_whiteout.png")
+```
+
+## Equilibrium distribution
+
+```{r echo=F, fig.show = "hold", out.width = "70%", fig.align = "center"}
+knitr::include_graphics("x1_plt.png")
+```
 
 ## Data
 
