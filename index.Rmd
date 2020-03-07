@@ -28,7 +28,7 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-I am a PhD candidate at the University of Idaho working with Professor [Scott Nuismer](https://www.leeef.org) with plans to graduate June 2020. My degree program is Bioinformatics and Computational Biology ([BCB](https://www.uidaho.edu/sci/bcb)) which is housed within The Institute for Bioinformatics and Evolutionary Studies ([IBEST](http://www.ibest.uidaho.edu/)). My CV is available [here](bob_week.pdf).
+I am a PhD candidate at the University of Idaho advised by Professor [Scott Nuismer](https://www.leeef.org) and planning to graduate June 2020. My degree program is Bioinformatics and Computational Biology ([BCB](https://www.uidaho.edu/sci/bcb)) which is housed within The Institute for Bioinformatics and Evolutionary Studies ([IBEST](http://www.ibest.uidaho.edu/)). My CV is available [here](bob_week.pdf).
 </b>
 </p>
 
