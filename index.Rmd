@@ -17,7 +17,7 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-I am generally interested in understanding the relationship between pattern and process in ecological communities. This inquiry leads to a broad range of questions involving mechanisms for species coexistence, the role of contemporary coevolution in structuring interaction networks, the effects of genetic constraints on community level patterns, feedbacks with chemical cycles, the macroevolutionary history of interacting taxa and, of course, much much more. However, developing models and statistical methods to explore these biological curiosities and to test our ideas on them leads to challenging mathematical and computational problems. Building off my background in mathematics, I hope to work with theoreticians and empiricists in bringing theory and data closer together to tackle these problems.
+I am generally interested in understanding the relationship between pattern and process in ecological communities. This inquiry leads to a broad range of questions involving mechanisms for species coexistence, the role of contemporary coevolution in structuring interaction networks, the effects of genetic constraints on community level patterns, feedbacks with chemical cycles, the macroevolutionary history of interacting taxa and, of course, much much more. However, developing models and statistical methods to explore these biological curiosities and to test our ideas on them leads to challenging technical problems. I use my background in mathematics to confront these challenges and contribute to collaborations with evolutionary biologists and ecologists to develop novel insights for understanding ecological communities.
 </b>
 </p>
 

@@ -1,5 +1,0 @@
-revealjs_config:
-  keyboard: {
-    39: 'next',
-    37: 'prev'
-  }
