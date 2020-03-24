@@ -12,7 +12,7 @@ output:
 
 $$\Huge\text{Bob Week}$$
 
-$$\small{\text{Mathematical Evolutionary Ecology}}$$
+$$\small{\sim\text{Mathematical Evolutionary Ecology}\sim}$$
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
@@ -41,6 +41,6 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-My dissertation contributes to a coevolutionary theory of community ecology with a focus on plant-pollinator networks. In particular, I have recently developed a Maximum Likelihood method to infer the strength of coevolution between pairs of species using spatially structured phenotypic data ([Week 2019](https://onlinelibrary.wiley.com/doi/abs/10.1111/ele.13231)). I am currently finishing a project applying Measure-Valued Branching Processes (e.g., [super-Brownian motion](http://www.math.ubc.ca/~perkins/superbrownianmotionandcriticalspatialsystems.pdf)) and Stochastic Partial Differential Equations ([SPDE](https://en.wikipedia.org/wiki/Stochastic_partial_differential_equation)) to formally derive stochastic models of coevolving communities. Working with Professor [Paul CaraDonna](https://paulcaradonna.weebly.com/), we plan on using this new set of tools to develop an Approximate Bayesian Computation to infer the distribution of phenological coevolution in a sub-alpine plant-pollinator network.
+My dissertation contributes to a coevolutionary theory of community ecology with a focus on plant-pollinator networks. In particular, I have recently developed a Maximum Likelihood method to infer the strength of coevolution between pairs of species using spatially structured phenotypic data ([Week 2019](https://onlinelibrary.wiley.com/doi/abs/10.1111/ele.13231)). I am currently finishing a project applying Diffusion Limits of Measure-Valued Branching Processes (e.g., [super-Brownian motion](http://www.math.ubc.ca/~perkins/superbrownianmotionandcriticalspatialsystems.pdf)) and their associated Stochastic Partial Differential Equations ([SPDE](https://en.wikipedia.org/wiki/Stochastic_partial_differential_equation)) to formally derive stochastic models of coevolving communities. Working with Professor [Paul CaraDonna](https://paulcaradonna.weebly.com/), we plan on using this new set of tools to develop an Approximate Bayesian Computation to infer the distribution of phenological coevolution in a sub-alpine plant-pollinator network.
 </b>
 </p>
