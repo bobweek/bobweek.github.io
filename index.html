@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -84,7 +84,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -233,6 +232,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -244,18 +244,6 @@ $(document).ready(function () {
   display: none;
 }
 </style>
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
 
 <!-- code folding -->
 
@@ -332,7 +320,7 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;">
-<b> My dissertation contributes to a coevolutionary theory of community ecology with a focus on plant-pollinator networks. In particular, I have recently developed a Maximum Likelihood method to infer the strength of coevolution between pairs of species using spatially structured phenotypic data (<a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/ele.13231">Week 2019</a>). I am currently finishing a project applying Diffusion Limits of Measure-Valued Branching Processes (e.g., <a href="http://www.math.ubc.ca/~perkins/superbrownianmotionandcriticalspatialsystems.pdf">super-Brownian motion</a>) and their associated Stochastic Partial Differential Equations (<a href="https://en.wikipedia.org/wiki/Stochastic_partial_differential_equation">SPDE</a>) to formally derive stochastic models of coevolving communities. Working with Professor <a href="https://paulcaradonna.weebly.com/">Paul CaraDonna</a>, we plan on using this new set of tools to develop an Approximate Bayesian Computation to infer the distribution of phenological coevolution in a sub-alpine plant-pollinator network. </b>
+<b> My dissertation contributes to a coevolutionary theory of community ecology with a focus on plant-pollinator networks. In particular, I have recently developed a Maximum Likelihood method to infer the strength of coevolution between pairs of species using spatially structured phenotypic data (<a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/ele.13231">Week 2019</a>). I am currently finishing a project applying Diffusion Limits of Measure-Valued Branching Processes (e.g., <a href="http://www.math.ubc.ca/~perkins/superbrownianmotionandcriticalspatialsystems.pdf">super-Brownian motion</a>) and their associated Stochastic Partial Differential Equations (<a href="https://en.wikipedia.org/wiki/Stochastic_partial_differential_equation">SPDE</a>) to formally derive stochastic models of coevolving communities. </b>
 </p>
 </div>
 </div>
@@ -354,6 +342,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
