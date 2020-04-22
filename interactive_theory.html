@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -87,7 +87,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -236,6 +235,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -248,48 +248,9 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -303,6 +264,12 @@ $(document).ready(function ()  {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -412,8 +379,14 @@ margin:5px;">
 <h2>scenario 1</h2>
 <div id="d-migration-and-drift" class="section level3">
 <h3>1-D Migration and Drift</h3>
+<!--
 <div align="middle">
-<p><a href="https://www.openprocessing.org/sketch/386248"><img src="images/driftMig.png" height="300" width="400"/></a></p>
+<a href="https://www.openprocessing.org/sketch/386248"><img src="images/driftMig.png" height="300" width="400"/></a>
+</div>
+-->
+<div align="middle">
+<iframe src="https://www.openprocessing.org/sketch/386248/embed/?plusEmbedHash=MDJjODI2ZWIxYjlmMTAwNDkzOWRmODdjMTViYzMzYTNlMGVlMTIxYzljMmExODliZDQ5ODcyY2M4YjFjNjVhYjMyOWNmMTU2ZGU5Njk3ZDAyZDkwNGJkYjYxZDg0ZjhiOThhOWU1NjExOGMwOTNhNTY0MWVlZTIwNzU3YmE5MWZmc1NVSDFnREt6K3VZRUxrU2RLYW5jWStKS25pVFNNcTdObGhNY3JSbk1Sc1JjYjhUWjNJWExYekpKMW5MRU0vK0JVK2xqRDRycm5NQ29XUUl5eGRaQT09&amp;plusEmbedTitle=true&amp;plusEmbedFullscreen=true" width="610" height="610">
+</iframe>
 </div>
 <p align="justify" style="background-color:#2E2E2E;
 border-radius:4px;
@@ -428,8 +401,14 @@ margin:5px;">
 <h2>scenario 2</h2>
 <div id="d-migration-drift-and-coevolution" class="section level3">
 <h3>1-D Migration, Drift and Coevolution</h3>
+<!--
 <div align="middle">
-<p><a href="https://www.openprocessing.org/sketch/401086"><img src="images/coev.png" height="300" width="600"/></a></p>
+<a href="https://www.openprocessing.org/sketch/401086"><img src="images/coev.png" height="300" width="600"/></a>
+</div>
+-->
+<div align="middle">
+<iframe src="https://www.openprocessing.org/sketch/401086/embed/?plusEmbedHash=NTljM2EwZWE4YzQ1NjcyNTc5MGJlYmZhM2NlZTA5MmY2ZWE5ZGZkY2E3OWQyNmM1YTQxYzNmMTdmM2MwYmJhMGFjMDEwMWE3ODIzNDRlOWQ5OWEzMzEwYjRlODMyYTVhOTg4NDQ1OGJlZTQ1MDBlZjgwNjgyOWQ0NjY1NjE3MzEveGJZTG9jYkpqRDYwWW9hVytpR1NpemhhN08zRWlaamlyK05wRUVQdDRqS0NZekF2UW5DQkxkWG1Fb3dCYVhHbzZhM21USkhTdGdLa3JJM3hZWFBCQT09&amp;plusEmbedTitle=true&amp;plusEmbedFullscreen=true" width="710" height="610">
+</iframe>
 </div>
 <p align="justify" style="background-color:#2E2E2E;
 border-radius:4px;
@@ -444,8 +423,14 @@ margin:5px;">
 <h2>scenario 3</h2>
 <div id="d-migration-drift-and-coevolution-1" class="section level3">
 <h3>2-D Migration, Drift and Coevolution</h3>
+<!--
 <div align="middle">
-<p><a href="https://www.openprocessing.org/sketch/396443"><img src="images/three.png" height="300" width="500"/></a></p>
+<a href="https://www.openprocessing.org/sketch/396443"><img src="images/three.png" height="300" width="500"/></a>
+</div>
+-->
+<div align="middle">
+<iframe src="https://www.openprocessing.org/sketch/396443/embed/?plusEmbedHash=MDBiMzUzOTEzMzg5YThlNTE5MjdlYjY4OGNjNGZlYTU5MGRmY2VjNjI3ZGU2MzJjM2U2ZmMzODIyYTAyZDc1YzFiZjViZThmYjE5NTU1ODZiNjUyYmRiMDA1ODNlYjkyNDY0MzlhNjU0ZjVmZjY3YWQzNTY5YmNlNWYxMDgzZjBFOTI1V014ak8wQ0tJa0ZSYXJpMnhQMkdBeGlVNkJCMzNXNEJ2WXZnREVFNTE0b1d1dTdWY3llSS9YdERCTWRjTWhCU24zNGNYOW1JOUJYang5UjBrZz09&amp;plusEmbedFullscreen=true" width="850" height="650">
+</iframe>
 </div>
 <p align="justify" style="background-color:#2E2E2E;
 border-radius:4px;
@@ -476,6 +461,49 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
