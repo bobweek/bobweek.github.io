@@ -2,7 +2,7 @@
 title: "Mechanisitc Home Range Analysis"
 description: |
   Notes
-output: radix::radix_article
+output: distill::distill_article
 ---
 
 \newcommand{\C}{\mathbb{C}}
