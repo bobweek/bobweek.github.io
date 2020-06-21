@@ -48,6 +48,10 @@
 \usefont{OT1}{phv}{b}{n}%		% bch-b-n: CharterBT-Bold font
 \sectionrule{0pt}{0pt}{-5pt}{2pt}}
 
+\subsectionfont{%			            % Change font of \section command
+\usefont{OT1}{phv}{b}{n}%		% bch-b-n: CharterBT-Bold font
+\sectionrule{0pt}{0pt}{-5pt}{2pt}}
+
 %%% Macros
 %%% ------------------------------------------------------------
 \newlength{\spacebox}
@@ -76,7 +80,7 @@
 \large \usefont{OT1}{phv}{n}{n} #1
 \par \normalsize \normalfont}
 
-\newcommand{\NewPart}[1]{\section*{\uppercase{#1}}}
+\newcommand{\NewPart}[1]{\subsection*{\uppercase{#1}}}
 
 \newcommand{\PersonalEntry}[2]{
 \noindent\hangindent=2em\hangafter=0 % Indentation
@@ -85,8 +89,7 @@
 \hspace{1.5em} #2 \par}    % Entry value
 
 \newcommand{\SkillsEntry}[2]{      % Same as \PersonalEntry
-\noindent \textit{#1} \par       % School
-\noindent\hangindent=2em\hangafter=0\small #2 % Description
+\noindent \textit{#1} #2 % Description
 \normalsize \par}
 
 \newcommand{\ExpEntry}[5]{      % Same as \PersonalEntry
@@ -200,6 +203,8 @@
 
 \NewPart{\emph{Manuscripts in Preparation \& Preprints}}{}
 
+\InPrep{Coevolutionary Arms Races and the Conditions for the Maintenance of Mutualism}{\textbf{Week, B.}; Nuismer, S.L.}
+\sepspace
 \InPrep{A White Noise Approach to Evolutionary Ecology}{\textbf{Week, B.}; Krone, S.; Nuismer, S.L.; Harmon, L.J.}
 \sepspace
 \InPrepWithDoi{A Unified Model of Species Abundance, Genetic Diversity, and Functional Diversity Reveals the Mechanisms Structuring Ecological Communities}{2020}{Overcast, I.; Ruffley, M.; Rosindell, J.; Harmon, L.; Borges, P.; Emerson, B.; Etienne, R.S.; Gillespie, R.; Krehenwinkel, H.; Mahler, L.; Massol, F.; Parent, K.; Pati\~{n}o, J.; Peter, B.; \textbf{Week, B.}; Wagner, C.; Hickerson, M.J.; Rominger, A.}{\url{http://dx.doi.org/10.1101/2020.01.30.927236}}
@@ -226,7 +231,6 @@
 %%% ------------------------------------------------------------
 \NewPart{\emph{Presentations}}{}
 
-
 \PresentationEntry{A Bayesian Methodology for Estimating the Distribution of Coevolution Within
 Ecological Communities}{Talk}{2020}{\href{https://amnat2020.com/}{AmNat2020} - Pacific Grove, California}
 \sepspace
@@ -247,7 +251,7 @@ Ecological Communities}{Talk}{2020}{\href{https://amnat2020.com/}{AmNat2020} - P
 %%% ------------------------------------------------------------
 \NewPart{\emph{Technical Skills}}{}
 
-\SkillsEntry{Software}{Julia, \textit{R}, Mathematica, \texttt{C++}, \LaTeX}
-\SkillsEntry{Mathematics}{Theoretical Quantitative and Population Genetics, Measure Theory, Probability, Functional Analysis, Mathematical Statistics, Ordinary, Partial and Stochastic Differential Equations}
+\SkillsEntry{Software: }{Julia, \textit{R}, Mathematica, \texttt{C++}, \LaTeX}
+\SkillsEntry{Mathematics: }{Theoretical Quantitative and Population Genetics, Measure Theory, Probability, Functional Analysis, Mathematical Statistics, Ordinary, Partial and Stochastic Differential Equations}
 
 \end{document}

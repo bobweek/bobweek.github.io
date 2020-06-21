@@ -351,6 +351,7 @@ div.tocify {
         <li><a href="index.html">Home</a></li>
         <li><a href="interactive_theory.html">Interactive theory</a></li>
         <li><a href="measuring_coevolution.html">Measuring coevolution</a></li>
+        <li><a href="bob_week.pdf">CV</a></li>
 
       </ul>
     </div><!--/.nav-collapse -->
@@ -691,7 +692,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
