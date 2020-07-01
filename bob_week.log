@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.5.24)  21 JUN 2020 12:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.26)  1 JUL 2020 12:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **bob_week.tex
 (./bob_week.tex
 LaTeX2e <2020-02-02> patch level 5
-L3 programming layer <2020-05-15>
+L3 programming layer <2020-06-18>
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/koma-script/scrartcl.cls
 Document Class: scrartcl 2020/04/19 v3.30 KOMA-Script document class (article)
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/koma-script/scrkbase.sty
@@ -136,10 +136,10 @@ Package: iftex 2020/03/06 v1.0d TeX engine tests
 \Gm@dimlist=\toks16
 )
 (/home/bb/.TinyTeX/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2020/05/13 3.44 The Babel package
+Package: babel 2020/06/10 3.45 The Babel package
 
 (/home/bb/.TinyTeX/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2020/05/13 3.44 Babel common definitions
+File: babel.def 2020/06/10 3.45 Babel common definitions
 \babel@savecnt=\count179
 \U@D=\dimen143
 \l@babelnohyphens=\language6
@@ -282,10 +282,10 @@ Package: amsthm 2020/05/29 v2.20.6
 )
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/xpatch/xpatch.sty
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2020-05-15 L3 programming layer (loader) 
+Package: expl3 2020-06-18 L3 programming layer (loader) 
 
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-File: l3backend-pdfmode.def 2020-05-05 L3 backend support: PDF mode
+File: l3backend-pdfmode.def 2020-06-23 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count196
 \l__pdf_internal_box=\box49
 ))
@@ -357,7 +357,7 @@ Package: hyperref 2020-05-15 v7.00e Hypertext links for LaTeX
 Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
 )
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
-Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
+Package: pdftexcmds 2020-06-04 v0.32 Utility functions of pdfTeX for LuaTeX (HO
 )
 
 (/home/bb/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
@@ -742,11 +742,11 @@ Package rerunfilecheck Info: File `bob_week.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13157 strings out of 482383
- 226986 string characters out of 5946504
- 688262 words of memory out of 5000000
- 28672 multiletter control sequences out of 15000+600000
- 554529 words of font info for 97 fonts, out of 8000000 for 9000
+ 13156 strings out of 482378
+ 226878 string characters out of 5946323
+ 688523 words of memory out of 5000000
+ 28677 multiletter control sequences out of 15000+600000
+ 553312 words of font info for 96 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  49i,5n,56p,10168b,340s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/bb/.TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}</home/bb/.TinyTeX/
@@ -756,12 +756,11 @@ s/type1/public/amsfonts/cm/cmr8.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmti10.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmtt10.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmtt12.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pf
-b></home/bb/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></home/bb/
-.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on bob_week.pdf (2 pages, 112010 bytes).
+b></home/bb/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb>
+Output written on bob_week.pdf (2 pages, 107239 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 66 compressed objects within 1 object stream
+ 76 PDF objects out of 1000 (max. 8388607)
+ 63 compressed objects within 1 object stream
  12 named destinations out of 1000 (max. 500000)
  23553 words of extra memory for PDF output out of 24883 (max. 10000000)
 
