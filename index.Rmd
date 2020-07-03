@@ -42,3 +42,7 @@ margin:5px;"><b>
 My dissertation contributes to a coevolutionary theory of community ecology with a focus on plant-pollinator networks. Using Diffusion Limits of Measure-Valued Branching Processes (e.g., [super-Brownian motion](http://www.math.ubc.ca/~perkins/superbrownianmotionandcriticalspatialsystems.pdf)), my work provides a stochastic synthesis of quantitative genetics and population ecology (ms in prep). I apply this synthetic approach to derive models of coevolving communities that track the stochastic dynamics of abundance and quantitative traits. Using this framework, I have investigated the evolutionary dissolution of mutualisms experiencing coevolutionary arms races (ms in prep) and have developed a Maximum Likelihood method to infer the strength of coevolution between pairs of species using spatially structured phenotypic data ([Week & Nuismer 2019](https://onlinelibrary.wiley.com/doi/abs/10.1111/ele.13231)).
 </b>
 </p>
+
+### Defense
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HpvkIWx_3Ds" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
