@@ -366,6 +366,12 @@ div.tocify {
 </div>
 
 
+<style type="text/css">
+.badCode {
+  background-color: black;
+  color: white;
+}
+</style>
 <div id="the-measurement-of-coevolution-in-the-wild" class="section level1">
 <h1>The measurement of coevolution in the wild</h1>
 <p align="justify" style="background-color:#2E2E2E;
@@ -403,13 +409,13 @@ margin:5px;">
 <pre class="r"><code># read in data
 load(&quot;toju_pairs.Rda&quot;)
 head(toju_df)</code></pre>
-<pre><code>##   rostrum body pericarp  location island
-## 1    9.63 8.40     5.42   Nodzumi    HNS
-## 2    7.98 6.95     4.32      Kamo    HNS
-## 3    9.13 7.82     3.88   Nagaoka    HNS
-## 4   10.42 8.19     6.07   Kutsuki    HNS
-## 5   10.79 7.87     4.90 Hiratsuka    HNS
-## 6    9.89 7.86     6.30     Kyoto    HNS</code></pre>
+<pre><code>  rostrum body pericarp  location island
+1    9.63 8.40     5.42   Nodzumi    HNS
+2    7.98 6.95     4.32      Kamo    HNS
+3    9.13 7.82     3.88   Nagaoka    HNS
+4   10.42 8.19     6.07   Kutsuki    HNS
+5   10.79 7.87     4.90 Hiratsuka    HNS
+6    9.89 7.86     6.30     Kyoto    HNS</code></pre>
 <p align="justify" style="background-color:#2E2E2E;
 border-radius:4px;
 font-size:16px;
@@ -424,7 +430,7 @@ library(gapminder)
 library(ggthemes)
 ggplot(toju_df,aes(x=rostrum,y=pericarp,color=island))+geom_point()+dark_mode(theme_minimal())+xlab(&quot;Rostrum length&quot;)+ylab(&quot;Pericarp thickness&quot;)</code></pre>
 <div class="figure" style="text-align: center">
-<img src="measuring_coevolution_files/figure-html/unnamed-chunk-2-1.png" alt="Figure 2: Displayed in this scatter plot are mean trait pairs for various locations across Japan. The colours indicate which island these locations belong to." width="672" />
+<img src="measuring_coevolution_files/figure-html/unnamed-chunk-3-1.png" alt="Figure 2: Displayed in this scatter plot are mean trait pairs for various locations across Japan. The colours indicate which island these locations belong to." width="672" />
 <p class="caption">
 Figure 2: Displayed in this scatter plot are mean trait pairs for various locations across Japan. The colours indicate which island these locations belong to.
 </p>
@@ -502,12 +508,12 @@ padding:15px;
 margin:5px;">
 <b> We have collected the background parameters needed in the dataframe <strong>toju_par.Rda</strong>. In the R environment, this dataframe is referred to as <strong>par_df</strong>. </b>
 </p>
-<pre class="r"><code># read in data
+<pre class="r"><code># read in parameters
 load(&quot;toju_par.Rda&quot;)
 par_df</code></pre>
-<pre><code>##          Gs   thetas   eff_ns     species
-## 1 0.5202037 5.911818 30769.50 C. camellia
-## 2 5.2526697 6.248235  1789.99 C. japonica</code></pre>
+<pre><code>         Gs   thetas   eff_ns     species
+1 0.5202037 5.911818 30769.50 C. camellia
+2 5.2526697 6.248235  1789.99 C. japonica</code></pre>
 <p align="justify" style="background-color:#2E2E2E;
 border-radius:4px;
 font-size:16px;
@@ -546,7 +552,7 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;">
-<b> Finally we use the function <strong>ml_sol()</strong> to find our results. </b>
+<b> Finally we use the function <em>ml_sol()</em> to find our results. </b>
 </p>
 <pre class="r"><code>n1  &lt;- par_df$eff_ns[1]
 n2  &lt;- par_df$eff_ns[2]
@@ -555,20 +561,20 @@ th2 &lt;- par_df$thetas[2]
 G1  &lt;- par_df$Gs[1]
 G2  &lt;- par_df$Gs[2]
 ml_sol(mu1,mu2,V1,V2,C,n1,n2,th1,th2,G1,G2)</code></pre>
-<pre><code>## $A1
-## [1] 0.0002593573
-## 
-## $A2
-## [1] 8.053552e-06
-## 
-## $B1
-## [1] 0.0007168077
-## 
-## $B2
-## [1] 4.999954e-06
-## 
-## $k
-## [1] 4.51103</code></pre>
+<pre><code>$A1
+[1] 0.0002593573
+
+$A2
+[1] 8.053552e-06
+
+$B1
+[1] 0.0007168077
+
+$B2
+[1] 4.999954e-06
+
+$k
+[1] 4.51103</code></pre>
 <p align="justify" style="background-color:#2E2E2E;
 border-radius:4px;
 font-size:16px;
@@ -631,7 +637,7 @@ p2 &lt;- dchisq(Lambda2,1)
 # is coevolution significant?
 if( max(p1,p2) &gt; 0.05 ) print(&quot;Coevolution no&quot;)
 if( max(p1,p2) &lt; 0.05 ) print(&quot;Coevolution yes&quot;)</code></pre>
-<pre><code>## [1] &quot;Coevolution yes&quot;</code></pre>
+<pre><code>[1] &quot;Coevolution yes&quot;</code></pre>
 <p align="justify" style="background-color:#2E2E2E;
 border-radius:4px;
 font-size:16px;

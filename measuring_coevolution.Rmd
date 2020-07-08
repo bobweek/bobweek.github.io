@@ -9,6 +9,13 @@ output:
     css: style.css
 ---
 
+```{css, echo=F}
+.badCode {
+  background-color: black;
+  color: white;
+}
+```
+
 # The measurement of coevolution in the wild
 
 <p align=justify style="background-color:#2E2E2E;
@@ -48,11 +55,10 @@ Estimates of mean trait pairs across multiple locations comprise the core data r
 </b>
 </p>
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, tidy=TRUE, comment=''}
 # read in data
 load("toju_pairs.Rda")
 head(toju_df)
-
 ```
 
 <p align=justify style="background-color:#2E2E2E;
@@ -64,7 +70,7 @@ Note the column names in this data frame. The column __rostrum__ contains the me
 </b>
 </p>
 
-```{r, message=FALSE, fig.align='center', fig.cap="Figure 2: Displayed in this scatter plot are mean trait pairs for various locations across Japan. The colours indicate which island these locations belong to."}
+```{r, message=FALSE, fig.align='center', fig.cap="Figure 2: Displayed in this scatter plot are mean trait pairs for various locations across Japan. The colours indicate which island these locations belong to.", tidy=TRUE, comment=''}
 # plot data
 library(ggplot2)
 library(ggdark)
@@ -162,9 +168,8 @@ We have collected the background parameters needed in the dataframe __toju_par.R
 </b>
 </p>
 
-```{r, message=FALSE, warning=FALSE}
-
-# read in data
+```{r, message=FALSE, warning=FALSE, tidy=TRUE, comment=''}
+# read in parameters
 load("toju_par.Rda")
 par_df
 
@@ -190,7 +195,7 @@ Inferring selection parameters and the optimal offset with our method is very br
 </b>
 </p>
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, tidy=TRUE, tidy=TRUE, comment=''}
 N   <- dim(toju_df)[1]
 mu1 <- mean(toju_df$rostrum)
 mu2 <- mean(toju_df$pericarp)
@@ -208,7 +213,7 @@ Next we load in the file containing the functions needed.
 </b>
 </p>
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, tidy=TRUE, comment=''}
 # read in functions
 source("functions.R")
 ```
@@ -218,11 +223,11 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-Finally we use the function __ml_sol()__ to find our results.
+Finally we use the function _ml_sol()_ to find our results.
 </b>
 </p>
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, tidy=TRUE, comment=''}
 n1  <- par_df$eff_ns[1]
 n2  <- par_df$eff_ns[2]
 th1 <- par_df$thetas[1]
@@ -281,7 +286,7 @@ With these likelihoods in hand we can calculate the statistics $\Lambda_1$ and $
 </b>
 </p>
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, tidy=TRUE, comment=''}
 
 # preparing data for likelihood calculations
 data <- cbind(toju_df$rostrum,toju_df$pericarp)

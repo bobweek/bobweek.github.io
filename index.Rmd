@@ -45,6 +45,14 @@ My dissertation contributes to a coevolutionary theory of community ecology with
 
 ### Defense
 
-<center><iframe width="560" height="315" src="https://www.youtube.com/embed/HpvkIWx_3Ds" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+<p align=center style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;"><b>
+[Slides](https://bobweek.github.io/coevolutionary-community-ecology.html)<br>
+<iframe width="800" height="450" src="https://www.youtube.com/embed/HpvkIWx_3Ds" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</b>
+</p>
 
-<center>[Slides](https://bobweek.github.io/coevolutionary-community-ecology.html)</center>
+
