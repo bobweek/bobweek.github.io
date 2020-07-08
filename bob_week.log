@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.6.26)  1 JUL 2020 12:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.7.7)  7 JUL 2020 14:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -285,7 +285,7 @@ Package: amsthm 2020/05/29 v2.20.6
 Package: expl3 2020-06-18 L3 programming layer (loader) 
 
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
-File: l3backend-pdfmode.def 2020-06-23 L3 backend support: PDF mode
+File: l3backend-pdfmode.def 2020-06-29 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count196
 \l__pdf_internal_box=\box49
 ))
@@ -356,8 +356,8 @@ Package: hyperref 2020-05-15 v7.00e Hypertext links for LaTeX
 (/home/bb/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
 )
-(/home/bb/.TinyTeX/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
-Package: pdftexcmds 2020-06-04 v0.32 Utility functions of pdfTeX for LuaTeX (HO
+(/home/bb/.TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
 )
 
 (/home/bb/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
@@ -742,11 +742,11 @@ Package rerunfilecheck Info: File `bob_week.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13156 strings out of 482378
- 226878 string characters out of 5946323
+ 13158 strings out of 482378
+ 226900 string characters out of 5946324
  688523 words of memory out of 5000000
  28677 multiletter control sequences out of 15000+600000
- 553312 words of font info for 96 fonts, out of 8000000 for 9000
+ 553363 words of font info for 97 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  49i,5n,56p,10168b,340s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/bb/.TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}</home/bb/.TinyTeX/
@@ -757,7 +757,7 @@ ublic/amsfonts/cm/cmti10.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmtt10.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmtt12.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pf
 b></home/bb/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb>
-Output written on bob_week.pdf (2 pages, 107239 bytes).
+Output written on bob_week.pdf (2 pages, 107338 bytes).
 PDF statistics:
  76 PDF objects out of 1000 (max. 8388607)
  63 compressed objects within 1 object stream
