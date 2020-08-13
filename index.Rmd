@@ -10,7 +10,7 @@ output:
 
 <center> ![A picture of me at work](me25.jpg) </center>
 
-$$\Large\text{Bob Week}$$
+$$\require{xcolor}\color{hotpink}{\Large\mathcal{Bob\ Week}}$$
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
