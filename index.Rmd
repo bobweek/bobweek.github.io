@@ -28,7 +28,7 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-I just finished defending a PhD at the University of Idaho advised by Professor [Scott Nuismer](https://www.leeef.org) on June 30, 2020. My degree is in Bioinformatics and Computational Biology ([BCB](https://www.uidaho.edu/sci/bcb)), an interdisciplinary PhD program closely affiliated with The Institute for Bioinformatics and Evolutionary Studies ([IBEST](http://www.ibest.uidaho.edu/)). My dissertation committee consists of Professors [Luke Harmon](https://scholar.google.com/citations?hl=en&user=nsA3IsgAAAAJ&view_op=list_works), [Paul Hohenlohe](https://scholar.google.com/citations?user=QPMrd8EAAAAJ&hl=en) and [Steve Krone](https://www.webpages.uidaho.edu/~krone/res.html). My CV is available [here](bob_week.pdf).
+I earned my PhD at the University of Idaho advised by Professor [Scott Nuismer](https://www.leeef.org) in the summer of 2020. My degree is in Bioinformatics and Computational Biology ([BCB](https://www.uidaho.edu/sci/bcb)), an interdisciplinary PhD program closely affiliated with The Institute for Bioinformatics and Evolutionary Studies ([IBEST](http://www.ibest.uidaho.edu/)). My dissertation committee consists of Professors [Luke Harmon](https://scholar.google.com/citations?hl=en&user=nsA3IsgAAAAJ&view_op=list_works), [Paul Hohenlohe](https://scholar.google.com/citations?user=QPMrd8EAAAAJ&hl=en) and [Steve Krone](https://www.webpages.uidaho.edu/~krone/res.html). My CV is available [here](bob_week.pdf).
 </b>
 </p>
 
