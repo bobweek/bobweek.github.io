@@ -45,6 +45,9 @@ My dissertation contributes to a coevolutionary theory of community ecology with
 
 ### Publications
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+
 ```{r, echo=F, warning=F, class.output="bg-success"}
 library(scholar)
 library(DT)
@@ -52,7 +55,7 @@ pubs = get_publications('vtSczyYAAAAJ')
 pubs.smaller = data.frame(pubs$year,pubs$author,pubs$title,pubs$journal,pubs$cites)
 colnames(pubs.smaller) = c('Year','Author','Title','Journal','Cites')
 
-datatable(pubs.smaller, rownames = FALSE, options = list(dom = 't',
+datatable(pubs.smaller, rownames = FALSE, extensions = 'Responsive', options = list(dom = 't',
   initComplete = JS("
     function(settings, json) {
       $(this.api().table().header()).css({
@@ -67,4 +70,3 @@ datatable(pubs.smaller, rownames = FALSE, options = list(dom = 't',
   color = "white"
 )
 ```
-
