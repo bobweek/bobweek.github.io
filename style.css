@@ -4,7 +4,7 @@
   color: #d1d1d1;
 }
 
-.dropdown-submenu .dropdown-menu li:hover a:hover {
+.dropdown-submenu .dropdown-menu .dropdown-toggle li:hover a:hover {
   color: #000 !important;
   background-color: #ffffff;
 }

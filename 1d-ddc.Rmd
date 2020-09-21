@@ -1,0 +1,28 @@
+---
+title: ""
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+---
+
+# Drift, Dispersal and Coevolution in 1-dimensional space
+
+<!--
+<div align="middle">
+<a href="https://www.openprocessing.org/sketch/401086"><img src="images/coev.png" height="300" width="600"/></a>
+</div>
+-->
+
+<div align="middle">
+<iframe src="https://www.openprocessing.org/sketch/401086/embed/?plusEmbedHash=NTljM2EwZWE4YzQ1NjcyNTc5MGJlYmZhM2NlZTA5MmY2ZWE5ZGZkY2E3OWQyNmM1YTQxYzNmMTdmM2MwYmJhMGFjMDEwMWE3ODIzNDRlOWQ5OWEzMzEwYjRlODMyYTVhOTg4NDQ1OGJlZTQ1MDBlZjgwNjgyOWQ0NjY1NjE3MzEveGJZTG9jYkpqRDYwWW9hVytpR1NpemhhN08zRWlaamlyK05wRUVQdDRqS0NZekF2UW5DQkxkWG1Fb3dCYVhHbzZhM21USkhTdGdLa3JJM3hZWFBCQT09&plusEmbedTitle=true&plusEmbedFullscreen=true" width="710" height="610"></iframe>
+</div>
+
+<p align=justify style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;"><b>
+This application simulates the coevolution of two species on a single spatial axis as a generalization of the above application. The traits involved for each species are colored red and green.  At the bottom of the application is a time-series plot of the instantaneous spatial correlation between traits and the running average of this correlation. Spatial correlations have historically been used to determine support for a coevolutionary hypothesis, so it is an interesting quantity to track.
+</b>
+</p>

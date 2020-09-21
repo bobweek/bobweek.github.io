@@ -11,9 +11,9 @@
 
 
 
-<title>index.utf8</title>
+<title>2d-ddc.utf8</title>
 
-<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -22,16 +22,6 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="site_libs/datatables-binding-0.13/datatables.js"></script>
-<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-<link href="site_libs/dt-ext-responsive-1.10.20/css/responsive.dataTables.min.css" rel="stylesheet" />
-<script src="site_libs/dt-ext-responsive-1.10.20/js/dataTables.responsive.min.js"></script>
-<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -309,48 +299,24 @@ $(document).ready(function () {
 </div>
 
 
-<div id="section" class="section level1">
-<h1></h1>
-<center>
-<img src="me25.jpg" alt="A picture of me at work" />
-</center>
-<div id="bob-week" class="section level2">
-<h2>Bob Week</h2>
+<div id="drift-dispersal-and-coevolution-in-2-dimensional-space" class="section level1">
+<h1>Drift, Dispersal and Coevolution in 2-dimensional space</h1>
+<!--
+<div align="middle">
+<a href="https://www.openprocessing.org/sketch/396443"><img src="images/three.png" height="300" width="500"/></a>
+</div>
+-->
+<div align="middle">
+<iframe src="https://www.openprocessing.org/sketch/396443/embed/?plusEmbedHash=MDBiMzUzOTEzMzg5YThlNTE5MjdlYjY4OGNjNGZlYTU5MGRmY2VjNjI3ZGU2MzJjM2U2ZmMzODIyYTAyZDc1YzFiZjViZThmYjE5NTU1ODZiNjUyYmRiMDA1ODNlYjkyNDY0MzlhNjU0ZjVmZjY3YWQzNTY5YmNlNWYxMDgzZjBFOTI1V014ak8wQ0tJa0ZSYXJpMnhQMkdBeGlVNkJCMzNXNEJ2WXZnREVFNTE0b1d1dTdWY3llSS9YdERCTWRjTWhCU24zNGNYOW1JOUJYang5UjBrZz09&amp;plusEmbedFullscreen=true" width="850" height="650">
+</iframe>
+</div>
 <p align="justify" style="background-color:#2E2E2E;
 border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;">
-<b> I am interested in the relationship between patterns and processes shaping ecological communities. This inquiry leads to a broad range of questions involving the role of contemporary coevolution, the structure of interaction networks, the effects of genetic architecture, the role of geography, feedbacks with abundance and ecosystem processes and the macroevolutionary history of interacting taxa. However, developing models and statistical methods to explore these areas and understand their relative contributions to the structure and dynamics of ecological communities leads to challenging technical problems. By combining tools from stochastic processes, theoretical quantitative genetics and population genetics with classical and Bayesian statistics, I collaborate with evolutionary biologists, ecologists and mathematicians to develop model-based approaches to infer ecological and evolutionary processes occurring in the wild. </b>
+<b> Here three species coevolve across a two dimensional continuum (discretized into a grid for computational purposes). One species is colored blue, one red and one green. The trait values that evolve are brightness. To summarize these properties within each pixel, a weighted average of red, blue and green is computed, weighted by the mean brightness of each species within that pixel. The result is a colorful, evolving grid. The interactions between the three species can be thought of as a circular trophic system where each level consumes the next level and is consumed by the previous level. This rock-paper-scissors dynamic leads to an oscillating coevolutionary chase where the green species chases the blue species, the blue species chases the red species and the red species chases the green species. </b>
 </p>
-<div id="current-position" class="section level3">
-<h3>Current position</h3>
-<p align="justify" style="background-color:#2E2E2E;
-border-radius:4px;
-font-size:16px;
-padding:15px;
-margin:5px;">
-<b> I am currently in search of a postdoctoral research position with a long-term goal of starting a lab focused on developing eco-evolutionary methods to infer the processes structuring ecological communities. I earned my PhD at the University of Idaho advised by Professor <a href="https://www.leeef.org">Scott Nuismer</a> in the summer of 2020. My degree is in Bioinformatics and Computational Biology (<a href="https://www.uidaho.edu/sci/bcb">BCB</a>), an interdisciplinary PhD program closely affiliated with The Institute for Bioinformatics and Evolutionary Studies (<a href="http://www.ibest.uidaho.edu/">IBEST</a>). My dissertation committee consists of Professors <a href="https://scholar.google.com/citations?hl=en&amp;user=nsA3IsgAAAAJ&amp;view_op=list_works">Luke Harmon</a>, <a href="https://scholar.google.com/citations?user=QPMrd8EAAAAJ&amp;hl=en">Paul Hohenlohe</a> and <a href="https://www.webpages.uidaho.edu/~krone/res.html">Steve Krone</a>. My CV is available <a href="bob_week.pdf">here</a> and my google scholar page is <a href="https://scholar.google.com/citations?user=vtSczyYAAAAJ&amp;hl=en&amp;oi=ao">here</a>. </b>
-</p>
-</div>
-<div id="phd-work" class="section level3">
-<h3>PhD work</h3>
-<p align="justify" style="background-color:#2E2E2E;
-border-radius:4px;
-font-size:16px;
-padding:15px;
-margin:5px;">
-<b> My dissertation contributes to a coevolutionary theory of community ecology with a focus on plant-pollinator networks. Using Diffusion Limits of Measure-Valued Branching Processes (e.g., <a href="http://www.math.ubc.ca/~perkins/superbrownianmotionandcriticalspatialsystems.pdf">super-Brownian motion</a>), my work provides a stochastic synthesis of quantitative genetics and population ecology (preprint <a href="https://www.biorxiv.org/content/10.1101/2020.07.28.226001v1">here</a>). I apply this synthetic approach to derive models of coevolving communities that track the stochastic dynamics of abundance and quantitative traits. Using this framework, I have investigated the evolutionary dissolution of mutualisms experiencing coevolutionary arms races (ms in prep) and have developed a Maximum Likelihood method to infer the strength of coevolution between pairs of species using spatially structured phenotypic data (<a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/ele.13231">Week &amp; Nuismer 2019</a>). My defense was recorded and can be viewed <a href="https://youtu.be/HpvkIWx_3Ds">here</a>. Interactive slides are available <a href="https://bobweek.github.io/coevolutionary-community-ecology.html">here</a>. </b>
-</p>
-</div>
-<div id="publications" class="section level3">
-<h3>Publications</h3>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css"/>
-<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
-<div id="htmlwidget-bb4db3f2cd3a074c7656" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-bb4db3f2cd3a074c7656">{"x":{"filter":"none","extensions":["Responsive"],"data":[[2018,2019,2019,2019,2020,2020],["SL Nuismer, B Week, MA Aizen","B Week, SL Nuismer","M Ruffley, K Peterson, B Week, DC Tank, LJ Harmon","SL Nuismer, B Week","B Week, S Nuismer, L Harmon, S Krone","I Overcast, M Ruffley, J Rosindell, L Harmon, PAV Borges, BC Emerson, ..."],["Coevolution slows the disassembly of mutualistic networks","The measurement of coevolution in the wild","Identifying models of trait‐mediated community assembly using random forests and approximate Bayesian computation","Approximate Bayesian estimation of coevolutionary arms races","A White Noise Approach to Evolutionary Ecology","A unified model of species abundance, genetic diversity, and functional diversity reveals the mechanisms structuring ecological communities"],["The American Naturalist","Ecology letters","Ecology and evolution","PLoS computational biology","BioRxiv","BioRxiv"],[5,4,2,2,0,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>Author<\/th>\n      <th>Title<\/th>\n      <th>Journal<\/th>\n      <th>Cites<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","initComplete":"\n    function(settings, json) {\n      $(this.api().table().header()).css({\n        'background-color': '#1F1F1F',\n        'color': '#fff'\n      });\n    }","columnDefs":[{"className":"dt-right","targets":[0,4]}],"order":[],"autoWidth":false,"orderClasses":false,"responsive":true,"rowCallback":"function(row, data) {\nvar value=data[1]; $(row).css({'color':'white','background-color':'#2E2E2E'});\nvar value=data[0]; $(row).css({'color':'white','background-color':'#2E2E2E'});\nvar value=data[2]; $(row).css({'color':'white','background-color':'#2E2E2E'});\nvar value=data[3]; $(row).css({'color':'white','background-color':'#2E2E2E'});\nvar value=data[4]; $(row).css({'color':'white','background-color':'#2E2E2E'});\n}"}},"evals":["options.initComplete","options.rowCallback"],"jsHooks":[]}</script>
-</div>
-</div>
 </div>
 
 

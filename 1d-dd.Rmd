@@ -1,0 +1,28 @@
+---
+title: ""
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+---
+
+# Drift and Dispersal in 1-dimensional space
+
+<!--
+<div align="middle">
+<a href="https://www.openprocessing.org/sketch/386248"><img src="images/driftMig.png" height="300" width="400"/></a>
+</div>
+-->
+
+<div align="middle">
+<iframe src="https://www.openprocessing.org/sketch/386248/embed/?plusEmbedHash=MDJjODI2ZWIxYjlmMTAwNDkzOWRmODdjMTViYzMzYTNlMGVlMTIxYzljMmExODliZDQ5ODcyY2M4YjFjNjVhYjMyOWNmMTU2ZGU5Njk3ZDAyZDkwNGJkYjYxZDg0ZjhiOThhOWU1NjExOGMwOTNhNTY0MWVlZTIwNzU3YmE5MWZmc1NVSDFnREt6K3VZRUxrU2RLYW5jWStKS25pVFNNcTdObGhNY3JSbk1Sc1JjYjhUWjNJWExYekpKMW5MRU0vK0JVK2xqRDRycm5NQ29XUUl5eGRaQT09&plusEmbedTitle=true&plusEmbedFullscreen=true" width="610" height="610"></iframe>
+</div>
+
+<p align=justify style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;"><b>
+This application simulates the evolution of a trait for a species on a single spatial axis, the horizontal axis. Migration is modeled with a stepping stone model where migrants can move to neighboring sites only. The vertical displacement of the white dots shown represents trait values at each site. Two sliders are provided to allow the user to manipulate the migration rate and the variance of drift.
+</b>
+</p>

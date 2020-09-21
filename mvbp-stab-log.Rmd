@@ -1,0 +1,26 @@
+---
+title: ""
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+---
+
+# A measure-valued branching model of stabilizing selection and logistic growth
+
+<!--
+<div align="middle">
+<a href="https://www.openprocessing.org/sketch/396443"><img src="images/three.png" height="300" width="500"/></a>
+</div>
+-->
+
+<center><iframe src="https://editor.p5js.org/bobweek/embed/I6sh2Z5nT" width="605" height="605"></iframe></center>
+
+<p align=justify style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;"><b>
+Description under construction!
+</b>
+</p>
