@@ -1,0 +1,20 @@
+---
+title: ""
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+---
+
+# A spatial model of neutral evolution with local population regulation
+
+<center><iframe src="https://editor.p5js.org/bobweek/embed/eiyzPCMPP" width="605" height="605"></iframe></center>
+
+<p align=justify style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;"><b>
+In this model, individuals navigate two-dimensional space via Brownian motion. Space is toroidal so that when an individual leaves the screen on the right, they appear on the left at the same vertical position. Similarly, if an individual leaves the screen at the bottom, they appear at the top at the same horizontal position. Each individual is assigned an exponentially distributed lifetime. At the end of their lifetime, they either split into two offspring or they senesce. The probabilities of these two events are determined by the number of individuals nearby, inducing a form of local population regulation which can be interpreted as competition for resources. Each individual is represented by a color. This color is encoded by a genetic value. In particular, each indvidual carries three haploid chromosomes. Each chromosome consists of 255 loci, where the allelic states of each locus are zero or one. The sum of allelic states across the first chromosome determines the amount of red in the individual, the sum along the second chromosome the amount of green and the third the amount of blue. When an individual splits into two, for each offspring it reaches out to another nearby individual to exchange genetic material. In particular, the offspring inherits parental chromosomes at random. Occasionally recombination occurs. When this occurs, a random location along a random chromosome is chosen and the offspring chromosome is identical to one parent before that location and the other parent after that location. Mutation can also. When a mutation occurs, two random loci are chosen. Between these loci the allelic states are all switched to either zero or one at random. To make the control menu collapse, double click on 'Parameters'.
+</b>
+</p>

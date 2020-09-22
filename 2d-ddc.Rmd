@@ -8,12 +8,6 @@ output:
 
 # Drift, Dispersal and Coevolution in 2-dimensional space
 
-<!--
-<div align="middle">
-<a href="https://www.openprocessing.org/sketch/396443"><img src="images/three.png" height="300" width="500"/></a>
-</div>
--->
-
 <div align="middle">
 <iframe src="https://www.openprocessing.org/sketch/396443/embed/?plusEmbedHash=MDBiMzUzOTEzMzg5YThlNTE5MjdlYjY4OGNjNGZlYTU5MGRmY2VjNjI3ZGU2MzJjM2U2ZmMzODIyYTAyZDc1YzFiZjViZThmYjE5NTU1ODZiNjUyYmRiMDA1ODNlYjkyNDY0MzlhNjU0ZjVmZjY3YWQzNTY5YmNlNWYxMDgzZjBFOTI1V014ak8wQ0tJa0ZSYXJpMnhQMkdBeGlVNkJCMzNXNEJ2WXZnREVFNTE0b1d1dTdWY3llSS9YdERCTWRjTWhCU24zNGNYOW1JOUJYang5UjBrZz09&plusEmbedFullscreen=true" width="850" height="650"></iframe>
 </div>

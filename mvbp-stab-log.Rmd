@@ -6,21 +6,28 @@ output:
     css: style.css
 ---
 
-# A measure-valued branching model of stabilizing selection and logistic growth
-
-<!--
-<div align="middle">
-<a href="https://www.openprocessing.org/sketch/396443"><img src="images/three.png" height="300" width="500"/></a>
-</div>
--->
+# Diffusion approximation of a measure-valued branching process
 
 <center><iframe src="https://editor.p5js.org/bobweek/embed/I6sh2Z5nT" width="605" height="605"></iframe></center>
+
+### Summary
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-Description under construction!
+This simulation illustrates the idea of taking a diffusion limit for models of structured populations. Here the structure is due to a quantitative trait represented by the vertical axis. The red line represents the trait value that maximizes fitness. Selection is stabilizing around this optimal trait value. In the diffusion limit, individuals reproduce and senesce at faster rates and their individual contribution to total population size is diminished. When this rescaling is done appropriately, the particle picture of the population is replaced by a stochastic blob known as a superprocess.
+</b>
+</p>
+
+### Details
+
+<p align=justify style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;"><b>
+We assume a continuously reproducing population of asexual individuals. Each individual is assigned an exponentially distributed lifetime with rate a function of trait value. The further the trait is from the optimal value, the shorter the lifetime. Births are also assigned to individual between exponential time intervals (with constant rate). When a birth event occurs, the individual randomly produces anywhere from zero to four offspring. The trait values of the offspring are normally distributed around the parental value with constant variance (representing mutation).
 </b>
 </p>
