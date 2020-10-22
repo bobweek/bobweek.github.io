@@ -84,3 +84,13 @@ datatable(pubs.smaller, rownames = FALSE, extensions = 'Responsive', options = l
   color = "white"
 )
 ```
+
+<noscript>
+    <style type="text/css">
+        .pagecontainer {display:none;}
+    </style>
+    <div class="noscriptmsg">
+    This website uses javascript to display my publication record. The interactive simulations and components of website navigation also require javascript. Please return using a web browser with javascript enabled to enjoy this content.
+    
+    -- yours truly
+</noscript>
