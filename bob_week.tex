@@ -152,11 +152,8 @@
 }
 
 
-\newcommand{\ReviewEntry}[2]{
-\noindent\hangindent=2em\hangafter=0 #1 \hfill      % Title
-\colorbox{White}{%
-\parbox{6em}{%
-\hfill\color{Black}#2}} \par  % Date
+\newcommand{\ReviewEntry}[1]{
+\noindent\hangindent=2em\hangafter=0 #1 % Journal
 \normalsize \par}
 
 
@@ -185,7 +182,7 @@
 %%% ------------------------------------------------------------
 \NewPart{\emph{Education}}{}
 
-\SpecialEducationEntry{PhD \href{https://www.uidaho.edu/sci/bcb}{Bioinformatics \& Computational Biology (BCB)}}{August 2020}{University of Idaho,}{Advised by Scott L. Nuismer}{My dissertation provides synthetic mathematical approach to evolutionary community ecology, uncovers the conditions that maintain mutualistic interactions in the face of coevolutionary arms races and develops a statistical method to infer coevolution in the wild.}
+\SpecialEducationEntry{PhD \href{https://www.uidaho.edu/sci/bcb}{Bioinformatics \& Computational Biology (BCB)}}{August 2020}{University of Idaho,}{Advised by Scott L. Nuismer}{My dissertation provides a synthetic mathematical approach to evolutionary community ecology, uncovers the conditions that maintain mutualistic interactions in the face of coevolutionary arms races and develops a statistical method to infer coevolution in the wild.}
 \sepspace
 \EducationEntry{BS Mathematics}{2015}{University of Idaho}{A general mathematics degree including traditional coursework such as Abstract Algebra and Analysis along with applied courses including Numerical Methods and Physics.}
 
@@ -243,17 +240,16 @@ Ecological Communities}{Talk}{2020}{\href{https://amnat2020.com/}{AmNat2020} - P
 \NewPart{\emph{Professional Service}}{}
 
 \ServiceTopic{Manuscript Reviewer}
-\ReviewEntry{Evolution}{2020}
-\ReviewEntry{Ecology}{2020}
-\ReviewEntry{Population Ecology}{2019}
-\ReviewEntry{The American Naturalist}{2018}
-\ReviewEntry{Evolution}{2018}
+\ReviewEntry{The American Naturalist}
+\ReviewEntry{Ecology}
+\ReviewEntry{Evolution}
+\ReviewEntry{Population Ecology}
 
 %%% Skills
 %%% ------------------------------------------------------------
 \NewPart{\emph{Technical Skills}}{}
 
 \SkillsEntry{Software: }{Julia, \textit{R}, Mathematica, \texttt{C++}, \LaTeX}
-\SkillsEntry{Mathematics: }{Theoretical Quantitative and Population Genetics, Mathematical Statistics, Ordinary, Partial and Stochastic Differential Equations, Diffusion Approximations, Some Measure-Valued Branching Processes}
+\SkillsEntry{Mathematics: }{Theoretical Quantitative and Population Genetics, Mathematical Statistics, Ordinary, Partial and Stochastic Differential Equations, Diffusion Approximations, Measure-Valued Branching Processes}
 
 \end{document}
