@@ -35,14 +35,14 @@ the wild.
 </b>
 </p>
 
-### Current position
+### Current position & trajectory
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-I am currently in search of a postdoctoral research position with a long-term goal of starting a lab focused on developing eco-evolutionary methods to infer the processes structuring ecological communities. I earned my PhD at the University of Idaho advised by Professor [Scott Nuismer](https://www.leeef.org) in the summer of 2020. My degree is in Bioinformatics and Computational Biology ([BCB](https://www.uidaho.edu/sci/bcb)), an interdisciplinary PhD program closely affiliated with The Institute for Bioinformatics and Evolutionary Studies ([IBEST](http://www.ibest.uidaho.edu/)). My dissertation committee consists of Professors [Luke Harmon](https://scholar.google.com/citations?hl=en&user=nsA3IsgAAAAJ&view_op=list_works), [Paul Hohenlohe](https://scholar.google.com/citations?user=QPMrd8EAAAAJ&hl=en) and [Steve Krone](https://www.webpages.uidaho.edu/~krone/res.html). My CV is available [here](bob_week.pdf) and my google scholar page is [here](https://scholar.google.com/citations?user=vtSczyYAAAAJ&hl=en&oi=ao).
+I am a first-year postdoctoral researcher in [the Bradburd lab](http://www.genescape.org/) developing spatial population genetic models and statistical methods to describe population structure and admixture. My long-term goal is to start a lab that integrates coevolutionary theory and population genetic methods into statistical approaches for inferring biological processes structuring ecological communities.
 </b>
 </p>
 
