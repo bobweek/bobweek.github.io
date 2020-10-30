@@ -35,7 +35,7 @@ the wild.
 </b>
 </p>
 
-### Current position & trajectory
+### Current Position & Trajectory
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
@@ -46,7 +46,7 @@ I am a first-year postdoctoral researcher in [the Bradburd lab](http://www.genes
 </b>
 </p>
 
-### PhD work
+### PhD Work
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;

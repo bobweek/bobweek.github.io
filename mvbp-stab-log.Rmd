@@ -6,7 +6,7 @@ output:
     css: style.css
 ---
 
-# Diffusion approximation of a measure-valued branching process
+# Diffusion Approximation of a Measure-Valued Branching Process
 
 <center><iframe src="https://editor.p5js.org/bobweek/embed/I6sh2Z5nT" width="605" height="605"></iframe></center>
 
