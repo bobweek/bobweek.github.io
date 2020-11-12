@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.10.28)  28 OCT 2020 09:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.10.31)  11 NOV 2020 16:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **bob_week.tex
 (./bob_week.tex
-LaTeX2e <2020-10-01> patch level 1
-L3 programming layer <2020-10-05> xparse <2020-03-03>
+LaTeX2e <2020-10-01> patch level 2
+L3 programming layer <2020-10-27> xparse <2020-03-03>
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/koma-script/scrartcl.cls
 Document Class: scrartcl 2020/09/21 v3.32 KOMA-Script document class (article)
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/koma-script/scrkbase.sty
@@ -221,10 +221,10 @@ Package: iftex 2020/03/06 v1.0d TeX engine tests
 \Gm@dimlist=\toks16
 )
 (/home/bb/.TinyTeX/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2020/10/06 3.50 The Babel package
+Package: babel 2020/10/27 3.51 The Babel package
 
 (/home/bb/.TinyTeX/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2020/10/06 3.50 Babel common definitions
+File: babel.def 2020/10/27 3.51 Babel common definitions
 \babel@savecnt=\count187
 \U@D=\dimen147
 \l@babelnohyphens=\language3
@@ -367,7 +367,7 @@ Package: amsthm 2020/05/29 v2.20.6
 )
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/xpatch/xpatch.sty
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2020-10-05 L3 programming layer (loader) 
+Package: expl3 2020-10-27 L3 programming layer (loader) 
 
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
@@ -377,7 +377,7 @@ File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 Package: xpatch 2020/03/25 v0.3a Extending etoolbox patching commands
 
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2020-10-05 L3 Experimental document command parser
+Package: xparse 2020-10-27 L3 Experimental document command parser
 
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse-generic.tex))
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
@@ -813,17 +813,17 @@ Class scrartcl Warning: Incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 250.
+ne 251.
 
 [2] (./bob_week.aux)
 Package rerunfilecheck Info: File `bob_week.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 12857 strings out of 481865
- 222483 string characters out of 5931381
- 748560 words of memory out of 5000000
- 28904 multiletter control sequences out of 15000+600000
+ 12861 strings out of 481433
+ 222552 string characters out of 5920632
+ 752533 words of memory out of 5000000
+ 29342 multiletter control sequences out of 15000+600000
  555954 words of font info for 100 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  106i,6n,111p,10668b,350s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -835,7 +835,7 @@ ublic/amsfonts/cm/cmti10.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmtt10.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmtt12.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pf
 b></home/bb/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb>
-Output written on bob_week.pdf (2 pages, 107864 bytes).
+Output written on bob_week.pdf (2 pages, 107902 bytes).
 PDF statistics:
  77 PDF objects out of 1000 (max. 8388607)
  64 compressed objects within 1 object stream
