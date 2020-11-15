@@ -17,21 +17,8 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-I am interested in the relationship between patterns and processes
-shaping ecological communities. This inquiry leads to a broad range of
-questions involving the role of contemporary coevolution, the
-structure of interaction networks, the effects of genetic
-architecture, the role of geography, feedbacks with abundance and
-ecosystem processes and the macroevolutionary history of interacting
-taxa. However, developing models and statistical methods to explore
-these areas and understand their relative contributions to the
-structure and dynamics of ecological communities leads to challenging
-technical problems. By combining tools from stochastic processes,
-theoretical quantitative genetics and population genetics with
-classical and Bayesian statistics, I collaborate with evolutionary
-biologists, ecologists and mathematicians to develop model-based
-approaches to infer ecological and evolutionary processes occurring in
-the wild.
+I am interested in the relationship between patterns and processes shaping ecological communities. This inquiry leads to a broad range of questions involving the role of contemporary coevolution, the structure of interaction networks, the effects of genetic architectures, the role of geography, feedbacks with abundance and ecosystem processes and the macroevolutionary history of interacting taxa. However, developing models and statistical methods to explore these areas and understand their relative contributions to the structure and dynamics of ecological communities leads to challenging technical problems. By combining tools from stochastic processes, theoretical quantitative genetics and population genetics with classical and Bayesian statistics, I collaborate with evolutionary
+biologists, ecologists and mathematicians to study ecological communities and develop model-based approaches to infer ecological and evolutionary processes occurring in the wild.
 </b>
 </p>
 
@@ -42,7 +29,7 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-I am a first-year postdoctoral researcher in [the Bradburd lab](http://www.genescape.org/) developing spatial population genetic models and statistical methods to describe population structure and admixture. My long-term goal is to start a lab that integrates coevolutionary theory and population genetic methods into statistical approaches for inferring biological processes structuring ecological communities.
+I am a first-year postdoctoral researcher in [the Bradburd lab](http://www.genescape.org/) studying continuous-space population genetics. My long-term goal is to start a lab that integrates mathematical approaches to coevolution, community ecology and population genetics into statistical methods for inferring biological processes structuring ecological communities.
 </b>
 </p>
 
@@ -53,7 +40,7 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-My dissertation contributes to a coevolutionary theory of community ecology with a focus on plant-pollinator networks. Using Diffusion Limits of Measure-Valued Branching Processes (e.g., [super-Brownian motion](http://www.math.ubc.ca/~perkins/superbrownianmotionandcriticalspatialsystems.pdf)), my work provides a stochastic synthesis of quantitative genetics and population ecology (preprint [here](https://www.biorxiv.org/content/10.1101/2020.07.28.226001v1)). I apply this synthetic approach to derive models of coevolving communities that track the stochastic dynamics of abundance and quantitative traits. Using this framework, I have investigated the evolutionary dissolution of mutualisms experiencing coevolutionary arms races (ms in prep) and have developed a Maximum Likelihood method to infer the strength of coevolution between pairs of species using spatially structured phenotypic data ([Week & Nuismer 2019](https://onlinelibrary.wiley.com/doi/abs/10.1111/ele.13231)). My defense was recorded and can be viewed [here](https://youtu.be/HpvkIWx_3Ds). Interactive slides are available [here](https://bobweek.github.io/coevolutionary-community-ecology.html).
+I defended my PhD June 30, 2020. My dissertation contributes to a coevolutionary theory of community ecology with a focus on plant-pollinator networks. Using Diffusion Limits of Measure-Valued Branching Processes (e.g., [super-Brownian motion](http://www.math.ubc.ca/~perkins/superbrownianmotionandcriticalspatialsystems.pdf)), my work provides a stochastic synthesis of quantitative genetics and population ecology (preprint [here](https://www.biorxiv.org/content/10.1101/2020.07.28.226001v1)). I apply this synthetic approach to derive models of coevolving communities that track the stochastic dynamics of abundance and quantitative traits. Using this framework, I have investigated the evolutionary dissolution of mutualisms experiencing coevolutionary arms races (ms in prep) and have developed a Maximum Likelihood method to infer the strength of coevolution between pairs of species using spatially structured phenotypic data ([Week & Nuismer 2019](https://onlinelibrary.wiley.com/doi/abs/10.1111/ele.13231)). My defense was recorded and can be viewed [here](https://youtu.be/HpvkIWx_3Ds). Interactive slides are available [here](https://bobweek.github.io/coevolutionary-community-ecology.html).
 </b>
 </p>
 
