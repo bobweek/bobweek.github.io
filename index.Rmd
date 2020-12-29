@@ -29,7 +29,7 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-I am a first-year postdoctoral researcher in [the Bradburd lab](http://www.genescape.org/) studying continuous-space population genetics. My long-term goal is to start a lab that integrates mathematical approaches to coevolution, community ecology and population genetics into statistical methods for inferring biological processes structuring ecological communities.
+I am a first-year postdoctoral researcher at [The Bradburd Lab](http://www.genescape.org/) studying continuous-space population genetics. My long-term goal is to start a lab with two primary objectives. The first is to integrate mathematical approaches to genetics, coevolution, community ecology and ecosystem ecology for theoretical explorations of the causes and consequences of ecological patterns across spatial, temporal and taxonomic scales. The second is the development of statistical methods to infer ecological and evolutionary processes and to predict future states of populations, communities and ecosystems.
 </b>
 </p>
 
