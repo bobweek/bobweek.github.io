@@ -10,7 +10,7 @@ output:
 
 <center> ![A picture of me at work](me25.jpg) </center>
 
-## Bob Week
+## <span style="background-color: black;">Bob Week</span>
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
@@ -22,7 +22,7 @@ biologists, ecologists and mathematicians to study ecological communities and de
 </b>
 </p>
 
-### Current Position & Trajectory
+### <span style="background-color: black;">Current Position & Trajectory</span>
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
@@ -33,7 +33,7 @@ I am a first-year postdoctoral researcher at [The Bradburd Lab](http://www.genes
 </b>
 </p>
 
-### PhD Work
+### <span style="background-color: black;">PhD Work</span>
 
 <p align=justify style="background-color:#2E2E2E;
 border-radius:4px;
@@ -44,7 +44,7 @@ I defended my PhD June 30, 2020. My dissertation contributes to a coevolutionary
 </b>
 </p>
 
-### Publications
+### <span style="background-color: black;">Publications</span>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css"/>
 <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
