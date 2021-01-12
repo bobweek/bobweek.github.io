@@ -1,0 +1,15 @@
+---
+title: "Recorded Presentations"
+output: 
+  html_document:
+    theme: cosmo
+    css: style.css
+---
+
+### Coevolutionary Arms Races & the Conditions for the Maintenance of Mutualism ([ASN2021](https://virtualasilomar2021.org/))
+
+<p align="center">[slides](https://bobweek.github.io/coevolutionary-community-ecology.html#/)<br><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/8ApmFjOkKQU?controls=0&amp;start=14448" frameborder="10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+
+### PhD Defense ([IBEST](https://www.ibest.uidaho.edu/))
+
+<p align="center">[slides](https://bobweek.github.io/coevolutionary-dissolution-of-mutualisms.html)<br><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/HpvkIWx_3Ds?controls=0" frameborder="10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
