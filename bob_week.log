@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.1)  2 MAR 2021 11:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.12)  13 MAR 2021 17:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -221,10 +221,10 @@ Package: iftex 2020/03/06 v1.0d TeX engine tests
 \Gm@dimlist=\toks16
 )
 (/home/bb/.TinyTeX/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2021/02/22 3.54 The Babel package
+Package: babel 2021/03/03 3.55 The Babel package
 
 (/home/bb/.TinyTeX/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2021/02/22 3.54 Babel common definitions
+File: babel.def 2021/03/03 3.55 Babel common definitions
 \babel@savecnt=\count191
 \U@D=\dimen147
 \l@babelnohyphens=\language3
@@ -370,7 +370,7 @@ Package: amsthm 2020/05/29 v2.20.6
 Package: expl3 2021-02-18 L3 programming layer (loader) 
 
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2021-02-18 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2021-03-02 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count274
 \l__pdf_internal_box=\box51
 ))
@@ -430,7 +430,7 @@ File: svgnam.def 2016/05/11 v2.12 Predefined colors according to SVG 1.1 (UK)
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2021-02-10 v7.00j Hypertext links for LaTeX
+Package: hyperref 2021-02-27 v7.00k Hypertext links for LaTeX
 
 (/home/bb/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
@@ -472,10 +472,10 @@ Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
 \Hy@pagecounter=\count277
 
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2021-02-10 v7.00j Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2021-02-27 v7.00k Hyperref: PDFDocEncoding definition (HO)
 )
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref-langpatches.def
-File: hyperref-langpatches.def 2021-02-10 v7.00j Hyperref: patches for babel la
+File: hyperref-langpatches.def 2021-02-27 v7.00k Hyperref: patches for babel la
 nguages
 )
 (/home/bb/.TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
@@ -487,7 +487,7 @@ Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 \Hy@SavedSpaceFactor=\count278
 
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2021-02-10 v7.00j Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2021-02-27 v7.00k Hyperref: PDF Unicode definition (HO)
 )
 Package hyperref Info: Hyper figures OFF on input line 4192.
 Package hyperref Info: Link nesting OFF on input line 4197.
@@ -532,7 +532,7 @@ with kernel methods
 Package hyperref Info: Driver (autodetected): hpdftex.
 
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2021-02-10 v7.00j Hyperref driver for pdfTeX
+File: hpdftex.def 2021-02-27 v7.00k Hyperref driver for pdfTeX
 
 (/home/bb/.TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery packag
@@ -819,18 +819,18 @@ Class scrartcl Warning: Incompatible usage of \@ssect detected.
 (scrartcl)              from within a non compatible caller, that does not
 (scrartcl)              \scr@s@ct@@nn@m@ locally.
 (scrartcl)              This could result in several error messages on input li
-ne 255.
+ne 256.
 
 [2] [3] (./bob_week.aux)
 Package rerunfilecheck Info: File `bob_week.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 15593 strings out of 480971
- 259660 string characters out of 5908068
- 784778 words of memory out of 5000000
+ 15591 strings out of 480971
+ 259642 string characters out of 5908067
+ 784788 words of memory out of 5000000
  32482 multiletter control sequences out of 15000+600000
- 425568 words of font info for 120 fonts, out of 8000000 for 9000
+ 425460 words of font info for 119 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  111i,6n,116p,10668b,354s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/bb/.TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}</home/bb/.TinyTeX/
@@ -841,7 +841,7 @@ ublic/amsfonts/cm/cmti10.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmtt10.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmtt12.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pf
 b></home/bb/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb>
-Output written on bob_week.pdf (3 pages, 109619 bytes).
+Output written on bob_week.pdf (3 pages, 110187 bytes).
 PDF statistics:
  84 PDF objects out of 1000 (max. 8388607)
  70 compressed objects within 1 object stream
