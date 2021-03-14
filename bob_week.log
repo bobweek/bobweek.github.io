@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.12)  13 MAR 2021 17:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.3.12)  13 MAR 2021 18:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -841,10 +841,10 @@ ublic/amsfonts/cm/cmti10.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmtt10.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmtt12.pfb></home/bb/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pf
 b></home/bb/.TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb>
-Output written on bob_week.pdf (3 pages, 110187 bytes).
+Output written on bob_week.pdf (3 pages, 109866 bytes).
 PDF statistics:
- 84 PDF objects out of 1000 (max. 8388607)
- 70 compressed objects within 1 object stream
+ 86 PDF objects out of 1000 (max. 8388607)
+ 72 compressed objects within 1 object stream
  13 named destinations out of 1000 (max. 500000)
  38913 words of extra memory for PDF output out of 42996 (max. 10000000)
 
