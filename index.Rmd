@@ -17,8 +17,7 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-I am interested in the relationship between patterns and processes shaping ecological communities. This inquiry leads to a broad range of questions involving the role of contemporary coevolution, the structure of interaction networks, the effects of genetic architectures, the role of geography, feedbacks with abundance and ecosystem processes and the macroevolutionary history of interacting taxa. However, developing models and statistical methods to explore these areas and understand their relative contributions to the structure and dynamics of ecological communities leads to challenging technical problems. By combining tools from stochastic processes, theoretical quantitative genetics and population genetics with classical and Bayesian statistics, I collaborate with evolutionary
-biologists, ecologists and mathematicians to study ecological communities and develop model-based approaches to infer ecological and evolutionary processes occurring in the wild.
+I am interested in the relationship between patterns and processes shaping ecological communities. This inquiry leads to a broad range of questions involving the role of contemporary coevolution, the structure of interaction networks, the effects of genetic architectures, the role of geography, feedbacks with abundance and ecosystem processes and the macroevolutionary history of interacting taxa. However, developing models and statistical methods to explore these areas and understand their relative contributions to the structure and dynamics of ecological communities leads to challenging technical problems. By combining tools from stochastic processes, theoretical quantitative genetics and population genetics with classical and Bayesian statistics, I collaborate with evolutionary biologists, ecologists and mathematicians to study ecological communities and develop model-based approaches to infer ecological and evolutionary processes occurring in the wild.
 </b>
 </p>
 
@@ -29,7 +28,7 @@ border-radius:4px;
 font-size:16px;
 padding:15px;
 margin:5px;"><b>
-I am a first-year postdoctoral researcher at [The Bradburd Lab](http://www.genescape.org/) studying continuous-space population genetics. My long-term goal is to start a lab with two primary objectives. The first is to integrate mathematical approaches to genetics, coevolution, community ecology and ecosystem ecology for theoretical explorations of the causes and consequences of genetic and ecological patterns across spatial, temporal and taxonomic scales. The second is the development of statistical methods to infer ecological and evolutionary processes and to predict future states of populations, communities and ecosystems.
+I am a first-year postdoctoral researcher at [The Bradburd Lab](http://www.genescape.org/) studying continuous-space population genetics. My long-term goal is to start a lab with two primary objectives. The first is to integrate mathematical approaches to genetics, coevolution, community ecology and eventually ecosystem ecology for theoretical explorations of the causes and consequences of genetic and ecological patterns across spatial, temporal and taxonomic scales. The second is the development of statistical methods to infer ecological and evolutionary processes and to forecast future states of populations, communities and ecosystems.
 </b>
 </p>
 
