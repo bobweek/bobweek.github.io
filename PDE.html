@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Lawrence C. Evans" />
+
+
+<title>Partial differential equations</title>
+
+<script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Interactive Simulations</span> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="1d-dd.html">1D Drift/Dispersal</a></li>
+                <li><a href="1d-ddc.html">1D Drift/Dispersal/Coevolution</a></li>                
+                <li><a href="2d-ddc.html">2D Drift/Dispersal/Coevolution</a></li>
+                <li><a href="mvbp-stab-log.html">MVBP with Selection/Competition</a></li>
+            </ul>
+        </li>
+        <li><a href="measuring_coevolution.html">Measuring Coevolution</a></li>
+        <li><a href="presentations.html">Presentations</a></li>
+        <li><a href="bob_week.pdf">CV</a></li>
+
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Partial differential equations</h1>
+<h4 class="author">Lawrence C. Evans</h4>
+
+</div>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { 
+    TagSide: "left",
+    equationNumbers: { autoNumber: "AMS" } 
+  }
+});
+</script>
+<div id="second-order-elliptic-equations" class="section level1">
+<h1><strong>Second-Order Elliptic Equations</strong></h1>
+</div>
+<div id="definitions" class="section level1">
+<h1>6.1 Definitions</h1>
+<p>We study problems with Dirichlet boundary conditions:</p>
+<p><span class="math display">\[\begin{equation}
+\left\{\begin{matrix}
+Lu = f &amp; x\in U \\
+u = 0 &amp; x\in \partial U
+\end{matrix}\right. .
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(L\)</span> is a second order partial differential operator appearing as</p>
+<ul>
+<li>divergence form (best used with energy methods):</li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+Lu = -\sum_{i,j}\left(a^{ij}(x)u_{x_i}\right)_{x_j}+\sum_ib^i(x)u_{x_i}+c(x)u
+\end{equation}\]</span></p>
+<ul>
+<li>nondivergence form (best used with maximum principle techniques):</li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+Lu = -\sum_{i,j}a^{ij}(x)u_{x_i x_j}+\sum_ib^i(x)u_{x_i}+c(x)u
+\end{equation}\]</span></p>
+<p><strong>Def:</strong> <span class="math inline">\(L\)</span> is uniformly <em>elliptic</em> if there exists a constant <span class="math inline">\(\theta&gt;0\)</span> s.t.</p>
+<p><span class="math display">\[\begin{equation}
+\sum_{i,j}a^{ij}(x)\xi_i\xi_j\geq\theta|\xi|^2
+\end{equation}\]</span></p>
+<p>for a.e. <span class="math inline">\(x\in U\)</span> and for all <span class="math inline">\(\xi\in\mathbb{R}^n\)</span>. <span class="math inline">\(\diamond\)</span></p>
+<ul>
+<li><p>If <span class="math inline">\(L\)</span> is elliptic, then for each <span class="math inline">\(x\in U\)</span> the matrix <span class="math inline">\(\pmb{A}(x)=(a^{ij}(x))\)</span> is positive definite, with smallest eigenvalue <span class="math inline">\(\geq0\)</span>.</p></li>
+<li><p>If <span class="math inline">\(a^{ij}=\delta_{ij}, \ b^i=0, \ c=0\)</span>, then <span class="math inline">\(L=-\Delta\)</span></p></li>
+<li><p><strong>Population dynamics:</strong> If we set <span class="math inline">\(f=u_t\)</span>, the terms <span class="math inline">\(a\)</span> represent diffusive migration, <span class="math inline">\(b\)</span> directional migration/taxis, <span class="math inline">\(c\)</span> the Malthusian fitness. However, this is not technically an elliptic equation…</p></li>
+</ul>
+<div id="weak-solutions" class="section level2">
+<h2>6.1.2 Weak solutions</h2>
+<p>Assume <span class="math inline">\(a^{ij},b^i,c\in L^\infty(U)\)</span> &amp; <span class="math inline">\(f\in L^2(U)\)</span> and that <span class="math inline">\(L\)</span> is in divergence form <span class="math inline">\((2)\)</span>.</p>
+<p><strong>Def:</strong></p>
+<ol style="list-style-type: lower-roman">
+<li>The <em>bilinear form</em> <span class="math inline">\(B[ \ , \ ]\)</span> associated with the divergence form elliptic operator <span class="math inline">\(L\)</span> is</li>
+</ol>
+<p><span class="math display">\[B[u,v]\equiv\int_U\left(\sum_{ij}a^{ij}u_{x_i}v_{x_j}+\sum_ib^iu_{x_i}v+cuv\right)dx\]</span></p>
+<p>for <span class="math inline">\(u,v\in H_0^1(U)\)</span>.</p>
+<ol start="2" style="list-style-type: lower-roman">
+<li><span class="math inline">\(u\in H_0^1(U)\)</span> is a <em>weak solution</em> of the BVP <span class="math inline">\((1)\)</span> if</li>
+</ol>
+<p><span class="math display">\[B[u,v]=(f,v)\equiv\int_U f(x)v(x)dx\]</span></p>
+<p>for all <span class="math inline">\(v\in H_0^1(U)\)</span>.</p>
+<hr />
+<div id="characterization-of-h-1" class="section level3">
+<h3>Characterization of <span class="math inline">\(H^{-1}\)</span></h3>
+<ol style="list-style-type: lower-roman">
+<li>For <span class="math inline">\(f\in H^{-1}\)</span> there exist functions <span class="math inline">\(f^0,\dots,f^n\in L^2\)</span> (<span class="math inline">\(n=\dim(U)\)</span>) s.t.</li>
+</ol>
+<p><span class="math display">\[\left&lt;f,v\right&gt;=\int_U\left(f^0v+\sum_if^iv_{x_i}\right)dx, \ (v\in H_0^1)\]</span></p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>Also,</li>
+</ol>
+<p><span class="math display">\[\|f\|_{H^{-1}}=\inf\left\{\left(\int_U\sum_i|f^i|^2dx\right)^{1/2}:
+  f\text{ satisfies i. for the specified }f^0,\dots,f^n\in L^2\right\}\]</span></p>
+<ol start="3" style="list-style-type: lower-roman">
+<li>In particular,</li>
+</ol>
+<p><span class="math display">\[(v,u)_{L^2}=\left&lt;v,u\right&gt;\]</span></p>
+<p>for all <span class="math inline">\(u\in H^1_0, \ v\in L^2\subset H^{-1}\)</span>.</p>
+<p><strong>Notation:</strong> Write “<span class="math inline">\(f=f^0-\sum_if^i_{x_i}\)</span>” whenever i. holds.</p>
+<hr />
+<p>Consider the boundary value problem</p>
+<p><span class="math display">\[\begin{equation}
+\left\{
+\begin{matrix}
+Lu = f^0-\sum_i f^i_{x_i} &amp; x\in U \\
+ u = 0                    &amp; x\in\partial U 
+\end{matrix}
+\right.
+\end{equation}\]</span></p>
+<p>with <span class="math inline">\(L\)</span> in divergence form and <span class="math inline">\(f^i\in L^2(U)\)</span>. From above we see <span class="math inline">\(f=f^0-\sum_if^i_{x_i}\in H^{-1}(U)\)</span>.</p>
+<p><strong>Def:</strong> <span class="math inline">\(u\in H_0^1(U)\)</span> is a <em>weak solution</em> of (5) if</p>
+<p><span class="math display">\[B[u,v]=\left&lt;f,v\right&gt;\]</span></p>
+<p>for every <span class="math inline">\(v\in H_0^1(U)\)</span>, where <span class="math inline">\(\left&lt;,vf\right&gt;\equiv\int_Uf^0v+\sum_if^iv_{x_i}dx\)</span> and <span class="math inline">\(\left&lt; \ , \ \right&gt;\)</span> is a “pairing” (like an innder-product) between <span class="math inline">\(H^{-1}\)</span> and <span class="math inline">\(H_0^1\)</span>.</p>
+<ul>
+<li><p>If a BVP has condition <span class="math inline">\(u=g\)</span> on <span class="math inline">\(\partial U\)</span>, so long as <span class="math inline">\(g\)</span> is the trace of some <span class="math inline">\(w\in H^1\)</span> so that <span class="math inline">\(u-w\in H_0^1\)</span>, the BVP can be rephrased with a Dirichlet condition be subtracting <span class="math inline">\(g\)</span> from both equations.</p></li>
+<li><p>Because of this we focus on Dirichlet boundary conditions.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="existence-of-weak-solutions" class="section level1">
+<h1>6.2 Existence of weak solutions</h1>
+<p><strong>Lax-Milgram Theorem:</strong> If <span class="math inline">\(B:H\times H\rightarrow\mathbb{R}\)</span> is a bilinear form for which there exists <span class="math inline">\(\alpha,\beta&gt;0\)</span> s.t.</p>
+<ol style="list-style-type: lower-roman">
+<li><p><span class="math inline">\(|B[u,v]|\leq\alpha\|u\| \ \|v\|, \ \ \ (u,v\in H)\)</span></p></li>
+<li><p><span class="math inline">\(\beta\|u\|^2\leq B[u,u], \ \ \ (u\in H)\)</span></p></li>
+</ol>
+<p>and if <span class="math inline">\(f:H\rightarrow\mathbb{R}\)</span> is a bounded linear functional on <span class="math inline">\(H\)</span>, then there exists a unique element <span class="math inline">\(u\in H\)</span> s.t. <span class="math inline">\(B[u,v]=\left&lt;f,v\right&gt;\)</span> for all <span class="math inline">\(v\in H\)</span>. <span class="math inline">\(\diamond\)</span></p>
+<ul>
+<li>This theorem is just Riesz representation if <span class="math inline">\(B\)</span> is symmetric. Hence, it its significance is that it works for asymmetric <span class="math inline">\(B\)</span>.</li>
+</ul>
+<div id="energy-estimates-applying-lax-milgram" class="section level2">
+<h2>6.2.2 Energy estimates (applying Lax-Milgram)</h2>
+<p>Assume <span class="math inline">\(B\)</span> is the bilinear form associated with <span class="math inline">\(L\)</span>.</p>
+<p><strong>Theorem 2 (Energy estimates):</strong> There exists <span class="math inline">\(\alpha,\beta&gt;0\)</span> and <span class="math inline">\(\gamma\geq0\)</span> s.t.</p>
+<ol style="list-style-type: lower-roman">
+<li><p><span class="math inline">\(|B[u,v]|\leq\alpha\|u\|_{H_0^1} \ \|v\|_{H_0^1}\)</span></p></li>
+<li><p><span class="math inline">\(\beta\|u\|_{H_0^1}^2\leq B[u,u]+\gamma\|u\|^2_{L^2}\)</span></p></li>
+</ol>
+<p><strong>Proof:</strong> Checking the first condition is just a straightforward use of <span class="math inline">\(|\int f|\leq\int|f|\)</span>. The second requires the ellipticity condition <span class="math inline">\((4)\)</span>. <span class="math inline">\(\square\)</span></p>
+<ul>
+<li>When <span class="math inline">\(\gamma&gt;0\)</span>, <span class="math inline">\(B\)</span> does not satisfy hypothesis of Lax-Milgram. So we need the following:</li>
+</ul>
+<p><strong>Theorem 3 (first existence theorem):</strong> There is a number <span class="math inline">\(\gamma\geq0\)</span> s.t. for all <span class="math inline">\(\mu\geq\gamma\)</span> and each <span class="math inline">\(f\in L^2(U)\)</span>, there is a unique weak solution <span class="math inline">\(u\in H_0^1\)</span> of the BVP</p>
+<p><span class="math display">\[\begin{equation}
+\left\{
+\begin{matrix}
+Lu+\mu u=f &amp; x\in U \\
+u = 0      &amp; x\in\partial U.
+\end{matrix}
+\right.
+\end{equation}\]</span></p>
+<p><strong>Proof:</strong> Set <span class="math inline">\(L_\mu=Lu+\mu u\)</span>. Then the associated <span class="math inline">\(B_\mu\)</span> satisfies Lax-Milgram. With <span class="math inline">\(f\)</span> fixed in <span class="math inline">\(L^2\)</span>, setting <span class="math inline">\(\left&lt;f,v\right&gt;=(f,v)\)</span> defines a bounded linear functional on <span class="math inline">\(L^2\)</span>. Apply Lax-Milgram to find unique <span class="math inline">\(u\in H_0^1\)</span> satisfying <span class="math inline">\(B_\mu[u,v]=\left&lt;f,v\right&gt;\)</span> for all <span class="math inline">\(v\in H_0^1\)</span>. <span class="math inline">\(\square\)</span></p>
+<p><strong><span class="math inline">\(H_0^1\sim H^{-1}\)</span>:</strong></p>
+<ul>
+<li>For all <span class="math inline">\(f^i\in L^2\)</span>, <span class="math inline">\((i=0,\dots,n)\)</span>, <span class="math inline">\(\left&lt;f,v\right&gt;=\int_U f^0v+\sum_i f^iv_{x_i}\)</span> is a bounded linear functional on <span class="math inline">\(H_0^1\)</span>. Hence, there is a weak solution <span class="math inline">\(u\)</span> of the PDE</li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+\left\{
+\begin{matrix}
+Lu+\mu u=f^0-\sum_if^i_{x_i} &amp; x\in U \\
+u = 0      &amp; x\in\partial U.
+\end{matrix}
+\right.
+\end{equation}\]</span></p>
+<ul>
+<li>In particular, <span class="math inline">\(L_\mu=L+\mu I:H_0^1\rightarrow H^{-1}\)</span> is an <em>isomorphism</em>.</li>
+</ul>
+</div>
+<div id="fredholm-alternative" class="section level2">
+<h2>6.2.3. Fredholm alternative</h2>
+<p>We first collect some results from the appendix.</p>
+<hr />
+<ul>
+<li><span class="math inline">\(X,Y\)</span> are Banach spaces</li>
+</ul>
+<p><strong>Def:</strong> An operator <span class="math inline">\(A:X\rightarrow Y\)</span> is <em>closed</em> if whenever <span class="math inline">\(u_k\rightarrow u\)</span> and <span class="math inline">\(Au_k\rightarrow v\)</span>, then <span class="math inline">\(Au=v\)</span>.</p>
+<p><strong>Theorem (closed graph theorem):</strong> If <span class="math inline">\(A\)</span> is a closed linear operator, then it is bounded.</p>
+<p><strong>Def:</strong> <span class="math inline">\(A:X\rightarrow X\)</span> is a bounded operator.</p>
+<ol style="list-style-type: lower-roman">
+<li><p>The <em>resolvent</em> of <span class="math inline">\(A\)</span> is <span class="math inline">\(\rho(A)=\{\eta\in\mathbb{R}:(A-\eta I)\text{ is a bijection }\}\)</span>.</p></li>
+<li><p>The <em>spectrum</em> of <span class="math inline">\(A\)</span> is <span class="math inline">\(\sigma(A)=\mathbb{R}-\rho(A)\)</span>.</p></li>
+<li><p>(eigenvalues) The <em>point spectrum</em> of <span class="math inline">\(A\)</span> is <span class="math inline">\(\sigma_p(A)=\{\eta\in\sigma:N(A-\eta I)\neq\{0\}\}\)</span></p></li>
+</ol>
+<p><span class="math display">\[\diamond\]</span></p>
+<ul>
+<li>If <span class="math inline">\(\eta\in\rho\)</span>, the closed graph theorem implies that <span class="math inline">\((A-\eta I)^{-1}:X\rightarrow X\)</span> is a bounded linear operator.</li>
+</ul>
+<p><strong>Def:</strong> Weak convergence is denoted by <span class="math inline">\(u_k\rightharpoonup u\)</span> which implies <span class="math inline">\(\left&lt;u^*,u_k\right&gt;\rightarrow\left&lt;u^*,u\right&gt;\)</span> for every bounded linear functional <span class="math inline">\(u^*\in X^*\)</span>.</p>
+<p><strong>Def:</strong> A bounded linear operator <span class="math inline">\(K:X\rightarrow Y\)</span> is <em>compact</em> if for every bounded sequence <span class="math inline">\(\{u_k\}\subset X\)</span>, the sequence <span class="math inline">\(\{Ku_k\}\)</span> is <em>precompact</em> in <span class="math inline">\(Y\)</span> (which occurs when there exists a subsequence <span class="math inline">\(\{u_{k_j}\}\)</span> s.t. <span class="math inline">\(\{Ku_{k_j}\}\)</span> converges in <span class="math inline">\(Y\)</span>).</p>
+<ul>
+<li>If a linear operator <span class="math inline">\(K:H\rightarrow H\)</span> is compact and <span class="math inline">\(u_k\rightharpoonup u\)</span>, <span class="math inline">\(Ku_k\rightarrow Ku\)</span>.</li>
+</ul>
+<p><strong>Def:</strong> The adjoint of an operator <span class="math inline">\(K\)</span> is defined by <span class="math inline">\(\left&lt;Ku,v\right&gt;=\left&lt;f,K^* v\right&gt;\)</span>.</p>
+<p><strong>Theorem:</strong> If <span class="math inline">\(K\)</span> is compact, so is <span class="math inline">\(K^*\)</span>.</p>
+<p><strong>Theorem (Fredholm alternative:</strong> <span class="math inline">\(K:H\rightarrow H\)</span> a compact operator. Then</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(N(I-K)\)</span> is finite dimensional</li>
+<li><span class="math inline">\(R(I-K)\)</span> is closed</li>
+<li><span class="math inline">\(R(I-K)=N(I-K^*)^\bot\)</span></li>
+<li><span class="math inline">\(N(I-K)=\{0\}\)</span> iff <span class="math inline">\(R(I-K)=H\)</span></li>
+<li><span class="math inline">\(\dim N(I-K)=\dim N(I-K^*)\)</span></li>
+</ol>
+<p><span class="math display">\[\diamond\]</span></p>
+<p>The Fredholm alternative implies precisely one of the two statements:</p>
+<ol style="list-style-type: lower-roman">
+<li><p>For each <span class="math inline">\(f\in H\)</span>, the equation <span class="math inline">\(u-Ku=f\)</span> has a unique solution.</p></li>
+<li><p>The homogeneous equation <span class="math inline">\(u-Ku=0\)</span> has solutions <span class="math inline">\(u\neq0\)</span>. The space of these solutions is finite-dimensional and the nonhomogeneous equation <span class="math inline">\(u-Ku=f\)</span> has a solution iff <span class="math inline">\(f\in N(I-K^*)^\bot\)</span>.</p></li>
+</ol>
+<p><strong>Theorem:</strong> If <span class="math inline">\(\dim H=\infty\)</span> and <span class="math inline">\(K\)</span> is compact, then</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(0\in\sigma(K)\)</span></li>
+<li><span class="math inline">\(\sigma(K)-\{0\}=\sigma_p(K)-\{0\}\)</span></li>
+<li><span class="math inline">\(\sigma(K)-\{0\}\)</span> is finite or else is a sequnce tending to <span class="math inline">\(0\)</span>.</li>
+</ol>
+<p><strong>Def:</strong> For linear bounded symmetric <span class="math inline">\(S:H\rightarrow H\)</span> denote</p>
+<p><span class="math display">\[m\equiv\inf_{\begin{matrix} u\in H \\ \|u\|=1 \end{matrix}}(Su,u), \ \ \ M\equiv\sup_{\begin{matrix} u\in H \\ \|u\|=1 \end{matrix}}(Su,u).\]</span></p>
+<p><strong>Lemma:</strong> <span class="math inline">\(\sigma(S)\subset[m,M]\)</span> and <span class="math inline">\(m,M\in\sigma(S)\)</span>.</p>
+<p><strong>Theorem:</strong> <span class="math inline">\(H\)</span> a separable Hilbert space, <span class="math inline">\(S\)</span> a symmetric compact operator on <span class="math inline">\(H\)</span>. Then there exists an ONB of <span class="math inline">\(H\)</span> consisting of eigenvectors of <span class="math inline">\(S\)</span>.</p>
+<hr />
+<p><strong>Def:</strong></p>
+<ol style="list-style-type: lower-roman">
+<li>The <em>formal adjoint</em> of <span class="math inline">\(L\)</span>, denoted by <span class="math inline">\(L^*\)</span>, is</li>
+</ol>
+<p><span class="math display">\[L^*v\equiv\sum_{ij}(a^{ij}v_{x_j})_{x_i}\]</span></p>
+<ol start="2" style="list-style-type: lower-roman">
+<li><p>The <em>adjoint bilinear form</em> <span class="math inline">\(B^*:H_0^1\times H_0^1\rightarrow\mathbb{R}\)</span> is <span class="math inline">\(B^*[v,u]\equiv B[u,v]\)</span> for all <span class="math inline">\(u,v\in H_0^1\)</span>.</p></li>
+<li><p>If <span class="math inline">\(v\in H_0^1\)</span> satisfies <span class="math inline">\(B^*[v,u]=(f,u)\)</span> for all <span class="math inline">\(u\in H_0^1\)</span> then it is a weak solution of the <em>adjoint problem</em></p></li>
+</ol>
+<p><span class="math display">\[\left\{\begin{matrix}L^*v=f &amp; x\in U \\ v=0 &amp; x\in\partial U.\end{matrix}\right.\]</span></p>
+<p><span class="math display">\[\diamond\]</span></p>
+<ul>
+<li><p><span class="math inline">\(N=\{u\in H_0^1: u \text{ is a weak solution of the homogeneous problem} \}\)</span></p></li>
+<li><p><span class="math inline">\(N^*=\{v\in H_0^1: u \text{ is a weak solution of the homogeneous adjoint problem} \}\)</span></p></li>
+</ul>
+<p><strong>Theorem 4 (second existence theorem):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><p>Precisely one of the following</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>for each <span class="math inline">\(f\in L^2\)</span> there is a unique weak solution <span class="math inline">\(u\)</span> of the BVP <span class="math inline">\((1)\)</span></p></li>
+<li><p>there exists a weak solution <span class="math inline">\(u\neq0\)</span> of <span class="math inline">\((1)\)</span> when <span class="math inline">\(f=0\)</span> (homogeneous)</p></li>
+</ol></li>
+<li><p>If b. holds, <span class="math inline">\(\dim N=\dim N^*&lt;\infty\)</span></p></li>
+<li><p>The BVP <span class="math inline">\((1)\)</span> has a weak solution iff <span class="math inline">\((f,v)=0\)</span> for all <span class="math inline">\(v\in N^*\)</span>.</p></li>
+</ol>
+<p><span class="math display">\[\diamond\]</span></p>
+<p><strong>Theorem 5 (third existence theorem):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li>There exists an at most countable set <span class="math inline">\(\Sigma\subset\mathbb{R}\)</span> s.t. the BVP</li>
+</ol>
+<p><span class="math display">\[\left\{\begin{matrix}Lu=\lambda u+f &amp; x\in U \\ u=0 &amp; x\in\partial U\end{matrix}\right.\]</span></p>
+<p>has a weak solution for each <span class="math inline">\(f\in L^2\)</span> iff <span class="math inline">\(\lambda\notin\Sigma\)</span>.</p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>If <span class="math inline">\(\Sigma\)</span> is infinite, then <span class="math inline">\(\Sigma=\{\lambda_k\}\)</span> is nondecreasing with <span class="math inline">\(\lambda_k\rightarrow\infty\)</span>.</li>
+</ol>
+<p><strong>Def:</strong> <span class="math inline">\(\Sigma\)</span> is the <em>real spectrum</em> of <span class="math inline">\(L\)</span>. The BVP</p>
+<p><span class="math display">\[\left\{\begin{matrix}Lu=\lambda u &amp; x\in U \\ u=0 &amp; x\in\partial U\end{matrix}\right.\]</span></p>
+<p>has a nontrivial solution <span class="math inline">\(w\neq0\)</span> iff <span class="math inline">\(\lambda\in\Sigma\)</span>. In this case <span class="math inline">\(\lambda\)</span> is an <em>eigenvalue</em> of <span class="math inline">\(L\)</span> corresponding to the <em>eigenfunction</em> <span class="math inline">\(w\)</span>. The PDE <span class="math inline">\(Lu=\lambda u\)</span> for <span class="math inline">\(L=-\Delta\)</span> is called <em>Helmholtz’s equation</em>.</p>
+<p><strong>Theorem 6 (boundedness of the inverse):</strong> If <span class="math inline">\(\lambda\notin\Sigma\)</span> there exists a constant <span class="math inline">\(C\)</span> s.t.</p>
+<p><span class="math display">\[\|u\|_{L^2}\leq C\|f\|_{L^2}\]</span></p>
+<p>whenever <span class="math inline">\(f\in L^2\)</span> and <span class="math inline">\(u\in H_0^1\)</span> is the unique weak solution of</p>
+<p><span class="math display">\[\left\{\begin{matrix}Lu=\lambda u+f &amp; x\in U \\ u=0 &amp; x\in\partial U.\end{matrix}\right.\]</span></p>
+<p>The constant <span class="math inline">\(C\)</span> depends only on <span class="math inline">\(\lambda,U\)</span> and the coefficients of <span class="math inline">\(L\)</span>. The constant <span class="math inline">\(C\)</span> blows up when <span class="math inline">\(\lambda\)</span> approaches an eigenvalue.</p>
+</div>
+</div>
+<div id="eigenvalues-and-eigenfunctions" class="section level1">
+<h1>6.5 Eigenvalues and eigenfunctions</h1>
+<p>We consider</p>
+<p><span class="math display">\[\begin{equation}
+\left\{\begin{matrix}
+Lw = \lambda w &amp; x\in U \\
+w = 0          &amp; x\in\partial U,
+\end{matrix}\right.
+\end{equation}\]</span></p>
+<p>with <span class="math inline">\(U\)</span> open and bounded.</p>
+<div id="eigenvalues-of-symmetric-elliptic-operators" class="section level2">
+<h2>6.5.1 Eigenvalues of symmetric elliptic operators</h2>
+<p>Restrict attention to the divergence form <span class="math inline">\(Lu=-\sum_{ij}\left(a^{ij}u_{x_i}\right)_{x_j}\)</span> with <span class="math inline">\(a^{ij}\in C^\infty(\bar U)\)</span>. Further suppose that the elliptic condition is satisfied and <span class="math inline">\(a^{ij}=a^{ji}\)</span>. Then the operator <span class="math inline">\(L\)</span> is symmetric and, in particular, <span class="math inline">\(B[u,v]=B[v,u]\)</span> (<span class="math inline">\(L\)</span> is equal to its adjoint).</p>
+<p>Assume also that <span class="math inline">\(U\)</span> is connected.</p>
+<p><strong>Theorem 1 (eigenvalues of symmetric elliptic operators):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li>each eigenvalue of <span class="math inline">\(L\)</span> is real</li>
+<li>repeating each eigenvalue according to its multiplicity, we get <span class="math inline">\(\Sigma=\{\lambda_k\}\)</span> s.t.</li>
+</ol>
+<p><span class="math display">\[0&lt;\lambda_1\leq\lambda_2\leq\cdots, \ \ \ \lambda_k\rightarrow\infty.\]</span></p>
+<ol start="3" style="list-style-type: lower-roman">
+<li>There exists an ONB <span class="math inline">\(\{w_k\}\)</span> of <span class="math inline">\(L^2(U)\)</span>, where <span class="math inline">\(w_k\in H_0^1\)</span> is an eigenfunction corresponding to <span class="math inline">\(\lambda_k\)</span>:</li>
+</ol>
+<p><span class="math display">\[\left\{\begin{matrix}Lw_k=\lambda_k w_k &amp; x\in U \\ w_k=0 &amp; x\in\partial U\end{matrix}\right., \ \ \ k=1,2,\dots\]</span></p>
+<ul>
+<li><span class="math inline">\(w_k\in C^\infty(U)\)</span> and if <span class="math inline">\(\partial U\)</span> is smooth, <span class="math inline">\(w_k\in C^\infty(\bar U)\)</span>.</li>
+</ul>
+<p><strong>Weyl’s law:</strong> The eigenvalues of the Laplacian in a smooth bounded open set <span class="math inline">\(U\subset\mathbb{R}\)</span> satisfy</p>
+<p><span class="math display">\[\lim_{k\rightarrow\infty}\frac{\lambda_k^{n/2}}{k}=\frac{(2\pi)^n}{|U|\alpha(n)}\]</span></p>
+<p>where <span class="math inline">\(|U|\)</span> is the volume of <span class="math inline">\(U\)</span> and <span class="math inline">\(\alpha(n)=\frac{\pi^{n/2}}{\Gamma(\frac{n}{2}+1)}\)</span> is the volume of a unit ball in <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
+<p><strong>Def:</strong> We call <span class="math inline">\(\lambda_1&gt;0\)</span> the <em>principle eigenvalue</em> of <span class="math inline">\(L\)</span>.</p>
+<p><strong>Theorem 2 (variational principle for the principle eigenvalue):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><p><span class="math inline">\(\lambda_1=\min\{B[u,u]:u\in H_0^1,\|u\|_{L^2}=1\}\)</span></p></li>
+<li><p><span class="math inline">\(\lambda_1\)</span> is obtained for a function <span class="math inline">\(w_1&gt;0\)</span> in <span class="math inline">\(U\)</span> and solves</p></li>
+</ol>
+<p><span class="math display">\[\left\{\begin{matrix}Lw_1=\lambda_1 w_1 &amp; x\in U \\ w_1=0 &amp; x\in\partial U\end{matrix}\right.\]</span></p>
+<ol start="3" style="list-style-type: lower-roman">
+<li>if <span class="math inline">\(u\in H_0^1\)</span> is any weak solution of</li>
+</ol>
+<p><span class="math display">\[\left\{\begin{matrix}Lu=\lambda_1 u &amp; x\in U \\ u=0 &amp; x\in\partial U\end{matrix}\right.\]</span></p>
+<p>then <span class="math inline">\(u\)</span> is a multiple of <span class="math inline">\(w_1\)</span>.</p>
+<ul>
+<li>remarks: assertion iii. states that <span class="math inline">\(\lambda_1\)</span> has multiplicity one (<span class="math inline">\(0&lt;\lambda&lt;\lambda_2\leq\lambda_3\leq\dots\)</span>, its eigenspace is one-dimensional). the expression involving a minimum is called <em>Rayleigh’s formula</em> and is equivalent to</li>
+</ul>
+<p><span class="math display">\[\lambda_1=\min_{\begin{matrix} u\in H_0^1 \\ u\neq0 \end{matrix}}\frac{B[u,u]}{\|u\|^2_{L^2}}.\]</span></p>
+</div>
+<div id="eigenvalues-of-nonsymmetric-elliptic-operators" class="section level2">
+<h2>6.5.2 Eigenvalues of nonsymmetric elliptic operators</h2>
+<p>Consider the nondivergence form <span class="math inline">\(Lu=-\sum_{ij}a^{ij}u_{x_ix_j}+\sum_ib^iu_{x_i}+cu\)</span>. Assume <span class="math inline">\(a^{ij},^i,c\in C^\infty(\bar U)\)</span>, <span class="math inline">\(U\)</span> is open bounded and connected and <span class="math inline">\(\partial U\)</span> is smooth. Suppose also that <span class="math inline">\(a^{ij}=a^{ji}\)</span> and <span class="math inline">\(c\geq0\)</span> in <span class="math inline">\(U\)</span>.</p>
+<p>In this case <span class="math inline">\(L\)</span> does not equal its adjoint.</p>
+<p><strong>Theorem 3 (principle eigenvalues for nonsymmetric elliptic operators):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li>there exists a real eigenvalue <span class="math inline">\(\lambda_1\)</span> for the operator <span class="math inline">\(L\)</span>, taken with zero boundary conditions, s.t. if <span class="math inline">\(\lambda\in C\)</span> is any other eigenvalue, we have</li>
+</ol>
+<p><span class="math display">\[\mathscr{R}(\lambda)\geq\lambda_1.\]</span></p>
+<ol start="2" style="list-style-type: lower-roman">
+<li><p>there exists a corresponding eigenfunction <span class="math inline">\(w_1\)</span> which is positive in <span class="math inline">\(U\)</span>.</p></li>
+<li><p>The eigenvalue <span class="math inline">\(\lambda_1\)</span> is simple.</p></li>
+</ol>
+</div>
+</div>
+<div id="linear-evolution-equations" class="section level1">
+<h1><strong>Linear Evolution Equations</strong></h1>
+<div id="second-order-parabolic-equations" class="section level2">
+<h2>7.1 Second-order parabolic equations</h2>
+<div id="definitions-1" class="section level3">
+<h3>7.1.1 Definitions</h3>
+<ul>
+<li><p><span class="math inline">\(U\subset\mathbb{R}^n\)</span>, open and bounded</p></li>
+<li><p><span class="math inline">\(U_T=U\times[0,T]\)</span>, for some fixed <span class="math inline">\(T&gt;0\)</span>.</p></li>
+</ul>
+<p><span class="math display">\[\begin{equation}
+\left\{\begin{matrix}
+u_t+Lu=f &amp; x\in U_T \\
+u = 0 &amp; x\in\partial U\times[0,T] \\
+u = g &amp; x\in U\times\{t=0\}
+\end{matrix}\right.
+\end{equation}\]</span></p>
+<p>The coefficients <span class="math inline">\(a^{ij}\)</span> and <span class="math inline">\(b^i\)</span> of <span class="math inline">\(L\)</span> are now functions of time as well as space. We call <span class="math inline">\(L\)</span> parabolic if it is uniformly elliptic for each <span class="math inline">\(t\in[0,T]\)</span>.</p>
+<ul>
+<li><p><span class="math inline">\(\pmb u:[0,T]\rightarrow H_0^1(U)\)</span> s.t. <span class="math inline">\([\pmb u(t)](x)\equiv u(x,t)\)</span>,  <span class="math inline">\(x\in U, t\in[0,T]\)</span></p></li>
+<li><p><span class="math inline">\(\pmb f:[0,T]\rightarrow L^2(U)\)</span> s.t. <span class="math inline">\([\pmb f(t)](x)=f(x,t)\)</span></p></li>
+</ul>
+<p><span class="math display">\[B[u,v;t]\equiv\int_U\left(\sum_{ij}a^{ij}(\cdot,t)u_{x_i}v_{x_j}+\sum_ib^i(\cdot)u_{x_i}v+c(\cdot,t)uv\right)dx, \ \ u,v\in H_0^1(U), \ \text{ ae } \ t\in [0,T]\]</span></p>
+<p><strong>Def:</strong> The function <span class="math inline">\(\pmb u\in L^2(0,T; H_0^1(U))\)</span>, with <span class="math inline">\(\pmb u&#39;\in L^2(0,T;H^{-1}(U))\)</span>, is a weak solution of <span class="math inline">\((9)\)</span> if</p>
+<ol style="list-style-type: lower-roman">
+<li><p><span class="math inline">\(\left&lt;\pmb u&#39;,v\right&gt;+B[\pmb u,v;t]=(\pmb f,v)\)</span> for all <span class="math inline">\(v\in H^1_0(U)\)</span> and a.e. <span class="math inline">\(t\in[0,T]\)</span></p></li>
+<li><p><span class="math inline">\(\pmb u(0)=g\)</span></p></li>
+</ol>
+</div>
+</div>
+<div id="semigroup-theory" class="section level2">
+<h2>7.4 Semigroup theory</h2>
+<div id="definitions-2" class="section level3">
+<h3>7.4.1 Definitions</h3>
+<p><span class="math inline">\(X\)</span> is a real Banach space. Consider the ODE</p>
+<p><span class="math display">\[\left\{\begin{matrix}\pmb u&#39;(t)=A\pmb u(t), &amp; t\geq0 \\ \pmb u(0)=u, &amp; u\in X \end{matrix}\right.\]</span></p>
+<p>where <span class="math inline">\(A:D(A)\rightarrow X\)</span> is a possibly unbounded operator whose domain is a linear subspace of <span class="math inline">\(X\)</span>. We consider the existence and uniqueness of a mapping <span class="math inline">\(\pmb u:[0,\infty)\rightarrow X\)</span> that satisfies the above ODE (in the weak sense).</p>
+<ul>
+<li>we keep <span class="math inline">\(X=L^p\)</span> in mind. in this case <span class="math inline">\(A\)</span> is neccessarily unbounded.</li>
+</ul>
+<p><strong>Notation:</strong> <span class="math inline">\(\pmb u(t)\equiv S(t)u, \ t\geq0\)</span> to emphasize dependence on <span class="math inline">\(u\)</span>. <span class="math inline">\(S(t)\)</span> is a mapping of <span class="math inline">\(X\)</span> into <span class="math inline">\(X\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p><span class="math inline">\(S(t):X\rightarrow X\)</span> is linear</p></li>
+<li><p><span class="math inline">\(S(0)u=u\)</span></p></li>
+<li><p><span class="math inline">\(S(t+s)u=S(t)S(s)u=S(s)S(t)u\)</span> (unique solution at each point)</p></li>
+<li><p><span class="math inline">\(t\mapsto S(t)u\)</span> is continuous from <span class="math inline">\([0,\infty)\)</span> into <span class="math inline">\(X\)</span></p></li>
+</ol>
+<p><strong>Def:</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><p>A family <span class="math inline">\(\{S(t)\}_{t\geq0}\)</span> of bounded linear operators on <span class="math inline">\(X\)</span> is a <em>semigroup</em> if a.-d. are satisfied.</p></li>
+<li><p><span class="math inline">\(\{S(t)\}\)</span> is a <em>contraction semigroup</em> if in addition <span class="math inline">\(\|S(t)\|\leq1\)</span> where</p></li>
+</ol>
+<p><span class="math display">\[\|S(t)\|\equiv\sup_{u\in X}\frac{\|S(t)u\|}{\|u\|}\]</span></p>
+<p>Since <span class="math inline">\(\|S(t)u\|\leq\|S(t)\|\|u\|\)</span>, this implies <span class="math inline">\(\|S(t)u\|\leq\|u\|\)</span>.</p>
+<ul>
+<li><strong>NOTE:</strong> <strong>From here we assume that <span class="math inline">\(\{S(t)\}\)</span> is a contraction semigroup</strong></li>
+</ul>
+<p><strong>Def:</strong></p>
+<p><span class="math display">\[D(A)\equiv\left\{u\in X:\lim_{t\downarrow 0}\frac{S(t)u-u}{t}\text{ exists in }X\right\}\]</span></p>
+<p><span class="math display">\[Au\equiv\lim_{t\downarrow 0}\frac{S(t)u-u}{t}, \ \ \ u\in D(A).\]</span></p>
+<p>The operator <span class="math inline">\(A\)</span> is the <em>infinitesimal generator</em> of the semigroup <span class="math inline">\(\{S(t)\}\)</span>.</p>
+<p><strong>Theorem 1 (differentiable properties of semigroups):</strong></p>
+<p>If <span class="math inline">\(u\in D(A)\)</span> then</p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(S(t)u\in D(A)\)</span> for each <span class="math inline">\(t\geq0\)</span></li>
+<li><span class="math inline">\(AS(t)u=S(t)Au\)</span> for each <span class="math inline">\(t\geq0\)</span></li>
+<li><span class="math inline">\(t\mapsto S(t)u\)</span> is differentiable for each <span class="math inline">\(t&gt;0\)</span>.</li>
+<li><span class="math inline">\(\frac{d}{dt}S(t)u=AS(t)u\)</span> for <span class="math inline">\(t&gt;0\)</span></li>
+</ol>
+<p><strong>Proof:</strong></p>
+<ol style="list-style-type: lower-roman">
+<li>&amp; ii. Since <span class="math inline">\(u\in D(A)\)</span>, we know that</li>
+</ol>
+<p><span class="math display">\[\lim_{t\downarrow0}\frac{S(t)u-u}{t}\equiv Au\in X.\]</span></p>
+<p>Replacing <span class="math inline">\(u\)</span> with <span class="math inline">\(S(t)u\)</span> and applying the semigroup property (commutivity)</p>
+<p><span class="math display">\[\lim_{s\downarrow0}\frac{S(s)S(t)u-S(t)u}{s}=\lim_{s\downarrow 0}\frac{S(t)(S(s)u-u)}{s}=S(t)Au.\]</span></p>
+<p>Since <span class="math inline">\(A:D(A)\rightarrow X\)</span> and <span class="math inline">\(S(t):X\rightarrow X\)</span>, we have <span class="math inline">\(S(t)A: D(A)\rightarrow X\)</span> so the above limit exists in <span class="math inline">\(X\)</span>. Hence, <span class="math inline">\(S(t)u\in D(A)\)</span> and thus it makes sense to write <span class="math inline">\(S(t)Au=AS(t)u\)</span>.</p>
+<ol start="3" style="list-style-type: lower-roman">
+<li>&amp; iv.</li>
+</ol>
+<p><span class="math display">\[\lim_{h\downarrow0}\left\|\frac{S(t+h)u-S(t)u}{h}-AS(t)u\right\|=\lim_{h\downarrow0}\left\|\frac{S(t)S(h)u-S(t)u}{h}-AS(t)u\right\|\]</span></p>
+<p><span class="math display">\[\leq\|S(t)\|\lim_{h\downarrow0}\left\|\frac{S(h)u-u}{h}-Au\right\|=0\]</span></p>
+<p><strong>Remark:</strong> The mapping <span class="math inline">\(t\mapsto S(t)\)</span> is <span class="math inline">\(C^1\)</span> in <span class="math inline">\((0,\infty)\)</span> when <span class="math inline">\(u\in D(A)\)</span>.</p>
+<p><strong>Theorem 2 (properties of generators):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(D(A)\)</span> is dense in <span class="math inline">\(X\)</span></li>
+<li><span class="math inline">\(A\)</span> is a closed operator</li>
+</ol>
+<p><strong>Remark:</strong> <span class="math inline">\(A\)</span> is closed if whenever <span class="math inline">\(\{u_k\}\subset D(A)\)</span> and <span class="math inline">\(u_k\rightarrow u\)</span>, <span class="math inline">\(Au_k\rightarrow v\)</span>, then</p>
+<p><span class="math display">\[u\in D(A), \ \ v=Au.\]</span></p>
+<p><strong>Proof:</strong> exercise for bob</p>
+<div id="resolvents" class="section level4">
+<h4>Resolvents</h4>
+<p>Let <span class="math inline">\(A\)</span> be a closed linear operator on <span class="math inline">\(X\)</span> with domain <span class="math inline">\(D(A)\)</span>.</p>
+<p><strong>Def:</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><span class="math inline">\(\lambda\in\rho(A)\)</span> (<span class="math inline">\(\rho(A)\)</span> is the <em>resolvent set</em> of <span class="math inline">\(A\)</span>) if</li>
+</ol>
+<p><span class="math display">\[\lambda I-A:D(A)\rightarrow X\]</span></p>
+<p>is a bijection.</p>
+<ol start="2" style="list-style-type: lower-roman">
+<li>If <span class="math inline">\(\lambda\in\rho(A)\)</span>, then <span class="math inline">\(R_\lambda:X\rightarrow X\)</span> given by <span class="math inline">\(R_\lambda u\equiv(\lambda I-A)^{-1}u\)</span> is called the <em>resolvent operator</em> of <span class="math inline">\(A\)</span>.</li>
+</ol>
+<p>By the closed graph theorem, <span class="math inline">\(R_\lambda\)</span> is a bounded linear operator. Also, <span class="math inline">\(R_\lambda\)</span> and <span class="math inline">\(A\)</span> commute.</p>
+<p><strong>Theorem 3 (properties of resolvent operators):</strong></p>
+<ol style="list-style-type: lower-roman">
+<li><p>if <span class="math inline">\(\lambda,\mu\in\rho(A)\)</span>, then <span class="math inline">\(R_\lambda\)</span> and <span class="math inline">\(R_\mu\)</span> commute.</p></li>
+<li><p>if <span class="math inline">\(\lambda&gt;0\)</span>, then <span class="math inline">\(\lambda\in\rho(A)\)</span> and</p></li>
+</ol>
+<p><span class="math display">\[R_\lambda u=\int_0^\infty e^{-\lambda t}S(t)udt, \ \ \ u\in X.\]</span></p>
+<p>Since</p>
+<p><span class="math display">\[\|R_\lambda u\|=\left\|\int_0^\infty e^{-\lambda t}S(t)udt\right\|\leq\left|\int_0^\infty e^{-\lambda t}\|S(t)\|\|u\|dt\right|\]</span></p>
+<p><span class="math display">\[\leq\|u\|\int_0^\infty e^{-\lambda t}dt=\frac{\|u\|}{\lambda}e^{-\lambda t}\]</span></p>
+<p>we have <span class="math inline">\(\|R_\lambda\|\leq\frac{1}{\lambda}\)</span> for all <span class="math inline">\(\lambda\in\rho(A)\cap(0,\infty)\)</span>.</p>
+<p>Hence, the resolvent operator is the Laplace transform of the semigroup.</p>
+</div>
+</div>
+<div id="generating-contraction-semigroups" class="section level3">
+<h3>Generating contraction semigroups</h3>
+<p><strong>Theorem 4 (Hill-Yosida)</strong> Let <span class="math inline">\(A\)</span> be a closed, densely-defined linear operator on <span class="math inline">\(X\)</span>. Then <span class="math inline">\(A\)</span> is the generator of a contraction semigroup <span class="math inline">\(\{S(t)\}\)</span> iff</p>
+<p><span class="math display">\[(0,\infty)\subset\rho(A), \ \ \ \|R_\lambda\|\leq\frac{1}{\lambda} \text{ for } \lambda&gt;0.\]</span></p>
+<p><strong>Proof:</strong> later</p>
+<p><strong>Remark:</strong> Let <span class="math inline">\(\omega\in\mathbb{R}\)</span>. A semigroup <span class="math inline">\(\{S(t)\}\)</span> is called <span class="math inline">\(\omega\)</span>-contractive if <span class="math inline">\(\|S(t)\|\leq e^{\omega t}\)</span> for all <span class="math inline">\(t\geq0\)</span>. A variant of theorem 4 states that a closed, densely-defined linear operator <span class="math inline">\(A\)</span> generates an <span class="math inline">\(\omega\)</span>-contractive semigroup iff</p>
+<p><span class="math display">\[(\omega,\infty)\subset\rho(A), \ \ \ \|R_\lambda\|\leq\frac{1}{\lambda-\omega}\text{ for }\lambda&gt;\omega\]</span></p>
+</div>
+<div id="applications" class="section level3">
+<h3>7.4.3 Applications</h3>
+<div id="a.-second-order-parabolic-pde" class="section level4">
+<h4>a. Second order parabolic PDE</h4>
+<p><span class="math display">\[\begin{equation}
+\left\{
+\begin{matrix}
+u_t+Lu=0 &amp; x\in U_T \\
+u=0      &amp; x\in \partial U\times[0,T]
+u=g      &amp; x\in U\times\{t=0\}
+\end{matrix}
+\right.
+\end{equation}\]</span></p>
+<p>Assume <span class="math inline">\(L\)</span> has divergence form with smooth coefficients and satisfies the strong ellipticity condition. Assume <span class="math inline">\(U\)</span> is open, bounded and has smooth boundary. Wish to reinterpret <span class="math inline">\((10)\)</span> as a flow determined by a semigroup on <span class="math inline">\(X=L^2(U)\)</span>. Set</p>
+<p><span class="math display">\[D(A)\equiv H_0^1(U)\cap H^2(U)\]</span></p>
+<ul>
+<li><strong>Recall:</strong> <span class="math inline">\(H^2=W^{k,2}\)</span></li>
+</ul>
+<p>Define <span class="math inline">\(Au\equiv Lu\)</span> when <span class="math inline">\(u\in D(A)\)</span>. Then <span class="math inline">\(A\)</span> is unbounded and linear on <span class="math inline">\(X\)</span>.</p>
+<ul>
+<li><strong>Recall:</strong> from 6.2.2 (Theorem 2): <span class="math inline">\(\beta\|u\|^2_{H_0^1}\leq B[u,u]+\gamma\|u\|^2_{L^2}\)</span> for some <span class="math inline">\(\beta&gt;0,\gamma\geq0\)</span>.</li>
+</ul>
+<p><strong>Theorem 5 (second-order parabolic PDE as semigroups):</strong> The operator <span class="math inline">\(A\)</span> generates a <span class="math inline">\(\gamma\)</span>-contraction semigroup <span class="math inline">\(\{S(t)\}_{t\geq0}\)</span> on <span class="math inline">\(L^2(U)\)</span>.</p>
+<p><strong>Proof:</strong> later</p>
+<ul>
+<li><strong>Note:</strong> it appears that Craig is not very fond of semigroups. they assert that although semigroups provide more regular solutions on the outset than Galerkins approximation method, it can be shown that the weak solutions constructed by Galerkins approach are actually more regular than those constructed via semigroups. what’s interesting, however, is the book on semigroups that i own which emphasizes the centrality of semigroups for linear evolution equations.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Engel &amp; Nagel" />
 
 
-<title>Harmonic Analysis 03-29-19</title>
+<title>One-parameter semigroups</title>
 
 <script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -29,6 +30,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -219,6 +223,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -226,6 +293,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -265,36 +342,45 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Harmonic Analysis 03-29-19</h1>
+<h1 class="title toc-ignore">One-parameter semigroups</h1>
+<h4 class="author">Engel &amp; Nagel</h4>
 
 </div>
 
 
-<div id="frames" class="section level1">
-<h1>Frames</h1>
-<p>Recall ONB’s:</p>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { 
+    TagSide: "left",
+    equationNumbers: { autoNumber: "AMS" } 
+  }
+});
+</script>
+<div id="linear-dynamical-systems" class="section level1">
+<h1>1 Linear dynamical systems</h1>
+<div id="uniformly-continuous-operator-semigroups" class="section level2">
+<h2>3 Uniformly continuous operator semigroups</h2>
 <ul>
-<li><p><span class="math inline">\(L^2[0,1):\{e^{2\pi i x}\}_{k\in\mathbb{Z}}\)</span></p></li>
-<li><p>By translation <span class="math inline">\(\{e^{2\pi ikx}\chi_{[0,1)}(x-n)\}_{k\in\mathbb{Z}}\)</span> is an ONB for <span class="math inline">\(L^2[n,n+1)\)</span>.</p></li>
-<li><p>Together <span class="math inline">\(\{e^{2\pi ikx}\chi_{[0,1)}(x-n)\}_{k,n\in\mathbb{Z}}\)</span> is an ONB for <span class="math inline">\(L^2(\mathbb{R})\)</span>.</p>
-<ul>
-<li>a Gabor basis (defined by modulation instead of dilation)</li>
-</ul></li>
-<li><p>For <span class="math inline">\(\psi\)</span> the Haar mother wavelet, we also have <span class="math inline">\(\{\psi_{j,k}\}_{j,k\in\mathbb{Z}}\)</span> is an ONB for <span class="math inline">\(L^2(\mathbb{R})\)</span>.</p></li>
-<li><p>For <span class="math inline">\(\mathbb{R}^2\)</span> we have <span class="math inline">\(\{e_1,e_2\}\)</span> is an ONB.</p></li>
+<li><p><span class="math inline">\(\mathcal{L}(X)\equiv\)</span> Banach algebra of bounded linear operators on the complex Banach space <span class="math inline">\(X\)</span></p></li>
+<li><p>for <span class="math inline">\(A\in\mathcal{L}(X)\)</span>, <span class="math inline">\(e^{tA}=\sum_{k=0}^\infty\frac{t^k}{k!}A^k\)</span></p></li>
 </ul>
-<p>Fun facts: if <span class="math inline">\(\{e_k\}\)</span> is an ONB of some Hilbert space <span class="math inline">\(\mathscr{H}\)</span>, the for any <span class="math inline">\(f\in\mathscr{H}\)</span> we have</p>
-<p><span class="math display">\[f=\left&lt;f,e_k\right&gt;e_k, \ \ \|f\|^2=\sum_k|\left&lt;f,e_k\right&gt;|^2\]</span></p>
-<div id="why-frames" class="section level3">
-<h3>Why frames?</h3>
-<p>In <span class="math inline">\(\mathbb{R}^2\)</span>, once <span class="math inline">\(e_1\)</span> is chosen, <span class="math inline">\(e_2\)</span> is determined (up to sign). If we just want a basis instead, there are infinitely many choices (the only restricting being not colinear with <span class="math inline">\(e_1\)</span>), leaving a bit more flexibility. If <span class="math inline">\(\{b_i\}\)</span> is a basis, it provides a <em>unique</em> representation for any vector. This is another restriction that may become a nuisance. In this case, we may consider a <em>redundant set</em>.</p>
-<p>Suppose <span class="math inline">\(f=\sum c_kb_k+d\varphi\)</span> for some <span class="math inline">\(\varphi\in\mathscr{H}\)</span>. If <span class="math inline">\(f=\sum c_kb_k\)</span> then we can take <span class="math inline">\(d=0\)</span>. Alternatively, we can set <span class="math inline">\(f-\varphi=\sum c_kb_k\)</span> with <span class="math inline">\(d=1\)</span>. The redundant set is now <span class="math inline">\(\{b_k\}\cup\{\varphi\}\)</span>.</p>
-<p>A problem with using a basis - missing flexibility.</p>
+<p><strong>Def (operator topologies)</strong> If</p>
+<ul>
+<li><p><span class="math inline">\(\|T_n-T\|\rightarrow0\)</span>, then <span class="math inline">\(T_n\)</span> converges to <span class="math inline">\(T\)</span> in <em>the uniform operator topology</em>.</p></li>
+<li><p><span class="math inline">\(T_nx\rightarrow x\)</span> (ie, <span class="math inline">\(\|T_nx-Tx\|\rightarrow0\)</span>), then <span class="math inline">\(T_n\)</span> converges to <span class="math inline">\(T\)</span> in <em>the strong operator topology</em>.</p></li>
+<li><p><span class="math inline">\(\left&lt;T_nx,x&#39;\right&gt;\rightarrow\left&lt;Tx,x&#39;\right&gt;\)</span> for all <span class="math inline">\(x\in X\)</span>, <span class="math inline">\(x&#39;\in X&#39;\)</span>, then <span class="math inline">\(T_n\)</span> converges to <span class="math inline">\(T\)</span> in <em>the weak operator topology</em>.</p></li>
+<li></li>
+</ul>
+<p><strong>Def 3.6</strong> A one-parameter semigroup <span class="math inline">\(\{T(t)\}_{t\geq0}\)</span> on a Bancah space <span class="math inline">\(X\)</span> is called <em>uniformly continuous</em> if</p>
+<p><span class="math display">\[\mathbb{R}_+\ni t\mapsto T(t)\in\mathcal{L}(X)\]</span></p>
+<p>is continuous wrt the uniform operator topology on <span class="math inline">\(\mathcal{L}(X)\)</span>.</p>
 </div>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -327,6 +413,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
