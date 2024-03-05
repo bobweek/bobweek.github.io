@@ -462,7 +462,7 @@ jsonresume:
   - basics
   - work
   - education
-  - publications
+  # - publications
   # - projects
   # - volunteer
   - awards
