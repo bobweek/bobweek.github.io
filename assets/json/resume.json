@@ -1,11 +1,11 @@
 {
   "basics": {
     "name": "Bob Week",
-    "label": "Postdoctoral Researcher",
+    "affiliation": "Bohannan Lab, University of Oregon",
+    "title": "Postdoctoral Researcher",
     "image": "",
     "email": "bweek.ecoevo[at]proton[dot]me",
     "url": "https://bobweek.github.io",
-    "resume": "My resume tailored for industry can be found [here](/assets/cvres/week_modeling_resume.pdf)",
     "location": {
       "postalCode": "OR 97403",
       "city": "Eugene",
