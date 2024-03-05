@@ -465,9 +465,9 @@ jsonresume:
   # - publications
   # - projects
   # - volunteer
-  - awards
+  # - awards
   # - certificates
-  - skills
+  # - skills
   # - languages
-  - interests
+  # - interests
   # - references
