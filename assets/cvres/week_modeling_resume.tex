@@ -1,0 +1,267 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Developer CV
+% LaTeX Class
+% Version 2.0 (12/10/23)
+%
+% This class originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Omar Roldan
+% Based on a template by  Jan Vorisek (jan@vorisek.me)
+% Based on a template by Jan Küster (info@jankuester.com)
+% Modified for LaTeX Templates by Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% The MIT License (see included LICENSE file)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[9pt]{developercv} % Default font size, values from 8-12pt are recommended
+\usepackage{multicol}
+\setlength{\columnsep}{0mm}
+%----------------------------------------------------------------------------------------
+\usepackage{lipsum}  
+\usepackage{outlines}
+
+% \usepackage{xcolor}
+% \pagecolor[rgb]{0.25,0.25,0.25}
+% \color[rgb]{1,1,1}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE AND CONTACT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}[t]{0.5\textwidth} 
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+	
+	{ \fontsize{16}{20} \textcolor{black}{\textbf{\MakeUppercase{Bob Week}}}} % First name
+	
+	\vspace{6pt}
+	
+	{\Large Computational Biologist} % Career or current job title
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.2\textwidth} % 20% of the page width for the first row of icons
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+	
+	% The first parameter is the FontAwesome icon name, the second is the box size and the third is the text
+	\icon{Globe}{11}{\href{https://bobweek.github.io}{bobweek.github.io}}\\ 
+    \icon{Phone}{11}{360 216 9074}\\
+    \icon{MapMarker}{11}{Beaverton, Oregon}\\
+	
+\end{minipage}
+\begin{minipage}[t]{0.27\textwidth} % 27% of the page width for the second row of icons
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+	
+	\icon{Envelope}{11}{\href{mailto:email@example.com}{bweek.ecoevo@proton.me}}\\	
+    \icon{Github}{11}{\href{https://github.com/bobweek}{github.com/bobweek}}\\
+    \icon{LinkedinSquare}{11}{\href{https://www.linkedin.com/in/bobweek/}{/in/bobweek/}}\\    
+    
+\end{minipage}
+
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION, SKILLS AND TECHNOLOGIES
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}[t]{0.46\textwidth}
+    \cvsect{Summary}
+	\vspace{-6pt}
+
+	I am interested in applying my background in mathematical and computational methods to solve difficult problems faced by industry. My experience makes me uniquely positioned to develop and analyze simulations and models used to optimize industrial processes. \\
+ 
+\end{minipage}
+\hfill % Whitespace between
+\begin{minipage}[t]{0.465\textwidth}
+    \cvsect{Skills}
+    \vspace{-6pt}
+    
+    \begin{minipage}[t]{0.2\textwidth}
+        \textbf{Software:}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.75\textwidth}
+      Julia, Python, R, Linux, Mathematica, SLURM, C/C++, Matlab
+    \end{minipage}
+    \vspace{4mm}
+
+    \vspace{-5 pt}
+    \begin{minipage}[t]{0.2\textwidth}
+        \textbf{Math:}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.75\textwidth}
+      Linear Algebra, Dynamical Systems,\newline Harmonic Analysis, Stochastic Processes
+    \end{minipage}
+    \vspace{4mm}
+
+    \vspace{-5 pt}
+    \begin{minipage}[t]{0.2\textwidth}
+        \textbf{Statistics:}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.75\textwidth}
+      Modeling, Analysis, Inference
+      \\ (e.g., GLM, PCA, MCMC, KDE, ABC, GRF)
+    \end{minipage}
+    
+\end{minipage}
+
+%----------------------------------------------------------------------------------------
+%	EXPERIENCE
+%----------------------------------------------------------------------------------------
+\vspace{-5 pt}
+\cvsect{Experience}
+\begin{entrylist}
+	\entry
+        {2022 -- Current}
+		{Postdoctoral Research Fellow}
+		{B.J.M. Bohannan Lab, University of Oregon}
+            {\vspace{-10 pt}\begin{outline}[itemize]
+                    \1 I developed a novel mathematical framework to understand microbiome-mediated host evolution
+                        \vspace{-6 pt} \2[$\cdot$] This is the first time such a genralization has been formally carried out
+                        \vspace{-3 pt} \2[$\cdot$] \textbf{Conceptually novel} by formally generalizing biological inheritance using path analysis
+                        \vspace{-3 pt} \2[$\cdot$] Requisite background is basic calculus, which facilitates \textbf{communication} with biologists
+                    \vspace{-6 pt}\1 I developed microbially-explicit individual-based \textbf{simulations} to test the mathematical framework
+                        \vspace{-6 pt} \2[$\cdot$] I chose Julia for fast implementation, JIT-compilation, and ease of parallelization
+                    \vspace{-6 pt}\1 I implented \textbf{multi-threading} on a computational cluster in Julia to compare theory and simulations
+                        \vspace{-6 pt} \2[$\cdot$] Multi-threading was necessary to overcome time constraints
+                    \vspace{-6 pt}\1 The mathematical framework and associated simulation model is under review at \emph{\href{https://royalsocietypublishing.org/journal/rspb}{RoySocB}}
+                        \vspace{-6 pt} \2[$\cdot$] Code for the simulation model is available \emph{\href{https://github.com/bobweek/host-microbe-sims}{here}}
+                    \vspace{-6 pt}\1 I developed a novel genetically-explicit spatial host-microbe simulation model in Julia
+                        \vspace{-6 pt} \2[$\cdot$] The model is novel by adding explicit genome evolution and host spatial structure
+                        \vspace{-3 pt} \2[$\cdot$] I chose Julia for fast implementation, JIT-compilation, and ease of parallelization
+                        \vspace{-3 pt} \2[$\cdot$] To improve simulation performance, I used \textbf{sparse matrices} to represent genomic data
+                        \vspace{-3 pt} \2[$\cdot$] Code for this simulation model is available \emph{\href{https://github.com/bobweek/spatial-genetic-host-microbe}{here}}
+                    
+                \end{outline}}
+               \entry
+               {2020 -- 2022}
+               {Postdoctoral Researcher}
+               {G. Bradburd Lab, Michigan State University}
+               {\vspace{-10 pt}\begin{outline}[itemize]
+                    \1 Applied \textbf{SVD} (singular value decomposition) to simulate multivariate Gaussian fields in Julia
+                        \vspace{-6 pt}\2[$\cdot$] I chose SVD instead of \textbf{Cholesky} because high numerical stability was required
+                        \vspace{-3 pt}\2[$\cdot$] I chose Julia because of fast implementation
+                    \vspace{-6 pt}\1 I applied \textbf{FFT} in NumPy to analyze coherence of simulated genomic data
+                        \vspace{-6 pt} \2[$\cdot$] I chose this approach to identify the spatial signature of coevolution on genomic data
+                        \vspace{-3 pt} \2[$\cdot$] I chose \textbf{NumPy} because Python also has tools for efficient analysis of genomic data
+                    \vspace{-6 pt} \1 I used \textbf{SLURM} to schedule large-scale simulations on a High-Performance Computing Cluster
+                    \vspace{-6 pt} \1 I developed an individual-based model of spatial host-parasite coevolution
+                        \vspace{-6 pt} \2[$\cdot$] I then implemented this model using the \emph{\href{https://messerlab.org/slim/}{SLiM}} simulation framework 
+                        \vspace{-3 pt} \2[$\cdot$] I also used this model to derive an \textbf{SPDE} model and analytical results using \textbf{Fourier analysis}
+                    \vspace{-6 pt} \1 I published the SPDE model in a recent paper available \emph{\href{https://doi.org/10.1086/727470}{here}}
+                    \vspace{-6 pt} \1 Code for the simulation model is available \emph{\href{https://github.com/bobweek/genomic-sign-coev-cont-sp}{here}}
+                \end{outline}}                    
+        \entry
+        {2015 -- 2020}
+        {Doctoral Student}
+        {S.L. Nuismer Lab, University of Idaho}
+        {\vspace{-10 pt}\begin{outline}[itemize]
+            \1 I developed heuristics to calculate population-level models from individual-based models
+                \vspace{-6 pt}\2[$\cdot$] This is useful for \textbf{analyzing simulations} and deriving mechanistic analytical models
+            \vspace{-6 pt}\1 I developed heuristics using infinite-dimensional \textbf{stochastic analysis} to calculate SDE from SPDE
+            \vspace{-6 pt}\1 I applied the above heuristics to generalize existing eco-evolutionary mathematical frameworks
+                \vspace{-6 pt}\2[$\cdot$] I published this framework \emph{\href{https://doi.org/10.1016/j.jtbi.2021.110660}{here}}
+                \vspace{-3 pt}\2[$\cdot$] Code associated with this framework is available \emph{\href{https://github.com/bobweek/white.noise.community.ecology}{here}}
+            \vspace{-6 pt} \1 I developed a model-based \textbf{maximum likelihood} method to measure species coevolution
+                \vspace{-6 pt}\2[$\cdot$] This required developing a model of coevolution yielding a tractable likelihood function
+                \vspace{-3 pt}\2[$\cdot$] I implemented this method in R to make it accessible for empirical biologists
+                \vspace{-3 pt}\2[$\cdot$] I published this project \emph{\href{https://doi.org/10.1111/ele.13231}{here}}
+            \vspace{-6 pt} \1 I applied my framework to study the coevolutionary maintence of mutualism, published \emph{\href{https://doi.org/10.1086/714274}{here}}
+        \end{outline}}
+\end{entrylist}
+%----------------------------------------------------------------------------------------
+%	Projects
+%----------------------------------------------------------------------------------------
+\vspace{-20 pt}
+\cvsect{Selected Projects}
+\begin{entrylist}
+        \entry
+		{2023}
+		{The Evolution of Microbiome-Mediated Traits}
+		{\ \ \ \href{https://github.com/bobweek/host-microbe-sims}{github.com/bobweek/host-microbe-sims}}
+		{%Dummy text 
+        Analytical and simulation models of host trait evolution mediated by microbiome transmission}
+        \entry
+		{2023}
+		{Host-Parasite Coevolution in Continuous Space}
+		{\href{https://zenodo.org/records/8008017}{zenodo.org/records/8008017}}
+		{%Dummy text 
+        A stochastic partial differential equation model for spatial analysis of host-parasite coevolution}
+	\entry
+		{2022}
+		{The Genomic Signature of Coevolution}
+		{\href{https://github.com/bobweek/genomic-sign-coev-cont-sp}{github.com/bobweek/genomic-sign-coev-cont-sp}}
+		{%Dummy text 
+        Individual-based simulations of coevolution and spatial analysis of simulated genomic data}
+	\entry
+		{2021}
+		{White Noise Evolutionary Ecology}
+		{\href{https://github.com/bobweek/white.noise.community.ecology}{github.com/bobweek/white.noise.community.ecology}}
+		{%Dummy text 
+        An application of infinite-dimensional stochastic calculus to unify eco-evolutionary models}
+    \entry
+		{2019}
+		{Measuring Coevolution}
+		{\href{https://github.com/bobweek/measuring.coevolution}{github.com/bobweek/measuring.coevolution}}
+		{%Dummy text 
+        A maximum likelihood method to measure coevolution using spatial trait data}
+\end{entrylist}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION
+%----------------------------------------------------------------------------------------
+\vspace{-10 pt}
+\cvsect{Education}
+\begin{entrylist}
+    \entry
+		{2020}
+		{PhD Bioinformatics \& Computational Biology}
+		{S.L. Nuismer Lab, University of Idaho}
+		{Dissertation focused on modeling eco-evolutionary processes and developing statistical methods}
+    \entry
+		{2015}
+		{BS Mathematics}
+		{University of Idaho}
+		{Traditional math degree with electives Digital Logic, Signals \& Systems, Physics, and Numerical Methods}
+\end{entrylist}
+
+%----------------------------------------------------------------------------------------
+%	LANGUAGES
+%----------------------------------------------------------------------------------------
+\vspace{-10 pt}
+\cvsect{Awards}
+\begin{entrylist}
+    \entry
+        {2018 -- 2019}
+        {Bioinformatics \& Computational Biology Fellowship}
+        {IBEST, University of Idaho}
+        {Project aimed to model the duration of coevolutionary associations}
+    \entry
+        {2017-2018}
+        {Bioinformatics \& Computational Biology Fellowship}
+        {IBEST, University of Idaho}
+        {Project aimed to develop a method to measure coevolution in continuous space}
+    \entry
+        {2017}
+        {Paul Joyce Memorial BCB Fellowship Endowment}
+        {IBEST, University of Idaho}
+        {Nominated by Professor Scott Nuismer because of my “love for mathematics and helping others to appreciate how it can be used to understand biological processes”}
+    \entry
+        {2013-2015}
+        {Undergraduate Research in Biology \& Mathematics}
+        {IBEST, University of Idaho}
+        {Efforts focused on developing a method to measure coevolution in discrete space}
+\end{entrylist}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
