@@ -20,7 +20,7 @@
       }
     ]
   },
-  "work": [
+  "experience": [
     {
       "name": "The Institute of Ecology and Evolution, University of Oregon",
       "position": "Postdoctoral Researcher",
@@ -40,7 +40,7 @@
       "highlights": ["Coevolution","Continuous Space","SPDE"]
     },
     {
-      "name": "Department of Integrative Biology, Michigan State University",
+      "name": "P.J. CaraDonna Lab, Rocky Mountain Biological Laboratory",
       "position": "Visiting Scientist",
       "url": "https://integrativebiology.natsci.msu.edu/",
       "startDate": "2018",
@@ -67,7 +67,8 @@
       "url": "https://www.iids.uidaho.edu/ibest.php",
       "studyType": "PhD Bioinformatics & Computational Biology",
       "startDate": "2015",
-      "endDate": "2020"
+      "endDate": "2020",
+      "mentor": "Scott L. Nuismer"
     }
   ],
   "awards": [
