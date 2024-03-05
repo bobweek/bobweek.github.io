@@ -33,7 +33,7 @@ nav_order: 4
 {% endif %}
 {% endif %}
 
-## Selected Repositories
+## selected repositories
 
 {% if site.data.repositories.github_repos %}
 
