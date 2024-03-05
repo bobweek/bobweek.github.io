@@ -64,7 +64,7 @@
 %----------------------------------------------------------------------------------------
 
 \usepackage[utf8]{inputenc} % Required for inputting international characters
-\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage[TU]{fontenc} % Output font encoding for international characters
 
 \usepackage[default]{raleway}
 %\usepackage[defaultsans]{droidsans}
@@ -83,11 +83,13 @@
 	\vcenteredhbox{\textcolor{black}{#3}}% Text
 }
 
-% \newcommand{\gscholar}[3]{% The first parameter is the FontAwesome icon name, the second is the box size and the third is the text
-% 	\vcenteredhbox{\colorbox{white}{\makebox(#2, #2){\textcolor{black}{\Large\csname fa#1\endcsname}}}}% Icon and box
-% 	\hspace{0.1cm}% Whitespace
-% 	\vcenteredhbox{\textcolor{black}{#3}}% Text
-% }
+\usepackage{academicons}
+
+\newcommand{\gscholar}[2]{% The first parameter is the FontAwesome icon name, the second is the box size and the third is the text
+	\vcenteredhbox{\colorbox{white}{\makebox(#1, #1){\textcolor{black}{\LARGE\aiGoogleScholar}}}}% Icon and box
+	\hspace{0.1cm}% Whitespace
+	\vcenteredhbox{\textcolor{black}{#2}}% Text
+}
 
 %----------------------------------------------------------------------------------------
 %	GRAPHICS DEFINITIONS
@@ -142,6 +144,32 @@
 		{\footnotesize \textbf{\textcolor{black}{#3}}}\\% Right-aligned entry qualifier text
 		#4 % Entry description text
 	}\\\\}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATION LIST
+%----------------------------------------------------------------------------------------
+
+% Environment to hold a new list of presentations
+\newenvironment{preslist}{
+	\begin{longtable}[H]{l l}
+}{
+	\end{longtable}
+}
+
+\newcommand{\pres}[4]{% First argument for the leftmost date(s) text, second is for the bold entry heading, third is for the bold right-aligned entry qualifier and the fourth is for the entry description
+	\vspace{-10 pt}	
+	\parbox[t]{0.15\textwidth}{% 17.5% of the text width of the page
+	   \small #1 % Leftmost entry date(s) text
+	}%
+	&\parbox[t]{0.85\textwidth}{% 82.5% of the text width of the page
+		\textbf{#2} \ - \ #3% Entry heading text
+		\hfill% Horizontal whitespace
+		{\footnotesize \textbf{\textcolor{black}{#4}}}\\% Right-aligned entry qualifier text
+	}\\\\}
+
+%----------------------------------------------------------------------------------------
+%	PUBLICATION LIST
+%----------------------------------------------------------------------------------------
 
 % Environment to hold a publication list
 \newenvironment{publist}{
