@@ -466,11 +466,11 @@ jsonresume:
   - work
   - education
   - publications
-  - projects
-  - volunteer
+  # - projects
+  # - volunteer
   - awards
-  - certificates
+  # - certificates
   - skills
-  - languages
+  # - languages
   - interests
-  - references
+  # - references
