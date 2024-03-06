@@ -91,6 +91,12 @@
 	\vcenteredhbox{\textcolor{black}{#2}}% Text
 }
 
+\newcommand{\orcid}[2]{% The first parameter is the FontAwesome icon name, the second is the box size and the third is the text
+	\vcenteredhbox{\colorbox{white}{\makebox(#1, #1){\textcolor{black}{\LARGE\aiOrcid}}}}% Icon and box
+	\hspace{0.1cm}% Whitespace
+	\vcenteredhbox{\textcolor{black}{\small#2}}% Text
+}
+
 %----------------------------------------------------------------------------------------
 %	GRAPHICS DEFINITIONS
 %---------------------------------------------------------------------------------------- 
