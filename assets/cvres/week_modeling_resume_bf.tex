@@ -127,17 +127,17 @@
             {\vspace{-10 pt}\begin{outline}[itemize]
                     \1 Developed a novel mathematical framework to understand microbiome-mediated host evolution
                         \vspace{-6 pt} \2[$\cdot$] This is the first time such a genralization has been formally carried out
-                        \vspace{-3 pt} \2[$\cdot$] Conceptually novel approach formally generalizing biological inheritance using path analysis
-                    \vspace{-6 pt}\1 Developed individual-based simulations to test the mathematical framework
+                        \vspace{-3 pt} \2[$\cdot$] \textbf{Conceptually novel} approach formally generalizing biological inheritance using path analysis
+                    \vspace{-6 pt}\1 Developed individual-based \textbf{simulations} to test the mathematical framework
                         \vspace{-6 pt} \2[$\cdot$] Chose Julia for fast implementation, JIT-compilation, and ease of parallelization
-                    \vspace{-6 pt}\1 Implented multi-threading on a computational cluster in Julia to compare theory and simulations
+                    \vspace{-6 pt}\1 Implented \textbf{multi-threading} on a computational cluster in Julia to compare theory and simulations
                         \vspace{-6 pt} \2[$\cdot$] Multi-threading was necessary to overcome time constraints
                     \vspace{-6 pt}\1 Mathematical framework and associated simulation model are under review at \href{https://royalsocietypublishing.org/journal/rspb}{\footnotesize{The Royal Society B}}
                         \vspace{-6 pt} \2[$\cdot$] Code for the simulation model is available at \href{https://github.com/bobweek/host-microbe-sims}{\footnotesize{github.com/bobweek/host-microbe-sims}}
                     \vspace{-6 pt}\1 Developed a novel genetically-explicit spatial host-microbe simulation model in Julia
-                        \vspace{-6 pt} \2[$\cdot$] The model is novel due to including explicit genome evolution and host spatial structure
+                        \vspace{-6 pt} \2[$\cdot$] The model is novel by adding explicit genome evolution and host spatial structure
                         \vspace{-3 pt} \2[$\cdot$] Chose Julia for fast implementation, JIT-compilation, and ease of parallelization
-                        \vspace{-3 pt} \2[$\cdot$] Used sparse matrices for representing genomic data to improve simulation performance
+                        \vspace{-3 pt} \2[$\cdot$] Used \textbf{sparse matrices} for representing genomic data to improve simulation performance
                         \vspace{-3 pt} \2[$\cdot$] Code for this simulation model is available at \href{https://github.com/bobweek/spatial-genetic-host-microbe}{\footnotesize{github.com/bobweek/spatial-genetic-host-microbe}}
                     
                 \end{outline}}
@@ -148,16 +148,16 @@
                {\vspace{-10 pt}\begin{outline}[itemize]
                     \1 Developed an individual-based model of spatial host-parasite coevolution
                         \vspace{-6 pt} \2[$\cdot$] Implemented this model using the SLiM simulation framework \href{https://messerlab.org/slim/}{\footnotesize{(messerlab.org/slim)}}
-                        \vspace{-3 pt} \2[$\cdot$] Used this model to derive an SPDE model and analytical results using Fourier analysis
-                        \vspace{-6 pt} \1 Applied SVD (singular value decomposition) to simulate multivariate Gaussian fields in Julia
+                        \vspace{-3 pt} \2[$\cdot$] Used this model to derive an \textbf{SPDE} model and analytical results using \textbf{Fourier analysis}
+                        \vspace{-6 pt} \1 Applied \textbf{SVD} (singular value decomposition) to simulate multivariate Gaussian fields in Julia
                         \vspace{-6 pt}\2[$\cdot$] This provided a numerical method to sample equilibrium solutions of the SPDE model 
-                        \vspace{-3 pt}\2[$\cdot$] Chose SVD instead of Cholesky because high numerical stability was required
+                        \vspace{-3 pt}\2[$\cdot$] Chose SVD instead of \textbf{Cholesky} because high numerical stability was required
                         \vspace{-3 pt}\2[$\cdot$] Chose Julia because of fast implementation
                     \vspace{-6 pt} \1 The SPDE model is published at \href{https://doi.org/10.1086/727470}{\footnotesize{doi.org/10.1086/727470}}
-                    \vspace{-6 pt} \1 Used SLURM to schedule large-scale simulations on a High-Performance Computing Cluster
-                    \vspace{-6 pt}\1 Applied FFT in NumPy to analyze coherence of simulated genomic data
+                    \vspace{-6 pt} \1 Used \textbf{SLURM} to schedule large-scale simulations on a High-Performance Computing Cluster
+                    \vspace{-6 pt}\1 Applied \textbf{FFT} in NumPy to analyze coherence of simulated genomic data
                         \vspace{-6 pt} \2[$\cdot$] Chose this approach to identify the spatial signature of coevolution on genomic data
-                        \vspace{-3 pt} \2[$\cdot$] Chose NumPy because Python also has tools for efficient analysis of genomic data
+                        \vspace{-3 pt} \2[$\cdot$] Chose \textbf{NumPy} because Python also has tools for efficient analysis of genomic data
                     \vspace{-6 pt} \1 Code for the simulation model is available at \href{https://github.com/bobweek/genomic-sign-coev-cont-sp}{\footnotesize{github.com/bobweek/genomic-sign-coev-cont-sp}}
                 \end{outline}}                    
         \entry
@@ -166,13 +166,13 @@
         {S.L. Nuismer Lab, University of Idaho}
         {\vspace{-10 pt}\begin{outline}[itemize]
             \1 Developed heuristics to calculate population-level models from individual-based models
-                \vspace{-6 pt}\2[$\cdot$] This is useful for analyzing simulations and deriving mechanistic analytical models
-            \vspace{-6 pt}\1 Developed heuristics using infinite-dimensional stochastic analysis to calculate SDE from SPDE
+                \vspace{-6 pt}\2[$\cdot$] This is useful for \textbf{analyzing simulations} and deriving mechanistic analytical models
+            \vspace{-6 pt}\1 Developed heuristics using infinite-dimensional \textbf{stochastic analysis} to calculate SDE from SPDE
             \vspace{-6 pt}\1 Applied the above heuristics to generalize existing eco-evolutionary mathematical frameworks
                 \vspace{-6 pt}\2[$\cdot$] This framework is published at \href{https://doi.org/10.1016/j.jtbi.2021.110660}{\footnotesize{doi.org/10.1016/j.jtbi.2021.110660}}
             \vspace{-6 pt}\1 Developed numerical methods to solve associated SPDE and simulate rescaled processes
                 \vspace{-6 pt}\2[$\cdot$] Associated code is available at \href{https://github.com/bobweek/white.noise.community.ecology}{\footnotesize{github.com/bobweek/white.noise.community.ecology}}
-            \vspace{-6 pt} \1 Developed a model-based maximum likelihood method to measure species coevolution
+            \vspace{-6 pt} \1 Developed a model-based \textbf{maximum likelihood} method to measure species coevolution
                 \vspace{-6 pt}\2[$\cdot$] This required developing a model of coevolution yielding a tractable likelihood function
                 \vspace{-3 pt}\2[$\cdot$] Implemented this method in R to make it accessible for empirical biologists
                 \vspace{-3 pt}\2[$\cdot$] This project is published at \href{https://doi.org/10.1111/ele.13231}{\footnotesize{doi.org/10.1111/ele.13231}}
