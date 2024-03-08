@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>measuring_coevolution.knit</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- NOTE: add "navbar-inverse" class for an alternate navbar background -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"> <span class="nav-label">Interactive Simulations</span> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="2d-ddc.html">Spatial Coevolution</a></li>
+                <li><a href="mvbp-stab-log.html">Diffusion Limit</a></li>
+            </ul>
+        </li>
+        <li><a href="measuring_coevolution.html">Measuring Coevolution</a></li>
+        <li><a href="week_cv.pdf">Curriculum Vitae</a></li>
+        <li><a href="week_modeling_resume.pdf">Resume</a></li>
+
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+
+<style type="text/css">
+.badCode {
+  background-color: #2C2C2C;
+  color: white;
+}
+<!-- .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover { -->
+<!--     background-color: #B86EBD; -->
+<!-- } -->
+</style>
+<div id="the-measurement-of-coevolution-in-the-wild"
+class="section level1">
+<h1>The measurement of coevolution in the wild</h1>
+<div id="tldr" class="section level3">
+<h3>TLDR</h3>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Click on <a
+href="measuring_coevolution_files/functions.R"><code>functions.R</code></a>
+for an <code>R</code> script that includes tools for computing and
+maximizing the likelihood function of our model and for computing the
+maximum likelihood values of selection strengths and optimal offset.
+</b>
+</p>
+</div>
+<div id="tutorial" class="section level3">
+<h3>Tutorial</h3>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> This is a tutorial for the method of coevolutionary inference
+introduced by Week &amp; Nuismer (<a
+href="https://doi.org/10.1111/ele.13231">2019</a>). Data used in this
+tutorial comes from Toju &amp; Sota (<a
+href="https://doi.org/10.1086/498277">2006</a>) and have been collected
+<a href="https://github.com/bobweek/measuring.coevolution">here</a>. A
+detailed treatment of our model, application of likelihood and analysis
+of data can be found in the appendix of Week &amp; Nuismer (2019),
+linked to <a href="appendix.pdf">here</a>. Aside from the derivation of
+equilibrium expressions, all of our calculations have been carried out
+in the statistical programming language R. </b>
+</p>
+</div>
+<div id="introduction-to-the-biology" class="section level2">
+<h2>Introduction to the biology</h2>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> To demonstrate the utility of our method, we walk through each step
+taken to obtain the results produced in the main text. We restrict our
+analysis in this document to the data provided by Toju &amp; Sota
+(2006). This paper documents the antagonistic interaction between the
+female <i>Curculio camelliae</i> weevil and the <i>Camellia japonica</i>
+fruit. Female weevils bore holes into the woody pericarps of the
+camellia to oviposit. Inside the fruit, weevil larvae feed on the seeds
+of the camellia up until the fourth instar, at which time they exit the
+fruit and overwinter. These two species co-occur across Japan, although
+camellia populations where the weevil is absent have been documented. A
+great deal of evidence has been produced to demonstrate that the
+thickness of the camellia pericarp and the length of the weevil rostrum
+have coevolved. In this tutorial we will be measuring the strength of
+coevolution and testing the hypothesis that the spatial patterns of
+elongation in these traits are the products of coevolution. </b>
+</p>
+<div style="text-align:center" markdown="1">
+<div class="float">
+<img src="weevil.jpg"
+alt="Figure 1: C. camelliae boring into C. japonica" />
+<div class="figcaption"><a
+href="https://sites.google.com/site/ecoltj/home/movie">Figure 1: <em>C.
+camelliae</em> boring into <em>C. japonica</em></a></div>
+</div>
+</div>
+</div>
+<div id="phenotypic-data" class="section level2">
+<h2>Phenotypic data</h2>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Estimates of mean trait pairs across multiple locations comprise the
+core data required to utilize this method. With these data we calculate
+the metapopulation mean traits, variance of local mean traits across
+space, and the spatial covariance of local mean traits for the two
+interacting species. To begin we read in the trait data to a dataframe
+in R. Note that although the file is named
+<strong>toju_pairs.Rda</strong>, we refer to it within the R environment
+as <strong>toju_df</strong>. </b>
+</p>
+<pre class="r"><code># read in data
+load(&quot;measuring_coevolution_files/toju_pairs.Rda&quot;)
+head(toju_df)</code></pre>
+<pre><code>  rostrum body pericarp  location island
+1    9.63 8.40     5.42   Nodzumi    HNS
+2    7.98 6.95     4.32      Kamo    HNS
+3    9.13 7.82     3.88   Nagaoka    HNS
+4   10.42 8.19     6.07   Kutsuki    HNS
+5   10.79 7.87     4.90 Hiratsuka    HNS
+6    9.89 7.86     6.30     Kyoto    HNS</code></pre>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Note the column names in this data frame. The column
+<strong>rostrum</strong> contains the mean rostrum lengths at each
+location used in our analysis. Column <strong>body</strong> contains the
+mean body sizes of weevils in each population. Column
+<strong>pericarp</strong> contains the mean pericarp thickness at each
+location. Column <strong>location</strong> contains the names of each
+location which we keep identical to those used in Toju &amp; Sota 2006.
+Finally, the <strong>island</strong> column contains the islands for
+which each of these locations belong. We can visualize these data with
+following line of code: </b>
+</p>
+<pre class="r"><code># plot data
+library(ggplot2)
+library(ggdark)
+library(gapminder)
+library(ggthemes)
+ggplot(toju_df, aes(x = rostrum, y = pericarp, color = island)) + geom_point() +
+    dark_mode(theme_minimal()) + xlab(&quot;Rostrum length&quot;) + ylab(&quot;Pericarp thickness&quot;)</code></pre>
+<div class="figure" style="text-align: center">
+<img src="measuring_coevolution_files/figure-html/unnamed-chunk-4-1.png" alt="Figure 2: Displayed in this scatter plot are mean trait pairs for various locations across Japan. The colours indicate which island these locations belong to." width="672" />
+<p class="caption">
+Figure 2: Displayed in this scatter plot are mean trait pairs for
+various locations across Japan. The colours indicate which island these
+locations belong to.
+</p>
+</div>
+</div>
+<div id="background-parameters" class="section level2">
+<h2>Background parameters</h2>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Before we can infer the strengths of biotic selection we need to
+infer some key background parameters. Specifically, we need to know the
+abiotic optima, the effective population sizes and additive genetic
+variances. </b>
+</p>
+<div id="abiotic-optimal-trait-values-theta_i" class="section level3">
+<h3>Abiotic optimal trait values (<span
+class="math inline">\(\theta_i\)</span>)</h3>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> These parameters represent the trait values that maximize fitness
+for each species ignoring the effects of the interaction. They are
+potentially the most difficult to estimate depending on the biological
+details of the system being studied. There are many ways one can choose
+to estimate these values which will likely differ for each of the
+species involved in the interaction. For example, in the camellia-weevil
+system analyzed here, we found estimates of average pericarp thicknesses
+from populations where the weevils were found to be absent. Measuring
+mean trait values in populations where the interaction has not been
+taking place over evolutionary time-scales will likely be a popular
+method for inferring the abiotic optima. Another approach is to identify
+members of the population that do not partake in the interaction. In the
+case of the weevils, the males do not oviposit and hence are not
+involved with the arms race between the rostrum lengths of the female
+weevils and the thickness of the pericarps. We therefore assume the
+average rostrum length of the male weevils provides at least a crude
+estimate for the abiotic optimal trait value. </b>
+</p>
+</div>
+<div id="effective-population-sizes-n_i" class="section level3">
+<h3>Effective population sizes (<span
+class="math inline">\(n_i\)</span>)</h3>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Effective population sizes are most readily estimated from
+population genomic data. Perhaps the most classic approach is through
+the equation </b>
+</p>
+<p><span class="math display">\[\Theta_i=4n_i\eta_i\]</span></p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> where <span class="math inline">\(\Theta_i\)</span> is the
+fundamental parameter from population genetics (not to be confused with
+<span class="math inline">\(\theta_i\)</span> from above), <span
+class="math inline">\(n_i\)</span> is the effective population size and
+<span class="math inline">\(\eta_i\)</span> is the rate of mutation in
+species <span class="math inline">\(i\)</span>. Of course there are
+other methods, but the literature on this subject is far too vast to
+review in this short tutorial. </b>
+</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Using the above equation and the software package
+<strong>Migrate-n</strong> (<a
+href="https://doi.org/10.1093/bioinformatics/bti803">Beerli 2006</a>)
+Toju &amp; Sota (<a
+href="https://doi.org/10.1111/j.1558-5646.2011.01243.x">2011</a>) were
+able to provide estimates of effective population sizes from multiple
+locations across Japan. However, our method requires a single estimate
+of the effective population size. In the appendix of the associated
+manuscript, we show that, given estimates from multiple locations, the
+harmonic mean of these values is the correct value to use. That is, if
+<span class="math inline">\(n_{ij}\)</span> is the effective population
+size of species <span class="math inline">\(i\)</span> in location <span
+class="math inline">\(j\)</span>, then, given <span
+class="math inline">\(N\)</span> locations, we would set </b>
+</p>
+<p><span
+class="math display">\[n_i=\frac{N}{\sum_j\frac{1}{n_{ij}}}.\]</span></p>
+</div>
+<div id="additive-genetic-variances-g_i" class="section level3">
+<h3>Additive genetic variances (<span
+class="math inline">\(G_i\)</span>)</h3>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Heritabilities (in the narrow-sense) of traits are routinely
+estimated using parent-offspring regressions and other techniques. With
+an estimate of the heritability of the trait in species <span
+class="math inline">\(i\)</span> (denoted by <span
+class="math inline">\(h_i^2\)</span>) and an estimate of the phenotypic
+variance (<span class="math inline">\(\sigma_i^2\)</span>) we can
+calculate an estimate of the additive genetic variance using the
+relation <span class="math inline">\(G_i=h_i^2\sigma_i^2\)</span>. </b>
+</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> In Toju &amp; Sota (2011) estimates for the heritability of pericarp
+thickness in the camellia fruit were calculated. We used the average of
+the heritabilities calculated. In addition to these values estimates of
+phenotypic variances were provided in Toju &amp; Sota (2006) for
+multiple populations. As shown in the appendix of the associated
+manuscript, the arithmetic mean of additive genetic variances from
+multiple locations should be used as the effective additive genetic
+variance for our model. That is, given the additive genetic variance of
+species <span class="math inline">\(i\)</span> in locations <span
+class="math inline">\(j=1,\dots,N\)</span> (<span
+class="math inline">\(G_{ij}\)</span>), we calculate the effective
+additive genetic variance as </b>
+</p>
+<p><span
+class="math display">\[G_i=\frac{1}{N}\sum_jG_{ij}.\]</span></p>
+</div>
+<div id="values-of-background-parameters" class="section level3">
+<h3>Values of background parameters</h3>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> We have collected the background parameters needed in the dataframe
+<strong>toju_par.Rda</strong>. In the R environment, this dataframe is
+referred to as <strong>par_df</strong>. </b>
+</p>
+<pre class="r"><code># read in parameters
+load(&quot;measuring_coevolution_files/toju_par.Rda&quot;)
+par_df</code></pre>
+<pre><code>         Gs   thetas   eff_ns     species
+1 0.5202037 5.911818 30769.50 C. camellia
+2 5.2526697 6.248235  1789.99 C. japonica</code></pre>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> The column labelled <strong>Gs</strong> contains the effective
+additive genetic variances for each species. The column
+<strong>thetas</strong> contains the abiotic optimal phenotypes for each
+species, and the column <strong>eff_ns</strong> contains the the
+effective population sizes for each species. The column
+<strong>species</strong> denotes which species each estimate belongs to.
+</b>
+</p>
+</div>
+</div>
+<div id="estimating-selection" class="section level2">
+<h2>Estimating Selection</h2>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Inferring selection parameters and the optimal offset with our
+method is very brief. All the heavy lifting has already been done (see
+the associated manuscript for details). With the data and background
+parameters prepared, we simply load in the relevant function for
+calculating the maximum likelihood estimated of biotic and abiotic
+selection strengths and the optimal offset. We begin by calculating the
+five statistical moments that describe a bivariate normal distribution:
+the means (<span class="math inline">\(\mu_1,\mu_2\)</span>), the
+variances (<span class="math inline">\(V_1,V_2\)</span>) and the
+covariance (<span class="math inline">\(C\)</span>). Note that we adjust
+the sample moment calculations for the variances and covariance. This is
+because the actual maximum likelihood estimates of these moments do not
+have the correction factor <span class="math inline">\(N-1\)</span> in
+the denominator. </b>
+</p>
+<pre class="r"><code>N &lt;- dim(toju_df)[1]
+mu1 &lt;- mean(toju_df$rostrum)
+mu2 &lt;- mean(toju_df$pericarp)
+V1 &lt;- (N - 1) * var(toju_df$rostrum)/N
+V2 &lt;- (N - 1) * var(toju_df$pericarp)/N
+C &lt;- (N - 1) * cov(toju_df$rostrum, toju_df$pericarp)/N</code></pre>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Next we load in the file containing the functions needed. </b>
+</p>
+<pre class="r"><code># read in functions
+source(&quot;measuring_coevolution_files/functions.R&quot;)</code></pre>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> Finally we use the function <em>ml_sol()</em> to find our results.
+</b>
+</p>
+<pre class="r"><code>n1 &lt;- par_df$eff_ns[1]
+n2 &lt;- par_df$eff_ns[2]
+th1 &lt;- par_df$thetas[1]
+th2 &lt;- par_df$thetas[2]
+G1 &lt;- par_df$Gs[1]
+G2 &lt;- par_df$Gs[2]
+ml_sol(mu1, mu2, V1, V2, C, n1, n2, th1, th2, G1, G2)</code></pre>
+<pre><code>$A1
+[1] 0.0002593573
+
+$A2
+[1] 8.053552e-06
+
+$B1
+[1] 0.0007168077
+
+$B2
+[1] 4.999954e-06
+
+$k
+[1] 4.51103</code></pre>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> And there we have it. The <span class="math inline">\(A_i\)</span>
+is the strength of abiotic selection of species <span
+class="math inline">\(i\)</span>, the <span
+class="math inline">\(B_i\)</span> is the strength of biotic selection
+on species <span class="math inline">\(i\)</span> and the <span
+class="math inline">\(\kappa\)</span> is the optimal offset. Both
+strengths of selection are in inverse-square phenotypic units. Since our
+phenotypic units are millimeters (<span
+class="math inline">\(mm\)</span>), the strengths of selection found
+here are in <span class="math inline">\(\frac{1}{mm^2}\)</span>. </b>
+</p>
+</div>
+<div id="hypothesis-testing" class="section level2">
+<h2>Hypothesis Testing</h2>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> In this final section of our tutorial we demonstrate how to use
+likelihood ratios to test for the significance of coevolution. In order
+to solve for the above parameters, we had to maximize a function called
+the <strong>likelihood</strong> function. Hence, this function decreases
+as model parameters depart from their maximum likelihood values. In
+particular, when fix either <span class="math inline">\(B_1=0\)</span>
+or <span class="math inline">\(B_2=0\)</span> we obtain a restricted
+likelihood function, one that will never reach the actual maximum
+likelihood value. However, it may come very close and how close it gets
+will tell us something about the significance of biotic selection. In
+particular, setting <span class="math inline">\(L_c\)</span> equal to
+the maximum likelihood value and <span
+class="math inline">\(L_i\)</span> equal to the maximum possible
+likelihood value when <span class="math inline">\(B_i=0\)</span>, we can
+compute the statistic </b>
+</p>
+<p><span class="math display">\[\Lambda_i=2(\ln L_c-\ln
+L_i).\]</span></p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> This is called a likelihood ratio statistic (because the difference
+between logs of values is equal to the log of the ratio of those values,
+explaining the name). This statistic is known to be approximately
+Chi-square distributed when sample size is sufficiently large. Since the
+difference between the number of parameters used to calculate <span
+class="math inline">\(L_c\)</span> and the number of parameters used to
+calculate <span class="math inline">\(L_i\)</span> is one (we only fix
+<span class="math inline">\(B_i\)</span>), the degrees of freedom for
+this Chi-square distribution is one. Hence, we can use the distribution
+function of the Chi-square distribution to calculate the probability of
+observing values at least as large as <span
+class="math inline">\(\Lambda_i\)</span>. This probability is commonly
+referred to as a p-value. As we need to test both <span
+class="math inline">\(B_1\)</span> and <span
+class="math inline">\(B_2\)</span> for significance, we will be
+calculating two p-values (<span class="math inline">\(p_1\)</span> and
+<span class="math inline">\(p_2\)</span> resp). Since we are setting our
+significance threshold <span class="math inline">\(\alpha\)</span> to
+0.05, both <span class="math inline">\(p_1\)</span> and <span
+class="math inline">\(p_2\)</span> must be less than 0.05 for
+coevolution to be considered significant. </b>
+</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> We begin by calculating the likelihoods. Since our model can capture
+any combination of means, variances and covariance and since the sample
+moments are the maximum likelihood moments, we simply plug in the sample
+moments to our likelihood function to obtain the maximum likelihood
+value. The function <strong>likelihood</strong> actually returns the
+log-likelihood. In the appendix we show that when <span
+class="math inline">\(B_1=0\)</span> the restricted likelihood is
+maximized when <span class="math inline">\(\mu_2,V_1,V_2\)</span> and
+<span class="math inline">\(C\)</span> are kept at their sample moments,
+but <span class="math inline">\(\mu_1\)</span> is set to <span
+class="math inline">\(\theta_1\)</span>. The mirror image holds for when
+<span class="math inline">\(B_2=0\)</span>. This is because without
+biotic selection there is nothing keeping the species <span
+class="math inline">\(i\)</span> from evolving to its abiotic optimal
+value. </b>
+</p>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> With these likelihoods in hand we can calculate the statistics <span
+class="math inline">\(\Lambda_1\)</span> and <span
+class="math inline">\(\Lambda_2\)</span>. Finally, we compute the
+associated p-values with some built in R functions. </b>
+</p>
+<pre class="r"><code># preparing data for likelihood calculations
+data &lt;- cbind(toju_df$rostrum, toju_df$pericarp)
+m &lt;- c(mu1, mu2)
+S &lt;- matrix(c(V1, C, C, V2), nc = 2)
+
+# calculating maximum likelihood
+Lc &lt;- likelihood(data, m, S)
+
+# calculating the restricted likelihoods
+L1 &lt;- likelihood(data, c(th1, mu2), S)
+L2 &lt;- likelihood(data, c(mu1, th2), S)
+
+# calculating the likelihood ratios
+Lambda1 &lt;- 2 * (Lc - L1)
+Lambda2 &lt;- 2 * (Lc - L2)
+
+# calculating the p-values
+p1 &lt;- dchisq(Lambda1, 1)
+p2 &lt;- dchisq(Lambda2, 1)
+
+# is coevolution significant?
+if (max(p1, p2) &gt; 0.05) print(&quot;Coevolution no&quot;)
+if (max(p1, p2) &lt; 0.05) print(&quot;Coevolution yes&quot;)</code></pre>
+<pre><code>[1] &quot;Coevolution yes&quot;</code></pre>
+<p align="justify" style="background-color:#2E2E2E;
+border-radius:4px;
+font-size:16px;
+padding:15px;
+margin:5px;">
+<b> We see that “Coevolution yes” printed and hence coevolution was
+detected in this system by our method. </b>
+</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
