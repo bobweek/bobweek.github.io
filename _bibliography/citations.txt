@@ -6,7 +6,8 @@
   number={4},
   pages={490--502},
   year={2018},
-  publisher={University of Chicago Press Chicago, IL}
+  publisher={University of Chicago Press Chicago, IL},
+  pdf={699218.pdf}
 }
 
 @article{week2019measurement,
@@ -16,7 +17,8 @@
   volume={22},
   number={4},
   pages={717--725},
-  year={2019}
+  year={2019},
+  pdf={week2019.pdf}
 }
 
 @article{nuismer2019approximate,
@@ -27,7 +29,8 @@
   number={4},
   pages={e1006988},
   year={2019},
-  publisher={Public Library of Science San Francisco, CA USA}
+  publisher={Public Library of Science San Francisco, CA USA},
+  pdf={nuismer2019.pdf}
 }
 
 @article{week2021white,
@@ -37,14 +40,16 @@
   volume={521},
   pages={110660},
   year={2021},
-  publisher={Academic Press}
+  publisher={Academic Press},
+  pdf={white-noise-week.pdf}
 }
 
 @article{week2021coevolutionary,
   title={Coevolutionary Arms Races and the Conditions for the Maintenance of Mutualism},
   author={Week, Bob and Nuismer, Scott L},
   journal={The American Naturalist},
-  year={2021}
+  year={2021},
+  pdf={714274.pdf}
 }
 
 @article{nuismer2022uncovering,
@@ -55,7 +60,8 @@
   number={6},
   pages={869--880},
   year={2022},
-  publisher={The University of Chicago Press Chicago, IL}
+  publisher={The University of Chicago Press Chicago, IL},
+  pdf={nuismer2022.pdf}
 }
 
 @article{overcast2021unified,
@@ -84,5 +90,16 @@
   title={Host-Parasite Coevolution in Continuous Space Leads to Variation in Local Adaptation Across Spatial Scales},
   author={Week, Bob and Bradburd, Gideon},
   journal={The American Naturalist},
-  year={2023}
+  year={2023},
+  pdf={727470.pdf}
+}
+
+@article{Week2024,
+  title = {The Evolution of Microbiome-Mediated Traits},
+  url = {http://dx.doi.org/10.1101/2024.03.29.587374},
+  DOI = {10.1101/2024.03.29.587374},
+  publisher = {Cold Spring Harbor Laboratory},
+  author = {Week,  Bob and Morris,  Andrew H. and Bohannan,  Brendan J. M.},
+  year = {2024},
+  pdf={mm-preprint.pdf}
 }

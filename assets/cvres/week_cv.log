@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.15.0 (TeX Live 2022/Debian)  (format=lualatex 2024.1.29)  6 MAR 2024 09:45
+This is LuaHBTeX, Version 1.15.0 (TeX Live 2022/Debian)  (format=lualatex 2024.1.29)  2 APR 2024 10:44
  restricted system commands enabled.
 **week_cv.tex
 (./week_cv.tex
@@ -1285,115 +1285,130 @@ Underfull \hbox (badness 10000) in paragraph at lines 147--148
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--176
+Underfull \hbox (badness 10000) in paragraph at lines 153--153
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 160--161
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 188--189
 
  []
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 198--199
+Underfull \hbox (badness 10000) in paragraph at lines 211--212
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 216--217
+Underfull \hbox (badness 10000) in paragraph at lines 229--230
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 222--222
+Underfull \hbox (badness 10000) in paragraph at lines 235--235
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 227--227
+Underfull \hbox (badness 10000) in paragraph at lines 240--240
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 232--232
+Underfull \hbox (badness 10000) in paragraph at lines 245--245
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 237--237
+Underfull \hbox (badness 10000) in paragraph at lines 250--250
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 242--242
+Underfull \hbox (badness 10000) in paragraph at lines 255--255
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 247--247
+Underfull \hbox (badness 10000) in paragraph at lines 260--260
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 252--252
+Underfull \hbox (badness 10000) in paragraph at lines 265--265
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 259--260
+Underfull \hbox (badness 10000) in paragraph at lines 272--273
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 266--266
+Underfull \hbox (badness 10000) in paragraph at lines 279--279
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 283--284
+Underfull \hbox (badness 10000) in paragraph at lines 296--297
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 290--290
+Underfull \hbox (badness 10000) in paragraph at lines 303--303
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 296--296
+Underfull \hbox (badness 10000) in paragraph at lines 309--309
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 307--308
+Underfull \hbox (badness 10000) in paragraph at lines 320--321
 
  []
 
 LaTeX Font Info:    Font shape `TU/Raleway(0)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 320.
+(Font)              scaled to size 6.0pt on input line 333.
+
+Underfull \hbox (badness 4072) in paragraph at lines 343--344
+[]\TU/Raleway(0)/m/n/9 Mod-el-ing, Anal-y-sis, In-fer-ence, Meth-ods
+ []
+
 [2] (./week_cv.aux)
 Package rerunfilecheck Info: File `week_cv.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 )
 
 Here is how much of LuaTeX's memory you used:
- 27863 strings out of 478382
- 156265,1977958 words of node,token memory allocated
+ 27865 strings out of 478382
+ 125007,1977958 words of node,token memory allocated
  458 words of node memory still in use:
    3 hlist, 1 vlist, 1 rule, 2 glue, 3 kern, 1 glyph, 5 attribute, 57 glue_spec,
  5 attribute_list, 2 write nodes
-   avail lists: 1:1,2:1260,3:579,4:330,5:2013,6:154,7:13098,8:87,9:1086,10:23,11
-:1124
- 46910 multiletter control sequences out of 65536+600000
+   avail lists: 1:1,2:1194,3:570,4:324,5:1847,6:145,7:11962,8:83,9:1039,10:23,11
+:974
+ 46911 multiletter control sequences out of 65536+600000
  72 fonts using 6229223 bytes
- 115i,7n,125p,445b,430s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 115i,7n,125p,445b,338s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/opentype/impallari/raleway/Raleway-Regular-
 Italic.otf></usr/share/texlive/texmf-dist/fonts/truetype/public/academicons/acad
 emicons.ttf></usr/share/texlive/texmf-dist/fonts/opentype/public/fontawesome/Fon
 tAwesome.otf></usr/share/texlive/texmf-dist/fonts/opentype/impallari/raleway/Ral
 eway-Regular.otf></usr/share/texlive/texmf-dist/fonts/opentype/impallari/raleway
 /Raleway-Bold.otf>
-Output written on week_cv.pdf (2 pages, 33899 bytes).
+Output written on week_cv.pdf (2 pages, 34180 bytes).
 
-PDF statistics: 95 PDF objects out of 1000 (max. 8388607)
- 75 compressed objects within 1 object stream
- 11 named destinations out of 1000 (max. 131072)
+PDF statistics: 97 PDF objects out of 1000 (max. 8388607)
+ 77 compressed objects within 1 object stream
+ 12 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 
