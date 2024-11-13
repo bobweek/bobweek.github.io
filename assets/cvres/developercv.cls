@@ -198,5 +198,20 @@
 		{\footnotesize \href{https://doi.org/#5}{doi:#5}}\\% Doi
 	}\\\\}
 
+
+\newcommand{\ralphjob}[5]{% First argument for the leftmost date(s) text, second is for the bold entry heading, third is for the bold right-aligned entry qualifier and the fourth is for the entry description
+	\vspace{-10 pt}
+	\parbox[t]{0.15\textwidth}{% 17.5% of the text width of the page
+	   \small #1 % Leftmost entry date(s) text
+	}%
+	&\parbox[t]{0.85\textwidth}{% 82.5% of the text width of the page
+		\textbf{#2}% Entry heading text
+		\hfill% Horizontal whitespace
+		{\footnotesize \textbf{\textcolor{black}{#3}}}\\% Journal Name
+		#4 % Entry description text
+		\hfill
+		{\footnotesize #5}\\% Doi
+	}\\\\}
+
 % Command to output a separator slash between lists, e.g. '  /  '
 \newcommand{\slashsep}{\hspace{3mm}/\hspace{3mm}}
