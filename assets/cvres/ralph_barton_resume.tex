@@ -1,0 +1,169 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Developer CV
+% LaTeX Class
+% Version 2.0 (12/10/23)
+%
+% This class originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Omar Roldan
+% Based on a template by  Jan Vorisek (jan@vorisek.me)
+% Based on a template by Jan Küster (info@jankuester.com)
+% Modified for LaTeX Templates by Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% The MIT License (see included LICENSE file)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[9pt]{developercv} % Default font size, values from 8-12pt are recommended
+\usepackage{multicol}
+\setlength{\columnsep}{0mm}
+%----------------------------------------------------------------------------------------
+\usepackage{lipsum}  
+\usepackage{outlines}
+
+% \usepackage{xcolor}
+% \pagecolor[rgb]{0.25,0.25,0.25}
+% \color[rgb]{1,1,1}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE AND CONTACT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}[t]{0.5\textwidth} 
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+	
+	{ \fontsize{16}{20} \textcolor{black}{\textbf{\MakeUppercase{Ralph Barton}}}} % First name
+	
+	\vspace{6pt}
+	
+	{\Large } % Career or current job title
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.2\textwidth} % 20% of the page width for the first row of icons
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+	
+	% The first parameter is the FontAwesome icon name, the second is the box size and the third is the text
+	% \icon{Globe}{11}{\href{https://bobweek.github.io}{bobweek.github.io}}\\ 
+    \icon{Phone}{11}{312 343 5556}\\
+	
+\end{minipage}
+\begin{minipage}[t]{0.27\textwidth} % 27% of the page width for the second row of icons
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+	
+	\icon{Envelope}{11}{\href{mailto:email@example.com}{productivity.guru@gmail.com}}\\	
+    % \icon{Github}{11}{\href{https://github.com/bobweek}{github.com/bobweek}}\\
+    % \icon{LinkedinSquare}{11}{\href{https://www.linkedin.com/in/bobweek/}{/in/bobweek/}}\\    
+    
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth} 
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+	
+	{ \fontsize{16}{20} \textcolor{black}{\textbf{\MakeUppercase{}}}} % First name
+	
+	\vspace{6pt}
+	
+	{\Large } % Career or current job title
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.475\textwidth} % 20% of the page width for the first row of icons
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+	
+	\vspace{6pt}
+	
+	% The first parameter is the FontAwesome icon name, the second is the box size and the third is the text
+	% \icon{Globe}{11}{\href{https://bobweek.github.io}{bobweek.github.io}}\\ 
+    \icon{MapMarker}{11}{11602 SE Alder st Portland, Oregon 97216}\\
+	
+\end{minipage}
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION, SKILLS AND TECHNOLOGIES
+%----------------------------------------------------------------------------------------
+\vspace{-5 pt}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION
+%----------------------------------------------------------------------------------------
+\vspace{-10 pt}
+\cvsect{Education}
+\begin{entrylist}
+    \entry
+		{2000}
+		{BA in Theatre Arts}
+		{University of Iowa}
+		{Received the Nicolas B Meyer Scholarship for Dramatic Writing}
+\end{entrylist}
+
+%----------------------------------------------------------------------------------------
+%	EXPERIENCE
+%----------------------------------------------------------------------------------------
+% \vspace{-5 pt}
+\cvsect{Experience}
+\begin{publist}
+    \ralphjob{}
+        {Bubblesound Modular Synthesizers}
+        {Portland Oregon}
+        {Product Assembly}
+        {David Woggenbach (646 886 9664)}    
+    \ralphjob{}
+		{Vino-Type}
+		{Chesterland Ohio}
+		{Wine Bar Manager,Bartender, Retail Sales}
+        {B. Kinney (440 773 9888)}
+    \ralphjob{}
+        {GO Garage Doors}
+        {Portland Oregon}
+        {Garage Door Repairman}
+        {Giorgio Katzen (503 512 3562)}
+    \ralphjob{}
+        {Midwest Wind and Solar}
+        {Chicago Illinois}
+        {Commercial Solar Installation}
+        {Eric Graf (773 934 6519)}
+    \ralphjob{}
+        {Modular'8}
+        {Portland Oregon}
+        {Retail Sales of Musical Instruments}
+        {Phillip Berryhill (503 505 2333)}
+    \ralphjob{}
+        {Ciat-Lombard Synthesizers}
+        {St. Johns Oregon}
+        {Product Assembly}
+        {Peter Blasser (503 512 3562)}
+    \ralphjob{}
+        {4ms Synthesizers}
+        {Portland Oregon}
+        {Product Assembly}
+        {Dan Green (503 512 3562)}
+\end{publist}
+
+%----------------------------------------------------------------------------------------
+%	Projects
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}[t]{0.46\textwidth}
+    \cvsect{Additional Experience}
+	\vspace{-6pt}
+
+	I have run a record label, published a magazine, curated an art gallery, toured as a musician, and produced several records
+
+\end{minipage}
+\hfill % Whitespace between
+\begin{minipage}[t]{0.465\textwidth}
+    \cvsect{Interests}
+    \vspace{-6pt}
+    
+    My current hobbies unclude painting, music, and hiking
+
+\end{minipage}
+
+\end{document}
