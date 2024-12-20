@@ -1,16 +1,16 @@
 {
   "basics": {
     "name": "Bob Week",
-    "affiliation": "Bohannan Lab, University of Oregon",
-    "title": "Postdoctoral Researcher",
+    "affiliation": "Schulenburg Lab, Kiel University",
+    "title": "KiTE Postdoctoral Research Fellow",
     "image": "",
     "email": "bweek.ecoevo[at]proton[dot]me",
     "url": "https://github.com/bobweek",
     "location": {
-      "postalCode": "OR 97403",
-      "city": "Eugene",
-      "countryCode": "US",
-      "region": "Oregon"
+      "postalCode": "24105",
+      "city": "Kiel",
+      "countryCode": "DE"
+      // "region": "Oregon"
     },
     "profiles": [
       {
@@ -22,11 +22,20 @@
   },
   "work": [
     {
+      "name": "Zoological Institute, Kiel University",
+      "position": "KiTE Postdoctoral Research Fellow",
+      "url": "https://evoecogen-kiel.de/",
+      "startDate": "2024",
+      "endDate": "2027",
+      "summary": "Establishing a comprehensive theoretical framework to understand host-microbiome dynamics",
+      "highlights": ["Metaorganism","Microbiome Transmission","Niche Construction"]
+    },
+    {
       "name": "The Institute of Ecology and Evolution, University of Oregon",
       "position": "Postdoctoral Researcher",
       "url": "https://ie2.uoregon.edu/",
       "startDate": "2022",
-      "endDate": "?",
+      "endDate": "2024",
       "summary": "Extending evolutionary theory for traits jointly determined by host genotype and host microbiome",
       "highlights": ["Holobiont","Host-Microbe","Breeders Equation"]
     },

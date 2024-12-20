@@ -14,7 +14,7 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
-I apply mathematical and computational approaches to study the dynamics of biological populations. Currently, I am a postdoctoral researcher at the University of Oregon developing theory to understand the evolution of traits mediated by host-associated microbiomes. This work is jointly advised by Professors [Brendan Bohannan](https://pages.uoregon.edu/bohannanlab/), [Bill Cresko](https://wcresko.github.io/lab_website/), and [Peter Ralph](https://pages.uoregon.edu/plr/).
+I apply mathematical and computational approaches to study the dynamics of biological populations. Currently, I am a [KiTE postdoctoral research fellow](https://www.uni-kiel.de/en/research/early-career-researchers/kite) at Kiel University developing theory to understand the dynamics of microbiome mediated traits. In Kiel I am hosted by the [Schulenburg group](https://evoecogen-kiel.de/) and the [Collaborative Research Center 1182](https://www.metaorganism-research.com/) focused on the study of host-microbiome systems.
 
 <!-- Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
 
