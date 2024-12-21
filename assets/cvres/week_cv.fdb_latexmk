@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1734719374.07273 "/home/bb/gits/bobweek.github.io/assets/cvres/week_cv.tex" "week_cv.pdf" "week_cv" 1734719374.89047 2
-  "/home/bb/gits/bobweek.github.io/assets/cvres/week_cv.tex" 1734719373.02382 14227 1e10e49849547ae5aada88758cb4abb9 ""
+["pdflatex"] 1734778833.33952 "/home/bb/gits/bobweek.github.io/assets/cvres/week_cv.tex" "week_cv.pdf" "week_cv" 1734778833.90955 2
+  "/home/bb/gits/bobweek.github.io/assets/cvres/week_cv.tex" 1734778803.17204 14603 ca5719c82bc42bc4c4ae457783fbf490 ""
   "/home/bb/texmf/tex/latex/xcolor/xcolor.sty" 1655066402 56148 51a9a8571c07b9921892ae11063ae853 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/fontawesome/fontawesometwo.enc" 1463430686 2679 32dd8ae231bf4a0752b98f62dc097183 ""
@@ -186,9 +186,9 @@
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1729036731 3325957 d2e5fbc99c9b859c88b5495750d29664 ""
   "/usr/local/texlive/2024/texmf.cnf" 1729036646.7493 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
   "developercv.cls" 1729377142.24806 8748 430e0aef0a380e9b2e8daae5b62f3e82 ""
-  "week_cv.aux" 1734719374.76382 839 3faa3339ff0b85b4c8739c1602c94d3c "pdflatex"
-  "week_cv.out" 1734719374.62382 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "week_cv.tex" 1734719373.02382 14227 1e10e49849547ae5aada88758cb4abb9 ""
+  "week_cv.aux" 1734778833.83614 839 3faa3339ff0b85b4c8739c1602c94d3c "pdflatex"
+  "week_cv.out" 1734778833.72814 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "week_cv.tex" 1734778803.17204 14603 ca5719c82bc42bc4c4ae457783fbf490 ""
   (generated)
   "week_cv.aux"
   "week_cv.log"
