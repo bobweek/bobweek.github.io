@@ -13,7 +13,9 @@ nav_order: 3
 
 <center>
 <iframe
-  src="https://editor.p5js.org/bobweek/present/jPU3t16NN"  
+  src="https://editor.p5js.org/bobweek/present/jPU3t16NN"
+    width="400"
+    height="700"
   style="border:0;"
 ></iframe>
 </center>
