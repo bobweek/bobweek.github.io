@@ -25,7 +25,7 @@ nav_order: 3
 
 <div style="display:flex;justify-content:center;">
   <iframe
-    src="./sim/"
+    src="./sims/spatial_coev/"
     width="800"
     height="600"
     style="border:0;display:block;"
