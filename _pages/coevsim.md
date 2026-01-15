@@ -12,9 +12,8 @@ nav_order: 3
 </center> -->
 
 <iframe
-  src="https://editor.p5js.org/bobweek/sketches/jPU3t16NN"  
+  src="https://editor.p5js.org/bobweek/present/jPU3t16NN"  
   style="border:0;"
-  allow="autoplay; fullscreen"
 ></iframe>
 
 
