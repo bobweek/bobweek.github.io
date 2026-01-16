@@ -68,7 +68,8 @@ function setup() {
 
   pixelDensity(1);
   
-  createCanvas(400, 700);
+  canvas = createCanvas(400, 700);
+  canvas.elt.style.touchAction = "manipulation";
   noStroke();
   background(0);
 
@@ -163,6 +164,8 @@ function draw() {
       text("spp 1 & 3 coevolution", m13.xpos, m13.ypos - 10);
       text("spp 2 & 3 coevolution", m23.xpos, m23.ypos - 10);
     }
+    updateAndDrawUI();
+
   } else {
     if (pause1) {
       // one-step redraw/update while paused (mirrors your Processing logic)
@@ -228,14 +231,16 @@ function draw() {
     }
 
     fill(0);
-    rect(140, 360, 220, 90);
+    rect(140, 360, 220, 70);
     fill(255);
     text("press h to toggle controls", 150, 380);
-    text("press p to pause/play", 150, 400);
-    text("press +/- to incr/decr resolution", 150, 420);
-    text("press r to reset with random values", 150, 440);
+    text("press +/- to incr/decr resolution", 150, 400);
+    text("press r to reset with random values", 150, 420);
     pause1 = false;
+    
+  updateAndDrawUI();
   }
+
 
 }
 
@@ -472,4 +477,44 @@ function initGridFromInstructions() {
       grid[i][j].set(r, g, b);
     }
   }
+}
+
+function mousePressed() {
+  const overSlider =
+    mig1.overEvent() || mig2.overEvent() || mig3.overEvent() ||
+    m12.overEvent()  || m13.overEvent()  || m23.overEvent();
+
+  if (!overSlider) {
+    pause = !pause;
+    pause1 = true;
+  }
+  return false;
+}
+
+
+function updateAndDrawUI() {
+  if (hud !== 0) return;
+
+  mig1.update(); mig1.display();
+  mig2.update(); mig2.display();
+  mig3.update(); mig3.display();
+  m12.update();  m12.display();
+  m13.update();  m13.display();
+  m23.update();  m23.display();
+
+  fill(0);
+  rect(mig1.xpos - 2, mig1.ypos - 20, 82, 12);
+  rect(mig2.xpos - 2, mig2.ypos - 20, 82, 12);
+  rect(mig3.xpos - 2, mig3.ypos - 20, 82, 12);
+  rect(m12.xpos - 2, m12.ypos - 20, 118, 12);
+  rect(m13.xpos - 2, m13.ypos - 20, 118, 12);
+  rect(m23.xpos - 2, m23.ypos - 20, 118, 12);
+
+  fill(255);
+  text("spp1 migration", mig1.xpos, mig1.ypos - 10);
+  text("spp2 migration", mig2.xpos, mig2.ypos - 10);
+  text("spp3 migration", mig3.xpos, mig3.ypos - 10);
+  text("spp 1 & 2 coevolution", m12.xpos, m12.ypos - 10);
+  text("spp 1 & 3 coevolution", m13.xpos, m13.ypos - 10);
+  text("spp 2 & 3 coevolution", m23.xpos, m23.ypos - 10);
 }
