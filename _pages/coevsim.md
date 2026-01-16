@@ -25,6 +25,7 @@ nav_order: 3
 
 <center>
 <div style="display:flex;justify-content:center;">
+  <center>
   <iframe
     src="/sims/spatial_coev/"
     width="800"
@@ -33,6 +34,7 @@ nav_order: 3
     loading="lazy"
     allowfullscreen>
   </iframe>
+  </center>
 </div>
 </center>
 
