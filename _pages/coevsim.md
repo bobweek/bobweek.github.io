@@ -25,7 +25,7 @@ nav_order: 3
 
 <div style="display:flex;justify-content:center;">
   <iframe
-    src="./sims/spatial_coev/"
+    src="/sims/spatial_coev/"
     width="800"
     height="600"
     style="border:0;display:block;"
@@ -38,7 +38,7 @@ This is an old visualizer I wrote of spatially distributed coevolution among thr
 
 - Press **h** to toggle sliders
 
-- Press **p** to play/pause
+- Tap/click play/pause
 
 - Press **+/-** to increase/decrease resolution
 
