@@ -1,0 +1,2234 @@
+---
+title: "The *Ecology* ~~and *Geography*~~ of **Coevolution**"
+subtitle: "<pink>Concepts</pink> + <pink>case studies</pink>"
+# author: "*Bob Week* - [Guest lecture]() - [BIOL227]() - Ecological and Evolutionary Applications in Medicine - **Kiel University**"
+author: "**Bob Week** - [BIOL227]() - *Kiel University*"
+format:
+  revealjs:
+    theme: black
+    css: custom.css
+    transition: fade
+    background-transition: none
+    slide-number: true
+    controls: true
+    progress: true
+    center: false
+    navigation-mode: linear
+    width: 1280
+    height: 720
+execute:
+  echo: false
+  fig-format: svg
+---
+
+## Follow Along!
+
+Interactive slides available at:
+
+[https://bobweek.github.io/teaching/coev_intro](https://bobweek.github.io/teaching/coev_intro)
+
+*insert QR code image here*
+
+<!-- ---
+
+## Who am I?
+
+- from portland oregon
+- phd at university of idaho on mathematical coevolutionary theory (advised by scott nuismer)
+- did a couple of postdocs in the states
+- now a kite postdoctoral fellow hosted by the schulenburg group working on host-microbiome interactions and evolution
+
+```{r}
+#| fig-align: center
+#| out-width: 65%
+#| fig-width: 6
+#| fig-height: 3.5
+
+library(ggplot2)
+
+# data
+x <- seq(-4, 4, length.out = 500)
+df <- data.frame(
+  x = rep(x, 3),
+  y = c(
+    dnorm(x, 0, 1),
+    dnorm(x, -0.8, 0.9),
+    dnorm(x, 1.1, 0.7)
+  ),
+  group = factor(rep(c("pink", "lime", "peach"), each = length(x)))
+)
+
+# palette
+cols <- c(
+  pink  = "#ff5fa2",
+  lime  = "#aaff00",
+  peach = "#ff9f80"
+)
+
+ggplot(df, aes(x, y, color = group)) +
+  geom_line(linewidth = 2.2, linecap = "round") +
+  scale_color_manual(values = cols) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_size = 18) +
+  theme(
+    legend.position = "none",
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(color = "#dddddd"),
+    plot.background = element_rect(fill = "transparent", color = NA)
+  )
+```
+
+::: notes
+::: -->
+
+---
+
+## Many uses of the word *Coevolution*
+
+- [Intraspecific **molecular** coevolution](https://doi.org/10.1016/j.gde.2006.09.001)
+  - [**Gene expression** coevolution](https://doi.org/10.1073/pnas.0402591101)
+  - [**Protein structure** coevolution](https://doi.org/10.1073/pnas.0402591101)
+  - [**Protein site** coevolution](https://doi.org/10.1371/journal.pone.0008591)
+  - [**Mitonuclear** coevolution](https://doi.org/10.1093/molbev/msac233)
+  - [**Antagonistic interlocus** coevolution](https://doi.org/10.1073/pnas.0501889102)
+- [Intraspecific **trait-trait** coevolution](https://doi.org/10.1186/s12862-023-02164-4)
+- [Coevolution between **genes** and **culture**](https://archive.org/details/Boyd1985CultureAndTheEvolutionaryProcessBook_201901)
+- *and even ...*
+ 
+::: notes
+many meanings, ours it at bottom
+:::
+
+---
+
+## A **magazine** from the 70s
+
+<div class="r-stack" style="text-align:center;">
+[![](images/coevquart.png){width=400}](https://archive.org/details/coevolutionquarterly) *but ...*
+</div>
+
+::: notes
+founded by stewart brand and kevin kelly
+:::
+
+---
+
+## The most *important* and **coolest** meaning is
+
+::: {.r-vstack .r-stretch style="align-items:flex-start;"}
+> **<u>Coevolution</u> of two (or more) *species* due to *ecological interactions***
+:::
+
+::: notes
+:::
+
+---
+
+## Interspecific Coevolution is a *Massive* Topic
+- **Host-parasite coevolution**
+  - [Epidemiology](https://doi.org/10.1017/S0031182000055360), [agriculture](https://doi.org/10.1006/viro.1999.0104)
+  - [Transmissible cancers (dftd)](https://doi.org/10.1093/evolut/qpae143)
+  - [Janzen-Connel hypothesis (spatial patterns of ecological communities)](https://doi.org/10.1086/282687)
+- **Major transitions of evolution**
+  - [Mutualism from parasitism](https://doi.org/10.1086/714274)
+  - [Evolution of recombination / sexual reproduction](https://doi.org/10.1073/pnas.87.9.3566)
+- **Structure and stability of mutualistic networks**
+  - [Plant-pollinator, fruit-frugivore](https://doi.org/10.1111/j.1558-5646.2012.01801.x)
+- **Competition and coexistence**
+  - [Resource partitioning](https://doi.org/10.1016/0040-5809(76)90054-X), [character displacement](https://doi.org/10.2307/2411924), [range dynamics](https://doi.org/10.1086/303351)
+- **Local Adaptation**
+  - [Spatial variation](https://doi.org/10.1093/jxb/erp168), [specialization](https://doi.org/10.2307/2408184), [speciation](https://doi.org/10.2307/2406212)
+  - [Genomic and phenotypic signatures of coevolution](https://doi.org/10.1002/ece3.3107)
+
+::: notes
+a small sample of topics under the umbrella of coevolution
+:::
+
+<!-- 
+---
+
+## With *Massive* implications for
+
+- **Basic Science**
+  - *Speciation/Diversification*
+  - *Community Ecology*
+- **Applied Science**
+  - *Conservation*
+  - *Agriculture*
+  - *Public Health*
+
+::: notes
+a small sample of topics under the umbrella of coevolution
+::: 
+-->
+
+## Roadmap
+
+**Act I:**  *What is coevolution?*
+
+- Definitions
+- Representative forms of coevolution
+
+**Act II:**  *The ecology of coevolution*
+
+- Coevolutionary outcomes of ecological interactions
+- Ecological outcomes of coevolutionary dynamics (ie, eco-evo feedback!)
+- The community context
+<!-- 
+**Act III:** *The geography of coevolution*
+
+- Spatial structure of ecological interactions
+- The interplay of dispersal limitation and random genetic drift (null hypotheses)
+- The spatial signature of coevolution
+
+::: notes
+if there's time ill synthesize all this stuff w gmtc , and mebe even point to some further directions
+::: -->
+
+---
+
+## Learning Outcomes
+
+- Define **coevolution** precisely (and say what it is *not*)
+- Recognize how coevolution can maintain **genetic diversity**
+- Explain how **ecology** and **coevolution** feedback on each other
+
+# Act I: *What is coevolution?*
+
+## Conditions for Coevolution
+
+> **DEFINITION:** Coevolution occurs when 
+> 
+> (1) the *interaction* between a pair of species alters *selection pressures* on both species and 
+> 
+> (2) both species exhibit an *evolutionary response* to the altered selection pressures
+
+>**Review:**
+>
+>- What is *selection*?
+>- What is an *evolutionary response* to selection?
+
+>**Read:**
+>
+> ["*When is it coevolution?*", Janzen 1980](https://doi.org/10.1111/j.1558-5646.1980.tb04849.x)
+
+## Selection Review <span style="text-transform: lowercase;">([see Lande & Arnold, 1983](https://doi.org/10.1111/j.1558-5646.1983.tb00236.x))</span>
+
+<!-- (<span style="text-transform: lowercase;">*single trait*</span>) -->
+
+> **DEFINITION:** *Selection* occurs when <u>fitness</u> and <u>phenotype</u> covary
+
+> **DEFINITION:** A *phenotype* is any measurable attribute of an organism 
+
+> **DEFINITION:** *Fitness* is the lifetime reproductive output of an individual
+
+::: columns
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-align: center
+#| out-width: 95%
+#| fig-width: 6
+#| fig-height: 3.5
+
+library(ggplot2)
+
+# phenotype axis
+x <- seq(-4, 4, length.out = 700)
+
+# stabilizing selection: fitness = a + b x
+a <- 0.2
+b <- 0.05
+
+df <- data.frame(
+  x = x,
+  y = a + b * x
+)
+
+# dark-mode palette (high contrast) — keep same style
+cols <- c(
+  pink = "#ff2bd6",
+  acid = "#f5ff3b",
+  cyan = "#00f0ff",
+  lime = "#70ff40"
+)
+
+lw <- 2.2
+bg <- "#1b1b1d"      # dark grey
+grid_x <- "#2a2a2e"  # subtle grid
+txt <- "#f2f2f2"     # near-white
+
+ggplot(df, aes(x, y)) +
+  geom_line(
+    linewidth = lw,
+    linecap = "round",
+    color = cols[["acid"]]   # pick one of your existing colors
+  ) +
+  labs(title = "Directional", x = "PHENOTYPE", y = "FITNESS") +
+  theme_minimal(base_size = 18) +
+  scale_x_continuous(breaks = NULL) +
+  scale_y_continuous(breaks = NULL) +
+  theme(
+    legend.position = "none",
+
+    # dark mode background
+    plot.background  = element_rect(fill = bg, color = NA),
+    panel.background = element_rect(fill = bg, color = NA),
+
+    # text in white
+    text  = element_text(color = txt),
+    axis.text  = element_text(color = txt),
+    axis.title = element_text(color = txt),
+    plot.title = element_text(color = txt, hjust = 0.5),
+
+    # grid styling
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(color = grid_x)
+  )
+
+```
+
+:::
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-align: center
+#| out-width: 95%
+#| fig-width: 6
+#| fig-height: 3.5
+
+library(ggplot2)
+
+# phenotype axis
+x <- seq(-4, 4, length.out = 700)
+
+# stabilizing selection: fitness = a - b (x - theta)^2
+theta <- 0         # optimum phenotype
+a <- 1             # peak fitness (arbitrary scale)
+b <- 0.08          # strength of stabilizing selection (curvature)
+
+df <- data.frame(
+  x = x,
+  y = a - b * (x - theta)^2
+)
+
+# dark-mode palette (high contrast) — keep same style
+cols <- c(
+  pink = "#ff2bd6",
+  acid = "#f5ff3b",
+  cyan = "#00f0ff",
+  lime = "#70ff40"
+)
+
+lw <- 2.2
+bg <- "#1b1b1d"      # dark grey
+grid_x <- "#2a2a2e"  # subtle grid
+txt <- "#f2f2f2"     # near-white
+
+ggplot(df, aes(x, y)) +
+  geom_line(
+    linewidth = lw,
+    linecap = "round",
+    color = cols[["acid"]]   # pick one of your existing colors
+  ) +
+  labs(title = "Stabilizing", x = "PHENOTYPE", y = "FITNESS") +
+  theme_minimal(base_size = 18) +
+  scale_x_continuous(breaks = NULL) +
+  scale_y_continuous(breaks = NULL) +
+  theme(
+    legend.position = "none",
+
+    # dark mode background
+    plot.background  = element_rect(fill = bg, color = NA),
+    panel.background = element_rect(fill = bg, color = NA),
+
+    # text in white
+    text  = element_text(color = txt),
+    axis.text  = element_text(color = txt),
+    axis.title = element_text(color = txt),
+    plot.title = element_text(color = txt, hjust = 0.5),
+
+    # grid styling
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(color = grid_x)
+  )
+
+```
+
+:::
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-align: center
+#| out-width: 95%
+#| fig-width: 6
+#| fig-height: 3.5
+
+library(ggplot2)
+
+# phenotype axis
+x <- seq(-4, 4, length.out = 700)
+
+# stabilizing selection: fitness = a - b (x - theta)^2
+theta <- 0         # optimum phenotype
+a <- 1             # peak fitness (arbitrary scale)
+b <- 0.08          # strength of stabilizing selection (curvature)
+
+df <- data.frame(
+  x = x,
+  y = - a + b * (x - theta)^2
+)
+
+# dark-mode palette (high contrast) — keep same style
+cols <- c(
+  pink = "#ff2bd6",
+  acid = "#f5ff3b",
+  cyan = "#00f0ff",
+  lime = "#70ff40"
+)
+
+lw <- 2.2
+bg <- "#1b1b1d"      # dark grey
+grid_x <- "#2a2a2e"  # subtle grid
+txt <- "#f2f2f2"     # near-white
+
+ggplot(df, aes(x, y)) +
+  geom_line(
+    linewidth = lw,
+    linecap = "round",
+    color = cols[["acid"]]   # pick one of your existing colors
+  ) +
+  labs(title = "Disruptive", x = "PHENOTYPE", y = "FITNESS") +
+  theme_minimal(base_size = 18) +
+  scale_x_continuous(breaks = NULL) +
+  scale_y_continuous(breaks = NULL) +
+  theme(
+    legend.position = "none",
+
+    # dark mode background
+    plot.background  = element_rect(fill = bg, color = NA),
+    panel.background = element_rect(fill = bg, color = NA),
+
+    # text in white
+    text  = element_text(color = txt),
+    axis.text  = element_text(color = txt),
+    axis.title = element_text(color = txt),
+    plot.title = element_text(color = txt, hjust = 0.5),
+
+    # grid styling
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(color = grid_x)
+  )
+
+```
+
+:::
+
+:::
+
+## Adaptation <span style="text-transform: lowercase;">*the Evolutionary Response to selection*</span>
+
+> **DEFINITION:** *Adaptation* is the <u>inherited</u>/<u>evolutionary</u> resposne to <u>selection</u>
+
+```{r}
+#| fig-align: center
+#| out-width: 95%
+#| fig-width: 8
+#| fig-height: 3.5
+
+library(ggplot2)
+
+# phenotype axis
+x <- seq(-4, 4, length.out = 700)
+dx <- x[2] - x[1]
+
+# original population
+mu0 <- -1.75
+sd0 <- 0.9
+p0  <- dnorm(x, mu0, sd0)
+
+# directional fitness (straight line)
+a <- 0.2
+b <- 0.05
+f_raw <- a + b * x
+
+# viability weights (keep straight-line shape)
+w <- f_raw - min(f_raw) + 1e-6
+
+# post-selection distribution
+p_sel_unnorm <- p0 * w
+Z <- sum(p_sel_unnorm) * dx
+p_sel <- p_sel_unnorm / Z
+
+# evolutionary response (Breeder)
+h2 <- 0.4
+mean0 <- sum(x * p0) * dx
+mean_sel <- sum(x * p_sel) * dx
+S <- mean_sel - mean0
+R <- h2 * S
+
+# --- VISUAL SEPARATION (purely illustrative) ---
+# enforce the correct ordering: mean0 < response < selected
+shift_sel <- 0.55    # push selected right for visibility
+t_resp    <- 0.55    # fraction of the (visual) selection shift inherited (0<h2-ish)
+
+mu_sel_vis  <-1.5
+mu_resp_vis <- 0   # guaranteed between mu0 and mu_sel_vis
+
+p_sel_vis  <- dnorm(x, mu_sel_vis,  sd0)
+p_resp_vis <- dnorm(x, mu_resp_vis, sd0)
+
+# scale fitness line to overlay on density axis (visual overlay only)
+ymax <- max(c(p0, p_sel_vis, p_resp_vis))
+f_scaled <- (f_raw - min(f_raw)) /
+  (max(f_raw) - min(f_raw)) * (0.85 * ymax)
+
+# arrow height
+belly_frac <- 0.65
+y_arrow <- dnorm(mu0, mu0, sd0) * belly_frac
+
+# styling
+cols <- c(
+  pink = "#ff2bd6",
+  acid = "#f5ff3b",
+  cyan = "#00f0ff",
+  lime = "#70ff40"
+)
+
+bg <- "#1b1b1d"
+grid_x <- "#2a2a2e"
+txt <- "#f2f2f2"
+lw <- 2.2
+arrow_len <- 0.22
+
+# data
+df_dist <- rbind(
+  data.frame(x = x, y = p0,         curve = "Original population"),
+  data.frame(x = x, y = p_sel_vis,  curve = "Post-selection"),
+  data.frame(x = x, y = p_resp_vis, curve = "Inherited response")
+)
+
+df_fit <- data.frame(
+  x = x,
+  y = f_scaled,
+  curve = "Fitness function"
+)
+
+# force legend order
+legend_levels <- c(
+  "Original population",
+  "Post-selection",
+  "Inherited response",
+  "Fitness function"
+)
+
+df_dist$curve <- factor(df_dist$curve, levels = legend_levels)
+df_fit$curve  <- factor(df_fit$curve,  levels = legend_levels)
+
+ggplot() +
+  # distributions
+  geom_line(
+    data = df_dist,
+    aes(x, y, linetype = curve, color = curve),
+    linewidth = lw,
+    linecap = "round"
+  ) +
+  # fitness overlay
+  geom_line(
+    data = df_fit,
+    aes(x, y, color = curve),
+    linewidth = lw,
+    linecap = "round"
+  ) +
+  # evolutionary response arrow: original -> response
+  annotate(
+    "segment",
+    x = mu0, y = y_arrow,
+    xend = mu_resp_vis, yend = y_arrow,
+    linewidth = lw,
+    lineend = "round",
+    color = cols[["lime"]],
+    arrow = arrow(
+      length = grid::unit(arrow_len, "in"),
+      type = "closed"
+    )
+  ) +
+  scale_linetype_manual(
+    breaks = legend_levels,
+    values = c(
+      "Original population" = "solid",
+      "Post-selection"      = "dotted",
+      "Inherited response"  = "dashed",
+      "Fitness function"    = "solid"
+    )
+  ) +
+  scale_color_manual(
+    breaks = legend_levels,
+    values = c(
+      "Original population" = cols[["pink"]],
+      "Post-selection"      = cols[["pink"]],
+      "Inherited response"  = cols[["pink"]],
+      "Fitness function"    = cols[["acid"]]
+    )
+  ) +
+  guides(
+    color = guide_legend(
+      override.aes = list(
+        linetype = c("solid", "dotted", "dashed", "solid")
+      )
+    ),
+    linetype = "none"
+  ) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_size = 18) +
+  scale_x_continuous(breaks = NULL, labels = NULL) +
+  scale_y_continuous(breaks = NULL, labels = NULL) +
+  theme(
+    legend.title = element_blank(),
+    legend.position = "right",
+    legend.direction = "vertical",
+    legend.background = element_rect(fill = bg, color = NA),
+    legend.key = element_rect(fill = bg, color = NA),
+    legend.text = element_text(size = 11, color = txt),
+    legend.key.width  = grid::unit(2.2, "cm"),
+    legend.key.height = grid::unit(0.6, "cm"),
+
+    plot.background  = element_rect(fill = bg, color = NA),
+    panel.background = element_rect(fill = bg, color = NA),
+    text = element_text(color = txt),
+    axis.text = element_text(color = txt),
+    axis.title = element_text(color = txt),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(color = grid_x)
+  )
+
+
+```
+
+## Coevolution is Co-adaptation
+
+> *<u>Coevolution</u>* **⇔** <u>both</u> species <u>adapt</u> in response <u>to</u> selection caused by <u>interaction</u>
+
+::: columns
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-align: center
+#| out-width: 95%
+#| fig-width: 6
+#| fig-height: 3.5
+
+library(ggplot2)
+
+# phenotype axis
+x <- seq(-4, 4, length.out = 700)
+dx <- x[2] - x[1]
+
+# original population
+mu0 <- 1.75
+sd0 <- 0.9
+p0  <- dnorm(x, mu0, sd0)
+
+# directional fitness (REVERSED direction)
+a <- 0.2
+b <- -0.05          # <- reverse selection gradient
+f_raw <- a + b * x
+
+# viability weights (keep straight-line shape)
+w <- f_raw - min(f_raw) + 1e-6
+
+# post-selection distribution
+p_sel_unnorm <- p0 * w
+Z <- sum(p_sel_unnorm) * dx
+p_sel <- p_sel_unnorm / Z
+
+# evolutionary response (Breeder)
+h2 <- 0.4
+mean0 <- sum(x * p0) * dx
+mean_sel <- sum(x * p_sel) * dx
+S <- mean_sel - mean0
+R <- h2 * S
+
+# --- VISUAL SEPARATION (purely illustrative) ---
+# enforce ordering: selected < response < original (leftward shift)
+mu_sel_vis  <- -1.5     # selected furthest left
+mu_resp_vis <- 0     # response between original and selected
+
+p_sel_vis  <- dnorm(x, mu_sel_vis,  sd0)
+p_resp_vis <- dnorm(x, mu_resp_vis, sd0)
+
+# scale fitness line to overlay on density axis (visual overlay only)
+ymax <- max(c(p0, p_sel_vis, p_resp_vis))
+f_scaled <- (f_raw - min(f_raw)) /
+  (max(f_raw) - min(f_raw)) * (0.85 * ymax)
+
+# arrow height
+belly_frac <- 0.65
+y_arrow <- dnorm(mu0, mu0, sd0) * belly_frac
+
+# styling
+cols <- c(
+  pink = "#ff2bd6",
+  cyan = "#00f0ff",
+  acid = "#f5ff3b",
+  lime = "#70ff40"
+)
+
+bg <- "#1b1b1d"
+grid_x <- "#2a2a2e"
+txt <- "#f2f2f2"
+lw <- 2.2
+arrow_len <- 0.22
+
+# data
+df_dist <- rbind(
+  data.frame(x = x, y = p0,         curve = "Original population"),
+  data.frame(x = x, y = p_sel_vis,  curve = "Post-selection"),
+  data.frame(x = x, y = p_resp_vis, curve = "Inherited response")
+)
+
+df_fit <- data.frame(
+  x = x,
+  y = f_scaled,
+  curve = "Fitness function"
+)
+
+ggplot() +
+  # population distributions (now CYAN)
+  geom_line(
+    data = df_dist,
+    aes(x, y, linetype = curve),
+    linewidth = lw,
+    linecap = "round",
+    color = cols[["pink"]]
+  ) +
+  # fitness overlay
+  geom_line(
+    data = df_fit,
+    aes(x, y),
+    linewidth = lw,
+    linecap = "round",
+    color = cols[["acid"]]
+  ) +
+  # evolutionary response arrow (REVERSED: points left)
+  annotate(
+    "segment",
+    x = mu0, y = y_arrow,
+    xend = mu_resp_vis, yend = y_arrow,
+    linewidth = lw,
+    lineend = "round",
+    color = cols[["lime"]],
+    arrow = arrow(
+      length = grid::unit(arrow_len, "in"),
+      type = "closed"
+    )
+  ) +
+  scale_linetype_manual(
+    values = c(
+      "Original population" = "solid",
+      "Post-selection"      = "dotted",
+      "Inherited response"  = "dashed"
+    )
+  ) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_size = 18) +
+  scale_x_continuous(breaks = NULL, labels = NULL) +
+  scale_y_continuous(breaks = NULL, labels = NULL) +
+  theme(
+    legend.position = "none",
+
+    plot.background  = element_rect(fill = bg, color = NA),
+    panel.background = element_rect(fill = bg, color = NA),
+    text = element_text(color = txt),
+    axis.text = element_text(color = txt),
+    axis.title = element_text(color = txt),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(color = grid_x)
+  )
+
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-align: center
+#| out-width: 95%
+#| fig-width: 6
+#| fig-height: 3.5
+
+library(ggplot2)
+
+# phenotype axis
+x <- seq(-4, 4, length.out = 700)
+dx <- x[2] - x[1]
+
+# original population
+mu0 <- -1.75
+sd0 <- 0.9
+p0  <- dnorm(x, mu0, sd0)
+
+# directional fitness (straight line)
+a <- 0.2
+b <- 0.05
+f_raw <- a + b * x
+
+# viability weights (keep straight-line shape)
+w <- f_raw - min(f_raw) + 1e-6
+
+# post-selection distribution
+p_sel_unnorm <- p0 * w
+Z <- sum(p_sel_unnorm) * dx
+p_sel <- p_sel_unnorm / Z
+
+# evolutionary response (Breeder)
+h2 <- 0.4
+mean0 <- sum(x * p0) * dx
+mean_sel <- sum(x * p_sel) * dx
+S <- mean_sel - mean0
+R <- h2 * S
+
+# --- VISUAL SEPARATION (purely illustrative) ---
+# enforce the correct ordering: mean0 < response < selected
+shift_sel <- 0.55    # push selected right for visibility
+t_resp    <- 0.55    # fraction of the (visual) selection shift inherited (0<h2-ish)
+
+mu_sel_vis  <- 1.5
+mu_resp_vis <- 0     # should lie between mu0 and mu_sel_vis for this chosen setup
+
+p_sel_vis  <- dnorm(x, mu_sel_vis,  sd0)
+p_resp_vis <- dnorm(x, mu_resp_vis, sd0)
+
+# scale fitness line to overlay on density axis (visual overlay only)
+ymax <- max(c(p0, p_sel_vis, p_resp_vis))
+f_scaled <- (f_raw - min(f_raw)) /
+  (max(f_raw) - min(f_raw)) * (0.85 * ymax)
+
+# arrow height
+belly_frac <- 0.65
+y_arrow <- dnorm(mu0, mu0, sd0) * belly_frac
+
+# styling
+cols <- c(
+  pink = "#ff2bd6",
+  acid = "#f5ff3b",
+  cyan = "#00f0ff",
+  lime = "#70ff40"
+)
+
+bg <- "#1b1b1d"
+grid_x <- "#2a2a2e"
+txt <- "#f2f2f2"
+lw <- 2.2
+arrow_len <- 0.22
+
+# data
+df_dist <- rbind(
+  data.frame(x = x, y = p0,         curve = "Original population"),
+  data.frame(x = x, y = p_sel_vis,  curve = "Post-selection"),
+  data.frame(x = x, y = p_resp_vis, curve = "Inherited response")
+)
+
+df_fit <- data.frame(
+  x = x,
+  y = f_scaled,
+  curve = "Fitness function"
+)
+
+# force legend order (kept, harmless even without legend)
+legend_levels <- c(
+  "Original population",
+  "Post-selection",
+  "Inherited response",
+  "Fitness function"
+)
+
+df_dist$curve <- factor(df_dist$curve, levels = legend_levels)
+df_fit$curve  <- factor(df_fit$curve,  levels = legend_levels)
+
+ggplot() +
+  # distributions
+  geom_line(
+    data = df_dist,
+    aes(x, y, linetype = curve, color = curve),
+    linewidth = lw,
+    linecap = "round"
+  ) +
+  # fitness overlay
+  geom_line(
+    data = df_fit,
+    aes(x, y, color = curve),
+    linewidth = lw,
+    linecap = "round"
+  ) +
+  # evolutionary response arrow: original -> response
+  annotate(
+    "segment",
+    x = mu0, y = y_arrow,
+    xend = mu_resp_vis, yend = y_arrow,
+    linewidth = lw,
+    lineend = "round",
+    color = cols[["lime"]],
+    arrow = arrow(
+      length = grid::unit(arrow_len, "in"),
+      type = "closed"
+    )
+  ) +
+  scale_linetype_manual(
+    breaks = legend_levels,
+    values = c(
+      "Original population" = "solid",
+      "Post-selection"      = "dotted",
+      "Inherited response"  = "dashed",
+      "Fitness function"    = "solid"
+    )
+  ) +
+  scale_color_manual(
+    breaks = legend_levels,
+    values = c(
+      "Original population" = cols[["cyan"]],
+      "Post-selection"      = cols[["cyan"]],
+      "Inherited response"  = cols[["cyan"]],
+      "Fitness function"    = cols[["acid"]]
+    )
+  ) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_size = 18) +
+  scale_x_continuous(breaks = NULL, labels = NULL) +
+  scale_y_continuous(breaks = NULL, labels = NULL) +
+  theme(
+    legend.position = "none",
+
+    plot.background  = element_rect(fill = bg, color = NA),
+    panel.background = element_rect(fill = bg, color = NA),
+    text = element_text(color = txt),
+    axis.text = element_text(color = txt),
+    axis.title = element_text(color = txt),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(color = grid_x)
+  )
+
+```
+
+:::
+
+:::
+
+## Examples of Coevolution: **Character Displacement**
+
+- *Interaction type:* resource **competition** along a continuous niche axis
+- *Altered selection:* **divergent** resource use/specialization (**directional** selection)
+- *Coevolutionary response:* both species evolve to **reduce** resource competition
+
+```{r}
+#| fig-align: center
+#| out-width: 65%
+#| fig-width: 6
+#| fig-height: 3.5
+
+library(ggplot2)
+
+x <- seq(-4, 4, length.out = 700)
+
+mu1 <- -1.2; sd1 <- 0.85
+mu2 <-  1.2; sd2 <- 0.85
+
+dmu <- 0.55
+mu1b <- mu1 - dmu
+mu2b <- mu2 + dmu
+
+# dark-mode palette (high contrast)
+cols <- c(
+  pink = "#ff2bd6",
+  acid = "#f5ff3b",
+  cyan = "#00f0ff",
+  lime = "#70ff40"
+)
+
+lw <- 2.2
+arrow_len <- 0.22
+dx <- 0.65
+
+belly_frac <- 0.45
+y1_belly <- dnorm(mu1, mu1, sd1) * belly_frac
+y2_belly <- dnorm(mu2, mu2, sd2) * belly_frac
+
+df <- rbind(
+  data.frame(x = x, y = dnorm(x, mu1,  sd1), group = "pink", phase = "current"),
+  data.frame(x = x, y = dnorm(x, mu2,  sd2), group = "cyan", phase = "current"),
+  data.frame(x = x, y = dnorm(x, mu1b, sd1), group = "pink", phase = "next"),
+  data.frame(x = x, y = dnorm(x, mu2b, sd2), group = "cyan", phase = "next")
+)
+df$phase <- factor(df$phase, levels = c("current", "next"))
+
+bg <- "#1b1b1d"      # dark grey
+grid_x <- "#2a2a2e"  # subtle grid
+txt <- "#f2f2f2"     # near-white
+
+ggplot(df, aes(x, y, color = group, linetype = phase)) +
+  geom_line(linewidth = lw, linecap = "round") +
+  annotate(
+    "segment",
+    x = mu1, y = y1_belly, xend = mu1 - dx, yend = y1_belly,
+    linewidth = lw, lineend = "round",
+    color = cols[["lime"]],
+    arrow = arrow(length = grid::unit(arrow_len, "in"), type = "closed")
+  ) +
+  annotate(
+    "segment",
+    x = mu2, y = y2_belly, xend = mu2 + dx, yend = y2_belly,
+    linewidth = lw, lineend = "round",
+    color = cols[["lime"]],
+    arrow = arrow(length = grid::unit(arrow_len, "in"), type = "closed")
+  ) +
+  scale_color_manual(values = cols) +
+  scale_linetype_manual(values = c("solid", "22")) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_size = 18) +
+  scale_x_continuous(breaks = NULL, labels = NULL) +
+  scale_y_continuous(breaks = NULL, labels = NULL) +
+  theme(
+    legend.position = "none",
+
+    # dark mode background
+    plot.background  = element_rect(fill = bg, color = NA),
+    panel.background = element_rect(fill = bg, color = NA),
+
+    # text in white
+    text  = element_text(color = txt),
+    axis.text  = element_text(color = txt),
+    axis.title = element_text(color = txt),
+
+    # grid styling (keep only x grid if you want)
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(color = grid_x)
+  )
+
+```
+
+::: notes
+as an exercise, consider which patterns of fitness produce these dynamics
+:::
+
+## Examples of Coevolution: **Mutualistic Matching**
+
+- *Interaction type:* **mutualism** w trait-matching (eg, plant-poll. phenology)
+- *Altered selection:* **positive** freq. dependent selection (**stabilizing** selection)
+- *Coevolutionary response:* **loss** of polymorphism (**decr.** genetic variation)
+
+```{r}
+#| fig-align: center
+#| out-width: 65%
+#| fig-width: 6
+#| fig-height: 3.5
+
+library(ggplot2)
+
+x <- seq(-4, 4, length.out = 700)
+
+mu1 <- -1.2; sd1 <- 0.85
+mu2 <-  1.2; sd2 <- 0.85
+
+# keep curves exactly where they were (character displacement locations)
+dmu <- 0.55
+mu1b <- mu1 - dmu
+mu2b <- mu2 + dmu
+
+# dark-mode palette (high contrast)
+cols <- c(
+  pink = "#ff2bd6",
+  acid = "#f5ff3b",
+  cyan = "#00f0ff",
+  lime = "#70ff40"
+)
+
+lw <- 2.2
+arrow_len <- 0.22
+dx <- 0.65
+
+belly_frac <- 0.45
+y1_belly <- dnorm(mu1, mu1, sd1) * belly_frac
+y2_belly <- dnorm(mu2, mu2, sd2) * belly_frac
+
+df <- rbind(
+  data.frame(x = x, y = dnorm(x, mu1,  sd1), group = "pink", phase = "current"),
+  data.frame(x = x, y = dnorm(x, mu2,  sd2), group = "cyan", phase = "current"),
+  data.frame(x = x, y = dnorm(x, mu1b, sd1), group = "pink", phase = "next"),
+  data.frame(x = x, y = dnorm(x, mu2b, sd2), group = "cyan", phase = "next")
+)
+df$phase <- factor(df$phase, levels = c("current", "next"))
+
+bg <- "#1b1b1d"      # dark grey
+grid_x <- "#2a2a2e"  # subtle grid
+txt <- "#f2f2f2"     # near-white
+
+ggplot(df, aes(x, y, color = group, linetype = phase)) +
+  geom_line(linewidth = lw, linecap = "round") +
+
+  # arrows point inward (trait matching)
+  annotate(
+    "segment",
+    x = mu1b, y = y1_belly, xend = mu1b + dx, yend = y1_belly,
+    linewidth = lw, lineend = "round",
+    color = cols[["lime"]],
+    arrow = arrow(length = grid::unit(arrow_len, "in"), type = "closed")
+  ) +
+  annotate(
+    "segment",
+    x = mu2b, y = y2_belly, xend = mu2b - dx, yend = y2_belly,
+    linewidth = lw, lineend = "round",
+    color = cols[["lime"]],
+    arrow = arrow(length = grid::unit(arrow_len, "in"), type = "closed")
+  ) +
+
+  scale_color_manual(values = cols) +
+
+  # exchange dashed/solid between phases (without moving curves)
+  scale_linetype_manual(values = c("22", "solid")) +
+
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_size = 18) +
+  scale_x_continuous(breaks = NULL, labels = NULL) +
+  scale_y_continuous(breaks = NULL, labels = NULL) +
+  theme(
+    legend.position = "none",
+    plot.background  = element_rect(fill = bg, color = NA),
+    panel.background = element_rect(fill = bg, color = NA),
+    text  = element_text(color = txt),
+    axis.text  = element_text(color = txt),
+    axis.title = element_text(color = txt),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(color = grid_x)
+  )
+
+```
+
+## Examples of Coevolution: **Trench Warfare**
+
+- *Interaction type:* **host-parasite** w lock-key (eg, viral receptor binding)
+- *Altered selection:* **negative** freq. dependent selection (**diversifying** selection)
+- *Coevolutionary response:* **maintenance** of polymorphism (**incr.** genetic variation)
+
+```{r}
+#| fig-align: center
+#| out-width: 65%
+#| fig-width: 6
+#| fig-height: 5.0
+
+library(ggplot2)
+
+x <- seq(-4, 4, length.out = 900)
+
+cols <- c(
+  pink = "#ff2bd6",
+  acid = "#f5ff3b",
+  cyan = "#00f0ff",
+  lime = "#70ff40"
+)
+
+lw <- 2.2
+arrow_len <- 0.22
+dx_host <- 0.75
+dx_para <- 0.65
+
+bg <- "#1b1b1d"
+grid_x <- "#2a2a2e"
+txt <- "#f2f2f2"
+
+# ---------- HOST (bimodal) ----------
+muH1 <- -1.25; muH2 <-  1.25
+sdH  <- 0.55
+wH1  <- 0.5;   wH2  <- 0.5
+
+dmu_host <- 0.55
+muH1b <- muH1 - dmu_host
+muH2b <- muH2 + dmu_host
+
+host_cur  <- wH1 * dnorm(x, muH1,  sdH) + wH2 * dnorm(x, muH2,  sdH)
+host_next <- wH1 * dnorm(x, muH1b, sdH) + wH2 * dnorm(x, muH2b, sdH)
+
+# ---------- PARASITE (center -> chases modes as ONE joined mixture next) ----------
+muP <- 0.0
+sdP <- 0.60
+
+dmu_para <- 0.85
+muP1b <- muP - dmu_para
+muP2b <- muP + dmu_para
+
+para_cur  <- dnorm(x, muP, sdP)
+para_next <- 0.5 * dnorm(x, muP1b, sdP) + 0.5 * dnorm(x, muP2b, sdP)
+
+# ---------- equal-peak scaling (visual, not probability) ----------
+target_peak <- 0.45
+rescale_to_peak <- function(y, target = target_peak) y * (target / max(y))
+
+host_cur  <- rescale_to_peak(host_cur)
+host_next <- rescale_to_peak(host_next)
+para_cur  <- rescale_to_peak(para_cur)
+para_next <- rescale_to_peak(para_next)
+
+# ---------- assemble line data ----------
+df <- rbind(
+  data.frame(x = x, y = host_cur,  entity = "HOST",     phase = "current"),
+  data.frame(x = x, y = host_next, entity = "HOST",     phase = "next"),
+  data.frame(x = x, y = para_cur,  entity = "PARASITE", phase = "current"),
+  data.frame(x = x, y = para_next, entity = "PARASITE", phase = "next")
+)
+
+df$phase  <- factor(df$phase,  levels = c("current", "next"))
+df$entity <- factor(df$entity, levels = c("HOST", "PARASITE"))
+
+# ---------- arrow belly heights from scaled curves ----------
+belly_frac <- 0.42
+yH1_belly <- approx(x, host_cur, xout = muH1)$y * belly_frac
+yH2_belly <- approx(x, host_cur, xout = muH2)$y * belly_frac
+yP_belly  <- approx(x, para_cur, xout = muP)$y * belly_frac
+
+# segment data so arrows respect facets
+seg <- rbind(
+  # host outward diversification arrows
+  data.frame(entity="HOST", x=muH1, y=yH1_belly, xend=muH1 - dx_host, yend=yH1_belly, col=cols[["lime"]]),
+  data.frame(entity="HOST", x=muH2, y=yH2_belly, xend=muH2 + dx_host, yend=yH2_belly, col=cols[["lime"]]),
+  # parasite “chase” arrows from center toward both modes
+  data.frame(entity="PARASITE", x=muP, y=yP_belly, xend=muP - dx_para, yend=yP_belly, col=cols[["lime"]]),
+  data.frame(entity="PARASITE", x=muP, y=yP_belly, xend=muP + dx_para, yend=yP_belly, col=cols[["lime"]])
+)
+seg$entity <- factor(seg$entity, levels = levels(df$entity))
+
+ggplot(df, aes(x, y, linetype = phase, color = entity)) +
+  geom_line(linewidth = lw, linecap = "round") +
+  geom_segment(
+    data = seg,
+    aes(x = x, y = y, xend = xend, yend = yend),
+    inherit.aes = FALSE,
+    linewidth = lw, lineend = "round",
+    color = seg$col,
+    arrow = arrow(length = grid::unit(arrow_len, "in"), type = "closed")
+  ) +
+  facet_grid(entity ~ ., scales = "free_y") +
+  scale_color_manual(values = c(HOST = cols[["pink"]], PARASITE = cols[["cyan"]])) +
+  scale_linetype_manual(values = c("solid", "22")) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_size = 18) +
+  scale_x_continuous(breaks = NULL, labels = NULL) +
+  scale_y_continuous(breaks = NULL, labels = NULL) +
+  theme(
+    legend.position = "none",
+    plot.background  = element_rect(fill = bg, color = NA),
+    panel.background = element_rect(fill = bg, color = NA),
+    strip.background = element_rect(fill = bg, color = NA),
+    strip.text = element_text(color = txt, face = "bold"),
+    text = element_text(color = txt),
+    axis.text = element_text(color = txt),
+    axis.title = element_text(color = txt),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(color = grid_x)
+  )
+
+```
+
+## Examples of *not* Coev: **Unilateral Matching**
+
+- *Interaction type:* **commensalism** w trait-matching
+- *Why <u>not</u> coev?:* selection is <u>not</u> modified for [host]() species
+
+```{r}
+#| fig-align: center
+#| out-width: 65%
+#| fig-width: 6
+#| fig-height: 3.5
+
+library(ggplot2)
+
+x <- seq(-4, 4, length.out = 700)
+
+mu1 <- -1.2; sd1 <- 0.85
+mu2 <-  1.2; sd2 <- 0.85
+
+# keep curves exactly where they were (character displacement locations)
+dmu <- 0.55
+mu1b <- mu1 - dmu
+mu2b <- mu2 + dmu
+
+# dark-mode palette (high contrast)
+cols <- c(
+  pink = "#ff2bd6",
+  acid = "#f5ff3b",
+  cyan = "#00f0ff",
+  lime = "#70ff40"
+)
+
+lw <- 2.2
+arrow_len <- 0.22
+dx <- 0.65
+
+belly_frac <- 0.45
+y1_belly <- dnorm(mu1, mu1, sd1) * belly_frac
+y2_belly <- dnorm(mu2, mu2, sd2) * belly_frac
+
+df <- rbind(
+  data.frame(x = x, y = dnorm(x, mu1,  sd1), group = "pink", phase = "current"),
+  # data.frame(x = x, y = dnorm(x, mu2,  sd2), group = "cyan", phase = "current"),
+  data.frame(x = x, y = dnorm(x, mu1b, sd1), group = "pink", phase = "next"),
+  data.frame(x = x, y = dnorm(x, mu2b, sd2), group = "cyan", phase = "next")
+)
+df$phase <- factor(df$phase, levels = c("current", "next"))
+
+bg <- "#1b1b1d"      # dark grey
+grid_x <- "#2a2a2e"  # subtle grid
+txt <- "#f2f2f2"     # near-white
+
+ggplot(df, aes(x, y, color = group, linetype = phase)) +
+  geom_line(linewidth = lw, linecap = "round") +
+
+  # arrows point inward (trait matching)
+  annotate(
+    "segment",
+    x = mu1b, y = y1_belly, xend = mu1b + dx, yend = y1_belly,
+    linewidth = lw, lineend = "round",
+    color = cols[["lime"]],
+    arrow = arrow(length = grid::unit(arrow_len, "in"), type = "closed")
+  ) +
+  # annotate(
+  #   "segment",
+  #   x = mu2b, y = y2_belly, xend = mu2b - dx, yend = y2_belly,
+  #   linewidth = lw, lineend = "round",
+  #   color = cols[["lime"]],
+  #   arrow = arrow(length = grid::unit(arrow_len, "in"), type = "closed")
+  # ) +
+
+  scale_color_manual(values = cols) +
+
+  # exchange dashed/solid between phases (without moving curves)
+  scale_linetype_manual(values = c("22", "solid")) +
+
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_size = 18) +
+  scale_x_continuous(breaks = NULL, labels = NULL) +
+  scale_y_continuous(breaks = NULL, labels = NULL) +
+  theme(
+    legend.position = "none",
+    plot.background  = element_rect(fill = bg, color = NA),
+    panel.background = element_rect(fill = bg, color = NA),
+    text  = element_text(color = txt),
+    axis.text  = element_text(color = txt),
+    axis.title = element_text(color = txt),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(color = grid_x)
+  )
+
+```
+
+## Examples of *not* Coev: **Unilateral Displacement**
+
+- *Interaction type:* resource **competition** along niche axis
+- *Why <u>not</u> coev?:* niche location <u>not</u> a heritable trait for [blue]() species
+
+```{r}
+#| fig-align: center
+#| out-width: 65%
+#| fig-width: 6
+#| fig-height: 3.5
+
+
+library(ggplot2)
+
+x <- seq(-4, 4, length.out = 700)
+
+mu1 <- -1.2; sd1 <- 0.85
+mu2 <-  1.2; sd2 <- 0.85
+
+dmu <- 0.55
+mu1b <- mu1 - dmu
+mu2b <- mu2 + dmu
+
+# dark-mode palette (high contrast)
+cols <- c(
+  pink = "#ff2bd6",
+  acid = "#f5ff3b",
+  cyan = "#00f0ff",
+  lime = "#70ff40"
+)
+
+lw <- 2.2
+arrow_len <- 0.22
+dx <- 0.65
+
+belly_frac <- 0.45
+y1_belly <- dnorm(mu1, mu1, sd1) * belly_frac
+y2_belly <- dnorm(mu2, mu2, sd2) * belly_frac
+
+df <- rbind(
+  data.frame(x = x, y = dnorm(x, mu1,  sd1), group = "pink", phase = "current"),
+  data.frame(x = x, y = dnorm(x, mu2,  sd2), group = "cyan", phase = "current"),
+  data.frame(x = x, y = dnorm(x, mu1b, sd1), group = "pink", phase = "next")
+  # data.frame(x = x, y = dnorm(x, mu2b, sd2), group = "cyan", phase = "next")
+)
+df$phase <- factor(df$phase, levels = c("current", "next"))
+
+bg <- "#1b1b1d"      # dark grey
+grid_x <- "#2a2a2e"  # subtle grid
+txt <- "#f2f2f2"     # near-white
+
+ggplot(df, aes(x, y, color = group, linetype = phase)) +
+  geom_line(linewidth = lw, linecap = "round") +
+  annotate(
+    "segment",
+    x = mu1, y = y1_belly, xend = mu1 - dx, yend = y1_belly,
+    linewidth = lw, lineend = "round",
+    color = cols[["lime"]],
+    arrow = arrow(length = grid::unit(arrow_len, "in"), type = "closed")
+  ) +
+  # annotate(
+  #   "segment",
+  #   x = mu2, y = y2_belly, xend = mu2 + dx, yend = y2_belly,
+  #   linewidth = lw, lineend = "round",
+  #   color = cols[["lime"]],
+  #   arrow = arrow(length = grid::unit(arrow_len, "in"), type = "closed")
+  # ) +
+  scale_color_manual(values = cols) +
+  scale_linetype_manual(values = c("solid", "22")) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_size = 18) +
+  scale_x_continuous(breaks = NULL, labels = NULL) +
+  scale_y_continuous(breaks = NULL, labels = NULL) +
+  theme(
+    legend.position = "none",
+
+    # dark mode background
+    plot.background  = element_rect(fill = bg, color = NA),
+    panel.background = element_rect(fill = bg, color = NA),
+
+    # text in white
+    text  = element_text(color = txt),
+    axis.text  = element_text(color = txt),
+    axis.title = element_text(color = txt),
+
+    # grid styling (keep only x grid if you want)
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(color = grid_x)
+  )
+
+```
+
+<!-- ## What coevolution is not
+
+**Not coevolution:**
+
+- one-sided adaptation - commensialism
+
+- correlated evolution (shared transmission/inheritanxe ...)
+
+- correlated change due to shared environment
+
+- ecological fitting / pre-adaptation without reciprocal response
+
+*Suggested Reading:*
+
+- ["*When is it coevolution?*", Janzen 1980](https://doi.org/10.1111/j.1558-5646.1980.tb04849.x)
+
+- ["*When is correlation coevolution?*", Nuismer et. al. 1999](https://doi.org/10.1086/651591)
+
+::: notes
+- Spend ~10–12 minutes here.
+- Immediately give a “false positive” example (correlation ≠ coevolution).
+:::
+
+---
+
+## The phenotypic interface
+
+The *traits that actually interact* determine:
+- selection gradients
+- constraints (tradeoffs, genetic architecture)
+- what gets locally adapted vs not
+
+**Key idea:** coevolution is often trait-specific, not organism-wide.
+
+---
+
+## Quote slide (styled callout)
+
+> “In many cases, the strongest claim is not coevolution — it is diffuse selection or sequential adaptation.”
+
+(Use this kind of slide to slow the tempo and reset attention.)
+
+--- -->
+
+# Act II: *The Ecology of Coevolution*
+
+## Taxonomy of ecological interactions
+
+```{r}
+#| fig-align: center
+#| out-width: 35%
+#| fig-width: 3.5
+#| fig-height: 3.5
+
+library(ggplot2)
+
+lims <- c(-1, 1)
+
+cols <- c(
+  grid = "#2a2a2e",
+  bg   = "#0e0e14",
+  zero = "#a0a0a0",
+  text = "#f6f6ff"
+)
+
+quad_signs <- data.frame(
+  x = c( 0.5,  0.5, -0.5, -0.5),
+  y = c( 0.5, -0.5,  0.5, -0.5),
+  lab = c("(+/+)", "(+/-)", "(-/+)", "(-/-)")
+)
+
+ggplot() +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.background = element_rect(fill = cols["bg"], color = NA),
+    plot.background  = element_rect(fill = cols["bg"], color = NA),
+    panel.grid.major = element_line(color = cols["grid"], linewidth = 0.4),
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_text(color = cols["text"]),
+    legend.position = "none"
+  ) +
+  geom_hline(yintercept = 0, color = cols["zero"], linewidth = 0.8) +
+  geom_vline(xintercept = 0, color = cols["zero"], linewidth = 0.8) +
+  geom_text(
+    data = quad_signs,
+    aes(x, y, label = lab),
+    color = cols["text"],
+    size = 5
+  ) +
+  coord_fixed(xlim = lims, ylim = lims, expand = FALSE) +
+  labs(x = "effect on sp. 1", y = "effect on sp. 2")
+
+```
+
+## A classic coevolutionary [woozle](https://www.law.umaryland.edu/media/sol/sol-2022-images-and-files/academics/programs-and-centers/health-law-program/pdfs-docs-and-files/Microbiome-WG-Meeting-3---Final-Report.pdf)
+
+```{r}
+#| fig-align: center
+#| out-width: 35%
+#| fig-width: 3.5
+#| fig-height: 3.5
+
+library(ggplot2)
+library(ggforce)
+
+lims <- c(-1, 1)
+
+cols <- c(
+  sp1 = "#70ff40",
+  sp2 = "#ff3e9b",
+  grid = "#2a2a2e",
+  bg   = "#0e0e14",
+  zero = "#a0a0a0",
+  text = "#f6f6ff"
+)
+
+xc <- 0.5
+yc <- 0.5
+dx <- 0.18
+up <- 0.22
+
+bez <- function(id, who, x0,y0, x1,y1, x2,y2, x3,y3) {
+  data.frame(
+    id = id, who = who,
+    x = c(x0,x1,x2,x3),
+    y = c(y0,y1,y2,y3),
+    t = 1:4
+  )
+}
+
+curves <- rbind(
+  ## Mutualism (+/+)
+  bez("M_sp1","sp1",
+      xc-dx, yc,
+      xc-dx, yc+up,
+      xc-0.05, 0.82,
+      xc-0.02, 0.92),
+  bez("M_sp2","sp2",
+      xc+dx, yc,
+      xc+dx, yc+up,
+      xc+0.05, 0.82,
+      xc+0.02, 0.92),
+
+  ## Competition (-/-)
+  bez("C_sp1","sp1",
+      -xc-dx, -yc,
+      -xc-dx, -yc+up,
+      -xc-0.25, -0.18,
+      -xc-0.35, -0.08),
+  bez("C_sp2","sp2",
+      -xc+dx, -yc,
+      -xc+dx, -yc+up,
+      -xc+0.25, -0.18,
+      -xc+0.35, -0.08),
+
+  ## Antagonism (-/+): top-left
+  bez("A1_harmed_sp1","sp1",
+      -xc-dx,  yc,
+      -xc-dx,  yc+up,
+      -xc-0.25, 0.72,
+      -xc-0.35, 0.88),
+  bez("A1_benef_sp2","sp2",
+      -xc+dx,  yc,
+      -xc+dx,  yc+up,
+      -xc+0.05, 0.72,
+      -xc+0.02, 0.88),
+
+  ## Antagonism (+/-): bottom-right
+  bez("A2_benef_sp1","sp1",
+      xc-dx,  -yc,
+      xc-dx,  -yc+up,
+      xc-0.05, -0.28,
+      xc-0.02, -0.08),
+  bez("A2_harmed_sp2","sp2",
+      xc+dx,  -yc,
+      xc+dx,  -yc+up,
+      xc+0.25, -0.30,
+      xc+0.35, -0.12)
+)
+
+# place signs at the *centers* of each quadrant
+quad_signs <- data.frame(
+  x = c( 0.5,  0.5, -0.5, -0.5),
+  y = c( 0.5, -0.5,  0.5, -0.5),
+  lab = c("(+/+)", "(+/-)", "(-/+)", "(-/-)")
+)
+
+ggplot() +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.background = element_rect(fill = cols["bg"], color = NA),
+    plot.background  = element_rect(fill = cols["bg"], color = NA),
+    panel.grid.major = element_line(color = cols["grid"], linewidth = 0.4),
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_text(color = cols["text"]),
+    legend.position = "none"
+  ) +
+  geom_hline(yintercept = 0, color = cols["zero"], linewidth = 0.8) +
+  geom_vline(xintercept = 0, color = cols["zero"], linewidth = 0.8) +
+  geom_bezier(
+    data = curves,
+    aes(x, y, group = id, color = who),
+    linewidth = 1.3,
+    arrow = arrow(type = "closed", length = grid::unit(3, "mm"))
+  ) +
+  geom_text(
+    data = quad_signs,
+    aes(x, y, label = lab),
+    color = cols["text"],
+    size = 5
+  ) +
+  scale_color_manual(values = cols[c("sp1","sp2")]) +
+  coord_fixed(xlim = lims, ylim = lims, expand = FALSE) +
+  labs(x = "effect on sp. 1", y = "effect on sp. 2")
+
+
+```
+
+## A classic coevolutionary [woozle](https://www.law.umaryland.edu/media/sol/sol-2022-images-and-files/academics/programs-and-centers/health-law-program/pdfs-docs-and-files/Microbiome-WG-Meeting-3---Final-Report.pdf) (debunked!)
+
+```{r}
+#| fig-align: center
+#| out-width: 35%
+#| fig-width: 3.5
+#| fig-height: 3.5
+
+library(ggplot2)
+library(ggforce)
+
+lims <- c(-1, 1)
+
+cols <- c(
+  sp1 = "#70ff40",
+  sp2 = "#ff3e9b",
+  grid = "#2a2a2e",
+  bg   = "#0e0e14",
+  zero = "#a0a0a0",
+  text = "#f6f6ff",
+  reject = "#ff1900"   # strong red
+)
+
+xc <- 0.5
+yc <- 0.5
+dx <- 0.18
+up <- 0.22
+
+bez <- function(id, who, x0,y0, x1,y1, x2,y2, x3,y3) {
+  data.frame(
+    id = id, who = who,
+    x = c(x0,x1,x2,x3),
+    y = c(y0,y1,y2,y3),
+    t = 1:4
+  )
+}
+
+curves <- rbind(
+  ## Mutualism (+/+)
+  bez("M_sp1","sp1",
+      xc-dx, yc,  xc-dx, yc+up,  xc-0.05, 0.82,  xc-0.02, 0.92),
+  bez("M_sp2","sp2",
+      xc+dx, yc,  xc+dx, yc+up,  xc+0.05, 0.82,  xc+0.02, 0.92),
+
+  ## Competition (-/-)
+  bez("C_sp1","sp1",
+      -xc-dx, -yc,  -xc-dx, -yc+up,  -xc-0.25, -0.18,  -xc-0.35, -0.08),
+  bez("C_sp2","sp2",
+      -xc+dx, -yc,  -xc+dx, -yc+up,  -xc+0.25, -0.18,  -xc+0.35, -0.08),
+
+  ## Antagonism (-/+)
+  bez("A1_sp1","sp1",
+      -xc-dx, yc,  -xc-dx, yc+up,  -xc-0.25, 0.72,  -xc-0.35, 0.88),
+  bez("A1_sp2","sp2",
+      -xc+dx, yc,  -xc+dx, yc+up,  -xc+0.05, 0.72,  -xc+0.02, 0.88),
+
+  ## Antagonism (+/-)
+  bez("A2_sp1","sp1",
+      xc-dx, -yc,  xc-dx, -yc+up,  xc-0.05, -0.28,  xc-0.02, -0.08),
+  bez("A2_sp2","sp2",
+      xc+dx, -yc,  xc+dx, -yc+up,  xc+0.25, -0.30,  xc+0.35, -0.12)
+)
+
+quad_signs <- data.frame(
+  x = c( 0.5,  0.5, -0.5, -0.5),
+  y = c( 0.5, -0.5,  0.5, -0.5),
+  lab = c("(+/+)", "(+/-)", "(-/+)", "(-/-)")
+)
+
+ggplot() +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.background = element_rect(fill = cols["bg"], color = NA),
+    plot.background  = element_rect(fill = cols["bg"], color = NA),
+    panel.grid.major = element_line(color = cols["grid"], linewidth = 0.4),
+    panel.grid.minor = element_blank(),
+    axis.text = element_blank(),
+    axis.title = element_text(color = cols["text"]),
+    legend.position = "none"
+  ) +
+
+  # zero axes
+  geom_hline(yintercept = 0, color = cols["zero"], linewidth = 0.8) +
+  geom_vline(xintercept = 0, color = cols["zero"], linewidth = 0.8) +
+
+  # curves
+  geom_bezier(
+    data = curves,
+    aes(x, y, group = id, color = who),
+    linewidth = 1.3,
+    arrow = arrow(type = "closed", length = grid::unit(3, "mm"))
+  ) +
+
+  # quadrant labels
+  geom_text(
+    data = quad_signs,
+    aes(x, y, label = lab),
+    color = cols["text"],
+    size = 5
+  ) +
+
+  # BIG RED CANCEL SLASHES (on top of everything)
+  geom_segment(
+    aes(x = -1, y = -1, xend = 1, yend = 1),
+    color = cols["reject"],
+    linewidth = 6,
+    lineend = "round"
+  ) +
+  geom_segment(
+    aes(x = -1, y = 1, xend = 1, yend = -1),
+    color = cols["reject"],
+    linewidth = 6,
+    lineend = "round"
+  ) +
+
+  scale_color_manual(values = cols[c("sp1","sp2")]) +
+  coord_fixed(xlim = lims, ylim = lims, expand = FALSE) +
+  labs(x = "effect on sp. 1", y = "effect on sp. 2")
+
+
+```
+
+## A pollination-based counter example
+
+::: columns
+::: {.column width="50%"}
+![](images/longir-anceps.png)
+:::
+
+::: {.column width="50%"}
+- Pollinator fly:
+  - *Moegistorhynchus longirostris*
+- Flower:
+  - *Lapeirousia anceps*
+
+>**Question:**
+>
+>- *If mutualism leads to matching, why the long face?*
+
+- Reading:
+  - [Pauw et al, 2009](https://doi.org/10.1111/j.1558-5646.2008.00547.x)
+
+:::
+:::
+
+---
+
+## The Phenotypic Interface of Interaction
+
+<video src="media/fly-flower-fynbos.mp4" controls width="1000"></video>
+
+---
+
+## The Phenotypic Interface of Interaction
+
+<iframe width="1000" height="560"
+src="https://www.youtube.com/embed/0l9prp9ebYk"
+title="YouTube video"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen></iframe>
+
+
+## (Evidence for) Selection Due to Interaction
+
+::: columns
+::: {.column width="50%"}
+![](images/longir-anceps-intrface.png)
+:::
+
+::: {.column width="50%"}
+- Fly trait > flower trait:
+  - *fly gets more nectar*
+- Flower trait > fly trait:
+  - *more flower pollen transferred*
+
+>**Question:**
+>
+>- If both do better with greater traits, what would coevolution lead to?
+
+:::
+:::
+
+---
+
+
+## A *mutualistic* arms race!
+
+```{r}
+#| fig-align: center
+#| out-width: 35%
+#| fig-width: 3.5
+#| fig-height: 3.5
+
+library(ggplot2)
+
+# coevolutionary arms race: both traits increase, one faster
+set.seed(1)
+
+tmax <- 80
+df <- data.frame(
+  t = 0:tmax,
+  species = rep(c("fly", "flower"), each = tmax + 1)
+)
+
+df$trait <- with(df, ifelse(
+  species == "fly",
+  0.25 * t + 0.30 * sin(t / 5),
+  0.16 * t + 0.25 * sin(t / 6)
+)) + rnorm(nrow(df), sd = 0.10)
+
+cols <- c(
+  fly = "#f5ff3b",   # acid
+  flower = "#ff3e9b"    # cyan
+)
+
+bg <- "#0b0b0f"
+grid <- "#1e1e26"
+txt <- "#ffffffff"
+
+ggplot(df, aes(t, trait, color = species)) +
+  geom_line(linewidth = 2.1) +
+  scale_color_manual(values = cols) +
+  theme_minimal(base_size = 9) +
+  labs(x = "time", y = "trait value") +
+  theme(
+    plot.background  = element_rect(fill = bg, color = bg),
+    panel.background = element_rect(fill = bg, color = bg),
+    panel.grid.major = element_line(color = grid, linewidth = 0.3),
+    panel.grid.minor = element_blank(),
+
+    axis.title = element_text(color = txt, size = 8),
+    axis.text  = element_text(color = txt, size = 7),
+    axis.ticks = element_line(color = grid),
+
+    legend.position = c(0.18, 0.82),
+    legend.background = element_rect(fill = bg, color = grid),
+    legend.key = element_rect(fill = bg),
+    legend.text = element_text(color = txt, size = 7),
+    legend.title = element_blank()
+  )
+
+```
+ 
+**Q:** what if one outpaces the other?
+
+---
+
+## (Co)Evolution of Interactions
+
+<div class="r-stack" style="text-align:center;">
+[![](images/evol-intxn.png){height=400}](https://doi.org/10.1086/714274)
+</div>
+
+[*Imbalance of **armaments** and the breakdown of mutualism*](https://doi.org/10.1086/714274)
+
+But also...
+
+---
+
+## Many Possibilities
+
+<div class="r-stack" style="text-align:center;">
+[![](images/par2mut.png){height=400}](https://doi.org/10.1086/714274)
+</div>
+
+(*left*) **mutualism maintained** (*right*) **mutualism from parasitism**
+
+It gets weirder...
+
+---
+
+## Community Context
+
+::: columns
+
+::: {.column width="40%"}
+
+<div class="r-stack" style="text-align:center;">
+[![](images/mlong-guild.png){height=500}](https://link.springer.com/article/10.1007/BF00987941)
+</div>
+
+:::
+
+::: {.column width="60%"}
+
+[*Fly is a **keystone** pollinator for long-tubed flowers*](https://link.springer.com/article/10.1007/BF00987941)
+
+It Gets Weirder Yet...
+
+:::
+
+:::
+
+---
+
+## Indirect Consequences of Coevolution
+
+::: columns
+
+::: {.column width="40%"}
+
+![](images/vortex.png){height=500}
+
+Fly visits *Babiana thunbergii*
+
+:::
+
+::: {.column width="60%"}
+
+
+![](images/malachite-thun.jpg){height=500}
+
+Malachite Sunbirds pollinate *B. thunbergii*
+
+:::
+
+:::
+
+## Inirect Effects may play big role
+
+
+::: columns
+
+::: {.column width="40%"}
+
+- *Q-matrix* = direct
+- *T-matrix* = sum of indirect
+
+:::
+
+::: {.column width="60%"}
+
+<div class="r-stack" style="text-align:center;">
+[![](images/indirfx.png){height=500}](https://www.nature.com/articles/nature24273)
+</div>
+
+:::
+
+:::
+
+[**Indirect effects drive coevolution in mutualistic networks**, *Guimarães et al 2017*](https://www.nature.com/articles/nature24273)
+
+## Long-Tongue Fly Families
+
+<div class="r-stack" style="text-align:center;">
+[![](images/long-flies.png){height=500}](https://doi.org/10.2307/2399833)
+</div>
+
+## [*A Geographic Mosaic*](https://doi.org/10.1086/303382)
+
+::: columns
+
+::: {.column width="60%"}
+
+<div class="r-stack" style="text-align:center;">
+[![](images/fly-space.png){height=500}](https://doi.org/10.2307/2666158)
+</div>
+
+:::
+
+::: {.column width="40%"}
+
+- Different fly pollination guilds
+- Partial spatial overlap
+- Coevolutionary hot/cold spots
+
+:::
+
+:::
+
+# Act III: *The Geography of Coevolution*
+
+## Spatially Distributed Populations
+
+![](images/lakes.jpg)
+
+## Metapopulation Concept
+
+![](images/metapop.png)
+
+## Powdery Mildew Parasitizing Plantago lanceolata
+
+![](images/mildew-plant.jpeg)
+
+## Spatial Host-Parasite System
+
+![](images/laine.png)
+
+
+
+
+<!-- ## idk
+
+- trait (mis)-matching
+
+  - displacement (spadefoot toads)
+
+  - matching ()
+
+  - chase
+
+- trait differences
+
+  - escalation (snake-newt)
+
+---
+
+## Why are some interactions poorly fit?
+
+some interactions seem nicely adapted in some areas but not others, why?
+
+- coevolution hasn't had a chance to occur
+
+- something else
+
+- space !
+
+---
+
+## The backbone question
+
+Why does antagonistic coevolution so often generate:
+- cycling
+- escalation
+- persistent polymorphism
+- spatial mosaics of outcomes?
+
+---
+
+## Geographic mosaic (concept slide)
+
+Coevolution is often **patchy**:
+
+- **hotspots:** reciprocal selection is strong
+- **coldspots:** interaction weak/absent or selection is one-sided
+- trait distributions can be mismatched across geography
+
+Notes:
+- You can name John Thompson here without going deep.
+
+---
+
+## Image example
+
+![](images/snake-newt.jpg)
+
+**Snake–newt arms race** as a spatially structured system:
+- local escalation in some regions
+- mismatch elsewhere
+
+Notes:
+- Put 2–3 bullets only, talk over the image.
+
+---
+
+## Link slide (clean)
+
+Case study reading (optional):
+- Snake–newt system overview: https://en.wikipedia.org/wiki/Rough-skinned_newt
+- Geographic mosaic theory: https://en.wikipedia.org/wiki/Geographic_mosaic_theory_of_coevolution
+
+Notes:
+- Replace with primary sources later if you want.
+
+---
+
+## Host–parasite: Red Queen in one sentence
+
+If “common” genotypes are targeted, **rarity becomes an advantage**, which can maintain diversity.
+
+From here:
+- gene-for-gene vs matching-alleles (high level)
+- diversity signatures as consequences (not definitions)
+
+---
+
+## Two-column slide (built-in layout)
+
+::: columns
+::: column
+### Gene-for-gene (idea)
+- resistance and infectivity loci
+- “universal” virulence often costly
+- can produce balancing selection or sweeps depending on costs + ecology
+:::
+
+::: column
+### Matching-alleles (idea)
+- success depends on “match”
+- strong frequency dependence
+- often more cycling / polymorphism-friendly
+:::
+:::
+
+::: notes
+- Don’t formalize unless your audience is unusually pop-gen fluent.
+:::
+
+--- -->
+
+<!-- # Act III: *The Geography of Coevolution*
+
+## Spatially structured interactions and coevolution
+
+## Local adaptation to biotic and abiotic factors
+
+## Spatial host-parasite coevolution - a case study
+
+## Geographic mosaics (different things happen differently at different times in different places)
+
+- Spatial variation in the strength of biotic selection due to spatial variation of interaction intensities
+
+  - due to spatial variation of abundance
+
+  - spatial variation of abiotic factors
+
+  - spatial variation of community composition
+
+- Correlation is not coevolution
+
+## Frame shift
+
+Antagonism: escalation / chasing  
+Mutualism: **alignment under conflict**
+
+Core problems:
+- cheating / overexploitation
+- partner choice, sanctions, rewards
+- ecological context changes stability
+
+---
+
+## **Fly–flower mutualisms:**
+
+
+::: columns
+
+::: column
+
+![](images/long-proboscid-fly.png){width=500}
+
+:::
+
+::: column
+
+- trait matching at the interface
+
+- dependence on community/ecology
+
+- local context can flip costs/benefits
+
+:::
+:::
+
+---
+
+## “Where this goes next” (do not expand)
+
+- Coevolution can reshape communities (pollination networks, mutualistic webs)
+- But that’s another lecture
+
+**Take-home:** ecology + geography shape whether coevolution cycles, escalates, stabilizes, or collapses.
+
+---
+
+## Final slide (clean summary)
+
+**One model to keep:**
+
+1) coevolution is about reciprocal selection  
+2) selection acts at phenotypic interfaces  
+3) space fragments dynamics into mosaics  
+4) antagonism maintains diversity more readily than mutualism  
+5) mutualism needs constraints + ecology to persist
+
+# Further Reading
+
+- Evolution of sex as a consequence of coevolution (snails on islands!)
+
+- Indirect interactions and coevolution shape ecological communities (mutualistic networks!)
+
+::: notes
+stick around for discussion, and then also to see the student presentations and give feedback
+::: -->
