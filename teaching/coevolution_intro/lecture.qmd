@@ -175,16 +175,12 @@ a small sample of topics under the umbrella of coevolution
 - Coevolutionary outcomes of ecological interactions
 - Ecological outcomes of coevolutionary dynamics (ie, eco-evo feedback!)
 - The community context
-<!-- 
-**Act III:** *The geography of coevolution*
 
-- Spatial structure of ecological interactions
-- The interplay of dispersal limitation and random genetic drift (null hypotheses)
-- The spatial signature of coevolution
+~~**Act III:** *The geography of coevolution*~~
 
-::: notes
-if there's time ill synthesize all this stuff w gmtc , and mebe even point to some further directions
-::: -->
+- ~~Spatial structure of ecological interactions~~
+- ~~Determinants of host-parasite local adaptation~~
+- ~~The spatial signature of coevolution~~
 
 ---
 
