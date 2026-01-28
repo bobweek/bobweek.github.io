@@ -25,9 +25,9 @@ execute:
 
 Interactive slides available at:
 
-[https://bobweek.github.io/teaching/coev_intro](https://bobweek.github.io/teaching/coev_intro)
+[https://bobweek.github.io/teaching/coevolution_intro/lecture.html](https://bobweek.github.io/teaching/coevolution_intro/lecture.html)
 
-*insert QR code image here*
+![](images/qr.png)
 
 <!-- ---
 
