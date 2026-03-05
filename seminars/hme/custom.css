@@ -1,0 +1,188 @@
+/* --------- Neon palette --------- */
+:root {
+  --bg: #07070a;       /* cool near-black */
+  --panel: #0e0e14;    /* cool dark panel */
+  --text: #f6f6ff;
+
+  --lime: #70ff40;     /* neon lime */
+  --pink: #e328b8;     /* neon pink */
+  --cyan: #00f0ff;     /* neon cyan */
+  --acid: #f5ff3b;
+  --violet: #8b5cff;
+
+  --uv: #8c00ff;
+  --ep: #7A00FF;
+  --safety: #ff1900;
+  --hotmag: #ff3e9b;
+
+  --gray: #a0a0a0;
+}
+
+acid    { color: var(--acid); }
+pink    { color: var(--pink); }
+lime    { color: var(--lime); }
+violet    { color: var(--violet); }
+ep      { color: var(--ep); }
+uv      { color: var(--uv); }
+safety  { color: var(--safety); }
+hotmag  { color: var(--hotmag); }
+
+
+/* Make borders/padding count inside slide size */
+.reveal, .reveal * {
+  box-sizing: border-box;
+}
+
+/* --------- Global typography/layout --------- */
+.reveal {
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+  /* Global sizing lever: tweak 26–30 */
+  font-size: 28px;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+/* Reset any stack containers (outer sections) */
+.reveal .slides > section {
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* Style actual slides: either horizontal slides OR vertical children */
+.reveal .slides > section:not(:has(> section)),
+.reveal .slides > section > section {
+  background: var(--panel);
+  border: 10px solid var(--lime);
+  border-radius: 16px;
+  padding: 22px 28px;
+  /*box-shadow: 0 0 0 4px rgba(255, 43, 214, 0.35);*/
+  box-shadow: 0 0 0 4px var(--pink);
+}
+
+
+/* Headings */
+.reveal h1, .reveal h2, .reveal h3 {
+  color: var(--acid);                  /* was orange */
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+}
+
+/* Body text (smaller) */
+.reveal p, .reveal li {
+  font-size: 24px;                     /* was 30px */
+  line-height: 1.25;
+}
+
+/* Links */
+.reveal a {
+  color: var(--cyan);
+  text-decoration: underline;
+}
+
+/* Lists */
+.reveal ul {
+  margin-top: 0.4em;
+}
+.reveal li::marker {
+  color: var(--pink);
+}
+
+/* Block quotes */
+.reveal blockquote {
+  border-left: 10px solid var(--cyan);
+  padding: 16px 20px;
+  background: rgba(21, 75, 58, 0.67);
+  color: var(--text);
+  font-style: normal;
+}
+
+/* Emphasis */
+.reveal strong {
+  color: var(--lime);
+}
+
+/* Cyan italics */
+.reveal em {
+  color: var(--hotmag) !important;
+}
+
+
+/* Images and video */
+.reveal img, .reveal video, .reveal iframe {
+  border: 8px solid rgba(0, 240, 255, 0.90);  /* cyan frame */
+  border-radius: 14px;
+}
+
+/* --------- Utility slide variants --------- */
+.title-slide {
+  border-color: var(--lime) !important;
+  /* box-shadow: 0 0 0 4px rgba(183,255,0,0.95) !important; */
+  box-shadow: 0 0 0 4px var(--cyan);
+}
+
+.inverse {
+  background: #000000 !important;
+  border-color: var(--pink) !important;
+}
+
+/* Smaller text slide for dense content */
+.smalltext p, .smalltext li {
+  font-size: 21px !important;
+}
+
+/* “Party” variant: cute chaos */
+.party {
+  border-color: var(--pink) !important;
+  box-shadow:
+    0 0 0 4px rgba(183,255,0,0.95),
+    0 0 0 10px rgba(0,240,255,0.98) !important;
+}
+
+/* Slide number badge */
+.reveal .slide-number {
+  background: linear-gradient(90deg, var(--pink), var(--lime));
+  color: #000;
+  padding: 2px 10px;
+  border-radius: 8px;
+  bottom: 14px;
+  right: 16px;
+}
+
+.reveal .slide-number {
+  background: rgba(0,0,0,0.6);
+  color: var(--lime);
+  border: 2px solid var(--cyan);
+}
+
+
+.reveal {
+  background:
+    linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.45)),
+    url("images/kewt-kamo.jpeg");
+  background-size: cover;
+}
+
+/* Lock link color so adding [text](url) can't change it */
+.reveal a,
+.reveal a:visited,
+.reveal a:hover,
+.reveal a:focus,
+.reveal a:active {
+  color: var(--cyan) !important;
+  text-decoration: underline;
+}
+
+.reveal .slide-number,
+.reveal .slide-number a {
+  color: var(--acid) !important;
+}
+
