@@ -1,12 +1,11 @@
 ---
-title: Modelling Host-Microbiome Interactions
-subtitle: "<pink>methods</pink> and <pink>madness</pink>"
+title: Modelling Host-Microbiome Evolution
 # author: "*Bob Week* - [Guest lecture]() - [BIOL227]() - Ecological and Evolutionary Applications in Medicine - **Kiel University**"
 author: "**Bob Week** - *Kiel University*"
 format:
   revealjs:
-    theme: black
-    css: custom.css
+    theme: white
+    css: custom-daytime-v1.css
     transition: fade
     background-transition: none
     slide-number: true
@@ -16,6 +15,19 @@ format:
     navigation-mode: linear
     width: 1280
     height: 720
+    margin: 0.08
+    html-math-method:
+      method: mathjax
+      url: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    include-in-header:
+      text: |
+        <script>
+        window.MathJax = {
+          chtml: {
+            fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/tex"
+          }
+        };
+        </script>
 execute:
   echo: false
   fig-format: svg
@@ -23,104 +35,268 @@ execute:
 
 ## Who am I
 
+::: {.incremental}
+
 - **Background:** Mathematical evolution and ecology
-- **Was a** postdoc with *Brendan Bohannan* 2022-2024
-- **Now a** postdoc with *Hinrich Schulenburg* at Kiel University
+- **PhD:** BCB, UI, Scott Nuismer ~ *Coevolutionary Theory*
+- **Postdoc 1:** MSU, Gideon Bradburd ~ *Host-Parasite Coevolution*
+- **Postdoc 2:** UO, Brendan Bohannan ~ *Host-Microbiome Evolution*
+- **Current:** KiTE postdoctoral fellow with Schulenburg Group at Kiel University
+  - *Host-Microbiome Evolution*
+  - Two Secondments:
+    - Regional *non-academic* (industry)
+    - International *academic*
+      - Hosted by Brendan Bohannan at UO
+      - Purpose: travel to share science and meet scientists
 
-## Overview (two parts)
+:::
 
-1. **ACROSS** HOST GENERATION DYNAMICS (host-microbiome feedback)
-  - *Modelling host-microbiome evolution*
-  - Extended inheritance frameworks
-  - ~~Microbiome-mediated rescue~~
-  - Microbiome-extended quantitative genetics
-    - *A gap*: microbiome inheritance ??
-    - motivates...
-2. **WITHIN** HOST GENERATION DYNAMICS (microbiomes structured by fixed hosts)
-  - *Modelling microbiome community dynamics and transmission*
-  - Metacommunity Framework
-  - Viscocity hypothesis
+<!-- 
+## Kiel Region Science
+
+- Kiel University
+- University Hospital Schleswig-Holstein
+- GEOMAR Helmholtz Centre for Ocean Research
+- Max Planck Institute for Evolutionary Biology (Plön)
+- University of Lübeck
+- https://www.metaorganism-research.com/ -->
 
 ## We live in a microbial world
 
 <div class="r-stack" style="text-align:center;">
-![](images/mcrbwrld.png){width=800}
+![[Andrew Rae for Quanta Magazine](https://www.quantamagazine.org/should-evolution-treat-our-microbes-as-part-of-us-20181120/)](images/microbial-world.jpg){width=800}
+</div>
+
+## Microbes interact with hosts
+
+<style>
+.grid-2x2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  row-gap: 1rem;        /* keeps vertical spacing larger */
+  width: 100%;
+}
+
+.grid-2x2 > div {
+  text-align: center;
+}
+
+.grid-2x2 img {
+  width: 40%;
+  height: auto;
+  max-height: 20vh;
+  object-fit: contain;
+}
+
+.grid-2x2 p {
+  margin: -0.5em 0 0 0;
+  font-size: 0.7em;
+}
+</style>
+
+<div class="grid-2x2">
+
+<div>
+<img src="images/stomach.jpg">
+<p>metabolism / digestion / nutrition</p>
+</div>
+
+<div>
+<img src="images/sad-plant.webp">
+<p>immune response / pathogen defense</p>
+</div>
+
+<div>
+<img src="images/bee-lifecycle.jpg">
+<p>development / life-history / phenology</p>
+</div>
+
+<div>
+<img src="images/brain.webp">
+<p>behavior / neurophysiology</p>
+</div>
+
 </div>
 
 ## Microbiomes mediate host trait variation
 
 <div class="r-stack" style="text-align:center;">
-![](images/henryetal.png){width=800}
+![Modified from Henry et al. (2021), Nat. Comm.](images/henryetal.png){width=800}
 </div>
 
-## Microbiomes can be inherited
+<!-- ## Microbiomes are heritable
+
+::: {.columns}
+
+::: {.column width="40%"}
+
 
 <div class="r-stack" style="text-align:center;">
-![](images/inhr.png){width=600}
+![Modified from Morris & Bohannan (2024), Nat. Micr.](images/mbiome-herit.png){width=500}
 </div>
+
+:::
+
+::: {.column width="60%"}
+
+- **Fraction of attributes heritable:** *~5–40%*
+  - relative abundance, alpha diversity, etc ...
+- **Magnitude of heritability:** *~0.01–0.5*
+  - perfect heritability = 1.0
+
+:::
+
+::: -->
+
+## Microbiomes are heritable
+
+- **Fraction of attributes heritable:** *~5–40%*
+  - relative abundance, alpha diversity, etc ...
+- **Broad sense heritability:** *H² ≈ 0.01 - 0.5*
+  - perfect heritability = 1.0
+
+<div class="r-stack" style="text-align:center;">
+![Modified from Morris & Bohannan (2024), Nat. Micr.](images/mbiome-herit.png){width=500}
+</div>
+
+
+## Microbiome inheritance modes
+
+::: {.columns}
+
+::: {.column}
+
+<div class="r-stack" style="text-align:center;">
+![Modified from <br> Morris & Bohannan (2024), Nat. Micr.](images/mbiome-inhr-proc.png){width=600}
+</div>
+
+:::
+
+::: {.column}
+
+<br><br>
+
+a. Direct parent-offspring transmission
+<br><br>
+b. Host genes associated with microbes
+<br><br>
+c. Social transmission
+<br><br>
+d. Shared environment
+<br><br>
+e. Habitat modification
+
+:::
+
+:::
 
 ## Can Microbiomes facilitate adaptation?
 
 <div class="r-stack" style="text-align:center;">
-![](images/lewontin-t.png){width=800}
+![Modified from Uller & Helanterä (2017), Extended Evolutionary Synthesis blog](images/lewontin-t.png){width=800}
 </div>
 
-- **Lewontins Conditions** $\uparrow$ for evolutionary adaptation
+<!-- - **Lewontins Conditions** $\uparrow$ for evolutionary adaptation
 
-## **But** microbiomes *not* like nuclear genes...
+- mebe another slide or two here ? -->
 
+## **But** Microbial Inheritance *not* Mendelian ...
+
+::: {.columns}
+
+::: {.column width="40%"}
+
+<br>
 <div class="r-stack" style="text-align:center;">
-![](images/metacomm.png){width=500}
+![Modified from Miller, Svanbäck & Bohannan (2018), Trends Ecol. Evol.](images/metacomm.png){width=400}
 </div>
+
+:::
+
+::: {.column width="60%"}
+
+<br><br>
 
 - **Community assembly** (microbial dispersal, within-host selection, etc ...)
+<br><br>
 
-## Extended inheritance account for microbiomes?
+- *Problem:* Complicated!
+<br><br>
+
+- *Need:* **Simple** general frameworks
+<br><br>
+
+- *Q:* Can we apply **existing** frameworks?
+
+:::
+
+:::
+
+## Extended inheritance frameworks
+
+::: {.columns}
+
+::: {.column}
 
 <div class="r-stack" style="text-align:center;">
-![](images/hme.png){width=900}
+![Modified from <br> Morris & Bohannan (2024), Nat. Micr.](images/mbiome-ext-inhr.png){width=600}
 </div>
 
-- Maternal Effects
-- Indirect Genetic Effects
-- Niche Construction
-- ~~Multilevel Selection~~
+:::
 
-## Maternal Effects
+::: {.column}
+
+<br><br>
+
+<ol type="a">
+  <li value="1">Maternal effect</li><br><br>
+  <li value="3">Indirect genetic effect</li><br><br>
+  <li value="5">Niche construction</li>
+</ol>
+
+:::
+
+:::
+
+## Maternal Effect
 
 ::: columns
 ::: {.column width="50%"}
 
 <div class="r-stack" style="text-align:center;">
-![](images/me.png){width=600}
+![Modified from <br> Week et al. (2024), Nat. Evo. Eco.](images/me.png){width=500}
 </div>
 
 :::
 
 ::: {.column width="50%"}
 
-> *Definition:* 
+> *Definition:* Parent trait explains offspring trait 
 > 
-> influence of parent trait on offspring trait
-  
+> (controlling for genetic variation)
+<!-- 
+> *Examples:* 
+> 
+> 1. Shell coiling
+>  -->
+
 :::
 :::
 
-## Indirect Genetic Effects
+## Indirect Genetic Effect
 
 ::: columns
 ::: {.column width="40%"}
 
-> *Definition:*
-> 
-> genotype of one individual influences trait of another individual
+> *Definition:* Genotype of one individual influences trait of another individual
 
 :::
 
 ::: {.column width="60%"}
 
 <div class="r-stack" style="text-align:center;">
-![](images/ige.png){width=750}
+![Modified from <br> Week et al. (2024), Nat. Evo. Eco.](images/ige.png){width=750}
 </div>
   
 :::
@@ -130,328 +306,891 @@ execute:
 
 
 ::: columns
-::: {.column width="60%"}
+::: {.column width="50%"}
 
 <div class="r-stack" style="text-align:center;">
-![](images/nc.png){width=700}
+![Modified from <br> Week et al. (2024), Nat. Evo. Eco.](images/nc.png){width=700}
 </div>
 
 :::
 
-::: {.column width="40%"}
+::: {.column width="50%"}
 
 > *Definition 1:* 
 > 
-> organism activity alters environment
+> Organism activity alters environment
 
 
 > *Definition 2:* 
 > 
-> organism activity alters selection pressures
+> Organism activity alters selection pressures
 
 > *Two perspectives:*
 >
-> 1. microbiome as environment
+> 1. Microbiome as environment
 >
-> 2. microbiome modifying environment
+> 2. Microbiome modifying environment
 
 :::
 :::
-
-
-## Multilevel Selection (*remove mls stuff!*) (or put in post-slides)
-
-- **MLS1:** Selection on *"individuals"* in groups (host-associated microbes)
-  - within group selection for individuals
-  - among group selection for individuals
-- **MLS2:** Selection on *"groups"* (hosts)
-
-## Multilevel Selection 1 <span style="text-transform: lowercase;">(*on microbes*)</span>
-
-::: {.columns}
-
-::: {.column width="60%"}
-
-<div class="r-stack" style="text-align:center;">
-![](images/mls1.png){width=600}
-</div>
-
-:::
-
-::: {.column width="40%"}
-
-> *Colonization-based selection:* 
-> 
-> covariance of microbe trait **α** with occurance within host relative to prevalence in environment (colonization **w**)
-
-
-> *Proliferation-based selection:* 
-> 
-> covariance of microbe trait **α** with difference in abundance across host development stages (proliferation **w**)
-
-
-:::
-
-:::
-
-## Multilevel Selection 2 <span style="text-transform: lowercase;">(*on hosts*)</span>
-
-<div class="r-stack" style="text-align:center;">
-![](images/mls2.png){width=850}
-</div>
 
 ## Conclusion
+
+<br>
 
 PROS
 
 - **Maternal Effects** ~ vertical *parent-offspring* inheritance
 - **Indirect Genetic Effects** ~ horizontal *social* inheritance
-- **Niche Construction** ~ horizontal *environmental* inheritance
-- **Multilevel Selection** ~ quantify *alignment of evolutionary interests*
+- **Niche Construction** ~ interaction of microbiomes and *selection*
+
+<br>
 
 CONS
 
-- Lack realism, *need testing*
-- Assessment of microbiome-mediated adaptation requires **synthesis**
-  - Designed for *unique biology* of host-microbiome systems
+- Each only cover one aspect
+- Microbiome inheritance follows several modes
+- **Need:** unified/sythetic framework
 
-## Working on it! (remove this slide! focus on qgmmt instead as response to needing synthesis)
-
-- Microbiome Mediated Rescue of Host Populations
-- Quantitative Genetics of Microbiome Mediated Traits
-- Multilevel Selection and Maintenance of Costly Mutualists
-- Evolution of Microbiome Mediated Traits
-  - Niche Construction
-
-## Working on it!
-
-- *Microbiome Mediated Rescue of Host Populations*
-- *Quantitative Genetics of Microbiome Mediated Traits*
-- ~~Multilevel Selection and Maintenance of Costly Mutualists~~
-- ~~Evolution of Microbiome Mediated Traits~~
-  - ~~Niche Construction~~
-
-## Microbiome Mediated Rescue of Host Populations
-
-::: columns
-::: {.column width=50%"}
-
+## Unified Framework for Extended Inheritance
 
 <div class="r-stack" style="text-align:center;">
-![](images/branching.png){width=450}
+  ![Modified from Day and Bonduriansky (2011), Am. Nat.](images/uni.png){width=50%}
 </div>
 
+<br>
+
+::: {.incremental}
+- *Models:* ME's, IGE's, etc.
+- *Limitation:* requires assumptions on
+  - transmission
+  - fidelity
+  - mutability
 :::
-::: {.column width="50%"}
+
+## Framework for Microbiome Inheritance
 
 <div class="r-stack" style="text-align:center;">
-![](images/m-case-text.png){width=325}
+![Modified from Roughgarden (2023), Am. Nat](images/lin-coll.png){width=1200}
 </div>
 
-<div class="r-stack" style="text-align:center;">
-![](images/gm-case-text.png){width=325}
-</div>
+- Collective inheritance facilitates adaptation
+- *Advantage:* Potential to explain adaptation without transmission details
 
-  
-:::
-:::
+## A Gap
 
-## <span style="font-size: 0.9em;">Quantitative Genetics of Microbiome Mediated Traits</span>
+> **Done:** *Collective inheritance* applied to gene-centric perspective 🦠 🚚 🧬
 
+> **Gap:** Connect concepts of *microbiome inheritance* and *host trait variance*
+to predict *microbiome-mediated adaptation*
+
+<br>
 
 ::: {.columns}
-
-::: {.column width="33%"}
-
-<span style="font-size: 0.8em;">*Host Trait Variance Partitioning*</span>
-
-$$P=G+M+E$$
-
-- $P$ ... <span style="font-size: 0.6em;">phenotypic variation</span>
-- $G$ ... <span style="font-size: 0.6em;">explained by **genetic** var</span>
-- $M$ ... <span style="font-size: 0.6em;">explained by **microbiome** var</span>
-- $E$ ... <span style="font-size: 0.6em;">explained by **other** stuff</span>
-:::
-
-::: {.column width="33%"}
-
-<span style="font-size: 0.8em;">*Microbiome Partitioning*</span>
-
-$$M=M_L+M_N+M_V$$
-
-- $M_L$ ... **lineal** <span style="font-size: 0.6em;">microbes</span>
-- $M_N$ ... **non-lineal** <span style="font-size: 0.6em;">microbes</span>
-- $M_V$ ... **novel** <span style="font-size: 0.6em;">microbes</span>
-:::
-
-::: {.column width="33%"}
-
-<span style="font-size: 0.8em;">*Predictions*</span>
-
-- $M_L$ ~ **most** <span style="font-size: 0.6em;">adaptive potential</span>
-- $M_N$ ~ **less** <span style="font-size: 0.6em;">adaptive potential</span>
-- $M_V$ ~ **least** <span style="font-size: 0.6em;">adaptive potential</span>
-:::
-
-:::
+::: {.column width="50%"}
 
 <div class="r-stack" style="text-align:center;">
-![](images/qgmmt.png){width=1200}
+<span style="font-size: 0.7em;">*microbiome inheritance*</span>
 </div>
-
-## Limits of Current Quantitative Genetic Approach
-
-- Variance partitioning general ✔️
-- Classical **adaptation predictions** assume:
-  - Mendelian inheritance
-  - Many loci small effect
-  - Random mating
-  - etc ...
-- Need to understand **microbiome inheritance** process:
-  - Transmission
-  - Dynamics
-  - Patterns
-
-# Part2: <span style="font-size: 0.7em;">*A Metacommunity Ecology Approach*</span>
-
-## Metacommunity Idea
-
-::: columns
-::: {.column width=50%"}
-
 <div class="r-stack" style="text-align:center;">
-![](images/metacomm-draw.png){width=500}
+![](images/lin-coll-crop.png){width=800}
 </div>
 
 :::
 ::: {.column width="50%"}
 
-- **Dispersal** among discrete patches
-- Local interspecific **interactions**
-- Habitat **filtering**
-  
-:::
-:::
-
-## Host-Associated Microbiome Metacommunity
-
-::: columns
-::: {.column width=50%"}
-
 <div class="r-stack" style="text-align:center;">
-![](images/metacomm-fish.png){width=500}
+<span style="font-size: 0.7em;">*host trait adaptation*</span>
 </div>
 
-:::
-::: {.column width="50%"}
+```{r}
+#| fig-align: center
+#| out-width: 95%
+#| fig-width: 8
+#| fig-height: 3.5
 
-- **Transmission** between hosts
-- Within host **interactions**
-- Host **control**
+library(ggplot2)
+
+# phenotype axis
+x <- seq(-4, 4, length.out = 700)
+dx <- x[2] - x[1]
+
+# original population
+mu0 <- -1.75
+sd0 <- 0.9
+p0  <- dnorm(x, mu0, sd0)
+
+# directional fitness (straight line)
+a <- 0.2
+b <- 0.05
+f_raw <- a + b * x
+
+# viability weights (keep straight-line shape)
+w <- f_raw - min(f_raw) + 1e-6
+
+# post-selection distribution
+p_sel_unnorm <- p0 * w
+Z <- sum(p_sel_unnorm) * dx
+p_sel <- p_sel_unnorm / Z
+
+# evolutionary response (Breeder)
+h2 <- 0.4
+mean0 <- sum(x * p0) * dx
+mean_sel <- sum(x * p_sel) * dx
+S <- mean_sel - mean0
+R <- h2 * S
+
+# --- VISUAL SEPARATION (purely illustrative) ---
+# enforce the correct ordering: mean0 < response < selected
+shift_sel <- 0.55    # push selected right for visibility
+t_resp    <- 0.55    # fraction of the (visual) selection shift inherited (0<h2-ish)
+
+mu_sel_vis  <-1.5
+mu_resp_vis <- 0   # guaranteed between mu0 and mu_sel_vis
+
+p_sel_vis  <- dnorm(x, mu_sel_vis,  sd0)
+p_resp_vis <- dnorm(x, mu_resp_vis, sd0)
+
+# scale fitness line to overlay on density axis (visual overlay only)
+ymax <- max(c(p0, p_sel_vis, p_resp_vis))
+f_scaled <- (f_raw - min(f_raw)) /
+  (max(f_raw) - min(f_raw)) * (0.85 * ymax)
+
+# arrow height
+belly_frac <- 0.65
+y_arrow <- dnorm(mu0, mu0, sd0) * belly_frac
+
+# styling
+cols <- c(
+  pink = "#c2185b",
+  acid = "#1b8c98",
+  cyan = "#007c91",
+  lime = "#1ea633"
+)
+
+bg <- "#ffffffff"
+grid_x <- "#ffffff"
+txt <- "#1b1f24"
+lw <- 2.2
+arrow_len <- 0.22
+
+# data
+df_dist <- rbind(
+  data.frame(x = x, y = p0,         curve = "Original population"),
+  data.frame(x = x, y = p_sel_vis,  curve = "Post-selection"),
+  data.frame(x = x, y = p_resp_vis, curve = "Inherited response")
+)
+
+df_fit <- data.frame(
+  x = x,
+  y = f_scaled,
+  curve = "Fitness function"
+)
+
+# force legend order
+legend_levels <- c(
+  "Original population",
+  "Post-selection",
+  "Inherited response",
+  "Fitness function"
+)
+
+df_dist$curve <- factor(df_dist$curve, levels = legend_levels)
+df_fit$curve  <- factor(df_fit$curve,  levels = legend_levels)
+
+ggplot() +
+  # distributions
+  geom_line(
+    data = df_dist,
+    aes(x, y, linetype = curve, color = curve),
+    linewidth = lw,
+    linecap = "round"
+  ) +
+  # fitness overlay
+  geom_line(
+    data = df_fit,
+    aes(x, y, color = curve),
+    linewidth = lw,
+    linecap = "round"
+  ) +
+  # evolutionary response arrow: original -> response
+  annotate(
+    "segment",
+    x = mu0, y = y_arrow,
+    xend = mu_resp_vis, yend = y_arrow,
+    linewidth = lw,
+    lineend = "round",
+    color = cols[["lime"]],
+    arrow = arrow(
+      length = grid::unit(arrow_len, "in"),
+      type = "closed"
+    )
+  ) +
+  scale_linetype_manual(
+    breaks = legend_levels,
+    values = c(
+      "Original population" = "solid",
+      "Post-selection"      = "dotted",
+      "Inherited response"  = "dashed",
+      "Fitness function"    = "solid"
+    )
+  ) +
+  scale_color_manual(
+    breaks = legend_levels,
+    values = c(
+      "Original population" = cols[["pink"]],
+      "Post-selection"      = cols[["pink"]],
+      "Inherited response"  = cols[["pink"]],
+      "Fitness function"    = cols[["acid"]]
+    )
+  ) +
+  guides(
+    color = guide_legend(
+      override.aes = list(
+        linetype = c("solid", "dotted", "dashed", "solid")
+      )
+    ),
+    linetype = "none"
+  ) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_size = 18) +
+  scale_x_continuous(breaks = NULL, labels = NULL) +
+  scale_y_continuous(breaks = NULL, labels = NULL) +
+  theme(
+    legend.title = element_blank(),
+    legend.position = "right",
+    legend.direction = "vertical",
+    legend.background = element_rect(fill = bg, color = NA),
+    legend.key = element_rect(fill = bg, color = NA),
+    legend.text = element_text(size = 11, color = txt),
+    legend.key.width  = grid::unit(2.2, "cm"),
+    legend.key.height = grid::unit(0.6, "cm"),
+
+    plot.background  = element_rect(fill = bg, color = NA),
+    panel.background = element_rect(fill = bg, color = NA),
+    text = element_text(color = txt),
+    axis.text = element_text(color = txt),
+    axis.title = element_text(color = txt),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.major.x = element_line(color = grid_x)
+  )
+```
+:::
+:::
+
+## Is a Quantitative Genetic Approach Useful?
+
+<br><br><br><br>
+
+::: {.incremental}
+- Explains *genetic adaptation* of complex traits ✅
   
+- Can account for *trait variation* explained by microbiomes ✅
+  
+- Adaptation predictions assume *Mendelian* inheritance ❌
+
+  - Interface with *microbiome* inheritance to close gap ✅
 :::
-:::
 
-## Why we need new theory (*a matter of scale*)
+## Classical Partitioning of Trait Variation
 
-- **Extreme abundance asymmetry**
-  - local abundances astronomical compared to number of dispersers
-- **Transmission mediated by host structure**
-  - constrained by social contact and environmental proximity
-- **Discretely packaged transmission events**
-  - concentrated pulses instead of continuous flow
-- **Strong demographic buffering locally**
-  - transmission alters composition, not abundance
-- **Implications:**
-  - different dynamics ~ different patterns
-  - microbiome diversity likely linked to *host sociality*...
-
-## A Model
-
-$$dN_i^k=\left({\color{yellow}{r_i^k}}-{\color{red}{\sum_{j=1}^S\alpha_{ij}^kN_j^k}}\right)N_i^k\,dt + 
-    \sum_{\ell=1}^K{\color{magenta}{T_{\ell\leftrightarrow k}(dt,dN)}}% + 
-    %{\color{green}{\varepsilon_{\ell k}e_i}})N_{i\ell} 
-    % - \sum_{\ell=1}^K({\color{purple}{\psi_{k\ell}s_{k\ell}^i}} +
-    % {\color{olive}{\varepsilon_{k\ell}e_{k\ell}^i}})N_{ik}
-    +{\color{lime}{e_i^k\,N_i^k\,dE_i^k}}
-    +{\color{skyblue}{\beta_i^k\sqrt{N_i^k}\,dD_i^k}}$$
+<div class="r-stack" style="text-align:center;">
+  mini review of quantitative genetics
+</div>
 
 ::: {.columns}
-
 ::: {.column width="50%"}
 
-- $i=$ microbe species 1,...,S
-- $k=$ host individual 1,...,K
-- $N_i^k=$ abundance microbe $i$ in host $k$
+<br><br><br>
 
-$\color{yellow}{\circ}$ $=$ habitat filtering / host selection
-
-$\color{red}{\circ}$ $=$ competition / ecological network
-
-$\color{magenta}{\circ}$ $=$ social contact
-
-$\color{lime}{\circ}$ = environmental stochasticity
-
-$\color{skyblue}{\circ}$ $=$ demographic stochasticity
-
-${\color{lime}{E_i^k}},\,{\color{skyblue}{D_i^k}}\,=$ Brownian motions
-
-
+::: {.fragment  data-fragment-index="1"} 
+- $P = G + E$
+- $G = G_A + R$
 :::
 
+::: {.fragment  data-fragment-index="4"}
+- **Adaptation Prediction:**
+  - *Resp. to Sel.* = $G_A$ × *Sel. Grad.*
+:::
+
+:::
 ::: {.column width="50%"}
 
-Transmission
+<br><br><br>
 
-- ${\color{magenta}{T_{\ell\leftrightarrow k}}}\,=$ jump process
-  - $\Psi_{\ell k}\,=$ jump rate btwn hosts $\ell,\,k$
-    - (*social contact network*)
-  - size of jumps for $N_i^\ell,\,N_i^k$ :
-  	- $B_i^kC_i^k$
-  	- $B_i^k\sim\mathrm{Bern}(L(N_i^k))$
-  	- $C_i^k\sim\mathrm{Exp}(c)$
-  	- $c\,=$ chonk size parameter
+::: {.fragment  data-fragment-index="3"}
 
+<div class="r-stack" style="text-align:center;">
+Additive Genetic Variance $G_A$
+</div>
+
+```{r}
+#| fig-align: center
+#| out-width: 95%
+#| fig-width: 8
+#| fig-height: 4.5
+
+library(ggplot2)
+
+# observed genotype-specific marginal phenotypes
+df_pts <- data.frame(
+  genotype = c(0, 1, 2),
+  y_obs    = c(-0.125, 0.075, 0.05)
+)
+
+# additive fit line: y = -0.1 + 0.1 * x
+df_pts$y_fit <- -0.1 + 0.1 * df_pts$genotype
+
+df_line <- data.frame(
+  x = seq(0, 2, length.out = 300)
+)
+df_line$y <- -0.1 + 0.1 * df_line$x
+
+# dotted horizontal guides from left margin to fitted values
+df_guides <- data.frame(
+  x    = c(-0.2, -0.2, -0.2),
+  xend = c(0,    1,    2),
+  y    = c(-0.1, 0.0,  0.1),
+  yend = c(-0.1, 0.0,  0.1)
+)
+
+# residual segments
+df_resid <- data.frame(
+  x    = df_pts$genotype,
+  xend = df_pts$genotype,
+  y    = df_pts$y_fit,
+  yend = df_pts$y_obs
+)
+
+bg  <- "#ffffffff"
+txt <- "#1b1f24"
+
+ggplot() +
+  # dotted horizontal guides
+  geom_segment(
+    data = df_guides,
+    aes(x = x, y = y, xend = xend, yend = yend),
+    linetype = "dotted",
+    linewidth = 0.4,
+    color = "gray55"
+  ) +
+  # dashed additive fit
+  geom_line(
+    data = df_line,
+    aes(x = x, y = y),
+    linetype = "dashed",
+    linewidth = 0.8,
+    color = txt
+  ) +
+  # residuals
+  geom_segment(
+    data = df_resid,
+    aes(x = x, y = y, xend = xend, yend = yend),
+    linewidth = 0.9,
+    color = txt
+  ) +
+  # observed points
+  geom_point(
+    data = df_pts,
+    aes(x = genotype, y = y_obs),
+    size = 2.5,
+    color = txt
+  ) +
+  coord_cartesian(
+    xlim = c(-0.2, 2.2),
+    ylim = c(-0.15, 0.15),
+    expand = FALSE
+  ) +
+  scale_x_continuous(
+    breaks = c(0, 1, 2),
+    labels = c("", "", "")
+  ) +
+  scale_y_continuous(
+    breaks = c(-0.1, 0.0, 0.1),
+    labels = c("", "", "")
+  ) +
+  labs(
+    x = "Genotype",
+    y = "Marginal Phenotype"
+  ) +
+  theme_minimal(base_size = 18) +
+  theme(
+    plot.background  = element_rect(fill = bg, color = NA),
+    panel.background = element_rect(fill = bg, color = NA),
+    panel.grid = element_blank(),
+
+    axis.line.x.top    = element_blank(),
+    axis.line.y.right  = element_blank(),
+    axis.line.x.bottom = element_line(color = txt, linewidth = 0.7),
+    axis.line.y.left   = element_line(color = txt, linewidth = 0.7),
+
+    axis.ticks.x = element_line(color = txt, linewidth = 0.5),
+    axis.ticks.y = element_line(color = txt, linewidth = 0.5),
+
+    axis.text = element_text(color = txt),
+    axis.title = element_text(color = txt),
+    text = element_text(color = txt)
+  )
+```
 
 :::
 
 :::
+:::
 
-
-## Viscocity Hypothesis
+## Partitioning of Variation including Microbiome
 
 ::: {.columns}
+::: {.column width="55%"}
 
+<br><br><br>
+
+::: {.incremental}
+- $P_A = G_A + M_A + C_A$
+  - $M_A=$ microbial variation
+  - $C_A=$ gene-microbe covariance
+:::
+
+::: {.fragment}
+- **Adaptation Prediction:**
+  - *Resp. to Sel.* = $P_A$ × *Sel. Grad.* **?**
+:::
+
+:::
+::: {.column width="45%"}
+
+<div class="r-stack" style="text-align:center;">
+![Modified from James et al. (2021), An Introduction to Statistical Learning](images/gm-margi.png){width=450}
+</div>
+
+:::
+:::
+
+## Not all microbes contribute to adaptation
+
+<div class="r-stack" style="text-align:center;">
+![](images/part.png){width=700}
+</div>
+
+## Ancestral Concordance Classification
+
+![](/images/anc-conc.png){style="max-width:100%;height:auto;"}
+
+::: {.columns}
+::: {.column width="33%"}
+
+> **Lineal Microbes:**
+> 
+> Ancestry overlaps with *host ancestry*
+<!-- >
+> <span style="font-size: 0.8em;">Tracks specific host lineage</span> -->
+
+:::
+::: {.column width="33%"}
+
+> **Non-lineal Microbes:** 
+> 
+> Ancestry in *host population*
+<!-- >
+> <span style="font-size: 0.8em;">Does not track specific host lineages</span> -->
+
+:::
+::: {.column width="33%"}
+
+> **Novel Microbes:** 
+> 
+> *No previous ancestry* with host population
+<!-- >
+> <span style="font-size: 0.8em;">Initial contact of microbe and host lineage pairs</span> -->
+
+::: 
+:::
+
+<br>
+
+<div class="r-stack" style="text-align:center;">
+  classifies individual microbial cells
+</div>
+
+## Partitioning Var. by Ancestral Concordance
+
+![](/images/anc-conc.png){style="max-width:100%;height:auto;"}
+
+::: {.columns}
+::: {.column width="32%"}
+
+> <span style="font-size: 0.7em;"> $M_L=$ </span> *lineal variance*
+
+:::
+::: {.column width="37%"}
+
+> <span style="font-size: 0.7em;"> $M_N=$ </span>*non-lineal variance*
+
+:::
+::: {.column width="31%"}
+
+> <span style="font-size: 0.7em;"> $M_V=$ </span>*noVel variance*
+
+::: 
+:::
+
+::: {.incremental}
+- (**Additive Phenotypic Variation**) $P_A = G_A + {\color{magenta}{M_A}} + C_A$
+- (**Additive Microbial Variation**) ${\color{magenta}{M_A}} = M_L + M_N + M_V + {\color{gray}{C_{LNV}} }$
+:::
+
+## Hypothesis
+
+::: {.incremental}
+- **Adaptation:**
+  - Lineal: <span style="font-size: 0.8em;">$M_L$</span> *most* likely
+  - Non-Lineal: <span style="font-size: 0.8em;">$M_N$</span> *less* likely
+  - NoVel: <span style="font-size: 0.8em;">$M_V$</span> *no* contribution
+- **How to test:**
+  - Host *Pedigree*
+  - *Metagenomic Data* for Microbiomes of Hosts in Pedigree
+    - Strain Resolved
+  - Classify Microbes by *Ancestral Concordance*
+  - *Partition* host trait variance
+  - Selection *Experiment*
+    - Predict response including *different combinations* of <span style="font-size: 0.8em;">$M_L,M_N,M_V$</span>
+    - *Measure response* to selection and assess predictions
+:::
+
+## Simulations
+
+::: {.columns}
 ::: {.column width="60%"}
+<div class="r-stack" style="text-align:center;">
+  ![Non-lineals sampled *before* selection](images/pre-selected.png)
+</div>
 
-- **Idea:** 
-  - mutulists move freely
-    - *lower viscocity*
-    - colonization is easier
-  - pathogens face more resistance
-    - *higher viscocity*
-    - need more attempts to colonize
-- **Prediction:**
-  - *pathogen* diversity accumulates in *clusters*
-  - *mutualist* diversity accumulates in *bridges*
+[ 🖤 lineal | 🩶 non-lineal | 🤍 novel ]
+
 :::
-
 ::: {.column width="40%"}
+**Simple inheritance model:**
+
+- Lineal abundances
+  - sampled from *parents*
+- Non-lineal abundances
+  - sampled from *random host*
+  - *before* or *after* selection
+- Novel abundances
+  - drawn *independently*
+
+**Additive host trait:**
+
+- $z=\sum_i\alpha_i\,n_i$
+
+:::
+:::
+
+## Simulations
+
+::: {.columns}
+::: {.column width="60%"}
+<div class="r-stack" style="text-align:center;">
+  ![Non-lineals sampled *after* selection](images/post-selected.png)
+</div>
+
+[ 🖤 lineal | 🩶 non-lineal | 🤍 novel ]
+
+:::
+::: {.column width="40%"}
+**Simple inheritance model:**
+
+- Lineal abundances
+  - sampled from *parents*
+- Non-lineal abundances
+  - sampled from *random host*
+  - *before* or *after* selection
+- Novel abundances
+  - drawn *independently*
+
+**Additive host trait:**
+
+- $z=\sum_i\alpha_i\,n_i$
+
+:::
+:::
+
+## Results
 
 <div class="r-stack" style="text-align:center;">
-![](images/mouse-ntwk.png){width=400}
+  ![](images/compare.png)
 </div>
+
+<span style="font-size: 0.8em;"> **$\pmb\Delta\mathbf{\bar z}$** </span> = Resp. to Selection, **G** = Gen. var, **L** = Lineal, **N** = Non-lineal, **V** = NoVel
+
+<div class="r-stack" style="text-align:center;">
+  *Conclusion:* include only microbe variation shaped by selection
+</div>
+
+## The *Selective Microbes* and Heritability
+
+::: {.fragment}
+> **Definition:** Subset of microbes that contribute to host adaptation
+> 
+> - *<span style="font-size: 0.8em;">$M_A^\psi$</span>* = trait variance explained by variance of *selectives*
+> - *<span style="font-size: 0.8em;">$C_A^\psi$</span>* = trait variance explained by covariance of *selectives* and genes
+:::
+
+::: {.fragment}
+> **By definition:** (*Resp. to Sel.*) = (<span style="font-size: 0.8em;">$G_A+M_A^\psi+C_A^\psi$</span>) × (*Sel. Grad.*)
+:::
+
+::: {.fragment}
+> **Without microbe fx:** (*Resp. to Sel.*) = (<span style="font-size: 0.8em;">$G_A$</span>) × (*Sel. Grad.*)
+:::
+
+::: {.fragment}
+> **Narrow-sense heritability:** <span style="font-size: 0.8em;">*$h^2$* $=$</span>$\frac{G_A}{P}$, **Resp. to Sel.:** <span style="font-size: 0.8em;">$R=$ *$h^2$* $S$</span>
+:::
+
+## Extending Heritability
+
+<br><br><br>
+
+::: {.columns}
+::: {.column width="50%"}
+
+::: {.fragment}
+Narrow-sense **heritability:**
+$$h^2=\frac{G_A}{P}$$
+
+$R=h^2\,S$
+
+(*w/o micr. fx*)
+:::
+
+:::
+
+<!-- ::: {.column width="33%"}
+
+::: {.fragment}
+Narrow-sense **microbial transmissibility:**
+$$b^2=\frac{M_A^\psi}{P}$$
+
+$R\neq(h^2+b^2)\,S$
+
+(*w micr. fx*)
+:::
+
+::: -->
+
+::: {.column width="50%"}
+
+::: {.fragment}
+Narrow-sense **total transmissibility:**
+
+$$t^2=\frac{M_A^\psi+C_A^\psi}{P}$$
+
+$R=t^2\,S$
+
+(*w micr. fx*)
+:::
+
+:::
+:::
+
+## Read all about it!
+
+<br><br><br>
+
+<div class="r-stack" style="text-align:center;">
+  ![Week et al. (2025), Evolution](images/qgmmt.png)
+</div>
+
+## Thanks Co-Authors
+
+<br><br><br>
+
+::: {.columns}
+::: {.column width="25%"}
+
+<div class="r-stack" style="text-align:center;">
+  ![Hannah Tavalie](images/tavalire-220-x-250.png)
+</div>
+
+:::
+::: {.column width="25%"}
+
+<div class="r-stack" style="text-align:center;">
+  ![Bill Cresko](images/bill.jpg)
+</div>
+
+:::
+::: {.column width="25%"}
+
+<div class="r-stack" style="text-align:center;">
+  ![Peter Ralph](images/Peter-Ralph-photo-tafwfp.jpg)
+</div>
+
+:::
+::: {.column width="25%"}
+<div class="r-stack" style="text-align:center;">
+  ![Brendan Bohanna](images/brend.jpg)
+</div>
+
+:::
+:::
+
+## What about Theory?
+
+::: {.incremental}
+- **Quant. Gen. approach:**
+  - *Statistical* framework
+  - Aimed at *empirical* studies
+  - Still very complicated
+- **Initial theoretical insights:**
+  - *Simple* models
+  - Motivates some *current* projects...
+:::
+
+## Microbe-Mediated Host Rescue
+
+::: {.columns}
+
+::: {.column width="30%"}
+
+<div class="r-stack" style="text-align:center;">
+
+![Hildegard Uecker <br> MPI Plön](images/hildegard.jpg){width=300}
+
+</div>
+
+:::
+
+::: {.column width="70%"}
+
+- **Scenario:** *Doomed* host population
+- **Microbiome:** Presence/absence *single* microbe
+  - Probability of *lineal inheritance*
+  - Rate of *social transmission*
+- **Fitness:** Host *gene* determines microbe *benefit*
+- **Results:** Delayed host *extinction time* analysis
+  
+- *Birth-Death Diffusion* <span style="font-size: 0.8em;">$dn=[(r+m)\,n+\psi]\,dt+\sqrt{n}\,dB$</span>
+
+<!-- ![](images/T-dists.png) -->
+
+![](images/sample-path-trans.png)
 
 :::
 
 :::
 
-## (*Extremely*) Preliminary Results
+## Microbiome-Mediated Niche Construction
 
+::: {.columns}
+::: {.column width="30%"}
 
 <div class="r-stack" style="text-align:center;">
-![](images/prelims.png){width=1200}
+  ![Hinrich Schulenburg <br> Kiel University](images/hinrich.png)
 </div>
 
+:::
+::: {.column width="70%"}
 
-## Conclusion
+- **Mesocosm experiments:**
+  - *C. elegans* shape microbiome in compost
+  - Compost conditions *degrade*
+  - Microbiome manipulation *buffers* against <span style="font-size: 0.8em;">$\Delta E$</span>
+- **Quant. Gen. Theory**
+  - Modify <span style="font-size: 0.8em;">*$\Delta\bar z=G\beta$*</span>
+    - Modelling framework (instead of statistical)
+  - Microbiome *community dynamics* ~ mutation
+  - *Feedback* with external microbiome
+  - External microbiome changes effect of env.
+
+**Q:** *What eco-evo processes and what host-microbiome attributes shape adaptation via niche construction?*
+
+:::
+:::
+
+## Multilevel Selection Framework
+
+::: {.columns}
+::: {.column width="30%"}
+
+<div class="r-stack" style="text-align:center;">
+  ![Arne Traulsen <br> MPI Plön](images/arne.webp)
+</div>
+
+:::
+::: {.column width="70%"}
+
+- **Mesocosm experiments:**
+  - *C. elegans* shape microbiome in compost
+  - Compost conditions *degrade*
+  - Microbiome manipulation *buffers* against <span style="font-size: 0.8em;">$\Delta E$</span>
+- **MLS Model**
+  - Modify <span style="font-size: 0.8em;">*$\Delta\bar z=G\beta$*</span>
+    - Modelling framework (instead of statistical)
+  - Microbiome transmission + dynamics ~ *mutation*
+  - *Feedback* with external microbiome
+  - External microbiome changes effect of env.
+
+**Q:** *What eco-evo processes and what host-microbiome attributes shape adaptation via niche construction?*
+
+:::
+:::
+
+## Social Microbiome Metacommunity Framework
+
+::: {.columns}
+::: {.column width="30%"}
+
+<div class="r-stack" style="text-align:center;">
+  ![Aura Raulo <br> University of Oxford](images/aura-raulo.jpg)
+</div>
+
+:::
+::: {.column width="70%"}
+- **Unique Biological Scales:**
+  - *Asymmetry:* astronomical local abundances
+  - *Constrained Dispersal:* social ntwk, discr. pulses
+  - *Transmission effect:* composition, not abundance
+  - *Implications:* unique biology, distinct diversity
+  - *Math:* jump-diffusion processes
+- **Viscocity Hypothesis:**
+<div style="margin-top:-20px;">
+
+::: {.columns}
+::: {.column width="49%"}
+<div class="r-stack" style="text-align:center;">
+  ![Pathogens accumulate in <br> clusters](images/paths.png){width=300}
+</div>
+
+:::
+::: {.column width="49%"}
+<div class="r-stack" style="text-align:center;">
+  ![Mutualists accumulate in <br> bridges](images/muts.png){width=300}
+</div>
+
+:::
+:::
+
+
+  <!-- - Pathogens face more resistance during transmission
+  - Mutualists move relatively freely
+    - Pathogens need more colonization attempts
+    - Should accumulate in clustered regions
+    - Mutualists accumulate in bridge nodes -->
+
+:::
+:::
+
+## Entangled Banks
+
+<div class="r-stack" style="text-align:center;">
+  ![](images/bank.png){width=70%}
+</div>
+
+## Entangled Host-Microbiome Systems
+
+<div class="r-stack" style="text-align:center;">
+![[Andrew Rae for Quanta Magazine](https://www.quantamagazine.org/should-evolution-treat-our-microbes-as-part-of-us-20181120/)](images/microbial-world.jpg){width=800}
+</div>
