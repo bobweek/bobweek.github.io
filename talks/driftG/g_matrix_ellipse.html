@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>G-matrix ellipse</title>
+<style>
+  :root{
+    --base:#faf4ed; --surface:#fffaf3; --text:#575279; --muted:#9893a5;
+    --foam:#56949f; --pine:#286983; --love:#b4637a; --iris:#907aa9; --hl:#dfdad9;
+  }
+  html,body{margin:0;background:var(--base);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;}
+  .wrap{max-width:760px;margin:24px auto;padding:0 16px;display:flex;gap:24px;flex-wrap:wrap;
+    align-items:flex-start;justify-content:center;}
+  canvas{background:var(--surface);border:1px solid var(--hl);border-radius:10px;}
+  .panel{min-width:240px;flex:1;}
+  h1{font-size:16px;font-weight:600;margin:0 0 14px;}
+  .ctl{margin:14px 0;}
+  .ctl label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;}
+  .ctl .val{color:var(--pine);font-variant-numeric:tabular-nums;}
+  input[type=range]{width:100%;accent-color:var(--foam);}
+  table{border-collapse:collapse;font-size:13px;margin-top:18px;font-variant-numeric:tabular-nums;}
+  td{padding:3px 10px;}
+  .mat td{background:var(--base);border:1px solid var(--hl);text-align:center;min-width:54px;}
+  .read{color:var(--muted);margin-top:14px;font-size:12.5px;line-height:1.7;}
+  .read b{color:var(--text);font-weight:600;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <canvas id="c" width="420" height="420"></canvas>
+  <div class="panel">
+    <h1>2&times;2 G-matrix ellipse</h1>
+
+    <div class="ctl">
+      <label>Variance of trait 1 &nbsp; G&#8321;&#8321;<span class="val" id="vV1">1.00</span></label>
+      <input id="V1" type="range" min="0.05" max="4" step="0.01" value="1">
+    </div>
+    <div class="ctl">
+      <label>Variance of trait 2 &nbsp; G&#8322;&#8322;<span class="val" id="vV2">1.00</span></label>
+      <input id="V2" type="range" min="0.05" max="4" step="0.01" value="1">
+    </div>
+    <div class="ctl">
+      <label>Correlation &nbsp; &rho;<span class="val" id="vR">0.00</span></label>
+      <input id="R" type="range" min="-0.99" max="0.99" step="0.01" value="0">
+    </div>
+
+    <table class="mat"><tr>
+      <td id="g11"></td><td id="g12"></td></tr><tr><td id="g21"></td><td id="g22"></td>
+    </tr></table>
+
+    <div class="read">
+      eigenvalues: <b id="eig"></b><br>
+      semi-axes (&radic;&lambda;): <b id="axes"></b><br>
+      major-axis angle: <b id="ang"></b><br>
+      det G: <b id="det"></b> &nbsp;&middot;&nbsp; total variance (tr): <b id="tr"></b>
+    </div>
+  </div>
+</div>
+
+<script>
+const cv=document.getElementById("c"), ctx=cv.getContext("2d");
+const W=cv.width, H=cv.height, cx=W/2, cy=H/2;
+const PXU=46;                       // pixels per unit; ellipse semi-axis in units = sqrt(eigenvalue)
+const css=getComputedStyle(document.documentElement);
+const col=n=>css.getPropertyValue(n).trim();
+
+const els={V1:V1,V2:V2,R:R};
+function read(){return {v1:+V1.value, v2:+V2.value, r:+R.value};}
+
+function eigen(a,b,c){            // symmetric [[a,b],[b,c]]
+  const m=(a+c)/2, d=Math.sqrt(((a-c)/2)**2 + b*b);
+  const l1=m+d, l2=m-d;          // l1 >= l2
+  const phi=0.5*Math.atan2(2*b, a-c);   // angle of major (l1) eigenvector
+  return {l1,l2,phi};
+}
+
+function draw(){
+  const {v1,v2,r}=read();
+  const b=r*Math.sqrt(v1*v2);
+  const {l1,l2,phi}=eigen(v1,b,v2);
+
+  ctx.clearRect(0,0,W,H);
+  // grid
+  ctx.strokeStyle=col("--hl"); ctx.lineWidth=1;
+  for(let u=-4;u<=4;u++){
+    ctx.globalAlpha=u===0?1:0.5;
+    ctx.beginPath();ctx.moveTo(cx+u*PXU,0);ctx.lineTo(cx+u*PXU,H);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,cy+u*PXU);ctx.lineTo(W,cy+u*PXU);ctx.stroke();
+  }
+  ctx.globalAlpha=1;
+  // unit circle reference
+  ctx.strokeStyle=col("--muted");ctx.setLineDash([4,4]);ctx.globalAlpha=.6;
+  ctx.beginPath();ctx.arc(cx,cy,PXU,0,2*Math.PI);ctx.stroke();
+  ctx.setLineDash([]);ctx.globalAlpha=1;
+
+  // covariance ellipse: point = R(phi) * [sqrt(l1)cos t, sqrt(l2)sin t]
+  const A=Math.sqrt(Math.max(l1,0)), B=Math.sqrt(Math.max(l2,0));
+  const co=Math.cos(phi), si=Math.sin(phi);
+  ctx.beginPath();
+  for(let i=0;i<=120;i++){
+    const t=2*Math.PI*i/120, x=A*Math.cos(t), y=B*Math.sin(t);
+    const X=co*x - si*y, Y=si*x + co*y;
+    const px=cx+X*PXU, py=cy-Y*PXU;
+    i? ctx.lineTo(px,py):ctx.moveTo(px,py);
+  }
+  ctx.closePath();
+  ctx.fillStyle=col("--foam")+"66"; ctx.fill();
+  ctx.strokeStyle=col("--pine"); ctx.lineWidth=2; ctx.stroke();
+
+  // principal axes
+  ctx.strokeStyle=col("--love"); ctx.lineWidth=1.5; ctx.setLineDash([5,4]);
+  for(const [len,ang] of [[A,phi],[B,phi+Math.PI/2]]){
+    const dx=Math.cos(ang)*len*PXU, dy=Math.sin(ang)*len*PXU;
+    ctx.beginPath();ctx.moveTo(cx-dx,cy+dy);ctx.lineTo(cx+dx,cy-dy);ctx.stroke();
+  }
+  ctx.setLineDash([]);
+
+  // readouts
+  vV1.textContent=v1.toFixed(2); vV2.textContent=v2.toFixed(2); vR.textContent=r.toFixed(2);
+  g11.textContent=v1.toFixed(2); g22.textContent=v2.toFixed(2);
+  g12.textContent=b.toFixed(2);  g21.textContent=b.toFixed(2);
+  eig.textContent=`${l1.toFixed(3)}, ${l2.toFixed(3)}`;
+  axes.textContent=`${A.toFixed(3)}, ${B.toFixed(3)}`;
+  let deg=phi*180/Math.PI; if(deg>90)deg-=180; if(deg<-90)deg+=180;
+  ang.textContent=`${deg.toFixed(1)}°`;
+  det.textContent=(v1*v2-b*b).toFixed(3);
+  tr.textContent=(v1+v2).toFixed(3);
+}
+for(const k in els) els[k].addEventListener("input",draw);
+draw();
+</script>
+</body>
+</html>

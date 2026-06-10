@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>drift builds linkage — Wright-Fisher applet</title>
+
+<!--
+  ===========================================================================
+  drift builds linkage  ·  Wright-Fisher genetic drift + recombination
+  ===========================================================================
+  A population of N haploid sequences. A handful of loci are biallelic and
+  coloured; the rest are monomorphic genome background (white). Each
+  generation the next population is N independent draws under a sequential
+  copying model:
+
+      for each offspring:
+        pick a random parent;
+        walk left -> right across loci, copying the current parent's allele;
+        between adjacent loci, switch to a freshly chosen random parent with
+        probability c.
+
+  c = 0  -> clonal: whole haplotypes are copied. Drift drags every locus along
+            one shared genealogy, so allelic associations build up and the
+            population collapses onto a few correlated haplotypes (r^2 -> 1).
+  c = 1  -> free recombination: every locus is inherited from an independently
+            chosen parent. Each locus has its own genealogy, associations are
+            reshuffled every generation, and the population stays in linkage
+            equilibrium (r^2 ~ 0) while loci drift and fix independently.
+
+  For large N the per-gap probability that two adjacent loci descend from
+  different lineages is ~c, so adjacent-locus linkage disequilibrium decays by
+  ~(1-c) per generation from recombination, modulated by drift. There is NO
+  mutation, so the only fates are association build-up and eventual fixation.
+
+  Drag the RECOMBINATION slider to move between the two panels of the classic
+  linkage figure. Click a coloured locus to make it part of the tracked pair.
+
+  ---------------------------------------------------------------------------
+  Self-hosting: this file loads p5.js from a CDN. To host it offline (e.g.
+  inside a Quarto reveal.js deck served from a folder), download p5.min.js and
+  replace the <script src="...p5..."> tag with a local path:
+      <script src="p5.min.js"></script>
+  Everything else is dependency-free (system fonts only).
+  ===========================================================================
+-->
+
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+<style>
+  :root{
+    --bg:#0E0F12; --panel:#15171C; --rule:#2A2D33; --ink:#E8E9EC;
+    --dim:#7C828C; --accent:#C7CCD4;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans)}
+  .wrap{max-width:1040px;margin:0 auto;padding:22px 20px 30px}
+  header h1{font-size:26px;font-weight:700;letter-spacing:-.01em;margin:0}
+  header p{color:var(--dim);font-size:13.5px;margin:6px 0 0;line-height:1.45;max-width:760px}
+  #holder{margin:18px 0 14px;border:1px solid var(--rule);border-radius:10px;
+          background:var(--panel);overflow:hidden}
+  canvas{display:block;width:100%}
+  .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+            gap:14px 22px;border:1px solid var(--rule);border-radius:10px;
+            background:var(--panel);padding:16px 18px}
+  .ctl{display:flex;flex-direction:column;gap:6px}
+  .ctl label{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+  .ctl .val{font-family:var(--mono);color:var(--ink);font-size:13px}
+  .ctl.recomb{grid-column:1 / -1}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:3px;
+    background:var(--rule);border-radius:2px;outline:none;margin:8px 0}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;
+    border-radius:50%;background:var(--accent);cursor:pointer;border:0}
+  input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;
+    background:var(--accent);cursor:pointer;border:0}
+  .recomb .scale{display:flex;justify-content:space-between;font-family:var(--mono);
+    font-size:11px;color:var(--dim)}
+  .recomb .scale b{color:var(--ink);font-weight:500}
+  .buttons{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+  button{font-family:var(--mono);font-size:12.5px;color:var(--ink);background:transparent;
+    border:1px solid var(--rule);border-radius:7px;padding:8px 14px;cursor:pointer;
+    transition:border-color .12s,background .12s}
+  button:hover{border-color:var(--accent)}
+  button.primary{border-color:var(--accent)}
+  button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .hint{color:var(--dim);font-size:12px;margin-top:12px;font-family:var(--mono)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>drift builds linkage</h1>
+    <p>A finite population copies whole sequences each generation (Wright-Fisher, no mutation).
+       Without recombination, random drift drags every locus along one shared genealogy and the
+       coloured loci drift into correlation. Slide recombination up to break that link.
+       Click a coloured locus to track it as part of the r² pair.</p>
+  </header>
+
+  <div id="holder"></div>
+
+  <div class="controls">
+    <div class="ctl recomb">
+      <label>recombination&nbsp;&nbsp;<span class="val" id="cVal">0.00 — clonal</span></label>
+      <input type="range" id="c" min="0" max="1" step="0.01" value="0">
+      <div class="scale"><span><b>0</b> · linkage builds</span><span>free recombination · <b>1</b></span></div>
+    </div>
+
+    <div class="ctl">
+      <label>population N&nbsp;&nbsp;<span class="val" id="nVal">30</span></label>
+      <input type="range" id="N" min="6" max="60" step="1" value="30">
+    </div>
+
+    <div class="ctl">
+      <label>segregating loci&nbsp;&nbsp;<span class="val" id="segVal">3</span></label>
+      <input type="range" id="seg" min="2" max="4" step="1" value="3">
+    </div>
+
+    <div class="ctl">
+      <label>speed&nbsp;&nbsp;<span class="val" id="spdVal">4 gen/s</span></label>
+      <input type="range" id="spd" min="1" max="14" step="1" value="4">
+    </div>
+
+    <div class="ctl buttons">
+      <button id="play" class="primary">pause</button>
+      <button id="step">step</button>
+      <button id="reset">reset</button>
+      <button id="seed">new seed</button>
+    </div>
+  </div>
+
+  <div class="hint" id="hint"></div>
+</div>
+
+<script>
+/* ----------------------------------------------------------------------- */
+/* palette                                                                  */
+/* ----------------------------------------------------------------------- */
+const COL = {
+  bg:"#0E0F12", panel:"#15171C", rule:"#2A2D33", ink:"#E8E9EC",
+  dim:"#7C828C", accent:"#C7CCD4", bar:"#F5F6F7", barEdge:"#0E0F12"
+};
+// two-hue allele pairs (allele 0 / allele 1), one per segregating locus
+const LOCUS_COLORS = [
+  ["#3D7FE0","#6A48A6"],   // blue   / purple
+  ["#93C079","#F0C530"],   // green  / gold
+  ["#3FB0A6","#E8794A"],   // teal   / coral
+  ["#E06B97","#5560B0"],   // rose   / indigo
+];
+
+/* ----------------------------------------------------------------------- */
+/* seeded RNG (mulberry32)                                                  */
+/* ----------------------------------------------------------------------- */
+let rngState = 1234567;
+function mulberry32(){
+  rngState |= 0; rngState = (rngState + 0x6D2B79F5) | 0;
+  let t = Math.imul(rngState ^ (rngState >>> 15), 1 | rngState);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+}
+const ri = n => Math.floor(mulberry32() * n);
+
+/* ----------------------------------------------------------------------- */
+/* model state                                                              */
+/* ----------------------------------------------------------------------- */
+let N = 30, segCount = 3, L = 7, c = 0.0;
+let segLoci = [];            // indices of coloured loci
+let focal = [1, 3];          // tracked locus pair (indices into 0..L-1)
+let pop = [];                // pop[i][loc] : allele (0/1) or -1 for white
+let gen = 0;
+let playing = true;
+let speed = 4;
+let seedValue = 20250609;
+let r2Hist = [];             // history of r^2 for sparkline
+let divHist = [];            // history of haplotype-diversity fraction
+const HIST_MAX = 260;
+let lastStepMs = 0;
+
+/* layout of segregating loci: white, colour, white, colour, ..., white ---- */
+function layoutLoci(){
+  L = 2 * segCount + 1;
+  segLoci = [];
+  for (let k = 0; k < segCount; k++) segLoci.push(2 * k + 1);
+  focal = [segLoci[0], segLoci[1]];
+}
+
+function initPop(){
+  rngState = seedValue >>> 0;
+  layoutLoci();
+  pop = [];
+  for (let i = 0; i < N; i++){
+    const row = new Array(L).fill(-1);
+    for (const loc of segLoci) row[loc] = ri(2);
+    pop.push(row);
+  }
+  gen = 0;
+  r2Hist = []; divHist = [];
+  recordStats();
+}
+
+/* one Wright-Fisher generation with per-gap recombination prob c ---------- */
+function stepGen(){
+  const next = [];
+  for (let i = 0; i < N; i++){
+    const row = new Array(L);
+    let parent = ri(N);
+    for (let loc = 0; loc < L; loc++){
+      if (loc > 0 && mulberry32() < c) parent = ri(N);
+      row[loc] = pop[parent][loc];
+    }
+    next.push(row);
+  }
+  pop = next;
+  gen++;
+  recordStats();
+}
+
+/* statistics -------------------------------------------------------------- */
+function r2(i, j){
+  let pA = 0, pB = 0, pAB = 0;
+  for (let k = 0; k < N; k++){
+    const a = pop[k][i] === 1, b = pop[k][j] === 1;
+    if (a) pA++; if (b) pB++; if (a && b) pAB++;
+  }
+  pA /= N; pB /= N; pAB /= N;
+  if (pA === 0 || pA === 1 || pB === 0 || pB === 1) return null;  // fixed
+  const D = pAB - pA * pB;
+  return (D * D) / (pA * (1 - pA) * pB * (1 - pB));
+}
+function nHaplotypes(){
+  const s = new Set();
+  for (let k = 0; k < N; k++) s.add(segLoci.map(l => pop[k][l]).join(""));
+  return s.size;
+}
+function recordStats(){
+  const r = r2(focal[0], focal[1]);
+  const div = (nHaplotypes() - 1) / Math.max(1, Math.min(N, Math.pow(2, segCount)) - 1);
+  r2Hist.push(r);   if (r2Hist.length  > HIST_MAX) r2Hist.shift();
+  divHist.push(div); if (divHist.length > HIST_MAX) divHist.shift();
+}
+
+/* ----------------------------------------------------------------------- */
+/* drawing                                                                  */
+/* ----------------------------------------------------------------------- */
+let HOLDER, gridX0, gridW, sideX0, sideW, gridTop, gridH;
+
+function setup(){
+  HOLDER = document.getElementById('holder');
+  const w = HOLDER.clientWidth || 980;
+  const cnv = createCanvas(w, 520);
+  cnv.parent(HOLDER);
+  pixelDensity(Math.min(2, window.devicePixelRatio || 1));
+  textFont('ui-monospace, Menlo, monospace');
+  initPop();
+  bindUI();
+  lastStepMs = millis();
+}
+
+function windowResized(){
+  const w = HOLDER.clientWidth || 980;
+  resizeCanvas(w, 520);
+}
+
+function computeRegions(){
+  const pad = 18;
+  gridTop = 34;
+  gridH = height - gridTop - 16;
+  const splitGap = 26;
+  // population grid gets ~62% of width; readout/sparkline the rest
+  gridX0 = pad;
+  const usable = width - pad * 2;
+  gridW  = Math.round(usable * 0.60);
+  sideX0 = gridX0 + gridW + splitGap;
+  sideW  = width - pad - sideX0;
+}
+
+function draw(){
+  background(COL.bg);
+  computeRegions();
+
+  // advance generations on a timer when playing
+  if (playing && millis() - lastStepMs > 1000 / speed){
+    stepGen();
+    lastStepMs = millis();
+  }
+
+  drawHeaderRow();
+  drawPopulation();
+  drawSide();
+}
+
+function drawHeaderRow(){
+  // left: panel label ; right: segmented progress-ish tab row (norns flavour)
+  noStroke(); fill(COL.ink); textSize(12.5); textStyle(BOLD); textAlign(LEFT, CENTER);
+  text("POPULATION", gridX0, 16);
+  textStyle(NORMAL); fill(COL.dim); textSize(11.5); textAlign(LEFT, CENTER);
+  text("gen " + gen, gridX0 + 108, 16);
+
+  // tiny static hairline tab strip above the side panel (norns flavour;
+  // the live activity lives in the sparkline below, not here)
+  const segs = 8, segw = sideW / segs;
+  stroke(COL.rule); strokeWeight(2);
+  for (let s = 0; s < segs; s++){
+    const xs = sideX0 + s * segw;
+    line(xs, 14, xs + segw - 5, 14);
+  }
+  noStroke(); fill(COL.ink); textSize(12.5); textStyle(BOLD); textAlign(LEFT, CENTER);
+  text("LINKAGE", sideX0, 28);
+  textStyle(NORMAL);
+}
+
+function drawPopulation(){
+  const rowH = gridH / N;
+  const barH = Math.max(2, rowH * 0.74);
+  const pad  = (rowH - barH) / 2;
+  const cellW = gridW / L;
+  const rounded = rowH > 7;
+  const segIndex = {}; segLoci.forEach((l, k) => segIndex[l] = k);
+
+  for (let r = 0; r < N; r++){
+    const by = gridTop + r * rowH + pad;
+    // white genome bar
+    noStroke(); fill(COL.bar);
+    if (rounded) rect(gridX0, by, gridW, barH, barH * 0.45);
+    else rect(gridX0, by, gridW, barH);
+    stroke(COL.barEdge); strokeWeight(1); noFill();
+    if (rounded) rect(gridX0, by, gridW, barH, barH * 0.45);
+    else rect(gridX0, by, gridW, barH);
+    // coloured allele bands
+    noStroke();
+    for (const loc of segLoci){
+      const allele = pop[r][loc];
+      const col = LOCUS_COLORS[segIndex[loc] % LOCUS_COLORS.length][allele];
+      const bx = gridX0 + loc * cellW + cellW * 0.12;
+      const bw = cellW * 0.76;
+      const inset = barH * 0.16;
+      fill(col);
+      rect(bx, by + inset, bw, barH - 2 * inset, rounded ? 1.5 : 0);
+    }
+  }
+
+  // focal-pair carets above the grid
+  stroke(COL.accent); strokeWeight(1.2); noFill();
+  for (const loc of focal){
+    const cx = gridX0 + (loc + 0.5) * cellW;
+    line(cx - cellW * 0.16, gridTop - 4, cx, gridTop - 9);
+    line(cx, gridTop - 9, cx + cellW * 0.16, gridTop - 4);
+  }
+}
+
+function drawSide(){
+  // ---- readouts --------------------------------------------------------
+  const r = r2(focal[0], focal[1]);
+  const nh = nHaplotypes();
+  let y = 50;
+
+  noStroke(); textAlign(LEFT, BASELINE);
+  fill(COL.dim); textSize(11);
+  text("LD between tracked loci", sideX0, y); y += 26;
+  fill(COL.ink); textSize(30); textStyle(BOLD);
+  text(r === null ? "—" : nf(r, 1, 2), sideX0, y);
+  textStyle(NORMAL); fill(COL.dim); textSize(12);
+  text("r²", sideX0 + (r === null ? 26 : 78), y);
+  y += 16;
+  // r^2 meter
+  const mW = sideW * 0.9;
+  fill(COL.rule); rect(sideX0, y, mW, 4, 2);
+  fill(COL.accent); rect(sideX0, y, mW * (r === null ? 0 : r), 4, 2);
+  y += 30;
+
+  fill(COL.dim); textSize(11); text("distinct haplotypes", sideX0, y); y += 22;
+  fill(COL.ink); textSize(20); textStyle(BOLD);
+  text(nh + (r === null ? "  (a locus fixed)" : ""), sideX0, y);
+  textStyle(NORMAL);
+  y += 26;
+
+  // regime hint
+  fill(COL.dim); textSize(11.5);
+  let regime = c < 0.08 ? "clonal — drift will build linkage"
+            : c > 0.9   ? "free recombination — linkage stays broken"
+            : "partial reshuffling";
+  text(regime, sideX0, y);
+  y += 22;
+
+  // ---- sparkline -------------------------------------------------------
+  const spY = y + 6, spH = gridTop + gridH - spY - 4, spW = sideW;
+  if (spH > 60){
+    // frame
+    stroke(COL.rule); strokeWeight(1); noFill();
+    line(sideX0, spY, sideX0, spY + spH);
+    line(sideX0, spY + spH, sideX0 + spW, spY + spH);
+    // baseline / unity guides
+    stroke(COL.rule); drawingContext.setLineDash([3, 4]);
+    line(sideX0, spY, sideX0 + spW, spY);               // r²=1
+    drawingContext.setLineDash([]);
+    noStroke(); fill(COL.dim); textSize(9.5);
+    text("1", sideX0 - 0, spY - 3 + 9); textAlign(LEFT, BASELINE);
+    text("r² over time", sideX0, spY + spH + 14);
+
+    const n = r2Hist.length;
+    const xx = i => sideX0 + (n <= 1 ? 0 : (i / (n - 1)) * spW);
+    const yy = v => spY + (1 - v) * spH;
+
+    // haplotype-diversity (dim) : how scrambled the population still is
+    stroke(COL.dim); strokeWeight(1.2); noFill(); beginShape();
+    for (let i = 0; i < n; i++) vertex(xx(i), yy(divHist[i]));
+    endShape();
+
+    // r² (bright), breaking the line where r² is undefined (fixed)
+    stroke(COL.accent); strokeWeight(1.8); noFill();
+    let open = false;
+    for (let i = 0; i < n; i++){
+      const v = r2Hist[i];
+      if (v === null){ if (open){ endShape(); open = false; } continue; }
+      if (!open){ beginShape(); open = true; }
+      vertex(xx(i), yy(v));
+    }
+    if (open) endShape();
+
+    noStroke(); fill(COL.dim); textSize(9.5); textAlign(RIGHT, BASELINE);
+    text("diversity", sideX0 + spW, spY + spH + 14); textAlign(LEFT, BASELINE);
+  }
+}
+
+/* ----------------------------------------------------------------------- */
+/* interaction                                                              */
+/* ----------------------------------------------------------------------- */
+function mousePressed(){
+  // click a coloured locus column in the grid to track it
+  if (mouseX < gridX0 || mouseX > gridX0 + gridW) return;
+  if (mouseY < gridTop || mouseY > gridTop + gridH) return;
+  const cellW = gridW / L;
+  const loc = Math.floor((mouseX - gridX0) / cellW);
+  if (segLoci.includes(loc) && !focal.includes(loc)){
+    focal = [focal[1], loc];     // keep the two most-recently chosen
+    // rebuild histories so the sparkline reflects the new pair cleanly
+    r2Hist = r2Hist.map(() => null); divHist = divHist.slice();
+    recordStats();
+  }
+}
+
+function keyPressed(){
+  if (key === ' ') { togglePlay(); return false; }
+  if (key === 's' || key === 'S') stepGen();
+}
+
+/* ----------------------------------------------------------------------- */
+/* UI wiring                                                                */
+/* ----------------------------------------------------------------------- */
+function togglePlay(){
+  playing = !playing;
+  document.getElementById('play').textContent = playing ? 'pause' : 'play';
+}
+
+function bindUI(){
+  const $ = id => document.getElementById(id);
+
+  $('c').addEventListener('input', e => {
+    c = parseFloat(e.target.value);
+    $('cVal').textContent = c.toFixed(2) + (c < 0.08 ? " — clonal"
+                          : c > 0.92 ? " — free recomb" : "");
+  });
+  $('N').addEventListener('input', e => {
+    N = parseInt(e.target.value); $('nVal').textContent = N; initPop();
+  });
+  $('seg').addEventListener('input', e => {
+    segCount = parseInt(e.target.value); $('segVal').textContent = segCount; initPop();
+  });
+  $('spd').addEventListener('input', e => {
+    speed = parseInt(e.target.value); $('spdVal').textContent = speed + " gen/s";
+  });
+  $('play').addEventListener('click', togglePlay);
+  $('step').addEventListener('click', () => { stepGen(); });
+  $('reset').addEventListener('click', () => { initPop(); });
+  $('seed').addEventListener('click', () => {
+    seedValue = (Math.random() * 4294967296) >>> 0; initPop();
+  });
+
+  document.getElementById('hint').textContent =
+    "space = play/pause · s = step · click a coloured locus to track it";
+}
+</script>
+</body>
+</html>
