@@ -42,16 +42,34 @@ execute:
 
 ::: {.column width="48%"}
 
-
+::: {.fragment}
+### Perspective
+ 
 <img src="hme.png" style="width:95%; height:auto;">
+
+- Niche construction
+- Maternal effects
+- Indirect genetic effects
+- Multilevel selection (MLS)
+:::
 
 :::
 
 ::: {.column width="48%"}
 
-- Rescue: ![](microbial_rescue_curve.png){.inline-img width=55%}
+::: {.fragment}
+### Microbe-mediated rescue ∫∑
 
-- MLS: ![](jar.webp){.inline-img width=25%}![](jar.webp){.inline-img width=25%}![](jar.webp){.inline-img width=25%}
+![](microbial_rescue_curve.png){.inline-img width=55%}
+
+:::
+
+::: {.fragment}
+### Multilevel selection ∫∑ & 🧪🔬
+
+![](jar.webp){.inline-img width=25%}![](jar.webp){.inline-img width=25%}![](jar.webp){.inline-img width=25%} 
+
+:::
 :::
 
 :::: 
@@ -231,12 +249,57 @@ $$\lim_{t\to\infty}q_t(\rho)\propto \frac{1}{(1-\rho)^{3/2}},\quad \int_{-1}^{1}
   - while also eroding variation
 - Stability of $\bf G$-matrix structure due to
   - mutation, migration, selection
+- Essentially complete opposite of previous view (Roff 2000)
 :::
 
 :::
 
 ::: {.column width="38%"}
 ![](G_drift_dynamics.gif){fig-align="center"}
+:::
+
+::::
+
+## Consequences for understanding evolution
+
+:::: {.columns .cols2}
+
+::: {.column width="38%"}
+
+- McGlothlin et al (2018): <br><br> "*Genetic drift is predicted to primarily influence G-matrix size, ...*"
+
+:::
+
+::: {.column width="58%"}
+![Fig 2 from McGlothlin et al (2018)](anolisG.jpeg){fig-align="center"}
+:::
+
+::::
+
+## More in the paper...
+
+![](mult-mtgl.png)
+
+## Thanks & Questions
+
+Peter L. Ralph, Steve Krone, Hinrich Schulenburg, Patrick C. Phillips, Arne Traulsen, Jonas Wickman, Brendan Bohannan, Carola Peterson, Inga Hamerich, Amande de Azevedo-Lopez, Hildegard Uecker, many more ...
+
+:::: {.columns .cols4}
+
+::: {.column width="23%"}
+![](dfg_trans_crop_black.png)
+:::
+
+::: {.column width="23%"}
+![](EN%20V%20Co-funded%20by_BLACK%20OUTLINE.jpg)
+:::
+
+::: {.column width="23%"}
+![](kite_cau_black.png)
+:::
+
+::: {.column width="23%"}
+![](mpi.png)
 :::
 
 ::::

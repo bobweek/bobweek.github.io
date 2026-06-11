@@ -266,3 +266,93 @@ hotmag  { color: var(--hotmag); }
   margin-right: auto;
   width: 100%;
 }
+
+.reveal .obsidian-note {
+  border-left: 8px solid var(--cyan);
+  background: var(--quote-bg, #eef4f6);
+  padding: 0.8em 1em;
+  margin: 0.8em 0;
+  border-radius: 0.4em;
+}
+
+.reveal .obsidian-note p {
+  margin: 0.2em 0;
+}
+
+.reveal .obsidian-callout {
+  border-left: 8px solid var(--cyan);
+  background: var(--quote-bg, #eef4f6);
+  padding: 0.75em 1em;
+  margin: 0.8em 0;
+  border-radius: 0.35em;
+}
+
+.reveal .obsidian-callout strong:first-child {
+  color: var(--cyan);
+}
+
+.reveal .obsidian-callout p {
+  margin: 0.25em 0;
+}
+
+.reveal .obsidian-callout.note {
+  border-left-color: var(--cyan);
+}
+
+.reveal .obsidian-callout.warning {
+  border-left-color: var(--safety);
+}
+
+.reveal .obsidian-callout.idea {
+  border-left-color: var(--violet);
+}
+
+/* --------- Obsidian-style callouts for Quarto/revealjs --------- */
+
+.reveal .obsidian-callout {
+  --callout-color: var(--cyan, #007c91);
+
+  border-left: 8px solid var(--callout-color) !important;
+  background: rgba(0, 124, 145, 0.10) !important;
+  color: var(--text) !important;
+
+  padding: 0.65em 0.9em !important;
+  margin: 0.8em 0 !important;
+  border-radius: 0.35em !important;
+}
+
+.reveal .obsidian-callout p {
+  margin: 0.25em 0 !important;
+}
+
+.reveal .obsidian-callout .callout-title {
+  color: var(--callout-color) !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.4em !important;
+}
+
+.reveal .obsidian-callout.note {
+  --callout-color: var(--cyan, #007c91);
+  background: rgba(0, 124, 145, 0.10) !important;
+}
+
+.reveal .obsidian-callout.warning {
+  --callout-color: var(--safety, #c62828);
+  background: rgba(198, 40, 40, 0.10) !important;
+}
+
+.reveal .obsidian-callout.idea {
+  --callout-color: var(--violet, #5a4cc7);
+  background: rgba(90, 76, 199, 0.10) !important;
+}
+
+.center-slide-img {
+  height: 620px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-slide-img img {
+  border: none !important;
+}
