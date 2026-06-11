@@ -231,10 +231,15 @@ $$\lim_{t\to\infty}q_t(\rho)\propto \frac{1}{(1-\rho)^{3/2}},\quad \int_{-1}^{1}
 :::
 
 ::: {.column width="38%"}
+::: {.incremental}
+
 - Interesting it does not depend on genetic vars $G_{11},G_{22}$
   - Evolution always depends on amount of genetic variation
 - How to test result?
   - replicated mesocosms of clonal populations controlling for mutation
+
+:::
+
 :::
 
 ::::
@@ -264,9 +269,21 @@ $$\lim_{t\to\infty}q_t(\rho)\propto \frac{1}{(1-\rho)^{3/2}},\quad \int_{-1}^{1}
 
 :::: {.columns .cols2}
 
-::: {.column width="38%"}
+::: {.column .fragment width="38%"}
 
-- McGlothlin et al (2018): <br><br> "*Genetic drift is predicted to primarily influence G-matrix size, ...*"
+McGlothlin et al (2018):
+
+::: {.incremental}
+
+- $\bf G$-matrice of Anolis lizards
+- Variation across lineages => evolution
+- Overall structure conserved
+- Explanations:
+  - Plieotropy
+  - Stabilizing selection
+  - "*Genetic drift is predicted to primarily influence G-matrix size...*"
+
+:::
 
 :::
 
@@ -275,6 +292,11 @@ $$\lim_{t\to\infty}q_t(\rho)\propto \frac{1}{(1-\rho)^{3/2}},\quad \int_{-1}^{1}
 :::
 
 ::::
+
+::: {.fragment}
+If drift explains small $\bf G$-matrices, why dont those matrices also have altered orientation?
+:::
+
 
 ## More in the paper...
 
