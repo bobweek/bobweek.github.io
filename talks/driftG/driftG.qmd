@@ -214,6 +214,10 @@ $$\frac{d{\bf G}}{dt}={\color{#c2185b} -\frac{v}{N_e}{\bf G}} + {\color{#5a4cc7}
 
 ::::
 
+## Effect of correlation on $\bf G$-matrix
+
+![](g_matrix_ellipse_demo.gif){fig-align="center"}
+
 <!-- 
 
 ## Equilibrium distribution of $\rho$ under drift?
@@ -260,7 +264,7 @@ $$\lim_{t\to\infty}q_t(\rho)\propto \frac{1}{(1-\rho)^{3/2}},\quad \int_{-1}^{1}
 :::
 
 ::: {.column width="38%"}
-![](G_drift_dynamics.gif){fig-align="center"}
+![](G_drift_dynamics_2.gif){fig-align="center"}
 :::
 
 ::::
