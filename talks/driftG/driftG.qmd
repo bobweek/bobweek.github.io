@@ -1,6 +1,6 @@
 ---
 title: The Response of Genetic Correlations to Drift
-author: "**Bob Week** 🦠 Schulenburg Group 🪱 *Kiel University*"
+author: "**Bob Week** 🦠 KiTE Postdoc ~ Schulenburg Group 🪱 *Kiel University*"
 format:
   revealjs:
     theme: white
@@ -18,7 +18,8 @@ format:
     html-math-method: mathjax 
     include-in-header:
       text: |
-        <script>
+        <script>The Response of Genetic Correlations to Drift
+
         window.MathJax = {
           tex: {
             macros: {
@@ -111,7 +112,7 @@ execute:
 
 ## How do genetic correlations respond to drift?
 
-![](WFdrift/wf_correlations.gif){fig-align="center"}
+![](wf_correlations_2.gif){fig-align="center"}
 
 - Genetic correlations among loci become more extreme
 
@@ -240,7 +241,9 @@ $$\lim_{t\to\infty}q_t(\rho)\propto \frac{1}{(1-\rho)^{3/2}},\quad \int_{-1}^{1}
 - Interesting it does not depend on genetic vars $G_{11},G_{22}$
   - Evolution always depends on amount of genetic variation
 - How to test result?
-  - replicated mesocosms of clonal populations controlling for mutation
+  - sets of replicated mesocosms of clonal populations controlling for mutation
+  - for each set impose different $N_e$ using bottlenecks
+  - time-series measurements of genetic correlations
 
 :::
 
