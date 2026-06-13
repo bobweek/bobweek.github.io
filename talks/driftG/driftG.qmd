@@ -36,7 +36,7 @@ execute:
   fig-format: svg
 ---
 
-
+<!-- 
 ## Host-Microbiome Evolution 🪱🦠
 
 :::: {.columns .cols2}
@@ -73,7 +73,7 @@ execute:
 :::
 :::
 
-:::: 
+::::  -->
 
 
 ## Response of Genetic Correlations to Drift
