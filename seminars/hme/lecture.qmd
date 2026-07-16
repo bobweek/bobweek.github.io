@@ -366,6 +366,7 @@ CONS
   - transmission
   - fidelity
   - mutability
+- *Need:* framework independent of detailed assumptions
 :::
 
 ## Framework for Microbiome Inheritance
@@ -606,7 +607,11 @@ ggplot() +
 
 ::: {.fragment  data-fragment-index="1"} 
 - $P = G + E$
+  - $P=$ total phenotypic var.
+  - $G=$ explained by genetic var.
+  - $E=$ unexplained by genetic var.
 - $G = G_A + R$
+  - $G_A=$ explained by add. model
 :::
 
 ::: {.fragment  data-fragment-index="4"}
@@ -1105,7 +1110,7 @@ $R=t^2\,S$
   - *Feedback* with external microbiome
   - External microbiome changes effect of env.
 
-**Q:** *What eco-evo processes and what host-microbiome attributes shape adaptation via niche construction?*
+**Q:** *Is microbiome-mediated niche construction a fundamental adaptive process?*
 
 :::
 :::
@@ -1122,18 +1127,19 @@ $R=t^2\,S$
 :::
 ::: {.column width="70%"}
 
-- **Mesocosm experiments:**
-  - *C. elegans* shape microbiome in compost
-  - Compost conditions *degrade*
-  - Microbiome manipulation *buffers* against <span style="font-size: 0.8em;">$\Delta E$</span>
-- **MLS Model**
-  - Modify <span style="font-size: 0.8em;">*$\Delta\bar z=G\beta$*</span>
-    - Modelling framework (instead of statistical)
-  - Microbiome transmission + dynamics ~ *mutation*
-  - *Feedback* with external microbiome
-  - External microbiome changes effect of env.
+- **MLS experiments:**
+  - Selection among *C. elegans* populations
+  - *MYb11* microbe ~ mutualist/pathogen depending
+  - Three levels of selection:
+    - *Flasks*, *Hosts*, *Microbes*
+- **MLS Model:**
+  - Two microbe types (mutualist/pathogen)
+  - Host abundance dynamics ~ microbe mediated
+  - Microbe abundance dynamics
+    - in hosts, and in substrate
+    - differential colonization/shedding rates
 
-**Q:** *What eco-evo processes and what host-microbiome attributes shape adaptation via niche construction?*
+**Q:** *What promotes alignment of evolutionary interests?*
 
 :::
 :::

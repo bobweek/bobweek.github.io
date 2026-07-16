@@ -1,0 +1,4843 @@
+-
+
+Supplementary Material for
+STOCHASTIC ECO-EVOLUTIONARY DYNAMICS OF MULTIVARIATE TRAITS
+Bob Week
+
+1. Numerical Implementation
+In the associated github repository (https://github.com/bobweek/multi-mtgl), I provide four different numerical implementations
+for the Brownian Motion Gradient version of the framework described in the main text. Each implementation has been written
+in Julia. The first three implementations (found in the folders labelled knw, dff, and cov) make use of the DifferentialEquations.jl
+package (Rackauckas and Nie, 2017). The first implementation, knw, works when analytical expressions for mean fitness m̄ and
+fitness gradients ∇z̄ m̄, ∇z̄ m, ∇G m̄, and ∇G m have been identified. The second implementation, diff, works when an analytical
+expression for mean fitness has been identified, but the gradients ∇z̄ m̄, ∇G m̄ are numerically approximated using finite differences.
+This second implementation assumes frequency-independent selection so that ∇z̄ m = ∇G m = 0. The third implementation, cov,
+works with just the fitness function m(ν, z) and numerically approximates integrals using a cubature method to obtain mean fitness
+and fitness gradients (which are computed using their expressions as covariances, see Supplementary Material, Section 2.3 below).
+The fourth implementation (found in the folder labelled diy) is a manual implementation, which is described in the following
+paragraphs:
+A simple approach to numerically solve stochastic differential equations is the Euler-Maruyama method (Bayram et al., 2018).
+This method is a natural stochastic extension of the Euler method to solving deterministic differential equations. In particular, for
+the d-dimensional differential equation u̇ = f (u) with f ∶ Rd → Rd , the Euler method approximates the solution with the recursion
+ut+∆t = ut + f (ut ) ∆t, for a given fixed time-step ∆t. As an extension, the Euler-Maruyama approach to solving
+du = f (u) dt + g(u) dB,
+
+(1)
+
+with g ∶ Rd → Rd×d , is given by the stochastic recursion
+ut+∆t = ut + f (ut ) ∆t + g(ut ) Wt
+
+(2)
+
+where Wt is a d-dimensional multivariate normal random vector with independent entries each having mean zero and variance ∆t,
+and the product g(ut ) Wt returns another d-dimensional vector defined as usual matrix-vector multiplication
+To numerically integrate G-matrix dynamics, this approach is extended for matrix-valued recursions. In this case, we have
+ut ∈ Rd×d , f ∶ Rd×d → Rd×d g ∶ Rd×d → Rd×d×d×d , and Wt a d × d symmetric normal matrix. In particular, Wt has independent
+diagonal entries each with mean zero and variance ∆t, off-diagonals have mean zero and variance ∆t/2, and symmetric pairs
+are perfectly correlated so that [Wt ]ij = [Wt ]ji , but otherwise entries are independent. The product g(ut ) Wt is replaced by
+g(ut ) ∶ Wt , and returns a d × d matrix following the tensor products described in the main text:
+[g(ut ) ∶ Wt ]
+
+ij
+
+= ∑ [g(ut )]ijkl [Wt ]kl .
+
+(3)
+
+kl
+
+1.1. Comparing Results Based on Heuristics with Classical Scaling Result
+Using the manual implementation described above, I first solved for G and then back-calculated ρ to check that the solutions match
+those found using the heuristics presented in the main text to obtain the sde dρ (i.e., main text equation (40)). Results indicating
+confirmation based on 500 replicates for initial values ρ0 = −0.5, 0.0, 0.5 and rate v/n = 0.1 are displayed in Figure 1 below.
+I also used this approach to compare the expected dynamics of G-matrices under drift with the classical scaling result E[Gt ] =
+G0 e−v t/n . Using 500 replicates with initial value G11 = G22 = 1.0, G12 = 0.5 and rate v/n = 0.1, I calculated approximate
+expectations by averaging over replicate runs (⟨G11 ⟩, ⟨G22 ⟩, ⟨G12 ⟩). Figure 2 demonstrates agreement.
+
+1
+
+2
+
+Bob Week
+
+Fig. 1. Correlation dynamics obtained by back-calculuting ρ from Euler-Maruyama solutions to G indicate agreement with heuristics presented in main
+text. Each panel displays 500 replicates initiated at ρ0 = −0.5 (top), ρ0 = 0.0 (middle), and ρ0 = 0.5 (bottom) with rate v/n = 0.1.
+
+Fig. 2. Euler-Maruyama solutions to G with initial condition G11 = G22 = 1.0, G12 = 0.5 and rate v/n = 0.1. Each panel displays averages over 500
+replicates (⟨G⟩) compared with the classical scaling result (EG).
+
+2. Calculation Steps for Expressions in Main Text
+2.1. Equation (1)
+For the sake of convenience, the multivariate Deterministic Asexual Gaussian Allelic (DAGA) partial differential equation (equation
+(1) of the main text) is repeated here:
+
+⊺
+
+ν̇t (z) = m(νt , z) νt (z) + 21 ∇ M ∇ νt (z).
+
+(4)
+
+Multivariate Eco-Evo Supp. Mat.
+
+3
+
+This equation is obtained from a deterministic approximation to solutions of the martingale problem described in Supplementary
+Material, Section 4 below. There are two ways to obtain this approximation: 1) assume the population size is very large or 2) assume
+the reproductive variance v is very small. Further technical details associated with these approximation schemes are described in
+Supplementary Material, Section 7.2 below.
+
+2.2. The Deterministic Covariance (DC ) Version: Equations (3), (4), and (6)
+2.2.1. Equation (3)
+Given finite population abundance at time t (i.e., nt < ∞) and integrable time derivative of population density at t (i.e.,
+∫Rd ∣ν̇t (z)∣dz < ∞), Lebesgue’s Dominated Convergence theorem (see, Axler, 2020) can be applied to the limit definition of the
+time derivative to justify ṅt = ∫Rd ν̇t (z)dz. Substituting the right hand side of multivariate DAGA (equation (4) above) for ν̇t leads
+to
+ṅt = ∫
+
+⊺
+
+Rd
+
+m(νt , z) νt (z) + 12 ∇ M∇ νt (z)dz.
+
+(5)
+
+Because m̄t = ∫Rd m(νt , z)pt (z)dz = ∫Rd m(νt , z)νt (z)/nt dz, we have ∫Rd m(νt , z)νt (z)dz = m̄t nt (recall pt (z) = νt (z)/nt is the trait
+distribution at time t, and m̄t is mean fitness at time t).
+By definition of matrix products, we immediately have ∫Rd ∇⊺ M∇ νt (z)dz = ∫Rd ∑ij Mij ∂zi ∂zj νt (z)dz. Then, assuming νt (z) → 0
+and ∣∇νt (z)∣ → 0 as ∣z∣ → ∞ sufficiently fast (with ∣z∣ being the Euclidean norm of z), integration-by-parts with respect to
+zi shows ∫Rd ∂zi ∂zj νt (z)dz = − ∫Rd [∂zi νt (z)][∂zj 1]dz = 0. This holds for each i = 1, . . . , d which implies ∫Rd ∇⊺ M∇ νt (z)dz =
+∫Rd ∑ij Mij ∂zi ∂zj νt (z)dz = ∑ij Mij ∫Rd ∂zi ∂zj νt (z)dz = 0.
+Linearity of integration then implies ṅt = m̄t nt , which is equation (3) of the main text.
+
+2.2.2. Equation (4)
+At time t the mean trait vector is defined by z̄t = ∫Rd z pt (z)dz. Assuming ∫Rd ∣z∣ (pt (z) + ∣ṗt (z)∣) dz < ∞, we can again apply
+Lebesgue’s Dominated Convergence theorem to the limit definition of the time derivative to justify ˙z̄t = ∫Rd z ṗt (z)dz.
+The quotient rule applied to ṗt (z) = ∂t [νt (z)/nt ] provides
+ṗt (z) =
+
+nt ν̇t (z) − νt (z) ṅt
+.
+n2t
+
+(6)
+
+Substituting the right-hand-side of DAGA (equation (4) above) for ν̇t (z), substituting the right-hand-side of the result ṅt = m̄t nt
+for ṅt , and then substituting pt (z) = νt (z)/nt into equation (6) and simplifying, the dynamics of the trait distribution are then
+obtained as
+⊺
+
+ṗt (z) = (m(nt pt , z) − m̄t ) pt (z) + 12 ∇ M ∇ pt (z).
+
+(7)
+
+with m(nt pt , z) = m(νt , z) because νt (z) = nt pt (z). Integration-by-parts is not needed to arrive at this result. The deterministic
+model summarized by DAGA (equation (4) above) is equally summarized by the combination of ṅt = m̄t nt and equation (7).
+Now substituting the right-hand-side of (7) into ˙z̄t = ∫Rd z ṗt (z)dz, we arrive at
+z̄˙ t = ∫
+
+⊺
+
+Rd
+
+z ((m(nt pt , z) − m̄t ) + 12 ∇ M ∇) pt (z)dz.
+
+(8)
+
+The selection term involving m(nt pt , z) − m̄t can be rewritten as
+∫ d z(m(nt pt , z) − m̄t )pt (z)dz = ∫ d (z − z̄t )(m(nt pt , z) − m̄t )pt (z)dz = Covt (m, z).
+
+(9)
+
+∫ d z̄t (m(nt pt , z) − m̄t )pt (z)dz = 0.
+
+(10)
+
+R
+
+R
+
+because
+R
+
+For the mutation term involving M, note the k-th entry of the d-dimensional vector ∫Rd z∇⊺ M∇νt (z)dz can be written using
+index notation using the definition of matrix products as ∑ij Mij ∫Rd zk ∂zi ∂zj pt (z)dz. Assuming pt (z) → 0 and ∣∇pt (z)∣ → 0
+sufficiently fast as ∣z∣ → ∞, integration-by-parts in zi shows ∫Rd zk ∂zi ∂zj pt (z)dz = − ∫Rd [∂zi zk ][∂zj pt (z)]dz = −δik ∫Rd ∂zj pt (z)dz.
+Thanks to the rapid decay of pt (z) for large ∣z∣, we have ∫Rd ∂zj pt (z)dz = 0. This holds for each j, k = 1, . . . , d and thus demonstrates
+˙z̄t = Covt (m, z) in agreement with equation (4) of the main text.
+
+4
+
+Bob Week
+
+2.2.3. Equation (6)
+At time t the trait covariance matrix is defined by Pt = ∫Rd (z − z̄)(z − z̄)⊺ pt (z)dz. Assuming
+2
+
+∫ d (∣z∣ + ∣z∣ )(pt (z) + ∣ṗt (z)∣)dz < ∞
+
+(11)
+
+R
+
+Lebesgue’s Dominated Convergence theorem can again be applied to justify Ṗt = ∫Rd ∂t [(z − z̄)(z − z̄)⊺ pt (z)]dz. Expanding the
+partial time derivative inside the integral leads to
+⊺
+
+⊺
+
+⊺
+
+∫ d ∂t [(z − z̄)(z − z̄) pt (z)]dz = ∫ d (z − z̄)(z − z̄) ṗt (z)dz + ∫ d pt (z)∂t [(z − z̄)(z − z̄) ]dz.
+R
+
+R
+
+(12)
+
+R
+
+The product rule of elementary calculus (in contrast to that of stochastic calculus) shows that ∂t [(z − z̄t )(z − z̄t )⊺ ] = −z̄˙ t (z − z̄t )⊺ −
+(z − z̄t ) ˙z̄⊺t . Hence, by the definition of z̄t , we have ∫Rd pt (z)∂t [(z − z̄t )(z − z̄t )⊺ ]dz = 0 and the dynamics of Pt simplify to
+Ṗt = ∫
+
+⊺
+
+Rd
+
+(z − z̄t )(z − z̄t ) ṗt (z)dz.
+
+(13)
+
+Replacing ṗt (z) in equation (13) with the right-hand-side of equation (7), we arrive at
+Ṗt = ∫
+
+Rd
+
+⊺
+
+⊺
+
+(z − z̄t )(z − z̄t ) ((m(nt pt , z) − m̄t ) + 21 ∇ M ∇) pt (z)dz.
+
+(14)
+
+The selection term involving m(nt pt , z) − m̄t can be rewritten as
+⊺
+
+⊺
+
+⊺
+
+∫ d (z − z̄t )(z − z̄t ) (m(nt pt , z) − m̄t ) pt (z)dz = ∫ d ((z − z̄t )(z − z̄t ) − Pt )(m(nt pt , z) − m̄t ) pt (z)dz = Covt (m, (z − z̄t )(z − z̄t ) )
+R
+R
+(15)
+because ∫Rd Pt (m(nt pt , z) − m̄t ) pt (z)dz = 0.
+Set U = (z − z̄t )(z − z̄t )⊺ , the d × d matrix with ij-th entry Uij = (zi − z̄i (t))(zj − z̄j (t)) and z̄k (t) the k-th entry of z̄t . Then, in
+index notation, the kl-th entry of the mutation term of equation (14) involving M is 21 ∫Rd Ukl ∑ij Mij ∂zi ∂zj pt (z)dz. Given that
+pt (z) → 0 and ∣∇pt (z)∣ → 0 sufficiently fast as ∣z∣ → ∞, apply integration-by-parts twice:
+●
+●
+
+First in zi : ∫Rd Ukl Mij ∂zi ∂zj pt (z)dz = − ∫Rd Mij [∂zi Ukl ][∂zj pt (z)]dz.
+Then in zj : − ∫Rd Mij [∂zi Ukl ][∂zj pt (z)]dz = ∫Rd Mij [∂zi ∂zj Ukl ]pt (z)dz.
+
+So the kl-th entry of the mutation term of equation (14) becomes 12 ∫Rd ∑ij Mij [∂zi ∂zj Ukl ]pt (z)dz. It is straightforward to obtain
+∂zi ∂zj Ukl = δik δjl + δil δjk , which does not depend on z. So the kl-th entry of the mutation term simplifies to 12 ∑ij (δik δjl +
+δil δjk )Mij = 12 (Mkl + Mlk ). Because M is a covariance matrix it also symmetric such that Mkl = Mlk . Hence, the mutation term
+of equation (14) simplifies to M.
+Taken together, we find Ṗt = M + Covt (m, (z − z̄t )(z − z̄t )⊺ ) in agreement with equation (6) of the main text.
+
+2.3. Writing Covariances in Terms of Gradients
+Here I show how to compute the Deterministic Gradient (DG) version of the framework from the Deterministic Covariance (DC)
+version. To begin, assume trait values are multivariate normal with non-singular covariance matrix so that
+
+p(z) = p(z, z̄, P) =
+
+exp (− 12 (z − z̄)⊺ P−1 (z − z̄))
+.
+√
+(2π)k det(P)
+
+(16)
+
+Setting ∇z̄ the gradient with respect to z̄ (i.e., the d-dimensional vector with i-th entry ∂/∂ z̄i ) and q(z) = ln p(z), we have
+⊺
+
+−1
+
+∇z̄ q(z) = − 12 ∇z̄ [(z − z̄) P
+
+(z − z̄)].
+
+(17)
+
+Applying equation (83) from Petersen and Pedersen, (2012), we obtain ∇z̄ [(z − z̄)⊺ P−1 (z − z̄)] = 2P−1 (z − z̄). Hence, ∇z̄ q(z) =
+P−1 (z − z̄). Combining this result with the standard log-derivative identity ∇z̄ ln p(z) = [∇z̄ p(z)]/p(z) brings us to
+−1
+
+∇z̄ p(z) = P
+
+(z − z̄)p(z).
+
+(18)
+
+Multivariate Eco-Evo Supp. Mat.
+
+5
+
+2.3.1. Covariance with trait expressed in terms of ∇z̄ :
+For a function x(z, z̄) that is differentiable with respect to z̄ and satisfies ∫Rd (∣x(z, z̄)∣+∣∇z̄ x(z, z̄)∣)p(z)dz < ∞, Lebesgue’s Dominated
+Convergence theorem can be applied to the limit definition of ∇z̄ to justify
+∇z̄ x̄ = ∇z̄ ∫
+
+Rd
+
+x(z, z̄) p(z)dz = ∫
+
+p(z) [∇z̄ x(z, z̄)]dz + ∫
+
+Rd
+
+Rd
+
+x(z, z̄) [∇z̄ p(z)]dz.
+
+(19)
+
+Setting ∇z̄ x = ∫Rd p(z) [∇z̄ x]dz and substituting ∇z̄ p(z) with the right-hand-side of equation (18), and simplifying using the
+definition of covariance results in
+−1
+∇z̄ x̄ = ∇z̄ x + P Cov(x, z).
+(20)
+Rearranging yields Cov(x, z) = P (∇z̄ x̄ − ∇z̄ x).
+
+2.3.2. Covariance with (z − z̄)(z − z̄)⊺ expressed in terms of ∇P :
+Setting ∇P the gradient with respect to the d × d (not necessarily symmetric nor positive-definite) matrix P (i.e., ∇P is the d × d
+matrix with ij-th entry ∂/∂Pij ), we can use formula presented in Petersen and Pedersen, (2012) to find ∇P ln det(P) = P−1 and
+∇P tr(AP−1 ) = −(P−1 AP−1 )⊺ for a d × d matrix A. Using the so-called cyclic property of the matrix trace operator lets us write
+(z − z̄)⊺ P−1 (z − z̄) = tr[(z − z̄)⊺ P−1 (z − z̄)] = tr[(z − z̄)(z − z̄)⊺ P−1 ]. Applying these results to ∇P ln p(z) and simplifying yields
+−1
+
+∇P ln p(z) = 12 P
+
+⊺
+
+−1
+
+[(z − z̄)(z − z̄) − P]P
+
+.
+
+(21)
+
+Finally, use the relation ∇P p(z) = p(z)∇P ln p(z) to obtain ∇P p(z). None of these calculations assume constancy of det(P) with
+respect to P or any other special assumptions.
+For a function x(z, P) that is differentiable with respect to P and satisfies ∫Rd (∣x(z, P)∣ + ∣∇P x(z, P)∣)p(z)dz < ∞, we
+can combine Lebesgue’s Dominated Convergence theorem with the limit definition of ∇P to justify ∇P ∫Rd x(z, P) p(z)dz =
+∫Rd ∇P [x(z, P) p(z)]dz. Using barred expressions for brevity, we then have ∇P x̄ = ∇P x + ∫Rd x(z)[∇P p(z)] dz. Equation (21)
+implies ∫Rd x(z)[∇P p(z)] dz = 21 P−1 Cov(x, (z − z̄)(z − z̄)⊺ )P−1 . We then obtain
+⊺
+
+Cov(x, (z − z̄)(z − z̄) ) = 2 P (∇P x̄ − ∇P x) P.
+
+(22)
+
+2.3.3. Covariance with trait expressed in terms of ∇:
+To rewrite Cov(x, z) in terms of ∇ ∶= (∂/∂z1 , . . . , ∂/∂zd )⊺ (i.e., the gradient with respect to z), note that for multivariate normal
+p(z) with mean z̄ and covariance P we have ∇z̄ ln p(z) = P−1 (z − z̄), and ∇ ln p(z) = −P−1 (z − z̄), and hence
+∇z̄ p(z) = p(z)∇z̄ ln p(z) = −p(z)∇ ln p(z) = −∇p(z).
+
+(23)
+
+In Supplementary Material, Section 2.3.1 above we already obtained
+∇z̄ x̄ = ∇z̄ ∫ x(z, z̄) p(z) dz = ∇z̄ x + ∫ x(z, z̄)[∇z̄ p(z)] dz.
+
+(24)
+
+∇z̄ x̄ − ∇z̄ x = − ∫ x(z, z̄)[∇p(z)] dz.
+
+(25)
+
+Thus,
+
+Because of multivariate normality, p(z) and ∣∇p(z)∣ decay sufficiently rapidly as ∣z∣ → ∞ to justify integration-by-parts. For
+coordinate i, this gives − ∫Rd x(z, z̄) [∂zi p(z)]dz = ∫Rd [∂zi x(z, z̄)] p(z)dz. In vector form this is ∇z̄ x̄ − ∇z̄ x = ∇x. Hence, we can
+equally write Cov(x, z) = P ∇x.
+
+2.3.4. Covariance with (z − z̄)(z − z̄)⊺ expressed in terms of ∇2 :
+To rewrite the response of P to selection in terms of the Hessian with respect to z,
+∂2
+
+⎛ ∂z12
+⎜ ∂2
+⎜
+2
+∂z ∂z
+∇ ∶= ⎜
+⎜ 2 1
+⎜
+⋮
+⎜
+2
+⎝ ∂z∂∂z
+d
+
+1
+
+∂2
+∂z1 ∂z2
+
+⋯
+
+∂2
+∂z22
+
+⋯
+
+⋮
+
+2
+
+∂
+∂zd ∂z2
+
+⋱
+⋯
+
+∂2
+∂z1 ∂zd ⎞
+
+⎟
+∂2
+⎟
+∂z2 ∂zd ⎟ ,
+⋮
+
+2
+
+∂
+∂zd2
+
+⎟
+⎟
+⎟
+⎠
+
+(26)
+
+first note that, by using multivariate normality, we can leverage results in section 8.4.2 of Petersen and Pedersen, (2012) to obtain
+∇P p(z) = 21 ∇2 p(z). In addition, because of multivariate normality p(z) and ∣∇p(z)∣ decay sufficiently rapidly as ∣z∣ → ∞ to justify
+applying integration-by-parts twice to (∫Rd x(z)[∇P p(z)] dz)ij = ∫Rd x(z) ∂zi ∂zj p(z)dz:
+
+6
+
+●
+●
+
+Bob Week
+
+First in zi : ∫Rd x(z) ∂zi ∂zj p(z)dz = − ∫Rd [∂zi x(z)][∂zj p(z)]dz.
+Then in zj : − ∫Rd [∂zi x(z)][∂zj p(z)]dz = ∫Rd [∂zi ∂zj x(z)] p(z)dz.
+
+In the notation above this gives ∇P x̄ − ∇P x = 12 ∇2 x. Hence, we can equally write Cov(x, (z − z̄)(z − z̄)⊺ ) = P ∇2 x P.
+
+2.4. Equations (8)
+Here I show how to combine the general dynamics
+ṅ = m̄ n,
+
+(27a)
+
+˙z̄ = Cov(m, z),
+
+(27b)
+⊺
+
+Ṗ = M + Cov(m, (z − z̄)(z − z̄) ),
+⊺
+
+(27c)
+
+z − 21 (θ − z)⊺ Ψ (θ − z) − c n to arrive at equations (8) in the main text. These
+
+with a fitness function of the form m(ν, z) = r + b
+derivations assume the abundance, mean vector, covariance matrix, and skew and kurtosis tensors are finite, but no other restrictions
+are required.
+
+2.4.1. Equation (8a)
+To begin, mean fitness m̄ can be obtained by first expanding the quadratic term quantifying stabilizing selection in m above and
+rearranging to get
+⊺
+
+⊺
+
+⊺
+
+⊺
+
+m(ν, z) = (r − 21 θ Ψ θ − c n) + (b + θ Ψ)z − 12 z Ψz
+
+(28)
+
+Note that the trace of a scalar is just that scalar so that z⊺ Ψz = tr(z⊺ Ψz). The trace operator has a so-called cyclic property
+such that tr(ABC) = tr(BCA) = tr(CAB) (see Petersen and Pedersen, 2012), so we can write z⊺ Ψz = tr(Ψzz⊺ ). Then because
+both the operations of taking the trace and averaging across traits are linear, we have z⊺ Ψz = tr(Ψzz⊺ ). But then we also have
+zz⊺ = P + z̄z̄⊺ so that (again using the cyclic property of trace) z⊺ Ψz = tr(ΨP) + z̄⊺ Ψz̄. Hence, making use of symmetry of Ψ, mean
+fitness is obtained as
+⊺
+
+⊺
+
+⊺
+
+⊺
+
+m̄ = (r − 21 θ Ψ θ − c n) + (b + θ Ψ)z̄ − 12 (tr(ΨP) + z̄ Ψz̄),
+
+(29)
+
+and rearranging brings us to
+⊺
+
+⊺
+
+m̄ = r + b z̄ − 12 (θ − z̄) Ψ (θ − z̄) − 21 tr(Ψ P) − c n.
+
+(30)
+
+Plugging this into ṅ = m̄ n provides equation (8a) in the main text.
+
+2.4.2. Equation (8b)
+For the mean trait dynamics, set x = z − z̄ so that Cov(m, z) = mx. Rewriting m in terms of x provides (making use of symmetry
+of Ψ),
+⊺
+
+⊺
+
+⊺
+
+⊺
+
+m(ν, x) = r + b z̄ − 12 (θ − z̄) Ψ (θ − z̄) − c n + (b + Ψ(θ − z̄)) x − 12 x Ψx.
+
+(31)
+
+Setting a = b + Ψ(θ − z̄), we then have Cov(m, z) = (a⊺ x)x − 12 (x⊺ Ψx)x because x̄ = 0. Using the matrix identity (a⊺ x)x = xx⊺ a
+and linearity of averaging across trait values, we have (a⊺ x)x = Pa because xx⊺ = P.
+Now observe that component i of (x⊺ Ψx)x is ∑jk Ψjk xi xj xk , and Sijk = xi xj xk is the ijk-th entry of the third order skew
+tensor S. In particular, this coincides with the i-th entry of the product S ∶ Ψ defined in the main text. Together this provides
+Cov(m, z) = Pb + PΨ(θ − z̄) − 12 S ∶ Ψ, which agrees with equation (8b) of the main text.
+
+2.4.3. Equation (8c)
+Starting with Ṗ = M + Cov(m, (z − z̄)(z − z̄)⊺ ), set x = z − z̄, so that P = xx⊺ and x = 0. Then
+⊺
+
+Ṗ = M + Cov(m, xx )
+and
+⊺
+
+⊺
+
+⊺
+
+⊺
+
+m = r + b z̄ − 21 (θ − z̄) Ψ(θ − z̄) − c n + a x − 21 x Ψx,
+where a = b + Ψ(θ − z̄). Then,
+
+Multivariate Eco-Evo Supp. Mat.
+
+⊺
+
+⊺
+
+⊺
+
+⊺
+
+7
+
+⊺
+
+Cov(m, xx ) = Cov(a x, xx ) − 12 Cov(x Ψx, xx ),
+and
+⊺
+
+⊺
+
+Cov(a x, xx ) = (a⊺ x)xx⊺ .
+The ijk-th entry of the third-order skew tensor S is given by Sijk = xi xj xk . Denoting the single contraction by (S⋅a)ij = ∑k Sijk ak ,
+we then have Cov(a⊺ x, xx⊺ ) = S ⋅ a. The ijkl-th entry of the fourth-order kurtosis tensor K is given by Kijkl = xi xj xk xl . Denote
+the double contraction by (K ∶ Ψ)ij = ∑kl Kijkl Ψkl . Then x⊺ Ψx = tr(ΨP), and using the identity Cov(x, y) = xy − x̄ȳ, we obtain
+⊺
+
+⊺
+
+Cov(x Ψx, xx ) = (K ∶ Ψ) − tr(ΨP) P.
+Because S ⋅ a = S ⋅ (b + Ψ(θ − z̄)) = S ⋅ b + S ⋅ (Ψ(θ − z̄)), we arrive at
+⊺
+
+Cov(m, xx ) = S ⋅ b + S ⋅ (Ψ(θ − z̄)) − 21 (K ∶ Ψ) + 12 tr(ΨP)P,
+which then justifies equation (8c) of the main text.
+
+2.5. Equilibrium of n, z̄, P when m takes the form of equation (7) in the main text
+2.5.1. Existence of Gaussian Equilibrium and justification for equations (9)-(11) in main text
+From equation (7) in Supplementary Material, Section 2.2.2 above, we have ṗ = (m − m̄)p + 12 ∇⊺ M∇p. Consider a Gaussian density
+of the form
+⊺ −1
+−1
+(32)
+f (z) = Z exp(− 21 (z − µ) Q (z − µ)) ,
+with mean µ , covariance matrix Q, and normalizing constant Z. Writing m(z) in place of m(ν, z), follow equation (7) in the main
+text and assume
+⊺
+⊺
+m(z) = r + b z − 12 (θ − z) Ψ(θ − z) − c n.
+(33)
+From (30) above, we already have
+⊺
+
+m̄ = ∫
+
+Rd
+
+⊺
+
+m(z)f (z)dz = r + b µ − 21 (θ − µ ) Ψ (θ − µ ) − 12 tr(Ψ Q) − c n,
+
+(34)
+
+which holds for any distribution of z (with finite first and second moments). Set y ∶= z − µ . Then (θ − z) = (θ − µ ) − y and
+θ − z)⊺ Ψ(θ
+θ − z) = (θ
+θ − µ)⊺ Ψ(θ
+θ − µ) − 2y⊺ Ψ(θ
+θ − µ) + y⊺ Ψy.
+(θ
+
+(35)
+
+Plugging this into m(z), and then using this to simplify m(z) − m̄ leads to
+⊺
+
+⊺
+
+⊺
+
+⊺
+
+m(z) − m̄ = a y − 12 y Ψy + 12 tr(ΨQ) = a (z − µ ) − 12 (z − µ ) Ψ(z − µ ) + 12 tr(ΨQ),
+
+(36)
+
+where a = b + Ψ(θ − µ ).
+From the form of f assumed, we have ln f (z) = − ln Z − 12 (z − µ )⊺ Q−1 (z − µ ). Using Petersen and Pedersen, (2012), equation
+(83), the gradient of a quadratic form is ∇[(z − µ)⊺ Q−1 (z − µ)] = 2 Q−1 (z − µ). Therefore, ∇ ln f (z) = −Q−1 (z − µ), and by the
+log-derivative identity, ∇f (z) = −Q−1 (z − µ ) f (z). Differentiating again gives ∇2 ln f (z) = ∇∇⊺ ln f (z) = −Q−1 . Using the identity
+for derivatives of exponentials,
+⊺
+⊺
+⊺
+∇∇ f (z) = f (z) ∇∇ ln f (z) + f (z) [∇ ln f (z)][∇ ln f (z)] ,
+(37)
+and hence
+⊺
+
+−1
+
++Q
+
+⊺
+
+−1
+
+∇∇ f (z) = f (z) [−Q
+⊺
+
+−1
+
+⊺
+
+−1
+
+(z − µ )(z − µ ) Q
+
+].
+
+(38)
+
+⊺
+
+Using ∇ M∇f = tr(M ∇∇ f ), we obtain
+⊺
+
+∇ M∇f (z) = f (z)[(z − µ ) Q
+
+−1
+
+MQ
+
+(z − µ ) − tr(MQ
+
+−1
+
+)].
+
+(39)
+
+)].
+
+(40)
+
+Divide the stationary condition 0 = (m(z) − m̄)f (z) + 12 ∇⊺ M∇f (z) by f (z) to get
+⊺
+
+−1
+
+0 = m(z) − m̄ + 12 [(z − µ ) Q
+
+−1
+
+MQ
+
+(z − µ ) − tr(MQ
+
+−1
+
+Plugging the result for m(z) − m̄ returns
+⊺
+
+⊺
+
+⊺
+
+−1
+
+−a (z − µ ) + 12 (z − µ ) Ψ(z − µ ) − 12 tr(ΨQ) = 12 (z − µ ) Q
+
+−1
+
+MQ
+
+(z − µ ) − 12 tr(MQ
+
+−1
+
+).
+
+(41)
+
+Now match coefficients. For the quadratic term, we have Ψ = Q−1 MQ−1 . Equivalently, M = Q Ψ Q. Denoting Ψ1/2 the principle
+square root of Ψ (defined using the eigenvalue decomposition Ψ1/2 = UΛ1/2 U), and multiplying both sides of M by Ψ1/2 provides
+1/2
+
+Ψ
+−1/2
+
+1/2
+
+MΨ
+
+−1/2
+
+=Ψ
+
+1/2
+
+1/2
+
+QΨQΨ
+
+=Ψ
+
+1/2
+
+1/2
+
+QΨ
+
+1/2
+
+Ψ
+
+1/2
+
+QΨ
+
+= (Ψ
+
+1/2
+
+1/2 2
+
+QΨ
+
+) .
+
+(42)
+
+Hence Q = Ψ
+(Ψ MΨ ) Ψ
+, in agreement with the expression for P̂ given by equation (9) in the main text. For the
+ˆ given by equation (10) in the main text.
+linear term, we have a = 0, which shows µ = Ψ−1 b+θ in agreement with the expression for z̄
+1/2
+
+1/2 1/2
+
+8
+
+Bob Week
+
+For the constant trace terms, we already have QΨ = MQ−1 . So the cyclic property of traces shows tr(ΨQ) = tr(MQ−1 ). Plugging
+in the equilibrium for mean trait vector and trait covariance matrix into the non-trivial equilibrium condition for abundance (ṅ = 0
+implies m̄ = 0 if n̂ > 0) returns equation (11) in the main text. Then, because the Gaussian ansatz is consistent, the stationary
+density is exactly
+1
+ˆ)⊺ P̂−1 (z − z̄
+ˆ)) .
+f (z) = p̂(z) = √
+exp(− 12 (z − z̄
+(43)
+d
+(2π) det(P̂)
+This demonstrates that, for m(z) given by equation (7) of the main text with sufficiently large intrinsic growth r > 0, multivariate
+DAGA (equation (1) in the main text) has an equilibrium proportional to a Gaussian density p̂(z) with covariance matrix P̂, mean
+ˆ
+z̄, and constant of proportionality n̂ given by equations (9)-(11) of the main text. Sufficiently large intrinsic growth r means
+that r > 21 tr((Ψ1/2 MΨ1/2 )1/2 ) − 12 b⊺ Ψ−1 b − b⊺θ . In that case ṅ = 0 implies m̄ = 0 and hence n̂ = m̄0 /c, while if m̄0 ≤ 0 the
+equilibrium abundance is n̂ = 0. I next show that the non-trivial equilibrium is globally stable given the initial condition satisfies
+n0 = ∫Rd ν0 (z)dz > 0.
+
+2.5.2. Global convergence of population density
+Multivariate DAGA is given by ν̇ = m ν + 12 ∇⊺ M∇ν. From equation (7) in Supplementary Material, Section 2.2.2 above, we then
+have ṗ = (m − m̄)p + 12 ∇⊺ M∇p. The specific form of m assumed is m(ν, z) = m(z) = r + b⊺ z − 21 (z − θ )⊺ Ψ(z − θ ) − c n. Hence m − m̄
+ˆ )p̂ + 12 ∇⊺ M∇p̂, and
+is independent of n, and therefore so are the dynamics of p. Equilibrium p̂ given above satisfies 0 = (m − m̄
+ˆ = 0. Together this implies
+equilibrium n̂ satisfies 0 = ˆ
+m̄n̂. Given sufficiently large intrinsic growth rate r, we have n̂ > 0 and thus m̄
+equilibrium population density is ν̂ = n̂p̂.
+To demonstrate νt → ν̂ as t → ∞ whenever n0 = ∫Rd ν0 (z)dz > 0 and r is large enough, I take advantage of the independence of
+ṗt from nt and consider a standard expression for the relative entropy of pt to p̂. I show this quantity is decreasing, and use this
+result to show pt → p̂. Building on this, I then show m̄t → 0 and use this to show nt → n̂. Finally, I combine these results to show
+global convergence of νt → ν̂.
+Convergence of trait distribution
+Define qt ∶= pt /p̂. Using pt = qt p̂ in the equation for ṗt and subtracting the stationary equation for p̂ multiplied by qt , a short
+product-rule computation gives
+1
+⊺
+⊺
+p̂ q̇t = 21 ∇ (M p̂ ∇qt ),
+q̇t =
+∇ (M p̂ ∇qt ).
+(44)
+2 p̂
+Using ∫ f as shorthand for ∫Rd f (z)dz, a standard definition for relative entropy is
+H(t) ∶= H(pt ∣ p̂) = ∫ pt ln
+
+pt
+= ∫ qt (ln qt ) p̂.
+p̂
+
+(45)
+
+d
+Differentiate in time using the chain rule for f (s) = s ln s, so ds
+f (s) = 1 + ln s:
+
+d
+(qt ln qt ) = (1 + ln qt ) q̇t .
+dt
+
+(46)
+
+Hence Ḣ(t) = ∫ (1 + ln qt ) q̇t p̂. Now use the normalization ∫ qt p̂ = 1 for all t. Differentiating this in time gives
+0=
+
+d
+∫ qt p̂ = ∫ q̇t p̂,
+dt
+
+(47)
+
+because p̂ does not depend on t. Therefore ∫ q̇t p̂ = 0. Hence, Ḣ(t) = ∫ q̇t p̂ ln qt . Substituting q̇t and integrating by parts (boundary
+terms vanish by Gaussian tails of pt , p̂) gives
+Ḣ(t) =
+
+1
+1
+⊺
+⊺
+∫ ∇ (M p̂ ∇qt ) ln qt = − ∫ (∇qt ) M (∇ ln qt ) p̂.
+2
+2
+
+(48)
+
+1
+⊺
+∫ qt (∇ ln qt ) M (∇ ln qt ) p̂ ≤ 0,
+2
+
+(49)
+
+Using ∇qt = qt ∇ ln qt ,
+Ḣ(t) = −
+
+since M is symmetric positive definite. Moreover Ḣ(t) = 0 iff ∇ ln qt ≡ 0, and hence iff qt ≡ 1 and pt ≡ p̂. Thus H(t) is non-increasing
+and constant only at pt = p̂. Under mild compactness/tightness assumptions (automatically satisfied here because both pt and p̂
+have Gaussian tails), any limit point p∞ of pt must satisfy Ḣ ≡ 0 and hence p∞ = p̂. Therefore
+∫ ∣pt − p̂∣ → 0 as t → ∞,
+which quantifies the notion by which pt → p̂.
+
+(50)
+
+Multivariate Eco-Evo Supp. Mat.
+
+9
+
+Convergence of abundance
+Note that
+ˆ =∫
+m̄t − m̄
+
+Rd
+
+(m(νt , z) − m(ν̂, z)) pt (z) dz + ∫
+
+Rd
+
+m(ν̂, z) (pt (z) − p̂(z)) dz.
+
+(51)
+
+Simplifying using the explicit quadratic form of m and the convergence pt → p̂ (which implies convergence of the relevant moments
+ˆ = εt − c (nt − n̂) for some εt → 0 as t → ∞. Hence, m̄t → ˆ
+ˆ = 0,
+z̄t → ˆ
+z̄ and Pt → P̂) to simplify, we arrive at m̄t − m̄
+m̄. But since m̄
+this implies m̄t ≈ c (n̂ − nt ) for large t. Then, for large t, we have ṅt ≈ c (n̂ − nt ) nt , and hence nt → n̂ as t → ∞.
+Convergence of population density
+Taken together, we have
+∫ ∣νt − ν̂∣ = ∫ ∣nt pt − n̂ p̂∣ ≤ ∣nt − n̂∣ + n̂ ∫ ∣pt − p̂∣ → 0
+
+(52)
+
+as t → ∞ whenever n0 > 0 and intrinsic growth r is sufficiently large. Thus the Gaussian equilibrium ν̂ is globally asymptotically
+stable.
+
+3. Translating Between Continuous and Discrete Time Models
+In this section, I describe how classical discrete time quantitative genetic models relate to the continuous time framework presented
+in the main text. Discrete time models work with fitness surfaces W (z), which can be thought of as the average lifetime reproductive
+output of an individual with trait value z (however, as described in Supplementary Material, Section 7.1 below, continuous-time
+individual-based models also utilize W (z) so that its inclusion in a model does not imply generations are non-overlapping). Given
+a trait distribution p(z), mean fitness is given by W̄ = ∫Rd W (z)p(z)dz. Then the trait distribution after a round of selection is
+given by p∗ (z) = p(z)W (z)/W̄ , and the post-selection mean trait is z̄∗ = ∫Rd z p∗ (z)dz. A selection differential is then defined as
+S = z̄∗ − z̄, and a selection gradient as β = P−1 S (Lande and Arnold, 1983). Interfacing this approach with the imperfect inheritance
+model in the main text, the response to selection in discrete time is classically obtained as ∆z̄ = Gβ (Lande, 1979).
+To map results obtained using the discrete time approach to the continuous time setting presented here, I describe the formal
+connection between fitness surfaces W and the growth rates m. Because there is a formal association between the two, in the main
+text I simply referred to m as a fitness function. The basic idea is to begin with an individual-based description of a population,
+and then take a diffusion limit to arrive at a population-level description. This limiting process provides a formal way to calculate
+m from W . I provide a brief overview of this process while omitting technical details, and then show how to use this approach to
+translate from classical fitness surfaces to continuous time growth rates.
+Because W (z) is an index associated with individuals that carry trait value z, it inherently assumes an individual-based
+description of a population. This can be made more precise using the concept of a point-mass to represent an individual with trait
+value z. In particular, the point-mass of an individual maps subsets U of Rd to either 0 or 1 to indicate whether the individuals
+trait lies in U . That is, denoting zi the trait value of the i-th individual in the population, the point-mass of this individual is
+defined by
+1,
+δzi (U ) = {
+0,
+
+zi is in U,
+zi is not in U.
+
+(53)
+
+n
+For a population of n individuals, the entire population can be summarized by the sum N = ∑n
+i=1 δzi . Hence N (U ) = ∑i=1 δzi (U )
+d
+d
+returns the abundance of the sub-population taking trait values in U ⊂ R , and N (R ) = n in particular. This provides a flexible way
+to describe the distribution of traits in a population. In the main text, trait distributions are assumed to be multivariate normal.
+However, because the population described by N is comprised of a sum of discrete individuals, the trait distribution cannot
+formally take the shape of a multivariate normal density. Even so, if the population size is very large, we can make histograms
+that summarize N which appear like densities of continuous distributions. Mathematically, this connection is made precise by
+diffusion-limits (Feller, 1951). In this section I describe just one component of taking a diffusion-limit that involves rescaling
+individual contributions to population size. Rescaling this weight or unit of an individual is useful because we want to approximate
+continuous trait distributions while retaining a notion of finite population size. For the sake of clarity, other diffusion-limit details
+such as rescaling time are left out of this section. However, to my knowledge no sufficiently accessible description of the specific
+kind of diffusion-limit useful for constructing this framework has been published (in particular, one that prioritize intuition over
+rigor). I therefore provide an informal description of one in Supplementary Material, Section 7 below.
+A discussion of diffusion-limits in the univariate trait case is given by Week et al. (2021), and a classical introduction in the
+contexts of population ecology and population genetics is given by Karlin and Taylor (1981). A variety of these limiting approaches
+have been developed (e.g., see Champagnat et al., 2006). To be clear, not all of them involve rescaling individual weights, but as
+implied above I focus on one that does here. For concreteness, consider the state of a population of n individuals at the initial
+time of the model, and follow the notation introduced above so that the population is summarized by N = ∑n
+i=1 δzi . The operation
+of rescaling individuals here involves replacing each individual by several other individuals whose weights sum to the weight of the
+individual they replace. One way to interpret this is to consider the trait values of individuals as uncertain. For instance, the trait
+value of individual i may take values zi,1 , zi,2 with probabilities one-half each. This leads to the rescaled population summarized
+n
+by N 2 = 12 (∑n
+i=1 δzi,1 + ∑i=1 δzi,2 ). We can simplify indexing by collecting trait values of the rescaled individuals into the finite
+sequence Z2 = {z1 , z2 , . . . , z2n } with z2i = zi,1 (so the zi,1 are inserted into even slots of Z2 ) and z2i−1 = zi,2 (so the zi,2 are
+
+10
+
+Bob Week
+
+inserted into the odd slots of Z2 ). More generally, write the k-th stage of rescaling as
+k
+
+N =
+
+1 nk
+∑ δz .
+k i=1 i
+
+(54)
+
+This approach to rescaling preserves the total abundance of the population because N k (Rd ) = n for each k. This is desired because
+we want to approximate continuous distributions of traits in the population while preserving the notion of population size.
+Because we are free to choose criteria for how traits are added at each stage of rescaling, we can obtain any continuous initial
+distribution of traits as k → ∞, but subsequent evolution of this distribution depends on how selection, mutation, etc., are modeled.
+In addition, depending on the biological determinants of individual fitness, the fitness surface associated with the k-th stage of
+rescaling Wk (z) may depend on k. Explicit examples are given by Week et al. (2021), Week and Nuismer (2021), and Week and
+Bradburd (2024). Additionally, as mentioned above, details involved with rescaling fitness are also presented in Supplementary
+Material, Section 7.1 below. Furthermore, to account for frequency and density dependent selection, the fitness surface associated
+with the k-th rescaling of the population will also likely depend on the rescaled population summary N k so that Wk (z) should
+be more formally replaced by Wk (N k , z). Under additional assumptions discussed for example in Champagnat et al. (2006), Week
+et al. (2021), and more formally by Méléard and Roelly (1993), the rescaled limit k → ∞ allows for the formal calculation of the
+fitness function m from the fitness surface W as
+k
+
+m(N , z) = lim (Wk (N , z) − 1)k,
+k→∞
+
+(55)
+
+where N k → N . In particular, N summarizes the population in the diffusion-limit as k → ∞. If we choose to add traits at each
+stage of rescaling k by sampling them from a continuous distribution p(z), then N will reflect this distribution in the sense that
+N (U )/n = ∫U p(z)dz. That is, unlike N k , the limit N in this case cannot be written as a sum of point-masses. Under conditions
+discussed in Li (1998) this continuity of the trait distribution in the diffusion-limit is retained as the population responds to
+selection, mutation, and drift. This continuity implies the existence of a function ν(z) called the population density that satisfies
+N (U ) = ∫U ν(z)dz. In this case the diffusion-limit of the population is equally described by ν(z), and here it is convenient to
+replace m(N , z) with m(ν, z) to avoid the additional technical details required for working with the mapping N (formally, these
+details involve measure theory as presented by Axler, 2020).
+If the rescaled fitness surface does not depend on the state of the population, and takes the special form of being the k-th root
+of W at stage k so that Wk (N, z) = W 1/k (z), then m(ν, z) = m(z) = ln W (z), where m(z) is introduced here because the resulting
+fitness function does not depend on the population density in the diffusion-limit ν. This, for example, is the case for classical
+fitness surfaces (e.g., Lande, 1979; Jones et al., 2007; Arnold et al., 2008; Jones et al., 2012), such as the directional selection fitness
+surface
+b⊺ z
+
+Wdir (z) = W0 e
+
+,
+
+(56)
+
+and the stabilizing selection fitness surface
+− 1 (θ −z)⊺ Ψ(θ −z)
+
+Wstab (z) = W0 e 2
+
+,
+
+(57)
+
+which are associated with the respective growth rate functions
+⊺
+
+mdir (z) = r + b z,
+⊺
+
+mstab (z) = r − 21 (θ − z) Ψ (θ − z),
+
+(58)
+
+(59)
+
+where r = ln W0 . Plugging these growth rates into equations (11b) and (11c) of the main text, ignoring both mutation and drift,
+and assuming multivariate normal trait distributions, we arrive at
+˙z̄dir = G b, Ġdir = 0,
+
+(60)
+
+z̄˙ stab = G Ψ (θ − z̄), Ġstab = −G Ψ G.
+
+(61)
+
+Note, calculation of these expressions by applying a deterministic version of the framework (such as equations (16) and (17) in the
+main text) does not rely on weak selection approximations. In contrast, calculations involved with their discrete time counterparts
+often do (Jones et al., 2007, 2012).
+
+4. The Martingale Problem Approach
+Here I outline an approach to formalize the framework and obtain the heuristics presented in the main text. Intuition for this
+approach comes from viewing populations as function spaces. This is formalized by viewing population processes as solutions to
+martingale problems, which is discussed at the end of the following subsection.
+To communicate these ideas to as wide of audience as possible, most technical details are omitted and some are communicated
+with less accuracy than standard treatments. The goal here is to keep the discussion accessible to anyone familiar with the concepts
+
+Multivariate Eco-Evo Supp. Mat.
+
+11
+
+of norm’s and inner-products’s on function spaces. It is assumed that readers familiar with the theory of measure-valued processes
+will be able to fill in all of the missing details, and notice where technically inaccurate statements are obviously stand-ins for
+their more accurate but technically involved counterparts. For readers unfamiliar with this theory, recommended entry points are
+suggested at the end of the following subsection.
+
+4.1. Formulation
+For now, assume perfect inheritance and work directly with trait values z ∈ Rd . Under this approach, populations are summarized
+by finite measures on the trait space Rd (referred to as mappings in Supplementary Material, Section 3 above). Measures are
+functions that map sets to numbers. In this context, a population measure is a function that maps subsets U ⊂ Rd to the abundance
+of the population in U . Here I focus on finite populations. So, if Nt is a measure representing a finite population on Rd at time t,
+then Nt (Rd ) < ∞. On the other hand, if Nτ (Rd ) is not finite for some τ > 0, then consider only the time interval [0, τ ). This is to
+handle cases where abundance can reach an infinite value in finite time. Biologically, this situation has been referred to as unstable
+persistence in models of mutualism (Wolin and Lawlor, 1984; Vandermeer and Boucher, 1978). Mathematically, reaching infinite
+values in finite time is called explosion (see sections 6.6 and 9.7 of Klebaner, 1998). However, once expressions for the framework
+are in place, one can examine the case where population size Nt (Rd ) is very large to obtain the Deterministic Covariance version
+and Deterministic Gradient version of the framework as deterministic approximations of the full stochastic framework.
+To continue describing the foundations of the framework, we need to work with integrals of functions with respect to population
+measures. Because this is often not taught in courses that introduce norms and inner-products on function spaces, I briefly provide
+intuition for understanding these integrals. In particular, the integral of a function x(z) over a set U ⊂ Rd with respect to the
+population measure Nt can be written as ∫U x(z)Nt (dz). Intuitively, one can think of this integral as a generalization of the
+classical Riemann integral ∫U x(z)dz, but with Nt providing different weights to different parts of trait space. Taking this informal
+intuition further, we can partition U into a disjoint set of subsets Uq = {U1 , . . . , Uq } such that ∪qi=1 Ui = U , then pick a zi ∈ Ui for
+each i = 1, . . . , q, and compute the sum St (Uq ) = ∑qi=1 x(zi )Nt (Ui ). Then assuming that, as q → ∞, the partition Uq becomes more
+and more refined (similar to how sequences of partitions are used to define the multivariate Riemann integral), we can intuitively
+consider ∫U x(z)Nt (dz) = limq→∞ St (Uq ). However, it should be carefully noted that the actual definition of the integral with
+respect to Nt depends on a concept known as Lebesgue integration (an excellent introduction is given by Axler, 2020), and there
+are important reasons why the intuitive approach outlined here fails in general.
+For each time t, the population measure Nt defines a space of functions x ∶ Rd → R having finite norm
+√
+L x Mt =
+
+∫ d ∣x(z)∣2 Nt (dz) < ∞ ,
+
+(62)
+
+R
+
+with inner-product ⟪x, y⟫t = ∫Rd x(z)y(z)Nt (dz). Note the less conventional symbols L ⋅ Mt and ⟪⋅, ⋅⟫t are used to emphasize that
+their definitions differ from the symbols ∥ ⋅ ∥ and ⟨⋅, ⋅⟩ used in the main text. These additional symbols are necessary because ∥ ⋅ ∥ and
+⟨⋅, ⋅⟩ depend on the dynamics of Nt (the reproductive variance v in particular), but here these dynamics have not yet been defined.
+Computing L x Mt for different functions returns information about the population. For example, computing L x M2t with x(z) = 1
+returns the total abundance of the population at time t. For this reason, the functions satisfying equation (62) are often referred
+to as test functions. The relationship between different summary statistics of the population, obtained from using different test
+functions, can then be computed using the inner-product.
+In the special case that Nt admits a density νt , so that ∫Rd x(z)Nt (dz) = ∫Rd x(z)νt (z)dz for any test function x, the dynamics
+of the population process can then be characterized by a stochastic partial differential equation (spde), such as
+⊺
+
+ν̇t (z) = m(νt , z) νt (z) + 12 ∇ M ∇ νt (z) +
+
+√
+
+v νt (z) Ẇt (z) ,
+
+(63)
+
+where Ẇt (z) is a space-time white noise process on R . A nice introduction to spde’s and space-time white noise is given by Dalang
+and Sanz-Solé (2024). Equation (63) is simply meant to provide an example of what a spde looks like. In particular, we might at
+first expect a population process similar to those studied in the main text to be characterized as a solution to equation (63).
+In general, densities rarely exist for population processes, and this is especially true for traits with dimensionality greater than
+one (Dawson, 1993; Li, 1998; Etheridge, 2000; Perkins, 2002). As a consequence, the above spde is in general meaningless for
+multivariate traits. Hence, there is a need for a more general approach to characterize the population processes of interest here.
+Indeed, under very general conditions on the growth rate m, Méléard and Roelly (1993, p 109) have shown that the population
+process Nt can instead be characterized by
+d
+
+Mt (x) ∶= ∫
+
+Rd
+
+x(z) Nt (dz) − ∫
+
+Rd
+
+x(z) N0 (dz) − ∫
+
+t
+0
+
+⊺
+
+∫ d (m(Ns , z) + 2 ∇ M∇) x(z) Ns (dz) ds,
+1
+
+(64)
+
+R
+
+where Mt satisfies the martingale condition E[ Mt+s (x) ∣ Mt (x) ] = Mt (x) for all x and s > 0. In particular, since M0 (x) = 0,
+we have E[ Mt (x) ] = 0 (by the law of total expectation). Comparing with equation (64) above, the condition E[ Mt (x) ] = 0
+is essentially a stochastic generalization of the fundamental theorem of calculus. Note that while the spde approach shows the
+√
+magnitude of stochasticity explicitly as v νt (z), the martingale characterization expresses this indirectly in terms of a quadratic
+variation discussed below. Details demonstrating the application of Méléard and Roelly (1993) to arrive at equation (64) above
+are given in Supplementary Material, Section 7 below.
+Equation (64) can be rewritten using a differential notation shorthand, which is common shorthand for writing stochastic
+differential equations (for a discussion of this notational convention, see section 4.4 of Klebaner, 1998). To do so, first simplify
+notation by writing Nt (x) = ∫Rd x(z)Nt (dz) and L(Nt , z) = m(Nt , z) + 21 ∇⊺ M∇ (or simply L). Note that the population measure
+
+12
+
+Bob Week
+
+Nt is first defined as a mapping from subsets of Rd to numbers. Here, with a common notational abuse, the same symbol is used
+to denote the induced mapping from functions to real numbers via integration against this measure. Both notations refer to the
+same underlying population object, and the intended interpretation is clear from context. Then, for each test function x, (64) can
+be rewritten as an ordinary stochastic differential equation. This expression is not derived through algebraic manipulation, but is
+a compact notational representation of the integral martingale formulation above.
+dNt (x) = Nt (Lx) dt + dMt (x) .
+
+(65)
+
+Equation (65) is particularly useful for placing the framework on a mathematically rigorous basis. For instance, setting x(z) = 1
+returns the stochastic differential equation (18) for the abundance of the population presented in the main text. Furthermore, the
+above expression already allows us to establish a simplified verion of the additive property of the heuristics presented in Table 1
+of the main text. Replacing x with ax + by in equation (64) and then rewriting in the form of (65) shows that dMt (ax + by) =
+a dMt (x) + b dMt (y). To see why, observe that each integral on the right-hand-side of equation (64) is linear with respect to x,
+and hence Mt (ax + by) = a Mt (x) + b Mt (y) (note the lack of d’s in this expression). Rewriting in differential notation shorthand
+then establishes the result. The more general version of the additive property allows a and b to be stochastic processes (typically
+univariate phenotypic moments), which is justified in Supplementary Material, Section 4.2 below. I return to an expression similar
+to (65) in Supplementary Material, Section 5, and use it to derive the dynamical equations presented in the main text.
+Importantly, for each test function x(z), the martingale Mt (x) is associated with a so-called quadratic variation, which provides
+insights into its variance. Again following Méléard and Roelly (1993, p 109), the quadratic variation of Mt (x) is given by
+[ M(x) ]t ∶= v ∫
+
+t
+0
+
+2
+
+∫ d ∣x(z)∣ Ns (dz)ds = v ∫
+
+0
+
+R
+
+t
+
+2
+
+L x Ms ds .
+
+(66)
+
+This quadratic variation will serve as the basis for establishing the heuristics presented in the main text, which allow for
+manipulating stochastic terms and deriving analytical models. In particular, the above quadratic variation illustrates how to
+compute products of stochastic terms that share a common test function x (i.e., dMt (x) dMt (x)). Then, to establish heuristics for
+computing products of stochastic terms based on different test functions x and y (i.e., dMt (x) dMt (y)), I consider the following
+bilinear form, referred to as the quadratic covariation (Rogers and Williams, 2000a), which is a special case of the result obtained
+by Roelly-Coppoletta (1986, p 177) for the measure-valued martingale process this framework is based on:
+[ M(x), M(y) ]t ∶= v ∫
+
+0
+
+t
+
+∫ d x(z)y(z)Ns (dz)ds = v ∫
+R
+
+0
+
+t
+
+⟪x, y⟫s ds .
+
+(67)
+
+What’s the problem? This is called a martingale problem approach because the population process Nt in equation (64) can
+be viewed as an unknown. Very roughly, the problem is then to find a process Nt such that Mt (x) is a martingale for each x
+that has the quadratic variation and quadratic covariation described by equations (66)–(67) (Roelly-Coppoletta, 1986; Méléard
+and Roelly, 1993). However, the technical prerequisites for specifying the martingale problem more precisely are outside the scope
+of this section in the Supplementary Material. Further information can be found in Stroock and Varadhan (1997), where the
+martingale problem approach is fully developed in the context of finite-dimensional systems of stochastic differential equations. For
+the present context, an infinite-dimensional extension is required, and this has been treated by Dawson (1993). An introduction to
+measure-valued population processes is provided by Etheridge (2000). A comprehensive introduction to stochastic calculus is given
+by Rogers & Williams (2000b; 2000a). More concise, but still advanced introductions are given by Le Gall (2016), Bass (2011),
+and Durret (1996). Introductions focused on stochastic differential equations are given by Øksendal (2013) and Evans (2012). More
+elementary (and therefore extremely useful!) introductions are given by Klebaner (1998) and Calin (2015). An introduction in the
+context of population genetics is given by Etheridge (2011).
+With expressions for the quadratic variation [ M(x) ]t and the quadratic covariation [ M(x), M(y) ]t in hand, we are now ready
+to develop the heuristics introduced in the main text, which is the subject of the following section.
+
+4.2. Heuristics
+Below I present justification for the heuristics presented in Table 1 of the main text. To facilitate comparisons with the main text, I
+adopt the norm ∥ ⋅ ∥ and inner-product ⟨⋅, ⋅⟩ used there. These are related to the norm L ⋅ Mt and inner-product ⟪⋅, ⋅⟫t introduced above
+√
+via ∥ x ∥t = v L x Mt and ⟨ x, y ⟩t = v ⟪ x, y ⟫t (which hold for test functions x, y when Nt satisfies the martingale problem described
+in the previous section). Note that in the main text subscripts indexing time are omitted to minimize notational complexity, but
+are needed here due to the appearance of integrals across intervals of time.
+
+4.2.1. The Scaling Property
+A simplified version of the scaling property states that dMt (x̂) ∶= dMt (x)/∥ x ∥t is the stochastic differential of a standard Brownian
+motion (where “standard” just means it starts at zero and has variance t at time t). Notation-wise, it is worth noting that Mt (x)
+is technically defined for fixed test functions x, but x̂t (z) = x(z)/∥ x ∥t is not a fixed function. This is the reason why the symbol
+dMt (x̂) has to be defined as above, and the benefit of this convention will be clear when combining the additive and multiplicative
+properties while deriving the stochastic framework below. The more general version of the scaling property (which states that, for
+qt (z) a stochastic process that is also a random test function for each fixed t that may also depend on Nt , dMt (q̂) ∶= dMt (q)/∥ q ∥t
+is the stochastic differential of a standard Brownian motion) will be made sense of at the end of this justification.
+Formally, the scaling property may be justified by the representation of continuous martingales as integrals with respect to
+Brownian motion (integration with respect to Brownian motion is introduced in Chapter 4 of Evans, 2012). More precisely, Corollary
+
+Multivariate Eco-Evo Supp. Mat.
+
+13
+
+14.5.4 on page 359 of Cohen and Elliot (2015) justifies the integral representation Mt (x) = ∫0t ∥ x ∥s dBs , where integration is with
+respect to a standard Brownian motion Bt (i.e., B0 = 0 and the variance of Bt is t). In differential notation shorthand, we have
+dMt (x) = ∥ x ∥t dBt . Then, informally dividing each side by ∥ x ∥t gives the result. To finish the formal justification, use integration
+with respect to the martingale Mt (x) (integration with respect to martingales is introduced in Chapter 10 of Bass, 2011) to define
+the process Bt′ ∶= ∫0t ∥ x ∥−1
+s dMs (x). Here, the meaning of dMt (x) extends beyond its interpretation as merely shorthand for writing
+integral expressions. Theorem 30.7 on page 55 of Rogers and Williams (2000a) implies that Bt′ is a continuous martingale with
+associated quadratic variation given by
+t
+1
+′
+[B ]t = ∫
+d[M(x)]s .
+(68)
+0 ∥ x ∥2
+s
+Writing equation (66) in differential form provides d[M(x)]s = ∥ x ∥2s ds. Hence, [B ′ ]t = ∫0t ds = t. In addition, because B0′ = 0, we
+can apply the Lévy characterization of Brownian motion (e.g., Theorem 8.6.1 on page 162 of Øksendal, 2013) to conclude that Bt′
+is a standard Brownian motion.
+The notation used for the scaling property can be generalized by setting dMt (at x) ∶= at dMt (x) for a test function x and a
+univariate process at (i.e., one that takes values in R). This notational convention will be needed to justify the multiplicative and
+additive properties below. More precisely, the process at is assumed to take the form at = f (Nt ). For instance, f (Nt ) = Nt (zi )/Nt (1)
+is the i-th component of the mean trait z̄i at time t. By Theorem 30.7 on page 55 of Rogers and Williams (2000a), if f satisfies
+t
+t
+t 2
+2
+∫0 f (Ns )∥ x ∥s ds < ∞ for each t > 0, then Qt (f, x) ∶= ∫0 f (Ns )dMs (x) = ∫0 as dMs (x) is a continuous martingale with quadratic
+variation
+t 2
+[Q(f, x)]t = ∫ f (Ns )d[M(x)]s .
+(69)
+0
+
+Furthermore, Equation 30.8 on page 56 of Rogers and Williams (2000a) states that the martingales Qt (f1 , x) and Qt (f2 , y) will
+have quadratic covariation
+t
+
+[Q(f1 , x), Q(f2 , y)]t = ∫
+
+0
+
+f1 (Ns )f2 (Ns )d[M(x), M(y)]s ,
+
+(70)
+
+where d[M(x), M(y)]t = ⟨ x, y ⟩t dt is differential notation shorthand for the same statement expressed by equation (67) above.
+√
+With this convention the scaling property is obtained for a given test function x by setting f (Nt ) = 1/ v Nt (∣x∣2 ) so that
+at = ∥ x ∥−1
+t . Furthermore, it should be carefully noted that, for many choices of f , dMt (at x) will not be the stochastic differential
+of a Brownian motion.
+Finally, the more general scaling property that states dMt (q̂) ∶= dMt (q)/∥ q ∥t is the stochastic differential of a standard
+Brownian motion (where qt (z) is a stochastic process such that, for each fixed t, qt is a test function that may also depend on Nt )
+is justified by first defining the notation ∫Rd x(z)M(dt, dz) ∶= dMt (x). Here M is still used for M(dt, dz), even though it is now
+technically a measure on R≥0 × Rd , because it still represents the same fundamental underlying object as Mt . Then we can write
+Qt (f, x) as
+Qt (f, x) = ∫
+
+t
+
+0
+
+∫ d f (Ns )x(z)M(ds, dz).
+
+(71)
+
+R
+
+Integrals of this form are natural generalizations of integration with respect to martingales, and are formally treated in Chapter 2
+of Walsh (1986). What is important here is that we can now define
+Qt (q) ∶= ∫
+
+t
+
+0
+
+which, setting ∥q∥t ∶=
+
+√
+
+∫ d qs (z)M(ds, dz),
+
+(72)
+
+R
+
+v ∫Rd qt2 (z)Nt (dz), requires E [∫0t ∥q∥2s ds] < ∞ for each t > 0. Given this condition, Qt (q) is again a continuous
+
+martingale. Following Chapter 2 of Walsh (1986), we then have the quadratic covariation between Qt (q (1) ) and Qt (q (2) ), for two
+(1)
+(2)
+processes qt (z), qt (z), is given by
+[Q(q
+(1)
+
+(1)
+
+), Q(q
+
+(2)
+
+)]t = ∫
+
+t
+
+0
+
+⟨q
+
+(1)
+
+,q
+
+(2)
+
+⟩s ds,
+
+(73)
+
+(2)
+
+where ⟨q (1) , q (2) ⟩t = v ∫Rd qt (z)qt (z)Nt (dz). From here, define dMt (q) ∶= dQt (q). Then, following the same arguments for Bt′
+above, we have Q′t ∶= ∫0t dMs (q̂) = ∫0t ∥q∥−1
+s dMs (q) is a continuous martingale with quadratic variation
+′
+
+[Q ]t = ∫
+
+0
+
+t
+
+t
+1
+d[Qt (q)] = ∫ ds = t.
+0
+∥q∥2s
+
+(74)
+
+So Lévy’s characterization of Brownian motion again justifies the general scaling property.
+Lastly, for a scalar-valued process at , define at dMt (q) ∶= dQt (aq) so that at dMt (q) = dMt (at q).
+
+4.2.2. The Multiplicative Property
+(i)
+
+The multiplicative property states dMt (q (1) ) dMt (q (2) ) = ⟨q (1) , q (2) ⟩t dt, where qt (z) is a process that, for each fixed t, is also a
+(1)
+(2)
+(random) test function, and ⟨q (1) , q (2) ⟩t = v ∫Rd qt (z)qt (z)Nt (dz). Formal justification for this property is based on the general
+definition of the quadratic covariation process (for example, given by Definition 31.3 on page 58 of Rogers and Williams, 2000a).
+Here I provide justification that leverages known results for the quadratic covariation process. To begin, consider the simplified
+(1)
+(2)
+situation where qt (z) = x(z) and qt (z) = y(z) are fixed test functions. The differential notation used by the multiplicative
+property then simplifies to a convenient shorthand defined by dMt (x) dMt (y) ∶= d[ M(x), M(y) ]t , where d[ M(x), M(y) ]t is
+
+14
+
+Bob Week
+
+already informal shorthand based on [ M(x), M(y) ]t . For the special case studied here (determined by equations (64) and (67)),
+we have that d[ M(x), M(y) ]t = ⟨x, y⟩t dt is shorthand to express the same statement as equation (67) above. The reasoning behind
+this differential shorthand is clarified by seeing where it occurs in Itô’s formula, which serves as a generalization of the chain rule
+for stochastic calculus. In particular, the differential notation shorthand establishes general heuristics to facilitate calculations
+involved with applying Itô’s formula. I therefore paraphrase the statement of Itô’s formula in the following paragraph, which
+applies more generally to a finite collection of martingales {Ut1 , . . . , Utk } (i.e., Uti is a stochastic process taking values in R such
+that E[Uti ∣ Usi ] = Usi for s < t). The multiplicative property presented in Table 1 of the main text is then based on the special case
+where these martingales are of the form Uti = Mt (xi ), with Mt defined by equations (64) and (67) and test functions x1 , . . . , xk .
+Following Theorem 32.8 on page 60 of Rogers and Williams (2000a), given a k-dimensional process Ut = (Ut1 , . . . , Utk ), where
+each component Uti is a martingale, and a function F (u) with continuous second derivatives ∂i ∂j F (where ∂i = ∂/∂ui ), Itô’s formula
+states (in differential notation shorthand)
+k
+
+k
+
+i
+
+i
+
+j
+
+dF (Ut ) = ∑ ∂i F (Ut ) dUt + 12 ∑ ∂i ∂j F (Ut ) d[ U , U ]t .
+i=1
+
+(75)
+
+i,j=1
+
+With this result in place, heuristical calculations involved with its application are facilitated by defining dUti dUtj ∶= d[ U i , U j ]t .
+(1)
+(2)
+Setting Uti = Mt (xi ) and Utj = Mt (xj ) establishes the simplified multiplicative property where qt (z) = x(z) and qt (z) = y(z)
+j
+(i)
+i
+(j)
+are fixed test functions. The general case is established by setting Ut = Qt (q ) and Ut = Qt (q ), where the definition of
+Qt (q) ∶= ∫0t ∫Rd qs (z)M(ds, dz) is given by equation (72). This definition formalizes the notation dMt (q (i) ) = dQt (q (i) ). Then,
+writing equation (73) above in differential notation shorthand justifies the multiplicative property in the most general form needed
+to derive the stochastic framework from the martingale problem approach.
+
+4.2.3. The Additive Property
+As mentioned in Supplementary Material, Section 4.1, a simplified version of the additive property dMt (ax + by) = a dMt (x) +
+b dMt (y) (which holds for constant scalars a, b and test functions x(z), y(z)) is justified by combining equation (64) with the
+differential notation shorthand introduced in equation (65). In particular, the linearity of the integrals appearing in equation (64)
+in addition to the linearity of the operator L(Nt , z) = m(Nt , z) + 12 ∇⊺ M∇ implies Mt (ax + by) = a Mt (x) + b Mt (y). Then rewriting
+using the differential notation shorthand establishes this simplified additive property in the case where a, b are scalars.
+For the more general case of processes qt (z) that, for each t, are test functions, most of the work to justify the additive property
+comes down to relating the notational conventions introduced here. For instance, recall the definition dMt (q) ∶= dQt (q) (with Qt
+defined by equation (72) above). Following Chapter 2 of Walsh (1986), we have that Qt is linear such that Qt (aq (1) + bq (2) ) =
+aQt (q (1) ) + bQt (q (2) ). In addition, for a scalar-valued process at , the convention at dMt (q) ∶= dMt (aq) ∶= dQt (aq) is justified
+because at qt (z) is again a process that is a (random) test function for each fixed t. Hence, if bt is another scalar-valued process, a
+generalized version of the additive property states dMt (aq (1) + bq (2) ) = at dMt (q (1) ) + bt dMt (q (2) ).
+
+5. Derivation of The Stochastic Framework from The Martingale Problem Approach
+To obtain the Brownian Motion Gradient version (BG) and the Martingale Gradient version (MG), I begin in Supplementary
+Material, Section 5.1 by interfacing the martingale problem approach with the model of imperfect inheritance presented in section
+2.1.3 of the main text. After this, I present the derivation for abundance dynamics in Supplementary Material, Section 5.2. In
+Supplementary Material, Section 5.3 I derive mean trait dynamics and show the noise processes driving them do not covary with
+abundance dynamics. Lastly, in Supplementary Material, Section 5.4 I derive additive genetic variance dynamics and show its noise
+process does not covary with that of abundance dynamics, and also that it does not covary with the noise process driving mean
+trait dynamics when traits are multivariate normal.
+
+5.1. Imperfect Inheritance
+The population measure of additive genetic values is denoted by Gt . From this the population measure of trait values Nt is the
+measure satisfying
+∫ d x(z) Nt (dz) = ∫ d ∫ d x(g + e) Gt (dg)ε(e)de,
+R
+
+R
+
+(76)
+
+R
+
+for each function x, with ε(e) the density of phenotypic residuals. Following Lande (1979), I assume residuals are multivariate
+normally distributed with mean 0 and covariance matrix E. As a short-hand, write Nt = Gt ∗ ε.
+To model imperfect inheritance, I define Mt in terms of Gt instead of Nt . This is slightly different than simply replacing Nt
+with Gt in equation (64) of Supplementary Material, Section 4.1 because fitness is still determined by expressed trait values. So I
+define fitness of additive genetic values as
+m̃(Gt , g) = ∫
+
+Rd
+
+m(Nt , g + e)ε(e)de = ∫
+
+Rd
+
+m(Gt ∗ ε, g + e)ε(e)de,
+
+(77)
+
+and define L̃(Gt , g) x(g) = m̃(Gt , g) x(g) + 12 ∇⊺ M∇ x(g), with gradients taken with respect to g. Then, using the notation Gt (x) =
+∫Rd x(g) Gt (dg), the replacement for equation (64) that accommodates imperfect inheritance is given by
+
+Multivariate Eco-Evo Supp. Mat.
+
+Mt (x) = Gt (x) − G0 (x) − ∫
+
+0
+
+t
+
+Gs (L̃x)ds
+
+15
+
+(78)
+
+This defines the martingale process referred to in the main text. For each x, this process can be expressed as a differential equation:
+dGt (x) = Gt (L̃x) dt + dMt (x).
+
+(79)
+
+To keep the following sections concise, I omit subscripts denoting time dependence and use the heuristic notation presented
+in Table 1 of the main text. Note that the heuristics presented in the main text assume that G admits the population density
+γ(g) such that the distribution of additive genetic values has a density p̃(g) (and thus γ(g) = n p̃(g)). In the calculations below,
+this assumption is only necessary when multivariate normality is assumed. However, for the purposes here, nothing is gained by
+treating the more general case where G does not necessarily admit a density. Instead, the more general case requires the use of
+notation that differs from the heuristics presented in the main text. Hence, for the sake of clarity, the following calculations are
+presented under the assumption that G(x) = n ∫Rd x(g)p̃(g)dg. In addition, the symbol m̃(γ, g) will be written in place of m̃(G, g),
+and similarly L̃(γ, g) will be written in place of L̃(G, g). For the sake of brevity, these will often be written simply as m̃ and L̃.
+
+5.2. Total Abundance n
+Because G(1) = n ∫Rd 1p̃(g)dg = n and L̃1 = m̃ (recalling L̃(γ, g) = m̃(γ, g) + 12 ∇⊺ M∇) which gives G(L̃1) = n ∫Rd (L̃1)p̃(g)dg =
+n ∫Rd m̃(γ, g)p̃(g)dg = m̄ n (recall from equation (14) in the main text that m̄ = ¯
+m̃), equation (79) can be used to write
+dn = m̄ n dt + dM(1).
+
+(80)
+
+This provides the expression of abundance dynamics in the MG version of the framework (equation (26a) in the main text). Using
+the scaling property obtained in Supplementary Material, Section 4.2, we immediately have dM(1) = ∥1∥ dBn where Bn ∶= M(1̂)
+√
+√ √
+is a standard normal Brownian motion, and by definition ∥1∥ = v n ∫Rd 12 p̃(g)dg = v n. Thus,
+dn = m̄ n dt +
+
+√
+v n dBn .
+
+(81)
+
+This provides the expression for abundance dynamics presented in the BG version of the framework (equation (18) in the main
+text). Neither of these expressions for abundance dynamics require the multivariate normal trait assumption.
+
+5.3. Mean Trait Vector z̄
+5.3.1. Martingale Gradient Version
+Setting x(g) = gi , equation (79) immediately shows dG(gi ) = G(L̃gi )dt + dMt (gi ). Because L̃gi = m̃ gi (x(g) = gi has no curvature),
+we have G(L̃gi ) = n ∫Rd (L̃gi )p̃(g)dg = n ∫Rd m̃ gi p̃(g)dg = n m̃ gi = n (Cov(m̃, gi ) + m̄ ḡi ). Combining this with g̊i ∶= G(gi ) =
+n ∫Rd gi p̃(g)dg, we arrive at
+dg̊i = dG(gi ) = n (Cov(m̃, gi ) + m̄ḡi ) dt + dM(gi ).
+
+(82)
+
+Because g̊i = G(gi ) = n ∫Rd gi p̃(g)dg = n ḡi , we then have ḡi = g̊i /n. Itô’s quotient rule (provided, for example, at the bottom of
+page 140 in Calin, 2015) immediately states
+d(
+
+1
+g̊i
+1
+g̊i
+g̊i
+2
+) = (dg̊i −
+dn − dg̊i dn + 2 (dn) ) .
+n
+n
+n
+n
+n
+
+(83)
+
+Using our results for dg̊i and dn, we have
+dg̊i dn = (n (Cov(m̃, gi ) + m̄ḡi ) dt + dM(gi )) (m̄ n dt + dM(1)) .
+
+(84)
+
+Expanding the product and then applying the general heuristics dt2 = 0 and dt dM(x) = 0 shows dg̊i dn = dM(gi ) dM(1). The
+multiplicative property immediately gives dM(1) dM(gi ) = v n ∫Rd gi p̃(g)dg dt = v n ḡi dt. Hence, dg̊i dn = v n ḡi dt.
+We also have (dn)2 = (m̄ n dt + dM(1))2 . Expanding the square and then applying the general heuristics dt2 = 0 and dt dM(x) =
+0 shows (dn)2 = (dM(1))2 . The multiplicative property immediately gives (dM(1))2 = v n ∫Rd 1p̃(g)dg dt = v n dt. Hence, (dn)2 =
+v n dt.
+
+Because ḡi = g̊i /n, we immediately have (with no intermediate steps to show) dḡi = d(g̊i /n). Combining this with our results for
+dg̊i dn and (dn)2 shows
+dḡi =
+Substituting g̊i = n ḡi and simplifying shows
+
+1
+g̊i
+1
+g̊i
+(dg̊i −
+dn − (v n ḡi dt) + 2 (v n dt)) .
+n
+n
+n
+n
+
+(85)
+
+16
+
+Bob Week
+
+dḡi =
+
+1
+(dg̊i − ḡi dn − (v ḡi dt) + (v ḡi dt)) .
+n
+
+(86)
+
+1
+(dg̊i − ḡi dn) .
+n
+
+(87)
+
+Because −(v ḡi dt) + (v ḡi dt) = 0, we then have
+dḡi =
+Substituting in our results for dg̊i and dn shows
+dg̊i − ḡi dn = n (Cov(m̃, gi ) + m̄ḡi ) dt + dM(gi ) − ḡi (m̄ n dt + dM(1)) = n Cov(m̃, gi ) dt + dM(gi ) − ḡi dM(1).
+
+(88)
+
+By the additive property we have dM(gi ) − ḡi dM(1) = dM(gi ) − dM(ḡi ) = dM(gi − ḡi ). Substituting these results into the
+expression for dḡi leads to
+1
+dM(gi − ḡi ).
+dḡi = Cov(m̃, gi )dt + n
+
+(89)
+
+Assuming multivariate normality, equation (20) in index notation immediately gives Cov(m̃, gi ) = ∑j Gij (∂j m̄ − ∂j m̃), where
+∂i = ∂/∂ z̄i = ∂/∂ ḡi because ēi = 0 (and thus, z̄i = ḡi ). Combining these last three results gives
+1
+dz̄i = ∑ Gij (∂j m̄ − ∂j m̃)dt + n
+dM(gi − ḡi ),
+
+(90)
+
+j
+
+By definition
+∂j m̃ = ∫
+
+Rd
+
+∂j m̃(γ, g)p̃(g)dg = ∫
+
+Rd
+
+∂j ∫
+
+Rd
+
+m(γ, g + e)ε(e)dep̃(g)dg.
+
+(91)
+
+Using the change of variables g = z − e, we obtain
+∂j m̃ = ∫
+
+Rd
+
+∂j ∫
+
+Rd
+
+m(ν, z)ε(e)p̃(z − e)dedz = ∫
+
+Rd
+
+∂j m(ν, z) ∫
+
+Rd
+
+ε(e)p̃(z − e)dedz.
+
+(92)
+
+But p(z) = ∫Rd ε(e)p̃(z − e)de. We thus have ∂j m̃ = ∫Rd [∂j m(ν, z)] p(z)dz = ∂j m. Finally, plugging this into equation (90) gives
+1
+dz̄i = ∑ Gij (∂j m̄ − ∂j m)dt + n
+dM(gi − ḡi ),
+
+(93)
+
+j
+
+which is the mean trait dynamics under the Martingale Gradient version (MG) of the framework expressed using index notation
+(i.e., equation (26b) of the main text).
+
+5.3.2. Brownian Motion Gradient Version
+The Brownian Motion Gradient version (BG) is obtained by first using the scaling property which states that we can write
+dM(gi − ḡi ) = ∥gi − ḡi ∥dM(ĝ
+i − g¯i ),
+
+(94)
+
+√
+√
+with Bz̄i ∶= M(ĝ
+v n ∫Rd (gi − ḡi )2 p̃(g)dg = v n Gii . Then, mean trait dynamics
+i − g i ) a standard Brownian motion and ∥gi − ḡi ∥ =
+under the Brownian Motion Gradient version in index notation are given by
+dz̄i = ∑ Gij (∂j m̄ − ∂j m)dt +
+
+√
+
+v
+G dBz̄i ,
+n ii
+
+(95)
+
+j
+
+√
+√
+where carefully note that the n in the numerator of v n Gii interacts with the n in the denominator appearing in equation (93)
+√
+to leave a n in the denominator of equation (95).
+
+Sphering Vector-Valued Martingales
+The stochastic dynamics of the mean trait components are not independent, and their correlated dynamics are quantified using the
+multiplicative property. In particular, while Bz̄i is a standard Brownian motion, it is not in general independent of Bz̄j . Collect
+these non-independent standard Brownian motions into a vector B̊z̄ = (Bz̄1 , . . . , Bz̄d )⊺ . Then, by definition of integration with
+respect to Brownian motion, we have
+B̊z̄ (t) = ∫
+
+0
+
+t
+
+dB̊z̄ (s)
+
+(96)
+
+with dB̊z̄ = (dBz̄1 , . . . , dBz̄d )⊺ . Intuitively, we can think about dBz̄i as being normally distributed with mean zero and variance
+dBz̄2i = dt (where this last equality is just a standard heuristic from stochastic calculus). More generally, we can think about dB̊z̄
+
+Multivariate Eco-Evo Supp. Mat.
+
+17
+
+as multivariate normal with mean zero and covariance matrix given by the outer-product
+2
+⎛ dBz̄1
+⎜
+dBz̄2 dBz̄1
+⊺
+E (dB̊z̄ dB̊z̄ ) = E ⎜
+⎜
+⋮
+⎜
+⎝dBz̄ dBz̄
+d
+1
+
+dBz̄1 dBz̄2
+dBz̄22
+⋮
+dBz̄d dBz̄2
+
+⋯
+⋯
+⋱
+⋯
+
+dBz̄1 dBz̄d ⎞
+dBz̄2 dBz̄d ⎟
+⎟.
+⎟
+⋮
+⎟
+2
+dBz̄d ⎠
+
+(97)
+
+The standard heuristic dBz̄2i = dt shows that the diagonal entries of this matrix are equal to dt. The off-diagonals, which quantify
+correlations between the dynamics of the entries of B̊z̄ , can be computed using the multiplicative property because dBz̄i ∶=
+̂
+dM(gi −
+g i ). The multiplicative property (in combination with the scaling property) then states
+̂
+̂
+g i )dM( gj −
+gj ) =
+dBz̄i dBz̄j = dM(gi −
+=
+
+dM(gi − ḡi ) dM(gj − ḡj )
+∥gi − ḡi ∥
+∥gj − ḡj ∥
+
+v n ∫Rd (gi − ḡi )(gj − ḡj )p̃(g)dg
+⟨ gi − ḡi , gj − ḡj ⟩
+Gij
+dt =
+dt = √
+dt.
+√
+√
+v n Gii Gjj
+v n Gii Gjj
+Gii Gjj
+
+(98)
+
+(99)
+
+Hence, the dynamics of the Brownian motions Bz̄i and Bz̄j covary according to the genetic correlation between traits zi and zj :
+√
+ρij = Gij / Gii Gjj . Note that, although covariance matrices are formally defined using an expectation (e.g., E(dB̊z̄ dB̊⊺z̄ )), the
+informal argument developed here leverages heuristics where products of stochastic differentials are deterministic quantities (e.g.,
+dBz̄2i = dt). So the expectation is not needed to express heuristical covariance matrices such as dB̊z̄ dB̊⊺z̄ , and thus will be dropped
+to simplify notation.
+Building on this intuitive perspective, we can leverage a so-called sphering transform common in data analysis (reviewed by
+Kessy et al., 2018) to use the matrix dB̊z̄ dB̊⊺z̄ to rewrite dB̊z̄ it terms of a vector of uncorrelated standard Brownian motions Bz̄ .
+√ −1
+The main idea here is that, for a d-dimensional multivariate normal vector v with covariance matrix Σ , the new vector v′ = Σ v
+√
+√ √ ⊺
+(where Σ is any d × d invertible matrix that satisfies Σ Σ = Σ , which exists if Σ is positive definite) is also multivariate normal
+but now with identity covariance matrix I. Conversely, we can start with a multivariate normal vector v′ with covariance matrix
+√
+√
+I, then the new vector v = Σ v′ will be multivariate normal with covariance matrix Σ (where here Σ need not be invertible and
+√
+√ √ ⊺
+Σ = Σ Σ can be singular). This application of the matrix Σ has been called a covariance-shaping transform (the inverse of
+the ZCA-Mahalanobis sphering transform in particular, see Kessy et al., 2018).
+Setting R = dB̊z̄ dB̊⊺z̄ /dt (dividing by dt because dBz̄i dBz̄j = ρij dt) and defining Bz̄ as a d-dimensional vector of independent
+standard Brownian motions, we have
+t√
+B̊z̄ (t) = ∫
+(100)
+R(s) dBz̄ (s),
+0
+√
+and hence dB̊z̄ = R dBz̄ . As an immediate consequence of equation (95), the mean trait dynamics can be written in matrix form
+as
+√ √
+v
+dz̄ = G(∇z̄ m̄ − ∇z̄ m)dt + n
+DG dB̊z̄ ,
+(101)
+√
+√
+where DG is the d × d diagonal matrix with ii-th entry equal to Gii and ij-th entry equal to zero when i ≠ j. Plugging in our
+√
+sphering transform result dB̊z̄ = R dBz̄ , the dynamics of z̄ are given in terms of the vector of independent standard Brownian
+motions Bz̄ as
+√ √
+√
+v
+dz̄ = G(∇z̄ m̄ − ∇z̄ m)dt + n
+(102)
+DG R dBz̄ .
+√
+√
+Setting A = DG R we have
+√
+√
+√
+√
+√ ⊺ √
+⊺
+(103)
+AA = ( DG R)( DG R) = DG R DG .
+√
+√
+√
+Using index notation, the ij-th entry of this product is given by (AA⊺ )ij = ∑kl ( DG )ik Rkl ( DG )ik . Because DG is diagonal
+√
+√
+√
+√
+such that ( DG )ij = Gij δij with δii ∶= 1 and δij ∶= 0 when i ≠ j, the sum simplifies to (AA⊺ )ij = Gii Rij Gjj . Recalling that
+√
+√
+Rij = ρij = Gij / Gii Gjj , we see AA⊺ = G. Then, setting G ∶= A we arrive at equation (19) in the main text:
+√ √
+v
+G dBz̄ .
+(104)
+dz̄ = G(∇z̄ m̄ − ∇z̄ m)dt + n
+√
+It turns out we can set G ∶= A for any d×d matrix A that satisfies AA⊺ = G (for a discussion, see section 5.1 of Durrett, 1996). As
+a final note regarding the intuitive sphering approach outlined above, formal justification requires handling G as a stochastic process
+(which can be done using notions of quadratic covariation for martingales to represent martingales as integrals with respect to
+Brownian motions). However, under this formalization, nothing fundamentally changes here other than how mathematical objects
+are interpreted. In particular, the result for expressing dz̄ in terms of Bz̄ holds after formalizing all the details.
+
+5.3.3. Uncorrelated noise processes driving n, z̄
+Lastly, to show the noise process driving mean trait dynamics is uncorrelated from the noise process driving abundance dynamics,
+1
+dM(1) dM(gi − ḡi ). Using
+expand the product dn dz̄i and apply the general heuristics dt2 = dt dM(x) = 0 to arrive at dn dz̄i = n
+the multiplicative property shows dM(1) dM(gi − ḡi ) = ⟨1, gi − ḡi ⟩ dt = v n ∫Rd (gi − ḡi )p̃(g)dg dt = 0 dt = 0, which holds for any
+distribution of additive genetic values g. This calculation immediately implies dBn dBz̄i = 0 (based on the definitions of dBn and
+dBz̄i ). Then, leveraging the same intuitive perspective used to justify the sphering argument above, we see that the noise processes
+driving n and z̄i are uncorrelated for any distribution of additive genetic values.
+
+18
+
+Bob Week
+
+5.4. Additive Genetic Covariance Matrix G
+5.4.1. Martingale Gradient Version
+Set G̊ij ∶= G(gi gj ). Recalling that G(x) = n ∫Rd x(g)p̃(g)dg, we then have G̊ij = n ∫Rd gi gj p̃(g)dg = n gi gj = n (Gij + ḡi ḡj ) (because
+Cov(gi , gj ) = Gij ). Equation (79) states dG̊ij = G(L̃(gi gj ))dt + dM(gi gj ). Because L̃ = m̃ + 12 ∇⊺ M∇, we have
+⊺
+
+L̃(gi gj ) = m̃gi gj + 12 ∇ M∇(gi gj ) = m̃gi gj + 12 ∑ Mkl ∂gk ∂gl (gi gj ),
+
+(105)
+
+kl
+
+where the summation on the right is just the definition of ∇⊺ M∇ (see equation (2) in the main text). Using the product rule from
+elementary calculus, we find ∂gl (gi gj ) = δil gj + δjl gi , with δii ∶= 1 and δij ∶= 0 when i ≠ j. In addition, ∂gk ∂gl (gi gj ) = δil δjk + δjl δik .
+Substituting into the summation we find 12 ∇⊺ M∇(gi gj ) = 12 (Mij +Mji ). Symmetry of M then demonstrates L̃(gi gj ) = m̃gi gj +Mij .
+So G(L̃(gi gj )) = n ∫Rd m̃(gi gj + Mij )p̃(g)dg = n (m̃gi gj + Mij ) = n (Cov(m̃, gi gj ) + m̄gi gj + Mij ). Hence,
+dG̊ij = n (Mij + Cov(m̃, gi gj ) + m̄ gi gj ) dt + dM(gi gj ).
+
+(106)
+
+Itô’s quotient rule immediately states (see page 140 of Calin, 2015)
+
+d
+
+⎛ G̊ij ⎞ dG̊ij
+G̊ij dn dG̊ij dn G̊ij dn2
+=
+−
+−
++
+.
+⎝ n ⎠
+n
+n n
+n n
+n n2
+
+(107)
+
+Substituting the above result for dG̊ij and the expression for dn given by equation (80) into the product dG̊ij dn, then expanding
+the product and applying the general heuristics dt2 = dt dM(x) = 0, we obtain dG̊ij dn = dM(gi gj ) dM(1). The multiplicative
+property states dM(gi gj ) dM(1) = ⟨gi gj , 1⟩ dt = vn ∫Rd gi gj p̃(g)dg dt = v n gi gj dt. So dG̊ij dn = v n gi gj dt. We also have (obtained
+from equation (81) above) dn2 = v n dt. Then substituting these results in addition to gi gj = G̊ij /n (which was obtained at the
+beginning of this subsection) and the result for dG̊ij into equation (107), and cancelling the n’s that appear in both numerator
+and denominator, we arrive at (with no additional steps other than the stated substitutions and cancelling of n’s)
+dgi gj = ((Mij + Cov(m̃, gi gj ) + m̄ gi gj ) dt +
+
+1
+1
+v
+v
+dM(gi gj )) − gi gj (m̄ dt + dM(1)) − gi gj dt + gi gj dt.
+n
+n
+n
+n
+
+(108)
+
+Simplifying by canceling out the terms that sum to zero, and using the additive property which immediately shows dM(gi gj ) −
+gi gj dM(1) = dM(gi gj − gi gj ), we arrive at
+dgi gj = (Mij + Cov(m̃, gi gj ))dt +
+
+1
+dM(gi gj − gi gj ).
+n
+
+(109)
+
+Consider the function f (x, y, z) = x − yz (where x, y, z are just scalar variables here, not to be confused with test functions or
+trait values). Itô’s formula (e.g., equation (4.73) on page 114 of Klebaner, 1998) applied to f (Xt , Yt , Zt ) states
+df (Xt , Yt , Zt ) = [∂x f (Xt , Yt , Zt )]dXt + [∂y f (Xt , Yt , Zt )]dYt + [∂z f (Xt , Yt , Zt )]dZt
++
+
+1
+2
+2
+2
+2
+2
+2
+(∂ f (Xt , Yt , Zt )]dXt + [∂y f (Xt , Yt , Zt )]dYt + [∂z f (Xt , Yt , Zt )]dZt )
+2 x
++ (∂x ∂y f (Xt , Yt , Zt )]dXt dYt + [∂x ∂z f (Xt , Yt , Zt )]dXt dYt + [∂y ∂z f (Xt , Yt , Zt )]dYt dZt ) .
+
+(110)
+
+For the specific functional form f (x, y, z) = x − yz, we then have
+df (Xt , Yt , Zt ) = dXt − Zt dYt − Yt dZt − dYt dZt .
+
+(111)
+
+Note that Gij = f (gi gj , ḡi , ḡj ) = gi gj − ḡi ḡj (this is an immediate consequence of the definition of covariance). Applying Itô’s
+formula for f (x, y, z) to dGij = df (gi gj , ḡi , ḡj ) provides
+dGij = dgi gj − ḡj dḡi − ḡi dḡj − dḡi dḡj .
+
+(112)
+
+Substituting our result for dgi gj and the result for dḡi given in equation (89) into the expression for dGij provides
+1
+1
+dM(gi gj − gi gj ) − ḡj (Cov(m̃, gi )dt + n
+dM(gi − ḡi ))
+dGij = (Mij + Cov(m̃, gi gj ))dt + n
+1
+− ḡi (Cov(m̃, gj )dt + n
+dM(gj − ḡj )) − dḡi dḡj .
+
+(113)
+
+Using dt2 = dt dM(x) = 0, expand the product dḡi dḡj and simplify to find dḡi dḡj = dM(gi − ḡi )dM(gj − ḡj )/n2 . The multiplicative
+property shows dM(gi − ḡi )dM(gj − ḡj ) = v n ∫Rd (gi − ḡi )(gj − ḡj )p̃(g)dg dt = v n Gij dt. In addition, bilinearity of covariance
+justifies Cov(m̃, gi gj ) − ḡj Cov(m̃, gi ) − ḡi Cov(m̃, gj ) = Cov(m̃, gi gj − ḡj gi − ḡi gj ). Because Cov(m̃, ḡi ḡj ) = 0 (covariance with a
+
+Multivariate Eco-Evo Supp. Mat.
+
+19
+
+constant is zero), we have Cov(m̃, gi gj − ḡj gi − ḡi gj ) = Cov(m̃, gi gj − ḡj gi − ḡi gj + ḡi ḡj ) = Cov(m̃, (gi − ḡi )(gj − ḡj )). Using the
+additive property, we also have
+dM(gi gj − gi gj ) − ḡj dM(gi − ḡi ) − ḡi dM(gj − ḡj ) = dM(gi gj − gi gj − ḡj gi + ḡi ḡj − ḡi gj + ḡi ḡj ) = dM((gi − ḡi )(gj − ḡj ) − Gij ),
+(114)
+where the right equality leveraged gi gj = Gij + ḡi ḡj . Plugging these results in to our expression for dGij provides
+v
+1
+dGij = (Mij + Cov(m̃, (gi − ḡi )(gj − ḡj )) − n
+Gij )dt + n
+dM((gi − ḡi )(gj − ḡj ) − Gij ).
+
+(115)
+
+Assuming multivariate normality, equation (22) in Supplementary Material, Section 2.3.2 directly shows
+v
+1
+Gij )dt + n
+dM((gi − ḡi )(gj − ḡj ) − Gij ).
+dGij = (Mij + 2 ∑ Gik (∂kl m̄ − ∂kl m̃)Gjl − n
+
+(116)
+
+kl
+
+Finally, the justification given above equation (93) can be extended to justify ∂kl m̃ = ∂kl m, which then justifies equation (26c) in
+the main text (the Martingale Gradient version).
+
+5.4.2. Brownian Motion Gradient Version
+For the Brownian Motion Gradient version, the scaling property shows dM((gi − ḡi )(gj − ḡj ) − Gij ) = ∥(gi − ḡi )(gj − ḡj ) − Gij ∥dBGij
+with dBGij a standard Brownian motion. By definition, we also have
+√
+∥(gi − ḡi )(gj − ḡj ) − Gij ∥ =
+
+vn ∫
+
+Rd
+
+((gi − ḡi )(gj − ḡj ) − Gij )2 p̃(g)dg.
+
+(117)
+
+Expanding the square leads to
+√
+
+√
+
+vn ∫
+
+Rd
+
+((gi − ḡi )(gj − ḡj ) − Gij )2 p̃(g)dg =
+
+v n ((gi − ḡi )2 (gj − ḡj )2 − G2ij ).
+
+(118)
+
+Assuming multivariate normality, Isserlis’ theorem (Isserlis, 1918) immediately implies
+(gi − ḡi )(gj − ḡj )(gk − ḡk )(gl − ḡl ) = Gij Gkl + Gik Gjl + Gil Gjk .
+
+(119)
+
+Applying Isserlis’ theorem then provides the simplification
+∥(gi − ḡi )(gj − ḡj ) − Gij ∥ =
+
+√ √
+v n Gii Gjj + G2ij .
+
+(120)
+
+Together this justifies equation (23) in the main text (from the Brownian Motion Gradient version of the framework). Carefully
+note, however, that the standard Brownian motions BGij and BGkl will in general covary even under the assumption of multivariate
+normality. More generally, the multiplicative property shows
+
+dM((gi − ḡi )(gj − ḡj ) − Gij ) dM((gk − ḡk )(gl − ḡl ) − Gkl ) = ⟨(gi − ḡi )(gj − ḡj ) − Gij , (gk − ḡk )(gl − ḡl ) − Gkl ⟩ dt
+= vn ∫
+
+Rd
+
+((gi − ḡi )(gj − ḡj ) − Gij )((gk − ḡk )(gl − ḡl ) − Gkl )p̃(g)dg dt = v n ((gi − ḡi )(gj − ḡj )(gk − ḡk )(gl − ḡl ) − Gij Gkl )dt.
+
+(121)
+
+Applying Isserlis’ theorem again gives the simplification
+dM((gi − ḡi )(gj − ḡj ) − Gij ) dM((gk − ḡk )(gl − ḡl ) − Gkl ) = v n (Gik Gjl + Gil Gjk )dt.
+
+(122)
+
+Then, because dBGij = dM((gi − ḡi )(gj − ḡj ) − Gij )/∥(gi − ḡi )(gj − ḡj ) − Gij ∥, we can combine the above results to see
+dBGij dBGkl = √
+
+which is equation (24) of the main text.
+
+Gik Gjl + Gil Gjk
+dt,
+√
+Gkk Gll + G2kl
+
+Gii Gjj + G2ij
+
+(123)
+
+20
+
+Bob Week
+
+Vectorizing and Sphering Matrix-Valued Martingales
+Now consider the d × d symmetric matrix of continuous martingales ΩG defined so that its ij-th entry is given by (ΩG )ij =
+M((gi − ḡi )(gj − ḡj ) − Gij ) (that is ΩG is a matrix-valued martingale). Using this definition, we can intuitively think of (dΩG )ij =
+dM((gi − ḡi )(gj − ḡj ) − Gij ) as a normally distributed random variable with mean zero and variance given by (dΩG )2ij = dM((gi −
+ḡi )(gj − ḡj ) − Gij )2 = v n (Gii Gjj + G2ij )dt. We can extend this perspective to consider dΩG as a matrix-valued normal random
+variable, in which case the covariance structure is summarized by a fourth-order tensor. In order to leverage a sphering argument to
+express dΩG in terms of a matrix-valued Brownian motion differential dBG , I vectorize the matrix dΩG by putting into one-to-one
+correspondence with the pair of indices (i, j) for 1 ≤ i ≤ j ≤ d with a vectorized index α (the exact mapping between α and (i, j),
+denoted α ↔ (i, j), doesn’t matter so long as it’s one-to-one). In particular, the vectorized index α spans u = d(d + 1)/2 different
+values. With the vectorized index α, write vec[dΩG ] for the u-dimensional vector with α-th entry given by vec[dΩG ]α = (dΩG )ij .
+We can then intuitively think of vec[dΩG ] as a multivariate normal vector with mean zero and covariance matrix given by the
+outer-product mat[C] ∶= vec[dΩG ]vec[dΩG ]⊺ . More precisely, given another vectorized index β ↔ (k, l), the matrix mat[C] has as
+its αβ-th entry
+mat[C]αβ = (dΩG )ij (dΩG )kl = v n (Gik Gjl + Gil Gjk )dt.
+
+(124)
+
+Because the informal argument made here leverages heuristics where products of stochastic differentials are deterministic quantities
+2
+= dt), expectations are not needed to express covariance matrices such as mat[C] (which otherwise would be needed
+(e.g., dBG
+ij
+in more formal settings). To simplify notation, these expectations are omitted for the rest of this argument.
+Define the fourth-order tensor Γ such that Γijkl = Gik Gjl + Gil Gjk . Then Γ = G⊗G + G⊗G, where (G⊗G)ijkl = Gik Gjl is
+called the upper open product, and (G⊗G)ijkl = Gil Gjk is called the lower open product. Write mat[Γ ] as the u × u matrix
+(u = d(d + 1)/2) with αβ-th entry (α ↔ (i, j) and β ↔ (k, l)) given by mat[Γ ]αβ = Γijkl . We can then write the covariance matrix
+for vec[dΩG ] as
+mat[C] = v n mat[Γ ] dt
+
+(125)
+
+Taking a similar sphering approach used to express dz̄ in terms of a vector of independent standard Brownian motions Bz̄ , we can
+write
+√ √
+vec[dΩG ] = v n mat[Γ ]vec[dBG ],
+(126)
+√
+√
+√
+⊺
+where mat[Γ ] is any u × u matrix that satisfies mat[Γ ] mat[Γ ] = mat[Γ ], and vec[dBG ] is multivariate normal with mean
+zero and covariance matrix equal to the u × u identity matrix times dt (i.e., vec[dBG ] has uncorrelated entries each with variance
+dt):
+⊺
+
+vec[dBG ]vec[dBG ] = Iu dt.
+
+(127)
+
+The vectorized indices α ↔ (i, j) and β ↔ (k, l) tell us how to reshape the matrix vec[dBG ]vec[dBG ]⊺ into a fourth-order tensor:
+⊺
+
+(vec[dBG ]vec[dBG ] )αβ = (dBG )ij (dBG )kl .
+
+(128)
+
+The constraint asserted by equation (127) creates a problem that has a canonical solution given by (dBG )ij (dBG )kl = 12 (δik δjl +
+δil δjk ) dt. In turn, this solution defines the fourth-order tensor dBG ⊗ dBG (in particular, (dBG ⊗ dBG )ijkl = (dBG )ij (dBG )kl )
+that determines the covariance structure of the symmetric normal matrix dBG .
+√
+Again using the vectorized indices α ↔ (i, j) and β ↔ (k, l), define Γ to be the fourth-order tensor with ijkl-th entry given
+√
+√
+by Γ ijkl = mat[Γ ]αβ . Then, because
+vec[dΩG ]α =
+
+√
+√
+v n ∑ mat[Γ ]αβ vec[dBG ]β ,
+
+(129)
+
+β
+
+we also have
+(dΩG )ij =
+
+√
+√
+v n ∑ Γ ijkl (dBG )kl .
+
+(130)
+
+kl
+
+Define the double contraction
+
+√
+√
+√
+Γ ∶ dBG as the d × d matrix with ij-th entry ( Γ ∶ dBG )ij = ∑kl Γ ijkl (dBG )kl . Then
+dΩG =
+
+√
+
+√
+
+√
+v n Γ ∶ dBG .
+
+mat[Γ ]αγ
+
+√
+
+(131)
+
+mat[Γ ]βγ , with the sum taken across another vectorized index
+√
+√
+γ ↔ (m, n). This is equivalent to the statement Γijkl = ∑mn Γ ijmn Γ klmn , with the sum on the right used to define the
+√
+√
+√
+√
+√
+√
+double contraction Γ ∶ Γ . In particular, we have Γ = Γ ∶ Γ . A choice of Γ that satisfies Γ = G⊗G + G⊗G is Γ ijkl =
+√
+√
+√
+√
+√
+( Gik Gjl + Gil Gjk )/ 2. This notation then justifies equation (21) in the main text (the matrix-valued stochastic differential
+equation for G under the Brownian Motion Gradient version of the framework).
+By definition of
+
+mat[Γ ], we have mat[Γ ]α = ∑γ
+
+√
+
+Multivariate Eco-Evo Supp. Mat.
+
+21
+
+5.4.3. Uncorrelated noise processes driving n, z̄, G
+Finally, to show that the noise processes driving the stochastic dynamics of additive genetic variances and abundance do not
+covary, use the multiplicative property to compute dn dGij = dM(1)dM((gi − ḡi )(gj − ḡj ) − Gij ) = ⟨ 1, (gi − ḡi )(gj − ḡj ) − Gij ⟩ dt =
+v n ∫Rd ((gi − ḡi )(gj − ḡj ) − Gij )p̃(g)dg dt = 0 dt = 0 for any distribution of additive genetic values g. Following the same intuitive
+perspective used to justify the sphering argument above, we see that the noise processes driving Gij and n are uncorrelated. For
+additive genetic variances and mean traits, compute
+dGij dz̄k = ⟨ (gi − ḡi )(gj − ḡj ) − Gij , gk − ḡk ⟩ dt = v n ∫
+
+Rd
+
+(gi − ḡi )(gj − ḡj )(gk − ḡk )p̃(g)dg dt = n v Sijk ,
+
+(132)
+
+where Sijk is the ijk-th entry of the third-order skew tensor for the distribution of additive genetic values p̃(g). For multivariate
+normal distributions Sijk = 0. Hence, the noise processes driving the stochastic dynamics of additive genetic variances and mean
+traits do not covary when additive genetic values are multivariate normal.
+
+6. Derivations of the dynamics of genetic correlation and of the inverse of its hyperbolic
+tangent in response to drift
+6.1. Derivation of the Stochastic Differential Equation dρ = − 21 nv ρ(1 − ρ2 )dt +
+
+√v
+
+n
+
+(1 − ρ2 )dBρ ??
+
+√
+The genetic correlation between traits i and j is given by ρij = Gij / Gii Gjj . The goal here is to derive a stochastic differential
+equation that characterizes the response of ρij to drift for asexually reproducing populations (without mutation, selection, or any
+√
+other process affecting ρij ). Itô’s formula applied to ρij = ρ(Gij , Gii , Gjj ) ∶= Gij / Gii Gjj provides
+dρ = (∂ij ρ)dGij + (∂ii ρ)dGii + (∂jj ρ)dGjj
++
+
+1
+2
+2
+2
+2
+2
+2
+[(∂ij ρ)(dGij ) + (∂ii ρ)(dGii ) + (∂jj ρ)(dGjj ) ]
+2
++ (∂ij ∂ii ρ)dGij dGii + (∂ij ∂jj ρ)dGij dGjj + (∂ii ∂jj ρ)dGii dGjj .
+
+(133)
+
+Throughout this section ρ is shorthand for ρ(Gij , Gii , Gjj ). The partial derivatives of ρ are
+1
+ρ
+ρ
+1
+Gij
+1
+Gij
+∂ij ρ = √
+=−
+=−
+, ∂ii ρ = −
+, ∂jj ρ = −
+,
+2 G3/2 G1/2
+2Gii
+2 G1/2 G3/2
+2Gjj
+Gii Gjj
+ii
+jj
+ii
+jj
+
+(134)
+
+and the second derivatives are
+
+2
+
+∂ij ρ = 0, ∂ij ∂ii ρ = −
+
+1
+1
+1 ∂ij ρ
+1
+1
+1 ∂ij ρ
+=− ,
+, ∂ij ∂jj ρ = −
+=− ,
+,
+2 G3/2 G1/2
+2 Gii
+2 G1/2 G3/2
+2 Gjj
+ii
+
+ii
+
+jj
+
+jj
+
+1
+3
+Gij
+Gij
+ρ
+3 ρ
+3 ρ
+1
+2
+, ∂jj ρ =
+, ∂ii ∂jj ρ =
+.
+=
+=
+=
+4 G5/2 G1/2
+4 G2ii
+4 G1/2 G5/2
+4 G2jj
+4 G3/2 G3/2
+4 Gii Gjj
+
+3
+2
+∂ii ρ =
+
+Gij
+
+ii
+
+jj
+
+ii
+
+jj
+
+ii
+
+(135)
+
+jj
+
+Write dρ = K + L, with K containing the first derivatives and L containing the second derivatives. In particular
+K = (∂ij ρ)dGij + (∂ii ρ)dGii + (∂jj ρ)dGjj .
+
+(136)
+
+We can split K into deterministic and stochastic components K = Kdet + Kstoch such that
+(det)
+
++ (∂ii ρ)dGii
+
+(stoch)
+
++ (∂ii ρ)dGii
+
+Kdet = (∂ij ρ)dGij
+(det)
+
+with dGij
+
+(det)
+
+(det)
+
++ (∂jj ρ)dGjj
+
+,
+
+(137)
+
+v
+= −n
+Gij dt and
+
+Kstoch = (∂ij ρ)dGij
+
+(stoch)
+
+(stoch)
+
++ (∂jj ρ)dGjj
+
+,
+
+(138)
+
+(stoch)
+
+1
+= n
+with dGij
+dM((gi − ḡi )(gj − ḡj ) − Gij ). Now plugging in expressions for the partial derivatives of ρ into Kdet and canceling
+terms that appear in both numerator and denominator leads to
+
+Kdet = −
+
+⎞
+v ⎛
+Gij
+1
+Gij
+1
+Gij
+− √
+− √
+= 0.
+√
+n ⎝ Gii Gjj
+2 Gii Gjj
+2 Gii Gjj ⎠
+
+(139)
+
+22
+
+Bob Week
+
+6.1.1. Kstoch
+
+(stoch)
+
+For Kstoch , substitute dGij
+Kstoch =
+
+1
+= n
+dM((gi − ḡi )(gj − ḡj ) − Gij ) to get
+
+1
+1
+1
+2
+2
+(∂ij ρ)dM[(gi − ḡi )(gj − ḡj ) − Gij ] + (∂ii ρ)dM[(gi − ḡi ) − Gii ] + (∂jj ρ)dM[(gj − ḡj ) − Gjj ].
+n
+n
+n
+
+(140)
+
+The additive property then justifies
+Kstoch =
+
+1
+2
+2
+dM[(∂ij ρ)((gi − ḡi )(gj − ḡj ) − Gij ) + (∂ii ρ)((gi − ḡi ) − Gii ) + (∂jj ρ)((gj − ḡj ) − Gjj )].
+n
+
+(141)
+
+Define
+2
+
+2
+
+Hij ∶= (∂ij ρ)((gi − ḡi )(gj − ḡj ) − Gij ) + (∂ii ρ)((gi − ḡi ) − Gii ) + (∂jj ρ)((gj − ḡj ) − Gjj ),
+
+(142)
+
+1
+so that Kstoch = n
+dM(Hij ). Distributing and then plugging the expressions for the partial derivatives of ρ, and then substituting
+√
+ρ = Gij / Gii Gjj and canceling terms that appear in both numerator and denominator leads to
+
+Hij =
+
+⎞
+⎛ (gi − ḡi )(gj − ḡj )
+ρ (gi − ḡi )2 ρ
+ρ (gj − ḡj )2 ρ
+(gi − ḡi )(gj − ḡj ) ρ (gi − ḡi )2 ρ (gj − ḡj )2
+− ρ + (−
++ ) + (−
++ )=
+−
+−
+√
+√
+⎠
+⎝
+2
+Gii
+2
+2
+Gjj
+2
+2
+Gii
+2
+Gjj
+Gii Gjj
+Gii Gjj
+
+(143)
+
+The scaling property states dM(Hij ) = ∥Hij ∥dBρij for some standard Brownian motion Bρij . Additionally, we have ∥Hij ∥ =
+√
+√
+2 . Expanding the square leads to
+v n ∫Rd (Hij )2 p̃(g)dg = v n Hij
+2 =
+Hij
+
+(gi − ḡi )2 (gj − ḡj )2 ρ2 (gi − ḡi )4 ρ2 (gj − ḡj )4
+(gi − ḡi )3 (gj − ḡj )
+(gi − ḡi )(gj − ḡj )3 ρ2 (gi − ḡi )2 (gj − ḡj )2
++
+−ρ
++
+.
+−ρ
++
+2
+2
+3/2
+1/2 3/2
+1/2
+Gii Gjj
+4
+Gii
+4
+Gjj
+2
+Gii Gjj
+G G
+G G
+ii
+
+ii
+
+jj
+
+jj
+
+(144)
+Isserlis’ theorem (Isserlis, 1918) immediately implies
+(gi − ḡi )(gj − ḡj )(gk − ḡk )(gl − ḡl ) = Gij Gkl + Gik Gjl + Gil Gjk .
+
+(145)
+
+Hence
+2
+
+(gi − ḡi )2 (gj − ḡj )2 = Gii Gjj + 2Gij ,
+
+(gi − ḡi )3 (gj − ḡj ) = 3Gii Gij ,
+
+(gi − ḡi )(gj − ḡj )3 = 3Gjj Gij .
+
+(146)
+
+2 gives
+Substituting into Hij
+
+2 =
+Hij
+
+Gii Gjj + 2G2ij
+Gii Gjj
+
+3Gii Gij
+ρ2 3G2ii ρ2 3Gjj
+3Gjj Gij
+ρ2 Gii Gjj + 2Gij
++
+− ρ 3/2 1/2 − ρ 1/2 3/2 +
+.
+2
+2
+4 Gii
+4 Gjj
+2
+Gii Gjj
+G G
+G G
+2
+
++
+
+2
+
+ii
+
+ii
+
+jj
+
+√
+
+Cancelling common terms appearing in numerators and denominators, and substituting Gij /
+
+Hence, ∥Hij ∥ =
+
+√
+
+Gii Gjj = ρ gives
+
+3 2 3 2
+ρ2
+2
+2
+2
+2
+4
+2 2
+ρ + ρ − 3ρ − 3ρ +
+(1 + 2ρ ) = 1 − 2ρ + ρ = (1 − ρ ) .
+4
+4
+2
+
+2
+
+2 = 1 + 2ρ +
+Hij
+
+(147)
+
+jj
+
+(148)
+
+v n (1 − ρ2 ), and, equating Bρ = Bρij , we then have
+K = Kdet + Kstoch = 0 +
+
+1
+∥Hij ∥ dBρij =
+n
+
+√
+
+v
+2
+(1 − ρ ) dBρ .
+n
+
+(149)
+
+6.1.2. L
+For L, use the multiplication property to find
+(dGij )(dGkl ) = dM((gi − ḡi )(gj − ḡj ) − Gij ), dM((gk − ḡk )(gl − ḡl ) − Gkl ) =
+In particular,
+2
+
+(dGij ) =
+
+v
+2
+(Gii Gjj + Gij ) dt,
+n
+
+(dGii )(dGjj ) = 2
+
+v
+(Gik Gjl + Gil Gjk ) dt.
+n
+
+v 2
+G dt.
+n ij
+
+(150)
+
+(151)
+
+From the expression for dρ above, we see L is given by
+2
+
+2
+
+2
+
+2
+
+L = 12 (∂ii ρ)(dGii ) + 21 (∂jj ρ)(dGjj ) + (∂ij ∂ii ρ)(dGij )(dGii ) + (∂ij ∂jj ρ)(dGij )(dGjj ) + (∂ii ∂jj ρ)(dGii )(dGjj ).
+Plugging in results for second partial derivatives of ρ then gives
+
+(152)
+
+Multivariate Eco-Evo Supp. Mat.
+
+⎛
+
+⎞
+
+3
+2
+2
+1
+(∂ii ρ)(dGii ) = 12 ⎜
+2
+
+23
+
+2v 2
+Gij
+v 3
+Gij
+⎟ ( Gii dt) =
+dt.
+5/2 1/2
+n 4 G1/2 G1/2
+⎝ 4 Gii Gjj ⎠ n
+ii
+jj
+
+(153)
+
+⎞ 2v 2
+v 3
+Gij
+Gij
+⎟ ( Gjj dt) =
+dt.
+1/2 5/2
+n 4 G1/2 G1/2
+⎝ 4 Gii Gjj ⎠ n
+jj
+ii
+
+(154)
+
+⎛
+
+3
+2
+2
+1
+(∂jj ρ)(dGjj ) = 21 ⎜
+2
+
+⎛ 1
+⎞ 2v
+v
+1
+Gij
+⎟ ( Gii Gij dt) = −
+(∂ij ∂ii ρ)(dGij )(dGii ) = ⎜−
+dt.
+3/2 1/2
+2
+n G1/2 G1/2
+Gii Gjj ⎠ n
+⎝
+jj
+ii
+
+(155)
+
+⎛ 1
+⎞ 2v
+1
+v
+Gij
+⎟ ( Gjj Gij dt) = −
+dt.
+(∂ij ∂jj ρ)(dGij )(dGjj ) = ⎜−
+1/2
+3/2
+n G1/2 G1/2
+⎝ 2 Gii Gjj ⎠ n
+ii
+jj
+
+(156)
+
+⎛1
+⎞ 2v 2
+G3ij
+Gij
+v 1
+⎟
+(∂ii ∂jj ρ)(dGii )(dGjj ) = ⎜
+dt.
+(
+G
+dt)
+=
+ij
+3/2 3/2
+n 2 G3/2 G3/2
+⎝ 4 Gii Gjj ⎠ n
+jj
+ii
+
+(157)
+
+Plugging these results into L and simplifying leads to
+3
+
+L=
+
+Gij
+v 3
+v
+Gij
+v 1
+v 3
+1 3
+1v
+Gij
+2
+dt − 2 1/2 1/2 dt +
+dt = ( ρ − 2ρ + ρ ) dt = −
+ρ(1 − ρ ) dt.
+n 2 G1/2 G1/2
+n G G
+n 2 G3/2 G3/2
+n 2
+2
+2n
+ii
+
+jj
+
+ii
+
+jj
+
+ii
+
+(158)
+
+jj
+
+6.2. Stationary distribution and boundary behavior
+In the last subsection we obtained
+dρ = b(ρ) dt + σ(ρ) dBρ ,
+
+(159)
+
+√v
+v
+ρ(1−ρ2 ) and σ(ρ) = n
+(1−ρ2 ). Because this is a regular one-dimensional diffusion, a formal stationary distribution
+with b(ρ) = − 21 n
+v
+(if it exists) is given by π(ρ) ∝ exp( ∫ ρ 2b(u)/σ 2 (u) du)/σ 2 (ρ) (Etheridge, 2010; Karlin and Taylor, 1981). Here σ 2 (ρ) = n
+(1 − ρ2 )2
+ρ
+ρ
+2
+2
+2 1/2
+2
+2
+2
+1
+and 2b(ρ)/σ (ρ) = −ρ/(1 − ρ ), so ∫ −u/(1 − u ) du = 2 log(1 − ρ ) + C, implying exp(∫ 2b/σ ) ∝ (1 − ρ ) . Substituting back gives
+2 −3/2
+
+the stationary shape q̂(ρ) ∝ (1 − ρ )
+, which is non-integrable on (−1, 1). Thus no normalizable stationary distribution exists.
+To classify the boundary behavior, compute the scale and speed densities. The scale density is s′ (ρ) = exp(− ∫ ρ 2b(u)/σ(u)2 du) ∝
+(1 − ρ2 )−1/2 , yielding the scale function s(ρ) = ∫0ρ (1 − u2 )−1/2 du = arcsin(ρ), which is finite at ρ = ±1. The speed density is
+m(ρ) = 2/(σ(ρ)2 s′ (ρ)) = 2n
+(1 − ρ2 )−3/2 , which diverges non-integrably at both boundaries. Referring to Table 6.2 for boundary
+v
+classification in Chapter 15 of Karlin and Taylor (1981), this combination (finite scale function at the boundary together with
+divergent speed measure) implies that ρ = ±1 are attracting in the sense that probability mass is pushed toward them, but they
+are unattainable from the interior (i.e., the probability of reaching them in finite time is zero) for all ρ ∈ (−1, 1).
+
+6.3. Derivation of the stochastic differential equation du = 12 nv tanh(u)dt +
+
+√v
+n
+
+dBu
+
+√v
+v
+In Supplementary Material, Section ?? we obtained dρ = − 21 n
+ρ(1 − ρ2 ) dt + n
+(1 − ρ2 ) dBρ . Define u ∶= tanh−1 (ρ) (the inverse
+hyperbolic tangent of ρ). Itô’s formula states
+1 ′′
+2
+′
+du = u (ρ) dρ + u (ρ) (dρ) .
+(160)
+2
+
+Use the identity
+u=
+
+1
+1+ρ
+ln (
+)
+2
+1−ρ
+
+(161)
+
+in combination with elementary calculus to obtain
+′
+
+d
+1
+−1
+tanh (ρ) =
+dρ
+1 − ρ2
+
+(162)
+
+d
+1
+2ρ
+(
+)=
+.
+dρ 1 − ρ2
+(1 − ρ2 )2
+
+(163)
+
+u (ρ) =
+and
+′′
+
+u (ρ) =
+√v
+
+v
+ρ(1 − ρ2 ), and b(ρ) = n (1 − ρ2 ). Then dρ = a(ρ) dt + b(ρ) dBρ . Because Bρ is a standard Brownian motion, we have
+Set a(ρ) = − 21 n
+the general heuristics dt2 = dt dBρ = 0 and (dBρ )2 = dt. Expanding the square (dρ)2 and applying these heuristics leads to
+
+v
+2 2
+(1 − ρ ) dt.
+n
+
+(164)
+
+1 ′′
+1 ′′
+2
+′
+2
+u (ρ) (dρ) = u (ρ)[a(ρ) dt + b(ρ) dBρ ] + u (ρ)b (ρ) dt.
+2
+2
+
+(165)
+
+2
+
+2
+
+(dρ) = b (ρ) dt =
+Substituting into Itô’s formula for du leads to
+′
+
+du = u (ρ) dρ +
+
+24
+
+Bob Week
+
+Collect dt and dBρ to get
+′
+
+1 ′′
+2
+′
+u (ρ)b (ρ)]dt + u (ρ)b(ρ) dBρ .
+2
+
+′
+
+1
+1 − ρ2
+
+du = [u (ρ)a(ρ) +
+Note
+u (ρ)b(ρ) =
+
+√
+
+v
+2
+(1 − ρ ) =
+n
+
+√
+
+v
+,
+n
+
+(166)
+
+(167)
+
+and
+′
+
+u (ρ)a(ρ) =
+
+1
+1v
+1v
+2
+(−
+ρ(1 − ρ )) = −
+ρ,
+1 − ρ2
+2n
+2n
+
+(168)
+
+and also
+1
+2ρ
+v
+v
+1 ′′
+2
+2 2
+u (ρ)b (ρ) = (
+) ( (1 − ρ ) ) = ρ.
+2
+2 (1 − ρ2 )2
+n
+n
+
+(169)
+
+Then
+′
+
+[u (ρ)a(ρ) +
+
+1 ′′
+1v
+2
+u (ρ)b (ρ)]dt =
+ρ dt.
+2
+2n
+
+(170)
+
+Substituting ρ = tanh(u) and setting Bu ∶= Bρ , we then arrive at
+
+du =
+
+1v
+tanh(u) dt +
+2n
+
+√
+
+v
+dBu .
+n
+
+(171)
+
+6.3.1. Approximating du when ∣u∣ ≫ 1
+Using the identity tanh(u) = (eu − e−u )/(eu + e−u ), we have u ≫ 1 implies e−u ≈ 0 and thus tanh(u) ≈ 1. Conversely, when u ≪ −1,
+then tanh(u) ≈ −1. Taken together, when u ≫ 1 we have
+du ≈
+
+1v
+dt +
+2n
+
+√
+
+and when u ≪ −1 we have
+du ≈ −
+
+1v
+dt +
+2n
+
+v
+dBu ,
+n
+
+√
+
+(172)
+
+v
+dBu .
+n
+
+(173)
+
+6.3.2. Approximating E[ut ] when t ≫ 1
+
+To understand the behavior of E[ut ] when t ≫ 1, recall that ut = tanh−1 (ρt ) satisfies
+dut =
+
+1v
+tanh(ut ) dt +
+2n
+
+√
+
+v
+dBu ,
+n
+
+so in integral form
+ut = u 0 +
+
+t
+1v
+∫ tanh(us ) ds +
+2n 0
+
+√
+
+v
+Bu .
+n
+
+(174)
+
+(175)
+
+Taking expectations and using E[Bu ] = 0 gives the exact identity
+E[ut ] = u0 +
+
+t
+1v
+∫ E[tanh(us )] ds.
+2n 0
+
+(176)
+
+The ode q̇ = a tanh(q) has the solution qt = sinh−1 ( sinh(q0 ) e a t ). To check, set St = sinh(q0 ) e a t = sinh(qt ) so that qt =
+√
+√
+sinh−1 (St ) and hence q̇ = Ṡ/ 1 + S 2 , Ṡt = a St = a sinh(qt ), and 1 + St2 = cosh(qt ) (because sinh2 (q) − cosh2 (q) = 1). Thus, q̇ =
+a sinh(q)/ cosh(q) = a tanh(q). For positive u, tanh(u) is convex and Jensen’s inequality (Jensen, 1906) then justifies tanh(E[u]) ≤
+d
+E[tanh(u)]. This implies that the solution to dt
+E[ut ] = a E[tanh(us )] ≥ a tanh(E[us ]) will satisfy E[ut ] ≥ qt for all t ≥ 0 given
+that q0 = u0 > 0 (here I’m assuming u0 = E[u0 ] is not random). In addition, because ∣ tanh(u)∣ ≤ 1 for all u, we also have
+d
+E[ut ] = a E[tanh(ut )] ≤ a which implies qt ≤ E[ut ] ≤ u0 + a t for all t ≥ 0. Asymptotically, qt ≈ q0 + a t for large t which then implies
+dt
+E[ut ] ≈ u0 + a t for large t. Because tanh is an odd function (i.e., tanh(−u) = − tanh(u)), the analogous result holds for u0 < 0.
+Letting a = v/2n gives the approximation of E[ut ] discussed below equation (42) in the main text.
+
+Multivariate Eco-Evo Supp. Mat.
+
+25
+
+7. Justification of Martingale Process Mt and Multivariate DAGA by a Diffusion-Limit
+The martingale process Mt characterized by equations (64) and (67) above in Supplementary Material, Section 4.1 (which
+establishes the mathematical foundation for the framework presented in the main text) can be formally constructed using diffusionlimits of individual-based branching processes. To illustrate one way to do this, I describe in the first subsection below an
+individual-based process and an approach to rescale it that are mathematically convenient. This choice is meant to keep the
+illustration as accessible as possible. It should be noted, however, that many alternative approaches that converge to the same
+diffusion-limit exist (including ones based on continuous-time or discrete-time individual-based processes). Hence, more biologically
+appealing but mathematically involved approaches are possible.
+General conditions under which these diffusion-limits converge are described by a theorem that was proved by Méléard and
+Roelly (1993). Hence, after describing the individual-based process and the approach to rescaling, I simply demonstrate that the
+conditions required by the theorem of Méléard and Roelly (1993) are satisfied. Finally, an important limitation of the proof given
+by Méléard and Roelly (1993) is the requirement for the fitness function m(ν, z) to be bounded in both ν and z. Classical models
+of competition, cooperation, and directional and stabilizing selection rely on fitness functions that are unbounded either in ν (for
+competition and cooperation) or in z (for directional and stabilizing selection). Therefore, in the third subsection below I describe
+an approach to adapt the result of Méléard and Roelly (1993) to allow for such unbounded fitness functions.
+Before describing a possible approach to construct the framework with unbounded m, in the second subsection I show how to
+obtain multivariate DAGA (i.e., equation (1) of the main text). This is done by observing that, in the absence of demographic
+stochasticity, equation (64) above characterizes weak solutions to multivariate DAGA.
+
+7.1. Informal Description of the Diffusion-Limit
+Following the notation introduced in Supplementary Material, Section 3 above, the state of the individual-based process at time
+n(t)
+t ≥ 0 is summarized by the discrete population measure Nt = ∑i=1 δzi (t) , where δzi (t) is the point-mass representing the i-th
+individual in the population. Traits of individuals are determined at birth and are constant throughout their lifetime. Because
+individuals can be added or removed from the population, their indexing will depend on time. If individual j is removed from the
+population at time t, the index of individual j + k is replaced by j + k − 1 for each k = 1, . . . , n(t) − j (i.e., the remaining individuals
+with indices greater than the individual being removed “move down by 1”). If a number j of individuals is added to the population
+at time t, they are given the indices n(t− ) + 1, . . . , n(t− ) + j in no particular order (where n(t− ) is the size of the population an
+instant before time t such that n(t) = n(t− ) + j is the updated population size after the j individuals are added). Even though
+the trait value of each individual is constant during its lifetime, the indexed values zi (t) appearing in the subscripts of the point
+masses depend on time because the indexing is dynamic and different individuals will typically have different trait values.
+Individual lifetimes are exponentially distributed with constant rate ρ > 0, and are drawn independently at birth. At the end of
+an individuals lifetime, it is removed and replaced by a Poisson distributed number of offspring. When this occurs, the individual
+being replaced is said to “branch”. Biologically, these assumptions imply that reproduction is asexual and occurs simultaneously
+with death. Suppose individual i branches at time t. The mean of the Poisson distributed number of offspring that replace it is
+written as W (Nt− , zi (t− )) (biologically, this is called the fitness of the branching individual because it quantifies the expected
+lifetime reproductive output of that individual). The shape of the fitness surface W as a function of population state N and
+individual trait value z determines how selection operates and how trends in population growth change over time. The individuals
+replacing the branching individual i are assigned trait values that are independently drawn from a d-dimensional multivariate
+normal distribution with mean zi and covariance matrix M̊ = M/ρ. The variation of offspring trait values around their parental
+value establishes a model of mutation.
+Rescaling this process begins with the same approach for rescaling individuals described in Supplementary Material, Section 3.
+kn(0)
+n(0)
+In particular, focusing on the initial state of the population N0 = ∑i=1 δzi (0) , the k-the stage of rescaling is N0k = k1 ∑i=1 δzi (0)
+where at each stage traits are sampled from a d-dimensional multivariate normal distribution with mean vector z̄0 and covariance
+matrix P0 . The initial trait distribution can be much more general than this, but nothing is lost here by keeping it simple. This
+approach to rescaling individuals implies their “weight” is replaced by αk = 1/k at stage k. Simultaneously, we replace the branching
+rate ρ with ρk = kρ. At branching, the mutation covariance matrix is rescaled as M̊k = M/ρk = M/k. Using this approach, we
+will find that v = ρ in the diffusion-limit (which intuitively makes sense because faster branching rates imply greater demographic
+stochasticity). Finally, we replace the fitness surface W with its k-th root W 1/k . I call the rescaled process Ntk a k-system. The
+theorem of Méléard and Roelly (1993) states that if αk → 0 and ρk → ∞ as k → ∞ (which holds in this case) and, given fixed initial
+population measures of the form N k = αk ∑i δi such that N k → N as k → ∞, if the limit
+k
+
+mk (N , z) = (W
+
+1/k
+
+k
+
+(N , z) − 1)ρk
+
+(177)
+
+converges to a function m(N , z) that is continuous and bounded in both N and z, and finally if the product
+k
+
+vk (N , z) = (W
+
+2/k
+
+k
+
+(N , z) − W
+
+1/k
+
+k
+
+(N , z) + 1)αk ρk
+
+(178)
+
+converges a constant v > 0, then the sequence of k-systems (the rescaled individual-based processes) described here converges to a
+solution of the martingale problem described in Supplementary Material, Section 4 above. Note the last condition is satisfied in
+our case because as k increases the roots of the fitness surface W 2/k and W 1/k become more and more similar so that for large k
+we have the approximation vk ≈ αk ρk . But this just simplifies to the constant vk ≈ ρ. Because this approximation becomes exact
+as k → ∞, we find v = ρ.
+I provide an outline on how to extend this result to allow for an m that is unbounded in both N and z below. However,
+because this involves adapting proofs on the convergence of rescaled measure valued processes, there are unavoidable technical
+
+26
+
+Bob Week
+
+details. Understanding how to justify the multivariate DAGA partial differential equation (equation (1) in the main text) is more
+interesting to a broader audience, and so I address this next.
+
+7.2. Justification of multivariate DAGA by Deterministic Approximation
+The most direct and simple way to justify multivariate DAGA is to set v = 0. Note this has to be done after taking the diffusion-limit.
+Otherwise this would require setting ρ = 0 so that branching would never occur in the rescaled processes, and thus no dynamics
+would be possible. With v = 0 equation (64) reduces to the deterministic equation
+∫ d f (z) Nt (dz) − ∫ d f (z) N0 (dz) = ∫
+R
+
+R
+
+0
+
+t
+
+⊺
+
+∫ d (m(Ns , z) + 2 ∇ M∇) f (z) Ns (dz) ds.
+1
+
+(179)
+
+R
+
+Solutions to this equation can be interpreted as so-called generalized or weak solutions to multivariate DAGA (an introduction to
+the topic is given by Evans, 2022), and this therefore provides a formal approach to derive equation (1) of the main text.
+Instead of setting v = 0, it is also possible to obtain multivariate DAGA by considering very large population size. The main
+idea here is that the magnitude of demographic stochasticity is determined by the square-root of the quadratic variation described
+in equation (66), which itself is linear in the population measure. That is, the magnitude of demographic stochasticity can be
+roughly quantified by the square root of the population measure. In contrast, the magnitude of the deterministic dynamics are
+linear with respect to the population measure. Hence, when the population size is very large the effects of stochasticity will be
+negligible relative to the effects of the deterministic dynamics. Using this reasoning, one arrives again at the deterministic equation
+(179) above. Formalizing this approach then provides an alternative derivation of equation (1) in the main text.
+
+7.3. An Approach to Formally Construct the Framework with Unbounded m(ν, z)
+A common approach to formalize the diffusion-limit described above is to start by considering the set of finite measures MF ∶= {µ ∶
+µ(1) < ∞}, where µ(x) = ∫Rd x(z)µ(dz) so that µ(1) is the total mass (or abundance) of a population characterized by µ (Ethier and
+Kurtz, 1986). With MF in hand, now consider the set of random functions N mapping time [0, ∞) into MF (so N is a MF -valued
+stochastic process) that are 1) right-continuous and 2) are left-limited. Writing κ(N , N̊ ) as a (specific) notion of distance between
+N , N̊ ∈ MF (see Ethier and Kurtz, 1986), right-continuous means that limε→0 κ(Nt+ε , Nt ) = 0, and left-limited means that there
+exists N̊ ∈ MF such that limε→0 κ(Nt−ε , N̊ ) = 0. Denote this set of left-limited and right-continuous functions by DMF [0, ∞). Note
+that, by construction, every sample path of the individual-based process Nt defined above is a member of DMF [0, ∞). I denote this
+membership by Nt ∈ DMF [0, ∞). In addition, we also have inclusion of the k-system Ntk ∈ DMF [0, ∞). Then construction of the
+diffusion-limit is accomplished by demonstrating the sequence of k-systems {N k }∞
+k=1 converges in DMF [0, ∞) in a very specific way
+(see Supplementary Material, Section 7.3.6 below). In addition, it must be shown that the limit N = limk N k solves a martingale
+problem (described in Supplementary Material, Section 7.3.3 below).
+Already this shows a restriction that the population measure must remain finite for all time, which prevents accommodating
+explosion (reaching infinite total abundance in finite time). This issue may be overcome by developing a localized (in time)
+alternative where {N k }∞
+k=1 converges in DMF [0, τ ) for some (random) time τ , where at times t ≥ τ the limiting population process
+would be considered to have infinite total abundance. Convergence in this case is formalized using localized martingale problems
+based on τ . My short description in this paragraph prioritizes intuition, and is slightly misleading. A more accurate description
+of localization is given in the next section, and is discussed in section 4.6 of Ethier and Kurtz, (1986). An introduction to
+accommodating explosion with localization in the context of finite dimensional markov processes is given in Chapter 10 of Stroock
+and Varadhan (1997).
+Another issue is that MF only requires measures to be finite (i.e., µ(Rd ) < ∞). However, it is possible for phenotypic moments
+associated with finite measures to be infinite such that ∫Rd ∣z∣p µ(dz) = ∞ for some p = 1, 2, . . . (where ∣z∣p is the Euclidean norm of
+z raised to the p-th power). The framework presented here tracks first and second moments (so for p = 1, 2). Hence, another kind
+of explosion may occur here where phenotypic moments become infinite in finite time. Temporal localization may be used again to
+account for moment explosion. In particular, consider the restricted set of measures Mp ∶= {µ ∶ µ(wp ) < ∞} where wp (z) = 1 + ∣z∣p
+and µ(wp ) = ∫Rd wp (z)µ(dz). This is the set of finite measures with finite moments up to order p (with strict inclusion Mp ⊂ MF ).
+This set of finite p-moment measures Mp is, in a sense, dual to the set of so-called p-tempered measures Mp introduced by Iscoe
+(1986). More precisely, for µ ∈ Mp we have µ(x) < ∞ for functions x(z) that grow at most like ∣z∣p for large ∣z∣, and for µ̊ ∈ Mp
+we have µ̊(x̊) < ∞ for functions x̊(z) that decay at least like 1/∣z∣p for large ∣z∣. Here we are interested in M4 (i.e., Mp with p = 4)
+because, as shown by equation (8c) in the main text and in Supplementary Material, Section 5.4.2, fourth-order moments appear
+when characterizing the dynamics of the trait covariance matrix. Formal construction of the framework presented here may be
+done using localized martingales to characterize the convergence of {N k }∞
+k=1 in DM4 [0, τ ) for some (random) time τ (this is only
+slightly misleading, and more accurate details are given in the next section).
+Constructing the framework using a localized martingale problem with solutions taking values in M4 involves a lot of technical
+details. Here I point out just a few of these details to outline how this approach might be formalized.
+
+Multivariate Eco-Evo Supp. Mat.
+
+27
+
+7.3.1. The Killed Process
+To handle explosion (of either total abundance or phenotypic moments), denote by ∂ a so-called cemetery point for M4 . The
+notation is sensible because ∂A is often used to denote the boundary of a set A, and the cemetery point ∂ will act essentially as
+the boundary of M4 in MF in the sense that when a process leaves M4 it hits {∂}. However, denoting the actual boundary of M4
+in MF by ∂M4 , for any µ ∈ ∂M4 we have that any neighborhood of µ intersects with M4 . In this sense, the boundary ∂M4 cannot
+be separated from M4 . This is a general fact for the boundary of any set (Munkres, 2005). In contrast, the cemetery point ∂ is
+defined to have the feature of being isolated from M4 (i.e., there exists a neighborhood of ∂ that does not intersect with M4 ). This
+therefore distinguishes ∂ from ∂M4 . Although it may at first seem artificial, the cemetery point ∂ is helpful because it turns out
+that ∂M4 = MF (Billingsley, 1999; Ethier and Kurtz, 1986) which prevents the definition of explosion in terms of a process hitting
+∂M4 . When a process hits the set {∂} (which will be defined shortly), we kill the process at that time (also defined shortly). This
+justifies naming ∂ a cemetery point.
+With ∂ in hand, we now work with the extended set M̄4 ∶= M4 ∪ {∂}. For a left-limited and right-continuous measure-valued
+process N (possibly with infinite abundance and moments) and for u = 1, 2, . . ., define stopping times
+τu ∶= inf{t ≥ 0 ∶ Nt (w4 ) ≥ u},
+
+τ ∶= lim τu .
+u→∞
+
+(180)
+
+Then the process N hits {∂} at time τ , at which point we kill it by defining the killed process Nt∂ ∶= Nt for t < τ and Nt∂ ∶= ∂ for
+t ≥ τ . It is possible that τ = ∞ (with probability one), and in this case we let N live.
+
+7.3.2. Brownian Motion Mutation Model
+For the sake of convenience, replace the model of mutation in the individual-based model in Supplementary Material, Section 7.1
+(where offspring traits are drawn at branching and then kept constant throughout their lifetime) with a model where offspring traits
+are initially equal to their parental trait at branching and subsequently follow d-dimensional Brownian motion with covariance M.
+The Brownian motion model of mutation is assumed to be independent from lifetime lengths so that the i-th offspring, when it
+branches, will have expectation equal to the trait of its parent (conditioned on knowing that parents’ trait value) and covariance
+matrix M/ρ (computed using law of total covariance). This demonstrates agreement with the mutation-at-branching model used
+in Supplementary Material, Section 7.1 above. The d-dimensional Brownian motion mutation model has an associated Kolmogorov
+forward equation (called the Fokker-Planck equation by physicists) that describes the evolution of the probability density ζt (z) of
+zi (t) (conditioned on knowing the parental trait value), and is given by ζ̇ = Aζ where Ax(z) = 12 ∇⊺ M∇x(z). The operator A is
+called the infinitesimal generator for the Brownian motion mutation model.
+
+7.3.3. Localized Martingale Problem
+Denoting C 2 (Rd ) the set of twice continuously differentiable functions on Rd , define a test function class
+2
+
+d
+
+2
+
+D ∶= {x ∈ C (R ) ∶ ∣x(z)∣ ≤ Cx w2 (z), ∣∇x(z)∣ ≤ Cx w1 (z), ∣∇ x(z)∣ ≤ Cx , for some Cx > 0}.
+
+(181)
+
+Given the mutation matrix M, growth rate m(Nt , z), and reproductive variance v ≥ 0, a process N ∈ D M̄4 [0, ∞) is said to solve
+the localized (M, m, v)-martingale problem if for every x ∈ D and u = 1, 2, . . .,
+u
+
+Mt (x) ∶= Nt∧τu (x) − N0 (x) − ∫
+
+t∧τu
+
+0
+
+∫ d (A x(z) + m(Ns , z) x(z)) Ns (dz) ds
+
+(182)
+
+R
+
+is a martingale with quadratic covariation
+u
+
+t∧τu
+
+u
+
+[M (x), M (y)]t = v ∫
+
+0
+
+∫ d x(z)y(z)Ns (dz) ds,
+
+(183)
+
+R
+
+and Nt = ∂ for t ≥ τ , where τu and τ were defined above in Supplementary Material, Section 7.3.1. The notation s ∧ t = min(s, t) is
+common in probability theory. Additionally, it should be noted that localization here refers to localization in time (not space).
+
+7.3.4. Approximating k-System
+For each k = 1, 2, . . ., the k-th rescaling of the individual-based model with Brownian motion mutation is summarized by:
+●
+
+Individual weight: αk = 1/k
+
+●
+
+t
+Population measure: Ntk = αk ∑i=1
+δzi,k (0)
+Initial abundance: nk
+=
+kn(0)
+0
+Mutation generator: A = 21 ∇⊺ M∇
+
+●
+●
+
+nk
+
+28
+
+●
+●
+●
+
+Bob Week
+
+Branching rate: ρk = kρ
+Fitness: Wk (N, z) = W 1/k (N, z), for N of the form N = α ∑i δzi and supk k∣W 1/k (N, z)−1∣ ≤ CW (1+N (1)+∣z∣2 ) for some CW > 0
+Offspring distribution: For parent with trait z in population N , Poisson with mean Wk (N, z)
+
+Define mk (N, z) = (Wk (N, z) − 1)ρk and vk (N, z) = (Wk2 (N, z) − Wk (N, z) + 1)αk ρk . More generally, the following assumptions are
+made:
+●
+●
+
+(A1) Mutation: Individuals mutate independently with generator A = 12 ∇⊺ M∇.
+(A2) Convergence of growth rate: There exists m ∶ M4 × Rd → R such that ∣m(µ, z)∣ ≤ Cm (1 + µ(1) + ∣z∣2 ) for some Cm > 0,
+and for every u = 1, 2, . . . , and every sequence of finite discrete population measures {µk }∞
+k=1 such that supk µk (w4 ) ≤ u and
+µk → µ (weakly) in M4 , we have
+sup ∣mk (µk , z) − m(µ, z)∣ → 0 as k → ∞.
+∣z∣≤u
+
+●
+
+(A3) Convergence of reproductive variance: There exists a constant v > 0 such that for every u = 1, 2, . . . , and every
+4
+sequence of finite discrete population measures {µk }∞
+k=1 satisfying supk µk (w4 ) ≤ u such that µk → µ (weakly) in M , we have
+sup ∣vk (µk , z) − v∣ → 0
+
+∣z∣≤u
+
+as k → ∞.
+
+●
+
+(A4) Initial conditions: N0k (x) → N0 (x) with N0 ∈ M4 for all x ∈ D (with D defined in Supplementary Material, Section
+7.3.3), and
+k
+4
+sup E[N0 (w4 )] < ∞,
+w4 (z) = 1 + ∣z∣ .
+
+●
+
+(A5) Uniform fourth-moment bound: For every finite time horizon T > 0,
+
+k
+
+k
+
+4
+
+sup E[ sup Nt (w4 ) ] ≤ CT ,
+k
+
+w4 (z) = 1 + ∣z∣ ,
+
+0≤t≤T
+
+for a constant CT > 0. This will be used to control localization stopping times τuk and obtain uniform moment bounds needed
+later.
+
+7.3.5. A Martingale Characterization of the Approximating k-System
+nk
+
+t
+For x ∈ D, we have Ntk (x) = ∫Rd x(z) Ntk (dz) = αk ∑i=1
+x(zi,k (t)). I derive a (semi)martingale decomposition for Ntk (x) and identify
+the quadratic covariation.
+√
+MdBi,k . Applying
+Brownian mutation: Between branching events the population size nk
+t is constant and for each i, k, dzi,k =
+Itô’s formula to x(zi,k ) gives
+⊺√
+dx(zi,k ) = Ax(zi,k ) dt + ∇x(zi,k )
+M dBi,k .
+(184)
+
+Summing over individuals and multiplying by αk gives
+dN
+
+k,mut
+
+nk
+
+nk
+
+i=1
+
+i=1
+
+(x) = αk ∑ dx(zi,k ) = αk ∑ Ax(zi,k )dt + dM
+
+k,mut
+
+(x),
+
+(185)
+
+with continuous martingale part
+k,mut
+
+Mt
+
+nk
+t
+
+(x) ∶= αk ∑ ∫
+i=1
+
+t
+
+0
+
+⊺√
+
+∇x(zi,k (s))
+
+M dBi,k (s).
+
+(186)
+
+The deterministic bias of dN k,mut due to mutation can be written as
+αk ∑ Ax(zi,k ) = ∫
+i
+
+k
+
+Rd
+
+Ax(z) N (dz).
+
+(187)
+
+The quadratic covariation for x, y ∈ D in differential notation is
+d[M
+
+k,mut
+
+(x), M
+
+k,mut
+
+⊺
+
+2
+
+(y)] = αk ∑ ∇x(zi,k ) M∇y(zi,k ) ds
+i
+
+= αk ∫
+
+Rd
+
+(188)
+⊺
+
+k
+
+∇x(z) M∇y(z) N (dz) ds.
+
+Branching events: Now consider the jumps in Ntk (x) due to branching. Take a population state N = αk ∑n
+i=1 δzi and fix an
+individual with trait z. When this individual branches:
+●
+●
+
+The event occurs at rate ρk .
+The individual is removed and replaced by K ∼ Poisson(Wk (N, z)) offspring.
+
+Multivariate Eco-Evo Supp. Mat.
+
+●
+
+29
+
+Neglecting mutation during the instantaneous branching, all offspring have trait z at the branching time.
+
+The jump in N (x) from this event is
+∆N (x) = αk
+
+⎞
+⎛K
+∑ x(z) − x(z) = αk (K − 1) x(z).
+⎠
+⎝j=1
+
+(189)
+
+Conditionally on N and the trait z,
+E[∆N (x) ∣ N, z] = αk (E[K] − 1) x(z) = αk (Wk (N, z) − 1)x(z),
+
+(190)
+
+and
+2
+
+2
+
+E[(∆N (x))(∆N (y)) ∣ N, z] = αk E[(K − 1) ] x(z)y(z).
+
+(191)
+
+For K ∼ Poisson(Wk ),
+2
+
+2
+
+2
+
+2
+
+E[(K − 1) ] = Var K + (EK − 1) = Wk + (Wk − 1) = Wk − Wk + 1.
+Summing (190) over all individuals and multiplying by the branching rate ρk gives the deterministic bias of dN
+dN
+
+k,br
+
+(192)
+k
+
+due to branching:
+
+n
+
+(x) = ∑ ρk E[∆N (x) ∣ N, zi ]
+i=1
+
+= ∑ ρk αk (Wk (N, zi ) − 1)x(zi )
+
+(193)
+
+i
+
+=∫
+
+(Wk (N, z) − 1)ρk x(z) N (dz).
+
+Rd
+
+We have mk (N, z) = (Wk (N, z) − 1)ρk , which give dN k,br (x) = ∫Rd mk (N, z) x(z) N (dz). Similarly, the quadratic covariation due
+to branching is given in differential notation by
+d[M
+
+k,br
+
+(x), M
+
+k,br
+
+(y)] = ∑ ρk E[∆N (x) ∆N (y) ∣ N, zi ] ds
+i
+2
+
+2
+
+= ∑ ρk αk (Wk (N, zi ) − Wk (N, zi ) + 1) x(zi )y(zi ) ds
+
+(194)
+
+i
+2
+
+= α k ρk ∫
+
+Rd
+
+(Wk (N, z) − Wk (N, z) + 1) x(z)y(z) N (dz) ds.
+
+We have vk (N, z) ∶= (Wk2 (N, z) − Wk (N, z) + 1) αk ρk . Thus d[M k,br (x), M k,br (y)] = ∫Rd vk (N k , z) x(z)y(z) N k (dz) ds.
+Branching and mutation: Combining the above results we find that, for each x ∈ D, the process
+k
+
+k
+
+k
+
+Mt (x) ∶= Nt (x) − N0 (x)
+−∫
+
+t
+
+0
+
+k
+
+(195)
+
+k
+
+∫ d (Ax(z) + mk (Ns , z) x(z)) Ns (dz) ds
+R
+
+is a martingale. Furthermore, because the mutation component of Mtk is continuous and the branching component is entirely made
+of jumps, the quadratic covariation of Mtk for x, y ∈ D simplifies to
+k
+
+k
+
+[M (x), M (y)]t = [M
+
+k,mut
+
+= αk ∫
+
+t
+
+0
+
++∫
+
+0
+
+t
+
+(x), M
+
+k,mut
+⊺
+
+(y)]t + [M
+
+k,br
+
+(x), M
+
+k,br
+
+(y)]t
+
+k
+
+∫ d ∇x(z) M∇y(z) Ns (dz) ds
+R
+
+k
+
+(196)
+
+k
+
+∫ d vk (Ns , z) x(z)y(z) Ns (dz) ds.
+R
+
+(more generally, for martingales M, N , [M + N, M + N ] = [M, M ] + 2[M, N ] + [N, N ].)
+
+7.3.6. Tightness and Identification of Limit Points of the Approximating k-system on M̄4
+To show that the k-system converges in k to a solution of the localize (M, m, v)-martingale problem on M̄4 , we need to first show
+that limit points of the sequence {N k }∞
+k=1 exist. To do so, I outline how one may show that the probability distributions for the
+k-systems in the sequence {N k }∞
+k=1 do not spread out too much. That is, the probability distribution of their outcomes remains
+sufficiently concentrated in D M̄4 [0, ∞) so that as k increases the associated k-systems do not wander off to infinity. This property
+is called tightness. After tightness of {N k }∞
+k=1 is established (i.e., that limit points exist), I then provide some details one may use
+4
+to show that each limit point of {N k }∞
+k=1 solves the localized (M, m, v)-martingale problem on M̄ . An introduction to the formal
+theory this approach is based on is given by Billingsley (1999).
+
+30
+
+Bob Week
+
+Localization and moment bounds
+For u = 1, 2, . . ., define the k-system stopping times
+k
+
+k
+
+k
+
+τu ∶= inf{t ≥ 0 ∶ Nt (w4 ) ≥ u},
+
+τu ∶= lim inf τu ,
+
+(197)
+
+k→∞
+
+k
+where w4 (z) ∶= 1 + ∣z∣4 . Define the stopped processes Ntk,u (x) ∶= Nt∧τ
+k (x), for x ∈ D (note that it is stopped and not killed because
+u
+
+it is constant for t ≥ τuk instead of equal to ∂). By definition then Ntk,u (w4 ) ≤ u for all t ≥ 0. Hence,
+k,u
+
+sup E[ sup Nt
+
+p
+
+p
+
+(w4 ) ] ≤ u ,
+
+T > 0.
+
+(198)
+
+0≤t≤T
+
+k
+
+This will be leveraged to apply Lebesgue’s Dominated Convergence theorem, and to demonstrate that {M k }∞
+k=1 has a subsequence
+with a martingale limit point.
+Tightness of one-dimensional projections
+k,u
+k
+(x) is also a martingale for each x ∈ D.
+Fix x ∈ D. From the expression for Mtk obtained above, define Mtk,u ∶= Mt∧τ
+k . Then Mt
+u
+Setting
+k,u
+
+Ft
+
+(x) ∶= ∫
+
+t∧τuk
+
+0
+
+k
+
+k
+
+∫ d (A + mk (Ns , z)) x(z) Ns (dz) ds,
+
+(199)
+
+R
+
+we can write Ntk,u (x) = N0k,u (x) + Ftk,u (x) + Mtk,u (x). Initial condition assumption (A4) already gives convergence of N0k,u (x).
+k,u
+k,u
+Tightness of {Ntk,u (x)}∞
+(x)}∞
+(x)}∞
+k=1 for fixed x ∈ D can be shown by demonstrating tightness of {Ft
+k=1 and {Mt
+k=1 separately.
+k,u
+For Ft (x), the triangle inequality justifies
+k,u
+
+∣Ft
+
+(x)∣ ≤ ∫
+
+t∧τuk
+0
+
+k
+
+k
+
+∫ d ∣Ax(z) + mk (Ns , z)x(z)∣ Ns (dz)ds.
+
+(200)
+
+R
+
+By definition of D, we have ∣Ax(z)∣ ≤ Cx′ and thus also ∣Ax(z)∣ ≤ Cx′ w4 (z). The form of mk and growth condition on W assumed
+(specified in Supplementary Material, Section 7.3.4) justifies ∣mk (Nsk , z)x(z)∣ ≤ CW (1 + Nsk (1) + ∣z∣2 )Cx (1 + ∣z∣2 ). Inside the stopped
+′
+integral s ≤ t ∧ τuk , and so Nsk (w4 ) ≤ u. In particular, Nsk (1) ≤ Nsk (w4 ) ≤ u. Hence, ∣mk (Nsk , z)x(z)∣ ≤ CW,x,u
+w4 (z) for a constant
+′
+k
+CW,x,u > 0. Then, for another constant CW,x,u > 0, ∣Ax(z) + mk (Ns , z)x(z)∣ ≤ CW,x,u w4 (z). Hence,
+k
+
+k
+
+k
+
+∫ d ∣Ax(z) + mk (Ns , z)x(z)∣ Ns (dz) ≤ CW,x,u Ns (w4 ).
+
+(201)
+
+R
+
+t∧τuk
+
+Again, because s ≤ t ∧ τuk , Nsk (w4 ) ≤ u. Set Cx,u ∶= CW,x,u u. Then ∣Ftk,u (x)∣ ≤ ∫0
+Lipschitz in t:
+k,u
+k,u
+∣Ft (x) − Fs (x)∣ ≤ Cx,u ∣t − s∣ ∀ s, t ∈ [0, T ],
+
+Cx,u ds ≤ Cx,u t. This implies Ftk,u (x) is
+
+T > 0.
+
+(202)
+
+The uniform Lipschitz bound together with the growth control places the family {Ftk,u (x)}∞
+k=1 in a setting where standard relativecompactness arguments for processes with continuous sample paths apply. Such compactness results (e.g., Arzelà–Ascoli) are
+classical in the weak-convergence literature (e.g., Ethier and Kurtz, 1986; Billingsley, 1999).
+The quadratic variation associate with Mtk,u (x) is given by
+[M
+
+k,u
+
+(x)]t = αk ∫
+
+t∧τuk
+
++∫
+
+⊺
+
+k
+
+∫ d ∇x(z) M∇x(z) Ns (dz) ds
+
+0
+
+R
+
+t∧τuk
+
+(203)
+k
+
+2
+
+k
+
+∫ d vk (Ns , z) x (z) Ns (dz) ds.
+
+0
+
+R
+
+For x ∈ D, we have ∇x(z)⊺ M∇x(z) ≤ Cx′ w4 (z) and x2 (z) ≤ Cx w4 (z). Informally, for fixed N, z and large k, vk (N, z) ≈ αk ρk , and
+thus
+k
+2
+k
+(204)
+∫ vk (Ns , z) x (z) Ns (dz)
+Rd
+
+should be close to
+αk ρk ∫
+
+Rd
+
+2
+
+k
+
+x (z) Ns (dz).
+
+(205)
+
+Formally, this step either requires an additional bound on vk , or a strengthened assumption ensuring that vk (N, z)x2 (z) grows at
+most like w4 (z). Under such an assumption, we can expect to obtain
+sup E[[M
+
+k,u
+
+(x)]T ] ≤ Cx,u T,
+
+(206)
+
+k
+
+for finite T > 0. This bound on quadratic variation together with compact-containment and martingale tightness criteria for leftlimited and right-continuous processes may establish tightness of {M k,u (x)}∞
+k=1 in DR [0, T ] (see, for example, Chapter 3 of Ethier
+and Kurtz, 1986; or Billingsley, 1999, for general weak-convergence arguments).
+Combining the bounds for F k,u (x) and M k,u (x) with (198) and the fact that the jumps of N k,u (x) at branching events are of
+size αk x(z) (hence uniformly small in k) yields: for each x ∈ D and u ≥ 1, the sequence {N k,u (x)}∞
+k=1 is tight in DR [0, ∞).
+
+Multivariate Eco-Evo Supp. Mat.
+
+31
+
+Separation and Convergence-Determining Test Functions
+The space of compactly supported and infinitely differentiable functions Cc∞ (Rd ) has the property that finite measures are
+uniquely determined by their integrals against these functions. That is, if µ1 (x) = µ2 (x) for all x ∈ Cc∞ (Rd ), then µ1 = µ2 . This also
+means that convergence of finite measures µk → µ is fully determined by convergence of µk (x) → µ(x) for all x ∈ Cc∞ (Rd ). Because
+Cc∞ (Rd ) ⊂ D, it follows that our test function class D is sufficiently rich to distinguish elements of M4 ⊂ MF . This observation
+motivates the next step.
+Application of Roelly’s Tightness Criterion
+Roelly’s criterion (Theorems 2.1-2.2 in Roelly-Coppoletta, 1986) requires a countable convergence-determining family of test
+functions. Using the fact above, fix a countable collection {xj }j≥1 ⊂ Cc∞ (Rd ) ⊂ D constructed, for example, by taking infinitely
+differentiable bump functions with rational centers, rational radii, and rational coefficients. This family has the property that, for
+any y ∈ Cc∞ (Rd ), there exists a subsequence such that xjℓ → y as ℓ → ∞. This family is therefore convergence-determining for finite
+measures, and hence for measures in M4 .
+For each fixed u ≥ 1, we already saw that every real-valued projection {N k,u (xj )}k , j ≥ 1, is tight in DR [0, ∞). Roelly’s criterion
+then implies that the sequence of stopped processes {N k,u }k is tight in D M̄4 [0, ∞). This establishes the tightness of the full
+measure-valued stopped processes, not merely their scalar projections.
+Localization from stopped to full processes
+For each fixed u ≥ 1, the argument above and Roelly’s criterion may be extended to show that the stopped processes {N k,u }k
+form a tight family in D M̄4 [0, ∞). Moreover, assumption (A5) implies that the localization times
+k
+
+k
+
+τu ∶= inf{t ≥ 0 ∶ Nt (w4 ) ≥ u}
+
+(207)
+
+tend to ∞ in probability as u → ∞, uniformly in k. That is, for every T > 0 and ε > 0 there exists u such that
+k
+
+sup P(τu ≤ T ) ≤ ε.
+
+(208)
+
+k≥1
+
+This is a compact containment condition that can be used to apply Theorem 7.2 on page 128 of Ethier and Kurtz (1986). That
+theorem also requires a modulus-of-continuity control, which is satisfied here by equation (206) above. Then, as a consequence of
+Theorem 7.2 in Ethier and Kurtz (1986), we have that the full sequence {N k }k is tight in D M̄4 [0, ∞). Note that Theorem 7.2
+in Ethier and Kurtz (1986) is a statement about relative compactness. But in their context relative compactness is the same as
+tightness.
+Identification of Limit Points as Solutions of the Localized Martingale Problem
+Having established tightness of the full sequence {N k }k≥1 in D M̄4 [0, ∞), there exists a subsequence {N kℓ }ℓ≥1 and an M̄4 -valued
+left-limited and right-continuous process N ∈ D M̄4 [0, ∞) such that N kℓ (x) → N (x) in DR [0, ∞) for each x ∈ D (where convergence
+is a.s. by Skorokhod’s representation theorem). Define stopping times for the limit by τu ∶= inf{t ≥ 0 ∶ Nt (w4 ) ≥ u}, for u = 1, 2, . . . ,
+and stopped process Ntu ∶= Nt∧τu . Similarly, for each kℓ , define
+k
+
+k
+
+k ,u
+
+τu ℓ ∶= inf{t ≥ 0 ∶ Nt ℓ (w4 ) ≥ u},
+
+Nt ℓ
+
+k
+
+∶= N ℓ kℓ .
+t∧τu
+
+(209)
+
+For any fixed u ≥ 1 and x ∈ D, the stopped processes admit the semimartingale decomposition
+k ,u
+
+Nt ℓ
+where
+k ,u
+
+Ft ℓ
+
+(x) = ∫
+
+k
+
+k ,u
+
+(x) = N0 ℓ (x) + Ft ℓ
+
+t∧τukℓ
+
+0
+
+k ,u
+
+(x) + Mt ℓ
+
+(x),
+
+kℓ
+
+(210)
+
+kℓ
+
+∫ d (Ax(z) + mkℓ (Ns , z) x(z)) Ns (dz) ds,
+
+(211)
+
+R
+
+and the martingale Mtkℓ ,u (x) has predictable quadratic variation
+k ,u
+
+[M ℓ
+
+(x)]t = αkℓ∫
+
+t∧τukℓ
+
+0
+
++∫
+
+t∧τukℓ
+
+0
+
+⊺
+
+k
+
+ℓ
+∫ ∇x(z) M∇x(z) Ns (dz) ds
+
+(212)
+k
+
+2
+
+k
+
+ℓ
+ℓ
+∫ vkℓ (Ns , z) x (z) Ns (dz) ds.
+
+The localization event {s ≤ τukℓ } is the subset of sample space where Ntkℓ ,u (w4 ) ≤ u for t ≤ s. So on this event, we have Nskℓ (w4 ) ≤ u,
+so by assumptions (A1)-(A3) and the growth bounds on x ∈ D, all drift integrands and bracket integrands are uniformly bounded in
+ℓ. Together with (A5), this yields uniform integrability on finite intervals. Since N kℓ → N (a.s.), Lebesgue’s dominated convergence
+theorem gives
+k ,u
+
+Ft ℓ
+
+(x) → ∫
+
+0
+
+t∧τu
+
+∫ d (Ax(z) + m(Ns , z) x(z)) Ns (dz) ds,
+
+and
+k ,u
+
+[M ℓ
+
+(213)
+
+R
+
+(x)]t → v ∫
+
+0
+
+t∧τu
+
+2
+
+∫ d x (z) Ns (dz) ds.
+
+(214)
+
+R
+
+To obtain the limit of the quadratic covariation, apply the same argument to x, y, and x + y, and use bilinearity of the quadratic
+covariation.
+
+32
+
+Bob Week
+
+Each M kℓ ,u (x) is a square-integrable martingale (that is, E[(Mtkℓ ,u (x))2 ] < ∞). The convergence of quadratic covariation on
+time [0, T ] for any T > 0, together with uniform integrability and convergence of the finite-variation parts, implies that the limit
+u
+
+Mt (x) ∶= Nt∧τu (x) − N0 (x) − ∫
+
+t∧τu
+
+∫ d (Ax(z) + m(Ns , z) x(z)) Ns (dz) ds
+
+0
+
+(215)
+
+R
+
+is a martingale with quadratic covariation
+u
+
+t∧τu
+
+u
+
+[M (x), M (y)]t = v ∫
+
+∫ d x(z)y(z) Ns (dz) ds.
+
+0
+
+(216)
+
+R
+
+Define τ ∶= limu→∞ τu and set Nt = ∂ for all t ≥ τ . This matches the killed-process construction used to define the localized
+martingale problem. In conclusion, for every u ≥ 1 and every test function x ∈ D, Mu
+t = Mt∧τu is a martingale with quadratic
+covariation given by (183). Because u was arbitrary, the above calculations offer compelling evidence that the diffusion-limit N
+exists and is a solution of the localized (M, m, v)-martingale problem on D M̄4 [0, ∞).
+This outlines one potential route to formally construct the framework in the main text via a diffusion-limit of an individualbased model. The calculations above use an underlying model in which mutation is represented by multivariate Brownian motion.
+Replacing this with an individual-based model where mutation occurs only through Gaussian jumps at branching events alters some
+local details of the semimartingale decomposition (mutation then enters through the jump mechanism rather than the continuous
+part), but it does not change the overall limiting argument. That is, after the usual small-jump/high-rate rescaling, the same
+generator A and the same limiting process N appear. Likewise, models that decouple death and branching (so individuals may
+branch several times before death), once rescaled appropriately, converge to the same limit N . Taken together, these observations
+show that a broad class of individual-based population models fall into the same diffusion-limit, reinforcing the utility and robustness
+of the framework developed in the main text for analyzing diverse biological population dynamics.
+
+8. The Reproductive Variance Parameter as Gillespie’s Variance in Offspring Number
+To show that the reproductive variance v > 0 is equal to Gillespie’s (1974; 1975; 1977) variance in offspring number (especially
+when v does not covary with genotype), start by considering the case where v = v(z) depends on trait value. For the univariate trait
+case, a stochastic extension of DAGA was introduced by Week et al., (2021) that accounts for v(z). In the absence of mutation,
+√
+this equation reads ν̇t (z) = m(z)νt (z) + v(z)νt (z)Ẇt (z), with Ẇt (z) a space-time white noise. For the sake of comparison with
+the martingale approach used here, the results in Méléard and Roelly (1993) demonstrate that solutions to this stochastic partial
+differential equation can also be characterized by solutions to a martingale problem:
+Mt (x) = ∫ x(z)Nt (dz) − ∫ x(z)N0 (dz) − ∫
+R
+
+0
+
+R
+
+t
+
+∫ m(z)x(z)Ns (dz)ds
+
+(217)
+
+R
+
+is a martingale with quadratic covariation
+[Mt (x), Mt (y)]t = ∫
+
+t
+
+0
+
+∫ v(z)x(z)y(z)Ns (dz)ds.
+
+(218)
+
+R
+
+It turns out that the solution to this martingale problem, Nt , admits a density νt (z) that solves the stochastic extension of DAGA
+without mutation such that Nt (dz) = νt (z)dz (Li, 1998).
+Gillespie’s (1974; 1975; 1977) primary result regarding the covariance of genotype with variance in offspring number states that,
+when two genotypes confer the same average number of offspring, selection favors the one with less variance in offspring number.
+Here I show how to recover this result from the stochastic extension of DAGA without mutation. In particular, when v(z) depends
+on trait value, a form of selection emerges due to the covariance Cov(v, z) = ∫R (v(z) − v̄)(z − z̄)p(z)dz, where v̄ = ∫R v(z)p(z)dz and
+p(z) = ν(z)/n, n = ∫R ν(z)dz. To demonstrate this, I start by deriving dynamics of the trait distribution p from ν̇.
+From hereon, I write M(x) in place of ∫R x(z)M(dz), and I use stochastic differential notation so that dN (x) = N (mx)dt+dM(x)
+communicates the same statement as equation (217) above. With this notation, the heuristics presented in the main text are
+extended here using equation (218). For example, abundance dynamics are given by setting x = 1. Because n = N (1), this gives
+√
+dn = m̄ n dt + v̄ n dBn for some Brownian motion Bn ∶= M(1̂).
+For each x, set P(x) ∶= N (x)/n so that P(x) = ∫R x(z)p(z)dz. For fixed x, apply Itô to N (x)/n:
+1
+N (x)
+N (x)
+1
+dN (x) −
+dn +
+d[M(1)]t − 2 d[M(x), M(1)]t .
+n
+n2
+n3
+n
+Substitute dN (x) = N (mx)dt + dM(x), dn = N (m)dt + dM(1), d[M(x), M(1)]t = N (vx)dt, and d[M(1)]t = N (v)dt:
+dP(x) =
+
+dP(x) =
+
+1
+N (x)
+N (x)
+1
+(N (mx)dt + dM(x)) −
+(N (m)dt + dM(1)) +
+N (v)dt − 2 N (vx)dt.
+n
+n2
+n3
+n
+
+(219)
+
+(220)
+
+Rewrite using N (x) = nP(x):
+dP(x) = P(mx)dt − P(x)P(m)dt −
+
+1
+1
+P(x)
+(P(vx) − P(x)P(v))dt + dM(x) −
+dM(1).
+n
+n
+n
+
+1
+Define CovP (a, x) ∶= P(ax) − P(a)P(x) and dMP (x) ∶= n
+dM(x) −
+
+dP(x) = (CovP (m, x) −
+
+(221)
+
+P(x)
+dM(1). Then
+n
+
+1
+P
+CovP (v, x))dt + dM (x).
+n
+
+(222)
+
+Multivariate Eco-Evo Supp. Mat.
+
+33
+
+8.1. Gillespie as a special case: two discrete types
+Fix a subset of trait space A ⊂ R with positive initial frequency 0 < P0 (A) < 1 and define the indicator xA (z) ∶= 1{z∈A} . The
+frequency of A at time t is
+pt ∶= Pt (xA ) = Pt (A).
+
+(223)
+
+Define conditional means of m and v on A and its complement Ac :
+m+ ∶=
+
+Pt (mxA )
+,
+pt
+
+m− ∶=
+
+v+ ∶=
+
+Pt (vxA )
+,
+pt
+
+v− ∶=
+
+Pt (m(1 − xA ))
+,
+1 − pt
+
+(224)
+
+Pt (v(1 − xA ))
+.
+1 − pt
+
+(225)
+
+Then
+Pt (m) = pt m+ + (1 − pt )m− ,
+
+Pt (mxA ) = pt m+ ,
+
+(226)
+
+so the covariance term becomes
+CovPt (m, xA ) = Pt (mxA ) − Pt (m)Pt (xA ) = pt (1 − pt )(m+ − m− ).
+
+(227)
+
+Similarly,
+Pt (v) = pt v+ + (1 − pt )v− ,
+
+Pt (vxA ) = pt v+ ,
+
+(228)
+
+so
+CovPt (v, xA ) = pt (1 − pt )(v+ − v− ).
+
+(229)
+
+Now plug x = xA into the general SDE:
+dpt = dPt (xA ) = (CovPt (m, xA ) −
+
+1
+P
+CovPt (v, xA ))dt + dMt (xA ).
+nt
+
+(230)
+
+Using the covariance expressions above, the deterministic term of dpt is
+det(dpt ) = pt (1 − pt )[(m+ − m− ) −
+
+v+ − v−
+].
+nt
+
+(231)
+
+Thus the Gillespie effective selection coefficient associated with the partition (A, Ac ) is
+seff = (m+ − m− ) −
+
+v+ − v−
+.
+nt
+
+(232)
+
+For the stochastic term, use the quadratic variation of MP (x):
+1
+d
+P
+2
+[M (x)]t =
+∫ (x(z) − Pt (x)) v(z)Pt (dz).
+dt
+nt
+
+(233)
+
+With x = xA and Pt (xA ) = pt ,
+2
+
+2
+
+2
+
+(234)
+
+∫ (xA − pt ) v dPt = pt (1 − pt )[(1 − pt )v+ + pt v− ].
+
+(235)
+
+d
+pt (1 − pt )
+[(1 − pt )v+ + pt v− ].
+[p]t =
+dt
+nt
+
+(236)
+
+∫ (xA (z) − pt ) v(z)Pt (dz) = ∫ (1 − pt ) v(z)Pt (dz) + ∫
+A
+
+Ac
+
+pt v(z)Pt (dz).
+
+Using the definitions of v+ and v− this simplifies to
+2
+
+Hence
+
+Collecting deterministic and stochastic terms, the sde for the frequency of the general subset A is
+
+dpt = pt (1 − pt )[(m+ − m− ) −
+
+¿
+Á pt (1 − pt )
+v+ − v−
+À
+]dt + Á
+[(1 − pt )v+ + pt v− ] dB+ ,
+nt
+nt
+
+(237)
+
+which is exactly the Gillespie form for the two “types” defined by A and Ac , for any measurable A with initial P0 (A) ∈ (0, 1).
+
+34
+
+Bob Week
+
+Now write the population means as
+m̄t ∶= Pt (m) = pt m+ + (1 − pt )m− ,
+
+v̄t ∶= Pt (v) = pt v+ + (1 − pt )v− .
+
+(238)
+
+For the deterministic term, note
+pt (1 − pt )(m+ − m− ) = pt (m+ − m̄t ) = (1 − pt )(m̄t − m− ),
+
+(239)
+
+pt (1 − pt )(v+ − v− ) = pt (v+ − v̄t ) = (1 − pt )(v̄t − v− ).
+
+(240)
+
+and likewise
+
+Using these identities, the deterministic term can be rewritten as
+det(pt ) = pt (m+ − m̄t ) −
+
+pt
+(v+ − v̄t ),
+nt
+
+(241)
+
+1 − pt
+(v̄t − v− ).
+nt
+
+(242)
+
+or equivalently
+det(pt ) = (1 − pt )(m̄t − m− ) −
+For the stochastic term, use
+
+so the variance term becomes
+
+(1 − pt )v+ + pt v− = v̄t + (1 − 2pt )(v+ − v− ),
+
+(243)
+
+pt (1 − pt )
+d
+[v̄t + (1 − 2pt )(v+ − v− )].
+[p]t =
+dt
+nt
+
+(244)
+
+Thus the sde can be expressed in terms of m̄t and v̄t as
+¿
+Á pt (1 − pt )
+pt
+À
+[v̄t + (1 − 2pt )(v+ − v− )] dB+ .
+dpt = (pt (m+ − m̄t ) −
+(v+ − v̄t ))dt + Á
+nt
+nt
+
+(245)
+
+√
+Recall the abundance dynamics dn = m̄ n dt + v̄ n dBn . Compare this with the abundance dynamics in the main text, dn =
+√
+m̄ n dt+ v n dBn , where v > 0 is constant. This identifies the reproductive variance parameter v with Gillespie’s variance in offspring
+number. This identification should not be taken literally: “variance in offspring number” is only one possible interpretation. The
+diffusion-limit construction above shows that v can equally be interpreted as an effective reproduction rate. In particular, in
+standard birth-death models one has v = b + d, the sum of per-capita birth and death rates (see Week et al., 2021).
+
+References
+S. J. Arnold, R. Bürger, P. A. Hohenlohe, B. C. Ajie, and A. G. Jones. Understanding the evolution and stability of the g-matrix.
+Evolution, 62(10):2451–2461, Oct. 2008. ISSN 1558-5646. doi: 10.1111/j.1558-5646.2008.00472.x. URL http://dx.doi.org/10.
+1111/j.1558-5646.2008.00472.x.
+S. Axler. Measure, integration & real analysis. Springer International Publishing, 2020. ISBN 9783030331436. doi: 10.1007/
+978-3-030-33143-6. URL http://dx.doi.org/10.1007/978-3-030-33143-6.
+R. F. Bass. Stochastic processes. Cambridge University Press, Oct. 2011. ISBN 9780511997044. doi: 10.1017/cbo9780511997044.
+URL http://dx.doi.org/10.1017/CBO9780511997044.
+M. Bayram, T. Partal, and G. Orucova Buyukoz. Numerical methods for simulation of stochastic differential equations. Advances
+in Difference Equations, 2018(1), Jan. 2018. ISSN 1687-1847. doi: 10.1186/s13662-018-1466-5. URL http://dx.doi.org/10.
+1186/s13662-018-1466-5.
+P. Billingsley. Convergence of probability measures. Wiley, July 1999. ISBN 9780470316962. doi: 10.1002/9780470316962. URL
+http://dx.doi.org/10.1002/9780470316962.
+O. Calin. An informal introduction to stochastic calculus with applications. World Scientific, Mar. 2015. ISBN 9789814678940.
+doi: 10.1142/9620. URL http://dx.doi.org/10.1142/9620.
+N. Champagnat, R. Ferrière, and S. Méléard. Unifying evolutionary dynamics: from individual stochastic processes to macroscopic
+models. Theoretical Population Biology, 69(3):297–321, May 2006. ISSN 0040-5809. doi: 10.1016/j.tpb.2005.10.004. URL
+http://dx.doi.org/10.1016/j.tpb.2005.10.004.
+S. N. Cohen and R. J. Elliott. Stochastic calculus and applications. Springer New York, 2015. ISBN 9781493928675. doi:
+10.1007/978-1-4939-2867-5. URL http://dx.doi.org/10.1007/978-1-4939-2867-5.
+R. C. Dalang and M. Sanz-Solé. Stochastic partial differential equations, space-time white noise and random fields, 2024. URL
+https://arxiv.org/abs/2402.02119.
+D. Dawson. Measure-valued markov processes, page 1–260. Springer Berlin Heidelberg, 1993. ISBN 9783540476085. doi:
+10.1007/bfb0084190. URL http://dx.doi.org/10.1007/BFb0084190.
+R. Durrett. Stochastic calculus: a practical introduction, Mar. 1996. URL http://dx.doi.org/10.1201/9780203738283.
+A. Etheridge. An introduction to superprocesses. University lecture series. American Mathematical Society, 2000. ISBN
+9780821827062. URL https://books.google.de/books?id=zUHyBwAAQBAJ.
+A. Etheridge. One dimensional diffusions, page 33–51. Springer Berlin Heidelberg, Nov. 2010. ISBN 9783642166327. doi:
+10.1007/978-3-642-16632-7 3. URL http://dx.doi.org/10.1007/978-3-642-16632-7_3.
+
+Multivariate Eco-Evo Supp. Mat.
+
+35
+
+A. Etheridge. Some mathematical models from population genetics: école d’été de probabilités de saint-flour xxxix-2009.
+Springer Berlin Heidelberg, 2011. ISBN 9783642166327. doi: 10.1007/978-3-642-16632-7. URL http://dx.doi.org/10.1007/
+978-3-642-16632-7.
+S. N. Ethier and T. G. Kurtz. Markov processes: characterization and convergence. John Wiley & Sons, 1986.
+L. C. Evans. An introduction to stochastic differential equations, volume 82. American Mathematical Soc., 2012.
+L. C. Evans. Partial differential equations, volume 19. American mathematical society, 2022.
+W. Feller. Diffusion processes in genetics. 1951.
+J. H. Gillespie. Natural selection for within-generation variance in offspring number. Genetics, 76(3):601–606, Mar. 1974. ISSN
+1943-2631. doi: 10.1093/genetics/76.3.601. URL http://dx.doi.org/10.1093/genetics/76.3.601.
+J. H. Gillespie. Natural selection for within-generation variance in offspring number ii. discrete haploid models. Genetics, 81(2):
+403–413, Oct. 1975. ISSN 1943-2631. doi: 10.1093/genetics/81.2.403. URL http://dx.doi.org/10.1093/genetics/81.2.403.
+J. H. Gillespie. Natural selection for variances in offspring numbers: a new evolutionary principle. The American Naturalist, 111
+(981):1010–1014, Sept. 1977. ISSN 1537-5323. doi: 10.1086/283230. URL http://dx.doi.org/10.1086/283230.
+I. Iscoe. A weighted occupation time for a class of measured-valued branching processes. Probability Theory and Related Fields,
+71(1):85–116, Jan. 1986. ISSN 1432-2064. doi: 10.1007/bf00366274. URL http://dx.doi.org/10.1007/BF00366274.
+L. Isserlis. On a formula for the product-moment coefficient of any order of a normal frequency distribution in any number of
+variables. Biometrika, 12(1–2):134–139, 1918. doi: 10.1093/biomet/12.1-2.134.
+J. L. W. V. Jensen. Sur les fonctions convexes et les inégalités entre les valeurs moyennes. Acta Mathematica, 30(0):175–193,
+1906. ISSN 0001-5962. doi: 10.1007/bf02418571. URL http://dx.doi.org/10.1007/BF02418571.
+A. G. Jones, S. J. Arnold, and R. Bürger. The mutation matrix and the evolution of evolvability. Evolution, 61(4):727–745, Apr.
+2007. ISSN 1558-5646. doi: 10.1111/j.1558-5646.2007.00071.x. URL http://dx.doi.org/10.1111/j.1558-5646.2007.00071.x.
+A. G. Jones, R. Bürger, S. J. Arnold, P. A. Hohenlohe, and J. C. Uyeda. The effects of stochastic and episodic movement of the
+optimum on the evolution of the g-matrix and the response of the trait mean to selection. Journal of Evolutionary Biology,
+25(11):2210–2231, Sept. 2012. ISSN 1420-9101. doi: 10.1111/j.1420-9101.2012.02598.x. URL http://dx.doi.org/10.1111/j.
+1420-9101.2012.02598.x.
+S. Karlin and H. E. Taylor. A second course in stochastic processes. Elsevier, 1981.
+A. Kessy, A. Lewin, and K. Strimmer. Optimal whitening and decorrelation. The American Statistician, 72(4):309–314, Jan.
+2018. ISSN 1537-2731. doi: 10.1080/00031305.2016.1277159. URL http://dx.doi.org/10.1080/00031305.2016.1277159.
+F. C. Klebaner. Introduction to stochastic calculus with applications. World Scientific Publishing Company, 1998.
+R. Lande. Quantitative genetic analysis of multivariate evolution, applied to brain:body size allometry. Evolution, 33(1Part2):
+402–416, Mar. 1979. ISSN 0014-3820. doi: 10.1111/j.1558-5646.1979.tb04694.x. URL http://dx.doi.org/10.1111/j.1558-5646.
+1979.tb04694.x.
+R. Lande and S. J. Arnold. The measurement of selection on correlated characters. Evolution, 37(6):1210–1226, Nov. 1983. ISSN
+1558-5646. doi: 10.1111/j.1558-5646.1983.tb00236.x. URL http://dx.doi.org/10.1111/j.1558-5646.1983.tb00236.x.
+J.-F. Le Gall. Brownian motion, martingales, and stochastic calculus. Springer International Publishing, 2016. ISBN
+9783319310893. doi: 10.1007/978-3-319-31089-3. URL http://dx.doi.org/10.1007/978-3-319-31089-3.
+Z.-H. Li. Absolute continuity of measure branching processes with interaction. Chinese Journal of Applied Probability and
+Statistics, 14(3):231–242, 1998.
+J. Munkres. Introduction to topology. 2005.
+S. Méléard and S. Roelly. Interacting measure branching processes. some bounds for the support. Stochastics and Stochastic
+Reports, 44(1–2):103–121, Sept. 1993. ISSN 1045-1129. doi: 10.1080/17442509308833843. URL http://dx.doi.org/10.1080/
+17442509308833843.
+E. Perkins. Dawson–watanabe superprocesses and measure-valued diffusions. Lectures on Probability Theory and Statistics,
+(1781), 2002.
+K. B. Petersen and M. S. Pedersen. The matrix cookbook. Technical University of Denmark, page 72, 2012.
+C. Rackauckas and Q. Nie. Differentialequations.jl–a performant and feature-rich ecosystem for solving differential equations in
+Julia. Journal of Open Research Software, 5(1), 2017.
+S. Roelly-Coppoletta. A criterion of convergence of measure-valued processes: application to measure branching processes.
+Stochastics, 17(1–2):43–65, Apr. 1986. ISSN 0090-9491. doi: 10.1080/17442508608833382. URL http://dx.doi.org/10.1080/
+17442508608833382.
+L. C. G. Rogers and D. Williams. Diffusions, markov processes and martingales: volume 2. Cambridge University Press, Sept.
+2000a. ISBN 9780511805141. doi: 10.1017/cbo9780511805141. URL http://dx.doi.org/10.1017/CBO9780511805141.
+L. C. G. Rogers and D. Williams. Diffusions, markov processes, and martingales: volume 1. Cambridge University Press, Apr.
+2000b. ISBN 9781107590120. doi: 10.1017/cbo9781107590120. URL http://dx.doi.org/10.1017/CBO9781107590120.
+D. W. Stroock and S. R. S. Varadhan. Multidimensional diffusion processes. Springer Berlin Heidelberg, 1997. ISBN
+9783540289999. doi: 10.1007/3-540-28999-2. URL http://dx.doi.org/10.1007/3-540-28999-2.
+J. H. Vandermeer and D. H. Boucher. Varieties of mutualistic interaction in population models. Journal of Theoretical Biology,
+74(4):549–558, Oct. 1978. ISSN 0022-5193. doi: 10.1016/0022-5193(78)90241-2. URL http://dx.doi.org/10.1016/0022-5193(78)
+90241-2.
+J. B. Walsh. An introduction to stochastic partial differential equations. In École d’Été de Probabilités de Saint Flour XIV-1984,
+pages 265–439. Springer, 1986.
+B. Week and G. Bradburd. Host-parasite coevolution in continuous space leads to variation in local adaptation across spatial
+scales. The American Naturalist, 203(1):43–54, Jan. 2024. ISSN 1537-5323. doi: 10.1086/727470. URL http://dx.doi.org/10.
+1086/727470.
+
+36
+
+Bob Week
+
+B. Week and S. L. Nuismer. Coevolutionary arms races and the conditions for the maintenance of mutualism. The American
+Naturalist, 198(2):195–205, Aug. 2021. ISSN 1537-5323. doi: 10.1086/714274. URL http://dx.doi.org/10.1086/714274.
+B. Week, S. L. Nuismer, L. J. Harmon, and S. M. Krone. A white noise approach to evolutionary ecology. Journal of Theoretical
+Biology, 521:110660, July 2021. ISSN 0022-5193. doi: 10.1016/j.jtbi.2021.110660. URL http://dx.doi.org/10.1016/j.jtbi.2021.
+110660.
+C. L. Wolin and L. R. Lawlor. Models of facultative mutualism: density effects. The American Naturalist, 124(6):843–862, Dec.
+1984. ISSN 1537-5323. doi: 10.1086/284320. URL http://dx.doi.org/10.1086/284320.
+B. Øksendal. Stochastic differential equations: an introduction with applications. Springer Science & Business Media, 2013.
+
+

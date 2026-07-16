@@ -1,0 +1,1754 @@
+Journal of Theoretical Biology 625 (2026) 112428
+
+Contents lists available at ScienceDirect
+
+Journal of Theoretical Biology
+journal homepage: www.elsevier.com/locate/jtbi
+
+Stochastic eco-evolutionary dynamics of multivariate traits: A framework
+for modeling population processes illustrated by the study of drifting
+𝐆-matrices
+Bob Week
+a
+b
+
+a,b
+
+Zoological Institute, Kiel University, Kiel, Germany
+Max-Planck Institute for Evolutionary Biology, Plön, Germany
+
+a r t i c l e
+
+i n f o
+
+a b s t r a c t
+
+Keywords:
+Evolutionary ecology
+Quantitative Genetics
+Drift
+G-matrices
+Martingale problems
+
+I derive a novel stochastic equation for the evolution of the additive genetic variance-covariance matrix 𝐆 in
+response to mutation, selection, drift, and ﬂuctuating population size. Common wisdom holds that the eﬀect of
+drift on 𝐆 is simply to reduce each of its entries by a common proportional amount while preserving its orientation. In contrast, I ﬁnd that drift causes signiﬁcant and directional shifts in the orientation of 𝐆 by driving
+genetic correlations to their extremes. Biologically, this is a consequence of linkage build-up introduced by drift.
+I compare these theoretical results to empirical observations based on experiments conducted by Phillips et al.
+(2001). Additionally, to derive the model of 𝐆-matrix evolution, I developed a novel synthetic framework for
+modelling ecological and evolutionary dynamics of populations carrying multivariate traits. This framework is
+optimized for deriving new models across a wide range of topics in population biology. Foundations of the framework are formalized by the theory of measure-valued processes, but application of the framework only requires
+multivariate calculus, and heuristics are presented in the main text for making additional calculations involving
+stochastic processes. Collectively, this work establishes a powerful framework enabling eﬃcient formal analysis
+of integrated population processes across evolution and ecology, and its potential for making new discoveries is
+illustrated by novel ﬁndings on fundamental aspects of 𝐆-matrix evolution.
+
+1. Introduction
+
+In the setting of multivariate traits, a common summary statistic for
+genetic architecture is the 𝐆-matrix. This matrix has the additive genetic
+variance of each trait on the associated diagonal entry. Oﬀ-diagonal entries quantify genetic covariances between traits which may be maintained by pleiotropic loci and linkage between loci aﬀecting diﬀerent
+traits. The standard view is that drift produces a proportional decrease
+in 𝐆 (Phillips and McGuigan, 2006; Cano et al., 2004; McGuigan, 2006;
+Chapuis et al., 2008; Dugand et al., 2021; Mallard et al., 2023a), and
+thus independent populations that have diverged due to drift should
+have proportional 𝐆-matrices (Roﬀ, 2000; Steppan et al., 2002; Aguirre
+et al., 2013). However, this insight rests on results from a deterministic
+model for the response of 𝐆-matrices to drift (Lande, 1979) and a model
+that assumes recombination happens suﬃciently fast to break-up linkage produced by selection (Lande, 1980). Hence, there is a need to develop theoretical predictions for the stochastic evolution of 𝐆-matrices
+driven solely by drift, and especially for the eﬀect of drift on genetic
+covariances (Mallard et al., 2023a,b).
+The reason for this gap in evolutionary theory stems, in part, from
+the lack of formal approaches to place stochastic models of 𝐆-matrix
+
+A fundamental principle of evolutionary biology is that random genetic drift erodes heritable variation at a rate inversely proportional
+to eﬀective population size. At the level of allele frequencies, models
+for the distribution of genetic variation responding to drift are wellknown (Kimura, 1964, 1968; Ewens, 2004; Hill and Robertson, 1966).
+In contrast, at the level of quantitative characters, models of additive genetic variation responding to drift focus on the average outcome using
+deterministic models (Latter, 1970; Bulmer, 1972; Lande, 1976, 1980;
+Chakraborty and Nei, 1982; Turelli and Barton, 1994; Lynch and Hill,
+1986; Bürger, 2000; Barton and Turelli, 2004; Débarre and Otto, 2016;
+Walsh and Lynch, 2018). Empirical work has supported theoretical predictions for the average response of additive genetic variation to drift
+(Phillips et al., 2001; McGuigan et al., 2005; Whitlock et al., 2002), but
+has also emphasized the need to predict the distribution of outcomes
+(Phillips et al., 2001; Whitlock, 1995) especially for multivariate traits
+and genetic covariances (Phillips and McGuigan, 2006; Mallard et al.,
+2023a).
+
+E-mail address: bweek@zoologie.uni-kiel.de
+https://doi.org/10.1016/j.jtbi.2026.112428
+Received 7 June 2025; Received in revised form 4 March 2026; Accepted 9 March 2026
+Available online 16 March 2026
+0022-5193/© 2026 The Author(s). Published by Elsevier Ltd. This is an open access article under the CC BY license (http://creativecommons.org/licenses/by/4.0/).
+
+Journal of Theoretical Biology 625 (2026) 112428
+
+B. Week
+
+evolution on a concrete mathematical foundation. In this paper, I aim
+to ﬁll this gap by leveraging the powerful theory of measure-valued
+processes, while also keeping the presentation as accessible as possible.
+Furthermore, taking this approach to formally derive 𝐆-matrix dynamics revealed a much broader framework for modelling a wide-range of
+population processes. In particular, given the growing appreciation for
+the interplay between ecological and evolutionary processes (Reznick,
+2015; Hendry, 2017; Kuosmanen et al., 2022), this framework makes an
+important contribution by enabling the formal interfacing of 𝐆-matrix
+evolution with models of eco-evolutionary feedbacks (e.g., Patel et al.,
+2018). I therefore focus this paper on presenting the framework in its full
+generality, and return to the study of 𝐆-matrix evolution as an example
+to illustrate its utility.
+In its full generality, this framework oﬀers tools to model the integrated ecological and evolutionary dynamics of populations with multivariate traits that respond to mutation, selection (including frequency
+and abundance dependence), demographic stochasticity, and consequential random genetic drift. In particular, this framework can be used
+to obtain generalizations of many classical models in evolution and
+ecology, such as Lotka-Volterra dynamics (Cattiaux and Méléard, 2009;
+Akjouj et al., 2024), coevolution (Gilman et al., 2012; Débarre et al.,
+2014), and evolutionary rescue (Klausmeier et al., 2020; Xu et al., 2023).
+Further details on how to apply this framework to generalize known
+models are given in the discussion section.
+As in classical quantitative genetics, the framework here assumes a
+linear genotype-phenotype map with ﬁxed mutational covariance. Under this modelling choice, development enters implicitly through the
+genotype-phenotype map rather than via explicit mechanistic developmental feedbacks (see Milocco and Salazar-Ciudad, 2022; GonzálezForero, 2022, 2024b,a). This paper therefore focuses on mutationselection-drift dynamics of multivariate traits, not on the evolution of
+developmental architecture.
+To apply this framework, the most important biological details relevant to a modeler are the mechanisms mediating ﬁtness. In contrast,
+details involving the genetic architecture of traits are abstracted in a
+way that captures basic biological principles while optimizing analytical tractability. For instance, asexual reproduction is assumed and mutation is modeled following approaches similar to Kimura (1965) and
+Débarre and Otto (2016) by assuming oﬀspring traits are distributed
+around their parental traits. This approach to modelling inheritance is
+similar to the inﬁnitesimal model in which traits are determined by
+many loci of small eﬀect, which implies oﬀspring are normally distributed around their parental values (Barton et al., 2017). However,
+an important distinction is that the inﬁnitesimal model restricts the response of allele frequencies to selection such that changes in genetic
+variance are only temporary and due to build-up of genetic linkage
+(Bulmer, 1971). Instead, I begin by assuming oﬀspring traits are normally distributed around their parental traits (referred to as the Gaussian descendants model by Turelli, 2017), in which case the response of
+population variance to selection can be permanent. Abstract approaches
+similar to this have been successful for obtaining valuable analytical insights into genetic variation maintained by mutation-selection balance
+(Kimura, 1965; Lande, 1975; Turelli, 1984, 1986) and by mutationdrift balance (Lande, 1976, 1979; Barton, 1989; Débarre and Otto,
+2016). Hence, by optimizing a trade-oﬀ between genetic detail and analytical tractability, this framework provides an accessible approach
+for obtaining and communicating a wide array of novel theoretical
+insights.
+To establish this framework, I build on the work of Week et al.
+(2021), which presented a stochastic diﬀerential equation framework
+focused on modelling the simultaneous dynamics of abundances, 1dimensional mean traits, and 1-dimensional trait variances responding to mutation, selection, demographic stochasticity, and random genetic drift. This 1-dimensional framework was based on the development of heuristics (i.e., practical rules that allow exact calculations
+without requiring familiarity with the underlying martingale theory
+
+or its formal derivation) for working with stochastic partial diﬀerential equations (spde). However, for multivariate traits, the spde approach breaks down (Dawson, 1993; Etheridge, 2000; Perkins, 2002).
+To overcome this challenge and establish a rigorous analytical framework for deriving population processes, I take an approach based on
+so-called martingale problems (Ethier and Kurtz, 1986; Dawson, 1993;
+Stroock and Varadhan, 1997; Rogers and Williams, 2000). Mathematical aspects of this approach are provided in Supplementary Material,
+Section 4. In the main text, I focus on the resulting dynamical equations and heuristics for performing calculations with minimal technical
+background.
+1.1. Overview
+I begin by outlining the derivation of the deterministic version of
+the framework without making any assumptions on the shape of trait
+distributions, which is summarized by a system of ordinary diﬀerential
+equations. This leads to expressions of selection in terms of covariances
+with ﬁtness, which I refer to collectively as the Deterministic Covariance version (or DC for short). By assuming traits follow multivariate
+normal distributions, covariances with ﬁtness are replaced by multivariate gradients of ﬁtness with respect to mean traits and trait variances,
+and I refer to the resulting system of diﬀerential equations as the Deterministic Gradient version (or DG for short). To simplify presentation of
+the deterministic version of the framework, I assume traits are perfectly
+heritable. However, because this work is motivated by understanding
+the consequences of drift for 𝐆-matrix evolution, I brieﬂy describe an
+approach to model imperfect heritability after introducing DC and DG.
+This model of imperfect heritability is adopted while introducing the
+stochastic extensions of the framework.
+The stochastic extensions of the framework include the eﬀects of
+demographic stochasticity (i.e., random reproductive output) and random genetic drift (which occurs here as a consequence of demographic
+stochasticity). I introduce two stochastic extensions. Both build on DG
+by assuming multivariate normal trait distributions and by expressing
+selection in terms of ﬁtness gradients. The ﬁrst form expresses dynamics
+in terms of Brownian motions as drivers of stochasticity (referred to as
+the Brownian Motion Gradient version, or BG for short), which is particularly useful for numerical analysis. The second form expresses dynamics in terms of a more general underlying martingale process (referred to
+as the Martingale Gradient version, or MG for short), and I use this form
+to introduce heuristics for deriving analytical models. To demonstrate
+the heuristics (summarized in Table 1), I derive a stochastic equation
+for the evolution of additive genetic correlations between trait values.
+To bring this paper full-circle, I then discuss how this exercise provides
+novel insights into the evolutionary response of 𝐆-matrices to random
+genetic drift and compare these theoretical results with observations obtained from experiments (Phillips et al., 2001; McGuigan et al., 2005;
+Whitlock et al., 2002).
+The Supplementary Material provides details to support conclusions
+and arrive at expressions presented throughout the main text. Supplementary Material, Section 1 summarizes numerical implementations of
+the framework. Detailed derivation of the deterministic versions of the
+framework are given in Supplementary Material, Section 2. section 3
+of the Supplement formally interfaces the continuous-time framework
+presented here with discrete time models of classical quantitative genetics. The mathematical foundation of this framework is communicated
+in Supplementary Material, Section 4. Using this foundation, Section 5
+of the Supplement presents detailed calculations for the derivation of
+the stochastic versions of the framework presented in the main text. In
+Supplementary Material, Section 6, I derive the dynamics of genetic correlations responding to drift. An outline for one approach to derive this
+framework from a diﬀusion-limit is given in Section 7 of the Supplement.
+Finally, Supplementary Material, Section 8 formalizes a connection with
+Gillespie’s work on the evolutionary consequences of oﬀspring number
+variation (Gillespie, 1974, 1975, 1977).
+2
+
+Journal of Theoretical Biology 625 (2026) 112428
+
+B. Week
+
+2. The framework
+
+Hence, unequal entries imply that mutation results in asymmetric diffusion across trait space so that mutation aﬀects some traits more than
+others. Additionally, if 𝑀𝑖𝑗 ≠ 0 when 𝑖 ≠ 𝑗, mutation contributes to covariance between traits 𝑧𝑖 and 𝑧𝑗 . This model of mutation can be obtained from a diﬀusion-limit of an individual-based model that assumes
+independence of reproduction and mutation in which the phenotypic
+eﬀect size of mutation is small (see Supplementary Material, Section 7).
+A model where mutation and reproduction interact has been studied by
+Wickman et al. (2023).
+Mathematically, assuming 𝑛 is ﬁnite allows us to write 𝑛̇ =
+∫ℝ𝑑 ̇𝜈(𝐳) 𝑑𝐳. We can then apply integration-by-parts to obtain
+
+The framework tracks the dynamics of the population density
+across trait space for asexually reproducing populations. To model 𝑑dimensional traits, I assume trait space is the entire Euclidean space ℝ𝑑 .
+Given the 𝑑-dimensional trait 𝐳 = (𝑧1 , … , 𝑧𝑑 )⊤ (with ⊤ denoting matrix
+transposition so 𝐳 is a column vector), I write 𝜈(𝐳) for the population
+density at 𝐳. Then the total abundance of the population is given by
+𝑛 = ∫ℝ𝑑 𝜈(𝐳) 𝑑𝐳. The distribution of the trait 𝐳 is then 𝑝(𝐳) = 𝜈(𝐳)∕𝑛, and
+this is also referred to as the relative abundance of 𝐳. Using 𝑝(𝐳), the
+mean trait vector is given by ̄𝐳 = ∫ℝ𝑑 𝐳 𝑝(𝐳) 𝑑𝐳, and the trait covariance
+matrix is 𝐏 = ∫ℝ𝑑 (𝐳 − ̄𝐳)(𝐳 − ̄𝐳)⊤ 𝑝(𝐳) 𝑑𝐳, with 𝑃𝑖𝑗 being the covariance between 𝑧𝑖 and 𝑧𝑗 . The chosen notation facilitates comparison with classical multivariate quantitative genetic models (Lande, 1980; Lande and
+Arnold, 1983; Jones et al., 2003; Arnold et al., 2008).
+In the following Section 2.1 I describe how to obtain the deterministic version of the framework using multivariate calculus. I do this in two
+parts. The ﬁrst part (DC) makes no assumption on the shape of 𝑝(𝐳). The
+second part (DG) assumes 𝑝(𝐳) is the density of a multivariate normal
+distribution. I continue to make this assumption in Section 2.2 where I
+introduce the stochastic extension of this framework.
+
+𝑛̇ = 𝑚̄ 𝑛,
+
+where ̄
+𝑚(𝜈) = ∫ℝ𝑑 𝑚(𝜈, 𝐳) 𝑝(𝐳) 𝑑𝐳 is mean ﬁtness. Biologically, 𝑛 should
+be very large since drift is being ignored. However, this approach can
+still be useful for gaining insights when 𝑛 is small, which occurs for
+example with Lotka-Volterra models (Akjouj et al., 2024). A version of
+Eq. (3) based on a ﬁnite number of genotypes (in place of continuous
+trait variation) is given in Crow and Kimura (1970) on page 10 above
+their equation 1.2.7.
+Dynamics of the mean trait vector are obtained by applying the quotient rule and integration-by-parts to ̄̇𝐳 = ∫ℝ𝑑 𝐳 ̇𝑝(𝐳) 𝑑𝐳, which provides
+̄𝐳̇ = Cov(𝑚, 𝐳),
+
+2.1. Deterministic dynamics
+
+Cov(𝑚, 𝑧𝑖 ) =
+
+𝑑
+∑
+𝑖,𝑗=1
+
+𝑀𝑖𝑗
+
+𝜕 𝜕
+𝜕𝑧𝑖 𝜕𝑧𝑗
+
+∫ℝ𝑑
+
+( 𝑚(𝜈, 𝐳) − ̄
+𝑚(𝜈) ) (𝑧𝑖 − 𝑧̄ 𝑖 ) 𝑝(𝐳) 𝑑𝐳,
+
+(5)
+
+where 𝑧̄ 𝑖 is the 𝑖th entry of ̄𝐳. Eq. (4) is similar to the Price equation
+without transmission bias in that evolutionary change is expressed as a
+covariance between ﬁtness and trait value (Price, 1970, 1972) . However, unlike the Price equation (which is a general identity) the present
+result is derived from an explicit population dynamical model and therefore depends on speciﬁc biological and analytical assumptions.
+The same techniques can also be applied to obtain 𝐏̇ as
+𝐏̇ = 𝐌 + Cov(𝑚, (𝐳 − ̄𝐳)(𝐳 − ̄𝐳)⊤ ),
+
+(6)
+
+where Cov(𝑚, (𝐳 − ̄𝐳)(𝐳 − ̄𝐳)⊤ ) is a 𝑑 × 𝑑 matrix with 𝑖𝑗th entry given by
+Cov(𝑚, (𝑧𝑖 − 𝑧̄ 𝑖 )(𝑧𝑗 − 𝑧̄ 𝑗 )). The response of the trait covariance matrix to
+selection as a covariance of ﬁtness with (𝐳 − ̄𝐳)(𝐳 − ̄𝐳)⊤ was previously
+found by Lande and Arnold (1983), without an explicit mutation term.
+An expression including 𝐌 was later presented by Phillips and McGuigan
+(2006), but not derived from an underlying dynamical model. The steps
+required to arrive at Eqs. (3)–(6) are detailed in the Supplementary Material, Section 2.
+Eqs. (3), (4), and (6) follow from the underlying trait-structured dynamical model and make no assumptions on the form of the trait distribution. Consequently, the model can be used to study populations with
+non-trivial higher moments, such as skewed or otherwise non-Gaussian
+distributions. However, this ﬂexibility of accommodating general trait
+distributions comes at the cost of a limited range of ﬁtness functions that
+are amenable to study. This is due to i) the challenge of calculating covariances between arbitrary ﬁtness functions and phenotypic moments,
+and ii) moment-closing issues that often arise during these calculations
+(Barton and Turelli, 1987; Gilpin and Feldman, 2019; Guerand et al.,
+2023). In spite of this limitation, a family of biologically important ﬁtness functions are tractable to study using DC. These function take the
+form
+
+(1)
+
+where ̇𝜈(𝐳) is the instantaneous rate of change of 𝜈(𝐳) over time, the
+symbol ∇ ∶= (𝜕∕𝜕𝑧1 , … , 𝜕∕𝜕𝑧𝑑 )⊤ is the gradient operator with respect to
+the 𝑑-dimensional trait 𝐳, and
+1 ⊤
+∇ 𝐌∇ ∶= 12
+2
+
+(4)
+
+where Cov(𝑚, 𝐳) is a 𝑑-dimensional vector with 𝑖th entry given by
+
+2.1.1. The deterministic covariance version (DC)
+To establish a ﬂexible, but tractable framework to model the dynamics of 𝑛, ̄𝐳, and 𝐏, I generalize the deterministic model used by Week et al.
+(2021), referred to there as the Deterministic Asexual Gaussian Allelic
+model (DAGA), to the multivariate setting. Speciﬁcally, DAGA focuses
+on dynamics due to just mutation and selection for asexually reproducing populations. Mutation is modeled as the variance 𝐌 of a normal distribution determining oﬀspring traits centered on their parental traits,
+and selection results from the covariance of ﬁtness and phenotype.
+In the multivariate trait setting, mutation is modeled as a 𝑑 × 𝑑 covariance matrix 𝐌, with the oﬀ-diagonal entries contributing to trait
+covariances. Here, I assume 𝐌 does not depend on 𝐳. This setup ﬁts
+within the conceptual framework that has been popular for theoretical
+and empirical studies of 𝐆-matrix evolution (Jones et al., 2007; Arnold
+et al., 2008; Mallard et al., 2023a). Fitness is quantiﬁed by a rate 𝑚(𝜈, 𝐳),
+which is the growth rate for the sub-population of individuals with trait
+value 𝐳 in a population summarized by 𝜈. The dependency of 𝑚 on 𝜈 and
+𝐳 allows for the modelling of interwoven ecological and evolutionary dynamics. I will also refer to 𝑚(𝜈, 𝐳) as a ﬁtness function, and this function
+may also depend on environmental parameters such as the trait values of
+individuals in interacting species. However, I omit notation accounting
+for such possibilities to simplify the frameworks presentation. Putting
+these components together, the multivariate generalization of DAGA is
+given by the partial diﬀerential equation
+̇𝜈(𝐳) = 𝑚(𝜈, 𝐳) 𝜈(𝐳) + 12 ∇⊤ 𝐌∇ 𝜈(𝐳),
+
+(3)
+
+(2)
+
+is the mutation operator. Eq. (1) can be used to obtain a multivariate
+generalization of Kimura’s continuum-of-alleles model (Kimura, 1965)
+that assumes diﬀusion instead of convolution with an arbitrary mutation
+kernel. Justiﬁcation for multivariate DAGA Eq. (1) as a deterministic approximation of the full stochastic framework is given in Supplementary
+Material, Section 7.
+If 𝑀𝑖𝑗 = 0 when 𝑖 ≠ 𝑗 and 𝑀𝑖𝑖 = 𝑀𝑗𝑗 is constant across all 𝑖𝑗, then the
+above mutation operator becomes proportional to the Laplacian operator on ℝ𝑑 , which causes symmetric diﬀusion of the population density.
+
+𝑚(𝜈, 𝐳) = 𝑟 + 𝐛⊤ 𝐳 − 12 (𝜃 − 𝐳)⊤ 𝚿 (𝜃 − 𝐳) − 𝑐 𝑛,
+
+(7)
+
+where 𝐛 = (𝑏1 , … , 𝑏𝑑 )⊤ (which does not depend on 𝐳) confers directional
+selection (positive or negative for trait 𝑧𝑖 depending on the sign of 𝑏𝑖 ),
+and 𝚿 is a symmetric matrix that mediates stabilizing or disruptive selection around the vector 𝜃 . Classically, 𝚿 is denoted 𝜔 −1 in quantitative
+genetic theory (e.g., Lande, 1979; Jones et al., 2012). The absence of stabilizing selection under the classical notation occurs when all eigenvalues of 𝜔 diverge towards +∞. To avoid this technicality, I use 𝚿 so that
+3
+
+Journal of Theoretical Biology 625 (2026) 112428
+
+B. Week
+
+the absence of stabilizing selection is associated with the zero matrix
+𝚿 = 𝟎. Additionally, the parameter 𝑐 ≥ 0 is the strength of competition,
+which here acts globally between individuals regardless of trait, and 𝑟 is
+the growth rate in the absence of selection and competition (i.e., when
+𝐛, 𝚿, and 𝑐 are all zero). It is possible to generalize this family so that
+competition is non-global, but this requires additional technical details
+as the ﬁtness function becomes operator-valued (which is treated, for
+example, by Volpert, 2014; and by Etheridge et al., 2024). Supplementary Material, 3 connects these ﬁtness functions to those known from
+classical discrete time quantitative genetic models.
+Combining Eqs. (3), (4), and (6) with Eq. (7) provides (derivation
+given in Supplementary Material, Section 2.3)
+(
+)
+𝑛̇ = 𝑟 + 𝐛⊤ ̄𝐳 − 12 (𝜃 − ̄𝐳)⊤ 𝚿 (𝜃 − ̄𝐳) − 12 tr(𝚿 𝐏) − 𝑐 𝑛 𝑛,
+(8a)
+̄̇𝐳 = 𝐏 𝐛 + 𝐏 𝚿 (𝜃 − ̄𝐳) − 1 𝐒 ∶ 𝚿,
+2
+
+(8b)
+
+𝐏̇ = 𝐌 + 12 tr(𝚿 𝐏) 𝐏 + 𝐒 ⋅ (𝚿(𝜃 − ̄𝐳)) + 𝐒 ⋅ 𝐛 − 12 𝐊 ∶ 𝚿,
+
+(8c)
+
+make the useful simplifying assumption that traits follow a multivariate normal distribution. Under this assumption, all phenotypic moments
+(such as skew and kurtosis) can be expressed in terms of the mean and
+variance which greatly simpliﬁes expressions such as Eq. (8). While deviations from normality can have consequences for ecological and evolutionary processes (Turelli, 1988; Débarre et al., 2015), normality has
+been an important initial assumption for studying a wide range of topics
+such as reaction-norm evolution (Lande, 2014), coevolving mutualistic
+networks (Nuismer et al., 2018), and niche construction (Fogarty and
+Wade, 2022). Furthermore, normality is a well-established approximation that holds under many genetic and selective scenarios (Turelli and
+Barton, 1994). Then, as a ﬁrst pass, I assume traits are multivariate normally distributed for the rest of this paper.
+In the context of this framework, the assumption of multivariate normality is particularly useful because it allows us to rewrite covariances
+between ﬁtness and phenotype as gradients of ﬁtness functions with respect to moments of the trait distribution. Such gradients can be analytically calculated for a broad range of ﬁtness functions. The calculations
+to obtain these expressions begin with the deﬁnitions of covariances
+between ﬁtness and phenotype, and then apply properties of the multivariate Gaussian function and integration-by-parts (see Supplementary
+Material, Section 2.3). As a result, the deterministic DG version of the
+framework is given by
+
+where 𝐒 is the third-order skew tensor of 𝐳 deﬁned by 𝑆𝑖𝑗𝑘 = ∫ℝ𝑑 (𝑧𝑖 −
+𝑧̄ )(𝑧 − 𝑧̄ 𝑗 )(𝑧𝑘 − 𝑧̄ 𝑘 )𝑝(𝐳)𝑑𝐳. Products with 𝐒 are given by (𝐒 ∶ 𝚿)𝑖 =
+∑𝑖 𝑗
+∑
+∑
+𝑗𝑘 𝑆𝑗𝑘𝑖 Ψ𝑗𝑘 , (𝐒 ⋅ 𝚿)𝑖𝑗 =
+𝑘 𝑆𝑖𝑗𝑘 Ψ𝑘𝑗 , and (𝐒 ⋅ 𝐛)𝑖𝑗 =
+𝑘 𝑆𝑖𝑗𝑘 𝑏𝑘 . In addition,
+𝐊 is the fourth-order kurtosis tensor of 𝐳 deﬁned by 𝐾𝑖𝑗𝑘𝑙 = ∫ℝ𝑑 (𝑧𝑖 −
+𝑧̄ 𝑖 )(𝑧𝑗 − 𝑧̄ 𝑗 )(𝑧𝑘 − 𝑧̄ 𝑘 )(𝑧𝑙 − 𝑧̄ 𝑙 )𝑝(𝐳)𝑑𝐳. The product with 𝐊 is given by (𝐊 ∶
+∑
+𝚿)𝑖𝑗 = 𝑘𝑙 𝐾𝑖𝑗𝑘𝑙 Ψ𝑘𝑙 . Eq. (8) collects the abundance, mean, and covariance dynamics (including skewness and kurtosis contributions) into a
+single system for clarity. While related formulations exist, this particular consolidation does not appear to be standard in the literature.
+Eq. (8) demonstrate that, for ﬁtness functions taking the form of (7),
+the dynamics of abundance, mean trait, and trait covariance matrix depend on higher phenotypic moments for non-normal trait distributions.
+In fact, a complete description requires an inﬁnite number of equations.
+However, by combining (7) with multivariate DAGA (i.e., with (1)), I
+demonstrate in Supplementary Material, Section 2.5 that, when 𝚿 is
+positive deﬁnite, 𝜈(𝐳) has a globally asymptotically stable equilibrium
+proportional to the density of a multivariate normal distribution with
+covariance matrix
+𝐏̂ = 𝚿−1∕2 (𝚿1∕2 𝐌𝚿1∕2 )1∕2 𝚿−1∕2
+
+and with a total abundance
+(
+(
+))
+1
+𝑛̂ =
+𝑟 + 𝐛⊤𝜃 + 12 𝐛⊤ 𝚿−1 𝐛 − 12 tr (𝚿1∕2 𝐌𝚿1∕2 )1∕2 .
+𝑐
+
+(12a)
+
+̄̇𝐳 = 𝐏 (∇𝐳̄ 𝑚̄ − ∇𝐳̄ 𝑚),
+
+(12b)
+
+𝐏̇ = 𝐌 + 2 𝐏 (∇𝐏 𝑚̄ − ∇𝐏 𝑚) 𝐏,
+
+(12c)
+
+where ∇ ̄𝐳 𝑚̄ and ∇ ̄𝐳 𝑚 are 𝑑-dimensional vectors that respectively capture the eﬀects of frequency independent and frequency dependent
+selection on mean trait evolution. More precisely, writing 𝜕𝑖 = 𝜕∕𝜕 𝑧̄ 𝑖
+as the partial derivative operator with respect to the 𝑖th mean trait,
+the 𝑖th entry of ∇ ̄𝐳 𝑚̄ and ∇ ̄𝐳 𝑚 are respectively given by 𝜕𝑖 𝑚̄ and
+𝜕𝑖 𝑚 = ∫ℝ𝑑 𝑝(𝐳) [ 𝜕𝑖 𝑚(𝜈, 𝐳) ] 𝑑𝐳. Similarly, ∇𝐏 𝑚̄ and ∇𝐏 𝑚 are 𝑑 × 𝑑 matrices that respectively quantify the dependence of ﬁtness on trait variances and covariances. Writing 𝜕𝑖𝑗 = 𝜕∕𝜕𝑃𝑖𝑗 as the partial derivative operator with respect to the covariance between trait components 𝑖 and
+𝑗, the 𝑖𝑗th entries of ∇𝐏 𝑚̄ and ∇𝐏 𝑚 are respectively given by 𝜕𝑖𝑗 𝑚̄ and
+
+(9)
+
+𝜕𝑖𝑗 𝑚 = ∫ℝ𝑑 𝑝(𝐳) [ 𝜕𝑖𝑗 𝑚(𝜈, 𝐳) ] 𝑑𝐳. Although 𝑚 is not written explicitly as a
+function of ̄𝐳 or 𝐏, it depends on them through 𝜈(𝐳). The derivatives of
+𝑚 above are therefore understood as sensitivities of 𝑚 to perturbations
+of the distribution that alter ̄𝐳 or 𝐏, and are not zero in general.
+In Supplementary Material, Section 2.3, I show how to apply
+integration-by-parts to obtain the alternative expressions 𝐳̄̇ = 𝐏 ∇𝑚 and
+𝐏̇ = 𝐌 + 𝐏 ∇2 𝑚 𝐏 where (∇)𝑖 = 𝜕∕𝜕𝑧𝑖 (so ∇𝑚 is the trait averaged gradient of ﬁtness with respect to phenotype 𝐳) and (∇2 )𝑖𝑗 = 𝜕 2 ∕𝜕𝑧𝑖 𝜕𝑧𝑗 (so
+
+(with matrix square roots deﬁned using eigenvalue decomposition: 𝐐 =
+𝐔𝚲𝐔−1 implies 𝐐1∕2 = 𝐔𝚲1∕2 𝐔−1 ) and equilibrium mean vector
+̂̄𝐳 = 𝚿−1 𝐛 + 𝜃 ,
+
+𝑛̇ = 𝑚̄ 𝑛,
+
+(10)
+
+(11)
+
+∇2 𝑚 is the trait averaged Hessian of ﬁtness with respect to phenotype 𝐳).
+A discrete-time counterpart to ∇2 𝑚 is given by equation (14b) in Lande
+and Arnold (1983).
+The Hessian form for the response of 𝐏 to selection is similar to
+previously known discrete-time expressions (Lande and Arnold, 1983;
+Débarre et al., 2014; Phillips and Arnold, 1989; Mullon and Lehmann,
+2019). An important diﬀerence is that the discrete-time expressions include an additional term equal to the outer product of the per-generation
+response of the mean trait to selection, commonly denoted (Δ̄𝐳)(Δ̄𝐳)⊤ ,
+which appears with a negative sign in the discrete-time update of 𝐏.
+However, this extra term disappears under weak selection approximations often made in discrete-time quantitative genetic models (Lande,
+1976, 1982; Turelli, 1984; Barton and Turelli, 1989; Turelli and Barton,
+1990; Lynch and Walsh, 1998; Bürger, 2000; Walsh and Lynch, 2018).
+Furthermore, under a continuous-time scaling, the mean changes only
+𝑂(Δ𝑡) over a small interval, so its contribution to covariance is 𝑂(Δ𝑡2 ).
+Dividing by Δ𝑡 to form a rate equation and letting Δ𝑡 → 0 removes this
+quadratic term, leaving only the curvature-driven (Hessian) part of selection in the continuous-time covariance dynamics, in agreement with
+Eq. (12c).
+
+Derivations for these equilibrium expressions are given in Supplementary Material, Section 2.5.1.
+The mutation-selection balance of phenotypic variance 𝐏̂ is a multivariate generalization of the univariate classical result obtained from
+multi-locus models (e.g., Bulmer, 1972) and continuum-of-alleles models (e.g., Bürger, 1986). Lande (1980) found a similar result using a multilocus approach that included recombination. In particular, 𝐏̂ has the
+same matrix-square-root structure as the equilibrium found by Lande
+(1980), and the two coincide when linkage is negligible and when 𝐌
+corresponds to the sum of Lande’s locus-speciﬁc mutation matrices. Further work is needed to extend these results for more general ﬁtness functions and higher phenotypic moments, which are already known to have
+important evolutionary consequences (Débarre et al., 2015). A new approach to study the dynamics of higher moments for univariate traits
+was recently introduced by Gilpin and Feldman (2019).
+2.1.2. The deterministic gradient version (DG)
+As noted above, deriving population dynamics from arbitrary ﬁtness
+functions can be challenging in the more general framework based on
+covariances between ﬁtness and phenotype. To overcome this we can
+4
+
+Journal of Theoretical Biology 625 (2026) 112428
+
+B. Week
+
+rate for the sub-population of individuals carrying genetic value 𝐠 is
+given by ̃
+𝑚(𝛾, 𝐠) = ∫ℝ𝑑 𝜀(𝐞)𝑚(𝜈, 𝐠 + 𝐞)𝑑𝐞. Furthermore, the ﬁtness function
+for trait values 𝑚(𝜈, 𝐳) and the ﬁtness function for additive genetic values
+𝑚(𝛾, 𝐠) have the same mean value across the population
+̃
+
+Mean trait and trait covariance dynamics can be expressed in index
+form as
+𝑧̄̇ 𝑖 =
+
+𝑑
+∑
+
+𝑃𝑖𝑗 (𝜕𝑗 𝑚̄ − 𝜕𝑗 𝑚),
+
+(13a)
+
+𝑗=1
+
+𝑃̇ 𝑖𝑗 = 𝑀𝑖𝑗 + 2
+
+𝑑
+∑
+
+𝑃𝑖𝑘 (𝜕𝑘𝑙 𝑚̄ − 𝜕𝑘𝑙 𝑚) 𝑃𝑙𝑗 .
+
+1
+𝑚̃̄ =
+𝑚(𝛾, 𝐠) 𝛾(𝐠) 𝑑𝐠
+̃
+𝑛 ∫ℝ𝑑
+(13b)
+=
+
+𝑘,𝑙=1
+
+Inclusion of the terms ∇ ̄𝐳 𝑚 and ∇𝐏 𝑚 in Eqs. (12b) and (12c) make it
+clear that this framework accounts for frequency-dependent selection.
+The decomposition of selection into components arising from frequencydependent and frequency-independent sources has been made explicit
+in previous quantitative genetic treatments of mean trait dynamics (see
+eqn. (9) of Lande, 1976), but was only implicit in models of trait variance evolution due to their expressions in terms of Hessians (Lande and
+Arnold, 1983; Débarre et al., 2014; Phillips and Arnold, 1989; Mullon
+and Lehmann, 2019). A decomposition of the Hessian of ﬁtness into
+frequency-dependent and frequency-independent components does not
+appear to be standard in existing treatments of trait-covariance evolution. Additionally, the approach outlined here can make a useful complement to adaptive dynamics and evolutionary game-theoretic treatments of frequency-dependent selection (Dieckmann and Law, 1996;
+Hofbauer and Sigmund, 1998; Traulsen et al., 2005).
+An important caveat of both DC and DG versions of the framework
+taking the form presented above is that they rely on perfect heritability of trait values. However, traits are in general not perfectly heritable,
+and this is of fundamental importance in evolutionary biology. I therefore address this additional complexity in the following sub-subsection.
+I note here that extending DC and DG to include imperfect heritability results in nearly identical equations, the important diﬀerence is that
+average growth rates must additionally be averaged over a phenotypic
+residual term. I state this explicitly for the DG version below.
+
+1
+1
+𝑚(𝜈, 𝐳) 𝜀(𝐞) 𝛾(𝐳 − 𝐞) 𝑑𝐞 𝑑𝐳 =
+𝑚(𝜈, 𝐳) 𝜈(𝐳) 𝑑𝐳 = ̄
+𝑚.
+𝑛 ∫ℝ𝑑 ∫ℝ𝑑
+𝑛 ∫ℝ𝑑
+(14)
+
+This approach to deriving the ﬁtness associated with an additive genetic
+value given the ﬁtness associated with a trait value and the distribution
+of residuals was originally introduced by Kimura and Crow (1978). It
+also appears in Eq. (4) of Lande (1979). The dynamics of 𝛾 are given in
+analogy to 𝜈̇ as
+̇𝛾(𝐠) = ̃
+𝑚(𝛾, 𝐠) 𝛾(𝐠) + 12 ∇⊤ 𝐌∇ 𝛾(𝐠).
+
+(15)
+
+The distribution of additive genetic values in the population is given
+by ̃𝑝(𝐠) = 𝛾(𝐠)∕𝑛. In combination with the model for phenotypic residuals, the mean trait vector is calculated as ̄𝐳 = ̄𝐠 and the trait covariance
+matrix is 𝐏 = 𝐆 + 𝐄. To simplify calculating ﬁtness, and to accommodate
+the assumption of multivariate normal traits, I assume 𝜀(𝐞) is the density
+of a multivariate normal distribution (with mean zero and covariance
+matrix 𝐄).
+Under these assumptions the expression for abundance dynamics
+does not change, but the mean trait dynamics can be calculated as
+̄̇𝐳 = 𝐆 (∇𝐳̄ 𝑚̄ − ∇𝐳̄ 𝑚),
+
+(16)
+
+and 𝐆-matrix dynamics are given by
+𝐆̇ = 𝐌 + 2 𝐆 (∇𝐆 𝑚̄ − ∇𝐆 𝑚) 𝐆.
+
+(17)
+
+I apply this model of imperfect inheritance while describing the stochastic extensions of the framework below. Further details about how imperfect inheritance is interfaced with the stochastic extension of this
+framework, and how to obtain Eqs. (16) and (17) are provided in the
+Supplementary Material, Section 5.
+In summary, this section derives deterministic equations for abundance, mean traits, and trait covariances from the DAGA formulation
+(1). It presents both the non-closed moment system for general trait distributions (Eqs. (3)–(8)) and the closed gradient/Hessian form obtained
+under normality with imperfect inheritance (Eqs. (12a), (16), and (17)),
+which the stochastic extensions build on below.
+
+2.1.3. Imperfect inheritance
+Following classical quantitative genetics, imperfect inheritance of
+trait values can be accounted for by assuming traits decompose into an
+additive genetic component and a residual component: 𝐳 = 𝐠 + 𝐞 (Lynch
+and Walsh, 1998).
+Biologically, this decomposition assumes that non-additive genetic
+eﬀects and genotype-environment interactions are absent, so that 𝐠 reﬂects only additive genetic eﬀects, while 𝐞 reﬂects the remaining nonheritable factors. This justiﬁes interpreting 𝐞 as the residual from ﬁtting a linear statistical model of trait values to genetic predictors (Falconer and Mackay, 1996; Lynch and Walsh, 1998). The absence of nonadditive genetic eﬀects is especially important in this asexual framework, where the lack of recombination would otherwise allow multilocus allelic associations to render such eﬀects heritable (Barton and
+Turelli, 1991). It is further assumed that the only trait-mediating factors
+that are heritable are additive genetic factors (i.e., cytoplasmic inheritance, persistent epigenetic marks, maternal eﬀects, microbiome transmission, and cultural inheritance are all excluded). Under these assumptions, 𝐞 is uncorrelated with 𝐠 and is uncorrelated among individuals,
+consistent with interpreting 𝐠 and 𝐞 as the genetic predictor and residual in a linear model relating trait values to genetic variation.
+In contrast to 𝐞, the additive genetic component 𝐠 follows the same
+Gaussian mutation model described above. In particular, given that 𝐠
+is the additive genetic component of the trait of a parent, an oﬀspring
+will have an additive genetic component that is multivariate normally
+distributed with mean 𝐠 and covariance matrix 𝐌.
+Assuming the residual 𝐞 is independent and identically distributed
+for all individuals with mean zero and covariance matrix 𝐄, and denoting 𝛾(𝐠) the population density at genetic value 𝐠, and 𝜀(𝐞) the distribution of the residuals, the population density of trait values is given
+by 𝜈(𝐳) = ∫ℝ𝑑 𝜀(𝐞)𝛾(𝐳 − 𝐞)𝑑𝐞. This preserves total abundance so that 𝑛 =
+∫ℝ𝑑 𝜈(𝐳)𝑑𝐳 = ∫ℝ𝑑 𝛾(𝐠)𝑑𝐠. These assumptions also imply that the growth
+
+2.2. Stochastic dynamics
+In this section, I extend the framework to the case where demographic stochasticity induces random genetic drift. This extension introduces the stochastic version of the framework and builds on the Deterministic Gradient (DG) formulation developed above. Two closely related stochastic variants are presented.
+The ﬁrst variant, called the Brownian Motion Gradient version (BG),
+expresses stochastic dynamics with respect to Brownian motion processes, as is standard for stochastic diﬀerential equations (Øksendal,
+2013; Evans, 2012). BG is particularly useful for numerical applications,
+and can be implemented using the Euler-Maruyama algorithm (Bayram
+et al., 2018). I illustrate this during a brief study of genetic correlations evolving in response to random genetic drift. Further information
+is provided in Supplementary Material, Section 1. Implementations of
+this approach using the DiﬀerentialEquations.jl package in Julia (Rackauckas and Nie, 2017), and a manual implementation are provided at
+the Zenodo repository https://doi.org/10.5281/zenodo.19087096.
+The second variant, called the Martingale Gradient version (MG), is
+useful for deriving the dynamics of more speciﬁc quantities. This usecase is illustrated below to formally obtain a stochastic diﬀerential equation tracking the evolution of genetic correlations in response to random
+genetic drift. To do so, I introduce a powerful set of novel heuristics
+5
+
+Journal of Theoretical Biology 625 (2026) 112428
+
+B. Week
+
+(i.e., practical rules that allow exact calculations without requiring familiarity with the underlying measure-valued martingale theory, see Table 1) that can be used to derive an array of models from this variant of
+the framework. These heuristics are obtained by examining a so-called
+martingale process underlying this entire framework, which is also the
+namesake of MG. Mathematical details are provided in Section 4 of the
+Supplement.
+Both stochastic extensions of the framework include an additional
+variable 𝑣, which is associated with the variance of lifetime reproductive output of individuals. Supplementary Material, Section 7.1 shows
+how to derive 𝑣 from an individual-based model. This parameter can
+be interpreted as the population average of what Gillespie (1974, 1975,
+1977) calls the variance in oﬀspring number. Supplementary Material,
+Section 8 formally demonstrates this interpretation. Importantly, 𝑣 can
+also be intrepreted as either the rate of reproduction for semelparous
+populations (demonstrated in Supplementary Material, Section 7.1) or
+the sum of birth and death rates in iteroparous populations (discussed
+in Week et al., 2021). I refer to 𝑣 as the reproductive variance.
+Previous work has shown that a novel form of selection can emerge
+when 𝑣 depends on trait value, referred to as noise-induced selection, and
+for which evolutionary responses behave radically diﬀerent from classical deterministic selection (Gillespie, 1974, 1977; Constable et al., 2016;
+Parsons et al., 2010; Kuosmanen et al., 2022; Bhat and Guttal, 2025).
+However, accounting for noise-induced selection leads to signiﬁcantly
+more complex expressions for the evolution of mean trait vector and trait
+covariance matrix (e.g., see Week et al., 2021, for the univariate case).
+While genotype-dependent diﬀerences in the variance of oﬀspring number have been documented in laboratory asexual systems (Turner and
+Chao, 1999), there is no evidence that such covariance is widespread,
+and selection acting explicitly on this variance component has not been
+directly measured in empirical populations. Then, as a ﬁrst pass, I keep
+the expressions relatively simple by assuming 𝑣 is constant across additive genetic values.
+
+In Eq. (19) the correlated eﬀects
+drift√on mean trait evo√of genetic ∑
+lution are encoded by the product ( 𝐆 𝑑𝐁 ̄𝐳 )𝑖 = 𝑗 ( 𝐆)𝑖𝑗 (𝑑𝐁 ̄𝐳 )𝑗 . In contrast, for Eq. (20), these correlated eﬀects are encoded directly by the
+non-independence of the Brownian motions 𝐵𝑧̄ 1 , … , 𝐵𝑧̄ 𝑑 . In particular,
+because 𝐁 ̄𝐳 is deﬁned such that its entries are independent, the 𝑖th entry
+of 𝑑𝐁 ̄𝐳 cannot be equal to 𝑑𝐵𝑧̄ 𝑖 as (𝑑𝐁 ̄𝐳 )𝑖 (𝑑𝐁 ̄𝐳 )𝑗 = 𝛿𝑖𝑗 𝑑𝑡, where 𝛿𝑖𝑗 = 1
+when 𝑖 = 𝑗 and zero otherwise. These heuristics work in the absence of
+multivariate normality, but the deterministic component of 𝑑 ̄𝐳 expressed
+above does depend on multivariate normality.
+The expression of 𝑑 𝑧̄ 𝑖 in Eq. (20) using non-independent Brownian
+motions is not standard. However, this form will be useful below to
+illustrate the relationship between the BM (Eqs. (18), (20) and (23))
+and MG (Eqs. (26)) versions of the framework.
+Supplementary Material, Section 5.4 shows that the application of
+the multivariate normal approximation to the stochastic dynamics of
+the 𝐆-matrix leads to the matrix equation
+√
+(
+)
+𝑣
+𝑣
+𝑑𝐆 = 𝐌 + 2 𝐆 (∇𝐆 𝑚̄ − ∇𝐆 𝑚) 𝐆 − 𝐆 𝑑𝑡 +
+𝚪 ∶ 𝑑𝐁𝐆 ,
+(21)
+𝑛
+𝑛
+where 𝚪 is a fourth-order tensor describing the covariance structure for
+the response of 𝐆 to drift. Deﬁning products of fourth-order
+𝐗
+√ tensors
+√
+∑
+and 𝐘 by (𝐗 ∶ 𝐘)𝑖𝑗𝑘𝑙 = 𝑚𝑛 𝐗𝑖𝑗𝑚𝑛 𝐘𝑚𝑛𝑘𝑙 , we can write 𝚪 = 𝚪 ∶ 𝚪. Fur(√ √
+) √
+√
+√ √
+√
+thermore, we have 𝚪𝑖𝑗𝑘𝑙 =
+𝐆𝑖𝑘 𝐆𝑗𝑙 + 𝐆𝑖𝑙 𝐆𝑗𝑘 ∕ 2, and 𝐆𝑖𝑗
+√
+√
+is the 𝑖𝑗th entry of 𝐆 (as mentioned beneath Eq. (19) above, 𝐆 is any
+√ √ ⊤
+√
+𝑑 × 𝑑 matrix such that 𝐆 𝐆 = 𝐆). Importantly, this implies 𝐆𝑖𝑗 is
+√
+not equal to 𝐺𝑖𝑗 .
+√
+√
+The product 𝚪 ∶ 𝑑𝐁𝐆 returns a 𝑑 × 𝑑 matrix with 𝑖𝑗th entry ( 𝚪 ∶
+√
+∑
+𝑑𝐁𝐆 )𝑖𝑗 = 𝑘𝑙 𝚪𝑖𝑗𝑘𝑙 (𝑑𝐁𝐆 )𝑘𝑙 . The 𝑑 × 𝑑 matrix-valued Brownian motion
+𝐁𝐆 has independent standard Brownian motions along its diagonal entries. The oﬀ-diagonal entries are standard Brownian motions scaled by
+one-half (i.e., the variance of (𝐁𝐆 )𝑖𝑗 (𝑡) is 𝑡∕2 when 𝑖 ≠ 𝑗), and symmetric
+entries are equivalent so that (𝐁𝐆 )𝑖𝑗 = (𝐁𝐆 )𝑗𝑖 . The covariance structure
+of 𝐁𝐆 is summarized by the heuristic
+
+2.2.1. The brownian motion gradient version (BG)
+Accounting for the eﬀects of demographic stochasticity, the abundance dynamics can now be expressed as the following stochastic differential equation
+√
+𝑑𝑛 = 𝑚̄ 𝑛 𝑑𝑡 + 𝑣 𝑛 𝑑𝐵𝑛 ,
+(18)
+
+(𝑑𝐁𝐆 )𝑖𝑗 (𝑑𝐁𝐆 )𝑘𝑙 =
+
+with 𝐁 ̄𝐳 a 𝑑-dimensional vector of independent standard Brownian mo√
+tions, and the matrix square root 𝐆 can be any 𝑑 × 𝑑 matrix 𝐀 that satisﬁes 𝐀𝐀⊤ = 𝐆 (for examples, see Kessy et al., 2018). Eq. (19) provides
+a continuous-time extension to the framework of multivariate evolution
+introduced by Lande (1979). Alternatively, the stochastic dynamics of
+mean traits can be expressed using index notation as
+𝑑 𝑧̄ 𝑖 =
+
+𝑗=1
+
+√
+𝐺𝑖𝑗 (𝜕𝑗 𝑚̄ + 𝜕𝑗 𝑚) 𝑑𝑡 +
+
+𝑣
+𝐺 𝑑𝐵𝑧̄ 𝑖 ,
+𝑛 𝑖𝑖
+
+2
+
+𝑑𝑡.
+
+(22)
+
+Scaling the oﬀ-diagonals by one-half ensures variances and covariances
+are correctly propagated while calculating the stochastic consequences
+of drift for 𝐆-matrix dynamics. Further information on symmetric normal matrices can be found in Gupta and Nagar (2018), particularly Theorem 2.5.1.
+Unlike the expression for the stochastic component of 𝑑 ̄𝐳, the stochastic component for 𝑑𝐆 does depend on the assumption of a multivariate
+normal trait distribution.
+Using index notation, the expression (21) simpliﬁes to a 𝑑(𝑑 + 1)∕2dimensional system of equations summarized by
+(
+)
+∑
+𝑣
+𝑑𝐺𝑖𝑗 = 𝑀𝑖𝑗 + 2
+𝐺𝑖𝑘 (𝜕𝑘𝑙 𝑚̄ − 𝜕𝑘𝑙 𝑚) 𝐺𝑙𝑗 − 𝐺𝑖𝑗 𝑑𝑡
+𝑛
+𝑘𝑙
+√ √
+𝑣
+2 𝑑𝐵
++
+𝐺𝑖𝑖 𝐺𝑗𝑗 + 𝐺𝑖𝑗
+(23)
+𝐺𝑖𝑗 ,
+𝑛
+
+where the noise process 𝐵𝑛 is a standard Brownian motion (i.e., 𝐵𝑛 (𝑡)
+has variance equal to 𝑡 and 𝐵𝑛 (0) = 0). Assuming multivariate normality,
+and the above model of imperfect inheritance, the mean trait dynamics
+(derived in Supplementary Material, Section 5.3) are given by
+√
+𝑣
+𝑑 ̄𝐳 = 𝐆 (∇ ̄𝐳 𝑚̄ − ∇ ̄𝐳 𝑚) 𝑑𝑡 +
+𝐆 𝑑𝐁 ̄𝐳 ,
+(19)
+𝑛
+
+𝑑
+∑
+
+𝛿𝑖𝑘 𝛿𝑗𝑙 + 𝛿𝑖𝑙 𝛿𝑗𝑘
+
+for 1 ≤ 𝑖 ≤ 𝑗 ≤ 𝑑 where 𝜕𝑖𝑗 = 𝜕∕𝜕𝐺𝑖𝑗 and for each 𝑖𝑗 we have 𝐵𝐺𝑖𝑗 is a
+standard Brownian motion with 𝐵𝐺𝑖𝑗 = 𝐵𝐺𝑗𝑖 . The covariance between
+𝐵𝐺𝑖𝑗 and 𝐵𝐺𝑘𝑙 is encoded by the heuristic
+
+(20)
+
+where 𝜕𝑖 = 𝜕∕𝜕 𝑧̄ 𝑖 and, for each 𝑖, 𝐵𝑧̄ 𝑖 is a standard Brownian motion and
+non-independence for each 𝑖𝑗 is encoded by the heuristic 𝑑𝐵𝑧̄ 𝑖 𝑑𝐵𝑧̄ 𝑗 =
+√
+𝜌𝑖𝑗 𝑑𝑡, with 𝜌𝑖𝑗 = 𝐺𝑖𝑗 ∕ 𝐺𝑖𝑖 𝐺𝑗𝑗 the genetic correlation between traits 𝑖
+and 𝑗. This heuristic is particularly useful when applying Itô’s formula
+(the stochastic analog of the chain rule, see Klebaner, 1998; Øksendal,
+2013; or Evans, 2012) to derive dynamics for functions of mean trait
+values. This approach may be used, for example, to track the dynamics of interaction coeﬃcients for coevolving species as a multivariate
+generalization of the approach taken by Week and Nuismer (2021).
+
+𝑑𝐵𝐺𝑖𝑗 𝑑𝐵𝐺𝑘𝑙 = √
+
+𝐺𝑖𝑘 𝐺𝑗𝑙 + 𝐺𝑖𝑙 𝐺𝑗𝑘
+𝑑𝑡.
+√
+2
+2
+𝐺𝑖𝑖 𝐺𝑗𝑗 + 𝐺𝑖𝑗
+𝐺𝑘𝑘 𝐺𝑙𝑙 + 𝐺𝑘𝑙
+
+(24)
+
+Importantly, this implies that 𝑑𝐵𝐺𝑖𝑗 is not the 𝑖𝑗th entry of 𝑑𝐁𝐆 .
+Finally, the noise process driving abundance in general does not covary with the noise processes driving mean traits and trait covariances
+(i.e., 𝑑𝐵𝑛 𝑑𝐵𝑧̄ 𝑖 = 𝑑𝐵𝑛 𝑑𝐵𝐺𝑘𝑙 = 0), and, under the assumption of multivariate normality, the same holds for trait means and trait covariances
+(i.e., 𝑑𝐵𝑧̄ 𝑖 𝑑𝐵𝐺𝑘𝑙 = 0). This agrees with the oﬀ-diagonal entries in 7b of
+6
+
+Journal of Theoretical Biology 625 (2026) 112428
+
+B. Week
+
+Barton (1989), but my results for the diagonal entries disagree. See Supplementary Material, Section 5.4 for more details.
+The vector-matrix expression of BG (Eqs. (19) and (21)) is particularly well-suited for numerical exploration of models because the covariance structure of the noise processes associated with random genetic
+drift are written explicitly
+in terms of sums involving the entries of the
+√
+matrix square root 𝐆. Hence, this version of the framework is easily
+interfaced with a common algorithm to numerically integrate systems of
+stochastic diﬀerential equations, the Euler-Maruyama method (Bayram
+et al., 2018). The numerical beneﬁts of the BG version of the framework
+are highlighted in section 3 below to study 𝐆-matrix evolution.
+The expression of BG in index notation (Eqs. (20) and (23)), while
+arguably more complex in appearance, are useful for deriving analytical results, and especially when applying Itô’s formula to derive the
+dynamics of a quantity depending on ̄𝐳 and/or 𝐆 (such as the dynamics
+of growth rate, 𝑑 ̄
+𝑚, for instance). However, there are limitations with
+this application of BG, particularly for dealing with sums of stochastic
+diﬀerentials such as 𝑈 = 𝑎 𝑑𝐵𝐺𝑖𝑗 + 𝑏 𝑑𝐵𝐺𝑘𝑙 . If the Brownian motions 𝐵𝐺𝑖𝑗
+√
+and 𝐵𝐺𝑘𝑙 were independent, then we can write 𝑈 = 𝑎2 + 𝑏2 𝑑𝐵 with 𝐵
+being another standard Brownian motion. Because 𝐵𝐺𝑖𝑗 and 𝐵𝐺𝑘𝑙 are not
+independent, which is captured by Eq. (24) above, it is not obvious how
+to properly express 𝑈 in terms of 𝑎, 𝑏 and a single standard Brownian
+motion 𝐵.
+To overcome these challenges, and also to simplify typical calculations, it is useful to rewrite the stochastic components of Eqs. (20) and
+(23) in terms of an underlying stochastic process . Because  satisﬁes
+a martingale property (roughly, this means 𝔼[ (𝑡 + 𝑠) | (𝑡) ] = (𝑡)
+for all 𝑠 > 0), I refer to this version of the framework as the Martingale Gradient version (or MG for short). In the following subsection, I
+present this version of the framework in a way that minimizes technical
+pre-requisites, while maintaining the same scope as Eqs. (20) and (23)
+above. Additionally, heuristics are oﬀered in Table 1 for making calculations, and these are demonstrated by deriving a stochastic diﬀerential
+equation for the correlation between two traits driven purely by random
+genetic drift.
+
+𝑑 𝑧̄ 𝑖 =
+
+𝐺𝑖𝑗 (𝜕𝑗 𝑚̄ + 𝜕𝑗 𝑚) 𝑑𝑡 +
+
+𝑗=1
+
+(
+
+𝑑𝐺𝑖𝑗 =
++
+
+1
+𝑑(𝑔𝑖 − 𝑔̄𝑖 ),
+𝑛
+
+∑
+
+𝑣
+𝑀𝑖𝑗 + 2
+𝐺𝑖𝑘 (𝜕𝑘𝑙 𝑚̄ − 𝜕𝑘𝑙 𝑚) 𝐺𝑙𝑗 − 𝐺𝑖𝑗
+𝑛
+𝑘𝑙
+
+(26b)
+)
+𝑑𝑡
+
+(
+)
+1
+𝑑 (𝑔𝑖 − 𝑔̄𝑖 )(𝑔𝑗 − 𝑔̄𝑗 ) − 𝐺𝑖𝑗 ,
+𝑛
+
+(26c)
+
+where recall that 𝜕𝑖 = 𝜕∕𝜕 𝑧̄ 𝑖 and 𝜕𝑖𝑗 = 𝜕∕𝜕𝐺𝑖𝑗 .
+The covariance structure of the system is maintained through heuristics (summarized in Table 1) for computing products of the above
+stochastic diﬀerentials 𝑑(𝑥). To understand the heuristics, I introduce
+some useful notation for keeping track of averages across the distribution of traits in the population. Speciﬁcally, for functions 𝑥(𝐠) and 𝑦(𝐠),
+I deﬁne the symbols ‖ 𝑥 ‖ and ⟨ 𝑥, 𝑦 ⟩ as follows:
+√
+√
+√
+√
+‖ 𝑥 ‖ = 𝑣 𝑛 𝑥2 = 𝑣 𝑛
+𝑥2 (𝐠) ̃𝑝(𝐠) 𝑑𝐠,
+(27a)
+∫ℝ𝑑
+⟨ 𝑥, 𝑦 ⟩ = 𝑣 𝑛 𝑥 𝑦 = 𝑣 𝑛
+
+∫ℝ𝑑
+
+𝑥(𝐠) 𝑦(𝐠) ̃𝑝(𝐠) 𝑑𝐠,
+
+(27b)
+
+where ̃𝑝(𝐠) = 𝛾(𝐠)∕𝑛 is the distribution of additive genetic values 𝐠 in
+the population (assumed to be multivariate
+normal). To provide a few
+√ √
+√
+examples, one can calculate ‖1‖ = 𝑣 𝑛 ∫ 12 ̃𝑝(𝐠) 𝑑𝐠 = 𝑣 𝑛 along with
+
+‖𝑔𝑖 − 𝑔̄𝑖 ‖ =
+
+√
+𝑣𝑛
+
+√
+∫ℝ𝑑
+
+⟨ 𝑔𝑖 − 𝑔̄𝑖 , 𝑔𝑗 − 𝑔̄𝑗 ⟩ = 𝑣 𝑛
+
+(𝑔𝑖 − 𝑔̄𝑖 )2 ̃𝑝(𝐠) 𝑑𝐠 =
+
+∫ℝ𝑑
+
+√
+
+𝑣 𝑛 𝐺𝑖𝑖 ,
+
+(𝑔𝑖 − 𝑔̄𝑖 ) (𝑔𝑗 − 𝑔̄𝑗 ) ̃𝑝(𝐠) 𝑑𝐠 = 𝑣 𝑛 𝐺𝑖𝑗 .
+
+(28a)
+
+(28b)
+
+The martingale process  mentioned above can be thought of as a mapping that associates functions with stochastic processes. This idea is formalized in Section 4 of the Supplement. In general, the process that
+ associates with 𝑥, denoted (𝑥), will not be a Brownian motion.
+However, Supplementary Material, Section 4.2 provides justiﬁcation for
+what I call the scaling property, which states that
+
+2.2.2. The martingale gradient version (MG)
+In Supplementary Material, Section 4, I show that this framework is
+justiﬁed based on a martingale process . Brownian motion is a special case of a martingale process, and stochastic equations are often expressed in terms of a Brownian stochastic diﬀerential 𝑑𝐵. However, in
+this framework, stochastic equations can also be expressed in terms of
+the stochastic diﬀerential with respect to , denoted by 𝑑. This establishes a powerful approach for deriving fundamental insights into
+evolutionary processes. Further mathematical details are provided in
+Supplementary Material, Sections 4 and 5, but here I focus on pragmatic
+aspects regarding calculations that involve 𝑑.
+I begin by artiﬁcially deﬁning symbols related to 𝑑 in terms of
+the Brownian motions that appear in Eqs. (18), (19), and (21), and use
+these deﬁnitions to express the framework in terms of 𝑑. This is done
+purely for the sake of motivating the material that follows. After this, I
+introduce some properties of 𝑑 and show how these can be used to
+recover the Brownian motions initially used in the artiﬁcial deﬁnitions
+mentioned above. I then provide general heuristics summarized in Table 1 for working with 𝑑, and illustrate these heuristics by deriving
+the response of trait correlations to random genetic drift.
+(
+For now, deﬁne the symbols 𝑑(1), 𝑑(𝑔𝑖 − 𝑔̄𝑖 ) and 𝑑 (𝑔𝑖 −
+)
+𝑔̄𝑖 )(𝑔𝑗 − 𝑔̄𝑗 ) − 𝐺𝑖𝑗 as follows:
+√
+𝑑(1) ∶= 𝑣 𝑛 𝑑𝐵𝑛 ,
+(25a)
+√
+𝑑(𝑔𝑖 − 𝑔̄𝑖 ) ∶= 𝑣 𝑛 𝐺𝑖𝑖 𝑑𝐵𝑧̄ 𝑖 ,
+(25b)
+√ √
+(
+)
+2 𝑑𝐵
+𝑑 (𝑔𝑖 − 𝑔̄𝑖 )(𝑔𝑗 − 𝑔̄𝑗 ) − 𝐺𝑖𝑗 ∶= 𝑣 𝑛 𝐺𝑖𝑖 𝐺𝑗𝑗 + 𝐺𝑖𝑗
+(25c)
+𝐺𝑖𝑗 .
+
+𝑑( ̂𝑥) ∶=
+
+𝑑(𝑥)
+‖𝑥‖
+
+is the stochastic diﬀerential of a standard Brownian motion.
+Using this heuristic, we can calculate
+√
+𝑑(1) = ‖1‖ 𝑑( ̂1) = 𝑣 𝑛 𝑑( ̂1),
+√
+𝑑(𝑔𝑖 − 𝑔̄𝑖 ) = ‖𝑔𝑖 − 𝑔̄𝑖 ‖ 𝑑(𝑔̂
+𝑣 𝑛 𝐺𝑖𝑖 𝑑(𝑔̂
+𝑖 − 𝑔̄𝑖 ) =
+𝑖 − 𝑔̄𝑖 ).
+
+(29)
+
+(30a)
+(30b)
+
+Comparing with Eqs. (18) and (20), these calculations highlight the fact
+̂
+that 𝑑𝐵𝑛 = 𝑑( ̂1) and 𝑑𝐵𝑧̄ 𝑖 = 𝑑(𝑔𝑖 −
+𝑔̄𝑖 ). A similar equality holds for
+𝑑𝐵𝐺𝑖𝑗 , but for the sake of brevity this expression is omitted (see Supplementary Material, Section 5.4 for details).
+Informally speaking, this scaling property allows us to “factor out”
+the standard deviation from the noise process driving the dynamics of
+a univariate function of the population (such as 𝑛, 𝑧̄ 𝑖 , or 𝐺𝑖𝑗 ), and to
+replace that noise process with the product of the resulting standard deviation with a standard Brownian motion. This is the crucial step for
+obtaining Eqs. (18), (20), and (23) from the underlying martingale process , as detailed in Supplementary Material, Section 5 where the
+heuristics summarized in Table 1 are applied to derive MG and BG. The
+calculations shown in Eq. (30) are heuristic because they lead to accurate results without a rigorous understanding of their justiﬁcation.
+Just as 𝐵𝑧̄ 𝑖 and 𝐵𝑧̄ 𝑗 have a covariance encoded by the heuristic
+(
+)
+√
+𝑑𝐵𝑧̄ 𝑖 𝑑𝐵𝑧̄ 𝑗 = 𝐺𝑖𝑗 ∕ 𝐺𝑖𝑖 𝐺𝑗𝑗 𝑑𝑡, the processes (𝑥) and (𝑦) will also
+covary following a more general heuristic. More precisely, Supplementary Material, Section 4.2 justiﬁes the multiplicative property which states
+that, for functions 𝑥, 𝑦, we have
+
+Using this notation, the MG version of the framework can be written as
+𝑑𝑛 = 𝑚̄ 𝑛 𝑑𝑡 + 𝑑(1),
+
+𝑑
+∑
+
+𝑑(𝑥) 𝑑(𝑦) = ⟨ 𝑥, 𝑦 ⟩ 𝑑𝑡,
+
+(26a)
+7
+
+(31)
+
+Journal of Theoretical Biology 625 (2026) 112428
+
+B. Week
+
+Table 1
+Heuristics summarizing the scaling, multiplicative,
+and additive properties of the stochastic diﬀerentials 𝑑(𝑥).
+Property
+
+Heuristic
+
+Scaling
+
+𝑑(𝑥) = ‖𝑥‖ 𝑑( ̂𝑥), ( ̂𝑥) a BM
+
+Multiplicative
+
+𝑑(𝑥) 𝑑(𝑦) = ⟨𝑥, 𝑦⟩ 𝑑𝑡
+
+Additive
+
+𝑑(𝑎𝑥 + 𝑏𝑦) = 𝑎 𝑑(𝑥) + 𝑏 𝑑(𝑦)
+
+we can directly compute the deterministic component of the sum 𝐾 and
+ﬁnd that this cancels to zero. This part of the calculation does not require
+the heuristics for 𝑑 introduced above. However, by using Eq. (26c) in
+the expression for 𝐾, and by leveraging the additive property of 𝑑,
+the stochastic component of 𝐾 can be rewritten as
+(
+)
+1
+(𝜕 𝜌) 𝑑 (𝑔𝑖 − 𝑔̄𝑖 )(𝑔𝑗 − 𝑔̄𝑗 ) − 𝐺𝑖𝑗
+𝑛 𝑖𝑗
+(
+)
++ 1𝑛 (𝜕𝑖𝑖 𝜌) 𝑑 (𝑔𝑖 − 𝑔̄𝑖 )(𝑔𝑖 − 𝑔̄𝑖 ) − 𝐺𝑖𝑖
+(
+)
++ 1𝑛 (𝜕𝑗𝑗 𝜌) 𝑑 (𝑔𝑗 − 𝑔̄𝑗 )(𝑔𝑗 − 𝑔̄𝑗 ) − 𝐺𝑗𝑗
+(
+(
+)
+= 1𝑛 𝑑 (𝜕𝑖𝑗 𝜌) (𝑔𝑖 − 𝑔̄𝑖 )(𝑔𝑗 − 𝑔̄𝑗 ) − 𝐺𝑖𝑗
+(
+)
+(
+))
++ (𝜕𝑖𝑖 𝜌) (𝑔𝑖 − 𝑔̄𝑖 )(𝑔𝑖 − 𝑔̄𝑖 ) − 𝐺𝑖𝑖 + (𝜕𝑗𝑗 𝜌) (𝑔𝑗 − 𝑔̄𝑗 )(𝑔𝑗 − 𝑔̄𝑗 ) − 𝐺𝑗𝑗 .
+
+where ⟨ 𝑥, 𝑥 ⟩ = ‖ 𝑥 ‖2 . In addition, we have 𝑑𝑡2 = 0 and 𝑑𝑡 𝑑(𝑥) =
+𝑑(𝑥) 𝑑𝑡 = 0 for any function 𝑥, which are exact equalities in standard
+approaches to stochastic diﬀerential equations (see Øksendal, 2013;
+Evans, 2012; Klebaner, 1998). In this context, phenotypic moments
+𝜇1 , 𝜇2 (such as 𝑧̄ 𝑖 or 𝐺𝑖𝑗 ) behave as constants such that ⟨ 𝜇1 𝑥, 𝜇2 𝑦 ⟩ =
+𝜇1 𝜇2 ⟨ 𝑥, 𝑦 ⟩ (but see Supplementary Material, Section 4.2 for justiﬁcation).
+Finally, we also have the additive property: 𝑑(𝑎 𝑥 + 𝑏 𝑦) =
+𝑎 𝑑(𝑥) + 𝑏 𝑑(𝑦), for functions 𝑥, 𝑦 and constants 𝑎, 𝑏 (more generally, 𝑎, 𝑏 can also be phenotypic moments such as 𝑧̄ 𝑖 and 𝐺𝑖𝑗 , see Section
+4.2 of the Supplement). This property is particularly useful for computing the correct stochastic term for an equation resulting from the
+application of Itô’s formula, as illustrated in Section 3 below.
+The heuristics associated with the MG version of the framework
+are summarized in Table 1. Example usage of these heuristics are provided through the derivation of this framework in Supplementary Material, Section 5. With these heuristics, it is straightforward to work with
+Eq. (26) to rigorously obtain the dynamics of quantities related to the
+population. For instance, the heuristics summarized in Table 1 may be
+used to formally derive a stochastic diﬀerential equation for the evolution of genetic correlations in response to drift. Indeed, I do this now.
+
+(33)
+Writing the argument to 𝑑 on the right-hand-side of Eq. (33) as
+𝐻𝑖𝑗 , the scaling property shows the stochastic component of 𝐾 can be
+written as
+1
+‖𝐻𝑖𝑗 ‖𝑑(𝐻̂ 𝑖𝑗 ).
+𝑛
+
+Calculation of ‖𝐻𝑖𝑗 ‖ only requires computation of the ﬁrst order derivatives 𝜕𝑖𝑗 𝜌, 𝜕𝑖𝑖 𝜌, 𝜕𝑗𝑗 𝜌 and the fact from multivariate normal distributions
+that
+∫ℝ𝑑
+
+(𝑔𝑖 − 𝑔̄𝑖 )(𝑔𝑗 − 𝑔̄𝑗 )(𝑔𝑘 − 𝑔̄𝑘 )(𝑔𝑙 − 𝑔̄𝑙 ) ̃𝑝(𝑔)𝑑𝑔
+
+= 𝐺𝑖𝑗 𝐺𝑘𝑙 + 𝐺𝑖𝑘 𝐺𝑗𝑙 + 𝐺𝑖𝑙 𝐺𝑗𝑘 .
+Working through these calculations provides
+√
+𝑣
+𝐾=
+(1 − 𝜌2 )𝑑𝐵𝜌 ,
+𝑛
+
+(35)
+
+(36)
+
+where 𝐵𝜌 ∶= (𝐻̂ 𝑖𝑗 ) is a scalar-valued standard Brownian motion.
+To compute 𝐿, I ﬁrst rewrite the product (𝑑𝐺𝑖𝑗 ) (𝑑𝐺𝑘𝑙 ) using the notation introduced in the MG version of the framework above (i.e., using
+Eq. (26)), which provides
+[
+]
+(𝑑𝐺𝑖𝑗 ) (𝑑𝐺𝑘𝑙 ) = 𝑛12 𝑑 (𝑔𝑖 − 𝑔̄𝑖 )(𝑔𝑗 − 𝑔̄𝑗 ) − 𝐺𝑖𝑗
+[
+]
+× 𝑑 (𝑔𝑘 − 𝑔̄𝑘 )(𝑔𝑙 − 𝑔̄𝑙 ) − 𝐺𝑘𝑙 .
+(37)
+
+3. Genetic correlations and 𝐆-matrix dynamics
+In the following subsection I illustrate how to apply the above framework to obtain new models of evolutionary phenomena. Speciﬁcally, I
+apply the heuristics introduced in the MG version of the framework to
+derive the dynamics of genetic correlations responding only to random
+genetic drift. Using this derivation, I then provide biological insights
+into the consequences of drift for genetic correlations in asexually reproducing populations. In Section 3.2, I then discuss the signiﬁcance of
+these results in the context of empirical research on 𝐆-matrix dynamics.
+
+Applying the multiplicative property for 𝑑, the product simpliﬁes to
+[⟨
+⟩
+(𝑑𝐺𝑖𝑗 ) (𝑑𝐺𝑘𝑙 ) = 𝑛12
+(𝑔𝑖 − 𝑔̄𝑖 )(𝑔𝑗 − 𝑔̄𝑗 ), (𝑔𝑘 − 𝑔̄𝑘 )(𝑔𝑙 − 𝑔̄𝑙 )
+]
+− 𝑣 𝑛 𝐺𝑖𝑗 𝐺𝑘𝑙 𝑑𝑡,
+(38)
+where I made use of ⟨ (𝑔𝑖 − 𝑔̄𝑖 )(𝑔𝑗 − 𝑔̄𝑗 ), 𝐺𝑘𝑙 ⟩ = 𝑣 𝑛 𝐺𝑖𝑗 𝐺𝑘𝑙 . Again applying property (35) from above, I obtain the further simpliﬁcation
+(𝑑𝐺𝑖𝑗 ) (𝑑𝐺𝑘𝑙 ) = 𝑣𝑛 (𝐺𝑖𝑘 𝐺𝑗𝑙 + 𝐺𝑖𝑙 𝐺𝑗𝑘 ). Interfacing this result with derivatives of 𝜌(𝐺𝑖𝑗 , 𝐺𝑖𝑖 , 𝐺𝑗𝑗 ), I arrive at
+
+3.1. Consequences of drift for trait correlations
+The additive genetic correlation between traits 𝑧𝑖 and 𝑧𝑗 is given by
+√
+𝜌𝑖𝑗 = 𝐺𝑖𝑗 ∕ 𝐺𝑖𝑖 𝐺𝑗𝑗 . For this subsection, I focus on the single correlation
+between 𝑧𝑖 and 𝑧𝑗 , and simply write this as 𝜌. To focus on the eﬀects
+of random genetic drift, and for the sake of simplicity, I ignore mutation, selection, and abundance dynamics in this analysis. For the sake
+of illustration, I outline only the steps needed to demonstrate how the
+framework is applied and to obtain the biological result. The full derivation is provided in Supplementary Material, Section 6.1.
+Because we have the stochastic equations for 𝑑𝐺𝑖𝑗 , 𝑑𝐺𝑖𝑖 , and
+𝑑𝐺𝑗𝑗 (Eq. (26c)), and because 𝜌 can be thought of as a function
+√
+𝜌(𝐺𝑖𝑗 , 𝐺𝑖𝑖 , 𝐺𝑗𝑗 ) = 𝐺𝑖𝑗 ∕ 𝐺𝑖𝑖 𝐺𝑗𝑗 , we can apply Itô’s formula, which, in
+this context, states the following stochastic analog of the chain-rule:
+𝑑𝜌 = 𝐾 + 𝐿, with 𝐾 = (𝜕𝑖𝑗 𝜌) 𝑑𝐺𝑖𝑗 + (𝜕𝑖𝑖 𝜌) 𝑑𝐺𝑖𝑖 + (𝜕𝑗𝑗 𝜌) 𝑑𝐺𝑗𝑗 and
+[
+]
+2
+𝐿 = 12 (𝜕𝑖𝑗2 𝜌) (𝑑𝐺𝑖𝑗 )2 + (𝜕𝑖𝑖2 𝜌) (𝑑𝐺𝑖𝑖 )2 + (𝜕𝑗𝑗
+𝜌) (𝑑𝐺𝑗𝑗 )2
+
+1𝑣
+𝜌 (1 − 𝜌2 ) 𝑑𝑡.
+(39)
+2𝑛
+Hence, by applying the MG version of the framework, I ﬁnd that trait
+correlations driven entirely by drift follow the ordinary stochastic differential equation
+√
+1𝑣
+𝑣
+𝑑𝜌 = −
+𝜌(1 − 𝜌2 )𝑑𝑡 +
+(1 − 𝜌2 )𝑑𝐵𝜌 .
+(40)
+2𝑛
+𝑛
+𝐿=−
+
+Eq. (40) shows that the eﬀect of drift is mediated by the ratio of
+the variance of lifetime reproductive output 𝑣 (typically set to 𝑣 = 1 in
+classical quantitative genetic models such as Lande, 1976) to the eﬀective population size 𝑛. Additionally, one can check that (because mutation and selection are absent) 𝜌 = ±1 are stationary points. Furthermore,
+leveraging the fact that Eq. (40) deﬁnes a one-dimensional diﬀusion, we
+can in principle solve for its stationary distribution ̂𝑞(𝜌) (Karlin and Taylor, 1981; Etheridge, 2010), which is done in Supplementary Material,
+Section 6.2. However, in attempt to do so we arrive at the non-integrable
+function:
+1
+̂𝑞(𝜌) ∝
+.
+(41)
+(1 − 𝜌2 )3∕2
+
++ (𝜕𝑖𝑗 𝜕𝑖𝑖 𝜌) (𝑑𝐺𝑖𝑗 ) (𝑑𝐺𝑖𝑖 ) + (𝜕𝑖𝑗 𝜕𝑗𝑗 𝜌) (𝑑𝐺𝑖𝑗 ) (𝑑𝐺𝑗𝑗 )
++ (𝜕𝑖𝑖 𝜕𝑗𝑗 𝜌) (𝑑𝐺𝑖𝑖 ) (𝑑𝐺𝑗𝑗 ),
+
+(34)
+
+(32)
+
+where 𝜕𝑖𝑗 𝜌 is the partial derivative of 𝜌 with respect to 𝐺𝑖𝑗 .
+With this formula in hand, all that is left is to carry out calculations
+based on the heuristics from the MG version of the framework. First oﬀ,
+8
+
+Journal of Theoretical Biology 625 (2026) 112428
+
+B. Week
+
+Fig. 1. The distribution of genetic correlations evolving under drift alone converges to a non-integrable stationary solution. Shown here are dynamics for initial
+distributions taking approximate point masses at 𝜌0 = −0.5 (left panel), 𝜌0 = 0.0 (middle panel), and 𝜌0 = 0.5 (right panel). Solutions at earlier times are colored
+green, and later times are purple which run until 𝑡 = 2000. The rate of drift is set to 𝑣∕𝑛 = 0.001.
+
+The lack of a formal stationary distribution creates a challenge for
+understanding the limiting behavior of genetic correlations evolving
+solely in response to drift. This can be partially overcome by again leveraging the theory of one-dimensional diﬀusions to demonstrate that the
+boundaries ±1 are both attracting and unattainable (Karlin and Taylor,
+1981). That is, genetic correlations tend towards their extremes, but
+never ﬁx at ±1. This is visualized in Figure 1 by plotting the distribution 𝑞(𝜌) of genetic correlations as numerical solutions to the forwards
+Kolmogorov (i.e., Fokker-Planck) equation associated with (40). Biologically, |𝜌| increases because drift randomly samples ﬁnite numbers of
+individuals, thereby causing transient correlations among the additive
+genetic values these individuals carry. Further biological implications
+are discussed in the following section.
+Another way to view this result is by applying Itô’s formula to
+𝑢 = tanh−1 (𝜌) (detailed calculations given in Supplementary Material,
+Section 6.3). Doing so returns
+√
+1𝑣
+𝑣
+𝑑𝑢 =
+tanh(𝑢)𝑑𝑡 +
+𝑑𝐵 .
+(42)
+2𝑛
+𝑛 𝑢
+
+Fig. 2. Drift drives trait correlations towards ±1. Shown here are ﬁve replicates illustrating the path-behavior of trait correlations following Eq. (40). Each
+replicate is initiated with 𝜌0 = 0 and the rate of drift is set to 𝑣∕𝑛 = 0.001.
+
+Because 𝜌 = tanh(𝑢) is a monotone increasing function of 𝑢, statements
+about 𝑢 map directly to 𝜌. In particular, 𝑢 = 𝜌 = 0 is unstable because
+tanh(𝑢) is positive for positive 𝑢, and negative for negative
+𝑢. Addition√
+ally, if 𝑢 is much greater than 1, then 𝑑𝑢 ≈ 𝑣 𝑑𝑡∕2𝑛 + 𝑣∕𝑛 𝑑𝐵𝑢 and, writing this point as 𝑢0 , we have 𝔼[𝑢𝑡 ] ≈ 𝑢0 + 𝑣 𝑡∕2𝑛. The analogous approximation holds when 𝑢 is much less than −1. Justiﬁcation for these claims
+is made in Supplementary Material, Section 6.3. This agrees with the
+boundary classiﬁcation result above that demonstrates drift has an overall tendency to drive trait correlations towards ±1. Numerical estimates
+for sample paths of the solution to (40), illustrated by Fig. 2, support
+this conclusion.
+To conﬁrm the heuristics return correct expressions, I also simulated
+the evolution of the 𝐆-matrix driven solely by random genetic drift for
+a 2-dimensional trait by applying the Euler-Maruyama method (Bayram
+et al., 2018) to the BG version of the framework. I then back-calculated
+the genetic correlation 𝜌 based on the simulated time-series of 𝐆. Fig.
+1 in Supplementary Material, Section 1 demonstrates this approach
+agrees with Eq. (40). Further information on the numerical implementation is given in Supplementary Material, Section 1, and associated
+code is available at the Zenodo repository https://doi.org/10.5281/zenodo.19087096.
+
+of the conventional wisdom that 𝐆-matrices responding to drift should
+merely contract proportionally (Lande, 1979; Phillips and McGuigan,
+2006; Dugand et al., 2021; Mallard et al., 2023a). In particular, it is classically thought that the orientation of the 𝐆-matrix should not change
+due to drift on average, and hence any changes in orientation may be
+a sign of selection (Roﬀ, 2000; Steppan et al., 2002; Cano et al., 2004;
+Chapuis et al., 2008; Aguirre et al., 2013).
+This idea can be obtained from Eq. (21) if the stochastic component
+is neglected. Then, the deterministic response due to drift is described by
+𝐆̇ = −𝑣 𝐆∕𝑛, which has the solution 𝐆𝑡 = 𝐆0 𝑒−𝑣 𝑡∕𝑛 , and is a continuoustime equivalent of the result found on page 409 in a paper by Lande
+(1979). Numerical results displayed in Fig. 2 of Supplementary Material,
+Section 1 indicate agreement with this classical scaling result in expectation. However, when stochastic ﬂuctuations dominate the dynamics
+over the timescale of interest (so that individual sample paths diverge
+strongly despite a smooth deterministic trend) the average response to
+drift may provide little information for within-population dynamics.
+Taking an experimental approach, Phillips et al. (2001) established
+isolated populations of Drosophila melanogaster from a common base
+population and found signiﬁcant variation across replicates for the response of 𝐆 to drift. This occurs in spite of the fact that Drosophila
+melanogaster is a sexually reproducing organism, and recombination
+should act to break up correlations caused by linkage (discussed further
+below) and thereby reduce variation across replicates. Fig. 3 emphasizes these variable outcomes theoretically by superimposing expected
+trait correlations over a collection of individual outcomes. The expected
+
+3.2. Evolution of The 𝐆-matrix in response to drift
+The above result demonstrates that drift increases correlations between traits, at least for asexually reproducing populations where recombination is absent. This perspective oﬀers an important reﬁnement
+9
+
+Journal of Theoretical Biology 625 (2026) 112428
+
+B. Week
+
+Fig. 3. Averages over replicated time-series of trait correlation do not predict within population trait correlations. Averages were computed using 3000 replicates
+with initial correlations 𝜌0 = −0.9 (top-left), 𝜌0 = −0.2 (top-right), 𝜌0 = 0.4 (bottom-left), and 𝜌0 = 0.8 (bottom-right). For the sake of clarity, just 20 random replicates
+are shown behind the average trends.
+
+correlations are approximated by averaging over replicates, but it took
+a very large number of replicates (>1000) to obtain a satisfactory deterministic trend. Because population size enters only through the ratio
+𝑣∕𝑛, increasing 𝑛 rescales the time axis but does not reduce pathwise
+variability or improve the predictive power of the average trend. The
+averages shift towards zero, in the sense of a slow directional trend that
+is not resolved to convergence over the ﬁnite time window shown, but
+we can see individual replicates are not predicted by this trend. Hence,
+to gain a more accurate picture of 𝐆-matrix evolution, there is a need
+to understand the path behavior of individual outcomes.
+One approach to gain insight for the trait correlation of a given replicate, as opposed to the average, is to analyze the proportion of time that
+correlations spend near ±1 over the total time the process is running.
+Fig. 4 plots the proportion of time that the magnitude of the trait correlation 𝜌 spends above the threshold 1 − 𝜀, i.e. with |𝜌| > 1 − 𝜀, averaged
+over 10 replicate trajectories with initial value 𝜌0 = 0 and 𝑣∕𝑛 = 0.001,
+for 𝜀 ∈ {0.20, 0.10, 0.05, 0.02}. Smaller 𝜀 corresponds to increasingly strict
+neighborhoods of ±1. This result shows that trait correlations typically
+aggregate near ±1 in drifting, isolated, asexual populations with no mutational input. Hence, interpreting this as a signature of drift, we can
+say that if trait correlations in a population exhibit signiﬁcant variation
+away from ±1, then either the population has been drifting for only a
+short time relative to its eﬀective population size, or other processes
+not captured by this model must be at play, such as ongoing mutation
+or recombination, which are explicitly excluded here. I therefore discuss
+mechanisms maintaining genetic correlations before concluding this section.
+Pleiotropic loci and genetic linkage are two mechanisms that maintain genetic correlations (Lande, 1980). In this framework, pleiotropic
+mutations would arise from non-zero oﬀ-diagonals of the mutation ma-
+
+Fig. 4. Trait correlations (𝜌) within populations rapidly evolve towards ±1
+under random genetic drift. Shown is the proportion of time that |𝜌| spends
+above a threshold 1 − 𝜀, averaged over 10 replicate trajectories, with 𝜀 ∈
+{0.20, 0.10, 0.05, 0.02}. Smaller 𝜀 corresponds to increasingly strict neighborhoods of ±1. Simulations start from 𝜌0 = 0 with 𝑣∕𝑛 = 0.001.
+
+trix 𝐌. In contrast, drift facilitates chance correlations of additive genetic values between traits across individuals. Hence, this second mode
+of genetic correlation accumulation is directly analogous to the build-up
+of linkage by drift (Hill and Robertson, 1966; Ohta and Kimura, 1969;
+Lucek and Willi, 2021). For sexually reproducing populations, it is expected that genetic correlations should be maintained by pleiotropic loci
+as recombination breaks up linkage (Lande, 1980; Jones et al., 2003;
+Phillips and McGuigan, 2006). However, the results in this section show
+10
+
+Journal of Theoretical Biology 625 (2026) 112428
+
+B. Week
+
+that drift alone drives genetic correlations toward extreme values. This
+raises the natural question of how this tendency would be counteracted
+by recombination, and whether a drift-recombination balance analogous
+to that studied in classical population genetics (e.g., Ohta and Kimura,
+1969) would emerge.
+The drift-only example considered here is intended as an illustrative
+application of the framework rather than a quantitative ﬁt to existing experiments. In a clonal, mutation-free setting, the model predicts that the
+stochastic dynamics of genetic correlations depend on time only through
+the rescaled variable 𝜏 = (𝑣∕𝑛)𝑡. Equivalently, for populations with different eﬀective sizes 𝑛, the distributions of correlation trajectories become comparable after rescaling time by 𝑛∕𝑣, so that increasing population size slows the dynamics without altering their qualitative path
+behavior. This prediction can be tested empirically using pathwise statistics such as the distribution of ﬁrst-passage times 𝜏𝑐 = inf{𝑡 ∶ |𝜌(𝑡)| > 𝑐}
+to a high-correlation threshold 𝑐, or the long-run fraction of time that
+correlations satisfy |𝜌| > 𝑐; both quantities are predicted to scale with
+𝑛∕𝑣. Such tests would, in principle, be feasible in replicated clonal
+systems with controlled demography and minimal mutational input,
+including bottlenecked microbial populations (e.g., Escherichia coli or
+asexually propagated Saccharomyces cerevisiae) or clonal macrophytes
+such as duckweed (Lemna or Spirodela) maintained in controlled microcosms. Extending the framework to incorporate sexual reproduction
+and recombination would be a natural next step for making quantitative
+predictions about drift-recombination balance. Nevertheless, the present
+results highlight that focusing solely on average, deterministic responses
+can obscure substantial pathwise structure, suggesting that conventional
+perspectives on 𝐆-matrix evolution merit closer examination.
+
+rescue model involving demographic stochasticity studied by Xu et al.
+(2023). Additionally, Jones et al. (2012) also studied a model of phenotypic adaptation to a dynamic optimum, but in the context of 𝐆-matrix
+evolution. This framework can then be used as a bridge between research topics such as evolutionary rescue and 𝐆-matrix evolution. This
+list provides a small set of examples for how this framework can be used
+to derive new models across a broad range of topics in ecology, evolution, and population biology.
+Further work is needed to extend this framework in several directions. For instance, it is possible to incorporate sexual reproduction and
+recombination by assuming each trait value is determined by the sum
+of additive genetic eﬀects contributed by two gametes, rather than by
+a single genetic value. In this case, each gamete contributes an additive genetic eﬀect 𝑔𝑖 , and the trait is encoded as 𝑔𝑖 + 𝑔𝑖′ , where 𝑔𝑖 and 𝑔𝑖′
+arise from convex combinations of the parental gametic values, similar
+to the approach taken by Lande (1980). How to formalize this extension
+using measure-valued processes is not obvious. In another direction, environmental stochasticity (i.e., stochastic growth rates) can be formally
+incorporated in a measure-valued context following the work of Mytnik (1996). Extending the framework in this direction may yield important additional insights complementing the work of Lande (2007, 2008),
+who studied the consequences of environmental stochasticity for longrun population growth rates. An extension in this direction may also
+be useful for studies investigating the consequences of environmental
+stochasticity on 𝐆-matrix evolution (e.g., Engen and Sæther, 2024).
+I also point to two possible extensions that concern the role of development. The ﬁrst accounts for the evolution of the mutational variancecovariance matrix 𝐌 within the classical quantitative genetic framework. Allowing 𝐌 to evolve enables analytical and simulation models for the evolution of evolvability, as studied by Jones et al. (2007),
+including numerical integration of the resulting stochastic diﬀerential
+equations (e.g. via Euler-Maruyama), rather than relying exclusively
+on individual-based models, and may yield more precise quantitative
+predictions amenable to experimental study (Mallard et al., 2023a).
+A second, conceptually distinct extension would be to replace the linear, regression-based genotype-phenotype map and residual model used
+here with nonlinear or mechanistic developmental maps, as in evo-devo
+frameworks (e.g., Milocco and Salazar-Ciudad, 2022; González-Forero,
+2022, 2024a,b), in which genetic and phenotypic covariation emerge
+from explicit developmental dynamics rather than being parameterized
+through a mutational covariance matrix.
+The application of this framework to study 𝐆-matrix evolution uncovered a more nuanced picture for the role of drift than what conventional wisdom suggests (Phillips and McGuigan, 2006). In particular, although drift indeed proportionally reduces 𝐆-matrices when averaged
+over many replicated populations, it also drives trait correlations towards their extremes within populations. This agrees with the result that
+the expected eigenvalues of 𝐆 diﬀer from the eigenvalues of the expectation of 𝐆 under drift (Griswold et al., 2007). In addition, the impact
+of drift on genetic correlations can be understood as a reduction in the
+eﬀective dimensionality of 𝐆-matrices (Hine and Blows, 2006), reﬂecting an extension of the principle that drift erodes heritable variation.
+That is, because drift drives pairwise correlations to ±1, the distribution of multivariate traits in a population that has been evolving solely
+under drift may be well approximated after projecting onto a lowerdimensional trait space. Conceptually, this is similar to dimensionality
+reduction techniques such as principal components analysis (Kirkpatrick
+and Meyer, 2004). Importantly, this eﬀect of drift on trait correlations
+calls into question comparative quantitative genetic methods utilizing
+𝐆-matrices which routinely treat diﬀerences in 𝐆-orientation as a signal
+of selection in diverged populations (Roﬀ, 2000; Steppan et al., 2002;
+Phillips and McGuigan, 2006; Cano et al., 2004; McGuigan, 2006; Chapuis et al., 2008; Aguirre et al., 2013; Dugand et al., 2021; Mallard
+et al., 2023a). These ﬁndings have broad implications for evolutionary
+biology, highlighting the need for revised theoretical perspectives and
+further empirical validation.
+
+4. Discussion
+The classical quantitative genetic approach has stressed the importance of considering the genetic architecture of traits for understanding evolutionary processes, and has placed particular emphasis on the
+use of multi-locus models (Bulmer, 1972; Chakraborty and Nei, 1982;
+Slatkin, 1987; Turelli and Barton, 1994; Barton and Turelli, 2004; Barton
+et al., 2017; Walsh and Lynch, 2018). The advantage of this approach
+is its clear connection with explicit genetic details. However, its primary challenge is the manipulation of complex expressions that emerge
+at such level of detail. To overcome this, and establish a ﬂexible tool
+for modelling the integrated ecological and evolutionary dynamics of
+populations carrying multivariate traits, I struck a balance between incorporating genetic detail and analytical tractability. As a consequence,
+this framework has potential for wide-spread use across topics in evolution, ecology, and population biology.
+A central feature of this framework is that a wide range of classical models can be obtained by choosing an appropriate ﬁtness function
+𝑚. For example, stochastic Lotka-Volterra dynamics for a community of
+species is obtained from this framework by applying the growth rate
+∑
+𝑚𝑖 = 𝑟𝑖 + 𝑗 𝛼𝑖𝑗 𝑛𝑗 for species 𝑖, with 𝑛𝑗 being the abundance of species
+𝑗 and 𝛼𝑖𝑗 the interaction coeﬃcient. The long time behavior of the resulting stochastic Lotka-Volterra process for two species has been studied by Cattiaux and Méléard (2009). In addition, by making the interaction coeﬃcients 𝛼𝑖𝑗 dependent on multivariate trait values 𝐳𝑖 , 𝐳𝑗 ,
+models integrating coevolution with abundance feedbacks can be obtained similar to those studied by Gokhale et al. (2013), Cortez and
+Weitz (2014), Patel et al. (2018). As a special case, continuous time
+analogs of multivariate coevolution models are obtained by focusing on
+two species with ﬁxed (or inﬁnite) abundances, and assuming 𝛼𝑖𝑗 (𝐳𝑖 , 𝐳𝑗 )
+depends on the Euclidean distance between 𝐳𝑖 and 𝐳𝑗 (Gilman et al.,
+2012; Débarre et al., 2014). Klausmeier et al. (2020) studied models
+of evolutionary rescue with univariate traits using growth rates of the
+2
+forms 𝑚(𝑧, 𝑡) = 𝑟 − 𝜓(𝜃(𝑡) − 𝑧)2 ∕2 and 𝑚(𝑧, 𝑡) = 𝑟 + 𝑟0 𝑒−𝜓(𝜃(𝑡)−𝑧) ∕2 , where
+𝜃(𝑡) is a dynamic phenotypic optimum and 𝜓 is the strength of stabilizing selection. Applying multivariate generalizations of these growth
+rates to the above framework leads to extensions of an evolutionary
+11
+
+Journal of Theoretical Biology 625 (2026) 112428
+
+B. Week
+
+The study of genetic correlations and 𝐆-matrix dynamics using this
+framework can be extended by studying Eq. (21) with mutation and
+selection. In the special case of one-dimensional traits, stabilizing selection, and no abundance dynamics, the theory of one-dimensional
+diﬀusions (Etheridge, 2010) can be used to show that the stationary
+distribution of additive genetic variance follows a generalized inverse
+Gaussian distribution (Jorgensen, 2012). This suggests the stationary
+distribution of 𝐆 may follow a matrix-variate generalization, such as the
+matrix generalized inverse Gaussian (MGIG) distribution (Fazayeli and
+Banerjee, 2016). Proposed distributions may be checked by evaluating
+the forwards Kolmogorov equation associated with (21) at equilibrium
+assuming a solution that follows the density of the proposal. Identiﬁcation of the stationary distribution for (21) may then be used to study the
+distribution of genetic correlations maintained by interactions between
+mutation, selection, and random genetic drift.
+In summary, this work introduces a versatile framework for modeling the stochastic eco-evolutionary dynamics of multivariate traits,
+providing a unifying approach that integrates mutation, selection, demographic stochasticity, and drift. By balancing mathematical rigor
+with accessibility, this framework enables the derivation of new models
+across a broad spectrum of population biology, making it a valuable tool
+for both theoretical and applied researchers. With its broad applicability, the framework presented here oﬀers a foundation for future studies
+investigating the dynamics of populations in both theoretical and empirical contexts.
+
+Barton, N., 1989. The divergence of a polygenic system subject to stabilizing selection, mutation and drift. Genetical Res. 54 (1), 59–78. https://doi.org/10.1017/
+s0016672300028378
+Barton, N.H., Etheridge, A.M., Véber, A., 2017. The inﬁnitesimal model: deﬁnition, derivation, and implications. Theor. Popul. Biol. 118, 50–73. https://doi.org/10.1016/j.tpb.
+2017.06.001
+Barton, N.H., Turelli, M., 1987. Adaptive landscapes, genetic distance and the evolution
+of quantitative characters. Genetical Res. 49 (2), 157–173. https://doi.org/10.1017/
+s0016672300026951
+Barton, N.H., Turelli, M., 1989. Evolutionary quantitative genetics: how little do we know?
+Ann. Rev. Genet. 23 (1), 337–370. https://doi.org/10.1146/annurev.ge.23.120189.
+002005
+Barton, N.H., Turelli, M., 1991. Natural and sexual selection on many loci. Genetics 127
+(1), 229–255. https://doi.org/10.1093/genetics/127.1.229
+Barton, N.H., Turelli, M., 2004. Eﬀects of genetic drift on variance components under a
+general model of epistasis. Evolution 58 (10), 2111–2132. https://doi.org/10.1111/j.
+0014-3820.2004.tb01591.x
+Bayram, M., Partal, T., Orucova Buyukoz, G., 2018. Numerical methods for simulation of
+stochastic diﬀerential equations. Adv. Diﬀer. Equations 2018 (1). https://doi.org/10.
+1186/s13662-018-1466-5
+Bhat, A.S., Guttal, V., 2025. Eco-evolutionary dynamics for ﬁnite populations and the
+noise-induced reversal of selection. Am. Nat. 205 (1), 1–19. https://doi.org/10.1086/
+733196
+Bulmer, M., 1971. The eﬀect of selection on genetic variability. Am. Nat. 105 (943),
+201–211.
+Bulmer, M.G., 1972. The genetic variability of polygenic characters under optimizing selection, mutation and drift. Genetical Res. 19 (1), 17–25. https://doi.org/10.1017/
+s0016672300014221
+Bürger, R., 2000. The Mathematical Theory of Selection, Recombination, and Mutation.
+John Wiley & Sons.
+Bürger, R., 1986. On the maintenance of genetic variation: global analysis of kimura’s
+continuum-of-alleles model. J. Math. Biol. 24 (3), 341–351. https://doi.org/10.1007/
+bf00275642
+Cano, J.M., Laurila, A., Palo, J., Merilä, J., 2004. Population diﬀerentiation in G matrix
+structure due to natural selection in rana temporaria. Evolution 58 (9), 2013–2020.
+https://doi.org/10.1111/j.0014-3820.2004.tb00486.x
+Cattiaux, P., Méléard, S., 2009. Competitive or weak cooperative stochastic lotka–volterra
+systems conditioned on non-extinction. J. Math. Biol. 60 (6), 797–829. https://doi.org/
+10.1007/s00285-009-0285-4
+Chakraborty, R., Nei, M., 1982. Genetic diﬀerentiation of quantitative characters between
+populations or species: I mutation and random genetic drift. Genetical Res. 39 (3),
+303–314. https://doi.org/10.1017/s0016672300020978
+Chapuis, E., Martin, G., Goudet, J., 2008. Eﬀects of selection and drift on G matrix evolution in a heterogeneous environment: a multivariate QST–FST test with the freshwater snail galba truncatula. Genetics 180 (4), 2151–2161. https://doi.org/10.1534/
+genetics.108.092452
+Constable, G. W.A., Rogers, T., McKane, A.J., Tarnita, C.E., 2016. Demographic noise
+can reverse the direction of deterministic selection. Proc. Natl. Acad. Sci. 113 (32).
+https://doi.org/10.1073/pnas.1603693113
+Cortez, M.H., Weitz, J.S., 2014. Coevolution can reverse predator–prey cycles. Proc. Natl.
+Acad. Sci. 111 (20), 7486–7491. https://doi.org/10.1073/pnas.1317693111
+Crow, J.F., Kimura, M., 1970. An Introduction to Population Genetics Theory. Harper &
+Row, New York.
+Dawson, D., 1993. Measure-Valued Markov Processes. Springer Berlin Heidelberg. p.
+1–260. https://doi.org/10.1007/bfb0084190
+Dieckmann, U., Law, R., 1996. The dynamical theory of coevolution: a derivation from
+stochastic ecological processes. J. Math. Biol. 34 (5–6), 579–612. https://doi.org/10.
+1007/bf02409751
+Dugand, R.J., Aguirre, J.D., Hine, E., Blows, M.W., McGuigan, K., 2021. The contribution
+of mutation and selection to multivariate quantitative genetic variance in an outbred
+population of drosophila serrata. Proc. Natl. Acad. Sci. 118 (31). https://doi.org/10.
+1073/pnas.2026217118
+Débarre, F., Nuismer, S.L., Doebeli, M., 2014. Multidimensional (co)evolutionary stability.
+Am. Nat. 184 (2), 158–171. https://doi.org/10.1086/677137
+Débarre, F., Otto, S.P., 2016. Evolutionary dynamics of a quantitative trait in a ﬁnite asexual population. Theor. Popul. Biol. 108, 75–88. https://doi.org/10.1016/j.tpb.2015.
+12.002
+Débarre, F., Yeaman, S., Guillaume, F., 2015. Evolution of quantitative traits under a
+migration-selection balance: when does skew matter? Am. Nat. 186 (S1), S37–S47.
+https://doi.org/10.1086/681717
+Engen, S., Sæther, B.-E., 2024. Evolutionary and ecological processes determining the
+properties of the G matrix. Am. Nat. 204 (5), 433–452. https://doi.org/10.1086/
+732159
+Etheridge, A., 2000. An Introduction to Superprocesses. University lecture series, American Mathematical Society. https://books.google.de/books?id=zUHyBwAAQBAJ.
+Etheridge, A., 2010. One Dimensional Diﬀusions. Springer Berlin Heidelberg. p. 33–51.
+https://doi.org/10.1007/978-3-642-16632-7_3
+Etheridge, A.M., Kurtz, T.G., Letter, I., Ralph, P.L., Tsui Ho Lung, T., 2024. Looking forwards and backwards: dynamics and genealogies of locally regulated populations. Electron. J. Probab. 29 (none). https://doi.org/10.1214/24-ejp1075
+Ethier, S.N., Kurtz, T.G., 1986. Markov Processes: Characterization and Convergence. John
+Wiley & Sons.
+Evans, L.C., 2012. An Introduction to Stochastic Diﬀerential Equations. Vol. 82. American
+Mathematical Soc.
+Ewens, W.J., 2004. Mathematical Population Genetics. Springer New York. https://doi.
+org/10.1007/978-0-387-21822-9
+
+CRediT authorship contribution statement
+Bob Week: Writing – review & editing, Writing – original draft, Visualization, Validation, Supervision, Software, Resources, Project administration, Methodology, Investigation, Funding acquisition, Formal analysis, Data curation, Conceptualization.
+Declaration of competing interest
+None.
+Acknowledgments
+I thank Jonas Wickman, Hinrich Schulenburg, Brendan J.M. Bohannan, Arne Traulsen, Patrick C. Phillips, Peter L. Ralph, and two anonymous reviewers for their insightful feedback, which has greatly improved this manuscript. Special thanks to Stephen M. Krone, who taught
+me probability and inspired me to think about populations as random
+Hilbert spaces. This work is dedicated in honor of his retirement. Additionally, I am thankful for support through KiTE (i.e., Kiel Training
+for Excellence), which is part of the European Union’s Horizon Europe
+research and innovation programme under the Marie Sklodowska-Curie
+grant agreement number No 101081480.
+Supplementary material
+Supplementary material associated with this article can be found in
+the online version at 10.1016/j.jtbi.2026.112428.
+References
+Aguirre, J.D., Hine, E., McGuigan, K., Blows, M.W., 2013. Comparing G: multivariate analysis of genetic variation in multiple populations. Heredity 112 (1), 21–29.
+https://doi.org/10.1038/hdy.2013.12
+Akjouj, I., Barbier, M., Clenet, M., Hachem, W., Maïda, M., Massol, F., Najim, J., Tran, V.C.,
+2024. Complex systems in ecology: a guided tour with large lotka–volterra models and
+random matrices. Proc. R. Soc. A Math. Phys. Eng. Sci. 480 (2285). https://doi.org/
+10.1098/rspa.2023.0284
+Arnold, S.J., Bürger, R., Hohenlohe, P.A., Ajie, B.C., Jones, A.G., 2008. Understanding
+the evolution and stability of the g-matrix. Evolution 62 (10), 2451–2461. https://doi.
+org/10.1111/j.1558-5646.2008.00472.x
+12
+
+Journal of Theoretical Biology 625 (2026) 112428
+
+B. Week
+
+Falconer, D.S., Mackay, T., 1996. Introduction to Quantitative Genetics. Pearson.
+Fazayeli, F., Banerjee, A., 2016. The Matrix Generalized Inverse Gaussian Distribution:
+Properties and Applications. Springer International Publishing. p. 648–664. https://
+doi.org/10.1007/978-3-319-46128-1_41
+Fogarty, L., Wade, M.J., 2022. Niche construction in quantitative traits: heritability and
+response to selection. Proc. R. Soc. B Biol. Sci. 289 (1976). https://doi.org/10.1098/
+rspb.2022.0401
+Gillespie, J.H., 1974. Natural selection for within-generation variance in oﬀspring number.
+Genetics 76 (3), 601–606. https://doi.org/10.1093/genetics/76.3.601
+Gillespie, J.H., 1975. Natural selection for within-generation variance in oﬀspring number II. discrete haploid models. Genetics 81 (2), 403–413. https://doi.org/10.1093/
+genetics/81.2.403
+Gillespie, J.H., 1977. Natural selection for variances in oﬀspring numbers: a new evolutionary principle. Am. Nat. 111 (981), 1010–1014. https://doi.org/10.1086/283230
+Gilman, R.T., Nuismer, S.L., Jhwueng, D.-C., 2012. Coevolution in multidimensional trait
+space favours escape from parasites and pathogens. Nature 483 (7389), 328–330.
+https://doi.org/10.1038/nature10853
+Gilpin, W., Feldman, M.W., 2019. Cryptic selection forces and dynamic heritability in
+generalized phenotypic evolution. Theor. Popul. Biol. 125, 20–29. https://doi.org/10.
+1016/j.tpb.2018.11.002
+Gokhale, C.S., Papkou, A., Traulsen, A., Schulenburg, H., 2013. Lotka–Volterra dynamics
+kills the red queen: population size ﬂuctuations and associated stochasticity dramatically change host-parasite coevolution. BMC Evol. Biol. 13, 1–10.
+González-Forero, M., 2022. How development aﬀects evolution. Evolution 77 (2),
+562–579. https://doi.org/10.1093/evolut/qpac003
+González-Forero, M., 2024a. Evolutionary–developmental (evo-devo) dynamics of hominin brain size. Nat. Hum. Behav. 8 (7), 1321–1333. https://doi.org/10.1038/
+s41562-024-01887-8
+González-Forero, M., 2024b. A mathematical framework for evo-devo dynamics. Theor.
+Popul. Biol. 155, 24–50. https://doi.org/10.1016/j.tpb.2023.11.003
+Griswold, C.K., Logsdon, B., Gomulkiewicz, R., 2007. Neutral evolution of multiple quantitative characters: a genealogical approach. Genetics 176 (1), 455–466. https://doi.
+org/10.1534/genetics.106.069658
+Guerand, J., Hillairet, M., Mirrahimi, S., 2023. A moment-based approach for the analysis
+of the inﬁnitesimal model in the regime of small variance. https://arxiv.org/abs/2309.
+09567. https://doi.org/10.48550/arxiv.2309.09567
+Gupta, A.K., Nagar, D.K., 2018. Matrix variate distributions. https://doi.org/10.1201/
+9780203749289
+Hendry, A.P., 2017. Eco-Evolutionary Dynamics. Princeton university press.
+Hill, W.G., Robertson, A., 1966. The eﬀect of linkage on limits to artiﬁcial selection. Genetical Res. 8 (3), 269–294. https://doi.org/10.1017/s0016672300010156
+Hine, E., Blows, M.W., 2006. Determining the eﬀective dimensionality of the genetic
+variance–covariance matrix. Genetics 173 (2), 1135–1144. https://doi.org/10.1534/
+genetics.105.054627
+Hofbauer, J., Sigmund, K., 1998. Evolutionary Games and Population Dynamics. Cambridge University Press. https://doi.org/10.1017/cbo9781139173179
+Jones, A.G., Arnold, S.J., Bürger, R., 2003. Stability of the G-matrix in a population experiencing pleiotropic mutation, stabilizing selection, and genetic drift. Evolution 57
+(8), 1747–1760. https://doi.org/10.1111/j.0014-3820.2003.tb00583.x
+Jones, A.G., Arnold, S.J., Bürger, R., 2007. The mutation matrix and the evolution of
+evolvability. Evolution 61 (4), 727–745. https://doi.org/10.1111/j.1558-5646.2007.
+00071.x
+Jones, A.G., Bürger, R., Arnold, S.J., Hohenlohe, P.A., Uyeda, J.C., 2012. The eﬀects of
+stochastic and episodic movement of the optimum on the evolution of the G–matrix
+and the response of the trait mean to selection. J. Evol. Biol. 25 (11), 2210–2231.
+https://doi.org/10.1111/j.1420-9101.2012.02598.x
+Jorgensen, B., 2012. Statistical Properties of the Generalized Inverse Gaussian Distribution. Vol. 9. Springer Science & Business Media.
+Karlin, S., Taylor, H.E., 1981. A Second Course in Stochastic Processes. Elsevier.
+Kessy, A., Lewin, A., Strimmer, K., 2018. Optimal whitening and decorrelation. Am. Stat.
+72 (4), 309–314. https://doi.org/10.1080/00031305.2016.1277159
+Kimura, M., 1964. Diﬀusion models in population genetics. J. Appl. Probab. 1 (2),
+177–232. https://doi.org/10.2307/3211856
+Kimura, M., 1965. A stochastic model concerning the maintenance of genetic variability
+in quantitative characters. Proc. Natl. Acad. Sci. 54 (3), 731–736. https://doi.org/10.
+1073/pnas.54.3.731
+Kimura, M., 1968. Genetic variability maintained in a ﬁnite population due to mutational
+production of neutral and nearly neutral isoalleles. Genetical Res. 11 (3), 247–270.
+https://doi.org/10.1017/s0016672300011459
+Kimura, M., Crow, J.F., 1978. Eﬀect of overall phenotypic selection on genetic change at
+individual loci. Proc. Natl. Acad. Sci. 75 (12), 6168–6171. https://doi.org/10.1073/
+pnas.75.12.6168
+Kirkpatrick, M., Meyer, K., 2004. Direct estimation of genetic principal components. Genetics 168 (4), 2295–2306. https://doi.org/10.1534/genetics.104.029181
+Klausmeier, C.A., Osmond, M.M., Kremer, C.T., Litchman, E., 2020. Ecological limits to
+evolutionary rescue. Philos. Trans. R. Soc. B Biol. Sci. 375 (1814), 20190453. https:
+//doi.org/10.1098/rstb.2019.0453
+Klebaner, F.C., 1998. Introduction to Stochastic Calculus with Applications. World Scientiﬁc Publishing Company.
+Kuosmanen, T., Särkkä, S., Mustonen, V., 2022. Turnover shapes evolution of birth and
+death rates https://doi.org/10.1101/2022.07.11.499527.
+Lande, R., 1975. The maintenance of genetic variability by mutation in a polygenic
+character with linked loci. Genetical Res. 26 (3), 221–235. https://doi.org/10.1017/
+s0016672300016037
+Lande, R., 1976. Natural selection and random genetic drift in phenotypic evolution. Evolution 30 (2), 314–334. https://doi.org/10.1111/j.1558-5646.1976.tb00911.x
+
+Lande, R., 1979. Quantitative genetic analysis of multivariate evolution, applied to
+brain:body size allometry. Evolution 33 (1Part2), 402–416. https://doi.org/10.1111/
+j.1558-5646.1979.tb04694.x
+Lande, R., 1980. The genetic covariance between characters maintained by pleiotropic
+mutations. Genetics 94 (1), 203–215. https://doi.org/10.1093/genetics/94.1.203
+Lande, R., 1982. A quantitative genetic theory of life history evolution. Ecology 63 (3),
+607–615. https://doi.org/10.2307/1936778
+Lande, R., 2007. Expected relative ﬁtness and the adaptive topography of ﬂuctuating
+selection. Evolution 61 (8), 1835–1846. https://doi.org/10.1111/j.1558-5646.2007.
+00170.x
+Lande, R., 2008. Adaptive topography of ﬂuctuating selection in a mendelian population.
+J. Evol. Biol. 21 (4), 1096–1105. https://doi.org/10.1111/j.1420-9101.2008.01533.x
+Lande, R., 2014. Evolution of phenotypic plasticity and environmental tolerance of a labile
+quantitative character in a ﬂuctuating environment. J. Evol. Biol. 27 (5), 866–875.
+https://doi.org/10.1111/jeb.12360
+Lande, R., Arnold, S.J., 1983. The measurement of selection on correlated characters.
+Evolution 37 (6), 1210–1226. https://doi.org/10.1111/j.1558-5646.1983.tb00236.x
+Latter, B.D.H., 1970. Selection in ﬁnite populations with multiple alleles. ii. centripetal
+selection, mutation, and isoallelic variation. Genetics 66 (1), 165–186. https://doi.
+org/10.1093/genetics/66.1.165
+Lucek, K., Willi, Y., 2021. Drivers of linkage disequilibrium across a species’ geographic
+range. PLOS Genet. 17 (3), e1009477. https://doi.org/10.1371/journal.pgen.1009477
+Lynch, M., Hill, W.G., 1986. Phenotypic evolution by neutral mutation. Evolution 40 (5),
+915–935. https://doi.org/10.1111/j.1558-5646.1986.tb00561.x
+Lynch, M., Walsh, B., 1998. Genetics and Analysis of Quantitative Traits. Vol. 1. Sinauer
+Sunderland, MA.
+Mallard, F., Afonso, B., TeotÃ³nio, H., 2023a. Selection and the direction of phenotypic
+evolution. eLife 12. https://doi.org/10.7554/elife.80993
+Mallard, F., Noble, L., Guzella, T., Afonso, B., Baer, C.F., TeotÃ³nio, H., 2023b. Phenotypic stasis with genetic divergence. Peer Community J. 3. https://doi.org/10.24072/
+pcjournal.349
+McGuigan, K., 2006. Studying phenotypic evolution using multivariate quantitative genetics. Mol. Ecol. 15 (4), 883–896. https://doi.org/10.1111/j.1365-294x.2006.02809.x
+McGuigan, K., Chenoweth, S., Blows, M., 2005. Phenotypic divergence along lines of genetic variance. Am. Nat. 165 (1), 32–43. https://doi.org/10.1086/426600
+Milocco, L., Salazar-Ciudad, I., 2022. Evolution of the G matrix under nonlinear genotypephenotype maps. Am. Nat. 199 (3), 420–435. https://doi.org/10.1086/717814
+Mullon, C., Lehmann, L., 2019. An evolutionary quantitative genetics model for phenotypic (co)variances under limited dispersal, with an application to socially synergistic
+traits. Evolution 73 (9), 1695–1728. https://doi.org/10.1111/evo.13803
+Mytnik, L., 1996. Superprocesses in random environments. Ann. Probab. 24 (4). https:
+//doi.org/10.1214/aop/1041903212
+Nuismer, S.L., Week, B., Aizen, M.A., 2018. Coevolution slows the disassembly of mutualistic networks. Am. Nat. 192 (4), 490–502. https://doi.org/10.1086/699218
+Ohta, T., Kimura, M., 1969. Linkage disequilibrium due to random genetic drift. Genetical
+Res. 13 (1), 47–55. https://doi.org/10.1017/s001667230000272x
+Øksendal, B., 2013. Stochastic Diﬀerential Equations: An Introduction with Applications.
+Springer Science & Business Media.
+Parsons, T.L., Quince, C., Plotkin, J.B., 2010. Some consequences of demographic stochasticity in population genetics. Genetics 185 (4), 1345–1354. https://doi.org/10.1534/
+genetics.110.115030
+Patel, S., Cortez, M.H., Schreiber, S.J., 2018. Partitioning the eﬀects of eco-evolutionary
+feedbacks on community stability. Am. Nat. 191 (3), 381–394. https://doi.org/10.
+1086/695834
+Perkins, E., 2002. Dawson–watanabe superprocesses and measure-valued diﬀusions. in:
+École d’Été de Probabilités de Saint-Flour XXIX–1999, Lecture Notes in Mathematics,
+vol. 1781, pp. 127–318. Springer.
+Phillips, P.C., Arnold, S.J., 1989. Visualizing multivariate selection. Evolution 43 (6),
+1209–1222. https://doi.org/10.1111/j.1558-5646.1989.tb02569.x
+Phillips, P.C., McGuigan, K.L., 2006. Evolution of genetic variance-covariance structure.
+In: Fox, C.W., Wolf, J.B. (Eds.), Evolutionary Genetics: Concepts and Case Studies.
+Oxford University Press, Oxford, England. chapter 20.
+Phillips, P.C., Whitlock, M.C., Fowler, K., 2001. Inbreeding changes the shape of the genetic covariance matrix in drosophila melanogaster. Genetics 158 (3), 1137–1145.
+https://doi.org/10.1093/genetics/158.3.1137
+Price, G.R., 1970. Selection and covariance. Nature 227 (5257), 520–521. https://doi.org/
+10.1038/227520a0
+Price, G.R., 1972. Extension of covariance selection mathematics. Ann. Hum. Genet. 35
+(4), 485–490. https://doi.org/10.1111/j.1469-1809.1972.tb00946.x
+Rackauckas, C., Nie, Q., 2017. Diﬀerentialequations.jl–a performant and feature-rich
+ecosystem for solving diﬀerential equations in Julia. J. Open Res. Software 5 (1), 15.
+Reznick, D., 2015. Hard and soft selection revisited: how evolution by natural selection
+works in the real world. J. Heredity 107 (1), 3–14. https://doi.org/10.1093/jhered/
+esv076
+Roﬀ, D., 2000. The evolution of the G matrix: selection or drift? Heredity 84 (2), 135–142.
+https://doi.org/10.1046/j.1365-2540.2000.00695.x
+Rogers, L.C.G., Williams, D., 2000. Diﬀusions, Markov Processes and Martingales: itô Calculus. Cambridge University Press. https://doi.org/10.1017/cbo9780511805141
+Slatkin, M., 1987. Heritable variation and heterozygosity under a balance between mutations and stabilizing selection. Genetical Res. 50 (1), 53–62. https://doi.org/10.1017/
+s0016672300023338
+Steppan, S.J., Phillips, P.C., Houle, D., 2002. Comparative quantitative genetics: evolution of the G matrix. Trends Ecol. Evol. 17 (7), 320–327. https://doi.org/10.1016/
+s0169-5347(02)02505-3
+Stroock, D.W., Varadhan, S.R.S., 1997. Multidimensional Diﬀusion Processes. Springer
+Berlin Heidelberg. https://doi.org/10.1007/3-540-28999-2
+13
+
+Journal of Theoretical Biology 625 (2026) 112428
+
+B. Week
+
+Traulsen, A., Claussen, J.C., Hauert, C., 2005. Coevolutionary dynamics: from ﬁnite to
+inﬁnite populations. Phys. Rev. Lett. 95 (23). https://doi.org/10.1103/physrevlett.95.
+238701
+Turelli, M., 1984. Heritable genetic variation via mutation-selection balance: Lerch’s zeta
+meets the abdominal bristle. Theor. Popul. Biol. 25 (2), 138–193. https://doi.org/10.
+1016/0040-5809(84)90017-0
+Turelli, M., 1986. Gaussian Versus Non-Gaussian Genetic Analyses of Polygenic
+Mutation-Selection Balance. Elsevier. p. 607–628. https://doi.org/10.1016/
+b978-0-12-398760-0.50030-4
+Turelli, M., 1988. Phenotypic evolution, constant covariances, and the maintenance of additive variance. Evolution 42 (6), 1342–1347. https://doi.org/10.1111/j.1558-5646.
+1988.tb04193.x
+Turelli, M., 2017. Commentary: ﬁsher’s inﬁnitesimal model: a story for the ages. Theor.
+Popul. Biol. 118, 46–49. https://doi.org/10.1016/j.tpb.2017.09.003
+Turelli, M., Barton, N.H., 1990. Dynamics of polygenic characters under selection. Theor.
+Popul. Biol. 38 (1), 1–57. https://doi.org/10.1016/0040-5809(90)90002-d
+Turelli, M., Barton, N.H., 1994. Genetic and statistical analyses of strong selection on
+polygenic traits: what, me normal? Genetics 138 (3), 913–941. https://doi.org/10.
+1093/genetics/138.3.913
+Turner, P.E., Chao, L., 1999. Prisoner’s dilemma in an RNA virus. Nature 398 (6726),
+441–443. https://doi.org/10.1038/18913
+
+Volpert, V., 2014. Elliptic Partial Diﬀerential Equations: Volume 2: Reaction-Diﬀusion
+Equations. Springer Basel. https://doi.org/10.1007/978-3-0348-0813-2
+Walsh, B., Lynch, M., 2018. Evolution and Selection of Quantitative Traits. Oxford University Press.
+Week, B., Nuismer, S.L., 2021. Coevolutionary arms races and the conditions for the maintenance of mutualism. Am. Nat. 198 (2), 195–205. https://doi.org/10.1086/714274
+Week, B., Nuismer, S.L., Harmon, L.J., Krone, S.M., 2021. A white noise approach to evolutionary ecology. J. Theor. Biol. 521, 110660. https://doi.org/10.1016/j.jtbi.2021.
+110660
+Whitlock, M.C., 1995. Variance-induced peak shifts. Evolution 49 (2), 252–259. https:
+//doi.org/10.1111/j.1558-5646.1995.tb02237.x
+Whitlock, M.C., Phillips, P.C., Fowler, K., 2002. Persistence of changes in the genetic covariance matrix after a bottleneck. Evolution 56 (10), 1968–1975. https://doi.org/10.
+1111/j.0014-3820.2002.tb00122.x
+Wickman, J., Koﬀel, T., Klausmeier, C.A., 2023. A theoretical framework for trait-based
+eco-evolutionary dynamics: population structure, intraspeciﬁc variation, and community assembly. Am. Nat. 201 (4), 501–522. https://doi.org/10.1086/723406
+Xu, K., Vision, T.J., Servedio, M.R., 2023. Evolutionary rescue under demographic and
+environmental stochasticity. J. Evol. Biol. 36 (10), 1525–1538. https://doi.org/10.
+1111/jeb.14224
+
+14
+
+

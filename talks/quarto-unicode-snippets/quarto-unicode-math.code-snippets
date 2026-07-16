@@ -1,0 +1,899 @@
+{
+  "Unicode math: alpha → α": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "alpha",
+      "\\alpha"
+    ],
+    "body": "α",
+    "description": "Insert Unicode α from alpha or \\alpha"
+  },
+  "Unicode math: beta → β": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "beta",
+      "\\beta"
+    ],
+    "body": "β",
+    "description": "Insert Unicode β from beta or \\beta"
+  },
+  "Unicode math: gamma → γ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "gamma",
+      "\\gamma"
+    ],
+    "body": "γ",
+    "description": "Insert Unicode γ from gamma or \\gamma"
+  },
+  "Unicode math: delta → δ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "delta",
+      "\\delta"
+    ],
+    "body": "δ",
+    "description": "Insert Unicode δ from delta or \\delta"
+  },
+  "Unicode math: epsilon → ε": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "epsilon",
+      "\\epsilon",
+      "eps",
+      "\\eps"
+    ],
+    "body": "ε",
+    "description": "Insert Unicode ε from epsilon or \\epsilon"
+  },
+  "Unicode math: varepsilon → ϵ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "varepsilon",
+      "\\varepsilon"
+    ],
+    "body": "ϵ",
+    "description": "Insert Unicode ϵ from varepsilon or \\varepsilon"
+  },
+  "Unicode math: zeta → ζ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "zeta",
+      "\\zeta"
+    ],
+    "body": "ζ",
+    "description": "Insert Unicode ζ from zeta or \\zeta"
+  },
+  "Unicode math: eta → η": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "eta",
+      "\\eta"
+    ],
+    "body": "η",
+    "description": "Insert Unicode η from eta or \\eta"
+  },
+  "Unicode math: theta → θ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "theta",
+      "\\theta"
+    ],
+    "body": "θ",
+    "description": "Insert Unicode θ from theta or \\theta"
+  },
+  "Unicode math: vartheta → ϑ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "vartheta",
+      "\\vartheta"
+    ],
+    "body": "ϑ",
+    "description": "Insert Unicode ϑ from vartheta or \\vartheta"
+  },
+  "Unicode math: iota → ι": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "iota",
+      "\\iota"
+    ],
+    "body": "ι",
+    "description": "Insert Unicode ι from iota or \\iota"
+  },
+  "Unicode math: kappa → κ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "kappa",
+      "\\kappa"
+    ],
+    "body": "κ",
+    "description": "Insert Unicode κ from kappa or \\kappa"
+  },
+  "Unicode math: lambda → λ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "lambda",
+      "\\lambda",
+      "lam",
+      "\\lam"
+    ],
+    "body": "λ",
+    "description": "Insert Unicode λ from lambda or \\lambda"
+  },
+  "Unicode math: mu → μ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "mu",
+      "\\mu"
+    ],
+    "body": "μ",
+    "description": "Insert Unicode μ from mu or \\mu"
+  },
+  "Unicode math: nu → ν": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "nu",
+      "\\nu"
+    ],
+    "body": "ν",
+    "description": "Insert Unicode ν from nu or \\nu"
+  },
+  "Unicode math: xi → ξ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "xi",
+      "\\xi"
+    ],
+    "body": "ξ",
+    "description": "Insert Unicode ξ from xi or \\xi"
+  },
+  "Unicode math: omicron → ο": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "omicron",
+      "\\omicron"
+    ],
+    "body": "ο",
+    "description": "Insert Unicode ο from omicron or \\omicron"
+  },
+  "Unicode math: pi → π": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "pi",
+      "\\pi"
+    ],
+    "body": "π",
+    "description": "Insert Unicode π from pi or \\pi"
+  },
+  "Unicode math: rho → ρ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "rho",
+      "\\rho"
+    ],
+    "body": "ρ",
+    "description": "Insert Unicode ρ from rho or \\rho"
+  },
+  "Unicode math: varrho → ϱ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "varrho",
+      "\\varrho"
+    ],
+    "body": "ϱ",
+    "description": "Insert Unicode ϱ from varrho or \\varrho"
+  },
+  "Unicode math: sigma → σ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "sigma",
+      "\\sigma"
+    ],
+    "body": "σ",
+    "description": "Insert Unicode σ from sigma or \\sigma"
+  },
+  "Unicode math: varsigma → ς": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "varsigma",
+      "\\varsigma"
+    ],
+    "body": "ς",
+    "description": "Insert Unicode ς from varsigma or \\varsigma"
+  },
+  "Unicode math: tau → τ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "tau",
+      "\\tau"
+    ],
+    "body": "τ",
+    "description": "Insert Unicode τ from tau or \\tau"
+  },
+  "Unicode math: upsilon → υ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "upsilon",
+      "\\upsilon"
+    ],
+    "body": "υ",
+    "description": "Insert Unicode υ from upsilon or \\upsilon"
+  },
+  "Unicode math: phi → φ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "phi",
+      "\\phi"
+    ],
+    "body": "φ",
+    "description": "Insert Unicode φ from phi or \\phi"
+  },
+  "Unicode math: varphi → ϕ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "varphi",
+      "\\varphi"
+    ],
+    "body": "ϕ",
+    "description": "Insert Unicode ϕ from varphi or \\varphi"
+  },
+  "Unicode math: chi → χ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "chi",
+      "\\chi"
+    ],
+    "body": "χ",
+    "description": "Insert Unicode χ from chi or \\chi"
+  },
+  "Unicode math: psi → ψ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "psi",
+      "\\psi"
+    ],
+    "body": "ψ",
+    "description": "Insert Unicode ψ from psi or \\psi"
+  },
+  "Unicode math: omega → ω": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "omega",
+      "\\omega"
+    ],
+    "body": "ω",
+    "description": "Insert Unicode ω from omega or \\omega"
+  },
+  "Unicode math: Gamma → Γ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Gamma",
+      "\\Gamma"
+    ],
+    "body": "Γ",
+    "description": "Insert Unicode Γ from Gamma or \\Gamma"
+  },
+  "Unicode math: Delta → Δ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Delta",
+      "\\Delta"
+    ],
+    "body": "Δ",
+    "description": "Insert Unicode Δ from Delta or \\Delta"
+  },
+  "Unicode math: Theta → Θ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Theta",
+      "\\Theta"
+    ],
+    "body": "Θ",
+    "description": "Insert Unicode Θ from Theta or \\Theta"
+  },
+  "Unicode math: Lambda → Λ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Lambda",
+      "\\Lambda"
+    ],
+    "body": "Λ",
+    "description": "Insert Unicode Λ from Lambda or \\Lambda"
+  },
+  "Unicode math: Xi → Ξ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Xi",
+      "\\Xi"
+    ],
+    "body": "Ξ",
+    "description": "Insert Unicode Ξ from Xi or \\Xi"
+  },
+  "Unicode math: Pi → Π": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Pi",
+      "\\Pi"
+    ],
+    "body": "Π",
+    "description": "Insert Unicode Π from Pi or \\Pi"
+  },
+  "Unicode math: Sigma → Σ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Sigma",
+      "\\Sigma"
+    ],
+    "body": "Σ",
+    "description": "Insert Unicode Σ from Sigma or \\Sigma"
+  },
+  "Unicode math: Upsilon → Υ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Upsilon",
+      "\\Upsilon"
+    ],
+    "body": "Υ",
+    "description": "Insert Unicode Υ from Upsilon or \\Upsilon"
+  },
+  "Unicode math: Phi → Φ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Phi",
+      "\\Phi"
+    ],
+    "body": "Φ",
+    "description": "Insert Unicode Φ from Phi or \\Phi"
+  },
+  "Unicode math: Psi → Ψ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Psi",
+      "\\Psi"
+    ],
+    "body": "Ψ",
+    "description": "Insert Unicode Ψ from Psi or \\Psi"
+  },
+  "Unicode math: Omega → Ω": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Omega",
+      "\\Omega"
+    ],
+    "body": "Ω",
+    "description": "Insert Unicode Ω from Omega or \\Omega"
+  },
+  "Unicode math: partial → ∂": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "partial",
+      "\\partial",
+      "delpartial",
+      "\\delpartial"
+    ],
+    "body": "∂",
+    "description": "Insert Unicode ∂ from partial or \\partial"
+  },
+  "Unicode math: nabla → ∇": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "nabla",
+      "\\nabla",
+      "grad",
+      "\\grad"
+    ],
+    "body": "∇",
+    "description": "Insert Unicode ∇ from nabla or \\nabla"
+  },
+  "Unicode math: infty → ∞": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "infty",
+      "\\infty",
+      "inf",
+      "\\inf",
+      "infinity",
+      "\\infinity"
+    ],
+    "body": "∞",
+    "description": "Insert Unicode ∞ from infty or \\infty"
+  },
+  "Unicode math: pm → ±": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "pm",
+      "\\pm",
+      "plusminus",
+      "\\plusminus"
+    ],
+    "body": "±",
+    "description": "Insert Unicode ± from pm or \\pm"
+  },
+  "Unicode math: mp → ∓": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "mp",
+      "\\mp",
+      "minusplus",
+      "\\minusplus"
+    ],
+    "body": "∓",
+    "description": "Insert Unicode ∓ from mp or \\mp"
+  },
+  "Unicode math: times → ×": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "times",
+      "\\times"
+    ],
+    "body": "×",
+    "description": "Insert Unicode × from times or \\times"
+  },
+  "Unicode math: cdot → ·": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "cdot",
+      "\\cdot",
+      "dot",
+      "\\dot"
+    ],
+    "body": "·",
+    "description": "Insert Unicode · from cdot or \\cdot"
+  },
+  "Unicode math: circ → ∘": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "circ",
+      "\\circ"
+    ],
+    "body": "∘",
+    "description": "Insert Unicode ∘ from circ or \\circ"
+  },
+  "Unicode math: bullet → •": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "bullet",
+      "\\bullet"
+    ],
+    "body": "•",
+    "description": "Insert Unicode • from bullet or \\bullet"
+  },
+  "Unicode math: sqrt → √": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "sqrt",
+      "\\sqrt"
+    ],
+    "body": "√",
+    "description": "Insert Unicode √ from sqrt or \\sqrt"
+  },
+  "Unicode math: propto → ∝": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "propto",
+      "\\propto"
+    ],
+    "body": "∝",
+    "description": "Insert Unicode ∝ from propto or \\propto"
+  },
+  "Unicode math: approx → ≈": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "approx",
+      "\\approx"
+    ],
+    "body": "≈",
+    "description": "Insert Unicode ≈ from approx or \\approx"
+  },
+  "Unicode math: sim → ∼": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "sim",
+      "\\sim"
+    ],
+    "body": "∼",
+    "description": "Insert Unicode ∼ from sim or \\sim"
+  },
+  "Unicode math: simeq → ≃": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "simeq",
+      "\\simeq"
+    ],
+    "body": "≃",
+    "description": "Insert Unicode ≃ from simeq or \\simeq"
+  },
+  "Unicode math: equiv → ≡": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "equiv",
+      "\\equiv"
+    ],
+    "body": "≡",
+    "description": "Insert Unicode ≡ from equiv or \\equiv"
+  },
+  "Unicode math: neq → ≠": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "neq",
+      "\\neq",
+      "ne",
+      "\\ne"
+    ],
+    "body": "≠",
+    "description": "Insert Unicode ≠ from neq or \\neq"
+  },
+  "Unicode math: leq → ≤": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "leq",
+      "\\leq",
+      "le",
+      "\\le"
+    ],
+    "body": "≤",
+    "description": "Insert Unicode ≤ from leq or \\leq"
+  },
+  "Unicode math: geq → ≥": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "geq",
+      "\\geq",
+      "ge",
+      "\\ge"
+    ],
+    "body": "≥",
+    "description": "Insert Unicode ≥ from geq or \\geq"
+  },
+  "Unicode math: ll → ≪": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "ll",
+      "\\ll"
+    ],
+    "body": "≪",
+    "description": "Insert Unicode ≪ from ll or \\ll"
+  },
+  "Unicode math: gg → ≫": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "gg",
+      "\\gg"
+    ],
+    "body": "≫",
+    "description": "Insert Unicode ≫ from gg or \\gg"
+  },
+  "Unicode math: forall → ∀": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "forall",
+      "\\forall"
+    ],
+    "body": "∀",
+    "description": "Insert Unicode ∀ from forall or \\forall"
+  },
+  "Unicode math: exists → ∃": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "exists",
+      "\\exists"
+    ],
+    "body": "∃",
+    "description": "Insert Unicode ∃ from exists or \\exists"
+  },
+  "Unicode math: nexists → ∄": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "nexists",
+      "\\nexists"
+    ],
+    "body": "∄",
+    "description": "Insert Unicode ∄ from nexists or \\nexists"
+  },
+  "Unicode math: therefore → ∴": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "therefore",
+      "\\therefore"
+    ],
+    "body": "∴",
+    "description": "Insert Unicode ∴ from therefore or \\therefore"
+  },
+  "Unicode math: because → ∵": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "because",
+      "\\because"
+    ],
+    "body": "∵",
+    "description": "Insert Unicode ∵ from because or \\because"
+  },
+  "Unicode math: in → ∈": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "in",
+      "\\in"
+    ],
+    "body": "∈",
+    "description": "Insert Unicode ∈ from in or \\in"
+  },
+  "Unicode math: notin → ∉": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "notin",
+      "\\notin"
+    ],
+    "body": "∉",
+    "description": "Insert Unicode ∉ from notin or \\notin"
+  },
+  "Unicode math: ni → ∋": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "ni",
+      "\\ni"
+    ],
+    "body": "∋",
+    "description": "Insert Unicode ∋ from ni or \\ni"
+  },
+  "Unicode math: subset → ⊂": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "subset",
+      "\\subset"
+    ],
+    "body": "⊂",
+    "description": "Insert Unicode ⊂ from subset or \\subset"
+  },
+  "Unicode math: subseteq → ⊆": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "subseteq",
+      "\\subseteq"
+    ],
+    "body": "⊆",
+    "description": "Insert Unicode ⊆ from subseteq or \\subseteq"
+  },
+  "Unicode math: supset → ⊃": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "supset",
+      "\\supset"
+    ],
+    "body": "⊃",
+    "description": "Insert Unicode ⊃ from supset or \\supset"
+  },
+  "Unicode math: supseteq → ⊇": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "supseteq",
+      "\\supseteq"
+    ],
+    "body": "⊇",
+    "description": "Insert Unicode ⊇ from supseteq or \\supseteq"
+  },
+  "Unicode math: cup → ∪": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "cup",
+      "\\cup"
+    ],
+    "body": "∪",
+    "description": "Insert Unicode ∪ from cup or \\cup"
+  },
+  "Unicode math: cap → ∩": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "cap",
+      "\\cap"
+    ],
+    "body": "∩",
+    "description": "Insert Unicode ∩ from cap or \\cap"
+  },
+  "Unicode math: emptyset → ∅": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "emptyset",
+      "\\emptyset",
+      "varnothing",
+      "\\varnothing"
+    ],
+    "body": "∅",
+    "description": "Insert Unicode ∅ from emptyset or \\emptyset"
+  },
+  "Unicode math: setminus → ∖": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "setminus",
+      "\\setminus"
+    ],
+    "body": "∖",
+    "description": "Insert Unicode ∖ from setminus or \\setminus"
+  },
+  "Unicode math: to → →": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "to",
+      "\\to",
+      "rightarrow",
+      "\\rightarrow",
+      "ra",
+      "\\ra"
+    ],
+    "body": "→",
+    "description": "Insert Unicode → from to or \\to"
+  },
+  "Unicode math: gets → ←": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "gets",
+      "\\gets",
+      "leftarrow",
+      "\\leftarrow",
+      "la",
+      "\\la"
+    ],
+    "body": "←",
+    "description": "Insert Unicode ← from gets or \\gets"
+  },
+  "Unicode math: leftrightarrow → ↔": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "leftrightarrow",
+      "\\leftrightarrow",
+      "lr",
+      "\\lr"
+    ],
+    "body": "↔",
+    "description": "Insert Unicode ↔ from leftrightarrow or \\leftrightarrow"
+  },
+  "Unicode math: Rightarrow → ⇒": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Rightarrow",
+      "\\Rightarrow",
+      "implies",
+      "\\implies"
+    ],
+    "body": "⇒",
+    "description": "Insert Unicode ⇒ from Rightarrow or \\Rightarrow"
+  },
+  "Unicode math: Leftarrow → ⇐": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Leftarrow",
+      "\\Leftarrow"
+    ],
+    "body": "⇐",
+    "description": "Insert Unicode ⇐ from Leftarrow or \\Leftarrow"
+  },
+  "Unicode math: Leftrightarrow → ⇔": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Leftrightarrow",
+      "\\Leftrightarrow",
+      "iff",
+      "\\iff"
+    ],
+    "body": "⇔",
+    "description": "Insert Unicode ⇔ from Leftrightarrow or \\Leftrightarrow"
+  },
+  "Unicode math: mapsto → ↦": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "mapsto",
+      "\\mapsto"
+    ],
+    "body": "↦",
+    "description": "Insert Unicode ↦ from mapsto or \\mapsto"
+  },
+  "Unicode math: int → ∫": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "int",
+      "\\int"
+    ],
+    "body": "∫",
+    "description": "Insert Unicode ∫ from int or \\int"
+  },
+  "Unicode math: iint → ∬": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "iint",
+      "\\iint"
+    ],
+    "body": "∬",
+    "description": "Insert Unicode ∬ from iint or \\iint"
+  },
+  "Unicode math: sum → ∑": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "sum",
+      "\\sum"
+    ],
+    "body": "∑",
+    "description": "Insert Unicode ∑ from sum or \\sum"
+  },
+  "Unicode math: prod → ∏": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "prod",
+      "\\prod"
+    ],
+    "body": "∏",
+    "description": "Insert Unicode ∏ from prod or \\prod"
+  },
+  "Unicode math: ell → ℓ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "ell",
+      "\\ell"
+    ],
+    "body": "ℓ",
+    "description": "Insert Unicode ℓ from ell or \\ell"
+  },
+  "Unicode math: Re → ℜ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Re",
+      "\\Re"
+    ],
+    "body": "ℜ",
+    "description": "Insert Unicode ℜ from Re or \\Re"
+  },
+  "Unicode math: Im → ℑ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "Im",
+      "\\Im"
+    ],
+    "body": "ℑ",
+    "description": "Insert Unicode ℑ from Im or \\Im"
+  },
+  "Unicode math: aleph → ℵ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "aleph",
+      "\\aleph"
+    ],
+    "body": "ℵ",
+    "description": "Insert Unicode ℵ from aleph or \\aleph"
+  },
+  "Unicode math: hbar → ℏ": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "hbar",
+      "\\hbar"
+    ],
+    "body": "ℏ",
+    "description": "Insert Unicode ℏ from hbar or \\hbar"
+  },
+  "Unicode math: degree → °": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "degree",
+      "\\degree",
+      "deg",
+      "\\deg"
+    ],
+    "body": "°",
+    "description": "Insert Unicode ° from degree or \\degree"
+  },
+  "Unicode math: prime → ′": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "prime",
+      "\\prime"
+    ],
+    "body": "′",
+    "description": "Insert Unicode ′ from prime or \\prime"
+  },
+  "Unicode math: doubleprime → ″": {
+    "scope": "markdown,quarto",
+    "prefix": [
+      "doubleprime",
+      "\\doubleprime"
+    ],
+    "body": "″",
+    "description": "Insert Unicode ″ from doubleprime or \\doubleprime"
+  }
+}
