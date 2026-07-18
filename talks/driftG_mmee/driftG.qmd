@@ -1,6 +1,6 @@
 ---
 title: Stochastic Eco-Evolutionary Dynamics of Multivariate Traits
-author: "**Bob Week** 🦠 KiTE Postdoc ~ Schulenburg Group 🪱 *Kiel University* <br><br> 🌐bobweek.github.io 🦋@bweek.bsky.social"
+author: "**Bob Week** 🦠 KiTE Postdoc ~ Schulenburg Group 🪱 *Kiel University* <br><br> 🌐 bobweek.github.io 🦋 @bweek.bsky.social"
 format:
   revealjs:
     theme: white
@@ -38,9 +38,9 @@ execute:
 
 ## Demographic stochasticity is super important
 
-- explains:
-  - extinction
-  - random genetic drift
+![explains extinction dynamics](extinction.png){fig-align="center" width="720"}
+
+![explains random genetic, fixation and loss](fixation.png){fig-align="center" width="720"}
 
 ## Consequences of random genetic drift
 
@@ -52,14 +52,15 @@ execute:
 
 ::: {.column width="58%"}
 
-- Erodes heritable variation
-- Increases genetic correlations/linkage
+- **1** Erodes heritable variation
+- **2** Increases genetic correlations/linkage
  
 :::
 
 ::: {.column width="38%"}
 
-- Fundamental principle of evolutionary biology
+- Fundamental principles of evolutionary biology
+- Established through population genetic lens
 
 :::
 
@@ -197,7 +198,7 @@ execute:
 
 ::: {.fragment}
 
-$\text{mean fitness:}\quad \bar m=\tfrac{1}{n}\int_{\mathbb{R}^d}m(\nu,{\bf z})\,\nu({\bf z})\,\mathrm d{\bf z}$
+$\text{mean fitness:}\quad \bar m=\tfrac{1}{n}\int_{\mathbb{R}^d}m(\nu,{\bf z})\,\nu({\bf z})\,\mathrm d{\bf z}\quad \text{reproductive variance: } v$
 
 :::
 
@@ -304,7 +305,8 @@ $$
 :::
 
 
-## How to use?
+## How to use? 
+(choose $m$ then numerical or analytical approach)
 
 ::: {.incremental}
 
@@ -315,15 +317,11 @@ $$
 
 **Deterministic/selection:**
 
-- $m(\nu,{\bf z})$ arbitrary
+- $m(\nu,{\bf z})$ very general
 - Examples:
-  - Logistic growth + stabilizing selection
-    - $m(\nu,{\bf z})=r-\tfrac 1 2 {\bf z}^\top{\bf \Psi}{\bf z}-c\,n$
-  - Lotka-Volterra
-    - $m_i=r-\sum_j\alpha_{ij}n_j$
-  - Coevolution
-    - $m({\bf z}_i,{\bf z}_j)_i=$
-  - Rugged ?
+  - *Logistic growth* + *stabilizing selection* $m(\nu,{\bf z})=r-\tfrac 1 2 {\bf z}^\top{\bf \Psi}{\bf z}-c\,n$
+  - *Lotka-Volterra* $m_i=r-\sum_j\alpha_{ij}n_j$
+  - *Host-Parasite Coevolution* <br> $m_H({\bf z}_H,{\bf z}_P)=r+\alpha({\bf z}_H,{\bf z_P})$ <br> $m_P({\bf z}_P,{\bf z}_H)=r-\alpha({\bf z}_H,{\bf z_P})$
 
 :::
 
@@ -331,10 +329,12 @@ $$
 
 **Stochasticity/drift:**
 
-- Numerical integration: *github.com/bobweek/multi-mtgl*
-- Analytical approach:
-  - Ito's Formula
-    - Heuristics
+- *No* stochastic calculus needed
+  - Numerical integration: *github.com/bobweek/multi-mtgl*
+  - Analytical methods:
+    - *Itô's Formula* for $\mathrm df(n,{\bar{\bf z}},{\bf G})$
+    - *Heuristics* for $\mathrm d B_n,\mathrm d {\bf B}_{\bar{\bf z}},\mathrm d {\bf B}_{\bf G}$
+    - *Demo* with $\mathrm d\rho$ from $\mathrm d {\bf G}$
 
 :::
 
@@ -349,46 +349,53 @@ $$\mathrm d{\bf G}={\color{#c2185b} -\tfrac{1}{N_e}{\bf G}\,\mathrm d t} + {\col
 
 ::: {.incremental}
 
-:::: {.columns .cols2}
-
-::: {.column width="68%"}
-
-
-- $N_e=v/n$ effective population size
+- $m(\nu,{\bf z})\equiv0$
+- ${\color{#3c8500}\bf M}={\bf 0}$
+- $N_e=v/n$ effective population size (assumed constant)
 - <pink>Deterministic part</pink> ~ shrinks $\bf G$
   - Agrees with Lande's $\mathbb E[{\bf G}_t]$
 - <violet>Stochastic part</violet> ~ complicated ...
   - study $\rho_{ij}=G_{ij}/\sqrt{G_{ii}G_{jj}}$ to gain insights
-:::
-
-::: {.column width="28%"}
 
 :::
-
-:::
-
-::::
 
 ## Obtaining dynamics of genetic correlations
-(and dealing with stochastic terms)
 
-- Use ito's formula on $\rho=f({\bf G})$
+::: {.incremental}
+
+- Use Itô's formula on $\rho=f({\bf G})$
+
+::: {.fragment}
 
 $$
-\mathrm d\rho=(\nabla_{\bf G}f)^\top\mathrm d{\bf G}+\tfrac 1 2 (\mathrm d{\bf G})^\top (\mathrm H_{\bf G}f)(\mathrm d {\bf G})
+\mathrm d\rho=\nabla_{\bf G}f:\mathrm d{\bf G}+\tfrac 1 2 \nabla_{\bf G}^2f::(\mathrm d{\bf G}\otimes\mathrm d{\bf G})
 $$
 
-- 
+:::
+
+<!-- - $\mathrm d{\bf G}\otimes\mathrm d{\bf G}$ involves $\mathrm d {\bf B}_{\bf G}$, already have heuristics for -->
+
+- Useful to rewrite $\mathrm d{\bf G}$
+
+  - *in index notation* $\mathrm dG_{ij}={\color{#c2185b}-\tfrac v n G_{ij}}\,\mathrm dt+{\color{#5a4cc7}\sqrt{G_{ij}^2-G_{ii}G_{jj}}\,\mathrm dB_{G_{ij}}}$
+
+    - ${\color{#5a4cc7}\mathrm d{\cal M}((g_i-\bar g)(g_j-\bar g)-G_{ij})}={\color{#5a4cc7}\sqrt{G_{ij}^2-G_{ii}G_{jj}}\,\mathrm dB_{G_{ij}}}$
+
+  - *because linearity* $a\,\mathrm d{\cal M}({\bf x})+b\,\mathrm d{\cal M}({\bf y})=\mathrm d{\cal M}(a\,{\bf x}+b\,{\bf y})$
+
+    - then rewrite back with $\mathrm dB=\mathrm d{\cal M}(a\,{\bf x}+b\,{\bf y})$
+
+:::
+
+
 
 ## Genetic correlations tend towards ±1
 
-::: {.incremental .fragment}
+$$\mathrm d\rho={\color{#c2185b}-\frac{1}{2N_e}\,\rho\,(1-\rho^2)}\,\mathrm dt+{\color{#5a4cc7}\sqrt{\frac{1}{N_e}\,(1-\rho^2)}\,\mathrm dB}$$
 
-- $d\rho/dt$ from $d{\bf G}/dt$ using chain rule: $\frac {d\rho}{dt}=-\frac{1}{2N_e}\,\rho\,(1-\rho^2)+\sqrt{\frac{1}{N_e}\,(1-\rho^2)}\,\frac {dB}{dt}$
+:::: {.incremental .fragment}
 
-:::
-
-:::: {.columns .cols2}
+::: {.columns .cols2}
 
 ::: {.column .fragment width="58%"}
 ![Five replicates starting at $\rho_0=0$, with $1/N_e=0.001$](fig2.png){fig-align="center" width=80%}
@@ -396,6 +403,8 @@ $$
 
 ::: {.column .fragment width="38%"}
 ![Evolution of pdf for $\rho$ with $1/N_e=0.001$](fig1_fokker_planck_cropped.png){fig-align="center" width=90%}
+:::
+
 :::
 
 ::::
@@ -407,9 +416,10 @@ $$
 ::: {.column width="58%"}
 ::: {.incremental}
 - Drift alters orientation of $\bf G$-matrices
-  - while also eroding variation
+  - while also eroding variation ${\mathbb E}[{\bf G}_t]$
 - Stability of $\bf G$-matrix structure due to
   - mutation, migration, selection
+    - (recombination)
 - Essentially complete opposite of previous view (Roff 2000)
 :::
 
@@ -420,7 +430,7 @@ $$
 :::
 
 ::::
-
+<!-- 
 ## Consequences for understanding evolution
 
 :::: {.columns .cols2}
@@ -452,7 +462,7 @@ McGlothlin et al (2018):
 ::: {.fragment}
 - If drift explains small $\bf G$-matrices, why dont those matrices also have altered orientation?
 - Adding recombination doesn't solve the problem ... add drosphila slide at end for people who ask this question
-:::
+::: -->
 
 
 ## More in the paper...
@@ -483,17 +493,20 @@ Steve Krone, Peter L. Ralph, Hinrich Schulenburg, Patrick C. Phillips, Arne Trau
 
 ::::
 
-<!-- 
-- Conventional (old) wisdom:
-  - *drift*
-    - does not change $\bf G$-matrices on average
-    - but does cause some variation across populations 
-  - *selection*
-    - alters orientation of $\bf G$-matrices
-- Rigorous (new) wisdom:
-  - *drift*
-    - rapidly drives correlations to ±1
-    - dramatically alters orientation of $\bf G$-matrices
-  - previously taken as 
+## What about Recombination?
 
-add rev to comp qg here -->
+Drift alters $\bf G$-matrix orientation even with recombination
+
+:::: {.columns .cols2}
+
+::: {.column width="48%"}
+![52 *Drosophila* lines from one ancestor: drift alone scatters the genetic correlation across orientations and flips its sign (**Phillips et al. 2001**).](phillips2001.png){fig-align="center" width="20%"}
+:::
+
+::: {.column width="48%"}
+![Outcrossing *C. elegans*, 240 generations, means static: evolved major axes randomly oriented vs the ancestor (**Mallard et al. 2023**)](mallard.png){fig-align="center"}
+:::
+
+::::
+
+

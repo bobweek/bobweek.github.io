@@ -9,7 +9,7 @@
 <link href="driftG_files/libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.26">
 
-  <meta name="author" content="Bob Week 🦠 KiTE Postdoc ~ Schulenburg Group 🪱 Kiel University   🌐bobweek.github.io 🦋@bweek.bsky.social">
+  <meta name="author" content="Bob Week 🦠 KiTE Postdoc ~ Schulenburg Group 🪱 Kiel University   🌐 bobweek.github.io 🦋 @bweek.bsky.social">
   <title>Stochastic Eco-Evolutionary Dynamics of Multivariate Traits</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -146,11 +146,26 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-<strong>Bob Week</strong> 🦠 KiTE Postdoc ~ Schulenburg Group 🪱 <em>Kiel University</em> <br><br> 🌐bobweek.github.io 🦋<span class="citation" data-cites="bweek.bsky.social">@bweek.bsky.social</span> 
+<strong>Bob Week</strong> 🦠 KiTE Postdoc ~ Schulenburg Group 🪱 <em>Kiel University</em> <br><br> 🌐 bobweek.github.io 🦋 <span class="citation" data-cites="bweek.bsky.social">@bweek.bsky.social</span> 
 </div>
 </div>
 </div>
 
+</section>
+<section id="demographic-stochasticity-is-super-important" class="slide level2 center">
+<h2>Demographic stochasticity is super important</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="extinction.png" width="720"></p>
+<figcaption>explains extinction dynamics</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fixation.png" width="720"></p>
+<figcaption>explains random genetic, fixation and loss</figcaption>
+</figure>
+</div>
 </section>
 <section id="consequences-of-random-genetic-drift" class="slide level2 center">
 <h2>Consequences of random genetic drift</h2>
@@ -158,12 +173,13 @@
 <img data-src="wf_correlations_2.gif" class="quarto-figure quarto-figure-center r-stretch"><div class="columns cols2">
 <div class="column" style="width:58%;">
 <ul>
-<li class="fragment">Erodes heritable variation</li>
-<li class="fragment">Increases genetic correlations/linkage</li>
+<li class="fragment"><strong>1</strong> Erodes heritable variation</li>
+<li class="fragment"><strong>2</strong> Increases genetic correlations/linkage</li>
 </ul>
 </div><div class="column" style="width:38%;">
 <ul>
-<li class="fragment">Fundamental principle of evolutionary biology</li>
+<li class="fragment">Fundamental principles of evolutionary biology</li>
+<li class="fragment">Established through population genetic lens</li>
 </ul>
 </div></div>
 </section>
@@ -277,7 +293,7 @@
 <section id="moment-dynamics-not-closed" class="slide level2 center">
 <h2>Moment Dynamics (not closed)</h2>
 <div class="fragment">
-<p><span class="math inline">\(\text{mean fitness:}\quad \bar m=\tfrac{1}{n}\int_{\mathbb{R}^d}m(\nu,{\bf z})\,\nu({\bf z})\,\mathrm d{\bf z}\)</span></p>
+<p><span class="math inline">\(\text{mean fitness:}\quad \bar m=\tfrac{1}{n}\int_{\mathbb{R}^d}m(\nu,{\bf z})\,\nu({\bf z})\,\mathrm d{\bf z}\quad \text{reproductive variance: } v\)</span></p>
 </div>
 <div class="fragment">
 <p><span class="math display">\[
@@ -347,37 +363,30 @@
 </section>
 <section id="how-to-use" class="slide level2 center">
 <h2>How to use?</h2>
+<p>(choose <span class="math inline">\(m\)</span> then numerical or analytical approach)</p>
 <div class="columns cols2">
 <div class="column" style="width:48%;">
 <p><strong>Deterministic/selection:</strong></p>
 <ul>
-<li class="fragment"><span class="math inline">\(m(\nu,{\bf z})\)</span> arbitrary</li>
+<li class="fragment"><span class="math inline">\(m(\nu,{\bf z})\)</span> very general</li>
 <li class="fragment">Examples:
 <ul>
-<li class="fragment">Logistic growth + stabilizing selection
-<ul>
-<li class="fragment"><span class="math inline">\(m(\nu,{\bf z})=r-\tfrac 1 2 {\bf z}^\top{\bf \Psi}{\bf z}-c\,n\)</span></li>
-</ul></li>
-<li class="fragment">Lotka-Volterra
-<ul>
-<li class="fragment"><span class="math inline">\(m_i=r-\sum_j\alpha_{ij}n_j\)</span></li>
-</ul></li>
-<li class="fragment">Coevolution
-<ul>
-<li class="fragment"><span class="math inline">\(m({\bf z}_i,{\bf z}_j)_i=\)</span></li>
-</ul></li>
-<li class="fragment">Rugged ?</li>
+<li class="fragment"><em>Logistic growth</em> + <em>stabilizing selection</em> <span class="math inline">\(m(\nu,{\bf z})=r-\tfrac 1 2 {\bf z}^\top{\bf \Psi}{\bf z}-c\,n\)</span></li>
+<li class="fragment"><em>Lotka-Volterra</em> <span class="math inline">\(m_i=r-\sum_j\alpha_{ij}n_j\)</span></li>
+<li class="fragment"><em>Host-Parasite Coevolution</em> <br> <span class="math inline">\(m_H({\bf z}_H,{\bf z}_P)=r+\alpha({\bf z}_H,{\bf z_P})\)</span> <br> <span class="math inline">\(m_P({\bf z}_P,{\bf z}_H)=r-\alpha({\bf z}_H,{\bf z_P})\)</span></li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:48%;">
 <p><strong>Stochasticity/drift:</strong></p>
 <ul>
+<li class="fragment"><em>No</em> stochastic calculus needed
+<ul>
 <li class="fragment">Numerical integration: <em>github.com/bobweek/multi-mtgl</em></li>
-<li class="fragment">Analytical approach:
+<li class="fragment">Analytical methods:
 <ul>
-<li class="fragment">Ito’s Formula
-<ul>
-<li class="fragment">Heuristics</li>
+<li class="fragment"><em>Itô’s Formula</em> for <span class="math inline">\(\mathrm df(n,{\bar{\bf z}},{\bf G})\)</span></li>
+<li class="fragment"><em>Heuristics</em> for <span class="math inline">\(\mathrm d B_n,\mathrm d {\bf B}_{\bar{\bf z}},\mathrm d {\bf B}_{\bf G}\)</span></li>
+<li class="fragment"><em>Demo</em> with <span class="math inline">\(\mathrm d\rho\)</span> from <span class="math inline">\(\mathrm d {\bf G}\)</span></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -386,10 +395,10 @@
 <section id="a-new-neutral-model-of-bf-g-matrix-evolution" class="slide level2 center">
 <h2>A new neutral model of <span class="math inline">\(\bf G\)</span>-matrix evolution</h2>
 <p><span class="math display">\[\mathrm d{\bf G}={\color{#c2185b} -\tfrac{1}{N_e}{\bf G}\,\mathrm d t} + {\color{#5a4cc7}\sqrt{\tfrac{1}{N_e}({\bf G}\underline\otimes{\bf G}+{\bf G}\overline\otimes{\bf G})}:\mathrm d{\bf B}}\]</span></p>
-<div class="columns cols2">
-<div class="column" style="width:68%;">
 <ul>
-<li class="fragment"><span class="math inline">\(N_e=v/n\)</span> effective population size</li>
+<li class="fragment"><span class="math inline">\(m(\nu,{\bf z})\equiv0\)</span></li>
+<li class="fragment"><span class="math inline">\({\color{#3c8500}\bf M}={\bf 0}\)</span></li>
+<li class="fragment"><span class="math inline">\(N_e=v/n\)</span> effective population size (assumed constant)</li>
 <li class="fragment"><pink>Deterministic part</pink> ~ shrinks <span class="math inline">\(\bf G\)</span>
 <ul>
 <li class="fragment">Agrees with Lande’s <span class="math inline">\(\mathbb E[{\bf G}_t]\)</span></li>
@@ -399,30 +408,36 @@
 <li class="fragment">study <span class="math inline">\(\rho_{ij}=G_{ij}/\sqrt{G_{ii}G_{jj}}\)</span> to gain insights</li>
 </ul></li>
 </ul>
-</div><div class="column" style="width:28%;">
-
-</div></div>
 </section>
 <section id="obtaining-dynamics-of-genetic-correlations" class="slide level2 center">
 <h2>Obtaining dynamics of genetic correlations</h2>
-<p>(and dealing with stochastic terms)</p>
 <ul>
-<li>Use ito’s formula on <span class="math inline">\(\rho=f({\bf G})\)</span></li>
+<li class="fragment">Use Itô’s formula on <span class="math inline">\(\rho=f({\bf G})\)</span></li>
 </ul>
+<div class="fragment">
 <p><span class="math display">\[
-\mathrm d\rho=(\nabla_{\bf G}f)^\top\mathrm d{\bf G}+\tfrac 1 2 (\mathrm d{\bf G})^\top (\mathrm H_{\bf G}f)(\mathrm d {\bf G})
+\mathrm d\rho=\nabla_{\bf G}f:\mathrm d{\bf G}+\tfrac 1 2 \nabla_{\bf G}^2f::(\mathrm d{\bf G}\otimes\mathrm d{\bf G})
 \]</span></p>
+</div>
+<!-- - $\mathrm d{\bf G}\otimes\mathrm d{\bf G}$ involves $\mathrm d {\bf B}_{\bf G}$, already have heuristics for -->
 <ul>
-<li></li>
+<li class="fragment"><p>Useful to rewrite <span class="math inline">\(\mathrm d{\bf G}\)</span></p>
+<ul>
+<li class="fragment"><p><em>in index notation</em> <span class="math inline">\(\mathrm dG_{ij}={\color{#c2185b}-\tfrac v n G_{ij}}\,\mathrm dt+{\color{#5a4cc7}\sqrt{G_{ij}^2-G_{ii}G_{jj}}\,\mathrm dB_{G_{ij}}}\)</span></p>
+<ul>
+<li class="fragment"><span class="math inline">\({\color{#5a4cc7}\mathrm d{\cal M}((g_i-\bar g)(g_j-\bar g)-G_{ij})}={\color{#5a4cc7}\sqrt{G_{ij}^2-G_{ii}G_{jj}}\,\mathrm dB_{G_{ij}}}\)</span></li>
+</ul></li>
+<li class="fragment"><p><em>because linearity</em> <span class="math inline">\(a\,\mathrm d{\cal M}({\bf x})+b\,\mathrm d{\cal M}({\bf y})=\mathrm d{\cal M}(a\,{\bf x}+b\,{\bf y})\)</span></p>
+<ul>
+<li class="fragment">then rewrite back with <span class="math inline">\(\mathrm dB=\mathrm d{\cal M}(a\,{\bf x}+b\,{\bf y})\)</span></li>
+</ul></li>
+</ul></li>
 </ul>
 </section>
 <section id="genetic-correlations-tend-towards-1" class="slide level2 center">
 <h2>Genetic correlations tend towards ±1</h2>
+<p><span class="math display">\[\mathrm d\rho={\color{#c2185b}-\frac{1}{2N_e}\,\rho\,(1-\rho^2)}\,\mathrm dt+{\color{#5a4cc7}\sqrt{\frac{1}{N_e}\,(1-\rho^2)}\,\mathrm dB}\]</span></p>
 <div class="fragment">
-<ul>
-<li class="fragment"><span class="math inline">\(d\rho/dt\)</span> from <span class="math inline">\(d{\bf G}/dt\)</span> using chain rule: <span class="math inline">\(\frac {d\rho}{dt}=-\frac{1}{2N_e}\,\rho\,(1-\rho^2)+\sqrt{\frac{1}{N_e}\,(1-\rho^2)}\,\frac {dB}{dt}\)</span></li>
-</ul>
-</div>
 <div class="columns cols2">
 <div class="column fragment" style="width:58%;">
 <div class="quarto-figure quarto-figure-center">
@@ -439,6 +454,7 @@
 </figure>
 </div>
 </div></div>
+</div>
 </section>
 <section id="revised-view" class="slide level2 center">
 <h2>Revised view</h2>
@@ -447,11 +463,14 @@
 <ul>
 <li class="fragment">Drift alters orientation of <span class="math inline">\(\bf G\)</span>-matrices
 <ul>
-<li class="fragment">while also eroding variation</li>
+<li class="fragment">while also eroding variation <span class="math inline">\({\mathbb E}[{\bf G}_t]\)</span></li>
 </ul></li>
 <li class="fragment">Stability of <span class="math inline">\(\bf G\)</span>-matrix structure due to
 <ul>
-<li class="fragment">mutation, migration, selection</li>
+<li class="fragment">mutation, migration, selection
+<ul>
+<li class="fragment">(recombination)</li>
+</ul></li>
 </ul></li>
 <li class="fragment">Essentially complete opposite of previous view (Roff 2000)</li>
 </ul>
@@ -462,37 +481,39 @@
 </figure>
 </div>
 </div></div>
-</section>
-<section id="consequences-for-understanding-evolution" class="slide level2 center">
-<h2>Consequences for understanding evolution</h2>
-<div class="columns cols2">
-<div class="column fragment" style="width:38%;">
-<p>McGlothlin et al (2018):</p>
-<ul>
-<li class="fragment"><span class="math inline">\(\bf G\)</span>-matrice of Anolis lizards</li>
-<li class="fragment">Variation across lineages =&gt; evolution</li>
-<li class="fragment">Overall structure conserved</li>
-<li class="fragment">Explanations:
-<ul>
-<li class="fragment">Plieotropy</li>
-<li class="fragment">Stabilizing selection</li>
-<li class="fragment">“<em>Genetic drift is predicted to primarily influence G-matrix size…</em>”</li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:58%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="anolisG.jpeg"></p>
-<figcaption>Fig 2 from McGlothlin et al (2018)</figcaption>
-</figure>
-</div>
-</div></div>
-<div class="fragment">
-<ul>
-<li>If drift explains small <span class="math inline">\(\bf G\)</span>-matrices, why dont those matrices also have altered orientation?</li>
-<li>Adding recombination doesn’t solve the problem … add drosphila slide at end for people who ask this question</li>
-</ul>
-</div>
+<!-- 
+## Consequences for understanding evolution
+
+:::: {.columns .cols2}
+
+::: {.column .fragment width="38%"}
+
+McGlothlin et al (2018):
+
+::: {.incremental}
+
+- $\bf G$-matrice of Anolis lizards
+- Variation across lineages => evolution
+- Overall structure conserved
+- Explanations:
+  - Plieotropy
+  - Stabilizing selection
+  - "*Genetic drift is predicted to primarily influence G-matrix size...*"
+
+:::
+
+:::
+
+::: {.column width="58%"}
+![Fig 2 from McGlothlin et al (2018)](anolisG.jpeg){fig-align="center"}
+:::
+
+::::
+
+::: {.fragment}
+- If drift explains small $\bf G$-matrices, why dont those matrices also have altered orientation?
+- Adding recombination doesn't solve the problem ... add drosphila slide at end for people who ask this question
+::: -->
 </section>
 <section id="more-in-the-paper" class="slide level2 center">
 <h2>More in the paper…</h2>
@@ -511,20 +532,26 @@
 </div><div class="column" style="width:23%;">
 <p><img data-src="mpi.png"></p>
 </div></div>
-<!-- 
-- Conventional (old) wisdom:
-  - *drift*
-    - does not change $\bf G$-matrices on average
-    - but does cause some variation across populations 
-  - *selection*
-    - alters orientation of $\bf G$-matrices
-- Rigorous (new) wisdom:
-  - *drift*
-    - rapidly drives correlations to ±1
-    - dramatically alters orientation of $\bf G$-matrices
-  - previously taken as 
-
-add rev to comp qg here -->
+</section>
+<section id="what-about-recombination" class="slide level2 center">
+<h2>What about Recombination?</h2>
+<p>Drift alters <span class="math inline">\(\bf G\)</span>-matrix orientation even with recombination</p>
+<div class="columns cols2">
+<div class="column" style="width:48%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="phillips2001.png" style="width:20.0%"></p>
+<figcaption>52 <em>Drosophila</em> lines from one ancestor: drift alone scatters the genetic correlation across orientations and flips its sign (<strong>Phillips et al.&nbsp;2001</strong>).</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:48%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="mallard.png"></p>
+<figcaption>Outcrossing <em>C. elegans</em>, 240 generations, means static: evolved major axes randomly oriented vs the ancestor (<strong>Mallard et al.&nbsp;2023</strong>)</figcaption>
+</figure>
+</div>
+</div></div>
 
 </section>
     </div>
