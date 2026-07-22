@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.8.26">
 
   <meta name="author" content="Bob Week 🦠 KiTE Postdoc ~ Schulenburg Group 🪱 Kiel University   🌐 bobweek.github.io 🦋 @bweek.bsky.social">
-  <title>Stochastic Eco-Evolutionary Dynamics of Multivariate Traits</title>
+  <title>The Response of \bf G-matrices to Random Genetic Drift</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -141,7 +141,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Stochastic Eco-Evolutionary Dynamics of Multivariate Traits</h1>
+  <h1 class="title">The Response of <span class="math inline">\(\bf G\)</span>-matrices to Random Genetic Drift</h1>
+  <p class="subtitle">and a stochastic eco-evolutionary modelling framework</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -152,63 +153,149 @@
 </div>
 
 </section>
-<section id="demographic-stochasticity-is-super-important" class="slide level2 center">
-<h2>Demographic stochasticity is super important</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="extinction.png" width="720"></p>
-<figcaption>explains extinction dynamics</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="fixation.png" width="720"></p>
-<figcaption>explains random genetic, fixation and loss</figcaption>
-</figure>
-</div>
-</section>
-<section id="consequences-of-random-genetic-drift" class="slide level2 center">
-<h2>Consequences of random genetic drift</h2>
-
-<img data-src="wf_correlations_2.gif" class="quarto-figure quarto-figure-center r-stretch"><div class="columns cols2">
-<div class="column" style="width:58%;">
-<ul>
-<li class="fragment"><strong>1</strong> Erodes heritable variation</li>
-<li class="fragment"><strong>2</strong> Increases genetic correlations/linkage</li>
-</ul>
-</div><div class="column" style="width:38%;">
-<ul>
-<li class="fragment">Fundamental principles of evolutionary biology</li>
-<li class="fragment">Established through population genetic lens</li>
-</ul>
-</div></div>
-</section>
-<section id="what-about-quantitative-characters" class="slide level2 center">
-<h2>What about quantitative characters?</h2>
+<section id="what-is-a-bf-g-matrix" class="slide level2 center">
+<h2>What is a <span class="math inline">\(\bf G\)</span>-matrix?</h2>
 <ul>
 <li class="fragment">Multivariate trait vector: <span class="math inline">\({\bf z}=\left(\begin{smallmatrix} z_1 \\ \vdots \\ z_d \end{smallmatrix}\right)\)</span></li>
-<li class="fragment">Genetic covariance structure ~ <span class="math inline">\({\bf G}\)</span>-matrix: <span class="math inline">\(\left(\begin{smallmatrix} G_{11} &amp; \cdots &amp; G_{1d} \\ \vdots &amp; \ddots &amp; \vdots \\ G_{d1} &amp; \cdots &amp; G_{dd} \end{smallmatrix}\right)\)</span> <img data-src="G-mat.png" class="inline-img" style="width:9.0%">
+<li class="fragment">Trait decomposition: <span class="math inline">\({\bf z}={\bf g}+{\bf e}\)</span>
 <ul>
-<li class="fragment">Genetic correlation: <span class="math inline">\(\rho_{ij}({\bf G})=G_{ij}/\sqrt{G_{ii}\,G_{jj}}\)</span> <br><br></li>
-<li class="fragment">We should know how <span class="math inline">\(\bf G\)</span> responds to drift!
+<li class="fragment"><span class="math inline">\(\bf g=\)</span> genetic component</li>
+<li class="fragment"><span class="math inline">\(\bf e=\)</span> “environmental” component (error, everything else)</li>
+</ul></li>
+<li class="fragment">Genetic covariance structure: <span class="math inline">\({\bf G}=\mathrm{Cov}({\bf g})=\left(\begin{smallmatrix} G_{11} &amp; \cdots &amp; G_{1d} \\ \vdots &amp; \ddots &amp; \vdots \\ G_{d1} &amp; \cdots &amp; G_{dd} \end{smallmatrix}\right)\)</span>
 <ul>
-<li class="fragment"><span class="math inline">\(\mathbb E[{\bf G}_t]={\bf G}_0e^{-t/N_e}\)</span>, (Lande, 1979, 1980) <img data-src="G-shrink.png" class="inline-img quarto-figure quarto-figure-center" style="width:10.0%"></li>
-<li class="fragment"><span class="math inline">\(\rho(\mathbb E[{\bf G}_t])=\rho({\bf G}_0)\)</span>, constant correlation (different previous slide!)</li>
+<li class="fragment">First two principle components: <img data-src="G-mat.png" class="inline-img" style="width:9.0%"></li>
+<li class="fragment">Heritable component of variation</li>
+<li class="fragment">Predicts response to selection <span class="math inline">\(\Delta\bar{\bf z}={\bf G}\,\nabla_{\bar{\bf z}}\ln\bar W\)</span>
+<ul>
+<li class="fragment"><span class="math inline">\(\bar W=\)</span> mean fitness</li>
 </ul></li>
 </ul></li>
+</ul>
+</section>
+<section id="what-is-random-genetic-drift" class="slide level2 center">
+<h2>What is random genetic drift?</h2>
+<div class="columns cols2">
+<div class="column" style="width:78%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="repro_variance_types.png" class="quarto-figure quarto-figure-center" width="900"></p>
+</figure>
+</div>
+</div><div class="column" style="width:18%;">
+<p><span class="math inline">\(v=\)</span> reproductive variance</p>
+</div></div>
+<div class="fragment">
+<div class="columns cols2">
+<div class="column" style="width:18%;">
+<p><span class="math inline">\(v&gt;0\)</span> + finite abundance <br></p>
+<p><span class="math inline">\(\implies\)</span> <br></p>
+<p>random fluctuations of allele frequencies</p>
+</div><div class="column" style="width:78%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="fixation.png" class="quarto-figure quarto-figure-center" width="820"></p>
+</figure>
+</div>
+</div></div>
+</div>
+<!-- ## Demographic stochasticity is super important
+
+
+:::: {.columns .cols2}
+
+::: {.column width="78%"}
+![](extinction.png){fig-align="center" width="100%"}
+:::
+
+::: {.column width="18%"}
+explains extinction dynamics
+:::
+
+
+:::
+
+::: {.fragment}
+
+
+:::: {.columns .cols2}
+
+::: {.column width="18%"}
+explains random genetic <br> fixation and loss
+:::
+
+::: {.column width="78%"}
+![](fixation.png){fig-align="center" width="100%"}
+:::
+
+::::
+
+::: -->
+<!-- 
+## Consequences of random genetic drift
+
+![](wf_correlations_2.gif){fig-align="center"}
+
+::: {.incremental}
+
+:::: {.columns .cols2}
+
+::: {.column width="58%"}
+
+- **1** Erodes heritable variation
+- **2** Increases genetic correlations/linkage
+ 
+:::
+
+::: {.column width="38%"}
+
+- Fundamental principles of evolutionary biology
+- Established through population genetic lens
+
+:::
+
+::::
+
+::: -->
+</section>
+<section id="response-of-mathbb-ebf-g-to-drift" class="slide level2 center">
+<h2>Response of <span class="math inline">\({\mathbb E}[{\bf G}]\)</span> to drift</h2>
+<ul>
+<li class="fragment"><p><span class="math inline">\(\tfrac{\mathrm d}{\mathrm dt}\mathbb E[{\bf G}]\approx-\tfrac{1}{N_e}\mathbb E[{\bf G}]\)</span>, <em>(Lande, 1979, 1980)</em><br><br></p></li>
+<li class="fragment"><p><span class="math inline">\(\mathbb E[{\bf G}_t]\approx{\bf G}_0e^{-t/N_e}\)</span></p></li>
+<li class="fragment"><p>Drift “shrinks” entries of <span class="math inline">\(\bf G\)</span>-matrices <img data-src="G-shrink.png" class="inline-img quarto-figure quarto-figure-center" style="width:10.0%"></p></li>
 </ul>
 </section>
 <section id="the-conventional-view" class="slide level2 center">
 <h2>The conventional view</h2>
 <ul>
-<li class="fragment">Drift “shrinks” entries of <span class="math inline">\(\bf G\)</span>-matrices <img data-src="G-shrink.png" class="inline-img quarto-figure quarto-figure-center" style="width:10.0%"> (Roff 2000)
+<li class="fragment">Drift “shrinks” entries of <span class="math inline">\(\bf G\)</span>-matrices <img data-src="G-shrink.png" class="inline-img quarto-figure quarto-figure-center" style="width:10.0%"></li>
+<li class="fragment">No effect on genetic correlations between traits
 <ul>
-<li class="fragment">No effect on genetic correlations between traits</li>
-<li class="fragment">Differences in orientation ~ selection, mutation, migration <img data-src="G-orient.png" class="inline-img quarto-figure quarto-figure-center" style="width:10.0%"></li>
-<li class="fragment">… but variation around <span class="math inline">\(\mathbb{E}[{\bf G}_t]\)</span> (Phillips et al, 2001; Steppan et al, 2002) <br><br></li>
+<li class="fragment">(btw, genetic correlations alter <span class="math inline">\(\bf G\)</span>-matrix orientation) <img data-src="G-orient.png" class="inline-img quarto-figure quarto-figure-center" style="width:10.0%"></li>
 </ul></li>
-<li class="fragment">… still lacking stochastic neutral model (Mallard et al, 2024; Blomberg et al, 2025)</li>
+<li class="fragment">Differences in orientation ~ selection, mutation, migration <em>(Roff 2000)</em><br><br>
+<ul>
+<li class="fragment">Used as evidence for selection <em>(Cano et al.&nbsp;2004)</em></li>
+</ul></li>
 </ul>
+</section>
+<section id="empirical-pushback-and-gap-in-theory" class="slide level2 center">
+<h2>Empirical pushback and gap in theory</h2>
+<div class="columns cols2">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="phillips2001.png" style="width:52.0%"></p>
+<figcaption>52 <em>Drosophila</em> lines from one ancestor: realized genetic correlations scatter across orientations and even flip sign (Phillips et al.&nbsp;2001)</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:48%;">
+<ul>
+<li class="fragment">Variation around <span class="math inline">\(\mathbb{E}[{\bf G}_t]\)</span> <em>(Phillips et al, 2001; Steppan et al, 2002)</em> <br><br></li>
+<li class="fragment">Still lacking stochastic neutral model <em>(Mallard et al, 2024; Blomberg et al, 2025)</em></li>
+</ul>
+</div></div>
 <!-- ## Why the contrast between linkage and trait correlations?
 
 - Drift:
@@ -230,6 +317,20 @@
 
 ::: -->
 </section>
+<section id="roadmap" class="slide level2 center">
+<h2>Roadmap</h2>
+<ul>
+<li class="fragment">Use diffusion-limit to get SDE <span class="math inline">\(\mathrm d{\bf G}=a({\bf G})\mathrm dt+b({\bf G})\mathrm d{\bf B}\)</span>
+<ul>
+<li class="fragment">Also gives abundance <span class="math inline">\(\mathrm dn\)</span>, mean trait <span class="math inline">\(\mathrm d\bar{\bf z}\)</span></li>
+<li class="fragment">Also gives heuristics for calculations
+<ul>
+<li class="fragment">{<span class="math inline">\(\mathrm dn,\mathrm d\bar{\bf z},\mathrm d{\bf G}\)</span>} ∪ {heuristics} = eco-evo framework</li>
+</ul></li>
+</ul></li>
+<li class="fragment">Apply heuristics to study <span class="math inline">\(\mathrm d{\bf G}\)</span></li>
+</ul>
+</section>
 <section id="a-diffusion-approximation-approach" class="slide level2 center">
 <h2>A Diffusion Approximation Approach</h2>
 <div class="columns cols2">
@@ -237,11 +338,10 @@
 <ul>
 <li class="fragment"><strong>Individual-Based Model:</strong>
 <ul>
-<li class="fragment">Traits <span class="math inline">\({\bf z}\in {\mathbb R}^d\)</span>, population <span class="math inline">\({\cal P}_t({\bf z})\)</span></li>
+<li class="fragment">Population <span class="math inline">\({\cal P}_t({\bf z})\)</span></li>
 <li class="fragment">Gaussian mutation
 <ul>
-<li class="fragment"><span class="math inline">\({\bf z}'\sim{\mathrm{MVN}}_d({\bf z},{\bf M})\)</span></li>
-<li class="fragment">NOT infitesimal model!!</li>
+<li class="fragment"><span class="math inline">\({\bf g}'\sim{\mathrm{MVN}}_d({\bf g},{\bf M})\)</span></li>
 </ul></li>
 <li class="fragment"><span class="math inline">\(W({\cal P}_t,{\bf z})=\)</span> fitness function</li>
 </ul></li>
@@ -251,10 +351,11 @@
 <li class="fragment"><strong>Diffusion Limit:</strong>
 <ul>
 <li class="fragment">Rescale turnover by factor <span class="math inline">\(k\)</span></li>
+<li class="fragment">Large abundance</li>
 <li class="fragment">Rescale population <span class="math inline">\({\cal P}_t^{(k)}({\bf z})\to \nu_t({\bf z})\)</span></li>
-<li class="fragment">Growth rate <span class="math inline">\(m(\nu_t,{\bf z})=\lim_k F_k(W)\)</span>
+<li class="fragment">Growth rate: <span class="math inline">\(m(\nu_t,{\bf z})\)</span>
 <ul>
-<li class="fragment"><span class="math inline">\(k[W^{1/k}({\cal P}_t^{(k)},{\bf z})-1]\to m(\nu_t,{\bf z})\)</span></li>
+<li class="fragment"><span class="math inline">\(m(\nu_t,{\bf z})=\lim_k[W^{1/k}({\cal P}_t^{(k)},{\bf z})-1]k\)</span></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -262,104 +363,274 @@
 <iframe src="branching/index.html" width="820" height="350" style="border:0; display:block; margin:0 auto;" title="Branching diffusion">
 </iframe>
 </section>
-<section id="why-use-diffusion-approximations" class="slide level2 center">
-<h2>Why Use Diffusion Approximations?</h2>
+<section id="why-take-a-diffusion-limit" class="slide level2 center">
+<h2>Why Take a Diffusion Limit?</h2>
 <div class="columns cols2">
 <div class="column" style="width:53%;">
 <ul>
-<li class="fragment">Nice analytical properties</li>
-<li class="fragment">Many models -&gt; common diffusion limit
+<li class="fragment"><p>Analytical tractability <em>(Kimura 1964)</em></p></li>
+<li class="fragment"><p>Many models <span class="math inline">\(\rightarrow\)</span> common diffusion limit <em>(Möhle 2001)</em></p>
 <ul>
-<li class="fragment">Previous slide:
-<ul>
-<li class="fragment">Birth-death process</li>
-<li class="fragment">&lt;-&gt; Poisson offspring count</li>
+<li class="fragment">Common leading-order drift and noise <em>(Kurtz 1978)</em></li>
+<li class="fragment">Robust predictions across that model class <em>(Constable &amp; McKane 2017)</em></li>
 </ul></li>
-<li class="fragment">Extracts important features</li>
-<li class="fragment">Uncover biological principles</li>
+<li class="fragment"><p><strong>Not a universally better model</strong></p>
+<ul>
+<li class="fragment">Validity depends on scaling and omitted details <em>(Der et al.&nbsp;2011)</em></li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:43%;">
 <div class="clean-slide-image r-stretch">
-<p><img src="diffusion_limit_set_diagram.png" alt="Individual-based models with a common diffusion limit"></p>
+<p><img src="diffusion_limit_set_diagram.png" alt="Different individual-based models sharing a diffusion limit under a specified scaling"></p>
 </div>
 </div></div>
+<!-- ## Why Take a Diffusion Limit?
+
+:::: {.columns .cols2}
+
+::: {.column width="53%"}
+
+::: {.incremental}
+
+- Nice analytical properties
+
+- Many models -> common diffusion limit
+  - A coarse-grained equivalence class
+  - Identifies leading-order structure
+
+- Candidate general principles
+  - Results shared across the equivalence class
+  - Departures from the limit reveal when omitted mechanisms matter
+
+:::
+
+:::
+
+::: {.column width="43%"}
+
+<div class="clean-slide-image r-stretch">
+  <img
+    src="diffusion_limit_set_diagram.png"
+    alt="Different individual-based models sharing a diffusion limit under a specified scaling"
+  >
+</div>
+
+:::
+
+::::
+
+## Why Use Diffusion Approximations?
+
+:::: {.columns .cols2}
+
+::: {.column width="53%"}
+
+
+::: {.incremental}
+
+
+- Nice analytical properties
+- Many models -> common diffusion limit
+  - Many details lost in limit
+  - Surviving details of broad importance
+  - Uncover biological principles
+
+:::
+
+:::
+
+::: {.column width="43%"}
+
+<div class="clean-slide-image r-stretch">
+  <img
+    src="diffusion_limit_set_diagram.png"
+    alt="Individual-based models with a common diffusion limit"
+  >
+</div>
+
+
+:::
+
+:::: -->
 </section>
 <section id="the-diffusion-limit" class="slide level2 center">
 <h2>The Diffusion Limit</h2>
 <iframe src="spde/index.html" width="980" height="560" style="border:0; display:block; margin:0 auto;" title="SPDE trait density">
 </iframe>
+<!-- ## Moment dynamics (not closed) {.smaller}
+
+<p style="text-align:center;font-size:.6em;color:#444;margin:.1em 0 .5em;">
+<span style="color:#c2185b;">●</span>&nbsp;selection / growth&emsp;
+<span style="color:#3c8500;">●</span>&nbsp;mutation&emsp;
+<span style="color:#5a4cc7;">●</span>&nbsp;drift (noise)
+</p>
+
+::: {.incremental}
+
+::: {.fragment}
+**abundance** <span style="font-size:.7em;color:#888;">scalar</span>
+$$\mathrm dn={\color{#c2185b}\bar m\,n}\,\mathrm dt+{\color{#5a4cc7}\sqrt{v\,n}\,\mathrm dB_n}$$
+:::
+
+::: {.fragment}
+**mean trait** <span style="font-size:.7em;color:#888;">$d\times1$</span>
+$$\mathrm d\bar{\bf z}={\color{#c2185b}\mathrm{Cov}(m,{\bf z})}\,\mathrm dt+{\color{#5a4cc7}\sqrt{\tfrac vn{\bf P}}\,\mathrm d{\bf B}_{\bar{\bf z}}}$$
+:::
+
+::: {.fragment}
+**trait (co)variance** <span style="font-size:.7em;color:#888;">$d\times d$</span>
+$$
+\mathrm d{\bf P}=\big[\,{\color{#3c8500}{\bf M}}+{\color{#c2185b}\mathrm{Cov}\big(m,({\bf z}-\bar{\bf z})({\bf z}-\bar{\bf z})^\top\big)}{\color{#5a4cc7}-\tfrac vn{\bf P}}\,\big]\,\mathrm dt
++{\color{#5a4cc7}\sqrt{\tfrac vn({\bf K}-{\bf P}\otimes{\bf P})}:\mathrm d{\bf B}_{\bf P}}
+$$
+:::
+
+::: {.fragment}
+**skew, kurtosis, …**
+$$\mathrm d{\bf S}=\dots,\qquad \mathrm d{\bf K}=\dots,\qquad \dots$$
+:::
+
+::: -->
 </section>
-<section id="moment-dynamics-not-closed" class="slide level2 center">
-<h2>Moment Dynamics (not closed)</h2>
-<div class="fragment">
-<p><span class="math inline">\(\text{mean fitness:}\quad \bar m=\tfrac{1}{n}\int_{\mathbb{R}^d}m(\nu,{\bf z})\,\nu({\bf z})\,\mathrm d{\bf z}\quad \text{reproductive variance: } v\)</span></p>
+<section id="moment-dynamics" class="slide level2 center">
+<h2>Moment dynamics</h2>
+<p style="text-align:center;font-size:.6em;color:#444;margin:.1em 0 .5em;">
+<span style="color:#c2185b;">●</span>&nbsp;selection / growth  <span style="color:#3c8500;">●</span>&nbsp;mutation  <span style="color:#5a4cc7;">●</span>&nbsp;drift (noise)
+</p>
+<div style="display:inline-block;background:#fdf0e3;color:#9a5b1e;border:1px solid #f0d3b0;border-radius:6px;padding:2px 12px;font-size:.68em;margin-bottom:.4em;">
+⚠ not closed — needs <span class="math inline">\({\bf K},{\bf S},\dots\)</span>
 </div>
-<div class="fragment">
+<div class="columns fragment">
+<div class="column" style="width:34%;">
+<p><span style="font-size:.8em;color:#555;">grows at mean fitness; demographic noise <span class="math inline">\(\propto\!\sqrt{n}\)</span></span></p>
+</div><div class="column" style="width:66%;">
+<p><span class="math display">\[\mathrm dn={\color{#c2185b}\bar m\,n}\,\mathrm dt+{\color{#5a4cc7}\sqrt{v\,n}\,\mathrm dB_n}\]</span></p>
+</div></div>
+<div class="columns fragment">
+<div class="column" style="width:34%;">
+<p><span style="font-size:.8em;color:#555;">selection moves the mean; drift jitters it</span></p>
+</div><div class="column" style="width:66%;">
+<p><span class="math display">\[\mathrm d\bar{\bf z}={\color{#c2185b}\mathrm{Cov}(m,{\bf z})}\,\mathrm dt+{\color{#5a4cc7}\sqrt{\tfrac vn{\bf G}}\,\mathrm d{\bf B}_{\bar{\bf z}}}\]</span></p>
+</div></div>
+<div class="columns fragment">
+<div class="column" style="width:34%;">
+<p><span style="font-size:.8em;color:#555;">mutation adds, selection reshapes, drift erodes &amp; fluctuates</span></p>
+</div><div class="column" style="width:66%;">
 <p><span class="math display">\[
+\begin{aligned}
+\mathrm d{\bf G}=\big[&amp;{\color{#3c8500}{\bf M}}+{\color{#c2185b}\mathrm{Cov}(m,\ldots)}{\color{#5a4cc7}-\tfrac vn{\bf G}}\big]\mathrm dt\\
+&amp;+{\color{#5a4cc7}\sqrt{\tfrac vn({\bf K}-{\bf G}\otimes{\bf G})}:\mathrm d{\bf B}_{\bf G}}
+\end{aligned}
+\]</span></p>
+</div></div>
+</section>
+<section id="multivariate-normal-approximation" class="slide level2 center">
+<h2>Multivariate normal approximation</h2>
+<div style="display:inline-block;background:#fdf0e3;color:#9a5b1e;border:1px solid #f0d3b0;border-radius:6px;padding:2px 12px;font-size:.68em;margin-bottom:.4em;">
+ദ്ദി ˉ͈̀꒳ˉ͈́ )✧ closed
+</div>
+<div class="columns fragment">
+<div class="column" style="width:38%;">
+<p><span style="font-size:.8em;color:#555;"><strong>unchanged</strong> — the MVN assumption never touches abundance</span></p>
+</div><div class="column" style="width:62%;">
+<p><span class="math display">\[\mathrm dn={\color{#c2185b}\bar m\,n}\,\mathrm dt+{\color{#5a4cc7}\sqrt{v\,n}\,\mathrm dB_n}\]</span></p>
+</div></div>
+<div class="columns fragment">
+<div class="column" style="width:38%;">
+<p><span style="font-size:.8em;color:#555;">selection: covariance becomes a <strong>gradient</strong> of <span class="math inline">\(\bar m\)</span> , <span class="math inline">\(\mathrm{Cov}(m,{\bf z})\to{\bf G}\nabla_{\bar{\bf z}}\bar m\)</span></span></p>
+</div><div class="column" style="width:62%;">
+<p><span class="math display">\[\mathrm d\bar{\bf z}={\color{#c2185b}{\bf G}\big(\nabla_{\bar{\bf z}}\bar m-\overline{\nabla_{\bar{\bf z}}m}\big)}\,\mathrm dt+{\color{#5a4cc7}\sqrt{\tfrac vn{\bf G}}\,\mathrm d{\bf B}_{\bar{\bf z}}}\]</span></p>
+</div></div>
+<div class="columns fragment">
+<div class="column" style="width:38%;">
+<p><span style="font-size:.8em;color:#555;">gradients again , <strong>and the noise closes</strong>: kurtosis <span class="math inline">\(\ {\bf K}\to{\bf G}\overline\otimes{\bf G}+{\bf G}\underline\otimes{\bf G}\)</span></span></p>
+</div><div class="column" style="width:62%;">
+<p><span class="math display">\[
+\begin{aligned}
+\mathrm d{\bf G}=\big[&amp;{\color{#3c8500}{\bf M}}+{\color{#c2185b}2{\bf G}(\nabla_{\bf G}\bar m-\overline{\nabla_{\bf G}m}){\bf G}}{\color{#5a4cc7}-\tfrac vn{\bf G}}\big]\mathrm dt\\
+&amp;+{\color{#5a4cc7}\sqrt{\tfrac vn({\bf G}\overline\otimes{\bf G}+{\bf G}\underline\otimes{\bf G})}:\mathrm d{\bf B}_{\bf G}}
+\end{aligned}
+\]</span></p>
+</div></div>
+<!-- ## Moment Dynamics (not closed)
+
+::: {.incremental}
+
+::: {.fragment}
+
+$\text{mean fitness:}\quad \bar m=\tfrac{1}{n}\int_{\mathbb{R}^d}m(\nu,{\bf z})\,\nu({\bf z})\,\mathrm d{\bf z}\quad \text{reproductive variance: } v$
+
+:::
+
+::: {.fragment}
+
+$$
 \text{total abundance:}\quad \mathrm dn={\color{#c2185b}\bar m \, n}\,\mathrm dt + {\color{#5a4cc7}\sqrt{v\,n}\,\mathrm dB_n}
-\]</span></p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
+$$
+
+:::
+
+::: {.fragment}
+
+$$
 \text{mean trait (}d\text{-dim):}\quad \mathrm d\bar{\bf z}={\color{#c2185b}\textrm{Cov}(m,{\bf z})}\,\mathrm dt + {\color{#5a4cc7}\sqrt{\tfrac v n {\bf P}}\,\mathrm d{\bf B}_{\bar{\bf z}}}
-\]</span></p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\begin{multline}
+$$
+
+:::
+
+::: {.fragment}
+
+\begin{multline}
 \text{trait variance (}d\times d\text{):}\quad \mathrm d{\bf P}=\big[{\color{#3c8500}{\bf M}}+{\color{#c2185b}\textrm{Cov}(m,({\bf z}-\bar{\bf z})({\bf z}-\bar{\bf z})^\top)}{\color{#5a4cc7}-\tfrac v n {\bf P}}\big]\,\mathrm dt \\
 + {\color{#5a4cc7}\sqrt{\tfrac v n ({\bf K}-{\bf P}\otimes{\bf P})}:\mathrm d{\bf B}_{\bf P}}
-\end{multline}\]</span></p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
+\end{multline}
+
+:::
+
+::: {.fragment}
+
+$$
 \text{skew tensor }(d\times d\times d)\text{:}\quad \mathrm d{\bf S}=\dots, \quad
-\text{kurtosis tensor }(d\times d\times d\times d)\text{:}\quad \mathrm d{\bf K}=\dots,\quad \dots\]</span></p>
-</div>
-</section>
-<section id="multivariate-normal-approximation-closed" class="slide level2 center">
-<h2>Multivariate Normal Approximation (closed)</h2>
-<div class="fragment">
-<p><span class="math display">\[
+\text{kurtosis tensor }(d\times d\times d\times d)\text{:}\quad \mathrm d{\bf K}=\dots,\quad \dots$$
+
+:::
+
+
+::: -->
+<!-- ## Multivariate Normal Approximation (closed)
+
+::: {.incremental}
+
+::: {.fragment}
+
+$$
 \text{total abundance (1-dim):}\quad \mathrm dn={\color{#c2185b}\bar m \, n}\,\mathrm dt + {\color{#5a4cc7}\sqrt{v\,n}\,\mathrm dB_n}
-\]</span></p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
+$$
+
+:::
+
+::: {.fragment}
+
+$$
 \text{mean trait (}d\text{-dim):}\quad \mathrm d\bar{\bf z}={\color{#c2185b}{\bf P}\big(\nabla_{\bar{\bf z}}\,\bar m-\overline{\nabla_{\bar{\bf z}}\,m}\big)}\,\mathrm dt + {\color{#5a4cc7}\sqrt{\tfrac v n {\bf P}}\,\mathrm d{\bf B}_{\bar{\bf z}}}
-\]</span></p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\begin{multline}
+$$
+
+:::
+
+::: {.fragment}
+
+\begin{multline}
 \text{trait variance (}d\times d\text{):}\quad \mathrm d{\bf P}=\big[{\color{#3c8500}\bf M}+{\color{#c2185b}2\,{\bf P}(\nabla_{\bf P}\,\bar m-\overline{\nabla_{\bf P}\,m})\,{\bf P}}{\color{#5a4cc7}-\tfrac v n {\bf P}}\big]\,\mathrm dt \\
 + {\color{#5a4cc7}\sqrt{\tfrac v n (\mathbf{P}\overline\otimes \mathbf{P}+\mathbf{P}\underline\otimes \mathbf{P})}:\mathrm d{\bf B}_{\bf P}}
-\end{multline}\]</span></p>
-</div>
+\end{multline}
+
+:::
+
+
+::: -->
 </section>
-<section id="multivariate-normal-decomposed-traits" class="slide level2 center">
-<h2>Multivariate Normal + Decomposed Traits</h2>
-<div class="fragment">
-<p>Traits decompose <span class="math inline">\({\bf z}={\bf g}+{\bf e}\)</span> with iid <span class="math inline">\({\mathrm{Cov}}({\bf e})={\bf E}\)</span> so that <span class="math inline">\({\bf P}={\bf G}+{\bf E}\)</span></p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
-\text{total abundance:}\quad \mathrm dn={\color{#c2185b}\bar m \, n}\,\mathrm dt + {\color{#5a4cc7}\sqrt{v\,n}\,\mathrm dB_n}
-\]</span></p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
-\text{mean trait (}d\text{-dim):}\quad \mathrm d\bar{\bf z}={\color{#c2185b}{\bf G}\big(\nabla_{\bar{\bf z}}\,\bar m-\overline{\nabla_{\bar{\bf z}}\,m}\big)}\,\mathrm dt + {\color{#5a4cc7}\sqrt{\tfrac v n {\bf G}}\,\mathrm d{\bf B}_{\bar{\bf z}}}
-\]</span></p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[\begin{multline}
-\text{genetic variance (}d\times d\text{):}\quad \mathrm d{\bf G}=\big[{\color{#3c8500}{\bf M}}+{\color{#c2185b}2\,{\bf G}(\nabla_{\bf G}\,\bar m-\overline{\nabla_{\bf G}\,m})\,{\bf G}}{\color{#5a4cc7}-\tfrac v n {\bf G}}\big]\,\mathrm dt \\
-+ {\color{#5a4cc7}\sqrt{\tfrac v n  (\mathbf{G}\overline\otimes \mathbf{G}+\mathbf{G}\underline\otimes \mathbf{G})}:\mathrm d{\bf B}_{\bf G}}
-\end{multline}\]</span></p>
-</div>
-<ul>
-<li class="fragment">this is a particularly kewt consolidation *^-^*</li>
-</ul>
+<section id="heuristics" class="slide level2 center">
+<h2>Heuristics</h2>
 </section>
 <section id="how-to-use" class="slide level2 center">
 <h2>How to use?</h2>
@@ -467,10 +738,7 @@
 </ul></li>
 <li class="fragment">Stability of <span class="math inline">\(\bf G\)</span>-matrix structure due to
 <ul>
-<li class="fragment">mutation, migration, selection
-<ul>
-<li class="fragment">(recombination)</li>
-</ul></li>
+<li class="fragment">mutation, migration, selection</li>
 </ul></li>
 <li class="fragment">Essentially complete opposite of previous view (Roff 2000)</li>
 </ul>
@@ -541,17 +809,20 @@ McGlothlin et al (2018):
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="phillips2001.png" style="width:20.0%"></p>
-<figcaption>52 <em>Drosophila</em> lines from one ancestor: drift alone scatters the genetic correlation across orientations and flips its sign (<strong>Phillips et al.&nbsp;2001</strong>).</figcaption>
+<figcaption>52 <em>Drosophila</em> lines from one ancestor: drift alone scatters the genetic correlation across orientations and flips its sign <br>(<strong>Phillips et al.&nbsp;2001</strong>)</figcaption>
 </figure>
 </div>
 </div><div class="column" style="width:48%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="mallard.png"></p>
-<figcaption>Outcrossing <em>C. elegans</em>, 240 generations, means static: evolved major axes randomly oriented vs the ancestor (<strong>Mallard et al.&nbsp;2023</strong>)</figcaption>
+<figcaption>Outcrossing <em>C. elegans</em>, 240 generations, means static: evolved major axes randomly oriented vs the ancestor <br>(<strong>Mallard et al.&nbsp;2023</strong>)</figcaption>
 </figure>
 </div>
 </div></div>
+</section>
+<section id="what-about-environmental-stochasticity" class="slide level2 center">
+<h2>What about environmental stochasticity?</h2>
 
 </section>
     </div>
