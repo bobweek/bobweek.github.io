@@ -1,5 +1,6 @@
 ---
-title: Stochastic Eco-Evolutionary Dynamics of Multivariate Traits
+title: The Response of $\bf G$-matrices to Random Genetic Drift
+subtitle: "and a stochastic eco-evolutionary modelling framework"
 author: "**Bob Week** 🦠 KiTE Postdoc ~ Schulenburg Group 🪱 *Kiel University* <br><br> 🌐 bobweek.github.io 🦋 @bweek.bsky.social"
 format:
   revealjs:
@@ -36,12 +37,90 @@ execute:
   fig-format: svg
 ---
 
-## Demographic stochasticity is super important
+## What is a $\bf G$-matrix?
 
-![explains extinction dynamics](extinction.png){fig-align="center" width="720"}
+::: {.incremental}
+- Multivariate trait vector: ${\bf z}=\left(\begin{smallmatrix} z_1 \\ \vdots \\ z_d \end{smallmatrix}\right)$
+- Trait decomposition: ${\bf z}={\bf g}+{\bf e}$
+  - $\bf g=$ genetic component
+  - $\bf e=$ "environmental" component (error, everything else)
+- Genetic covariance structure: ${\bf G}=\mathrm{Cov}({\bf g})=\left(\begin{smallmatrix} G_{11} & \cdots & G_{1d} \\ \vdots & \ddots & \vdots \\ G_{d1} & \cdots & G_{dd} \end{smallmatrix}\right)$
+  - First two principle components: ![](G-mat.png){.inline-img width=9%}
+  - Heritable component of variation
+  - Predicts response to selection $\Delta\bar{\bf z}={\bf G}\,\nabla_{\bar{\bf z}}\ln\bar W$
+    - $\bar W=$ mean fitness
+:::
 
-![explains random genetic, fixation and loss](fixation.png){fig-align="center" width="720"}
 
+## What is random genetic drift?
+
+:::: {.columns .cols2}
+
+::: {.column width="78%"}
+![](repro_variance_types.png){fig-align="center" width="900"}
+:::
+
+::: {.column width="18%"}
+$v=$ reproductive variance 
+:::
+
+::::
+
+
+::: {.fragment}
+:::: {.columns .cols2}
+
+::: {.column width="18%"}
+$v>0$ + finite abundance <br>
+
+$\implies$ <br>
+
+random fluctuations of allele frequencies
+:::
+
+::: {.column width="78%"}
+![](fixation.png){fig-align="center" width="820"}
+:::
+
+::::
+
+:::
+
+<!-- ## Demographic stochasticity is super important
+
+
+:::: {.columns .cols2}
+
+::: {.column width="78%"}
+![](extinction.png){fig-align="center" width="100%"}
+:::
+
+::: {.column width="18%"}
+explains extinction dynamics
+:::
+
+
+:::
+
+::: {.fragment}
+
+
+:::: {.columns .cols2}
+
+::: {.column width="18%"}
+explains random genetic <br> fixation and loss
+:::
+
+::: {.column width="78%"}
+![](fixation.png){fig-align="center" width="100%"}
+:::
+
+::::
+
+::: -->
+
+
+<!-- 
 ## Consequences of random genetic drift
 
 ![](wf_correlations_2.gif){fig-align="center"}
@@ -66,29 +145,50 @@ execute:
 
 ::::
 
-:::
+::: -->
 
 
-## What about quantitative characters?
+## Response of ${\mathbb E}[{\bf G}]$ to drift
 
 ::: {.incremental}
-- Multivariate trait vector: ${\bf z}=\left(\begin{smallmatrix} z_1 \\ \vdots \\ z_d \end{smallmatrix}\right)$
-- Genetic covariance structure ~ ${\bf G}$-matrix: $\left(\begin{smallmatrix} G_{11} & \cdots & G_{1d} \\ \vdots & \ddots & \vdots \\ G_{d1} & \cdots & G_{dd} \end{smallmatrix}\right)$ ![](G-mat.png){.inline-img width=9%}
-  - Genetic correlation: $\rho_{ij}({\bf G})=G_{ij}/\sqrt{G_{ii}\,G_{jj}}$ <br><br>
-  - We should know how $\bf G$ responds to drift!
-    - $\mathbb E[{\bf G}_t]={\bf G}_0e^{-t/N_e}$, (Lande, 1979, 1980) ![](G-shrink.png){.inline-img width=10% fig-align="center"}
-    - $\rho(\mathbb E[{\bf G}_t])=\rho({\bf G}_0)$, constant correlation (different previous slide!)
+
+- $\tfrac{\mathrm d}{\mathrm dt}\mathbb E[{\bf G}]\approx-\tfrac{1}{N_e}\mathbb E[{\bf G}]$, *(Lande, 1979, 1980)*<br><br>
+
+- $\mathbb E[{\bf G}_t]\approx{\bf G}_0e^{-t/N_e}$
+
+- Drift "shrinks" entries of $\bf G$-matrices ![](G-shrink.png){.inline-img width=10% fig-align="center"}
+
 :::
 
 ## The conventional view
 
 ::: {.incremental}
-- Drift "shrinks" entries of $\bf G$-matrices ![](G-shrink.png){.inline-img width=10% fig-align="center"} (Roff 2000)
-  - No effect on genetic correlations between traits
-  - Differences in orientation ~ selection, mutation, migration  ![](G-orient.png){.inline-img width=10% fig-align="center"}
-  - ... but variation around $\mathbb{E}[{\bf G}_t]$ (Phillips et al, 2001; Steppan et al, 2002) <br><br>
-- ... still lacking stochastic neutral model (Mallard et al, 2024; Blomberg et al, 2025)
+- Drift "shrinks" entries of $\bf G$-matrices ![](G-shrink.png){.inline-img width=10% fig-align="center"}
+- No effect on genetic correlations between traits
+  - (btw, genetic correlations alter $\bf G$-matrix orientation) ![](G-orient.png){.inline-img width=10% fig-align="center"}
+- Differences in orientation ~ selection, mutation, migration *(Roff 2000)*<br><br>
+  - Used as evidence for selection *(Cano et al. 2004)*
 :::
+
+## Empirical pushback and gap in theory
+
+:::: {.columns .cols2}
+
+::: {.column width="40%"}
+![52 *Drosophila* lines from one ancestor: realized genetic correlations scatter across orientations and even flip sign (Phillips et al. 2001)](phillips2001.png){fig-align="center" width="52%"}
+:::
+
+::: {.column width="48%"}
+::: {.incremental}
+
+- Variation around $\mathbb{E}[{\bf G}_t]$ *(Phillips et al, 2001; Steppan et al, 2002)* <br><br>
+- Still lacking stochastic neutral model *(Mallard et al, 2024; Blomberg et al, 2025)*
+
+:::
+:::
+
+::::
+
 
 <!-- ## Why the contrast between linkage and trait correlations?
 
@@ -112,6 +212,19 @@ execute:
 
 ::: -->
 
+## Roadmap
+
+::: {.incremental}
+
+- Use diffusion-limit to get SDE $\mathrm d{\bf G}=a({\bf G})\mathrm dt+b({\bf G})\mathrm d{\bf B}$
+  - Also gives abundance $\mathrm dn$, mean trait $\mathrm d\bar{\bf z}$
+  - Also gives heuristics for calculations
+    - {$\mathrm dn,\mathrm d\bar{\bf z},\mathrm d{\bf G}$} ∪ {heuristics} = eco-evo framework
+- Apply heuristics to study $\mathrm d{\bf G}$
+
+:::
+
+
 ## A Diffusion Approximation Approach
 
 
@@ -122,21 +235,20 @@ execute:
 ::: {.column width="48%"}
 
 - **Individual-Based Model:**
-  - Traits ${\bf z}\in {\mathbb R}^d$, population ${\cal P}_t({\bf z})$
+  - Population ${\cal P}_t({\bf z})$
   - Gaussian mutation 
-    - ${\bf z}'\sim{\mathrm{MVN}}_d({\bf z},{\bf M})$
-    - NOT infitesimal model!!
+    - ${\bf g}'\sim{\mathrm{MVN}}_d({\bf g},{\bf M})$
   - $W({\cal P}_t,{\bf z})=$ fitness function
-
 :::
 
 ::: {.column width="52%"}
 
 - **Diffusion Limit:**
   - Rescale turnover by factor $k$
+  - Large abundance
   - Rescale population ${\cal P}_t^{(k)}({\bf z})\to \nu_t({\bf z})$
-  - Growth rate $m(\nu_t,{\bf z})=\lim_k F_k(W)$
-    - $k[W^{1/k}({\cal P}_t^{(k)},{\bf z})-1]\to m(\nu_t,{\bf z})$
+  - Growth rate: $m(\nu_t,{\bf z})$
+    - $m(\nu_t,{\bf z})=\lim_k[W^{1/k}({\cal P}_t^{(k)},{\bf z})-1]k$
 
 :::
 
@@ -149,6 +261,76 @@ execute:
         title="Branching diffusion"></iframe>
 
 
+## Why Take a Diffusion Limit?
+
+:::: {.columns .cols2}
+
+::: {.column width="53%"}
+
+::: {.incremental}
+
+* Analytical tractability *(Kimura 1964)*
+
+* Many models $\rightarrow$ common diffusion limit *(Möhle 2001)*
+
+  * Common leading-order drift and noise *(Kurtz 1978)*
+  * Robust predictions across that model class *(Constable & McKane 2017)*
+
+* **Not a universally better model**
+
+  * Validity depends on scaling and omitted details *(Der et al. 2011)*
+:::
+
+:::
+
+::: {.column width="43%"}
+
+<div class="clean-slide-image r-stretch">
+  <img
+    src="diffusion_limit_set_diagram.png"
+    alt="Different individual-based models sharing a diffusion limit under a specified scaling"
+  >
+</div>
+
+:::
+
+::::
+
+
+<!-- ## Why Take a Diffusion Limit?
+
+:::: {.columns .cols2}
+
+::: {.column width="53%"}
+
+::: {.incremental}
+
+- Nice analytical properties
+
+- Many models -> common diffusion limit
+  - A coarse-grained equivalence class
+  - Identifies leading-order structure
+
+- Candidate general principles
+  - Results shared across the equivalence class
+  - Departures from the limit reveal when omitted mechanisms matter
+
+:::
+
+:::
+
+::: {.column width="43%"}
+
+<div class="clean-slide-image r-stretch">
+  <img
+    src="diffusion_limit_set_diagram.png"
+    alt="Different individual-based models sharing a diffusion limit under a specified scaling"
+  >
+</div>
+
+:::
+
+::::
 
 ## Why Use Diffusion Approximations?
 
@@ -162,10 +344,8 @@ execute:
 
 - Nice analytical properties
 - Many models -> common diffusion limit
-  - Previous slide:
-    - Birth-death process
-    - <-> Poisson offspring count
-  - Extracts important features
+  - Many details lost in limit
+  - Surviving details of broad importance
   - Uncover biological principles
 
 :::
@@ -184,7 +364,7 @@ execute:
 
 :::
 
-::::
+:::: -->
 
 ## The Diffusion Limit
 
@@ -192,7 +372,130 @@ execute:
         style="border:0; display:block; margin:0 auto;"
         title="SPDE trait density"></iframe>
 
-## Moment Dynamics (not closed)
+<!-- ## Moment dynamics (not closed) {.smaller}
+
+<p style="text-align:center;font-size:.6em;color:#444;margin:.1em 0 .5em;">
+<span style="color:#c2185b;">●</span>&nbsp;selection / growth&emsp;
+<span style="color:#3c8500;">●</span>&nbsp;mutation&emsp;
+<span style="color:#5a4cc7;">●</span>&nbsp;drift (noise)
+</p>
+
+::: {.incremental}
+
+::: {.fragment}
+**abundance** <span style="font-size:.7em;color:#888;">scalar</span>
+$$\mathrm dn={\color{#c2185b}\bar m\,n}\,\mathrm dt+{\color{#5a4cc7}\sqrt{v\,n}\,\mathrm dB_n}$$
+:::
+
+::: {.fragment}
+**mean trait** <span style="font-size:.7em;color:#888;">$d\times1$</span>
+$$\mathrm d\bar{\bf z}={\color{#c2185b}\mathrm{Cov}(m,{\bf z})}\,\mathrm dt+{\color{#5a4cc7}\sqrt{\tfrac vn{\bf P}}\,\mathrm d{\bf B}_{\bar{\bf z}}}$$
+:::
+
+::: {.fragment}
+**trait (co)variance** <span style="font-size:.7em;color:#888;">$d\times d$</span>
+$$
+\mathrm d{\bf P}=\big[\,{\color{#3c8500}{\bf M}}+{\color{#c2185b}\mathrm{Cov}\big(m,({\bf z}-\bar{\bf z})({\bf z}-\bar{\bf z})^\top\big)}{\color{#5a4cc7}-\tfrac vn{\bf P}}\,\big]\,\mathrm dt
++{\color{#5a4cc7}\sqrt{\tfrac vn({\bf K}-{\bf P}\otimes{\bf P})}:\mathrm d{\bf B}_{\bf P}}
+$$
+:::
+
+::: {.fragment}
+**skew, kurtosis, …**
+$$\mathrm d{\bf S}=\dots,\qquad \mathrm d{\bf K}=\dots,\qquad \dots$$
+:::
+
+::: -->
+
+## Moment dynamics 
+
+<p style="text-align:center;font-size:.6em;color:#444;margin:.1em 0 .5em;">
+<span style="color:#c2185b;">●</span>&nbsp;selection / growth&emsp;
+<span style="color:#3c8500;">●</span>&nbsp;mutation&emsp;
+<span style="color:#5a4cc7;">●</span>&nbsp;drift (noise)
+</p>
+
+<div style="display:inline-block;background:#fdf0e3;color:#9a5b1e;border:1px solid #f0d3b0;border-radius:6px;padding:2px 12px;font-size:.68em;margin-bottom:.4em;">⚠ not closed — needs ${\bf K},{\bf S},\dots$</div>
+
+
+
+::: {.incremental}
+
+:::: {.columns .fragment}
+::: {.column width="34%"}
+<span style="font-size:.8em;color:#555;">grows at mean fitness; demographic noise $\propto\!\sqrt{n}$</span>
+:::
+::: {.column width="66%"}
+$$\mathrm dn={\color{#c2185b}\bar m\,n}\,\mathrm dt+{\color{#5a4cc7}\sqrt{v\,n}\,\mathrm dB_n}$$
+:::
+::::
+
+:::: {.columns .fragment}
+::: {.column width="34%"}
+<span style="font-size:.8em;color:#555;">selection moves the mean; drift jitters it</span>
+:::
+::: {.column width="66%"}
+$$\mathrm d\bar{\bf z}={\color{#c2185b}\mathrm{Cov}(m,{\bf z})}\,\mathrm dt+{\color{#5a4cc7}\sqrt{\tfrac vn{\bf G}}\,\mathrm d{\bf B}_{\bar{\bf z}}}$$
+:::
+::::
+
+:::: {.columns .fragment}
+::: {.column width="34%"}
+<span style="font-size:.8em;color:#555;">mutation adds, selection reshapes, drift erodes &amp; fluctuates</span>
+:::
+::: {.column width="66%"}
+$$
+\begin{aligned}
+\mathrm d{\bf G}=\big[&{\color{#3c8500}{\bf M}}+{\color{#c2185b}\mathrm{Cov}(m,\ldots)}{\color{#5a4cc7}-\tfrac vn{\bf G}}\big]\mathrm dt\\
+&+{\color{#5a4cc7}\sqrt{\tfrac vn({\bf K}-{\bf G}\otimes{\bf G})}:\mathrm d{\bf B}_{\bf G}}
+\end{aligned}
+$$
+:::
+::::
+
+:::
+
+## Multivariate normal approximation
+
+<div style="display:inline-block;background:#fdf0e3;color:#9a5b1e;border:1px solid #f0d3b0;border-radius:6px;padding:2px 12px;font-size:.68em;margin-bottom:.4em;">ദ്ദി ˉ͈̀꒳ˉ͈́ )✧ closed</div>
+
+::: {.incremental}
+
+:::: {.columns .fragment}
+::: {.column width="38%"}
+<span style="font-size:.8em;color:#555;">**unchanged** — the MVN assumption never touches abundance</span>
+:::
+::: {.column width="62%"}
+$$\mathrm dn={\color{#c2185b}\bar m\,n}\,\mathrm dt+{\color{#5a4cc7}\sqrt{v\,n}\,\mathrm dB_n}$$
+:::
+::::
+
+:::: {.columns .fragment}
+::: {.column width="38%"}
+<span style="font-size:.8em;color:#555;">selection: covariance becomes a **gradient** of $\bar m$&emsp;, $\mathrm{Cov}(m,{\bf z})\to{\bf G}\nabla_{\bar{\bf z}}\bar m$</span>
+:::
+::: {.column width="62%"}
+$$\mathrm d\bar{\bf z}={\color{#c2185b}{\bf G}\big(\nabla_{\bar{\bf z}}\bar m-\overline{\nabla_{\bar{\bf z}}m}\big)}\,\mathrm dt+{\color{#5a4cc7}\sqrt{\tfrac vn{\bf G}}\,\mathrm d{\bf B}_{\bar{\bf z}}}$$
+:::
+::::
+
+:::: {.columns .fragment}
+::: {.column width="38%"}
+<span style="font-size:.8em;color:#555;">gradients again , **and the noise closes**: kurtosis $\ {\bf K}\to{\bf G}\overline\otimes{\bf G}+{\bf G}\underline\otimes{\bf G}$</span>
+:::
+::: {.column width="62%"}
+$$
+\begin{aligned}
+\mathrm d{\bf G}=\big[&{\color{#3c8500}{\bf M}}+{\color{#c2185b}2{\bf G}(\nabla_{\bf G}\bar m-\overline{\nabla_{\bf G}m}){\bf G}}{\color{#5a4cc7}-\tfrac vn{\bf G}}\big]\mathrm dt\\
+&+{\color{#5a4cc7}\sqrt{\tfrac vn({\bf G}\overline\otimes{\bf G}+{\bf G}\underline\otimes{\bf G})}:\mathrm d{\bf B}_{\bf G}}
+\end{aligned}
+$$
+:::
+::::
+
+:::
+
+<!-- ## Moment Dynamics (not closed)
 
 ::: {.incremental}
 
@@ -236,10 +539,10 @@ $$
 :::
 
 
-:::
+::: -->
 
 
-## Multivariate Normal Approximation (closed)
+<!-- ## Multivariate Normal Approximation (closed)
 
 ::: {.incremental}
 
@@ -269,41 +572,9 @@ $$
 :::
 
 
-:::
+::: -->
 
-
-## Multivariate Normal + Decomposed Traits
-
-::: {.incremental}
-
-::: {.fragment}
-Traits decompose ${\bf z}={\bf g}+{\bf e}$ with iid ${\mathrm{Cov}}({\bf e})={\bf E}$ so that ${\bf P}={\bf G}+{\bf E}$
-:::
-
-::: {.fragment}
-$$
-\text{total abundance:}\quad \mathrm dn={\color{#c2185b}\bar m \, n}\,\mathrm dt + {\color{#5a4cc7}\sqrt{v\,n}\,\mathrm dB_n}
-$$
-:::
-
-
-::: {.fragment}
-$$
-\text{mean trait (}d\text{-dim):}\quad \mathrm d\bar{\bf z}={\color{#c2185b}{\bf G}\big(\nabla_{\bar{\bf z}}\,\bar m-\overline{\nabla_{\bar{\bf z}}\,m}\big)}\,\mathrm dt + {\color{#5a4cc7}\sqrt{\tfrac v n {\bf G}}\,\mathrm d{\bf B}_{\bar{\bf z}}}
-$$
-:::
-
-::: {.fragment}
-\begin{multline}
-\text{genetic variance (}d\times d\text{):}\quad \mathrm d{\bf G}=\big[{\color{#3c8500}{\bf M}}+{\color{#c2185b}2\,{\bf G}(\nabla_{\bf G}\,\bar m-\overline{\nabla_{\bf G}\,m})\,{\bf G}}{\color{#5a4cc7}-\tfrac v n {\bf G}}\big]\,\mathrm dt \\
-+ {\color{#5a4cc7}\sqrt{\tfrac v n  (\mathbf{G}\overline\otimes \mathbf{G}+\mathbf{G}\underline\otimes \mathbf{G})}:\mathrm d{\bf B}_{\bf G}}
-\end{multline}
-:::
-
-- this is a particularly kewt consolidation \*\^-\^\*
-
-:::
-
+## Heuristics
 
 ## How to use? 
 (choose $m$ then numerical or analytical approach)
@@ -419,7 +690,6 @@ $$\mathrm d\rho={\color{#c2185b}-\frac{1}{2N_e}\,\rho\,(1-\rho^2)}\,\mathrm dt+{
   - while also eroding variation ${\mathbb E}[{\bf G}_t]$
 - Stability of $\bf G$-matrix structure due to
   - mutation, migration, selection
-    - (recombination)
 - Essentially complete opposite of previous view (Roff 2000)
 :::
 
@@ -500,13 +770,13 @@ Drift alters $\bf G$-matrix orientation even with recombination
 :::: {.columns .cols2}
 
 ::: {.column width="48%"}
-![52 *Drosophila* lines from one ancestor: drift alone scatters the genetic correlation across orientations and flips its sign (**Phillips et al. 2001**).](phillips2001.png){fig-align="center" width="20%"}
+![52 *Drosophila* lines from one ancestor: drift alone scatters the genetic correlation across orientations and flips its sign <br>(**Phillips et al. 2001**)](phillips2001.png){fig-align="center" width="20%"}
 :::
 
 ::: {.column width="48%"}
-![Outcrossing *C. elegans*, 240 generations, means static: evolved major axes randomly oriented vs the ancestor (**Mallard et al. 2023**)](mallard.png){fig-align="center"}
+![Outcrossing *C. elegans*, 240 generations, means static: evolved major axes randomly oriented vs the ancestor <br>(**Mallard et al. 2023**)](mallard.png){fig-align="center"}
 :::
 
 ::::
 
-
+## What about environmental stochasticity?
