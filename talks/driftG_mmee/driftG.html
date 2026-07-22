@@ -164,7 +164,7 @@
 </ul></li>
 <li class="fragment">Genetic covariance structure: <span class="math inline">\({\bf G}=\mathrm{Cov}({\bf g})=\left(\begin{smallmatrix} G_{11} &amp; \cdots &amp; G_{1d} \\ \vdots &amp; \ddots &amp; \vdots \\ G_{d1} &amp; \cdots &amp; G_{dd} \end{smallmatrix}\right)\)</span>
 <ul>
-<li class="fragment">First two principle components: <img data-src="G-mat.png" class="inline-img" style="width:9.0%"></li>
+<li class="fragment">First two principle components: <img data-src="G-mat.png" class="inline-img" style="width:5.0%"></li>
 <li class="fragment">Heritable component of variation</li>
 <li class="fragment">Predicts response to selection <span class="math inline">\(\Delta\bar{\bf z}={\bf G}\,\nabla_{\bar{\bf z}}\ln\bar W\)</span>
 <ul>
@@ -175,29 +175,13 @@
 </section>
 <section id="what-is-random-genetic-drift" class="slide level2 center">
 <h2>What is random genetic drift?</h2>
-<div class="columns cols2">
-<div class="column" style="width:78%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="repro_variance_types.png" class="quarto-figure quarto-figure-center" width="900"></p>
-</figure>
-</div>
-</div><div class="column" style="width:18%;">
-<p><span class="math inline">\(v=\)</span> reproductive variance</p>
-</div></div>
 <div class="fragment">
-<div class="columns cols2">
-<div class="column" style="width:18%;">
-<p><span class="math inline">\(v&gt;0\)</span> + finite abundance <br></p>
-<p><span class="math inline">\(\implies\)</span> <br></p>
-<p>random fluctuations of allele frequencies</p>
-</div><div class="column" style="width:78%;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="fixation.png" class="quarto-figure quarto-figure-center" width="820"></p>
+<p><img data-src="fixation.png" style="width:80.0%"></p>
+<figcaption>finite abundance <span class="math inline">\(\implies\)</span> random fluctuations of allele frequencies</figcaption>
 </figure>
 </div>
-</div></div>
 </div>
 <!-- ## Demographic stochasticity is super important
 
@@ -518,7 +502,7 @@ $$\mathrm d{\bf S}=\dots,\qquad \mathrm d{\bf K}=\dots,\qquad \dots$$
 </div><div class="column" style="width:66%;">
 <p><span class="math display">\[
 \begin{aligned}
-\mathrm d{\bf G}=\big[&amp;{\color{#3c8500}{\bf M}}+{\color{#c2185b}\mathrm{Cov}(m,\ldots)}{\color{#5a4cc7}-\tfrac vn{\bf G}}\big]\mathrm dt\\
+\mathrm d{\bf G}=\big[&amp;{\color{#3c8500}{\bf M}}+{\color{#c2185b}\mathrm{Cov}(m,({\bf z}-\bar{\bf z})({\bf z}-\bar{\bf z})^\top)}{\color{#5a4cc7}-\tfrac vn{\bf G}}\big]\mathrm dt\\
 &amp;+{\color{#5a4cc7}\sqrt{\tfrac vn({\bf K}-{\bf G}\otimes{\bf G})}:\mathrm d{\bf B}_{\bf G}}
 \end{aligned}
 \]</span></p>
@@ -552,6 +536,100 @@ $$\mathrm d{\bf S}=\dots,\qquad \mathrm d{\bf K}=\dots,\qquad \dots$$
 \end{aligned}
 \]</span></p>
 </div></div>
+</section>
+<section id="multivariate-normal-approximation-1" class="slide level2 center">
+<h2>Multivariate normal approximation</h2>
+<div style="display:inline-block;background:#fdf0e3;color:#9a5b1e;border:1px solid #f0d3b0;border-radius:6px;padding:2px 12px;font-size:.68em;margin-bottom:.4em;">
+<span class="math inline">\(\partial_i:=\partial/\partial\bar z_i\)</span> and <span class="math inline">\(\partial_{ij}:=\partial/\partial G_{ij}\)</span>.
+</div>
+<div class="columns fragment">
+<div class="column" style="width:38%;">
+<p><span style="font-size:.8em;color:#555;"><strong>unchanged</strong> — the MVN assumption never touches abundance</span></p>
+</div><div class="column" style="width:62%;">
+<p><span class="math display">\[
+\mathrm dn
+=
+{\color{#c2185b}\bar m\,n}\,\mathrm dt
++
+{\color{#5a4cc7}\sqrt{v\,n}\,\mathrm dB_n}
+\]</span></p>
+</div></div>
+<div class="columns fragment">
+<div class="column" style="width:38%;">
+<p><span style="font-size:.8em;color:#555;">selection covariances become <strong>gradients</strong>: <span class="math inline">\(\operatorname{Cov}(m,g_i)\to
+\sum_{j=1}^dG_{ij}(\partial_j\bar m-\partial_jm)\)</span></span></p>
+</div><div class="column" style="width:62%;">
+<p><span class="math display">\[
+\mathrm d\bar z_i
+=
+{\color{#c2185b}
+\sum_{j=1}^{d}
+G_{ij}
+\left(
+\partial_j\bar m-\partial_jm
+\right)}
+\,\mathrm dt
++
+{\color{#5a4cc7}
+\sqrt{\frac{v}{n}G_{ii}}\,
+\mathrm dB_{\bar z_i}}
+\]</span></p>
+</div></div>
+<div class="columns fragment">
+<div class="column" style="width:38%;">
+<p><span style="font-size:.8em;color:#555;">gradients again, and <strong>the noise closes</strong>: Gaussian fourth moments reduce the drift covariance to products of entries of <span class="math inline">\(\mathbf G\)</span></span></p>
+</div><div class="column" style="width:62%;">
+<p><span class="math display">\[
+\begin{aligned}
+\mathrm dG_{ij}
+={}&amp;
+\Bigg[
+{\color{#3c8500}M_{ij}}
++
+{\color{#c2185b}
+2\sum_{k,l=1}^{d}
+G_{ik}
+\left(
+\partial_{kl}\bar m-\partial_{kl}m
+\right)
+G_{lj}}
+-
+{\color{#5a4cc7}\frac{v}{n}G_{ij}}
+\Bigg]\mathrm dt
+\\[2pt]
+&amp;+
+{\color{#5a4cc7}
+\sqrt{
+\frac{v}{n}
+\left(
+G_{ii}G_{jj}+G_{ij}^{2}
+\right)
+}\,
+\mathrm dB_{G_{ij}}},
+\qquad 1\leq i\leq j\leq d .
+\end{aligned}
+\]</span></p>
+</div></div>
+<!-- ::: {.fragment}
+<div style="font-size:.57em;color:#666;margin-top:.25em;">
+
+$$
+\mathrm dB_{\bar z_i}\,\mathrm dB_{\bar z_j}
+=
+\frac{G_{ij}}{\sqrt{G_{ii}G_{jj}}}\,\mathrm dt,
+\qquad
+\mathrm dB_{G_{ij}}\,\mathrm dB_{G_{kl}}
+=
+\frac{
+G_{ik}G_{jl}+G_{il}G_{jk}
+}{
+\sqrt{G_{ii}G_{jj}+G_{ij}^{2}}\,
+\sqrt{G_{kk}G_{ll}+G_{kl}^{2}}
+}\,\mathrm dt .
+$$
+
+</div>
+::: -->
 <!-- ## Moment Dynamics (not closed)
 
 ::: {.incremental}
@@ -629,9 +707,6 @@ $$
 
 ::: -->
 </section>
-<section id="heuristics" class="slide level2 center">
-<h2>Heuristics</h2>
-</section>
 <section id="how-to-use" class="slide level2 center">
 <h2>How to use?</h2>
 <p>(choose <span class="math inline">\(m\)</span> then numerical or analytical approach)</p>
@@ -686,24 +761,145 @@ $$
 <li class="fragment">Use Itô’s formula on <span class="math inline">\(\rho=f({\bf G})\)</span></li>
 </ul>
 <div class="fragment">
-<p><span class="math display">\[
+<!-- $$
 \mathrm d\rho=\nabla_{\bf G}f:\mathrm d{\bf G}+\tfrac 1 2 \nabla_{\bf G}^2f::(\mathrm d{\bf G}\otimes\mathrm d{\bf G})
+$$ -->
+<p><span class="math display">\[
+\mathrm d\rho
+=
+\sum_{ij}
+\frac{\partial f}{\partial G_{ij}}\,
+\mathrm dG_{ij}
++
+\frac{1}{2}
+\sum_{ijkl}
+\frac{\partial^2 f}
+{\partial G_{ij}\,\partial G_{kl}}\,
+\mathrm dG_{ij}\,\mathrm dG_{kl}.
 \]</span></p>
 </div>
 <!-- - $\mathrm d{\bf G}\otimes\mathrm d{\bf G}$ involves $\mathrm d {\bf B}_{\bf G}$, already have heuristics for -->
 <ul>
-<li class="fragment"><p>Useful to rewrite <span class="math inline">\(\mathrm d{\bf G}\)</span></p>
+<li class="fragment"><p><em>recall</em> <span class="math inline">\(\mathrm dG_{ij}={\color{#c2185b}-\tfrac v n G_{ij}}\,\mathrm dt+{\color{#5a4cc7}\sqrt{G_{ij}^2-G_{ii}G_{jj}}\,\mathrm dB_{G_{ij}}}\)</span></p>
 <ul>
-<li class="fragment"><p><em>in index notation</em> <span class="math inline">\(\mathrm dG_{ij}={\color{#c2185b}-\tfrac v n G_{ij}}\,\mathrm dt+{\color{#5a4cc7}\sqrt{G_{ij}^2-G_{ii}G_{jj}}\,\mathrm dB_{G_{ij}}}\)</span></p>
-<ul>
-<li class="fragment"><span class="math inline">\({\color{#5a4cc7}\mathrm d{\cal M}((g_i-\bar g)(g_j-\bar g)-G_{ij})}={\color{#5a4cc7}\sqrt{G_{ij}^2-G_{ii}G_{jj}}\,\mathrm dB_{G_{ij}}}\)</span></li>
+<li class="fragment"><em>rewrite</em> <span class="math inline">\({\color{#5a4cc7}\sqrt{G_{ij}^2-G_{ii}G_{jj}}\,\mathrm dB_{G_{ij}}}={\color{#5a4cc7}\mathrm d{\cal M}((g_i-\bar g)(g_j-\bar g)-G_{ij})}\)</span></li>
 </ul></li>
-<li class="fragment"><p><em>because linearity</em> <span class="math inline">\(a\,\mathrm d{\cal M}({\bf x})+b\,\mathrm d{\cal M}({\bf y})=\mathrm d{\cal M}(a\,{\bf x}+b\,{\bf y})\)</span></p>
+<li class="fragment"><p><em>because linearity</em> <span class="math inline">\(a\,\mathrm d{\cal M}({x})+b\,\mathrm d{\cal M}({y})=\mathrm d{\cal M}(a\,{x}+b\,{y})\)</span></p>
 <ul>
-<li class="fragment">then rewrite back with <span class="math inline">\(\mathrm dB=\mathrm d{\cal M}(a\,{\bf x}+b\,{\bf y})\)</span></li>
-</ul></li>
+<li class="fragment">then rewrite back with <span class="math inline">\(\mathrm dB=\mathrm d{\cal M}(a\,{x}+b\,{ y})\)</span></li>
 </ul></li>
 </ul>
+</section>
+<section id="stochastic-heuristics-for-mathrm-dmathcal-mx" class="slide level2 center">
+<h2>Stochastic heuristics for <span class="math inline">\(\mathrm d\mathcal M(x)\)</span></h2>
+<div style="display:inline-block;background:#fdf0e3;color:#9a5b1e;border:1px solid #f0d3b0;border-radius:6px;padding:2px 12px;font-size:.68em;margin-bottom:.4em;">
+classically: <span class="math inline">\(\mathrm dt^2=0,\mathrm dB^2=\mathrm dt,\mathrm dt\,\mathrm dB=0\)</span>
+</div>
+<div class="fragment">
+<p><span class="math display">\[x({\bf g}),\,y({\bf g}),\quad
+\|x\|=\sqrt{v\,n\,\overline{x^2}},
+\qquad
+\langle x,y\rangle=v\,n\,\overline{xy}
+\]</span></p>
+</div>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="fragment">
+<p><strong>scale</strong> <span class="math display">\[
+\mathrm d\mathcal M(x)
+=
+\|x\|\,
+\mathrm d B_{x}
+\]</span> <span style="font-size:.75em;color:#555;">convert to Brownian noise</span></p>
+</div>
+</div><div class="column" style="width:48%;">
+<div class="fragment">
+<p><strong>multiply</strong> <span class="math display">\[
+\mathrm d\mathcal M(x)\,
+\mathrm d\mathcal M(y)
+=
+\langle x,y\rangle\,\mathrm dt
+\]</span> <span style="font-size:.75em;color:#555;">compute Itô terms</span></p>
+</div>
+</div></div>
+<div class="fragment">
+<p><strong>add</strong> <span class="math display">\[
+\mathrm d\mathcal M(ax+by)
+=
+a\,\mathrm d\mathcal M(x)
++
+b\,\mathrm d\mathcal M(y)
+\]</span> <span style="font-size:.75em;color:#555;">combine noise terms</span></p>
+</div>
+</section>
+<section id="martingale-gradient-version" class="slide level2 center">
+<h2>Martingale-gradient version</h2>
+<div style="display:inline-block;background:#fdf0e3;color:#9a5b1e;border:1px solid #f0d3b0;border-radius:6px;padding:2px 12px;font-size:.68em;margin-bottom:.4em;">
+<span class="math inline">\(\partial_i:=\partial/\partial\bar z_i\)</span> and <span class="math inline">\(\partial_{ij}:=\partial/\partial G_{ij}\)</span>.
+</div>
+<div class="columns fragment">
+<div class="column" style="width:38%;">
+<p><span style="font-size:.8em;color:#555;">abundance noise is the martingale evaluated at <span class="math inline">\(1\)</span></span></p>
+</div><div class="column" style="width:62%;">
+<p><span class="math display">\[
+\mathrm dn
+=
+{\color{#c2185b}\bar m\,n}\,\mathrm dt
++
+{\color{#5a4cc7}\mathrm d\mathcal M(1)}
+\]</span></p>
+</div></div>
+<div class="columns fragment">
+<div class="column" style="width:38%;">
+<p><span style="font-size:.8em;color:#555;">mean trait noise tracks deviations in additive genetic values</span></p>
+</div><div class="column" style="width:62%;">
+<p><span class="math display">\[
+\mathrm d\bar z_i
+=
+{\color{#c2185b}
+\sum_{j=1}^{d}
+G_{ij}
+\left(
+\partial_j\bar m-\partial_jm
+\right)}
+\,\mathrm dt
++
+{\color{#5a4cc7}
+\frac{1}{n}\,
+\mathrm d\mathcal M(g_i-\bar g_i)}
+\]</span></p>
+</div></div>
+<div class="columns fragment">
+<div class="column" style="width:38%;">
+<p><span style="font-size:.8em;color:#555;"><span class="math inline">\(\mathbf G\)</span> noise tracks centered products of additive genetic deviations</span></p>
+</div><div class="column" style="width:62%;">
+<p><span class="math display">\[
+\begin{aligned}
+\mathrm dG_{ij}
+={}&amp;
+\Bigg[
+{\color{#3c8500}M_{ij}}
++
+{\color{#c2185b}
+2\sum_{k,l=1}^{d}
+G_{ik}
+\left(
+\partial_{kl}\bar m-\partial_{kl}m
+\right)
+G_{lj}}
+-
+{\color{#5a4cc7}\frac{v}{n}G_{ij}}
+\Bigg]\mathrm dt
+\\[2pt]
+&amp;+
+{\color{#5a4cc7}
+\frac{1}{n}\,
+\mathrm d\mathcal M\!\left(
+(g_i-\bar g_i)(g_j-\bar g_j)-G_{ij}
+\right)}
+\end{aligned}
+\]</span></p>
+</div></div>
 </section>
 <section id="genetic-correlations-tend-towards-1" class="slide level2 center">
 <h2>Genetic correlations tend towards ±1</h2>
@@ -740,7 +936,7 @@ $$
 <ul>
 <li class="fragment">mutation, migration, selection</li>
 </ul></li>
-<li class="fragment">Essentially complete opposite of previous view (Roff 2000)</li>
+<li class="fragment">Essentially complete opposite of previous view <em>(Roff 2000)</em></li>
 </ul>
 </div><div class="column" style="width:38%;">
 <div class="quarto-figure quarto-figure-center">
