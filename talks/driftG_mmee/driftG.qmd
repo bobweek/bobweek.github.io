@@ -45,7 +45,7 @@ execute:
   - $\bf g=$ genetic component
   - $\bf e=$ "environmental" component (error, everything else)
 - Genetic covariance structure: ${\bf G}=\mathrm{Cov}({\bf g})=\left(\begin{smallmatrix} G_{11} & \cdots & G_{1d} \\ \vdots & \ddots & \vdots \\ G_{d1} & \cdots & G_{dd} \end{smallmatrix}\right)$
-  - First two principle components: ![](G-mat.png){.inline-img width=9%}
+  - First two principle components: ![](G-mat.png){.inline-img width=5%}
   - Heritable component of variation
   - Predicts response to selection $\Delta\bar{\bf z}={\bf G}\,\nabla_{\bar{\bf z}}\ln\bar W$
     - $\bar W=$ mean fitness
@@ -54,37 +54,13 @@ execute:
 
 ## What is random genetic drift?
 
-:::: {.columns .cols2}
-
-::: {.column width="78%"}
-![](repro_variance_types.png){fig-align="center" width="900"}
-:::
-
-::: {.column width="18%"}
-$v=$ reproductive variance 
-:::
-
-::::
-
-
 ::: {.fragment}
-:::: {.columns .cols2}
-
-::: {.column width="18%"}
-$v>0$ + finite abundance <br>
-
-$\implies$ <br>
-
-random fluctuations of allele frequencies
-:::
-
-::: {.column width="78%"}
-![](fixation.png){fig-align="center" width="820"}
-:::
-
-::::
+![finite abundance $\implies$ random fluctuations of allele frequencies
+](fixation.png){fig-align="center" width="80%"}
 
 :::
+
+
 
 <!-- ## Demographic stochasticity is super important
 
@@ -446,7 +422,7 @@ $$\mathrm d\bar{\bf z}={\color{#c2185b}\mathrm{Cov}(m,{\bf z})}\,\mathrm dt+{\co
 ::: {.column width="66%"}
 $$
 \begin{aligned}
-\mathrm d{\bf G}=\big[&{\color{#3c8500}{\bf M}}+{\color{#c2185b}\mathrm{Cov}(m,\ldots)}{\color{#5a4cc7}-\tfrac vn{\bf G}}\big]\mathrm dt\\
+\mathrm d{\bf G}=\big[&{\color{#3c8500}{\bf M}}+{\color{#c2185b}\mathrm{Cov}(m,({\bf z}-\bar{\bf z})({\bf z}-\bar{\bf z})^\top)}{\color{#5a4cc7}-\tfrac vn{\bf G}}\big]\mathrm dt\\
 &+{\color{#5a4cc7}\sqrt{\tfrac vn({\bf K}-{\bf G}\otimes{\bf G})}:\mathrm d{\bf B}_{\bf G}}
 \end{aligned}
 $$
@@ -494,6 +470,116 @@ $$
 ::::
 
 :::
+
+## Multivariate normal approximation
+
+<div style="display:inline-block;background:#fdf0e3;color:#9a5b1e;border:1px solid #f0d3b0;border-radius:6px;padding:2px 12px;font-size:.68em;margin-bottom:.4em;">$\partial_i:=\partial/\partial\bar z_i$ and
+$\partial_{ij}:=\partial/\partial G_{ij}$.</div>
+
+::: {.incremental}
+
+:::: {.columns .fragment}
+::: {.column width="38%"}
+<span style="font-size:.8em;color:#555;">**unchanged** — the MVN assumption never touches abundance</span>
+:::
+::: {.column width="62%"}
+$$
+\mathrm dn
+=
+{\color{#c2185b}\bar m\,n}\,\mathrm dt
++
+{\color{#5a4cc7}\sqrt{v\,n}\,\mathrm dB_n}
+$$
+:::
+::::
+
+:::: {.columns .fragment}
+::: {.column width="38%"}
+<span style="font-size:.8em;color:#555;">selection covariances become **gradients**:
+$\operatorname{Cov}(m,g_i)\to
+\sum_{j=1}^dG_{ij}(\partial_j\bar m-\partial_jm)$</span>
+:::
+::: {.column width="62%"}
+$$
+\mathrm d\bar z_i
+=
+{\color{#c2185b}
+\sum_{j=1}^{d}
+G_{ij}
+\left(
+\partial_j\bar m-\partial_jm
+\right)}
+\,\mathrm dt
++
+{\color{#5a4cc7}
+\sqrt{\frac{v}{n}G_{ii}}\,
+\mathrm dB_{\bar z_i}}
+$$
+:::
+::::
+
+:::: {.columns .fragment}
+::: {.column width="38%"}
+<span style="font-size:.8em;color:#555;">gradients again, and **the noise closes**:
+Gaussian fourth moments reduce the drift covariance to products of entries of $\mathbf G$</span>
+:::
+::: {.column width="62%"}
+$$
+\begin{aligned}
+\mathrm dG_{ij}
+={}&
+\Bigg[
+{\color{#3c8500}M_{ij}}
++
+{\color{#c2185b}
+2\sum_{k,l=1}^{d}
+G_{ik}
+\left(
+\partial_{kl}\bar m-\partial_{kl}m
+\right)
+G_{lj}}
+-
+{\color{#5a4cc7}\frac{v}{n}G_{ij}}
+\Bigg]\mathrm dt
+\\[2pt]
+&+
+{\color{#5a4cc7}
+\sqrt{
+\frac{v}{n}
+\left(
+G_{ii}G_{jj}+G_{ij}^{2}
+\right)
+}\,
+\mathrm dB_{G_{ij}}},
+\qquad 1\leq i\leq j\leq d .
+\end{aligned}
+$$
+:::
+::::
+
+<!-- ::: {.fragment}
+<div style="font-size:.57em;color:#666;margin-top:.25em;">
+
+$$
+\mathrm dB_{\bar z_i}\,\mathrm dB_{\bar z_j}
+=
+\frac{G_{ij}}{\sqrt{G_{ii}G_{jj}}}\,\mathrm dt,
+\qquad
+\mathrm dB_{G_{ij}}\,\mathrm dB_{G_{kl}}
+=
+\frac{
+G_{ik}G_{jl}+G_{il}G_{jk}
+}{
+\sqrt{G_{ii}G_{jj}+G_{ij}^{2}}\,
+\sqrt{G_{kk}G_{ll}+G_{kl}^{2}}
+}\,\mathrm dt .
+$$
+
+</div>
+::: -->
+
+:::
+
 
 <!-- ## Moment Dynamics (not closed)
 
@@ -574,8 +660,6 @@ $$
 
 ::: -->
 
-## Heuristics
-
 ## How to use? 
 (choose $m$ then numerical or analytical approach)
 
@@ -638,27 +722,177 @@ $$\mathrm d{\bf G}={\color{#c2185b} -\tfrac{1}{N_e}{\bf G}\,\mathrm d t} + {\col
 
 ::: {.fragment}
 
-$$
+<!-- $$
 \mathrm d\rho=\nabla_{\bf G}f:\mathrm d{\bf G}+\tfrac 1 2 \nabla_{\bf G}^2f::(\mathrm d{\bf G}\otimes\mathrm d{\bf G})
+$$ -->
+
+$$
+\mathrm d\rho
+=
+\sum_{ij}
+\frac{\partial f}{\partial G_{ij}}\,
+\mathrm dG_{ij}
++
+\frac{1}{2}
+\sum_{ijkl}
+\frac{\partial^2 f}
+{\partial G_{ij}\,\partial G_{kl}}\,
+\mathrm dG_{ij}\,\mathrm dG_{kl}.
 $$
 
 :::
 
 <!-- - $\mathrm d{\bf G}\otimes\mathrm d{\bf G}$ involves $\mathrm d {\bf B}_{\bf G}$, already have heuristics for -->
 
-- Useful to rewrite $\mathrm d{\bf G}$
+- *recall* $\mathrm dG_{ij}={\color{#c2185b}-\tfrac v n G_{ij}}\,\mathrm dt+{\color{#5a4cc7}\sqrt{G_{ij}^2-G_{ii}G_{jj}}\,\mathrm dB_{G_{ij}}}$
 
-  - *in index notation* $\mathrm dG_{ij}={\color{#c2185b}-\tfrac v n G_{ij}}\,\mathrm dt+{\color{#5a4cc7}\sqrt{G_{ij}^2-G_{ii}G_{jj}}\,\mathrm dB_{G_{ij}}}$
+  - *rewrite* ${\color{#5a4cc7}\sqrt{G_{ij}^2-G_{ii}G_{jj}}\,\mathrm dB_{G_{ij}}}={\color{#5a4cc7}\mathrm d{\cal M}((g_i-\bar g)(g_j-\bar g)-G_{ij})}$
 
-    - ${\color{#5a4cc7}\mathrm d{\cal M}((g_i-\bar g)(g_j-\bar g)-G_{ij})}={\color{#5a4cc7}\sqrt{G_{ij}^2-G_{ii}G_{jj}}\,\mathrm dB_{G_{ij}}}$
+- *because linearity* $a\,\mathrm d{\cal M}({x})+b\,\mathrm d{\cal M}({y})=\mathrm d{\cal M}(a\,{x}+b\,{y})$
 
-  - *because linearity* $a\,\mathrm d{\cal M}({\bf x})+b\,\mathrm d{\cal M}({\bf y})=\mathrm d{\cal M}(a\,{\bf x}+b\,{\bf y})$
-
-    - then rewrite back with $\mathrm dB=\mathrm d{\cal M}(a\,{\bf x}+b\,{\bf y})$
+  - then rewrite back with $\mathrm dB=\mathrm d{\cal M}(a\,{x}+b\,{ y})$
 
 :::
 
+## Stochastic heuristics for $\mathrm d\mathcal M(x)$
 
+<div style="display:inline-block;background:#fdf0e3;color:#9a5b1e;border:1px solid #f0d3b0;border-radius:6px;padding:2px 12px;font-size:.68em;margin-bottom:.4em;">classically: $\mathrm dt^2=0,\mathrm dB^2=\mathrm dt,\mathrm dt\,\mathrm dB=0$</div>
+
+::: {.incremental}
+
+::: {.fragment}
+$$x({\bf g}),\,y({\bf g}),\quad
+\|x\|=\sqrt{v\,n\,\overline{x^2}},
+\qquad
+\langle x,y\rangle=v\,n\,\overline{xy}
+$$
+:::
+
+:::: {.columns}
+
+::: {.column width="48%"}
+::: {.fragment}
+**scale**
+$$
+\mathrm d\mathcal M(x)
+=
+\|x\|\,
+\mathrm d B_{x}
+$$
+<span style="font-size:.75em;color:#555;">convert to Brownian noise</span>
+:::
+:::
+
+::: {.column width="48%"}
+::: {.fragment}
+**multiply**
+$$
+\mathrm d\mathcal M(x)\,
+\mathrm d\mathcal M(y)
+=
+\langle x,y\rangle\,\mathrm dt
+$$
+<span style="font-size:.75em;color:#555;">compute Itô terms</span>
+:::
+:::
+
+
+::::
+
+::: {.fragment}
+**add**
+$$
+\mathrm d\mathcal M(ax+by)
+=
+a\,\mathrm d\mathcal M(x)
++
+b\,\mathrm d\mathcal M(y)
+$$
+<span style="font-size:.75em;color:#555;">combine noise terms</span>
+:::
+
+
+:::
+
+## Martingale-gradient version
+
+<div style="display:inline-block;background:#fdf0e3;color:#9a5b1e;border:1px solid #f0d3b0;border-radius:6px;padding:2px 12px;font-size:.68em;margin-bottom:.4em;">$\partial_i:=\partial/\partial\bar z_i$ and $\partial_{ij}:=\partial/\partial G_{ij}$.</div>
+
+::: {.incremental}
+
+:::: {.columns .fragment}
+::: {.column width="38%"}
+<span style="font-size:.8em;color:#555;">abundance noise is the martingale evaluated at $1$</span>
+:::
+::: {.column width="62%"}
+$$
+\mathrm dn
+=
+{\color{#c2185b}\bar m\,n}\,\mathrm dt
++
+{\color{#5a4cc7}\mathrm d\mathcal M(1)}
+$$
+:::
+::::
+
+:::: {.columns .fragment}
+::: {.column width="38%"}
+<span style="font-size:.8em;color:#555;">mean trait noise tracks deviations in additive genetic values</span>
+:::
+::: {.column width="62%"}
+$$
+\mathrm d\bar z_i
+=
+{\color{#c2185b}
+\sum_{j=1}^{d}
+G_{ij}
+\left(
+\partial_j\bar m-\partial_jm
+\right)}
+\,\mathrm dt
++
+{\color{#5a4cc7}
+\frac{1}{n}\,
+\mathrm d\mathcal M(g_i-\bar g_i)}
+$$
+:::
+::::
+
+:::: {.columns .fragment}
+::: {.column width="38%"}
+<span style="font-size:.8em;color:#555;">$\mathbf G$ noise tracks centered products of additive genetic deviations</span>
+:::
+::: {.column width="62%"}
+$$
+\begin{aligned}
+\mathrm dG_{ij}
+={}&
+\Bigg[
+{\color{#3c8500}M_{ij}}
++
+{\color{#c2185b}
+2\sum_{k,l=1}^{d}
+G_{ik}
+\left(
+\partial_{kl}\bar m-\partial_{kl}m
+\right)
+G_{lj}}
+-
+{\color{#5a4cc7}\frac{v}{n}G_{ij}}
+\Bigg]\mathrm dt
+\\[2pt]
+&+
+{\color{#5a4cc7}
+\frac{1}{n}\,
+\mathrm d\mathcal M\!\left(
+(g_i-\bar g_i)(g_j-\bar g_j)-G_{ij}
+\right)}
+\end{aligned}
+$$
+:::
+::::
+
+:::
 
 ## Genetic correlations tend towards ±1
 
@@ -690,7 +924,7 @@ $$\mathrm d\rho={\color{#c2185b}-\frac{1}{2N_e}\,\rho\,(1-\rho^2)}\,\mathrm dt+{
   - while also eroding variation ${\mathbb E}[{\bf G}_t]$
 - Stability of $\bf G$-matrix structure due to
   - mutation, migration, selection
-- Essentially complete opposite of previous view (Roff 2000)
+- Essentially complete opposite of previous view *(Roff 2000)*
 :::
 
 :::
