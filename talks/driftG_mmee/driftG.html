@@ -154,7 +154,7 @@
 
 </section>
 <section id="what-is-a-bf-g-matrix" class="slide level2 center">
-<h2>What is a <span class="math inline">\(\bf G\)</span>-matrix?</h2>
+<h2>What is a <span class="math inline">\(\bf G\)</span>-matrix? <img data-src="G-mat.png" class="inline-img" style="width:8.0%"></h2>
 <ul>
 <li class="fragment">Multivariate trait vector: <span class="math inline">\({\bf z}=\left(\begin{smallmatrix} z_1 \\ \vdots \\ z_d \end{smallmatrix}\right)\)</span></li>
 <li class="fragment">Trait decomposition: <span class="math inline">\({\bf z}={\bf g}+{\bf e}\)</span>
@@ -166,10 +166,7 @@
 <ul>
 <li class="fragment">First two principle components: <img data-src="G-mat.png" class="inline-img" style="width:5.0%"></li>
 <li class="fragment">Heritable component of variation</li>
-<li class="fragment">Predicts response to selection <span class="math inline">\(\Delta\bar{\bf z}={\bf G}\,\nabla_{\bar{\bf z}}\ln\bar W\)</span>
-<ul>
-<li class="fragment"><span class="math inline">\(\bar W=\)</span> mean fitness</li>
-</ul></li>
+<li class="fragment">Predicts response to selection <span class="math inline">\(\Delta\bar{\bf z}={\bf G}\,\nabla_{\bar{\bf z}}\ln\bar W,\quad\bar W=\)</span> mean fitness</li>
 </ul></li>
 </ul>
 </section>
@@ -303,17 +300,24 @@ explains random genetic <br> fixation and loss
 </section>
 <section id="roadmap" class="slide level2 center">
 <h2>Roadmap</h2>
-<ul>
-<li class="fragment">Use diffusion-limit to get SDE <span class="math inline">\(\mathrm d{\bf G}=a({\bf G})\mathrm dt+b({\bf G})\mathrm d{\bf B}\)</span>
+<ol type="1">
+<li class="fragment">Use diffusion-limit to get SDE <span class="math inline">\(\mathrm d{\bf G}=a({\bf G})\mathrm dt+b({\bf G})\mathrm d{\bf B}\)</span></li>
+</ol>
 <ul>
 <li class="fragment">Also gives abundance <span class="math inline">\(\mathrm dn\)</span>, mean trait <span class="math inline">\(\mathrm d\bar{\bf z}\)</span></li>
 <li class="fragment">Also gives heuristics for calculations
 <ul>
 <li class="fragment">{<span class="math inline">\(\mathrm dn,\mathrm d\bar{\bf z},\mathrm d{\bf G}\)</span>} ∪ {heuristics} = eco-evo framework</li>
 </ul></li>
-</ul></li>
-<li class="fragment">Apply heuristics to study <span class="math inline">\(\mathrm d{\bf G}\)</span></li>
 </ul>
+<ol start="2" type="1">
+<li class="fragment">Apply heuristics to study <span class="math inline">\(\mathrm d{\bf G}\)</span></li>
+</ol>
+</section>
+<section>
+<section id="building-the-framework" class="title-slide slide level1 center">
+<h1>Building the Framework</h1>
+
 </section>
 <section id="a-diffusion-approximation-approach" class="slide level2 center">
 <h2>A Diffusion Approximation Approach</h2>
@@ -741,6 +745,11 @@ $$
 </ul></li>
 </ul>
 </div></div>
+</section></section>
+<section>
+<section id="the-response-of-bf-g-to-drift" class="title-slide slide level1 center">
+<h1>The Response of <span class="math inline">\(\bf G\)</span> to Drift</h1>
+
 </section>
 <section id="a-new-neutral-model-of-bf-g-matrix-evolution" class="slide level2 center">
 <h2>A new neutral model of <span class="math inline">\(\bf G\)</span>-matrix evolution</h2>
@@ -748,7 +757,7 @@ $$
 <ul>
 <li class="fragment"><span class="math inline">\(m(\nu,{\bf z})\equiv0\)</span></li>
 <li class="fragment"><span class="math inline">\({\color{#3c8500}\bf M}={\bf 0}\)</span></li>
-<li class="fragment"><span class="math inline">\(N_e=v/n\)</span> effective population size (assumed constant)</li>
+<li class="fragment"><span class="math inline">\(N_e=n/v\)</span> effective population size (assumed constant)</li>
 <li class="fragment"><pink>Deterministic part</pink> ~ shrinks <span class="math inline">\(\bf G\)</span>
 <ul>
 <li class="fragment">Agrees with Lande’s <span class="math inline">\(\mathbb E[{\bf G}_t]\)</span></li>
@@ -759,8 +768,8 @@ $$
 </ul></li>
 </ul>
 </section>
-<section id="obtaining-dynamics-of-genetic-correlations" class="slide level2 center">
-<h2>Obtaining dynamics of genetic correlations</h2>
+<section id="obtaining-dynamics-of-genetic-correlations-mathrm-drho" class="slide level2 center">
+<h2>Obtaining dynamics of genetic correlations <span class="math inline">\(\mathrm d\rho\)</span></h2>
 <ul>
 <li class="fragment">Use Itô’s formula on <span class="math inline">\(\rho=f({\bf G})\)</span></li>
 </ul>
@@ -791,6 +800,7 @@ $$ -->
 <li class="fragment"><p><em>because linearity</em> <span class="math inline">\(a\,\mathrm d{\cal M}({x})+b\,\mathrm d{\cal M}({y})=\mathrm d{\cal M}(a\,{x}+b\,{y})\)</span></p>
 <ul>
 <li class="fragment">then rewrite back with <span class="math inline">\(\mathrm dB=\mathrm d{\cal M}(a\,{x}+b\,{ y})\)</span></li>
+<li class="fragment">what about <span class="math inline">\(\mathrm dG_{ij}\,\mathrm dG_{kl}\)</span>?</li>
 </ul></li>
 </ul>
 </section>
@@ -990,8 +1000,12 @@ McGlothlin et al (2018):
 <section id="conclusion" class="slide level2 center">
 <h2>Conclusion</h2>
 <ul>
-<li>Revised view on <span class="math inline">\({\bf G}\)</span></li>
-<li>Useful set of equations and heuristics</li>
+<li>Revised view on <span class="math inline">\(\mathrm d{\bf G}\)</span></li>
+<li>Useful set of equations and heuristics
+<ul>
+<li>increase accessibility of formal stochastic models</li>
+<li>quickly obtain diverse models</li>
+</ul></li>
 </ul>
 </section>
 <section id="thanks-questions" class="slide level2 center">
@@ -1037,7 +1051,7 @@ McGlothlin et al (2018):
 <li><p>Measure-valued <em>(Mytnik 1996, Mytnik &amp; Xiong 2007)</em></p></li>
 </ul>
 
-</section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
