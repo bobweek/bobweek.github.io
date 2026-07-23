@@ -151,7 +151,7 @@ explains random genetic <br> fixation and loss
 :::: {.columns .cols2}
 
 ::: {.column width="40%"}
-![52 *Drosophila* lines from one ancestor: realized genetic correlations scatter across orientations and even flip sign (Phillips et al. 2001)](phillips2001.png){fig-align="center" width="52%"}
+![52 *Drosophila* lines from one ancestor: realized genetic correlations scatter across orientations and even flip sign (Phillips et al. 2001)](phillips2001.png){fig-align="center" width="40%"}
 :::
 
 ::: {.column width="48%"}
@@ -245,16 +245,18 @@ explains random genetic <br> fixation and loss
 
 ::: {.incremental}
 
-* Analytical tractability *(Kimura 1964)*
+* Analytical tractability
 
-* Many models $\rightarrow$ common diffusion limit *(Möhle 2001)*
+* Many models $\rightarrow$ common diffusion limit
 
-  * Common leading-order drift and noise *(Kurtz 1978)*
-  * Robust predictions across that model class *(Constable & McKane 2017)*
+  * Common leading-order structure
+  * Similar predictions across model class
+    * (can say a lot with a little?)
 
 * **Not a universally better model**
 
-  * Validity depends on scaling and omitted details *(Der et al. 2011)*
+  * Depends on scaling
+  * Features disappear in limit
 :::
 
 :::
@@ -973,6 +975,11 @@ McGlothlin et al (2018):
 
 ![](mult-mtgl.png)
 
+## Conclusion
+
+- Revised view on ${\bf G}$
+- Useful set of equations and heuristics
+
 ## Thanks & Questions
 
 Steve Krone, Peter L. Ralph, Hinrich Schulenburg, Patrick C. Phillips, Arne Traulsen, Jonas Wickman, Brendan Bohannan
@@ -1014,3 +1021,11 @@ Drift alters $\bf G$-matrix orientation even with recombination
 ::::
 
 ## What about environmental stochasticity?
+
+- $m(\nu,{\bf z})=$ random field
+
+- pop-gen *(Gillespie 1972, 1973a, ..., 1979)*
+
+- $\mathrm d\bar{\bf z}$ *(Lande 2007, 2008)*
+
+- Measure-valued *(Mytnik 1996, Mytnik & Xiong 2007)*
