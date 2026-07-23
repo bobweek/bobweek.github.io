@@ -37,7 +37,7 @@ execute:
   fig-format: svg
 ---
 
-## What is a $\bf G$-matrix?
+## What is a $\bf G$-matrix? ![](G-mat.png){.inline-img width=8%}
 
 ::: {.incremental}
 - Multivariate trait vector: ${\bf z}=\left(\begin{smallmatrix} z_1 \\ \vdots \\ z_d \end{smallmatrix}\right)$
@@ -47,8 +47,7 @@ execute:
 - Genetic covariance structure: ${\bf G}=\mathrm{Cov}({\bf g})=\left(\begin{smallmatrix} G_{11} & \cdots & G_{1d} \\ \vdots & \ddots & \vdots \\ G_{d1} & \cdots & G_{dd} \end{smallmatrix}\right)$
   - First two principle components: ![](G-mat.png){.inline-img width=5%}
   - Heritable component of variation
-  - Predicts response to selection $\Delta\bar{\bf z}={\bf G}\,\nabla_{\bar{\bf z}}\ln\bar W$
-    - $\bar W=$ mean fitness
+  - Predicts response to selection $\Delta\bar{\bf z}={\bf G}\,\nabla_{\bar{\bf z}}\ln\bar W,\quad\bar W=$ mean fitness
 :::
 
 
@@ -192,14 +191,15 @@ explains random genetic <br> fixation and loss
 
 ::: {.incremental}
 
-- Use diffusion-limit to get SDE $\mathrm d{\bf G}=a({\bf G})\mathrm dt+b({\bf G})\mathrm d{\bf B}$
+1. Use diffusion-limit to get SDE $\mathrm d{\bf G}=a({\bf G})\mathrm dt+b({\bf G})\mathrm d{\bf B}$
   - Also gives abundance $\mathrm dn$, mean trait $\mathrm d\bar{\bf z}$
   - Also gives heuristics for calculations
     - {$\mathrm dn,\mathrm d\bar{\bf z},\mathrm d{\bf G}$} ∪ {heuristics} = eco-evo framework
-- Apply heuristics to study $\mathrm d{\bf G}$
+2. Apply heuristics to study $\mathrm d{\bf G}$
 
 :::
 
+# Building the Framework
 
 ## A Diffusion Approximation Approach
 
@@ -699,6 +699,7 @@ $$
 
 :::
 
+# The Response of $\bf G$ to Drift
 
 ## A new neutral model of $\bf G$-matrix evolution
 
@@ -708,7 +709,7 @@ $$\mathrm d{\bf G}={\color{#c2185b} -\tfrac{1}{N_e}{\bf G}\,\mathrm d t} + {\col
 
 - $m(\nu,{\bf z})\equiv0$
 - ${\color{#3c8500}\bf M}={\bf 0}$
-- $N_e=v/n$ effective population size (assumed constant)
+- $N_e=n/v$ effective population size (assumed constant)
 - <pink>Deterministic part</pink> ~ shrinks $\bf G$
   - Agrees with Lande's $\mathbb E[{\bf G}_t]$
 - <violet>Stochastic part</violet> ~ complicated ...
@@ -716,7 +717,7 @@ $$\mathrm d{\bf G}={\color{#c2185b} -\tfrac{1}{N_e}{\bf G}\,\mathrm d t} + {\col
 
 :::
 
-## Obtaining dynamics of genetic correlations
+## Obtaining dynamics of genetic correlations $\mathrm d\rho$
 
 ::: {.incremental}
 
@@ -753,6 +754,7 @@ $$
 - *because linearity* $a\,\mathrm d{\cal M}({x})+b\,\mathrm d{\cal M}({y})=\mathrm d{\cal M}(a\,{x}+b\,{y})$
 
   - then rewrite back with $\mathrm dB=\mathrm d{\cal M}(a\,{x}+b\,{ y})$
+  - what about $\mathrm dG_{ij}\,\mathrm dG_{kl}$?
 
 :::
 
@@ -977,8 +979,10 @@ McGlothlin et al (2018):
 
 ## Conclusion
 
-- Revised view on ${\bf G}$
+- Revised view on $\mathrm d{\bf G}$
 - Useful set of equations and heuristics
+  - increase accessibility of formal stochastic models
+  - quickly obtain diverse models
 
 ## Thanks & Questions
 
