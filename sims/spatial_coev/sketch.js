@@ -15,10 +15,10 @@ let generation = 0;
 const $ = (id) => document.getElementById(id);
 
 const DEFAULTS = {
-  m1: 0.45, m2: 0.34, m3: 0.24,
-  s12: 0.02, s13: 0.007, s23: 0.02,
-  ratio: 2, mode: 'chase',
-  gamma: 0, sigma: 0, localNe: false,
+  m1: 0.23, m2: 0.43, m3: 0.30,
+  s12: 0.02, s13: 0.064, s23: 0.03,
+  ratio: 0.5, mode: 'chase',
+  gamma: 0, sigma: 2.26, localNe: false,
   view: 'traits', bounds: 'clamp', spf: 1,
 };
 
