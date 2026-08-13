@@ -1,520 +1,194 @@
-// --- globals (ported from Processing) ---
-let grid, dummy;
+/* =====================================================================
+   sketch.js  —  p5 glue only.  The model lives in field.js.
 
-let w, h,
-  wid = 80,
-  hi = 140,
-  old_wid,
-  old_hi,
-  neighborhood = 0,
-  hud = 1,
-  picCount,
-  k = 0,
-  e = 1,
-  count = 0;
+   Everything the user can touch is a real DOM control, so it keeps
+   working inside an iframe, on a touchscreen, and with a keyboard.
+   ===================================================================== */
 
-let C = 0.01,
-  mix = 0,
-  loge = 0.01,
-  Mratio = 2,
-  Msel12,
-  Msel13,
-  Msel23;
+let F;                 // the lattice
+let img;               // p5.Image at lattice resolution, blown up to fill
+let resIdx = 3;        // index into RESOLUTIONS
+let playing = true;
+let stepOnce = false;
+let generation = 0;
 
-let m = [0.1, 0.1, 0.1];
-let drift = [0, 0, 0];
-let G = [1, 1, 1],
-  Gamma = [0, 0, 0];
+const $ = (id) => document.getElementById(id);
 
-// matching selection matrix: M[i][j] is selection pressure from species i onto species j
-let M = [
-  [0, 0, 0],
-  [0, 0, 0],
-  [0, 0, 0],
-];
+const DEFAULTS = {
+  m1: 0.45, m2: 0.34, m3: 0.24,
+  s12: 0.02, s13: 0.007, s23: 0.02,
+  ratio: 2, mode: 'chase',
+  gamma: 0, sigma: 0, localNe: false,
+  view: 'traits', bounds: 'clamp', spf: 1,
+};
 
-let m_SL = "",
-  mig = "",
-  M_SL = "",
-  Mratio_SL = "",
-  A_SL = "",
-  Image = "",
-  Ran = "",
-  Size = "",
-  contrast = "",
-  Mix = "",
-  log_e,
-  filename;
-
-let number;
-// let size = 10;
-let c;
-
-let pic = false,
-  rando = false,
-  vid = false,
-  rev = false,
-  capture = false,
-  pause = false,
-  pause1 = false;
-
-// UI
-let mig1, mig2, mig3, m12, m13, m23;
+/* ------------------------------------------------------------- p5 setup */
 
 function setup() {
-  document.body.style.margin = "0";
-  document.body.style.padding = "0";
-  document.body.style.overflow = "hidden";
-
   pixelDensity(1);
-  
-  canvas = createCanvas(400, 700);
-  canvas.elt.style.touchAction = "manipulation";
-  noStroke();
-  background(0);
+  const c = createCanvas(400, 700);
+  c.parent('holder');
+  c.elt.style.touchAction = 'manipulation';
 
-  // sliders
-  mig1 = new HScrollbar(25, 50, 120, 20, 5, 120);
-  mig2 = new HScrollbar(25, 100, 120, 20, 5, 70);
-  mig3 = new HScrollbar(25, 150, 120, 20, 5, 30);
-  m12 = new HScrollbar(25, 200, 120, 20, 5, 120);
-  m13 = new HScrollbar(25, 250, 120, 20, 5, 20);
-  m23 = new HScrollbar(25, 300, 120, 20, 5, 120);
+  buildField(RESOLUTIONS[resIdx], null);
+  F.randomize();
 
-  // grid init
-  grid = new Array(wid);
-  for (let i = 0; i < wid; i++) {
-    grid[i] = new Array(hi);
-    for (let j = 0; j < hi; j++) {
-      grid[i][j] = new Cell(random(0, 255), random(0, 255), random(0, 255), i, j);
-    }
-  }
-  
-  
-  // initGridFromInstructions();
+  wireControls();
+  fitCanvas();
+
+  new ResizeObserver(() => fitCanvas()).observe($('stage'));
+
+  // the simulation *is* the motion, so honour the system setting
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) setPlaying(false);
 }
+
+function buildField(dims, old) {
+  F = new Field(dims[0], dims[1]);
+  if (old) F.resampleFrom(old); else F.randomize();
+  img = createImage(F.wid, F.hi);
+  img.loadPixels();
+  $('resv').value = `${F.wid} \u00d7 ${F.hi}`;
+}
+
+/* -------------------------------------------------------------- params */
+
+function readParams() {
+  const mode = $('mode').value;
+  return {
+    m: [+$('m1').value, +$('m2').value, +$('m3').value],
+    M: buildM(+$('s12').value, +$('s13').value, +$('s23').value, +$('ratio').value, mode),
+    gamma: +$('gamma').value,
+    sigma: +$('sigma').value,
+    localNe: $('localNe').checked,
+    mode: $('bounds').value,
+  };
+}
+
+/* ---------------------------------------------------------------- draw */
 
 function draw() {
-  if (!pause) {
-    // render
-    for (let i = 0; i < wid; i++) {
-      for (let j = 0; j < hi; j++) grid[i][j].render();
-    }
-
-    // read slider values -> parameters
-    m[0] = 0.75 * (mig1.spos - mig1.sposMin) / (mig1.sposMax - mig1.sposMin);
-    m[1] = 0.75 * (mig2.spos - mig2.sposMin) / (mig2.sposMax - mig2.sposMin);
-    m[2] = 0.75 * (mig3.spos - mig3.sposMin) / (mig3.sposMax - mig3.sposMin);
-
-    Mratio = 2;
-    Msel12 = 0.1 * (m12.spos - m12.sposMin) / (m12.sposMax - m12.sposMin);
-    Msel13 = 0.1 * (m13.spos - m13.sposMin) / (m13.sposMax - m13.sposMin);
-    Msel23 = 0.1 * (m23.spos - m23.sposMin) / (m23.sposMax - m23.sposMin);
-
-    // fill selection matrix
-    M[1][0] = Msel12;
-    M[2][1] = Msel13;
-    M[0][2] = Msel23;
-    M[0][1] = -Msel12;
-    M[1][2] = -Mratio * Msel13;
-    M[2][0] = -Mratio * Msel23;
-
-    // dummy copy
-    dummy = new Array(wid);
-    for (let i = 0; i < wid; i++) {
-      dummy[i] = new Array(hi);
-      for (let j = 0; j < hi; j++) {
-        dummy[i][j] = new Cell(
-          grid[i][j].species[0],
-          grid[i][j].species[1],
-          grid[i][j].species[2],
-          i,
-          j
-        );
-      }
-    }
-
-    // update (reverse loops kept)
-    for (let i = wid - 1; i >= 0; i--) {
-      for (let j = hi - 1; j >= 0; j--) grid[i][j].update(dummy);
-    }
-
-    // HUD
-    if (hud === 0) {
-      mig1.update(); mig1.display();
-      mig2.update(); mig2.display();
-      mig3.update(); mig3.display();
-      m12.update();  m12.display();
-      m13.update();  m13.display();
-      m23.update();  m23.display();
-
-      fill(0);
-      rect(mig1.xpos - 2, mig1.ypos - 20, 90, 12);
-      rect(mig2.xpos - 2, mig2.ypos - 20, 90, 12);
-      rect(mig3.xpos - 2, mig3.ypos - 20, 90, 12);
-      rect(m12.xpos - 2, m12.ypos - 20, 125, 12);
-      rect(m13.xpos - 2, m13.ypos - 20, 125, 12);
-      rect(m23.xpos - 2, m23.ypos - 20, 125, 12);
-
-      fill(255);
-      text("spp1 migration", mig1.xpos, mig1.ypos - 10);
-      text("spp2 migration", mig2.xpos, mig2.ypos - 10);
-      text("spp3 migration", mig3.xpos, mig3.ypos - 10);
-      text("spp 1 & 2 coevolution", m12.xpos, m12.ypos - 10);
-      text("spp 1 & 3 coevolution", m13.xpos, m13.ypos - 10);
-      text("spp 2 & 3 coevolution", m23.xpos, m23.ypos - 10);
-    }
-    updateAndDrawUI();
-
-  } else {
-    if (pause1) {
-      // one-step redraw/update while paused (mirrors your Processing logic)
-      for (let i = 0; i < wid; i++) {
-        for (let j = 0; j < hi; j++) grid[i][j].render();
-      }
-
-      m[0] = 0.75 * (mig1.spos - mig1.sposMin) / (mig1.sposMax - mig1.sposMin);
-      m[1] = 0.75 * (mig2.spos - mig2.sposMin) / (mig2.sposMax - mig2.sposMin);
-      m[2] = 0.75 * (mig3.spos - mig3.sposMin) / (mig3.sposMax - mig3.sposMin);
-
-      Mratio = 2;
-      Msel12 = 0.1 * (m12.spos - m12.sposMin) / (m12.sposMax - m12.sposMin);
-      Msel13 = 0.1 * (m13.spos - m13.sposMin) / (m13.sposMax - m13.sposMin);
-      Msel23 = 0.1 * (m23.spos - m23.sposMin) / (m23.sposMax - m23.sposMin);
-
-      M[1][0] = Msel12;
-      M[2][1] = Msel13;
-      M[0][2] = Msel23;
-      M[0][1] = -Msel12;
-      M[1][2] = -Mratio * Msel13;
-      M[2][0] = -Mratio * Msel23;
-
-      dummy = new Array(wid);
-      for (let i = 0; i < wid; i++) {
-        dummy[i] = new Array(hi);
-        for (let j = 0; j < hi; j++) {
-          dummy[i][j] = new Cell(
-            grid[i][j].species[0],
-            grid[i][j].species[1],
-            grid[i][j].species[2],
-            i,
-            j
-          );
-        }
-      }
-      for (let i = wid - 1; i >= 0; i--) {
-        for (let j = hi - 1; j >= 0; j--) grid[i][j].update(dummy);
-      }
-
-      mig1.update(); mig1.display();
-      mig2.update(); mig2.display();
-      mig3.update(); mig3.display();
-      m12.update();  m12.display();
-      m13.update();  m13.display();
-      m23.update();  m23.display();
-
-      fill(0);
-      rect(mig1.xpos - 2, mig1.ypos - 20, 90, 12);
-      rect(mig2.xpos - 2, mig2.ypos - 20, 90, 12);
-      rect(mig3.xpos - 2, mig3.ypos - 20, 90, 12);
-      rect(m12.xpos - 2, m12.ypos - 20, 125, 12);
-      rect(m13.xpos - 2, m13.ypos - 20, 125, 12);
-      rect(m23.xpos - 2, m23.ypos - 20, 125, 12);
-
-      fill(255);
-      text("spp1 migration", mig1.xpos, mig1.ypos - 10);
-      text("spp2 migration", mig2.xpos, mig2.ypos - 10);
-      text("spp3 migration", mig3.xpos, mig3.ypos - 10);
-      text("spp 1 & 2 coevolution", m12.xpos, m12.ypos - 10);
-      text("spp 1 & 3 coevolution", m13.xpos, m13.ypos - 10);
-      text("spp 2 & 3 coevolution", m23.xpos, m23.ypos - 10);
-    }
-
-    fill(0);
-    rect(140, 360, 220, 70);
-    fill(255);
-    text("press h to toggle controls", 150, 380);
-    text("press +/- to incr/decr resolution", 150, 400);
-    text("press r to reset with random values", 150, 420);
-    pause1 = false;
-    
-  updateAndDrawUI();
+  if (playing || stepOnce) {
+    const p = readParams();
+    const n = stepOnce ? 1 : +$('spf').value;
+    for (let q = 0; q < n; q++) F.step(p);
+    generation += n;
+    stepOnce = false;
+    $('gen').textContent = generation.toLocaleString();
   }
 
-
+  F.writePixels(img.pixels, $('view').value);
+  img.updatePixels();
+  image(img, 0, 0, width, height);
 }
 
-function keyReleased() {
-  switch (key) {
-    case '+': {
-      // copy current grid into dummy
-      dummy = new Array(wid);
-      for (let i = 0; i < wid; i++) {
-        dummy[i] = new Array(hi);
-        for (let j = 0; j < hi; j++) {
-          dummy[i][j] = new Cell(
-            grid[i][j].species[0],
-            grid[i][j].species[1],
-            grid[i][j].species[2],
-            i,
-            j
-          );
-        }
-      }
+/* ------------------------------------------------------------- sizing */
 
-      old_wid = wid;
-      old_hi = hi;
+function fitCanvas() {
+  const stage = $('stage');
+  const cs = getComputedStyle(stage);
+  const availW = stage.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+  const availH = stage.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+  if (availW < 20 || availH < 20) return;
 
-      hi += 3;
-      wid += 4;
+  const aspect = F.wid / F.hi;
+  let w = availW, h = availW / aspect;
+  if (h > availH) { h = availH; w = availH * aspect; }
+  w = Math.max(20, Math.round(w));
+  h = Math.max(20, Math.round(h));
+  if (w === width && h === height) return;
 
-      grid = new Array(wid);
-      for (let i = 0; i < wid; i++) {
-        grid[i] = new Array(hi);
-        for (let j = 0; j < hi; j++) {
-          grid[i][j] = new Cell(
-            dummy[i % (old_wid - 1)][j % (old_hi - 1)].species[0],
-            dummy[i % (old_wid - 1)][j % (old_hi - 1)].species[1],
-            dummy[i % (old_wid - 1)][j % (old_hi - 1)].species[2],
-            i,
-            j
-          );
-        }
-      }
-      dummy = null;
-      break;
+  resizeCanvas(w, h);
+  noSmooth();          // resizing the canvas resets the 2D context state
+}
+
+function windowResized() { fitCanvas(); }
+
+/* ------------------------------------------------------------ controls */
+
+function setPlaying(on) {
+  playing = on;
+  $('play').textContent = on ? 'Pause' : 'Play';
+}
+
+function setResolution(idx) {
+  const next = constrain(idx, 0, RESOLUTIONS.length - 1);
+  if (next === resIdx) return;
+  resIdx = next;
+  buildField(RESOLUTIONS[resIdx], F);
+  fitCanvas();
+}
+
+function showValues() {
+  const fmt = (id, d) => { $(id + 'v').value = (+$(id).value).toFixed(d); };
+  fmt('m1', 2); fmt('m2', 2); fmt('m3', 2);
+  fmt('s12', 3); fmt('s13', 3); fmt('s23', 3);
+  fmt('ratio', 2); fmt('gamma', 3); fmt('sigma', 2);
+  $('spfv').value = $('spf').value;
+  // the flee:track ratio only means anything for the chase interaction
+  $('ratioWrap').classList.toggle('off', $('mode').value !== 'chase');
+}
+
+function reseed(how) {
+  if (how === 'random') F.randomize();
+  else if (how === 'optima') F.seedOptima();
+  else F.seedFlat();
+  generation = 0;
+  $('gen').textContent = '0';
+}
+
+function wireControls() {
+  const sliders = ['m1', 'm2', 'm3', 's12', 's13', 's23', 'ratio', 'gamma', 'sigma', 'spf'];
+  sliders.forEach((id) => $(id).addEventListener('input', showValues));
+  $('mode').addEventListener('change', showValues);
+  showValues();
+
+  $('play').onclick = () => setPlaying(!playing);
+  $('stepBtn').onclick = () => { setPlaying(false); stepOnce = true; };
+
+  $('rand').onclick = () => reseed('random');
+  $('seedOpt').onclick = () => reseed('optima');
+  $('flat').onclick = () => reseed('flat');
+
+  $('coarser').onclick = () => setResolution(resIdx - 1);
+  $('finer').onclick = () => setResolution(resIdx + 1);
+
+  $('defaults').onclick = () => {
+    for (const [id, v] of Object.entries(DEFAULTS)) {
+      const el = $(id);
+      if (el.type === 'checkbox') el.checked = v; else el.value = v;
     }
+    showValues();
+  };
 
-    case '-': {
-      dummy = new Array(wid);
-      for (let i = 0; i < wid; i++) {
-        dummy[i] = new Array(hi);
-        for (let j = 0; j < hi; j++) {
-          dummy[i][j] = new Cell(
-            grid[i][j].species[0],
-            grid[i][j].species[1],
-            grid[i][j].species[2],
-            i,
-            j
-          );
-        }
-      }
+  $('hide').onclick = () => tuck(true);
+  $('reveal').onclick = () => tuck(false);
 
-      old_wid = wid;
-      old_hi = hi;
+  // pausing belongs to the canvas, not to every click on the page
+  document.querySelector('#holder canvas')
+    .addEventListener('pointerdown', () => setPlaying(!playing));
+}
 
-      hi -= 3;
-      if (hi < 3) hi = 3;
+function tuck(on) {
+  document.body.classList.toggle('tucked', on);
+  $('reveal').hidden = !on;
+  requestAnimationFrame(fitCanvas);
+}
 
-      wid -= 4;
-      if (wid < 4) wid = 4;
+/* ----------------------------------------------------------- keyboard */
 
-      grid = new Array(wid);
-      for (let i = 0; i < wid; i++) {
-        grid[i] = new Array(hi);
-        for (let j = 0; j < hi; j++) {
-          grid[i][j] = new Cell(
-            dummy[i % (old_wid - 1)][j % (old_hi - 1)].species[0],
-            dummy[i % (old_wid - 1)][j % (old_hi - 1)].species[1],
-            dummy[i % (old_wid - 1)][j % (old_hi - 1)].species[2],
-            i,
-            j
-          );
-        }
-      }
-      dummy = null;
-      break;
-    }
-
-    case 'h':
-      hud = (1 + hud) % 2;
-      break;
-
-    case 'p':
-      pause = !pause;
-      pause1 = true;
-      break;
-
-    case 'r':
-      for (let i = 0; i < wid; i++) {
-        for (let j = 0; j < hi; j++) grid[i][j].set(random(0, 255), random(0, 255), random(0, 255));
-      }
-      break;
+window.addEventListener('keydown', (e) => {
+  // let arrow keys nudge a focused slider instead of hijacking them
+  const a = document.activeElement;
+  if (a && /^(INPUT|SELECT|TEXTAREA|BUTTON)$/.test(a.tagName) && e.key !== 'Escape') {
+    if (e.key !== ' ') return;
+    if (a.tagName === 'BUTTON') return;
   }
-}
-
-// --- UI class (ported) ---
-class HScrollbar {
-  constructor(xp, yp, sw, sh, l, ispos) {
-    this.swidth = sw;
-    this.sheight = sh;
-    const widthtoheight = sw - sh;
-    this.ratio = sw / widthtoheight;
-
-    this.xpos = xp;
-    this.ypos = yp - sh / 2;
-
-    this.spos = ispos;
-    this.newspos = this.spos;
-
-    this.sposMin = this.xpos;
-    this.sposMax = this.xpos + this.swidth - this.sheight;
-
-    this.loose = l;
-
-    this.over = false;
-    this.locked = false;
+  switch (e.key) {
+    case ' ': setPlaying(!playing); e.preventDefault(); break;
+    case 's': setPlaying(false); stepOnce = true; break;
+    case 'r': reseed('random'); break;
+    case 'h': tuck(!document.body.classList.contains('tucked')); break;
+    case '[': setResolution(resIdx - 1); break;
+    case ']': setResolution(resIdx + 1); break;
   }
-
-  update() {
-    this.over = this.overEvent();
-
-    if (mouseIsPressed && this.over) this.locked = true;
-    if (!mouseIsPressed) this.locked = false;
-
-    if (this.locked) {
-      this.newspos = constrain(mouseX - this.sheight / 2, this.sposMin, this.sposMax);
-    }
-
-    if (abs(this.newspos - this.spos) > 1) {
-      this.spos = this.spos + (this.newspos - this.spos) / this.loose;
-    }
-  }
-
-  overEvent() {
-    return (
-      mouseX > this.xpos &&
-      mouseX < this.xpos + this.swidth &&
-      mouseY > this.ypos &&
-      mouseY < this.ypos + this.sheight
-    );
-  }
-
-  display() {
-    fill(204);
-    rect(this.xpos, this.ypos, this.swidth, this.sheight);
-
-    if (this.over || this.locked) fill(0);
-    else fill(102);
-
-    rect(this.spos, this.ypos, this.sheight, this.sheight);
-  }
-
-  getPos() {
-    return this.spos * this.ratio;
-  }
-}
-
-// --- spatial functions (ported) ---
-function abiotic_selection(x, y, i) {
-  return 0.1 * exp(-((y - height / 2) * (y - height / 2)) / (2 * 50000)) *
-    exp(-((x - width / 2) * (x - width / 2)) / (2 * 50000));
-}
-
-function biotic_selection(x, y, i) {
-  return 0.1 * exp(-((y - height / 2) * (y - height / 2)) / (2 * 50000)) *
-    exp(-((x - width / 2) * (x - width / 2)) / (2 * 50000));
-}
-
-function theta(x, y, i) {
-  let value = 0;
-  if (i === 0)
-    value =
-      55 +
-      200 *
-        exp(-((y - (2 * height) / 5) * (y - (2 * height) / 5)) / (2 * 10000)) *
-        exp(-((x - (3 * width) / 8) * (x - (3 * width) / 8)) / (2 * 10000));
-  if (i === 1)
-    value =
-      55 +
-      200 *
-        exp(-((y - (2 * height) / 5) * (y - (2 * height) / 5)) / (2 * 10000)) *
-        exp(-((x - (5 * width) / 8) * (x - (5 * width) / 8)) / (2 * 10000));
-  if (i === 2)
-    value =
-      55 +
-      200 *
-        exp(-((y - (3 * height) / 5) * (y - (3 * height) / 5)) / (2 * 10000)) *
-        exp(-((x - width / 2) * (x - width / 2)) / (2 * 10000));
-  return value;
-}
-
-function N(x, y, i) {
-  return 10 + 500 * exp(-((y - height / 2) * (y - height / 2)) / (2 * 5000)) *
-    exp(-((x - width / 2) * (x - width / 2)) / (2 * 5000));
-}
-
-
-function initGridFromInstructions() {
-  const msg =
-    "press p to pause/play\n" +
-    "press +/- to incr/decr resolution\n" +
-    "press r to reset with random values";
-
-  // offscreen buffer at lattice resolution
-  const pg = createGraphics(wid, hi);
-  pg.pixelDensity(1);
-  pg.background(0);
-  pg.fill(255);
-  pg.noStroke();
-  pg.textAlign(CENTER, CENTER);
-
-  // pick a readable size in lattice-pixels
-  pg.textSize(max(8, floor(min(wid, hi) * 0.12)));
-
-  // draw text centered
-  pg.text(msg, wid / 2, hi / 2);
-
-  pg.loadPixels();
-
-  // map buffer pixels -> Cell RGB
-  for (let i = 0; i < wid; i++) {
-    for (let j = 0; j < hi; j++) {
-      const idx = 4 * (i + wid * j);
-      const r = pg.pixels[idx + 0];
-      const g = pg.pixels[idx + 1];
-      const b = pg.pixels[idx + 2];
-      grid[i][j].set(r, g, b);
-    }
-  }
-}
-
-function mousePressed() {
-  const overSlider =
-    mig1.overEvent() || mig2.overEvent() || mig3.overEvent() ||
-    m12.overEvent()  || m13.overEvent()  || m23.overEvent();
-
-  if (!overSlider) {
-    pause = !pause;
-    pause1 = true;
-  }
-  return false;
-}
-
-
-function updateAndDrawUI() {
-  if (hud !== 0) return;
-
-  mig1.update(); mig1.display();
-  mig2.update(); mig2.display();
-  mig3.update(); mig3.display();
-  m12.update();  m12.display();
-  m13.update();  m13.display();
-  m23.update();  m23.display();
-
-  fill(0);
-  rect(mig1.xpos - 2, mig1.ypos - 20, 82, 12);
-  rect(mig2.xpos - 2, mig2.ypos - 20, 82, 12);
-  rect(mig3.xpos - 2, mig3.ypos - 20, 82, 12);
-  rect(m12.xpos - 2, m12.ypos - 20, 118, 12);
-  rect(m13.xpos - 2, m13.ypos - 20, 118, 12);
-  rect(m23.xpos - 2, m23.ypos - 20, 118, 12);
-
-  fill(255);
-  text("spp1 migration", mig1.xpos, mig1.ypos - 10);
-  text("spp2 migration", mig2.xpos, mig2.ypos - 10);
-  text("spp3 migration", mig3.xpos, mig3.ypos - 10);
-  text("spp 1 & 2 coevolution", m12.xpos, m12.ypos - 10);
-  text("spp 1 & 3 coevolution", m13.xpos, m13.ypos - 10);
-  text("spp 2 & 3 coevolution", m23.xpos, m23.ypos - 10);
-}
+});

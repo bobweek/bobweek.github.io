@@ -1,7 +1,309 @@
+/* =====================================================================
+   The lattice is the only saturated thing on screen. Everything around it
+   is grey. The one exception is the sliders: each carries the channel
+   colour of the species it moves, so the control tells you which colour in
+   the field it belongs to and no legend is needed.
+   ===================================================================== */
+
+:root {
+  --paper: #f2f2ef;
+  --card: #ffffff;
+  --ink: #14171a;
+  --muted: #6d7278;
+  --rule: #e2e2dc;
+  --sunk: #edede9;
+
+  --sp1: #e8323c;   /* red channel   */
+  --sp2: #25a244;   /* green channel */
+  --sp3: #2b6ee0;   /* blue channel  */
+
+  --ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono",
+          "Roboto Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--ui);
+  font-size: 13px;
+  -webkit-text-size-adjust: 100%;
 }
+
+body { display: flex; align-items: stretch; }
+
+/* ---------------------------------------------------------- the field */
+
+#stage {
+  flex: 1 1 auto;
+  min-width: 0;
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  background:
+    repeating-conic-gradient(var(--sunk) 0% 25%, var(--paper) 0% 50%) 0 0 / 16px 16px;
+}
+
+#holder { line-height: 0; }
+
 canvas {
   display: block;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(20, 23, 26, .16), 0 10px 30px rgba(20, 23, 26, .10);
+}
+
+#reveal {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+/* ---------------------------------------------------- the instruments */
+
+#panel {
+  flex: 0 0 302px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--card);
+  border-left: 1px solid var(--rule);
+  padding: 0 18px 22px;
+}
+
+body.tucked #panel { display: none; }
+
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px 0 12px;
+  background: var(--card);
+  border-bottom: 1px solid var(--rule);
+}
+
+h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 640;
+  letter-spacing: -.01em;
+}
+
+.sub {
+  margin: 3px 0 0;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+section { padding: 15px 0; border-bottom: 1px solid var(--rule); }
+section:last-of-type { border-bottom: 0; }
+
+h2 {
+  margin: 0 0 9px;
+  font-size: 9.5px;
+  font-weight: 660;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.note {
+  margin: 8px 0 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.note + .ctrl { margin-top: 12px; }
+
+/* ------------------------------------------------------------ transport */
+
+.transport {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-top: 14px;
+}
+
+.gen {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.gen::after { content: " gen"; letter-spacing: .04em; }
+
+/* -------------------------------------------------------------- buttons */
+
+button {
+  font-family: var(--ui);
+  font-size: 12px;
+  font-weight: 520;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 6px 11px;
+  cursor: pointer;
+  transition: background .12s, border-color .12s;
+}
+button:hover { background: var(--sunk); border-color: #cfcfc8; }
+button:active { background: #e3e3de; }
+
+button.solid { background: var(--ink); border-color: var(--ink); color: #fff; min-width: 62px; }
+button.solid:hover { background: #2a3037; border-color: #2a3037; }
+
+button.ghost { color: var(--muted); }
+button.wide { width: 100%; margin-top: 8px; }
+
+.row { display: flex; gap: 7px; }
+.row button { flex: 1; }
+
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* --------------------------------------------------------- slider rows */
+
+.ctrl { margin-bottom: 13px; }
+.ctrl:last-child { margin-bottom: 0; }
+
+.ctrl label {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.ctrl output {
+  float: right;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.ctrl.pick { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.ctrl.pick label { flex: 0 0 auto; }
+
+select {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--ui);
+  font-size: 12px;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 5px 6px;
+}
+
+.stepper { display: flex; align-items: center; gap: 6px; }
+.stepper button { padding: 4px 9px; font-family: var(--mono); }
+.stepper output {
+  float: none;
+  min-width: 58px;
+  text-align: right;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: 11px;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.check input { margin: 1px 0 0; accent-color: var(--ink); }
+
+/* ------------------------------------------------------ range elements */
+/* the track carries the channel colour of whatever the slider moves */
+
+input[type=range] {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  margin: 7px 0 0;
+  height: 16px;
+  background: transparent;
+  cursor: grab;
+  --tint: var(--muted);
+  --tint2: var(--muted);
+}
+input[type=range]:active { cursor: grabbing; }
+
+[data-tint=sp1] input[type=range] { --tint: var(--sp1); --tint2: var(--sp1); }
+[data-tint=sp2] input[type=range] { --tint: var(--sp2); --tint2: var(--sp2); }
+[data-tint=sp3] input[type=range] { --tint: var(--sp3); --tint2: var(--sp3); }
+[data-tint=p12] input[type=range] { --tint: var(--sp1); --tint2: var(--sp2); }
+[data-tint=p13] input[type=range] { --tint: var(--sp1); --tint2: var(--sp3); }
+[data-tint=p23] input[type=range] { --tint: var(--sp2); --tint2: var(--sp3); }
+
+input[type=range]::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--tint), var(--tint2));
+}
+input[type=range]::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--tint), var(--tint2));
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px; height: 15px;
+  margin-top: -5.5px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1.5px solid var(--ink);
+  box-shadow: 0 1px 2px rgba(20, 23, 26, .25);
+}
+input[type=range]::-moz-range-thumb {
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1.5px solid var(--ink);
+  box-shadow: 0 1px 2px rgba(20, 23, 26, .25);
+}
+
+.ctrl.off { opacity: .38; pointer-events: none; }
+
+/* ------------------------------------------------------------ keycaps */
+
+.keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 12px;
+  padding-top: 15px;
+  font-size: 10.5px;
+  color: var(--muted);
+}
+kbd {
+  font-family: var(--mono);
+  font-size: 10px;
+  background: var(--sunk);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1px 4px;
+}
+
+/* ------------------------------------------------------------- narrow */
+
+@media (max-width: 760px) {
+  body { flex-direction: column; }
+  #stage { flex: 0 0 auto; height: 56vh; padding: 10px; }
+  #panel { flex: 1 1 auto; border-left: 0; border-top: 1px solid var(--rule); }
+  body.tucked #stage { height: 100vh; }
 }

@@ -1,11 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
-  </head>
-  <body>
-    <script src="cell.js"></script>
-    <script src="sketch.js"></script>
-  </body>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>coevolution lattice</title>
+<link rel="stylesheet" href="style.css" />
+<!-- for an offline talk, swap this for the local copy: <script src="p5.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.min.js"></script>
+</head>
+<body>
+
+<main id="stage">
+  <div id="holder"></div>
+  <button id="reveal" type="button" hidden>controls</button>
+</main>
+
+<aside id="panel">
+
+  <header class="masthead">
+    <div>
+      <h1>Coevolution lattice</h1>
+      <p class="sub">three species &middot; one trait each &middot; drawn as R, G, B</p>
+    </div>
+    <button id="hide" class="ghost" type="button">Hide</button>
+  </header>
+
+  <section class="transport">
+    <button id="play" class="solid" type="button">Pause</button>
+    <button id="stepBtn" type="button">Step</button>
+    <span id="gen" class="gen">0</span>
+  </section>
+
+  <section>
+    <h2>Dispersal</h2>
+    <p class="note">Each species mixes with its four neighbours at rate <i>m</i>.</p>
+    <div class="ctrl" data-tint="sp1">
+      <label for="m1">Species 1</label><output id="m1v"></output>
+      <input id="m1" type="range" min="0" max="0.75" step="0.005" value="0.45" />
+    </div>
+    <div class="ctrl" data-tint="sp2">
+      <label for="m2">Species 2</label><output id="m2v"></output>
+      <input id="m2" type="range" min="0" max="0.75" step="0.005" value="0.34" />
+    </div>
+    <div class="ctrl" data-tint="sp3">
+      <label for="m3">Species 3</label><output id="m3v"></output>
+      <input id="m3" type="range" min="0" max="0.75" step="0.005" value="0.24" />
+    </div>
+  </section>
+
+  <section>
+    <h2>Coevolution</h2>
+    <div class="ctrl pick">
+      <label for="mode">Interaction</label>
+      <select id="mode">
+        <option value="chase" selected>Chase &mdash; one tracks, one flees</option>
+        <option value="match">Match &mdash; both converge</option>
+        <option value="avoid">Avoid &mdash; both diverge</option>
+      </select>
+    </div>
+    <div class="ctrl" data-tint="p12">
+      <label for="s12">Species 1 &amp; 2</label><output id="s12v"></output>
+      <input id="s12" type="range" min="0" max="0.1" step="0.001" value="0.02" />
+    </div>
+    <div class="ctrl" data-tint="p13">
+      <label for="s13">Species 1 &amp; 3</label><output id="s13v"></output>
+      <input id="s13" type="range" min="0" max="0.1" step="0.001" value="0.007" />
+    </div>
+    <div class="ctrl" data-tint="p23">
+      <label for="s23">Species 2 &amp; 3</label><output id="s23v"></output>
+      <input id="s23" type="range" min="0" max="0.1" step="0.001" value="0.02" />
+    </div>
+    <div class="ctrl" id="ratioWrap">
+      <label for="ratio">Flee : track</label><output id="ratiov"></output>
+      <input id="ratio" type="range" min="0" max="3" step="0.05" value="2" />
+    </div>
+  </section>
+
+  <section>
+    <h2>Selection &amp; drift</h2>
+    <div class="ctrl">
+      <label for="gamma">Stabilising, &gamma;</label><output id="gammav"></output>
+      <input id="gamma" type="range" min="0" max="0.4" step="0.005" value="0" />
+    </div>
+    <p class="note">Pulls each species toward its own optimum. Switch the view to <i>Optima</i> to see where those sit.</p>
+    <div class="ctrl">
+      <label for="sigma">Drift, &sigma;</label><output id="sigmav"></output>
+      <input id="sigma" type="range" min="0" max="3" step="0.02" value="0" />
+    </div>
+    <label class="check"><input id="localNe" type="checkbox" /> <span>Let <i>N</i><sub>e</sub> fall toward the range margin</span></label>
+    <p class="note">&sigma; = &radic;(<i>G</i>/<i>N</i><sub>e</sub>), so it is the value at the range core. At the margin it runs about 7&times; larger.</p>
+  </section>
+
+  <section>
+    <h2>Lattice</h2>
+    <div class="ctrl pick">
+      <label for="view">View</label>
+      <select id="view">
+        <option value="traits" selected>Traits</option>
+        <option value="optima">Optima</option>
+      </select>
+    </div>
+    <div class="ctrl pick">
+      <label for="bounds">Off-scale traits</label>
+      <select id="bounds">
+        <option value="clamp" selected>Clamp</option>
+        <option value="wrap">Wrap</option>
+        <option value="fold">Fold</option>
+        <option value="soft">Saturate</option>
+      </select>
+    </div>
+    <div class="ctrl pick">
+      <label>Grid</label>
+      <div class="stepper">
+        <button id="coarser" type="button" aria-label="Coarser grid">&minus;</button>
+        <output id="resv"></output>
+        <button id="finer" type="button" aria-label="Finer grid">+</button>
+      </div>
+    </div>
+    <div class="ctrl">
+      <label for="spf">Generations / frame</label><output id="spfv"></output>
+      <input id="spf" type="range" min="1" max="8" step="1" value="1" />
+    </div>
+  </section>
+
+  <section class="seeds">
+    <h2>Start over</h2>
+    <div class="row">
+      <button id="rand" type="button">Random</button>
+      <button id="seedOpt" type="button">At optima</button>
+      <button id="flat" type="button">Uniform</button>
+    </div>
+    <button id="defaults" class="wide ghost" type="button">Restore defaults</button>
+  </section>
+
+  <footer class="keys">
+    <span><kbd>space</kbd> play</span><span><kbd>s</kbd> step</span>
+    <span><kbd>r</kbd> random</span><span><kbd>h</kbd> hide</span>
+    <span><kbd>[</kbd> <kbd>]</kbd> grid</span>
+  </footer>
+
+</aside>
+
+<script src="field.js"></script>
+<script src="sketch.js"></script>
+</body>
 </html>
