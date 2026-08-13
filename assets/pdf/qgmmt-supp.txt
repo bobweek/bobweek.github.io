@@ -1,0 +1,736 @@
+Supplementary Material for
+
+Quantitative Genetics of Microbiome Mediated Traits
+Bob Week, Peter L. Ralph, Hannah F. Tavalire, William A. Cresko, Brendan J. M. Bohannan
+
+CONT E N TS
+1 Justification of Variance Partitioning
+
+1
+
+2 Additive Variances under Pairwise Interactions
+
+2
+
+3 Tables of Parameter Values used in Simulations
+
+5
+
+1
+
+SUPPLEM E N T TO M I C RO B I O ME MEDIATED QUANTITATIVE GENETICS
+
+1
+
+|
+
+JUSTIFICATION OF VARIANCE PARTITIONING
+
+Here we provide calculations to justify the partitioning of variance introduced in section 2.1 of the main text. The
+calculations here hold for any collection of numerically coded factors 𝑓 = (𝑓1 , … , 𝑓𝑛 )† . In the main text, the 𝑓𝑖 are equal
+to the allele counts 𝑔𝑖 for 𝑖 = 1, … , 𝐿, and are equal to relative microbial abundances 𝑚𝑖 for 𝑖 = 𝐿 + 1, … , 𝐿 + 𝑆. Instead of
+the additive effect specific to genotype-microbiome pairs 𝛼𝑔𝑚 , we focus on obtaining an expression for the additive
+effect for the vector of arbitrary factors 𝑓, denoted 𝛼𝑓 . The additivity constraint on 𝛼𝑓 implies 𝛼𝑓 = 𝛼0 + ∑𝑖 𝛼𝑖 𝑓𝑖 , which
+we abbreviate to 𝛼𝑓 = 𝛼0 + ⟨𝛼, 𝑓⟩ with 𝛼 = (𝛼1 , … , 𝛼𝑛 )† the vector of additive effects associated with each component of
+𝑓, and 𝛼0 is the intercept of the linear model. In the main text 𝛼𝑖 = 𝛾𝑖 for 𝑖 = 1, … , 𝐿 and 𝛼𝑖 = 𝜔𝑖 for 𝑖 = 𝐿 + 1, … , 𝐿 + 𝑆. We
+make the decomposition 𝑧𝑓 − 𝑧̄ = 𝛿𝑓 = 𝛼𝑓 + 𝜌𝑓 , i.e., 𝜌 is the residual. Following the definition of 𝑃𝑅 in the main text we
+have 𝑃𝑅 = ∑𝑓 𝑝𝑓 𝜌𝑓2 , where 𝑝𝑓 is the frequency of 𝑓 in the population. Then 𝑃𝑅 can be rewritten as 𝑃𝑅 = ∑𝑓 𝑝𝑓 (𝛿𝑓 − 𝛼𝑓 )2 .
+Our goal is to minimize 𝑃𝑅 . Partial differentiation with respect to the intercept returns
+∂𝛼0 𝑃𝑅 = −2 ∑ 𝑝𝑓 (𝛿𝑓 − 𝛼0 − ⟨𝛼, 𝑓⟩) = −2 ∑ 𝑝𝑓 𝜌𝑓 = −2𝜌.̄
+𝑓
+
+(1)
+
+𝑓
+
+The optimality condition ∂𝛼0 𝑃𝑅 = 0 then implies 𝜌̄ = 0, and hence we can set 𝛼0 = − ∑𝑓 𝑝𝑓 ⟨𝛼, 𝑓⟩ = −⟨𝛼, 𝑓⟩̄ = − ∑𝑖 𝛼𝑖 𝑓 ̄𝑖 .
+Partial differentiation with respect to additive effect 𝛼𝑖 for 𝑖 = 1, … , 𝑛 returns
+∂𝛼𝑖 𝑃𝑅 = −2 ∑ 𝑝𝑓 (𝛿𝑓 − 𝛼0 − ⟨𝛼, 𝑓⟩)𝑓𝑖 = −2 ∑ 𝑝𝑓 𝜌𝑓 𝑓𝑖 = −2 Cov(𝜌, 𝑓𝑖 ),
+𝑓
+
+(2)
+
+𝑓
+
+where the last equality holds because 𝜌̄ = 0. Then ∂𝛼𝑖 𝑃𝑅 = 0 implies Cov(𝜌, 𝑓𝑖 ) = 0. The expression for ∂𝛼𝑖 𝑃𝑅 can also be
+written as
+∂𝛼𝑖 𝑃𝑅 = −2 Cov(𝛿𝑓 , 𝑓𝑖 ) + 2 Cov(⟨𝛼, 𝑓⟩, 𝑓𝑖 ),
+
+(3)
+
+Note that Cov(𝛿𝑓 , 𝑓𝑖 ) = Cov(𝑧𝑓 , 𝑓𝑖 ) and Cov(⟨𝛼, 𝑓⟩, 𝑓𝑖 ) = ∑𝑗 𝛼𝑗 Cov(𝑓𝑗 , 𝑓𝑖 ). Hence, ∂𝛼𝑖 𝑃𝑅 = 0 also implies
+Cov(𝑧𝑓 , 𝑓𝑖 ) = ∑ 𝛼𝑗 Cov(𝑓𝑖 , 𝑓𝑗 ).
+
+(4)
+
+𝑗
+
+Writing Cov(𝑧𝑓 , 𝑓) as the vector with 𝑖th entry Cov(𝑧𝑓 , 𝑓𝑖 ) and Σ as the 𝑛 × 𝑛 matrix with 𝑖, 𝑗th entry Cov(𝑓𝑖 , 𝑓𝑗 ), the
+expression above can be written in vector-matrix notation as Cov(𝑧𝑓 , 𝑓) = Σ 𝛼. Hence, 𝛼 = Σ−1 Cov(𝑧𝑓 , 𝑓) when Σ−1 exists
+and 𝛼0 = −⟨𝛼, 𝑓⟩̄ with 𝑓 ̄ = (𝑓1̄ , … , 𝑓𝑛̄ )† . This establishes the definition of additive genetic and microbial effects provided
+in the main text when Σ is non-singular.
+The result Cov(𝜌𝑓 , 𝑓𝑖 ) = 0 implies ∑𝑓 𝑝𝑓 𝛼𝑓 𝜌𝑓 = 0, which then formally establishes the partitioning of the variance
+of the marginal value Var(𝑧𝑓 ) = ∑𝑓 𝑝𝑓 (𝑧𝑓 − 𝑧)̄ 2 as Var(𝑧𝑓 ) = 𝑃𝐴 + 𝑃𝑅 , with 𝑃𝐴 = ∑𝑓 𝑝𝑓 𝛼𝑓2 . More generally, given 𝐾 different
+classes of factors such that 𝑓 = (𝑓11 , … , 𝑓𝑛11 , … , 𝑓1𝐾 , … , 𝑓𝑛𝐾𝐾 )† and 𝛼 = (𝛼11 , … , 𝛼𝑛11 , … , 𝛼1𝐾 , … , 𝛼𝑛𝐾𝐾 )† , the expression for 𝑃𝐴 can
+be rewritten as
+𝐾
+
+𝐾 𝑘−1
+
+𝑃𝐴 = ∑ 𝑃𝐴,𝑘 + ∑ ∑ 𝐶𝐴,𝑘,ℓ ,
+𝑘=1
+
+𝑘=1 ℓ=1
+
+(5)
+
+2
+
+SUPPLEMENT TO MICROBIOME MEDIATED QUANTITATIVE GENETICS
+
+where 𝑃𝐴,𝑘 = ∑𝑓 𝑝𝑓 𝛼𝑓2𝑘 and 𝐶𝐴,𝑘,ℓ = 2 ∑𝑓 𝑝𝑓 𝛼𝑓 𝑘 𝛼𝑓 ℓ , with 𝑓 𝑘 = (𝑓1𝑘 , … , 𝑓𝑛𝑘𝑘 )† , 𝛼𝑘 = (𝛼1𝑘 , … , 𝛼𝑛𝑘𝑘 )† , and 𝛼𝑓𝑘 = 𝛼0𝑘 + ⟨𝛼𝑘 , 𝑓 𝑘 ⟩. Here
+we have introduced new partition-specific intercepts, which must satisfy 𝛼0 = ∑ 𝛼𝑘 , and so we can take 𝛼𝑘 = −⟨𝛼𝑘 , 𝑓 𝑘̄ ⟩.
+𝑘
+
+0
+
+0
+
+With this choice the contributions to 𝛼𝑓 from each partition are centered, so the resulting partition of variance comes
+out in terms of variances and covariances (without this choice of 𝛼0𝑘 we would have sums of squares instead of
+(co)variances). This returns our partitionings introduced in section 2.1 and in section 2.3.2 as special cases. Finally, our
+choice for 𝛼0𝑘 implies
+𝑛𝑘 𝑖−1
+
+𝑛𝐾
+
+𝑃𝐴,𝑘 = ∑(𝛼𝑖𝑘 )2 Var(𝑓𝑖𝑘 ) + 2 ∑ ∑ 𝛼𝑖𝑘 𝛼𝑗𝑘 Cov(𝑓𝑖𝑘 , 𝑓𝑗𝑘 ),
+𝑖=1
+
+(6a)
+
+𝑖=1 𝑗=1
+
+𝑛𝑘
+
+𝑛ℓ
+
+𝐶𝐴,𝑘,ℓ = 2 ∑ ∑ 𝛼𝑖𝑘 𝛼𝑗ℓ Cov(𝑓𝑖𝑘 , 𝑓𝑗ℓ ),
+
+(6b)
+
+𝑖=1 𝑗=1
+
+and this returns equations (5) of the main text as a special case.
+The above partitioning of 𝑃𝐴 is unique only when Σ is non-singular. When Σ is singular, the Moore–Penrose
+pseudoinverse of Σ is commonly used in place of Σ−1 . This approach is useful for approximating 𝑃𝐴 , but the estimate of
+𝛼 loses biological significance as a consequence of its lack of uniqueness.
+
+2
+
+| ADDITIVE VARIANCES UNDER PAIRWISE INTERACTIONS
+
+Here we compute expressions for host trait variation using a model that assumes genotypic-microbic values are
+determined by mechanistic additive effects of host allele counts 𝑔1 , … , 𝑔𝐿 and microbial abundances 𝑚1 , … , 𝑚𝑆 in
+addition to mechanistic effects explained by products of host allele counts 𝑔𝑖 𝑔𝑗 , products of microbial abundances
+𝑚𝑖 𝑚𝑗 , and products of host allele counts and microbial abundances 𝑔𝑖 𝑚𝑗 . This model incorporates all possible pairwise
+products of trait mediating factors analyzed, and therefore generalizes the model presented in section 5 of the main
+text which focused only on products of host allele counts and microbial abundances. The model here can be expressed
+as
+𝐿
+
+𝐿
+
+𝑖
+
+𝑆
+
+𝑆
+
+𝑖
+
+𝐿
+
+𝑆
+
+𝑧𝑔𝑚 = 𝑧0 + ∑ 𝛾̊ 𝑖 𝑔𝑖 + ∑ ∑ 𝛾̊ 𝑖𝑗 𝑔𝑖 𝑔𝑗 + ∑ 𝜔̊ 𝑖 𝑚𝑖 + ∑ ∑ 𝜔̊ 𝑖𝑗 𝑚𝑖 𝑚𝑗 + ∑ ∑ 𝜒̊ 𝑖𝑗 𝑔𝑖 𝑚𝑗 .
+𝑖=1
+
+𝑖=1 𝑗=1
+
+𝑖=1
+
+𝑖=1 𝑗=1
+
+(7)
+
+𝑖=1 𝑗=1
+
+Our goal here is to compute 𝐺𝐴 = ∑𝑔𝑚 𝑝𝑔𝑚 𝛾𝑔2 , 𝑀𝐴 = ∑𝑔𝑚 𝑝𝑔𝑚 𝜔𝑔2 , and 𝐶𝐴 = ∑𝑔𝑚 𝑝𝑔𝑚 𝛾𝑔 𝜔𝑚 given the above model under
+the assumption that all factors 𝑔1 , … , 𝑔𝐿 , 𝑚1 , … , 𝑚𝑆 are linearly independent so that Σ−1 exists (which implies uniqueness
+of 𝐺𝐴 , 𝑀𝐴 , 𝐶𝐴 ). To begin, note that
+𝐿
+
+𝑆
+
+Cov(𝑧𝑔𝑚 , 𝑔𝑘 ) = ∑ 𝛾̊ 𝑖 Cov(𝑔𝑖 , 𝑔𝑘 ) + ∑ 𝜔̊ 𝑖 Cov(𝑚𝑖 , 𝑔𝑘 )
+𝑖=1
+
+𝑖=1
+𝐿
+
+𝑖
+
+𝑆
+
+𝑆
+
+𝐿
+
+𝑆
+
++ ∑ ∑ 𝛾̊ 𝑖𝑗 Cov(𝑔𝑖 𝑔𝑗 , 𝑔𝑘 ) + ∑ ∑ 𝜔̊ 𝑖𝑗 Cov(𝑚𝑖 𝑚𝑗 , 𝑔𝑘 ) + ∑ ∑ 𝜒̊ 𝑖𝑗 Cov(𝑔𝑖 𝑚𝑗 , 𝑔𝑘 ),
+𝑖=1 𝑗=1
+
+𝑖=1 𝑗=1
+
+𝑖=1 𝑗=1
+
+(8a)
+
+3
+
+SUPPLEM E N T TO M I C RO B I O ME MEDIATED QUANTITATIVE GENETICS
+
+𝑆
+
+𝐿
+
+Cov(𝑧𝑔𝑚 , 𝑚𝑘 ) = ∑ 𝛾̊ 𝑖 Cov(𝑔𝑖 , 𝑚𝑘 ) + ∑ 𝜔̊ 𝑖 Cov(𝑚𝑖 , 𝑚𝑘 )
+𝑖=1
+
+𝑖=1
+𝐿
+𝑖
+
+𝑆
+
+𝑖
+
+𝐿
+
+𝑆
+
++ ∑ ∑ 𝛾̊ 𝑖𝑗 Cov(𝑔𝑖 𝑔𝑗 , 𝑚𝑘 ) + ∑ ∑ 𝜔̊ 𝑖𝑗 Cov(𝑚𝑖 𝑚𝑗 , 𝑚𝑘 ) + ∑ ∑ 𝜒̊ 𝑖𝑗 Cov(𝑔𝑖 𝑚𝑗 , 𝑚𝑘 ).
+𝑖=1 𝑗=1
+
+𝑖=1 𝑗=1
+
+(8b)
+
+𝑖=1 𝑗=1
+
+Writing 𝛼̊ = (𝛾̊ 1 , … , 𝛾̊ 𝐿 , 𝜔̊ 1 , … , 𝜔̊ 𝑆 ), and 𝑣 the vector-valued function of 𝑔 and 𝑚 with 𝑘th entry
+𝐿
+
+𝑆
+
+𝑖
+
+𝑖
+
+𝐿
+
+𝑆
+
+𝑣𝑘 = ∑ ∑ 𝛾̊ 𝑖𝑗 Cov(𝑔𝑖 𝑔𝑗 , 𝑔𝑘 ) + ∑ ∑ 𝜔̊ 𝑖𝑗 Cov(𝑚𝑖 𝑚𝑗 , 𝑔𝑘 ) + ∑ ∑ 𝜒̊ 𝑖𝑗 Cov(𝑔𝑖 𝑚𝑗 , 𝑔𝑘 ), 𝑘 = 1, … , 𝐿,
+𝑖=1 𝑗=1
+𝐿
+
+𝑖=1 𝑗=1
+𝑆
+
+𝑖
+
+𝑖
+
+𝐿
+
+𝑆
+
+𝑣𝑘 = ∑ ∑ 𝛾̊ 𝑖𝑗 Cov(𝑔𝑖 𝑔𝑗 , 𝑚𝑘−𝐿 ) + ∑ ∑ 𝜔̊ 𝑖𝑗 Cov(𝑚𝑖 𝑚𝑗 , 𝑚𝑘−𝐿 ) + ∑ ∑ 𝜒̊ 𝑖𝑗 Cov(𝑔𝑖 𝑚𝑗 , 𝑚𝑘−𝐿 ), 𝑘 = 𝐿 + 1, … , 𝐿 + 𝑆,
+𝑖=1 𝑗=1
+
+(9a)
+
+𝑖=1 𝑗=1
+
+𝑖=1 𝑗=1
+
+(9b)
+
+𝑖=1 𝑗=1
+
+we have Cov(𝑧𝑔𝑚 , 𝑎) = Σ𝛼̊ + 𝑣. Hence 𝛼 = 𝛼̊ + Σ−1 𝑣, and writing 𝑢 = Σ−1 𝑣 the vector-valued function of 𝑔 and 𝑚 resulting
+from a transformation on 𝑣, we have 𝛾𝑖 = 𝛾̊ 𝑖 + 𝑢𝑖 and 𝜔𝑖 = 𝜔̊ 𝑖 + 𝑢𝑖+𝐿 .
+𝑆
+
+𝐿
+
+𝛾𝑔 = ∑(𝛾̊ 𝑖 + 𝑢𝑖 )𝑔𝑖 , 𝜔𝑔 = ∑(𝜔̊ 𝑖 + 𝑢𝑖+𝐿 )𝑚𝑖 .
+𝑖=1
+
+𝑖=1
+
+𝐿
+
+𝑆
+
+(10a)
+
+Consequently
+
+𝛾̄ = ∑ 𝛾̊ 𝑖 𝑔̄ 𝑖 + 𝑔𝑖 𝑢𝑖 , 𝜔̄ = ∑ 𝜔̊ 𝑖 𝑚̄ 𝑖 + 𝑚𝑖 𝑢𝑖+𝐿 ,
+𝑖=1
+
+(11)
+
+𝑖=1
+
+where 𝑔𝑖 𝑢𝑖 and 𝑚𝑖 𝑢𝑖+𝐿 are averages of 𝑔𝑖 𝑢𝑖 and 𝑚𝑖 𝑢𝑖+𝐿 across genotype-microbiome pairs in the host population. To
+simplify expressions we write [𝑥] = 𝑥 − 𝑥̄ and [𝑥𝑦] = 𝑥𝑦 − 𝑥𝑦. This leads to
+𝐿
+
+𝐿
+
+𝑖−1
+
+[𝛾𝑔 ]2 = ∑ 𝛾̊ 𝑖2 [𝑔𝑖 ]2 + 2𝛾̊ 𝑖 [𝑔𝑖 ][𝑔𝑖 𝑢𝑖 ] + [𝑔𝑖 𝑢𝑖 ]2 + 2 ∑ ∑ 𝛾̊ 𝑖 𝛾̊ 𝑗 [𝑔𝑖 ][𝑔𝑗 ] + 𝛾̊ 𝑖 [𝑔𝑖 ][𝑔𝑗 𝑢𝑗 ] + 𝛾̊ 𝑗 [𝑔𝑗 ][𝑔𝑖 𝑢𝑖 ] + [𝑔𝑖 𝑢𝑖 ][𝑔𝑗 𝑢𝑗 ],
+𝑖=1
+
+(12a)
+
+𝑖=1 𝑗=1
+
+𝑆
+
+𝑆
+
+𝑖−1
+
+[𝜔𝑚 ]2 = ∑ 𝜔̊ 𝑖2 [𝑚𝑖 ]2 +2𝜔̊ 𝑖 [𝑚𝑖 ][𝑚𝑖 𝑢𝑖+𝐿 ]+[𝑚𝑖 𝑢𝑖+𝐿 ]2 +2 ∑ ∑ 𝜔̊ 𝑖 𝜔̊ 𝑗 [𝑚𝑖 ][𝑚𝑗 ]+𝜔̊ 𝑖 [𝑚𝑖 ][𝑚𝑗 𝑢𝑗+𝐿 ]+𝜔̊ 𝑗 [𝑚𝑗 ][𝑚𝑖 𝑢𝑖+𝐿 ]+[𝑚𝑖 𝑢𝑖+𝐿 ][𝑚𝑗 𝑢𝑗+𝐿 ]
+𝑖=1
+
+𝑖=1 𝑗=1
+
+(12b)
+𝐿
+
+𝑆
+
+[𝛾𝑔 ][𝜔𝑚 ] = ∑ ∑ 𝛾̊ 𝑖 𝜔̊ 𝑗 [𝑔𝑖 ][𝑚𝑖 ] + 𝛾̊ 𝑖 [𝑔𝑖 ][𝑚𝑗 𝑢𝑗+𝐿 ] + 𝜔̊ 𝑗 [𝑚𝑗 ][𝑔𝑖 𝑢𝑖 ] + [𝑔𝑖 𝑢𝑖 ][𝑚𝑗 𝑢𝑗+𝐿 ].
+
+(12c)
+
+𝑖=1 𝑗=1
+
+We can therefore write
+𝐿
+
+𝐺𝐴 = ∑ 𝛾̊ 𝑖2 Var(𝑔𝑖 ) + 2𝛾̊ 𝑖 Cov(𝑔𝑖 , 𝑔𝑖 𝑢𝑖 ) + Var(𝑔𝑖 𝑢𝑖 )
+𝑖=1
+𝐿
+
+𝑖−1
+
++ 2 ∑ ∑ 𝛾̊ 𝑖 𝛾̊ 𝑗 Cov(𝑔𝑖 , 𝑔𝑗 ) + 𝛾̊ 𝑖 Cov(𝑔𝑖 , 𝑔𝑗 𝑢𝑗 ) + 𝛾̊ 𝑗 Cov(𝑔𝑗 , 𝑔𝑖 𝑢𝑖 ) + Cov(𝑔𝑖 𝑢𝑖 , 𝑔𝑗 𝑢𝑗 ),
+𝑖=1 𝑗=1
+
+(13a)
+
+4
+
+SUPPLEMENT TO MICROBIOME MEDIATED QUANTITATIVE GENETICS
+
+𝑆
+
+𝑀𝐴 = ∑ 𝜔̊ 𝑖2 Var(𝑚𝑖 ) + 2𝜔̊ 𝑖 Cov(𝑚𝑖 , 𝑚𝑖 𝑢𝑖+𝐿 ) + Var(𝑚𝑖 𝑢𝑖+𝐿 )
+𝑖=1
+𝑆
+
+𝑖−1
+
++ 2 ∑ ∑ 𝜔̊ 𝑖 𝜔̊ 𝑗 Cov(𝑚𝑖 , 𝑚𝑗 ) + 𝜔̊ 𝑖 Cov(𝑚𝑖 , 𝑚𝑗 𝑢𝑗+𝐿 ) + 𝜔̊ 𝑗 Cov(𝑚𝑗 , 𝑚𝑖 𝑢𝑖+𝐿 ) + Cov(𝑚𝑖 𝑢𝑖+𝐿 , 𝑚𝑗 𝑢𝑗+𝐿 ),
+
+(13b)
+
+𝑖=1 𝑗=1
+
+𝐿
+
+𝑆
+
+𝐶𝐴 = 2 ∑ ∑ 𝛾̊ 𝑖 𝜔̊ 𝑗 Cov(𝑔𝑖 , 𝑚𝑖 ) + 𝛾̊ 𝑖 Cov(𝑔𝑖 , 𝑚𝑗 𝑢𝑗+𝐿 ) + 𝜔̊ 𝑗 Cov(𝑚𝑗 , 𝑔𝑖 𝑢𝑖 ) + Cov(𝑔𝑖 𝑢𝑖 , 𝑚𝑗 𝑢𝑗+𝐿 ).
+𝑖=1 𝑗=1
+
+(13c)
+
+5
+
+SUPPLEM E N T TO M I C RO B I O ME MEDIATED QUANTITATIVE GENETICS
+
+3
+
+| TABLES OF PARAMETER VALUES USED IN SIMULATIONS
+
+TA B L E 1
+
+Parameter values used for simulating data presented in Figure 5 of main text
+
+Symbol
+
+Meaning
+
+Value
+
+nr
+
+Number of times to initialize parental population
+
+100
+
+sr
+
+Number of times to repeat selection of hosts
+
+20
+
+or
+
+Number of times to repeat production of offspring
+
+20
+
+h²
+
+Expected proportion of additive genetic variance
+
+0.25
+
+𝜆²
+
+Expected proportion of additive lineal variance
+
+0.25
+
+𝜈²
+
+Expected proportion of additive non-lineal variance
+
+0.25
+
+𝜀²
+
+Expected proportion of additive external variance
+
+0.25
+
+L
+
+Number of host genetic loci
+
+100
+
+SL
+
+Number of lineal microbe taxa
+
+100
+
+SN
+
+Number of non-lineal microbe taxa
+
+100
+
+SE
+
+Number of external microbe taxa
+
+100
+
+𝔼P
+
+Expected total phenotypic variance
+
+100
+
+p
+
+Probability of alternate allele at each locus in parental genomes
+
+0.5
+
+n
+
+Size of host populations
+
+1000
+
+s
+
+Selection coefficient
+
+0.001
+
+KL
+
+Expected abundance for lineal microbe taxa
+
+50
+
+KN
+
+Expected abundance for non-lineal microbe taxa
+
+50
+
+KE
+
+Expected abundance for external microbe taxa
+
+50
+
+6
+
+SUPPLEMENT TO MICROBIOME MEDIATED QUANTITATIVE GENETICS
+
+TA B L E 2
+
+Parameter values used for simulating data presented in Figures 3 and 4 of main text
+
+Symbol
+
+Meaning
+
+Value
+
+T
+
+Number of host generations
+
+10
+
+ts_rep
+
+Number of time series to repeat
+
+20
+
+nr
+
+Number of times to initialize parental population
+
+50
+
+sr
+
+Number of times to repeat selection of hosts
+
+10
+
+or
+
+Number of times to repeat production of offspring
+
+10
+
+2
+ℎ𝐺𝐿𝑁𝐸
+
+Expected proportion of additive genetic variance for GLNE
+
+0.25
+
+𝜆2𝐺𝐿𝑁𝐸
+
+Expected proportion of additive lineal variance for GLNE
+
+0.25
+
+2
+𝜈𝐺𝐿𝑁𝐸
+
+Expected proportion of additive non-lineal variance for GLNE
+
+0.25
+
+𝜀2 𝐺𝐿𝑁𝐸
+
+Expected proportion of additive external variance for GLNE
+
+0.25
+
+2
+ℎ𝐺𝐿𝑁
+
+Expected proportion of additive genetic variance for GLN
+
+0.33
+
+𝜆2𝐺𝐿𝑁
+
+Expected proportion of additive lineal variance for GLN
+
+0.33
+
+2
+𝜈𝐺𝐿𝑁
+
+Expected proportion of additive non-lineal variance for GLN
+
+0.33
+
+2
+𝜀𝐺𝐿𝑁
+
+Expected proportion of additive external variance for GLN
+
+1e-3
+
+2
+ℎ𝐺𝐿
+
+Expected proportion of additive genetic variance for GL
+
+0.5
+
+𝜆2𝐺𝐿
+
+Expected proportion of additive lineal variance for GL
+
+0.5
+
+2
+𝜈𝐺𝐿
+
+Expected proportion of additive non-lineal variance for GL
+
+1e-3
+
+2
+𝜀𝐺𝐿
+
+Expected proportion of additive external variance for GL
+
+1e-3
+
+ℎ𝐺2
+
+Expected proportion of additive genetic variance for G
+
+0.99
+
+𝜆2𝐺
+
+Expected proportion of additive lineal variance for G
+
+1e-3
+
+𝜈𝐺2
+
+Expected proportion of additive non-lineal variance for G
+
+1e-3
+
+𝜀𝐺2
+
+Expected proportion of additive external variance for G
+
+1e-3
+
+L
+
+Number of host genetic loci
+
+100
+
+SL
+
+Number of lineal microbe taxa
+
+100
+
+SN
+
+Number of non-lineal microbe taxa
+
+100
+
+SE
+
+Number of external microbe taxa
+
+100
+
+𝔼[𝑃𝐺𝐿𝑁𝐸 ]
+
+Expected total phenotypic variance for GLNE
+
+100
+
+𝔼[𝑃𝐺𝐿𝑁 ]
+
+Expected total phenotypic variance for GLN
+
+75
+
+𝔼[𝑃𝐺𝐿 ]
+
+Expected total phenotypic variance for GL
+
+50
+
+𝔼[𝑃𝐺 ]
+
+Expected total phenotypic variance for G
+
+25
+
+𝑝
+
+Probability of alternate allele at each locus in parental genomes
+
+0.5
+
+𝑛
+
+Size of host populations
+
+1000
+
+𝑠
+
+Selection coefficient
+
+0.001
+
+KL
+
+Expected abundance for lineal microbe taxa
+
+50
+
+KN
+
+Expected abundance for non-lineal microbe taxa
+
+50
+
+KE
+
+Expected abundance for external microbe taxa
+
+50
+
+
