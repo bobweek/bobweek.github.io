@@ -38,8 +38,7 @@ function setup() {
 
   new ResizeObserver(() => fitCanvas()).observe($('stage'));
 
-  // the simulation *is* the motion, so honour the system setting
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) setPlaying(false);
+  tuck(true);
 }
 
 function buildField(dims, old) {
