@@ -36,15 +36,15 @@
     <p class="note">Each species mixes with its four neighbours at rate <i>m</i>.</p>
     <div class="ctrl" data-tint="sp1">
       <label for="m1">Species 1</label><output id="m1v"></output>
-      <input id="m1" type="range" min="0" max="0.75" step="0.005" value="0.45" />
+      <input id="m1" type="range" min="0" max="0.75" step="0.005" value="0.33" />
     </div>
     <div class="ctrl" data-tint="sp2">
       <label for="m2">Species 2</label><output id="m2v"></output>
-      <input id="m2" type="range" min="0" max="0.75" step="0.005" value="0.34" />
+      <input id="m2" type="range" min="0" max="0.75" step="0.005" value="0.40" />
     </div>
     <div class="ctrl" data-tint="sp3">
       <label for="m3">Species 3</label><output id="m3v"></output>
-      <input id="m3" type="range" min="0" max="0.75" step="0.005" value="0.24" />
+      <input id="m3" type="range" min="0" max="0.75" step="0.005" value="0.43" />
     </div>
   </section>
 
@@ -64,15 +64,15 @@
     </div>
     <div class="ctrl" data-tint="p13">
       <label for="s13">Species 1 &amp; 3</label><output id="s13v"></output>
-      <input id="s13" type="range" min="0" max="0.1" step="0.001" value="0.007" />
+      <input id="s13" type="range" min="0" max="0.1" step="0.001" value="0.064" />
     </div>
     <div class="ctrl" data-tint="p23">
       <label for="s23">Species 2 &amp; 3</label><output id="s23v"></output>
-      <input id="s23" type="range" min="0" max="0.1" step="0.001" value="0.02" />
+      <input id="s23" type="range" min="0" max="0.1" step="0.001" value="0.030" />
     </div>
     <div class="ctrl" id="ratioWrap">
       <label for="ratio">Flee : track</label><output id="ratiov"></output>
-      <input id="ratio" type="range" min="0" max="3" step="0.05" value="2" />
+      <input id="ratio" type="range" min="0" max="3" step="0.05" value="0.5" />
     </div>
   </section>
 
@@ -85,7 +85,7 @@
     <p class="note">Pulls each species toward its own optimum. Switch the view to <i>Optima</i> to see where those sit.</p>
     <div class="ctrl">
       <label for="sigma">Drift, &sigma;</label><output id="sigmav"></output>
-      <input id="sigma" type="range" min="0" max="3" step="0.02" value="0" />
+      <input id="sigma" type="range" min="0" max="3" step="0.02" value="2.26" />
     </div>
     <label class="check"><input id="localNe" type="checkbox" /> <span>Let <i>N</i><sub>e</sub> fall toward the range margin</span></label>
     <p class="note">&sigma; = &radic;(<i>G</i>/<i>N</i><sub>e</sub>), so it is the value at the range core. At the margin it runs about 7&times; larger.</p>
