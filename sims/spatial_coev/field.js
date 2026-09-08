@@ -29,9 +29,14 @@
 const NSP = 3;      // species
 const ZMAX = 255;   // trait scale == colour channel
 
-// lattice sizes; all 4:7 so cells stay square as resolution changes
+// Lattice sizes; all exactly 4:7 so cells stay square as resolution changes.
+// Cost is roughly linear in cell count up to ~180k, then goes superlinear as
+// the state arrays stop fitting in cache.  Measured step+blit per generation:
+// 80x140 1.5ms, 160x280 6ms, 320x560 23ms, 448x784 60ms, 640x1120 91ms.  The
+// last two run below 30fps; the patterns move slowly enough to still read.
 const RESOLUTIONS = [
   [24, 42], [40, 70], [56, 98], [80, 140], [112, 196], [160, 280],
+  [224, 392], [320, 560], [448, 784], [640, 1120],
 ];
 
 // --- standard normal, Box-Muller with a cached spare -------------------
@@ -61,22 +66,36 @@ const SQUASH = {
 };
 const SQUASH_NAMES = ['clamp', 'wrap', 'fold', 'soft'];
 
-// --- coevolution matrix from the three pair strengths ------------------
-// pairs are (0,1), (0,2), (1,2) i.e. species 1&2, 1&3, 2&3
-function buildM(s12, s13, s23, ratio, mode) {
+// --- coevolution matrix ------------------------------------------------
+//
+// M[t][s] is the pressure species t exerts on species s, entering the update
+// for z_s as M[t][s] * (z_t - z_s).
+//
+// Each pair carries two signed coefficients: how hard the tracker pulls
+// toward its target, and how hard the target pushes away.  Orientations are
+// fixed so the tracking relations close the cycle 1 -> 2 -> 3 -> 1, which is
+// the rock-paper-scissors structure:
+//
+//     pair 1&2:   1 tracks 2,   2 flees 1
+//     pair 1&3:   3 tracks 1,   1 flees 3
+//     pair 2&3:   2 tracks 3,   3 flees 2
+//
+// Because both numbers are signed and independent, a pair can run at any
+// asymmetry (the 2016 defaults used 1:1 on pair 1&2 and 1:2 on pair 1&3, and
+// that mismatch is a large part of how the original looked).  A negative flee
+// turns a pair into mutual matching; a negative track into mutual avoidance.
+const PAIRS = [
+  // [tracker, target, track key, flee key]
+  [0, 1, 't12', 'f12'],
+  [2, 0, 't13', 'f13'],
+  [1, 2, 't23', 'f23'],
+];
+
+function buildM(c) {
   const M = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-  const pairs = [[0, 1, s12], [0, 2, s13], [1, 2, s23]];
-  for (const [a, b, v] of pairs) {
-    if (mode === 'chase') {          // b tracks a, a runs from b
-      M[a][b] = +v;
-      M[b][a] = -ratio * v;
-    } else if (mode === 'match') {   // mutual convergence
-      M[a][b] = +v;
-      M[b][a] = +v;
-    } else {                         // 'avoid': mutual displacement
-      M[a][b] = -v;
-      M[b][a] = -v;
-    }
+  for (const [a, b, tk, fk] of PAIRS) {
+    M[b][a] = +c[tk];    // a moves toward b
+    M[a][b] = -c[fk];    // b moves away from a
   }
   return M;
 }
@@ -156,6 +175,12 @@ class Field {
     const m = p.m, M = p.M, gam = p.gamma, sig = p.sigma;
     const squash = SQUASH[p.mode] || SQUASH.clamp;
     const localNe = !!p.localNe;
+    // 'sequential' reproduces the original sketch: species are updated in
+    // index order, so species s sees the already-updated z_t for t < s, and
+    // z_s is re-read after each term of the coupling sum.  'simultaneous'
+    // evaluates every term at the previous state.  The two give visibly
+    // different dynamics; sequential sustains more motion.
+    const seq = p.sequential !== false;
     const rand = this.rand;
     const z = [0, 0, 0], a = [0, 0, 0];
 
@@ -175,13 +200,23 @@ class Field {
 
         const sc = localNe ? this.driftScale[q] : 1;
 
-        for (let s = 0; s < NSP; s++) {
-          let v = z[s];
-          v += m[s] * (a[s] - z[s]);
-          if (gam !== 0) v += gam * (theta[k + s] - z[s]);
-          for (let t = 0; t < NSP; t++) v += M[t][s] * (z[t] - z[s]);
-          if (sig > 0) v += sig * sc * gauss(rand);
-          next[k + s] = squash(v);
+        if (seq) {
+          for (let s = 0; s < NSP; s++) {
+            z[s] += m[s] * (a[s] - z[s]);
+            if (gam !== 0) z[s] += gam * (theta[k + s] - z[s]);
+            if (sig > 0) z[s] += sig * sc * gauss(rand);
+            for (let t = 0; t < NSP; t++) z[s] += M[t][s] * (z[t] - z[s]);
+          }
+          for (let s = 0; s < NSP; s++) next[k + s] = squash(z[s]);
+        } else {
+          for (let s = 0; s < NSP; s++) {
+            let v = z[s];
+            v += m[s] * (a[s] - z[s]);
+            if (gam !== 0) v += gam * (theta[k + s] - z[s]);
+            for (let t = 0; t < NSP; t++) v += M[t][s] * (z[t] - z[s]);
+            if (sig > 0) v += sig * sc * gauss(rand);
+            next[k + s] = squash(v);
+          }
         }
       }
     }
@@ -203,5 +238,5 @@ class Field {
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { Field, buildM, SQUASH, SQUASH_NAMES, RESOLUTIONS, NSP, ZMAX, gauss };
+  module.exports = { Field, buildM, PAIRS, SQUASH, SQUASH_NAMES, RESOLUTIONS, NSP, ZMAX, gauss };
 }

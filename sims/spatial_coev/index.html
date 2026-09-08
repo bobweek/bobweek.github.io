@@ -20,7 +20,7 @@
   <header class="masthead">
     <div>
       <h1>Coevolution lattice</h1>
-      <p class="sub">three species &middot; one trait each &middot; drawn as R, G, B</p>
+      <p class="sub">rock&ndash;paper&ndash;scissors in space &middot; traits drawn as R, G, B</p>
     </div>
     <button id="hide" class="ghost" type="button">Hide</button>
   </header>
@@ -28,7 +28,7 @@
   <section class="transport">
     <button id="play" class="solid" type="button">Pause</button>
     <button id="stepBtn" type="button">Step</button>
-    <span id="gen" class="gen">0</span>
+    <span class="readouts"><span id="rate" class="rate"></span><span id="gen" class="gen">0</span></span>
   </section>
 
   <section>
@@ -36,43 +36,65 @@
     <p class="note">Each species mixes with its four neighbours at rate <i>m</i>.</p>
     <div class="ctrl" data-tint="sp1">
       <label for="m1">Species 1</label><output id="m1v"></output>
-      <input id="m1" type="range" min="0" max="0.75" step="0.005" value="0.33" />
+      <input id="m1" type="range" min="0" max="0.75" step="0.0025" value="0.7125" />
     </div>
     <div class="ctrl" data-tint="sp2">
       <label for="m2">Species 2</label><output id="m2v"></output>
-      <input id="m2" type="range" min="0" max="0.75" step="0.005" value="0.40" />
+      <input id="m2" type="range" min="0" max="0.75" step="0.0025" value="0.3375" />
     </div>
     <div class="ctrl" data-tint="sp3">
       <label for="m3">Species 3</label><output id="m3v"></output>
-      <input id="m3" type="range" min="0" max="0.75" step="0.005" value="0.43" />
+      <input id="m3" type="range" min="0" max="0.75" step="0.0025" value="0.0375" />
     </div>
   </section>
 
   <section>
     <h2>Coevolution</h2>
+    <p class="note">Tracking runs 1&nbsp;&rarr;&nbsp;2&nbsp;&rarr;&nbsp;3&nbsp;&rarr;&nbsp;1, so no species can win. Each pair sets its pull and its push separately; a negative push makes that pair converge instead.</p>
     <div class="ctrl pick">
-      <label for="mode">Interaction</label>
-      <select id="mode">
-        <option value="chase" selected>Chase &mdash; one tracks, one flees</option>
-        <option value="match">Match &mdash; both converge</option>
-        <option value="avoid">Avoid &mdash; both diverge</option>
+      <label for="preset">Preset</label>
+      <select id="preset">
+        <option value="original" selected>Original (2016)</option>
+        <option value="cycle">Even cycle</option>
+        <option value="match">Match</option>
+        <option value="avoid">Avoid</option>
+        <option value="custom">Custom</option>
       </select>
     </div>
+
     <div class="ctrl" data-tint="p12">
-      <label for="s12">Species 1 &amp; 2</label><output id="s12v"></output>
-      <input id="s12" type="range" min="0" max="0.1" step="0.001" value="0.02" />
+      <label for="t12">1 tracks 2</label><output id="t12v"></output>
+      <input id="t12" type="range" min="-0.1" max="0.2" step="0.005" value="0.095" />
+    </div>
+    <div class="ctrl" data-tint="p12">
+      <label for="f12">2 flees 1</label><output id="f12v"></output>
+      <input id="f12" type="range" min="-0.1" max="0.2" step="0.005" value="0.095" />
+    </div>
+
+    <div class="ctrl" data-tint="p13">
+      <label for="t13">3 tracks 1</label><output id="t13v"></output>
+      <input id="t13" type="range" min="-0.1" max="0.2" step="0.005" value="0.095" />
     </div>
     <div class="ctrl" data-tint="p13">
-      <label for="s13">Species 1 &amp; 3</label><output id="s13v"></output>
-      <input id="s13" type="range" min="0" max="0.1" step="0.001" value="0.064" />
+      <label for="f13">1 flees 3</label><output id="f13v"></output>
+      <input id="f13" type="range" min="-0.1" max="0.2" step="0.005" value="0.19" />
+    </div>
+
+    <div class="ctrl" data-tint="p23">
+      <label for="t23">2 tracks 3</label><output id="t23v"></output>
+      <input id="t23" type="range" min="-0.1" max="0.2" step="0.005" value="0" />
     </div>
     <div class="ctrl" data-tint="p23">
-      <label for="s23">Species 2 &amp; 3</label><output id="s23v"></output>
-      <input id="s23" type="range" min="0" max="0.1" step="0.001" value="0.030" />
+      <label for="f23">3 flees 2</label><output id="f23v"></output>
+      <input id="f23" type="range" min="-0.1" max="0.2" step="0.005" value="0" />
     </div>
-    <div class="ctrl" id="ratioWrap">
-      <label for="ratio">Flee : track</label><output id="ratiov"></output>
-      <input id="ratio" type="range" min="0" max="3" step="0.05" value="0.5" />
+
+    <div class="ctrl pick">
+      <label for="order">Update</label>
+      <select id="order">
+        <option value="sequential" selected>Sequential (original)</option>
+        <option value="simultaneous">Simultaneous</option>
+      </select>
     </div>
   </section>
 
@@ -82,13 +104,12 @@
       <label for="gamma">Stabilising, &gamma;</label><output id="gammav"></output>
       <input id="gamma" type="range" min="0" max="0.4" step="0.005" value="0" />
     </div>
-    <p class="note">Pulls each species toward its own optimum. Switch the view to <i>Optima</i> to see where those sit.</p>
     <div class="ctrl">
       <label for="sigma">Drift, &sigma;</label><output id="sigmav"></output>
-      <input id="sigma" type="range" min="0" max="3" step="0.02" value="2.26" />
+      <input id="sigma" type="range" min="0" max="5" step="0.002" value="2.122" data-map="sq" data-dp="2" />
     </div>
     <label class="check"><input id="localNe" type="checkbox" /> <span>Let <i>N</i><sub>e</sub> fall toward the range margin</span></label>
-    <p class="note">&sigma; = &radic;(<i>G</i>/<i>N</i><sub>e</sub>), so it is the value at the range core. At the margin it runs about 7&times; larger.</p>
+    <p class="note">&sigma; = &radic;(<i>G</i>/<i>N</i><sub>e</sub>) in trait units, at the range core; the scale runs to 25, about the size of the strongest coevolutionary step. With <i>N</i><sub>e</sub> falling, the margin runs 7&times; that.</p>
   </section>
 
   <section>
@@ -111,15 +132,16 @@
     </div>
     <div class="ctrl pick">
       <label>Grid</label>
-      <div class="stepper">
+      <div class="stepper" data-level="6">
         <button id="coarser" type="button" aria-label="Coarser grid">&minus;</button>
         <output id="resv"></output>
         <button id="finer" type="button" aria-label="Finer grid">+</button>
       </div>
     </div>
+    <p class="note">Below 1 the lattice holds still on some frames, which is how you slow it past the frame rate.</p>
     <div class="ctrl">
       <label for="spf">Generations / frame</label><output id="spfv"></output>
-      <input id="spf" type="range" min="1" max="8" step="1" value="1" />
+      <input id="spf" type="range" min="0.125" max="8" step="0.125" value="0.5" data-dp="3" />
     </div>
   </section>
 

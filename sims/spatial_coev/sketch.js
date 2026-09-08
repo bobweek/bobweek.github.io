@@ -7,20 +7,47 @@
 
 let F;                 // the lattice
 let img;               // p5.Image at lattice resolution, blown up to fill
-let resIdx = 3;        // index into RESOLUTIONS
+let resIdx;            // index into RESOLUTIONS, read from the markup
 let playing = true;
+
+/* Set this to true to start with the control panel tucked away. The same
+   thing can be done per-embed with ?panel=hidden on the iframe src. */
+const PANEL_HIDDEN_BY_DEFAULT = false;
 let stepOnce = false;
 let generation = 0;
+let rate = 0, rateAt = 0, rateShown = 0;
+let genBudget = 0;     // carries the fractional part of generations/frame
 
 const $ = (id) => document.getElementById(id);
 
-const DEFAULTS = {
-  m1: 0.23, m2: 0.43, m3: 0.30,
-  s12: 0.02, s13: 0.064, s23: 0.03,
-  ratio: 0.5, mode: 'chase',
-  gamma: 0, sigma: 2.26, localNe: false,
-  view: 'traits', bounds: 'clamp', spf: 1,
-};
+/* Defaults live in ONE place: the value= / selected / checked attributes on
+   the controls in index.html.  They are snapshotted here at startup so the
+   "Restore defaults" button has something to go back to.  Add a control to
+   the markup and it is picked up automatically. */
+const STATEFUL = '#panel input[type=range], #panel input[type=checkbox], #panel select';
+let DEFAULTS = {};
+
+function captureDefaults() {
+  DEFAULTS = {};
+  document.querySelectorAll(STATEFUL).forEach((el) => {
+    if (el.id) DEFAULTS[el.id] = el.type === 'checkbox' ? el.checked : el.value;
+  });
+}
+
+/* A slider may declare data-map="sq", in which case the value it feeds the
+   model is the square of its position.  That buys fine control at the low end
+   of a wide range: drift runs 0..25 but the interesting part is under 2. */
+function mapped(el) {
+  const v = +el.value;
+  return el.dataset.map === 'sq' ? v * v : v;
+}
+
+// how many decimals to show for a slider, taken from its own step attribute
+function decimals(step) {
+  const s = String(step);
+  const dot = s.indexOf('.');
+  return dot < 0 ? 0 : s.length - dot - 1;
+}
 
 /* ------------------------------------------------------------- p5 setup */
 
@@ -30,6 +57,10 @@ function setup() {
   c.parent('holder');
   c.elt.style.touchAction = 'manipulation';
 
+  // the starting grid is a data attribute on the stepper, so it lives in the
+  // markup with every other default
+  resIdx = constrain(+document.querySelector('.stepper').dataset.level || 0,
+                     0, RESOLUTIONS.length - 1);
   buildField(RESOLUTIONS[resIdx], null);
   F.randomize();
 
@@ -38,7 +69,11 @@ function setup() {
 
   new ResizeObserver(() => fitCanvas()).observe($('stage'));
 
-  tuck(true);
+  const q = new URLSearchParams(location.search);
+  if (PANEL_HIDDEN_BY_DEFAULT || q.get('panel') === 'hidden' || q.get('panel') === '0') tuck(true);
+
+  // the simulation *is* the motion, so honour the system setting
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) setPlaying(false);
 }
 
 function buildField(dims, old) {
@@ -47,19 +82,34 @@ function buildField(dims, old) {
   img = createImage(F.wid, F.hi);
   img.loadPixels();
   $('resv').value = `${F.wid} \u00d7 ${F.hi}`;
+  rate = 0; rateAt = 0;
 }
 
 /* -------------------------------------------------------------- params */
 
+const COEF = ['t12', 'f12', 't13', 'f13', 't23', 'f23'];
+
+/* The 2016 sketch's slider positions, worked back through its own
+   normalisation.  "Even cycle" is the same structure with one asymmetry
+   throughout; match and avoid flip the sign of the push. */
+const PRESETS = {
+  original: { t12: 0.095, f12: 0.095, t13: 0.095, f13: 0.19, t23: 0, f23: 0 },
+  cycle:    { t12: 0.02,  f12: 0.04,  t13: 0.02,  f13: 0.04, t23: 0.02, f23: 0.04 },
+  match:    { t12: 0.05,  f12: -0.05, t13: 0.05,  f13: -0.05, t23: 0.05, f23: -0.05 },
+  avoid:    { t12: -0.05, f12: 0.05,  t13: -0.05, f13: 0.05,  t23: -0.05, f23: 0.05 },
+};
+
 function readParams() {
-  const mode = $('mode').value;
+  const c = {};
+  COEF.forEach((id) => { c[id] = +$(id).value; });
   return {
     m: [+$('m1').value, +$('m2').value, +$('m3').value],
-    M: buildM(+$('s12').value, +$('s13').value, +$('s23').value, +$('ratio').value, mode),
+    M: buildM(c),
     gamma: +$('gamma').value,
-    sigma: +$('sigma').value,
+    sigma: mapped($('sigma')),
     localNe: $('localNe').checked,
     mode: $('bounds').value,
+    sequential: $('order').value === 'sequential',
   };
 }
 
@@ -68,11 +118,43 @@ function readParams() {
 function draw() {
   if (playing || stepOnce) {
     const p = readParams();
-    const n = stepOnce ? 1 : +$('spf').value;
+
+    /* Generations per frame can be fractional. The budget carries the
+       remainder between frames, so 0.75 steps on three frames out of four
+       rather than rounding up to one step every frame. That is the only way
+       to run slower than the display refresh. */
+    let n;
+    if (stepOnce) {
+      n = 1;
+      stepOnce = false;
+    } else {
+      genBudget += +$('spf').value;
+      n = Math.floor(genBudget);
+      genBudget -= n;
+    }
+
     for (let q = 0; q < n; q++) F.step(p);
-    generation += n;
-    stepOnce = false;
-    $('gen').textContent = generation.toLocaleString();
+    if (n) {
+      generation += n;
+      $('gen').textContent = generation.toLocaleString();
+    }
+
+    /* Smoothed generations per second. This is averaged over every frame,
+       including the ones that take no step, or skipped frames would bias it
+       upward at fractional speeds. */
+    const now = performance.now();
+    if (rateAt) {
+      rate = rate * 0.93 + ((n * 1000) / Math.max(1, now - rateAt)) * 0.07;
+      if (now - rateShown > 400) {
+        $('rate').textContent = rate < 10 ? rate.toFixed(1) : rate.toFixed(0);
+        rateShown = now;
+      }
+    }
+    rateAt = now;
+  } else {
+    rateAt = 0;
+    genBudget = 0;
+    $('rate').textContent = '';
   }
 
   F.writePixels(img.pixels, $('view').value);
@@ -94,10 +176,18 @@ function fitCanvas() {
   if (h > availH) { h = availH; w = availH * aspect; }
   w = Math.max(20, Math.round(w));
   h = Math.max(20, Math.round(h));
-  if (w === width && h === height) return;
+  // resizing the canvas resets the 2D context state, and the lattice can
+  // change without the canvas changing, so smoothing is set either way
+  if (w !== width || h !== height) resizeCanvas(w, h);
+  setSmoothing();
+}
 
-  resizeCanvas(w, h);
-  noSmooth();          // resizing the canvas resets the 2D context state
+/* A lattice coarser than the canvas is magnified and should stay as crisp
+   blocks.  A lattice finer than the canvas has to be shrunk, and sampling it
+   nearest-neighbour would alias the fine structure into noise, so hand the
+   downsampling to the browser instead. */
+function setSmoothing() {
+  if (F.wid > width) smooth(); else noSmooth();
 }
 
 function windowResized() { fitCanvas(); }
@@ -118,13 +208,26 @@ function setResolution(idx) {
 }
 
 function showValues() {
-  const fmt = (id, d) => { $(id + 'v').value = (+$(id).value).toFixed(d); };
-  fmt('m1', 2); fmt('m2', 2); fmt('m3', 2);
-  fmt('s12', 3); fmt('s13', 3); fmt('s23', 3);
-  fmt('ratio', 2); fmt('gamma', 3); fmt('sigma', 2);
-  $('spfv').value = $('spf').value;
-  // the flee:track ratio only means anything for the chase interaction
-  $('ratioWrap').classList.toggle('off', $('mode').value !== 'chase');
+  document.querySelectorAll('#panel input[type=range]').forEach((el) => {
+    const out = $(el.id + 'v');
+    if (out) out.value = mapped(el).toFixed(el.dataset.dp ? +el.dataset.dp : decimals(el.step));
+  });
+}
+
+// mark the preset select as Custom once the coefficients no longer match it
+function syncPreset() {
+  const now = {};
+  COEF.forEach((id) => { now[id] = +$(id).value; });
+  const hit = Object.keys(PRESETS).find((name) =>
+    COEF.every((id) => Math.abs(PRESETS[name][id] - now[id]) < 1e-9));
+  $('preset').value = hit || 'custom';
+}
+
+function applyPreset(name) {
+  const p = PRESETS[name];
+  if (!p) return;
+  COEF.forEach((id) => { $(id).value = p[id]; });
+  showValues();
 }
 
 function reseed(how) {
@@ -136,9 +239,11 @@ function reseed(how) {
 }
 
 function wireControls() {
-  const sliders = ['m1', 'm2', 'm3', 's12', 's13', 's23', 'ratio', 'gamma', 'sigma', 'spf'];
-  sliders.forEach((id) => $(id).addEventListener('input', showValues));
-  $('mode').addEventListener('change', showValues);
+  captureDefaults();
+  document.querySelectorAll('#panel input[type=range]')
+    .forEach((el) => el.addEventListener('input', showValues));
+  COEF.forEach((id) => $(id).addEventListener('input', syncPreset));
+  $('preset').addEventListener('change', () => applyPreset($('preset').value));
   showValues();
 
   $('play').onclick = () => setPlaying(!playing);

@@ -9,6 +9,7 @@ function mulberry32(a) {
   };
 }
 const ZERO = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+const NOCOUPLE = { t12: 0, f12: 0, t13: 0, f13: 0, t23: 0, f23: 0 };
 let fails = 0;
 function ok(name, cond, extra = '') {
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '   ' + extra : ''}`);
@@ -99,41 +100,55 @@ function ok(name, cond, extra = '') {
 
 // --------------------------------- 5. which pair each coevolution slider hits
 {
-  const probe = (s12, s13, s23) => {
-    const M = buildM(s12, s13, s23, 2, 'chase');
+  const zero = { t12: 0, f12: 0, t13: 0, f13: 0, t23: 0, f23: 0 };
+  const probe = (over) => {
+    const M = buildM({ ...zero, ...over });
     const touched = new Set();
-    for (let a = 0; a < 3; a++) for (let b = 0; b < 3; b++) if (M[a][b] !== 0) { touched.add(a); touched.add(b); }
-    return [...touched].sort().join('');
+    for (let a = 0; a < 3; a++) for (let b = 0; b < 3; b++) if (M[a][b] !== 0) { touched.add(a + 1); touched.add(b + 1); }
+    return [...touched].sort().join('&');
   };
-  ok('s12 slider drives species 1 and 2 only', probe(0.1, 0, 0) === '01', probe(0.1, 0, 0));
-  ok('s13 slider drives species 1 and 3 only', probe(0, 0.1, 0) === '02', probe(0, 0.1, 0));
-  ok('s23 slider drives species 2 and 3 only', probe(0, 0, 0.1) === '12', probe(0, 0, 0.1));
+  ok('the 1&2 pair sliders touch species 1 and 2 only', probe({ t12: .1, f12: .1 }) === '1&2', probe({ t12: .1, f12: .1 }));
+  ok('the 1&3 pair sliders touch species 1 and 3 only', probe({ t13: .1, f13: .1 }) === '1&3', probe({ t13: .1, f13: .1 }));
+  ok('the 2&3 pair sliders touch species 2 and 3 only', probe({ t23: .1, f23: .1 }) === '2&3', probe({ t23: .1, f23: .1 }));
 
-  // the original mapping, for comparison
-  const M = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-  const Msel13 = 0.1, Msel12 = 0, Msel23 = 0, Mratio = 2;
-  M[1][0] = Msel12; M[2][1] = Msel13; M[0][2] = Msel23;
-  M[0][1] = -Msel12; M[1][2] = -Mratio * Msel13; M[2][0] = -Mratio * Msel23;
-  const t = new Set();
-  for (let a = 0; a < 3; a++) for (let b = 0; b < 3; b++) if (M[a][b] !== 0) { t.add(a); t.add(b); }
-  ok('original "spp 1 & 3" slider actually drove species 2 and 3', [...t].sort().join('') === '12', [...t].sort().join(''));
+  // tracking must close the cycle 1 -> 2 -> 3 -> 1, not form a hierarchy
+  const M = buildM({ t12: .05, f12: .1, t13: .05, f13: .1, t23: .05, f23: .1 });
+  const arrows = [];
+  for (let s2 = 0; s2 < 3; s2++) for (let t = 0; t < 3; t++) if (M[t][s2] > 0) arrows.push(`${s2 + 1}->${t + 1}`);
+  ok('tracking closes the 3-cycle 1->2->3->1', arrows.sort().join(' ') === '1->2 2->3 3->1', arrows.join(' '));
+  ok('no species tracks two others (that would be a hierarchy)',
+    new Set(arrows.map((x) => x.slice(-1))).size === 3);
+
+  // a negative push turns a pair into mutual matching
+  const Mm = buildM({ ...zero, t12: .05, f12: -.05 });
+  ok('a negative flee makes that pair converge', Mm[1][0] > 0 && Mm[0][1] > 0,
+    `M[1][0]=${Mm[1][0]} M[0][1]=${Mm[0][1]}`);
 }
 
-// ------------------------------------------------ 6. synchronous vs in-place
+// ------------------------------------------- 6. the two update orders differ
 {
-  // one step of the original in-place rule vs the synchronous rule,
-  // on a single cell with no dispersal
-  const M = buildM(0.08, 0.08, 0.08, 2, 'chase');
-  const z = [40, 150, 220];
-  // in place (original loop order)
-  const a = z.slice();
-  for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) a[i] += M[j][i] * (a[j] - a[i]);
-  // synchronous
-  const b = z.slice();
-  for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) b[i] += M[j][i] * (z[j] - z[i]);
-  const d = Math.max(...a.map((v, i) => Math.abs(v - b[i])));
-  ok('in-place update differs from synchronous update', d > 0.1,
-    `max|diff| = ${d.toFixed(3)} trait units per generation`);
+  const M = buildM({ t12: .095, f12: .095, t13: .095, f13: .19, t23: 0, f23: 0 });
+  const base = { m: [0.7125, 0.3375, 0.0375], M, gamma: 0, sigma: 0, localNe: false, mode: 'clamp' };
+  const init = new Float32Array(40 * 70 * 3);
+  const r = mulberry32(21);
+  for (let k = 0; k < init.length; k++) init[k] = r() * 255;
+
+  const A = new Field(40, 70, mulberry32(1)); A.cur.set(init);
+  const B = new Field(40, 70, mulberry32(1)); B.cur.set(init);
+  for (let t = 0; t < 200; t++) { A.step({ ...base, sequential: true }); B.step({ ...base, sequential: false }); }
+  let d = 0;
+  for (let k = 0; k < A.cur.length; k++) d = Math.max(d, Math.abs(A.cur[k] - B.cur[k]));
+  ok('sequential and simultaneous are different trajectories', d > 10, `max |difference| = ${d.toFixed(1)}`);
+
+  const churn = (F) => {
+    const p = Float32Array.from(F.cur);
+    F.step({ ...base, sequential: F === A });
+    let s2 = 0; for (let k = 0; k < F.cur.length; k++) s2 += Math.abs(F.cur[k] - p[k]);
+    return s2 / F.cur.length;
+  };
+  const cA = churn(A), cB = churn(B);
+  ok('sequential sustains more motion than simultaneous', cA > cB,
+    `sequential ${cA.toFixed(2)} vs simultaneous ${cB.toFixed(2)} trait units/generation`);
 }
 
 // ------------------------------------------------------- 7. stability bounds
@@ -146,26 +161,67 @@ function ok(name, cond, extra = '') {
   // full run at the most aggressive settings: must stay finite and in range
   const F = new Field(40, 70, mulberry32(9));
   F.randomize();
-  for (const mode of ['clamp', 'wrap', 'fold', 'soft']) {
+  const hot = buildM({ t12: 0.2, f12: 0.2, t13: 0.2, f13: 0.2, t23: 0.2, f23: 0.2 });
+  for (const mode of ['clamp', 'wrap', 'fold', 'soft']) for (const sequential of [true, false]) {
     const p = {
-      m: [mMax, mMax, mMax],
-      M: buildM(0.1, 0.1, 0.1, 3, 'chase'),
-      gamma: 0.4, sigma: 3, mode, localNe: true,
+      m: [mMax, mMax, mMax], M: hot,
+      gamma: 0.4, sigma: 25, mode, localNe: true, sequential,
     };
     for (let t = 0; t < 300; t++) F.step(p);
     let bad = 0;
     const hi = mode === 'wrap' ? 256 : 255 + 1e-9;
     for (let k = 0; k < F.cur.length; k++) if (!Number.isFinite(F.cur[k]) || F.cur[k] < 0 || F.cur[k] >= hi) bad++;
-    ok(`sliders pinned, mode=${mode}: state stays finite and on scale`, bad === 0, `${bad} bad cells`);
+    ok(`sliders pinned, mode=${mode}, ${sequential ? 'sequential' : 'simultaneous'}: finite and on scale`, bad === 0, `${bad} bad cells`);
     F.randomize();
   }
 }
 
-// ------------------------------------------------------------- 8. throughput
+// ------------------------------------------- 7b. the widened drift ceiling
 {
+  // the slider is quadratic: position 0..5 feeds sigma = position^2 = 0..25
+  const sq = (v) => v * v;
+  ok('drift slider reaches sigma = 25 at the top', Math.abs(sq(5) - 25) < 1e-9, `sigma(5) = ${sq(5)}`);
+  ok('drift slider still resolves the low end', sq(0.5) < 0.3 && sq(1) === 1,
+    `sigma(0.5) = ${sq(0.5)}, sigma(1) = ${sq(1)}`);
+  ok('drift is exactly zero at the bottom', sq(0) === 0);
+
+  // sigma = 25 with a falling Ne is essentially white noise at the margin
+  const F = new Field(56, 98, mulberry32(31));
+  F.seedFlat(128);
+  const p = { m: [0, 0, 0], M: ZERO, gamma: 0, sigma: 25, mode: 'clamp', localNe: true, sequential: true };
+  F.step(p);
+  let core = 0, marg = 0, nc = 0, nm = 0;
+  for (let q = 0; q < F.n; q++) {
+    const d = Math.abs(F.cur[3 * q] - 128);
+    if (F.driftScale[q] < 1.3) { core += d; nc++; } else if (F.driftScale[q] > 4) { marg += d; nm++; }
+  }
+  ok('at full drift the margin saturates in a single generation', marg / nm > core / nc,
+    `mean |step| core ${(core / nc).toFixed(0)}, margin ${(marg / nm).toFixed(0)} trait units`);
+}
+
+// ------------------------------------------------- 8. throughput and memory
+{
+  // every grid on the ladder must allocate and run without falling over
+  const { RESOLUTIONS } = require('./field.js');
+  const big = RESOLUTIONS[RESOLUTIONS.length - 1];
+  const B = new Field(big[0], big[1], mulberry32(12));
+  B.randomize();
+  const bp = { m: [.5, .5, .5], M: buildM({ t12: .095, f12: .095, t13: .095, f13: .19, t23: 0, f23: 0 }),
+    gamma: .05, sigma: 1, mode: 'clamp', localNe: true, sequential: true };
+  const bt = process.hrtime.bigint();
+  B.step(bp);
+  const bms = Number(process.hrtime.bigint() - bt) / 1e6;
+  let bad = 0;
+  for (let k = 0; k < B.cur.length; k++) if (!Number.isFinite(B.cur[k])) bad++;
+  ok(`largest grid ${big[0]}x${big[1]} runs and stays finite`, bad === 0, `${bms.toFixed(0)} ms/generation`);
+  ok('largest grid is 4:7 like the rest', Math.abs(big[0] / big[1] - 4 / 7) < 1e-9);
+  ok('every grid on the ladder is 4:7',
+    RESOLUTIONS.every(([w, h]) => Math.abs(w / h - 4 / 7) < 1e-9),
+    RESOLUTIONS.map((r) => r.join('x')).join(' '));
+
   const F = new Field(80, 140, mulberry32(11));
   F.randomize();
-  const p = { m: [0.3, 0.3, 0.3], M: buildM(0.05, 0.02, 0.05, 2, 'chase'), gamma: 0.05, sigma: 0.5, mode: 'clamp', localNe: true };
+  const p = { m: [0.3, 0.3, 0.3], M: buildM({ t12: .05, f12: .1, t13: .02, f13: .04, t23: .05, f23: .1 }), gamma: 0.05, sigma: 0.5, mode: 'clamp', localNe: true, sequential: true };
   const t0 = process.hrtime.bigint();
   for (let t = 0; t < 200; t++) F.step(p);
   const ms = Number(process.hrtime.bigint() - t0) / 1e6 / 200;

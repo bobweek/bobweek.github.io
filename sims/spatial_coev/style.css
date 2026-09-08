@@ -134,14 +134,18 @@ h2 {
   padding-top: 14px;
 }
 
-.gen {
+.readouts {
   margin-left: auto;
+  display: flex;
+  gap: 9px;
   font-family: var(--mono);
   font-size: 11px;
   font-variant-numeric: tabular-nums;
   color: var(--muted);
 }
-.gen::after { content: " gen"; letter-spacing: .04em; }
+.gen::after  { content: " gen";   letter-spacing: .04em; }
+.rate::after { content: " gen/s"; letter-spacing: .04em; }
+.rate:empty::after { content: ""; }
 
 /* -------------------------------------------------------------- buttons */
 
@@ -301,7 +305,7 @@ kbd {
 
 /* ------------------------------------------------------------- narrow */
 
-@media (max-width: 760px) {
+@media (max-width: 560px) {
   body { flex-direction: column; }
   #stage { flex: 0 0 auto; height: 56vh; padding: 10px; }
   #panel { flex: 1 1 auto; border-left: 0; border-top: 1px solid var(--rule); }
