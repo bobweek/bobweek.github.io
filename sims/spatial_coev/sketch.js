@@ -12,7 +12,7 @@ let playing = true;
 
 /* Set this to true to start with the control panel tucked away. The same
    thing can be done per-embed with ?panel=hidden on the iframe src. */
-const PANEL_HIDDEN_BY_DEFAULT = false;
+const PANEL_HIDDEN_BY_DEFAULT = true;
 let stepOnce = false;
 let generation = 0;
 let rate = 0, rateAt = 0, rateShown = 0;
@@ -73,7 +73,7 @@ function setup() {
   if (PANEL_HIDDEN_BY_DEFAULT || q.get('panel') === 'hidden' || q.get('panel') === '0') tuck(true);
 
   // the simulation *is* the motion, so honour the system setting
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) setPlaying(false);
+  // if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) setPlaying(false);
 }
 
 function buildField(dims, old) {
