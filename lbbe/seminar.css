@@ -1,0 +1,45 @@
+/* seminar.css -- overrides on deck.css for a figure-first deck.
+
+   Every figure is drawn at 1180 x 560 slide pixels with its own annotations
+   and status line, so a slide is: a one-line title, a small eyebrow, and the
+   figure at native size.  The arithmetic, on a 1280 x 720 slide:
+
+     padding 20 + 12, title ~52, eyebrow ~26, body padding 6  ->  604 px left
+     for a 560 px figure; side padding 50 + 50 leaves exactly 1180 px.
+
+   Keep titles to one line, or the figure is scaled down to make room.       */
+
+.reveal .slides > section,
+.reveal .slides > section > section { padding: 20px 50px 12px; }
+
+.reveal h2 { font-size: 1.04em; margin: 0 0 0.02em; }
+.reveal h2::after { width: 54px; height: 3px; margin-top: 0.22em; }
+
+.reveal .eyebrow { font-size: 0.42em; margin: 0.45em 0 0.2em; letter-spacing: 0.10em; }
+.reveal .eyebrow .badge { font-size: 0.92em; }
+
+.reveal .body { padding-top: 6px; gap: 0; }
+.reveal .fig img { max-height: 100%; max-width: 100%; }
+
+/* title slide: the map, veiled, behind the words */
+.reveal section.withmap { justify-content: center; padding-left: 86px; }
+.reveal section.withmap img.titlebg {
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0; pointer-events: none; max-height: none;
+}
+.reveal section.withmap p:has(img.titlebg) { margin: 0; height: 0; }
+.reveal section.withmap h2,
+.reveal section.withmap .sub,
+.reveal section.withmap .byline { position: relative; z-index: 1; }
+.reveal section.withmap h2 { font-size: 1.72em; max-width: 21ch; }
+
+/* whiten the chart just where the words sit: an ellipse of near-white that
+   fades out, painted above the image and below the text.  Move or resize it
+   with the two percentages after "ellipse" (radii) and after "at" (centre). */
+.reveal section.withmap::after {
+  content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse 50% 36% at 33% 50%,
+              rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.90) 55%,
+              rgba(255, 255, 255, 0.00) 100%);
+}
