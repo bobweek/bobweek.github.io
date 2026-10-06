@@ -1,0 +1,890 @@
+vol. 198, no. 2
+
+the american naturalist
+
+august 2021
+
+Coevolutionary Arms Races and the Conditions
+for the Maintenance of Mutualism
+Bob Week1,* and Scott L. Nuismer1,2
+1. Program in Bioinformatics and Computational Biology, University of Idaho, Moscow, Idaho 83844; 2. Department of Biological
+Sciences, University of Idaho, Moscow, Idaho 83844
+Submitted September 5, 2020; Accepted February 25, 2021; Electronically published May 27, 2021
+Online enhancements: supplemental PDF.
+abstract: Empirical evidence suggests that coevolutionary arms
+races between ﬂowering plants and their pollinators can occur in
+wild populations. In extreme cases, trait escalation may result in
+evolutionary switching from mutualism to parasitism. However,
+theoretical approaches to studying coevolution typically assume ﬁxed
+types of ecological interactions and ignore the evolution of absolute
+ﬁtness. Here, we introduce a novel approach to track the evolution of
+absolute ﬁtness as a framework to determine when escalatory coevolution results in a switch from mutualism to parasitism. We apply
+our approach to two previously studied mechanisms mediating selection as a function of phenotype. Our results demonstrate that interactions mediated by a “bigger-is-better” mechanism evolve toward
+parasitism. In contrast, generalizing the classical trait-matching mechanism so that the ﬁtness of each species is optimized when trait values mismatch by a particular amount, we ﬁnd theoretical support
+for indeﬁnite trait exaggeration that preserves mutualistic interactions. Building on our results, we discuss the consequences of coevolutionary arms races for the maintenance of cheating. Moving beyond
+pairwise interactions, we consider the ramiﬁcations of coevolution in
+a South African pollination network for the evolution of parasitism.
+Future work extending our approach beyond pairwise interactions
+can lead to a framework for understanding the evolution of parasitism
+in mutualistic networks and further insights into the structure and dynamic nature of ecological communities in general.
+Keywords: coevolution, mutualism, arms race, offset matching.
+
+Introduction
+Coevolution between pairs of species has long been considered an important driver of phenotypic exaggeration
+(Darwin 1862; Wallace 1867; Benkman et al. 2003; Brodie
+et al. 2005; Toju and Sota 2006; Anderson and Johnson 2007,
+2009; Pauw et al. 2009; Anderson et al. 2010; Muchhala and
+Thomson 2010; Thompson 2014; Nuismer 2017; Nuismer
+* Corresponding author; email: bobweek@gmail.com.
+ORCIDs: Week, https://orcid.org/0000-0001-7687-4757; Nuismer, https://
+orcid.org/0000-0001-9817-0056.
+Am. Nat. 2021. Vol. 198, pp. 195–205. q 2021 by The University of Chicago.
+0003-0147/2021/19802-60172$15.00. All rights reserved.
+DOI: 10.1086/714274
+
+and Week 2019; Week and Nuismer 2019). In particular,
+coevolutionary theory predicts that antagonistic victimexploiter interactions, such as host-parasite and predatorprey interactions, often result in coevolutionary cyclic chases
+(Gavrilets 1997; Gavrilets and Hastings 1998) or escalatory
+arms races (Nuismer et al. 2007). If an arms race goes unchecked by external sources of stabilizing selection, the interacting species are predicted to evolve ever greater defensive and offensive trait values. However, this dynamic is not
+unique to antagonistic interactions. Indeed, several cases of
+apparent trait escalation involving mutualistic interactions
+have been documented (Anderson and Johnson 2007, 2009;
+Pauw et al. 2009). Furthermore, the classiﬁcation of an interaction as a mutualism or an antagonism may change as partner species evolve or as the ecological context in which the
+interaction occurs changes over space and time (Bronstein
+1994; Gomulkiewicz et al. 2003; Nuismer et al. 1999, 2003).
+For example, the interactions between the pollinating seed
+parasite Greya politella and the plant it pollinates, Lithophragma parviﬂourm, changes from mutualism to parasitism as the abundance of copollinators decreases (Thompson and Pellmyr 1992). Alternatively, if one mutualistic
+partner outpaces the other in an evolutionary race, the
+carefully balanced mutual beneﬁts may disintegrate leading to the evolutionary switching from mutualism to parasitism (Pauw et al. 2009; Jones et al. 2015).
+Here, we study the disintegration of mutualisms due to
+escalatory coevolution. We focus on two mechanisms mediating ﬁtness as a function of phenotype. In one model,
+the arms race is driven by a “bigger-is-better” (i.e., trait differences sensu Nuismer et al. 2007) mechanism where ﬁtness increases indeﬁnitely with trait size. In the other model,
+the arms race is driven by an “offset-matching” mechanism (sensu Week and Nuismer 2019), where ﬁtness is
+a unimodal function peaking at some value larger than
+the trait of the interacting partner. Our goal is to determine whether these interaction mechanisms yield coevolutionary dynamics that preserve or destroy mutualistic
+interactions.
+
+196
+
+The American Naturalist
+
+Although coevolutionary models of victim-exploiter interactions often predict indeﬁnite trait escalation, most coevolutionary models of mutualistic interactions rarely, if
+ever, predict coevolutionary arms races and sustained escalation of traits (Nuismer 2017). A notable exception is Kiester et al. (1984), where it was demonstrated that sexual selection in pollinator populations can lead to escalation of
+pollinator preference. When plant traits evolve to track pollinator preference, sexual selection in the pollinator population may then indirectly lead to the evolutionary escalation
+of plant traits. However, the escalatory dynamics described
+in this situation are driven by sexual selection within species
+and not coevolutionary selection between species. Furthermore, Kiester et al. (1984) concluded that in the absence of
+sexual selection, coevolution in mutualisms would lead to
+the stable convergence of trait values. Recent coevolutionary models focused on dynamics driven solely by interspeciﬁc interactions continue this tradition of modeling the
+phenotypic interface of mutualisms with a trait-matching
+mechanism (Guimarães et al. 2017; Nuismer 2017; Medeiros et al. 2018; de Andreazzi et al. 2019). Hence, it is generally assumed that coevolving mutualists do not engage
+in cycles or arms races.
+While this dichotomy between antagonistic and mutualistic interactions is generally accepted, striking counterexamples exist in a range of empirically well-studied mutualistic interactions characterized by extremely exaggerated
+traits (Anderson and Johnson 2007, 2009; Pauw et al. 2009;
+Muchhala and Thomson 2010). For instance, in the interaction between the long-proboscid ﬂy Prosoeca ganglbaueri
+and the ﬂowering plant Zaluzianskya microsiphon, Anderson
+and Johnson (2007) found extreme trait exaggeration, including proboscis lengths of up to 50 mm and ﬂoral tube
+depths of up to 55 mm. Furthermore, these authors discovered signiﬁcant spatial correlations in mean proboscis
+length and ﬂoral tube depth, suggesting a role for coevolution
+in explaining patterns of phenotypic exaggeration. Similarly,
+Pauw et al. (2009) found signiﬁcant spatial correlations between another long-proboscid ﬂy, Moegistorhynchus longirostris, and a long-tubed ﬂower, Lapeirousia anceps. Using
+a clever experimental design, Pauw et al. (2009) also demonstrated evidence for reciprocal directional selection caused
+by this interaction for longer ﬂoral tubes and pollinator proboscises. Hence, evolutionary exaggeration in these systems
+may be explained by interspeciﬁc coevolutionary selection
+instead of intraspeciﬁc sexual selection.
+These examples suggest that coevolutionary trait exaggeration in mutualisms is more widespread than previously thought. However, if trait escalation of one partner
+outpaces that of the other, the interaction may cease to be
+beneﬁcial for the second partner. That is, the mutualism
+may collapse into a parasitism (Jones et al. 2015). For instance, if the ﬂy mouthpart evolves to exceed the nectar-
+
+tube depth by an extreme amount, the ﬂy may be better
+described as a nectar thief rather than a pollinator (Inouye
+1980; Pauw et al. 2009). Hence, these mutualisms may be
+maintained by a delicate coevolutionary dance between
+partner species.
+In a convincing counterargument drawing on metaanalyses of selection gradients and macroevolutionary
+patterns, Frederickson (2017) challenged the notion that
+mutualisms are on the verge of breakdown. Instead, Frederickson (2017) argues that a host-parasite interaction is
+more likely to experience an evolutionary switch to mutualism than the other way around. Combining this argument
+with our knowledge of coevolutionary arms races in mutualisms leads us to two key questions: Can sustained arms
+races within mutualistic interactions continue indeﬁnitely
+without disintegrating into antagonisms? And if so, which
+mechanisms mediating ﬁtness as a function of phenotype
+favor the stability of mutualism in the face of ongoing arms
+races for ever-increasing trait values?
+Here, we answer these questions by analyzing the traitdifferences and offset-matching models of mutualistic
+arms races. By tracking the absolute ﬁtness of interacting
+species in response to trait evolution, our results demonstrate that unchecked mutualistic arms races mediated by
+a weak selection approximation to trait differences are
+doomed to a parasitic fate. In contrast, offset matching
+(with weak or strong selection) can preserve mutualistic
+interactions in spite of ever-increasing trait values.
+
+Methods
+Our analysis focuses on two interaction mechanisms determining the ﬁtness of individuals as functions of their
+phenotype and the phenotype of an encountered individual: the trait-differences mechanism (Nuismer et al. 2007)
+and the offset-matching mechanism (Week and Nuismer
+2019). We therefore begin the description of our methods
+with a brief review of trait differences and offset matching.
+We then describe our approach to modeling coevolutionary dynamics and present population growth rates associated with each interaction mechanism. We show that these
+growth rates can be additively decomposed into a component representing the overall effect on ﬁtness due to the
+interaction and a component representing effects due to
+sources outside the interaction. By tracking the component
+describing the overall effect of the interaction on absolute
+ﬁtness, we develop a method to model the evolutionary
+switching of interaction types and the transition from mutualism to parasitism in particular. In the results section,
+we combine our models of coevolutionary dynamics with
+our approach to model the evolutionary switching of interaction types to determine when trait differences and offset
+
+Mutualistic Arms Races
+matching promote an evolutionary switch from mutualism
+to antagonism.
+Trait Differences
+The trait-differences mechanism assumes that the component of ﬁtness due to a biotic interaction changes
+monotonically with the trait value of the focal individual.
+Nuismer et al. (2007) used trait differences to derive quantitative genetic models of coevolutionary trait escalation
+driven by antagonistic interactions. The coevolutionary
+behavior implied by the trait-differences mechanism exhibits two characteristic features. First, the mean traits will
+diverge toward ever larger values. Second, in the limit of
+weak selection, the rate of trait evolution for one species
+does not depend on the trait value of the other, leading
+to independent evolutionary trajectories.
+The trait-differences mechanism has frequently been
+modeled using a logistic curve describing the probability
+of a successful interaction given the trait values of the interacting individuals (Toju and Sota 2006; Nuismer et al.
+2007; Nuismer 2017; Nuismer and Week 2019). However,
+the same bigger-is-better mechanism can also be modeled
+with an exponential curve. Although not as biologically realistic, the latter option simpliﬁes analysis and yields the
+same dynamics as the logistic curve in the limit of weak selection (Nuismer et al. 2007; Week and Nuismer 2019). We
+
+197
+
+therefore make use of the exponential curve instead of the
+logistic curve in our derivations.
+Denoting x the trait value of an individual of species X,
+denoting y the trait value of an individual of species Y, and
+assuming each individual engages in a single interaction,
+individual ﬁtness can be captured by
+W X (x, y) ∝ exp(BX (x 2 y)),
+
+ð1aÞ
+
+W Y (y, x) ∝ exp(BY (y 2 x)),
+
+ð1bÞ
+
+where BX, BY 1 0 determine the sensitivity of ﬁtness to
+trait values and hence mediate the strengths of selection
+on the respective species. We therefore refer to these parameters as the strengths of biotic selection. This interaction mechanism is summarized graphically in ﬁgure 1.
+Offset Matching
+The offset-matching mechanism generalizes the traitmatching mechanism frequently used to model coevolutionary interactions (Kiester et al. 1984; Week and Nuismer 2019). In particular, offset matching relaxes the key
+assumption that trait values from interacting pairs must
+be perfectly matched to optimize ﬁtness for both species.
+Instead, ﬁtness for each species is optimized when their
+trait value differs from the other by a particular amount,
+which we refer to as the optimal offset. By assuming that
+
+Figure 1: Fitness curves under trait differences (left) and offset matching (right) as functions of the difference in individual traits x 2 y.
+Solid lines represent the ﬁtness of individuals in species X. Dashed lines represent the ﬁtness of individuals in species Y. Vertical dotted
+lines mark the location of offset ﬁtness optima. In the offset-matching case we have set d p 0:5. In both plots we have set BX 1 BY so that
+species X experiences stronger selection than species Y. In particular, for trait differences we set BX p 1:5 and BY p 1, and for offset
+matching we set BX p 15 and BY p 5.
+
+198
+
+The American Naturalist
+
+ﬁtness is maximized at a positive optimal offset for both
+species, we obtain a phenotypic mechanism for escalatory
+selection. In particular, this assumes that each species beneﬁts from having a slightly larger trait but suffers reduced
+ﬁtness beyond a certain threshold. This model of ﬁtness
+was introduced by Week and Nuismer (2019) to simultaneously explain trait exaggeration and correlations of mean
+traits across multiple populations, enabling the use of a simple maximum likelihood approach to measure the strength
+of coevolution in the wild. By setting the optimal offset to
+zero, the trait-matching model commonly used to model
+mutualistic coevolution is recovered. Figure 1 compares
+ﬁtness curves under trait differences and offset matching.
+Following the notation introduced above, we denote by x
+the trait value of an individual in species X and by y a trait
+value in species Y. Assuming each individual participates
+in a single interaction, individual ﬁtness under the offsetmatching model can be described by
+
+
+BX
+2
+ð2aÞ
+W X (x, y) ∝ exp 2 (x 1 d 2 y) ,
+2
+
+
+BY
+W Y (y, x) ∝ exp 2 (y 1 d 2 x)2 ,
+ð2bÞ
+2
+where d is the optimal offset and BX, BY 1 0 again determine the strength of biotic selection on the respective species. Although it is likely that each species will experience a
+unique offset (say, dX and dY), such asymmetry can be accounted for in our model by the change of variables x0 p
+x 1 dX =2, y0 p y 1 dY =2, and d p (dX 1 dY )=2. We therefore proceed with our assumption of identical optimal
+offsets without loss of generality. A formal connection with
+the trait-differences model can be established using a simultaneous weak selection and large optimal offset approximation. In particular, substituting BX, BY p ε3 and
+d p 1=ε, the trait-differences mechanism can be obtained
+using a second-order Taylor expansion around ε ≈ 0. We
+illustrate this calculation in the supplemental PDF (available online).
+Modeling Approach
+The novelty of our approach lies in rigorous derivations
+of growth rates alongside trait dynamics. Beginning with
+the above-described models of individual ﬁtness, we follow
+Week et al. (2021) and formally derive the continuous-time
+growth rates for interacting populations from individualbased models (detailed calculations are provided in sec. A
+of the supplemental PDF). The approach is essentially a
+generalization of the classical diffusion-limit approach introduced by Feller (1951; but see Otto and Day 2011). To
+illustrate the basic idea, consider a single population. First
+assume that the population is composed of n discrete indi-
+
+viduals and rescale their individual contribution to population size by the amount N 0 =n. Then, summing across
+all individuals, the initial population size is N0 for any
+n 1 0. Fitness is rescaled by W → W 1=n so that as individuals become more numerous and contribute less to overall
+population size, their expected lifetime reproductive output
+converges toward unity. Simultaneously, the rate at which
+individuals reproduce and senesce is multiplied by n. This
+latter step can be thought of as considering larger temporal
+scales over which the dynamics are occurring. Finally, the
+effects of mutation on offspring trait values are rescaled by
+the amount 1=n so that mutation becomes less noticeable
+at the individual scale with larger n. With this rescaling in
+place, each n corresponds to a rescaled version of the original individual-based model. While population size and
+mean trait value evolve in discrete jumps at birth and death
+events for the individual-based model, in the limit n → ∞
+the rescaled models converge to a limiting model with continuous evolution of mean trait and population size. This
+diffusion limit provides a more mathematically tractable
+model while preserving crucial features of the underlying
+biology. This approach is typically taken to study stochastic dynamics resulting from small population size. However, we make use of this method here to formally derive
+population-level models from interactions between individuals. To avoid eco-evolutionary feedbacks, we assume
+that each individual interacts with exactly one individual
+from the partner species. This assumption removes the
+dependency of selection on abundance of the partner species. To dismiss stochastic dynamics, we send the rescaled
+initial population sizes N 0 → ∞ after we have obtained
+the diffusion limit from the rescaled individual-based
+model. Applying this approach to the models of ﬁtness reviewed above results in a set of ordinary (deterministic)
+differential equations tracking the mean traits of coevolving species.
+To describe our models mathematically, we denote by
+mX (x, y) the growth rate of individuals in species X with
+trait value x that interact with individuals of species Y
+having trait value y. Similarly, we denote by mY (y, x) the
+growth rate of individuals in species Y having trait value y
+interacting with individuals of species X with trait value x.
+Averaging mX (x, y) and mY (y, x) across interacting pairs,
+ X and m
+Y
+we obtain the continuous-time growth rates m
+for species X and Y, respectively. We assume that trait values x and y are normally distributed with means x and y,
+respectively, and variances j2X and j2Y , respectively. We denote by GX and GY the additive genetic variances (assumed
+to be constant), by rX and rY the intrinsic growth rates, and
+by eX and eY the baseline effects of interactions on growth
+rates (i.e., the effects on growth rates due to the interaction
+that do not vary with trait values) for species X and Y, respectively. This notation is summarized in table 1.
+
+Mutualistic Arms Races
+
+199
+
+Table 1: Summary of notation
+Parameter
+x, y
+x, y
+j2X , j2Y ≥ 0
+GX , G Y ≥ 0
+mX (x, y), mY (y, x)
+Y
+
+mX , m
+r X , rY
+I X , IY
+e X , eY
+B X , BY ≥ 0
+d≥0
+
+Description
+Individual trait values
+Population mean trait values
+Population trait variances
+Additive genetic variances: the heritable components of j2X and j2Y
+Growth rates as functions of focal individual trait and trait of interacting partner
+Population growth rates: averages of mX and mY across interacting partners
+Intrinsic growth rates: population growth rates in the absence of interaction
+Overall interaction effects: effects of the interaction on population growth rates
+Baseline interaction effects: effects of the interaction in the absence of biotic selection
+Strengths of biotic selection: coevolution requires BX, BY 1 0
+Optimal offset: determines ﬁtness maxima in the offset-matching model
+
+Note: Except for those indicated, all model parameters can be positive or negative.
+
+Using D to denote results under trait differences and
+O for offset matching, we ﬁnd the following pairs of population growth rates:
+
+
+m X p r X 1 eX 1 BX (x 2 y),
+ð3aÞ
+D
+ Y p r Y 1 eY 1 BY (y 2 x );
+m
+8
+BX
+BX
+>
+ X p r X 1 eX 2 (y 1 d 2 x )2 2 (j2X 1 j2Y ),
+<m
+2
+2
+O
+B
+B
+>
+Y
+Y
+:m
+ Y p r Y 1 eY 2 (x 1 d 2 y )2 2 (j2X 1 j2Y ):
+2
+2
+ð3bÞ
+
+we ﬁnd growth rates for each species can be additively
+ X p I X 1 r X and 
+partitioned as m
+mY p I Y 1 rY , where IX
+and IY represent the components due to the interspeciﬁc
+interaction and the intrinsic growth rates rX and rY represent the components due to everything else. Following
+equations (3), trait differences and offset matching respectively yield
+(
+I X p eX 1 BX (x 2 y ),
+ð6aÞ
+D
+I Y p eY 1 BY (x 2 y );
+
+In section C of the supplemental PDF, we show that
+the trait-speciﬁc growth rates mX (x, y)and mY (y, x) do not
+exhibit frequency-dependent selection. Hence, following
+our approach to derive deterministic dynamics, we calculate the evolution of mean traits via
+
+ð6bÞ
+
+X
+dx
+∂m
+p GX
+∂x ,
+dt
+
+ð4aÞ
+
+Y
+dy
+∂m
+p GY
+∂y :
+dt
+
+ð4bÞ
+
+This yields the following two sets of mean trait
+dynamics:
+8
+dx
+>
+>
+p GX BX ,
+<
+dt
+ð5aÞ
+D
+>
+>
+: dy p GY BY ;
+dt
+8
+dx
+>
+>
+p GX BX (y 1 d 2 x ),
+<
+dt
+ð5bÞ
+O
+>
+>
+: dy p GY BY (x 1 d 2 y):
+dt
+Under our assumption of ﬁxed phenotypic variances,
+the population growth rates presented in equations (3)
+change only through mean trait evolution. In particular,
+
+8
+BX
+>
+< I X p eX 2 [(y 1 d 2 x )2 1 j2X 1 j2Y ],
+2
+O
+B
+>
+: I p e 2 Y [(x 1 d 2 y )2 1 j2 1 j2 ]:
+Y
+Y
+X
+Y
+2
+
+Hence, IX and IY determine the type of interaction between species X and Y. Speciﬁcally, if IX, I Y 1 0, the interaction is a mutualism, and if either I X ! 0 or I Y ! 0, the
+interaction is an antagonism. Thus, by tracking the signs
+of IX and IY as mean traits evolve, we can track the evolutionary switching of ecological interaction types. In particular, if an interaction mechanism promotes the evolutionary switching from a mutualism to a parasitism, then
+IX and IY begin with positive values and eventually one of
+either IX or IY becomes negative because of the evolution
+of x and y. In the following section, we combine the coevolutionary models presented above with this criterion
+to determine when an interaction mechanism promotes
+evolutionary switching from mutualism to parasitism.
+Results
+Trait Differences Promotes Switching to Parasitism
+We begin by exploring the conditions under which sustained trait exaggeration can occur under the model of
+trait differences without the interaction dissolving into antagonism. Speciﬁcally, because the trait-differences model
+
+200
+
+The American Naturalist
+
+yields sustained trait exaggeration under positive selection
+strengths (i.e., BX, BY 1 0), we study how the ecological nature of the interaction evolves under this regime. Combining
+equations (5a) and (6a), we ﬁnd that the overall effects of the
+interaction on species growth rates evolve via
+dI X
+p BX (GX BX 2 GY BY ),
+dt
+
+ð7aÞ
+
+dI Y
+p BY (GY BY 2 GX BX ):
+dt
+
+ð7bÞ
+
+Hence, unless the products of additive genetic variance
+and strength of biotic selection is perfectly balanced between the two species so that GX BX p GY BY , the effects
+on species growth rates will indeﬁnitely evolve in opposite
+directions. This symmetry condition is unlikely to hold in
+nature, implying that one of the species will evolve to become a parasite of the other. Thus, no matter how large
+the baseline effects eX and eY are, mutualisms mediated
+by a trait-differences mechanism tend toward parasitism.
+The left panel of ﬁgure 2 displays this steady disintegration of mutualism by tracking the evolution of overall in-
+
+teraction effects IX and IY. For the particular parameters
+chosen, species Y becomes the host, and species X becomes the parasite. The right panel of ﬁgure 2 displays
+the rate of transition from mutualism to parasitism as a
+function of GX BX 2 GY BY . When GX BX ! GY BY , species Y
+becomes the parasite, and when GX BX 1 GY BY , species X
+becomes the parasite.
+There are three important caveats to this result: (1) the
+lack of stabilizing selection, (2) the assumed independence
+of ecological and evolutionary dynamics, and (3) the assumption of weak selection. Each may have important consequences for our predictions, which we work through in
+detail in the discussion section.
+
+Offset Matching Stabilizes Mutualistic Interactions
+Here, we assume that ﬁtness for an individual is maximized when its trait value exceeds that of its partners’
+by some speciﬁc amount d 1 0, which we refer to as the
+optimal offset (see ﬁg. 1). Under these assumptions, equation (5b) yields ever-increasing trait values. Combining
+equations (5b) and (6b), we ﬁnd that the effects on species
+growth rates evolve via
+
+Figure 2: Left, time-series plot illustrating the trajectories of overall interaction effects IX and IY. The solid line represents the overall interaction effect on species X, and the dashed line represents the overall interaction effect on species Y. The horizontal dotted line marks
+the threshold determining the interaction type. When IX or IY is below this line, the interaction is an antagonism. Hence, for the particular
+parameters chosen, this graph shows that species X evolves to become a parasite of species Y. Right, rate of transition from parasitism to
+mutualism as a function of GX BX 2 GY BY under the assumption BX ! BY . On the right side of the plane, species X becomes a parasite of
+species Y. On the left side of the plane, this relationship is reversed. For both plots we set BX p 5e 2 3 and BY p 1:5e 2 2. For the left plot,
+we used initial values I X p 1 and I Y p 3 and set GX p 10 and GY p 1.
+
+Mutualistic Arms Races
+dI X
+dD
+p 2BX (d 2 D)
+,
+dt
+dt
+
+ð8aÞ
+
+dI Y
+dD
+ð8bÞ
+p 2BY (d 1 D)
+,
+dt
+dt
+where D p x 2 y. In turn, the difference in mean traits D
+evolves via
+
+
+dD
+GX BX 2 GY BY
+p (GX BX 1 GY BY )
+d 2 D : ð9Þ
+GX BX 1 GY BY
+dt
+Since the offset-matching model requires positive selection strengths BX , BY 1 0, equation (9) implies that the
+difference in mean trait values D will always evolve to a stable equilibrium, even though the mean traits x and y evolve
+indeﬁnitely greater values. In particular, we ﬁnd that the
+difference in mean trait values at equilibrium can be expressed as
+^ p GX BX 2 GY BY d:
+D
+GX BX 1 GY BY
+
+ð10Þ
+
+In spite of ever-escalating mean trait values x and y,
+when D is at its equilibrium, the components of species
+growth rates IX and IY have also reached a stable equilibrium, given by
+
+BX
+I^X p eX 2
+2
+BY
+I^Y p eY 2
+2
+
+
+
+2GY BY d
+GX BX 1 GY BY
+
+
+
+2GX BX d
+GX BX 1 GY BY
+
+2
+2
+
+201
+
+
+1 (j2X 1 j2Y ) ,
+
+ð11aÞ
+
+
+1 (j2X 1 j2Y ) :
+
+ð11bÞ
+
+Hence, trait escalation under the offset-matching model
+promotes the stabilization of interaction effects in the absence of all other evolutionary forces. This means that if
+the baseline effects eX and eY are large enough, the interaction will remain a mutualism even as trait values escalate
+indeﬁnitely toward larger values. Furthermore, this result
+implies novel interactions that begin as a parasitism may
+evolve toward mutualism when mediated by an offsetmatching mechanism. Figure 3 illustrates these results by
+tracking the evolution of overall interaction effects IX and
+IY for two scenarios.
+Inspection of equations (11) reveals that the minimal
+baseline beneﬁts eX and eY needed to preserve mutualism
+increase logistically with the selection strength of the partner species. For example, the minimal value of eX required
+to maintain beneﬁts for species X does not increase indefinitely with BY. In contrast, we see that these minimal quantities do increase indeﬁnitely with the selection strengths
+of their focal species, the optimal offset d, and phenotypic
+
+Figure 3: Time-series plots of overall interaction effects IX and IY under two scenarios. Solid lines represent the overall interaction effect on
+species X, and dashed lines represent the overall interaction effect on species Y. The horizontal dotted lines mark the threshold determining
+the interaction type. When IX or IY is below this line, the interaction is an antagonism. The left plot illustrates a mutualism that is preserved
+in spite of indeﬁnitely escalating trait values. The right plot illustrates a novel parasitism that experiences an evolutionary switch to mutualism. Parameter values for the left plot are D0 p 0, d p 100, BX p 1e 2 5, BY p 5e 2 5, eX p 2, eY p 3, and GX p GY p j2X p j2Y p 10.
+Parameter values for the right plot are D0 p 500, d p 0:5, BX p 1e 2 5, BY p 1:5e 2 5, eX p 2, eY p 1, and GX p GY p j2X p j2Y p 10.
+
+202
+
+The American Naturalist
+
+variances j2X and j2Y . To summarize, mutualisms mediated
+by an offset-matching mechanism are more likely to dissolve into parasitisms when ﬁtness is maximized for large
+offsets, when either species maintains a sufﬁciently large
+trait variance, or when either species experiences strong
+selection.
+Discussion
+We have shown that mutualistic interactions can be preserved in the face of indeﬁnite coevolutionary trait escalation. However, this result depends on the mechanism mediating interspeciﬁc interactions. In particular, we found
+that interactions mediated by a weak selection approximation of the trait-differences mechanism, which has
+been traditionally employed to model trait escalation in
+coevolving antagonisms (Toju and Sota 2006; Nuismer
+et al. 2007), encourages the dissolution of mutualism into
+parasitism. In contrast, employing the recently introduced
+offset-matching mechanism (Week and Nuismer 2019),
+which generalizes the classical trait-matching mechanism
+proposed by Kiester et al. (1984), we found that mutualistic
+interactions are preserved when the baseline beneﬁts of the
+interaction are sufﬁciently large (eqq. [11]).
+Our analyses are particularly relevant for the study of
+pairwise plant-pollinator interactions. Indeed, the primary
+motivation for this work is the hypothesis that exaggerated
+ﬂoral tubes and pollinator proboscises observed in the wild
+are explained by pairwise coevolutionary races. Plantpollinator interactions provide classical examples of mutualisms in which the plant provides a nutritional or metabolic resource to the pollinator in trade for movement of
+pollen. Under the trait-differences mechanism, our results
+imply that the difference between average proboscis length
+and average ﬂoral tube depth will increase indeﬁnitely,
+leading to one of two outcomes: (1) ﬂoral tube depth will
+eventually exceed pollinator proboscis length, such that
+the pollinator is essentially tricked into transferring pollen
+without access to any reward, or (2) pollinator proboscis
+length will eventually exceed ﬂoral tube depth, such that
+the pollinator drains the ﬂower of nectar without transferring pollen. In both of these cases, one species is eventually
+exploited while the other continues to proﬁt from the interaction. Quantitatively, this implies that the overall interaction effect on absolute ﬁtness becomes negative for
+one of the species and hence results in a host-parasite
+relationship.
+Alternatively, results based on the offset-matching mechanism, which assumes that ﬁtness is maximized at a particular offset instead of indeﬁnitely increasing or decreasing
+with the difference in mean trait values, imply that this
+parasitic fate is not universal among mutualistic pairs engaged in a coevolutionary arms race. Returning to the plant-
+
+pollinator example given above, the offset-matching mechanism implies that the difference in average proboscis
+length and average ﬂoral tube depth will converge to a stable equilibrium proportional to the optimal offset, even
+though these mean traits will themselves continue to escalate indeﬁnitely. In this case, there are three conditions required to maintain the mutualism: (1) the optimal offset
+must be sufﬁciently small, (2) biotic selection cannot be
+too strong (as determined by eX and eY; see eqq. [11]),
+and (3) local phenotypic variances cannot be too large. If
+all three of these conditions are satisﬁed, then the phenotypic distribution of each species remains in a range that
+beneﬁts the other species, even though these ranges are
+dynamic.
+One hypothesized mechanism for the evolutionary
+breakdown of mutualism is the evolution of cheating individuals that exploit the beneﬁts of the interaction without reciprocation (Bronstein 2001; Ferrière et al. 2007).
+To understand whether this mechanism explains the evolutionary switch from mutualism to parasitism predicted
+by the trait-differences model, we can apply the deﬁnition
+of cheating provided by Jones et al. (2015). According to
+this deﬁnition, cheaters must satisfy two conditions. First,
+a cheater must enjoy greater ﬁtness than the mean ﬁtness
+of their focal population. Second, a cheater must decrease
+the ﬁtness of their partner below the average ﬁtness of the
+partner population. Since we assume that individuals encounter each other at random, individuals are expected to
+cheat under the trait-differences model whenever their
+trait value exceeds the average trait value of their focal
+population. Furthermore, since we assume that traits are
+symmetrically distributed, half of the individuals in each
+species are expected to cheat at any stage of the coevolutionary arms race. In particular, this implies that the mechanism of mutualistic breakdown studied here is not explained
+by the evolution of cheaters when using the deﬁnition provided by Jones et al. (2015). However, if we deﬁne cheating
+using absolute ﬁtness instead of relative ﬁtness, the frequency of cheating in the eventual parasitic species would
+evolve toward unity. Hence, under an alternative deﬁnition of cheating, this result is equivalent to an explanation
+of mutualistic breakdown by cheating. Thus, whether the
+mechanism of mutualistic breakdown studied here is distinct from the evolution of cheating depends on the deﬁnition of cheating employed.
+Although our mathematical analyses shed light on the
+outcomes of pairwise interactions, plant-pollinator interactions based on a trade between pollen movement and
+food tend to be generalized (Waser et al. 1996; Vázquez
+and Aizen 2004). These interactions may therefore vary
+as a result of their ecological context. To understand the
+dynamics of evolutionary interaction switching in the
+presence of multispeciﬁc interactions, the analytical methods
+
+Mutualistic Arms Races
+developed here can be extended to models of coevolving
+mutualistic networks (e.g., Medeiros et al. 2018). In the
+case that a subset of the community engages in a multispeciﬁc coevolutionary arms race, the species left behind
+are at risk of becoming parasitized. For example, in the
+ﬂy-ﬂower pollination system investigated by Pauw et al.
+(2009), the long-proboscid ﬂy Moegistorhynchus longirostris
+is known to visit at least 20 long-tubed ﬂower species
+(Manning and Goldblatt 1997). This plant guild includes
+Lapeirousia anceps, which is the most abundant and widespread member (Pauw et al. 2009). The exaggerated nectar
+tube of L. anceps exhibits strong spatial correlations with
+the proboscis length of M. longirostris. By interfacing these
+patterns of trait exaggeration and spatial correlation with
+coevolutionary theory, Week and Nuismer (2019) were
+able to provide quantitative evidence for a coevolutionary
+arms race between the two species. However, in the course
+of this arms race it is likely that M. longirostris imposed
+and received selection pressures from other members of
+the long-tubed plant guild, leading to a compartment of
+species engaged in a coevolutionary arms race (Pauw et al.
+2009). As a consequence, mutualistic interactions between
+M. longirostris and ﬂower species outside this compartment
+are at risk of disintegrating into parasitisms.
+A likely antagonism that may have been produced indirectly as a by-product of coevolutionary escalation as
+described above occurs between M. longirostris and the
+iris Babiana thunbergii. Moegistorhynchus longirostris has
+been observed to frequently visit ﬂowers of B. thunbergii,
+which are usually pollinated by malachite sunbirds and
+have a much shorter and wider ﬂoral morphology. Pauw
+et al. (2009) noted that M. longirostris rarely contacts the
+reproductive organs of B. thunbergii while draining its
+nectar and hence acts as a parasitic nectar thief. In the case
+that B. thunbergii originally proﬁted from visits of M. longirostris, before the evolution of extreme proboscis lengths,
+external sources of selection, such as those due to sunbirds,
+may have countered selection for ﬂoral elongation. In this
+case, the disintegration of mutualism follows a different
+path from what we have described above for pairwise interactions. Instead of direct pairwise interactions leading
+to an intimate race for exaggerated trait values, indirect coevolutionary effects due to interactions with other community members impose inconsistent patterns of selection
+for each member of the focal pair. A recent theoretical result supports this view by suggesting that such indirect effects are as important for shaping coevolutionary dynamics in ecological networks as direct effects (Guimarães et al.
+2017).
+For the sake of analytical tractability and clarity of results, we have kept our analysis as simple as possible while
+recognizing that our assumptions are unlikely to be satisﬁed literally in real biological systems. For instance, ig-
+
+203
+
+noring stabilizing selection implies the absence of wellestablished physiological and anatomical constraints that
+prevent indeﬁnite runaway coevolution. Similarly, we have
+ignored the possible depletion of heritable variation and
+the inﬂuence of abundance dynamics, and in the case of
+trait differences we considered only weak coevolution. Although these assumptions come at the cost of biological
+realism, they have allowed us to understand and illuminate the tendency of trait differences and offset matching
+to motivate or resist evolutionary transitions from mutualism to parasitism. Hence, our results should be interpreted
+in much the same way as results obtained from experiments conducted in controlled but biologically unrealistic
+environments. It would therefore be premature, for example,
+to combine our results with the argument made by Frederickson (2017)—namely, that parasitisms are more likely to experience a switch to mutualism than vice versa—to conclude
+that mutualistic arms races observed in the wild tend to be
+mediated by offset mechanisms. Indeed, mutualism in the
+face of an arms race may instead be explained by combining
+the trait-differences mechanism with abiotic stabilizing selection. Thus, to predict and understand when wild populations of coevolving mutualists are doomed to an inevitable
+parasitic fate, we must confront these complications directly
+and with more complex and biologically realistic models.
+Of the large set of processes we have controlled for, perhaps the most important are eco-evolutionary feedbacks.
+Future models using our framework can incorporate the
+effects of eco-evolutionary feedbacks by replacing the assumption that each individual interacts with a single individual of their partner species with the assumption that
+individual interaction frequencies depend on abundances.
+As an example, assuming that each individual of species X
+interacts once with each individual of species Y (and vice
+versa) yields baseline beneﬁts eX and eY and strengths of biotic selection BX and BY that depend linearly on the abundance of the partner species. Hence, this assumption leads
+to generalizations of classical mass action models of population dynamics, such as the Lotka-Volterra predatorprey model (Lotka 1925; Volterra 1926), that allow for
+the evolutionary switching of interaction type in tandem
+with the ﬂuctuations of abundance. In this case, the overall
+interaction effects can be expressed as I X p aX N Y and
+I Y p aY N X , where aX and aY represent the interaction
+coefﬁcients corresponding to species X and Y, respectively.
+In principle, the same approach developed here to analyze
+evolutionary interaction switching can be directly extended
+to this more complicated scenario.
+Conclusion
+We have introduced a novel approach to model the evolutionary switching of interaction types by tracking the
+
+204
+
+The American Naturalist
+
+evolution of absolute ﬁtness in addition to trait dynamics.
+Applying our approach to two models of coevolutionary
+trait escalation inspired by plant-pollinator interactions
+revealed that mutualisms mediated by a bigger-is-better
+(i.e., trait-differences) mechanism inevitably dissolve into
+parasitism. In contrast, our results show that mutualisms
+mediated by an offset-matching mechanism, a generalization of classical trait matching, are preserved when the
+baseline beneﬁts of the interaction (i.e., the components
+that do not vary with trait values) are large enough. Our
+results are based on minimal models of mean trait coevolution determined by different interaction mechanisms
+and hence ignore the effects of external evolutionary processes and eco-evolutionary feedbacks. Predicting when
+wild populations of mutualists are prone to disintegration
+via coevolutionary arms races will likely require more complex models that account for a variety of processes, such
+as abiotic stabilizing selection, gene ﬂow, random genetic
+drift, and multispeciﬁc interactions. Future work applying
+the analytical approach developed here to models that account for realistic sets of evolutionary processes can enrich
+our understanding of the dynamical nature of ecological
+relationships observed in the wild and produce novel statistical tools to forecast the evolutionary stability of ecological relationships.
+Acknowledgments
+We thank Editor Jennifer A. Lau, Associate Editor Adam
+M. Siepielski, and two anonymous reviewers for their insightful and encouraging comments.
+Statement of Authorship
+B.W. conceived the project, formulated the model, performed the analysis, produced the ﬁgures, and wrote the
+original draft and revision. S.L.N. provided supervision,
+reviewed and edited the manuscript, and secured funding.
+Data and Code Availability
+There is no code or data for this article.
+Literature Cited
+Anderson, B., and S. D. Johnson. 2007. The geographical mosaic of
+coevolution in a plant-pollinator mutualism. Evolution 62:220–
+225.
+———. 2009. Geographical covariation and local convergence of
+ﬂower depth in a guild of ﬂy-pollinated plants. New Phytologist
+182:533–540.
+Anderson, B., J. S. Terblanche, and A. G. Ellis. 2010. Predictable patterns of trait mismatches between interacting plants and insects.
+BMC Evolutionary Biology 10:204.
+
+Benkman, C. W., T. L. Parchman, A. Favis, and A. M. Siepielski. 2003.
+Reciprocal selection causes a coevolutionary arms race between
+crossbills and lodgepole pine. American Naturalist 162:182–194.
+Brodie, E. D., III, C. R. Feldman, C. T. Haniﬁn, J. E. Motychak, D. G.
+Mulcahy, B. L. Williams, and E. D. Brodie Jr. 2005. Parallel arms
+races between garter snakes and newts involving tetrodotoxin as
+the phenotypic interface of coevolution. Journal of Chemical
+Ecology 31:343–356.
+Bronstein, J. L. 1994. Conditional outcomes in mutualistic interactions. Trends in Ecology and Evolution 9:214–217.
+———. 2001. The exploitation of mutualisms. Ecology Letters 4:277–
+287.
+Darwin, C. 1862. On the various contrivances by which British and
+foreign orchids are fertilised by insects: and on the good effects of
+intercrossing. J. Murray, London.
+de Andreazzi, C. S., J. Astegiano, and P. R. Guimarães. 2019. Coevolution by different functional mechanisms modulates the structure and dynamics of antagonistic and mutualistic networks.
+Oikos 129:224–237.
+Feller, W. 1951. Diffusion processes in genetics. Pages 227–246
+in Proceedings of the Second Berkeley Symposium on Mathematical Statistics and Probability. University of California Press,
+Berkeley.
+Ferrière, R., M. Gauduchon, and J. L. Bronstein. 2007. Evolution
+and persistence of obligate mutualists and exploiters: competition for partners and evolutionary immunization. Ecology Letters 10:115–126.
+Frederickson, M. E. 2017. Mutualisms are not on the verge of breakdown. Trends in Ecology and Evolution 32:727–734.
+Gavrilets, S. 1997. Coevolutionary chase in exploiter-victim systems
+with polygenic characters. Journal of Theoretical Biology 186:527–
+534.
+Gavrilets, S., and A. Hastings. 1998. Coevolutionary chase in twospecies systems with applications to mimicry. Journal of Theoretical Biology 191:415–427.
+Gomulkiewicz, R., S. L. Nuismer, and J. N. Thompson. 2003. Coevolution in variable mutualisms. American Naturalist 162:S80–
+S93.
+Guimarães, P. R., M. M. Pires, P. Jordano, J. Bascompte, and J. N.
+Thompson. 2017. Indirect effects drive coevolution in mutualistic networks. Nature 550:511–514.
+Inouye, D. W. 1980. The terminology of ﬂoral larceny. Ecology
+61:1251–1253.
+Jones, E. I., M. E. Afkhami, E. Akçay, J. L. Bronstein, R. Bshary, M. E.
+Frederickson, K. D. Heath, et al. 2015. Cheaters must prosper:
+reconciling theoretical and empirical perspectives on cheating
+in mutualism. Ecology Letters 18:1270–1284.
+Kiester, A. R., R. Lande, and D. W. Schemske. 1984. Models of coevolution and speciation in plants and their pollinators. American Naturalist 124:220–243.
+Lotka, A. 1925. Elements of physical biology. Williams & Wilkins,
+Baltimore.
+Manning, J. C., and P. Goldblatt. 1997. The Moegistorhynchus longirostris (Diptera: Nemestrinidae) pollination guild: long-tubed
+ﬂowers and a specialized long-proboscid ﬂy pollination system in
+southern Africa. Plant Systematics and Evolution 206:51–69.
+Medeiros, L. P., G. Garcia, J. N. Thompson, and P. R. Guimarães.
+2018. The geographic mosaic of coevolution in mutualistic networks. Proceedings of the National Academy of Sciences of the
+USA 115:12017–12022.
+
+Mutualistic Arms Races
+Muchhala, N., and J. D. Thomson. 2010. Fur versus feathers: pollen
+delivery by bats and hummingbirds and consequences for pollen
+production. American Naturalist 175:717–726.
+Nuismer, S. L. 2017. Introduction to coevolutionary theory. W. H.
+Freeman, San Francisco.
+Nuismer, S. L., R. Gomulkiewicz, and M. T. Morgan. 2003. Coevolution in temporally variable environments. American Naturalist 162:195–204.
+Nuismer, S. L., B. J. Ridenhour, and B. P. Oswald. 2007. Antagonistic coevolution mediated by phenotypic differences between
+quantitative traits. Evolution 61:1823–1834.
+Nuismer, S. L., J. N. Thompson, and R. Gomulkiewicz. 1999. Gene
+ﬂow and geographically structured coevolution. Proceedings of
+the Royal Society B 266:605–609.
+Nuismer, S. L., and B. Week. 2019. Approximate Bayesian estimation of coevolutionary arms races. PLoS Computational Biology
+15:e1006988.
+Otto, S. P., and T. Day. 2011. A biologist’s guide to mathematical
+modeling in ecology and evolution. Princeton University Press,
+Princeton, NJ.
+Pauw, A., J. Stofberg, and R. J. Waterman. 2009. Flies and ﬂowers
+in Darwin’s race. Evolution 63:268–279.
+Thompson, J. N. 2014. Interaction and coevolution. University of
+Chicago Press, Chicago.
+
+205
+
+Thompson, J. N., and O. Pellmyr. 1992. Mutualism with pollinating
+seed parasites amid co-pollinators: constraints on specialization.
+Ecology 73:1780–1791.
+Toju, H., and T. Sota. 2006. Adaptive divergence of scaling relationships mediates the arms race between a weevil and its host
+plant. Biology Letters 2:539–542.
+Vázquez, D. P., and M. A. Aizen. 2004. Asymmetric specialization: a
+pervasive feature of plant-pollinator interactions. Ecology 85:1251–
+1257.
+Volterra, V. 1926. Fluctuations in the abundance of a species considered mathematically. Nature 118:558–560.
+Wallace, A. R. 1867. Creation by law. Quarterly Journal of Science
+4:470–488.
+Waser, N. M., L. Chittka, M. V. Price, N. M. Williams, and J. Ollerton.
+1996. Generalization in pollination systems, and why it matters.
+Ecology 77:1043–1060.
+Week, B., and S. L. Nuismer. 2019. The measurement of coevolution in the wild. Ecology Letters 22:717–725.
+Week, B., S. L. Nuismer, L. J. Harmon, and S. M. Krone. 2021. A white
+noise approach to evolutionary ecology. Journal of Theoretical Biology 521:110660.
+Associate Editor: Adam M. Siepielski
+Editor: Jennifer A. Lau
+
+“The habits of the species are those of the Centrarchidæ generally, modiﬁed in so far as being merely more of a mud-loving species. So
+purely a mud-dwelling ﬁsh are they that we have frequently found them in water so shallow, that they marked the mud with their pectoral
+ﬁns in swimming; preferring such shallow water, with the mud, to that which was deeper, to which they had access, because it was over a
+stony bed.” Figured: “Spotted Sun-ﬁsh (Enneacanthus guttatus).” From “Mud-Loving Fishes” by Charles C. Abbott (The American Naturalist, 1870, 4:385–391).
+
+

@@ -1,0 +1,830 @@
+<!DOCTYPE html><html>
+<head>
+<title></title>
+<style type="text/css">
+<!--
+.xflip {
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: fliph;
+}
+.yflip {
+    -moz-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: flipv;
+}
+.xyflip {
+    -moz-transform: scaleX(-1) scaleY(-1);
+    -webkit-transform: scaleX(-1) scaleY(-1);
+    -o-transform: scaleX(-1) scaleY(-1);
+    transform: scaleX(-1) scaleY(-1);
+    filter: fliph + flipv;
+}
+-->
+</style>
+</head>
+<body>
+<a name=1></a><img src="nuismer2019-1_1.png"/><br/>
+<img src="nuismer2019-1_2.png"/><br/>
+RESEARCH&#160;ARTICLE<br/>
+Approximate&#160;Bayesian&#160;estimation&#160;of<br/>coevolutionary&#160;arms&#160;races<br/>
+<b>Scott&#160;L.&#160;Nuismer&#160;1,2</b><br/>
+<b>2</b><br/>
+<a href="http://orcid.org/0000-0001-9817-0056"><b>ID</b></a><br/>
+<b>*,&#160;Bob&#160;Week<a href="http://orcid.org/0000-0001-7687-4757">ID</a></b><br/>
+<b>1&#160;</b>Department&#160;of&#160;Biological&#160;Sciences,&#160;University&#160;of&#160;Idaho,&#160;Moscow,&#160;Idaho,&#160;United&#160;States&#160;of&#160;America,<br/><b>2&#160;</b>Bioinformatics&#160;and&#160;Computational&#160;Biology,&#160;University&#160;of&#160;Idaho,&#160;Moscow,&#160;Idaho,&#160;United&#160;States&#160;of&#160;America<br/>
+*&#160;snuismer@uidaho.edu<br/>
+Abstract<br/>
+<a href="http://crossmark.crossref.org/dialog/?doi=10.1371/journal.pcbi.1006988&domain=pdf&date_stamp=2019-04-25">a1111111111<br/>a1111111111</a><br/>
+Exaggerated&#160;traits&#160;involved&#160;in&#160;species&#160;interactions&#160;have&#160;long&#160;captivated&#160;the&#160;imagination&#160;of<br/>
+<a href="http://crossmark.crossref.org/dialog/?doi=10.1371/journal.pcbi.1006988&domain=pdf&date_stamp=2019-04-25">a1111111111</a><br/>
+evolutionary&#160;biologists&#160;and&#160;inspired&#160;the&#160;durable&#160;metaphor&#160;of&#160;the&#160;coevolutionary&#160;arms&#160;race.<br/>
+<a href="http://crossmark.crossref.org/dialog/?doi=10.1371/journal.pcbi.1006988&domain=pdf&date_stamp=2019-04-25">a1111111111</a><br/>
+Despite&#160;decades&#160;of&#160;research,&#160;however,&#160;we&#160;have&#160;only&#160;a&#160;handful&#160;of&#160;examples&#160;where&#160;recipro-<br/>
+<a href="http://crossmark.crossref.org/dialog/?doi=10.1371/journal.pcbi.1006988&domain=pdf&date_stamp=2019-04-25">a1111111111</a><br/>
+cal&#160;coevolutionary&#160;change&#160;has&#160;been&#160;rigorously&#160;established&#160;as&#160;the&#160;cause&#160;of&#160;trait&#160;exaggera-<br/>
+tion.&#160;Support&#160;for&#160;a&#160;coevolutionary&#160;mechanism&#160;remains&#160;elusive&#160;because&#160;we&#160;lack&#160;generally<br/>
+applicable&#160;tools&#160;for&#160;quantifying&#160;the&#160;intensity&#160;of&#160;coevolutionary&#160;selection.&#160;Here&#160;we&#160;develop&#160;an<br/>
+approximate&#160;Bayesian&#160;computation&#160;(ABC)&#160;approach&#160;for&#160;estimating&#160;the&#160;intensity&#160;of&#160;coevolu-<br/>
+OPEN&#160;ACCESS<br/>
+tionary&#160;selection&#160;using&#160;population&#160;mean&#160;phenotypes&#160;of&#160;traits&#160;mediating&#160;interspecific&#160;interac-<br/>
+<b>Citation:&#160;</b>Nuismer&#160;SL,&#160;Week&#160;B&#160;(2019)&#160;Approximate<br/>
+tions.&#160;Our&#160;approach&#160;relaxes&#160;important&#160;assumptions&#160;of&#160;a&#160;previous&#160;maximum&#160;likelihood<br/>
+Bayesian&#160;estimation&#160;of&#160;coevolutionary&#160;arms&#160;races.<br/>
+PLoS&#160;Comput&#160;Biol&#160;15(4):&#160;e1006988.&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.</a><br/>
+approach&#160;by&#160;allowing&#160;gene&#160;flow&#160;among&#160;populations,&#160;variable&#160;abiotic&#160;environments,&#160;and<br/>
+<a href="https://doi.org/10.1371/journal.pcbi.1006988">org/10.1371/journal.pcbi.1006988</a><br/>
+strong&#160;coevolutionary&#160;selection.&#160;Using&#160;simulated&#160;data,&#160;we&#160;show&#160;that&#160;our&#160;ABC&#160;method&#160;accu-<br/>
+<b>Editor:&#160;</b>Daniel&#160;B.&#160;Stouffer,&#160;University&#160;of&#160;Canterbury,<br/>
+rately&#160;infers&#160;the&#160;strength&#160;of&#160;coevolutionary&#160;selection&#160;if&#160;reliable&#160;estimates&#160;are&#160;available&#160;for<br/>
+NEW&#160;ZEALAND<br/>
+key&#160;background&#160;parameters&#160;and&#160;ten&#160;or&#160;more&#160;populations&#160;are&#160;sampled.&#160;Applying&#160;our<br/>
+<b>Received:&#160;</b>October&#160;24,&#160;2018<br/>
+approach&#160;to&#160;the&#160;putative&#160;arms&#160;race&#160;between&#160;the&#160;plant&#160;<i>Camellia&#160;japonica&#160;</i>and&#160;its&#160;seed&#160;preda-<br/>
+tory&#160;weevil,&#160;<i>Curculio&#160;camelliae</i>,&#160;provides&#160;support&#160;for&#160;a&#160;coevolutionary&#160;hypothesis&#160;but&#160;fails&#160;to<br/>
+<b>Accepted:&#160;</b>March&#160;29,&#160;2019<br/>
+preclude&#160;the&#160;possibility&#160;of&#160;unilateral&#160;evolution.&#160;Comparing&#160;independently&#160;estimated&#160;selection<br/>
+<b>Published:&#160;</b>April&#160;15,&#160;2019<br/>
+gradients&#160;acting&#160;on&#160;Camellia&#160;pericarp&#160;thickness&#160;with&#160;values&#160;simulated&#160;by&#160;our&#160;model&#160;reveals<br/>
+<b>Copyright:&#160;</b>©&#160;2019&#160;Nuismer,&#160;Week.&#160;This&#160;is&#160;an&#160;open<br/>
+a&#160;correlation&#160;between&#160;predicted&#160;and&#160;observed&#160;selection&#160;gradients&#160;of&#160;0.941.&#160;The&#160;strong<br/>
+access&#160;article&#160;distributed&#160;under&#160;the&#160;terms&#160;of&#160;the<br/>
+agreement&#160;between&#160;predicted&#160;and&#160;observed&#160;selection&#160;gradients&#160;validates&#160;our&#160;method.<br/>
+<a href="http://creativecommons.org/licenses/by/4.0/">Creative&#160;Commons&#160;Attribution&#160;License,&#160;</a>which<br/>
+permits&#160;unrestricted&#160;use,&#160;distribution,&#160;and<br/>
+reproduction&#160;in&#160;any&#160;medium,&#160;provided&#160;the&#160;original<br/>
+author&#160;and&#160;source&#160;are&#160;credited.<br/>
+<b>Data&#160;Availability&#160;Statement:&#160;</b>All&#160;relevant&#160;data&#160;are<br/>
+Author&#160;summary<br/>
+within&#160;the&#160;manuscript&#160;and&#160;its&#160;Supporting<br/>
+Information&#160;files.<br/>
+Exaggerated&#160;traits&#160;involved&#160;in&#160;species&#160;interactions,&#160;such&#160;as&#160;extreme&#160;running&#160;speeds&#160;in<br/>predator&#160;and&#160;prey,&#160;have&#160;long&#160;captivated&#160;the&#160;imagination&#160;of&#160;evolutionary&#160;biologists&#160;and<br/>
+<b>Funding:&#160;</b>Funding&#160;was&#160;provided&#160;by&#160;US&#160;National<br/>
+inspired&#160;the&#160;durable&#160;metaphor&#160;of&#160;the&#160;coevolutionary&#160;arms&#160;race.&#160;Despite&#160;decades&#160;of<br/>
+Science&#160;Foundation&#160;grant&#160;DEB&#160;1450653&#160;to&#160;SLN<br/>
+(<a href="https://www.nsf.gov/div/index.jsp?div=DEB">https://www.nsf.gov/div/index.jsp?div=DEB).&#160;</a>The<br/>
+research,&#160;however,&#160;we&#160;have&#160;only&#160;a&#160;handful&#160;of&#160;examples&#160;where&#160;coevolution&#160;has&#160;been&#160;rigor-<br/>
+funders&#160;had&#160;no&#160;role&#160;in&#160;study&#160;design,&#160;data&#160;collection<br/>
+ously&#160;established&#160;as&#160;the&#160;cause&#160;of&#160;trait&#160;exaggeration.&#160;The&#160;reason&#160;support&#160;for&#160;a&#160;coevolution-<br/>
+and&#160;analysis,&#160;decision&#160;to&#160;publish,&#160;or&#160;preparation&#160;of<br/>
+ary&#160;mechanism&#160;remains&#160;elusive&#160;is&#160;that&#160;we&#160;lack&#160;generally&#160;applicable&#160;tools&#160;for&#160;quantifying<br/>
+the&#160;manuscript.<br/>
+the&#160;intensity&#160;of&#160;coevolution.&#160;Here&#160;we&#160;develop&#160;a&#160;computational&#160;approach&#160;for&#160;estimating<br/>
+<b>Competing&#160;interests:&#160;</b>The&#160;authors&#160;have&#160;declared<br/>
+the&#160;intensity&#160;of&#160;coevolutionary&#160;selection&#160;(ABC&#160;Coevolution)&#160;and&#160;illustrate&#160;its&#160;use&#160;by<br/>
+that&#160;no&#160;competing&#160;interests&#160;exist.<br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+1&#160;/&#160;21<br/>
+<hr/>
+<a name=2></a><img src="nuismer2019-2_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+applying&#160;the&#160;method&#160;to&#160;a&#160;well-studied&#160;interaction&#160;between&#160;the&#160;plant&#160;<i>Camellia&#160;japonica<br/></i>and&#160;its&#160;seed&#160;predatory&#160;weevil,&#160;<i>Curculio&#160;camelliae</i>.&#160;Our&#160;results&#160;provide&#160;support&#160;for&#160;a&#160;coevo-<br/>lutionary&#160;hypothesis&#160;but&#160;fail&#160;to&#160;preclude&#160;the&#160;possibility&#160;of&#160;unilateral&#160;evolution.<br/>
+<b>Introduction</b><br/>
+Few&#160;metaphors&#160;have&#160;captured&#160;the&#160;interest&#160;of&#160;evolutionary&#160;biologists&#160;and&#160;ecologists&#160;more&#160;than<br/>the&#160;coevolutionary&#160;arms&#160;race&#160;<a href="nuismer2019s.html#18">[1</a>].&#160;Whether&#160;between&#160;species,&#160;sexes,&#160;individuals,&#160;or&#160;genes,&#160;the<br/>idea&#160;of&#160;perpetually&#160;and&#160;reciprocally&#160;escalating&#160;defenses&#160;and&#160;counter-defenses&#160;has&#160;inspired&#160;an<br/>enormous&#160;amount&#160;of&#160;research&#160;[e.g.,&#160;<a href="nuismer2019s.html#18">2</a>,&#160;<a href="nuismer2019s.html#19">3–21].&#160;</a>As&#160;a&#160;result,&#160;we&#160;now&#160;have&#160;convincing&#160;evidence<br/>that&#160;arms&#160;races&#160;occur&#160;both&#160;within&#160;and&#160;between&#160;species,&#160;at&#160;least&#160;in&#160;some&#160;well-studied&#160;cases.<br/>What&#160;we&#160;know&#160;with&#160;much&#160;less&#160;certainty,&#160;however,&#160;is&#160;just&#160;how&#160;reciprocal,&#160;common,&#160;and&#160;intense<br/>evolutionary&#160;arms&#160;races&#160;tend&#160;to&#160;be&#160;across&#160;the&#160;diversity&#160;of&#160;life&#160;as&#160;a&#160;whole.<br/>
+Our&#160;overall&#160;understanding&#160;of&#160;evolutionary&#160;arms&#160;races&#160;is&#160;limited&#160;by&#160;existing&#160;approaches&#160;that<br/>
+are&#160;labor&#160;intensive&#160;and&#160;that&#160;generally&#160;yield&#160;qualitative&#160;rather&#160;than&#160;quantitative&#160;estimates&#160;for<br/>the&#160;strength&#160;of&#160;reciprocal&#160;selection.&#160;For&#160;instance,&#160;studies&#160;exploring&#160;arms&#160;races&#160;at&#160;the&#160;level&#160;of<br/>genes&#160;often&#160;rely&#160;on&#160;classical&#160;population&#160;genetic&#160;tools&#160;that&#160;identify&#160;signatures&#160;of&#160;positive&#160;selec-<br/>tion&#160;using&#160;ratios&#160;of&#160;synonymous&#160;to&#160;non-synonymous&#160;substitutions,&#160;patterns&#160;of&#160;linkage&#160;disequi-<br/>librium,&#160;or&#160;shifts&#160;in&#160;the&#160;site&#160;frequency&#160;spectra&#160;[<a href="nuismer2019s.html#19">22</a>,&#160;<a href="nuismer2019s.html#20">23</a>].&#160;Although&#160;the&#160;results&#160;of&#160;such&#160;studies&#160;can<br/>be&#160;consistent&#160;with&#160;a&#160;coevolutionary&#160;arms&#160;race&#160;(e.g.,&#160;positive&#160;selection&#160;acting&#160;on&#160;putatively<br/>interacting&#160;host&#160;and&#160;pathogen&#160;genes),&#160;the&#160;degree&#160;of&#160;reciprocity&#160;between&#160;the&#160;species&#160;cannot&#160;be<br/>easily&#160;ascertained&#160;and&#160;alternative&#160;explanations&#160;for&#160;parallel&#160;positive&#160;selection&#160;are&#160;often&#160;plausible.<br/>Similar&#160;issues&#160;plague&#160;studies&#160;investigating&#160;arms&#160;races&#160;at&#160;the&#160;phenotypic&#160;level.&#160;Such&#160;studies<br/>often&#160;rely&#160;on&#160;fossil&#160;times&#160;series&#160;<a href="nuismer2019s.html#20">[24–26],&#160;</a>the&#160;phylogenetic&#160;distribution&#160;of&#160;traits&#160;[<a href="nuismer2019s.html#19">13</a>,&#160;<a href="nuismer2019s.html#20">27</a>,&#160;<a href="nuismer2019s.html#20">28],&#160;</a>or<br/>relationships&#160;between&#160;traits&#160;over&#160;space/time&#160;<a href="nuismer2019s.html#18">[2,&#160;</a><a href="nuismer2019s.html#19">19</a>,&#160;<a href="nuismer2019s.html#20">29–32].&#160;</a>As&#160;with&#160;the&#160;genetic&#160;approaches,<br/>these&#160;phenotypic&#160;studies&#160;can&#160;provide&#160;evidence&#160;consistent&#160;with&#160;a&#160;coevolutionary&#160;arms&#160;race<br/>(e.g.,&#160;parallel&#160;patterns&#160;of&#160;trait&#160;escalation&#160;in&#160;the&#160;fossil&#160;record,&#160;correlated&#160;traits&#160;among&#160;popula-<br/>tions,&#160;etc.),&#160;but&#160;are&#160;generally&#160;unable&#160;to&#160;quantify&#160;the&#160;extent&#160;of&#160;reciprocity&#160;or&#160;rule&#160;out&#160;alternative<br/>explanations&#160;for&#160;parallel&#160;patterns&#160;of&#160;escalation&#160;in&#160;interacting&#160;species.&#160;Thus,&#160;we&#160;are&#160;currently&#160;in<br/>a&#160;situation&#160;where&#160;we&#160;have&#160;tools&#160;that&#160;can&#160;be&#160;used&#160;to&#160;identify&#160;parallel&#160;patterns&#160;of&#160;genetic&#160;or&#160;phe-<br/>notypic&#160;escalation&#160;in&#160;interacting&#160;species&#160;pairs,&#160;but&#160;few&#160;tools&#160;that&#160;can&#160;robustly&#160;estimate&#160;the<br/>degree&#160;of&#160;reciprocal&#160;or&#160;coevolutionary&#160;selection&#160;underlying&#160;these&#160;patterns&#160;of&#160;parallel&#160;evolution-<br/>ary&#160;change.<br/>
+Recently,&#160;we&#160;developed&#160;a&#160;maximum&#160;likelihood&#160;approach&#160;that&#160;begins&#160;to&#160;fill&#160;this&#160;gap&#160;in&#160;the<br/>
+toolkit&#160;available&#160;for&#160;investigating&#160;coevolutionary&#160;arms&#160;races&#160;[<a href="nuismer2019s.html#20">33].&#160;</a>This&#160;approach&#160;estimates&#160;the<br/>strength&#160;of&#160;coevolutionary&#160;selection&#160;between&#160;a&#160;pair&#160;of&#160;interacting&#160;species&#160;using&#160;the&#160;spatial&#160;dis-<br/>tribution&#160;of&#160;traits&#160;involved&#160;in&#160;the&#160;interaction.&#160;In&#160;addition&#160;to&#160;estimating&#160;the&#160;strength&#160;of&#160;coevolu-<br/>tionary&#160;selection,&#160;this&#160;approach&#160;opens&#160;the&#160;door&#160;to&#160;likelihood&#160;ratio&#160;tests&#160;that&#160;allow&#160;the&#160;relative<br/>support&#160;for&#160;coevolutionary&#160;and&#160;non-coevolutionary&#160;hypotheses&#160;to&#160;be&#160;evaluated.&#160;Although&#160;fast<br/>and&#160;efficient,&#160;this&#160;method&#160;relies&#160;on&#160;a&#160;handful&#160;of&#160;important&#160;assumptions.&#160;Specifically,&#160;this<br/>approach&#160;assumes&#160;interactions&#160;do&#160;not&#160;depend&#160;too&#160;strongly&#160;on&#160;the&#160;traits&#160;of&#160;the&#160;interacting&#160;indi-<br/>viduals.&#160;In&#160;addition,&#160;the&#160;maximum&#160;likelihood&#160;approach&#160;ignores&#160;gene&#160;flow&#160;among&#160;populations<br/>and&#160;assumes&#160;random&#160;genetic&#160;drift&#160;is&#160;the&#160;only&#160;force&#160;generating&#160;phenotypic&#160;diversity&#160;among<br/>populations.<br/>
+Here&#160;we&#160;develop&#160;a&#160;complementary&#160;Bayesian&#160;approach&#160;(<i>ABC&#160;Coevolution</i>)&#160;that&#160;relaxes&#160;key<br/>
+restrictions&#160;of&#160;the&#160;maximum&#160;likelihood&#160;framework&#160;by&#160;allowing&#160;for&#160;strong&#160;coevolutionary<br/>selection,&#160;gene&#160;flow&#160;among&#160;populations,&#160;and&#160;environmental&#160;variation&#160;in&#160;abiotic&#160;optima.<br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+2&#160;/&#160;21<br/>
+<hr/>
+<a name=3></a><img src="nuismer2019-3_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+Although&#160;we&#160;restrict&#160;our&#160;attention&#160;to&#160;interactions&#160;between&#160;species,&#160;the&#160;general&#160;methodology<br/>developed&#160;here&#160;could&#160;be&#160;applied&#160;to&#160;arms&#160;races&#160;between&#160;the&#160;sexes&#160;with&#160;only&#160;very&#160;minor&#160;modifi-<br/>cations.&#160;Extending&#160;our&#160;approach&#160;to&#160;other&#160;forms&#160;of&#160;ecological&#160;interaction&#160;(e.g.,&#160;mutualism)&#160;or<br/>different&#160;functional&#160;forms&#160;of&#160;interaction&#160;(e.g.,&#160;trait&#160;matching)&#160;is&#160;equally&#160;straightforward.&#160;We<br/>will&#160;begin&#160;by&#160;developing&#160;a&#160;model&#160;that&#160;simulates&#160;coevolution&#160;between&#160;a&#160;pair&#160;of&#160;interacting&#160;spe-<br/>cies&#160;distributed&#160;across&#160;a&#160;landscape;&#160;these&#160;simulations&#160;will&#160;power&#160;our&#160;ABC&#160;framework.&#160;Next,&#160;we<br/>will&#160;evaluate&#160;the&#160;performance&#160;of&#160;our&#160;ABC&#160;approach&#160;using&#160;simulated&#160;data.&#160;Finally,&#160;we&#160;will<br/>apply&#160;our&#160;ABC&#160;method&#160;to&#160;a&#160;well-studied,&#160;but&#160;putative,&#160;example&#160;of&#160;a&#160;coevolutionary&#160;arms&#160;race<br/>between&#160;a&#160;seed&#160;boring&#160;weevil&#160;and&#160;its&#160;plant&#160;prey&#160;<a href="nuismer2019s.html#20">[34</a>].<br/>
+<b>Methods</b><br/>
+We&#160;focus&#160;on&#160;the&#160;common&#160;scenario&#160;where&#160;the&#160;outcome&#160;of&#160;an&#160;interaction&#160;between&#160;species&#160;X<br/>and&#160;species&#160;Y&#160;depends&#160;on&#160;the&#160;mechanistic&#160;interaction&#160;between&#160;a&#160;pair&#160;of&#160;quantitative&#160;traits,&#160;<i>x<br/></i>and&#160;<i>y</i>.&#160;For&#160;instance,&#160;in&#160;the&#160;interaction&#160;between&#160;the&#160;Japanese&#160;Camellia,&#160;<i>Camellia&#160;japonica</i>,&#160;and<br/>its&#160;seed&#160;predatory&#160;weevil,&#160;<i>Curculio&#160;camelliae</i>,&#160;the&#160;probability&#160;of&#160;seed&#160;predation&#160;depends&#160;on&#160;the<br/>size&#160;of&#160;the&#160;weevil’s&#160;rostrum&#160;relative&#160;to&#160;the&#160;thickness&#160;of&#160;the&#160;Camellia&#160;fruit’s&#160;defensive&#160;pericarp<br/><a href="nuismer2019s.html#20">[34</a>].&#160;Similarly,&#160;the&#160;outcome&#160;of&#160;interaction&#160;between&#160;the&#160;newt,&#160;<i>Taricha&#160;granulosa</i>,&#160;and&#160;its&#160;garter<br/>snake&#160;predator,&#160;<i>Thamnophis&#160;sirtalis</i>,&#160;depends&#160;on&#160;the&#160;amount&#160;of&#160;tetrodotoxin&#160;produced&#160;by&#160;the<br/>newt&#160;relative&#160;to&#160;the&#160;detoxification&#160;ability&#160;of&#160;the&#160;snake&#160;<a href="nuismer2019s.html#20">[35].&#160;</a>The&#160;approach&#160;we&#160;develop&#160;here<br/>requires&#160;that&#160;the&#160;population&#160;mean&#160;values&#160;of&#160;these&#160;key&#160;traits,&#160;�<br/>
+<i>x&#160;</i>and&#160;�<i>y</i>,&#160;be&#160;estimated&#160;in&#160;<i>N&#160;</i>differ-<br/>
+ent&#160;populations,&#160;as&#160;has&#160;been&#160;done&#160;in&#160;a&#160;wide&#160;range&#160;of&#160;systems&#160;[e.g.,&#160;<a href="nuismer2019s.html#18">2</a>,&#160;<a href="nuismer2019s.html#20">35</a>,&#160;<a href="nuismer2019s.html#20">36</a>,&#160;<a href="nuismer2019s.html#20">37–40</a>].&#160;Our<br/>approach&#160;then&#160;summarizes&#160;the&#160;data&#160;using&#160;five&#160;statistics:&#160;1)&#160;the&#160;average&#160;population&#160;mean&#160;phe-<br/>notype&#160;in&#160;each&#160;species&#160;over&#160;all&#160;sampled&#160;populations&#160;(<i>μx</i>,&#160;<i>μy</i>),&#160;2)&#160;the&#160;standard&#160;deviation&#160;in&#160;popu-<br/>lation&#160;mean&#160;phenotypes&#160;among&#160;all&#160;sampled&#160;populations&#160;(<i>σx</i>,&#160;<i>σy</i>),&#160;and&#160;3)&#160;the&#160;correlation<br/>between&#160;the&#160;population&#160;mean&#160;phenotypes&#160;of&#160;the&#160;two&#160;species&#160;over&#160;all&#160;sampled&#160;populations<br/>(<i>ρxy</i>).&#160;With&#160;this&#160;data&#160;in&#160;hand,&#160;our&#160;approach&#160;employs&#160;approximate&#160;Bayesian&#160;computation&#160;[e.g.,<br/><a href="nuismer2019s.html#20">41</a>,&#160;<a href="nuismer2019s.html#20">42</a>–<a href="nuismer2019s.html#21">44</a>]&#160;to&#160;develop&#160;posterior&#160;distributions&#160;for&#160;the&#160;strength&#160;of&#160;coevolution&#160;between&#160;the&#160;inter-<br/>acting&#160;species&#160;pair.&#160;We&#160;begin&#160;by&#160;describing&#160;the&#160;evolutionary&#160;simulations&#160;that&#160;power&#160;our&#160;ABC<br/>approach.&#160;Next,&#160;we&#160;describe&#160;how&#160;these&#160;evolutionary&#160;simulations&#160;are&#160;integrated&#160;into&#160;an&#160;approx-<br/>imate&#160;Bayesian&#160;framework&#160;and&#160;then&#160;describe&#160;how&#160;we&#160;evaluate&#160;the&#160;performance&#160;of&#160;the<br/>approach&#160;using&#160;simulated&#160;data.&#160;Finally,&#160;we&#160;demonstrate&#160;how&#160;our&#160;approach&#160;can&#160;be&#160;applied&#160;to<br/>real&#160;data&#160;using&#160;the&#160;well-studied&#160;interaction&#160;between&#160;the&#160;seed&#160;boring&#160;weevil,&#160;<i>Curculio&#160;camelliae</i>,<br/>and&#160;its&#160;host&#160;plant,&#160;<i>Camellia&#160;japonica</i>.&#160;All&#160;simulations&#160;and&#160;approximate&#160;Bayesian&#160;computation<br/>were&#160;conducted&#160;in&#160;C++;&#160;the&#160;source&#160;code&#160;is&#160;available&#160;at:&#160;<a href="http://www.leeef.org/resources">http://www.leeef.org/resources</a>.<br/>
+<b>Coevolutionary&#160;simulation</b><br/>
+We&#160;simulate&#160;coevolution&#160;between&#160;a&#160;pair&#160;of&#160;species&#160;that&#160;interact,&#160;and&#160;potentially&#160;coevolve,<br/>within&#160;the&#160;<i>N&#160;</i>spatially&#160;distributed&#160;populations&#160;for&#160;which&#160;phenotypic&#160;data&#160;has&#160;been&#160;collected.<br/>Specifically,&#160;we&#160;follow&#160;the&#160;population&#160;mean&#160;phenotypes&#160;of&#160;the&#160;two&#160;species&#160;within&#160;each&#160;of&#160;<i>N<br/></i>populations&#160;over&#160;the&#160;course&#160;of&#160;a&#160;generation&#160;consisting&#160;of:&#160;1)&#160;selection,&#160;2)&#160;random&#160;genetic&#160;drift,<br/>3)&#160;gene&#160;flow,&#160;and&#160;finally&#160;4)&#160;random&#160;mating&#160;and&#160;inheritance.&#160;We&#160;then&#160;repeat&#160;this&#160;life&#160;cycle&#160;for<br/>one&#160;hundred&#160;generations,&#160;after&#160;which&#160;the&#160;life&#160;cycle&#160;continues&#160;until&#160;the&#160;summary&#160;statistics,&#160;<i>μx</i>,<br/><i>μy</i>,&#160;<i>σx</i>,&#160;<i>σy</i>,&#160;and&#160;<i>ρxy&#160;</i>reach&#160;an&#160;approximate&#160;equilibrium&#160;where&#160;the&#160;means&#160;change&#160;by&#160;less&#160;than&#160;1%<br/>of&#160;their&#160;values&#160;each&#160;generation&#160;and&#160;the&#160;standard&#160;deviations&#160;and&#160;correlation&#160;change&#160;by&#160;less&#160;than<br/>5%&#160;of&#160;their&#160;values&#160;each&#160;generation,&#160;on&#160;average,&#160;over&#160;a&#160;ten&#160;generation&#160;window.&#160;Although&#160;a&#160;5%<br/>change&#160;in&#160;standard&#160;deviations&#160;or&#160;correlation&#160;may&#160;seem&#160;inconsistent&#160;with&#160;equilibrium,&#160;this<br/>level&#160;of&#160;variation&#160;is&#160;consistent&#160;with&#160;sampling&#160;error&#160;given&#160;the&#160;relatively&#160;small&#160;number&#160;of&#160;popula-<br/>tions&#160;we&#160;study&#160;here&#160;(i.e.,&#160;<i>&lt;&#160;</i>20).&#160;In&#160;the&#160;sections&#160;that&#160;follow,&#160;we&#160;describe&#160;the&#160;details&#160;of&#160;each&#160;step<br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+3&#160;/&#160;21<br/>
+<hr/>
+<a name=4></a><img src="nuismer2019-4_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+<a href="nuismer2019s.html#4"><b>Table&#160;1.&#160;</b></a><b>Parameters,&#160;biological&#160;interpretations,&#160;and&#160;specific&#160;assumptions.</b><br/>
+<i><b>Parameter</b></i><br/>
+<i><b>Biological&#160;interpretation</b></i><br/>
+<i><b>Relevant&#160;assumptions</b></i><br/>
+<i>N</i><br/>
+The&#160;number&#160;of&#160;populations&#160;sampled<br/>
+Identical&#160;to&#160;number&#160;of&#160;populations&#160;in&#160;metapopulation<br/>
+<i>γi</i><br/>
+Strength&#160;of&#160;stabilizing&#160;selection&#160;acting&#160;on&#160;species&#160;i<br/>
+Spatially&#160;homogenous<br/>
+<i>θi</i>,<i>j</i><br/>
+Phenotypic&#160;optimum&#160;favored&#160;by&#160;stabilizing&#160;selection&#160;acting&#160;on&#160;species&#160;i&#160;in<br/>
+Spatially&#160;heterogeneous&#160;with&#160;mean&#160;<i>μθ</i>,<i>i</i>,&#160;variance&#160;s2&#160;,&#160;and&#160;interspecific<br/>
+y<i>;i</i><br/>
+population&#160;j<br/>
+correlation&#160;<i>ρθ</i><br/>
+<i>αi</i><br/>
+Coevolutionary&#160;sensitivity&#160;of&#160;species&#160;i<br/>
+Spatially&#160;homogenous<br/>
+<i>h</i>2<br/>
+Heritability&#160;of&#160;key&#160;trait&#160;in&#160;species&#160;i<br/>
+Spatially&#160;homogenous<br/>
+<i>i</i><br/>
+<i>Vi</i><br/>
+Phenotypic&#160;variance&#160;of&#160;key&#160;trait&#160;in&#160;species&#160;i<br/>
+Fixed<br/>
+<i>mi</i><br/>
+Rate&#160;of&#160;movement&#160;among&#160;populations&#160;in&#160;species&#160;i<br/>
+Island&#160;model<br/>
+<i>ni</i><br/>
+Effective&#160;population&#160;size&#160;of&#160;species&#160;i<br/>
+Constant&#160;and&#160;spatially&#160;homogeneous<br/>
+<a href="https://doi.org/10.1371/journal.pcbi.1006988.t001">https://doi.org/10.1371/journal.pcbi.1006988.t001</a><br/>
+of&#160;this&#160;life&#160;cycle,&#160;pointing&#160;out&#160;key&#160;assumptions&#160;along&#160;the&#160;way.&#160;All&#160;model&#160;parameters&#160;and&#160;their<br/>biological&#160;interpretations&#160;and&#160;assumptions&#160;are&#160;summarized&#160;in&#160;<a href="nuismer2019s.html#4">Table&#160;1.</a><br/>
+Natural&#160;selection–We&#160;assume&#160;that&#160;individuals&#160;of&#160;species&#160;i&#160;inhabiting&#160;population&#160;j&#160;experi-<br/>
+ence&#160;stabilizing&#160;selection&#160;toward&#160;some&#160;spatially&#160;variable&#160;phenotypic&#160;optimum,&#160;<i>θi</i>,<i>j</i>.&#160;Because&#160;cor-<br/>relations&#160;between&#160;abiotic&#160;optima&#160;may&#160;lead&#160;to&#160;patterns&#160;similar&#160;to&#160;those&#160;produced&#160;by<br/>coevolution&#160;<a href="nuismer2019s.html#21">[45</a>,&#160;<a href="nuismer2019s.html#21">46</a>],&#160;we&#160;allow&#160;the&#160;phenotypic&#160;optima&#160;of&#160;the&#160;two&#160;species&#160;to&#160;be&#160;modestly&#160;corre-<br/>lated&#160;across&#160;space,&#160;with&#160;correlations&#160;ranging&#160;between&#160;-0.1&#160;and&#160;0.1.&#160;For&#160;simplicity,&#160;we&#160;will&#160;refer<br/>to&#160;this&#160;background&#160;selection&#160;as&#160;“abiotic”&#160;even&#160;though&#160;it&#160;may&#160;result&#160;from&#160;biotic&#160;interactions<br/>external&#160;to&#160;the&#160;focal&#160;interaction,&#160;the&#160;abiotic&#160;environment,&#160;or&#160;some&#160;combination&#160;of&#160;both.&#160;Spe-<br/>cifically,&#160;we&#160;assume&#160;that&#160;the&#160;abiotic&#160;fitness&#160;of&#160;the&#160;two&#160;species&#160;in&#160;population&#160;j&#160;is&#160;given&#160;by:<br/>
+<i>W</i><br/>
+¼&#160;<i>exp</i>½&#160;g&#160;ð<i>x</i><br/>
+y&#160;Þ2�<br/>
+ð1Þ<br/>
+<i>A;X;j</i><br/>
+<i>X</i><br/>
+<i>j</i><br/>
+<i>X;j</i><br/>
+<i>W</i><br/>
+¼&#160;<i>exp</i>½&#160;g&#160;ð<i>y</i><br/>
+y&#160;Þ2�<br/>
+<i>A;Y;j</i><br/>
+<i>Y</i><br/>
+<i>j</i><br/>
+<i>Y;j</i><br/>
+where&#160;<i>γi&#160;</i>is&#160;the&#160;strength&#160;of&#160;stabilizing&#160;selection&#160;acting&#160;on&#160;species&#160;i.<br/>
+Selection&#160;imposed&#160;by&#160;the&#160;interaction&#160;between&#160;the&#160;focal&#160;species,&#160;X&#160;and&#160;Y,&#160;is&#160;assumed&#160;to<br/>
+depend&#160;on&#160;their&#160;relative&#160;trait&#160;values.&#160;For&#160;simplicity&#160;and&#160;brevity,&#160;we&#160;refer&#160;to&#160;this&#160;as&#160;“biotic”<br/>selection.&#160;Specifically,&#160;we&#160;assume&#160;that&#160;the&#160;fitness&#160;of&#160;an&#160;individual&#160;of&#160;species&#160;X&#160;with&#160;phenotype<br/>x&#160;in&#160;an&#160;encounter&#160;with&#160;an&#160;individual&#160;of&#160;species&#160;Y&#160;with&#160;phenotype&#160;y&#160;is&#160;given&#160;by:<br/>
+1<br/>
+<i>W</i><br/>
+¼<br/>
+ð2Þ<br/>
+<i>B;X;j</i><br/>
+1&#160;þ&#160;<i>exp</i>½&#160;a&#160;ð<i>x</i><br/>
+<i>y</i>Þ�<br/>
+<i>x</i><br/>
+and&#160;the&#160;fitness&#160;of&#160;an&#160;individual&#160;of&#160;species&#160;Y&#160;with&#160;phenotype&#160;y&#160;in&#160;an&#160;encounter&#160;with&#160;an&#160;individ-<br/>ual&#160;of&#160;species&#160;X&#160;with&#160;phenotype&#160;x&#160;is&#160;given&#160;by:<br/>
+1<br/>
+<i>W</i><br/>
+¼<br/>
+<i>B;Y;j</i><br/>
+1&#160;þ&#160;<i>exp</i>½&#160;a&#160;ð<i>y</i><br/>
+<i>x</i>Þ�<br/>
+<i>y</i><br/>
+where&#160;the&#160;parameter&#160;<i>αi&#160;</i>measures&#160;the&#160;sensitivity&#160;of&#160;the&#160;biotic&#160;component&#160;of&#160;fitness&#160;in&#160;species&#160;i<br/>within&#160;population&#160;j&#160;to&#160;the&#160;difference&#160;between&#160;the&#160;phenotypes&#160;of&#160;the&#160;individuals.&#160;These&#160;func-<br/>tions&#160;assume&#160;a&#160;phenotypic&#160;differences&#160;or&#160;arms&#160;race&#160;model&#160;of&#160;interaction&#160;[e.g.,&#160;<a href="nuismer2019s.html#21">47</a>]&#160;where&#160;indi-<br/>vidual&#160;fitness&#160;is&#160;increased&#160;by&#160;having&#160;a&#160;phenotypic&#160;value&#160;that&#160;is&#160;large&#160;relative&#160;to&#160;that&#160;of&#160;the<br/>interacting&#160;individual.&#160;For&#160;selection&#160;to&#160;be&#160;reciprocal&#160;and&#160;coevolutionary,&#160;<i>αi&gt;</i>0&#160;for&#160;both&#160;species<br/>X&#160;and&#160;Y.&#160;Assuming&#160;encounters&#160;between&#160;individuals&#160;occur&#160;at&#160;random,&#160;Eq&#160;<a href="nuismer2019s.html#4">(2</a>)&#160;can&#160;be&#160;used&#160;to<br/>determine&#160;the&#160;expected&#160;fitness&#160;of&#160;individuals&#160;within&#160;each&#160;species&#160;by&#160;integrating&#160;over&#160;the<br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+4&#160;/&#160;21<br/>
+<hr/>
+<a name=5></a><img src="nuismer2019-5_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+phenotype&#160;distribution&#160;of&#160;the&#160;interacting&#160;species:<br/>
+R<br/>
+1<br/>
+�<br/>
+<i>W</i><br/>
+¼<br/>
+<i>�&#160;</i>ð<i>y</i>Þ&#160;<i>dy</i><br/>
+ð3Þ<br/>
+<i>B;X;j</i><br/>
+1&#160;þ&#160;<i>exp</i>½&#160;a&#160;ð<i>x</i><br/>
+<i>y</i>Þ�&#160;<i>y;j</i><br/>
+<i>x</i><br/>
+R<br/>
+1<br/>
+�<br/>
+<i>W</i><br/>
+¼<br/>
+<i>�&#160;</i>ð<i>x</i>Þ&#160;<i>dx</i><br/>
+<i>B;Y;j</i><br/>
+1&#160;þ&#160;<i>exp</i>½&#160;a&#160;ð<i>y</i><br/>
+<i>x</i>Þ�&#160;<i>x;j</i><br/>
+<i>y</i><br/>
+where&#160;<i>ϕx</i>,<i>j</i>(<i>x</i>)&#160;and&#160;<i>ϕy</i>,<i>j</i>(<i>y</i>)&#160;are&#160;the&#160;phenotype&#160;frequency&#160;distributions&#160;for&#160;traits&#160;x&#160;and&#160;y,&#160;respec-<br/>tively,&#160;within&#160;population&#160;j.&#160;These&#160;phenotype&#160;distributions&#160;are&#160;assumed&#160;to&#160;be&#160;normal,&#160;with<br/>means&#160;�<br/>
+<i>x&#160;</i>and&#160;�<br/>
+<i>y&#160;</i>and&#160;variances&#160;<i>VX&#160;</i>and&#160;<i>VY</i>,&#160;respectively.&#160;For&#160;simplicity,&#160;we&#160;assume&#160;the&#160;pheno-<br/>
+typic&#160;variances,&#160;<i>VX&#160;</i>and&#160;<i>VY</i>,&#160;are&#160;constant&#160;over&#160;space&#160;and&#160;time.<br/>
+The&#160;total&#160;lifetime&#160;fitness&#160;of&#160;individuals&#160;is&#160;assumed&#160;to&#160;be&#160;the&#160;product&#160;of&#160;the&#160;abiotic&#160;and&#160;biotic<br/>
+fitness&#160;components:<br/>
+<i>W</i><br/>
+¼&#160;<i>W</i><br/>
+�<br/>
+<i>W</i><br/>
+ð4Þ<br/>
+<i>T;X;j</i><br/>
+<i>A;X;j</i><br/>
+<i>B;X;j</i><br/>
+<i>W</i><br/>
+¼&#160;<i>W</i><br/>
+�<br/>
+<i>W</i><br/>
+<i>T;Y;j</i><br/>
+<i>A;Y;j</i><br/>
+<i>B;Y;j</i><br/>
+The&#160;mean&#160;fitness&#160;of&#160;each&#160;species&#160;can&#160;then&#160;be&#160;calculated&#160;by&#160;integrating&#160;total&#160;lifetime&#160;fitness<br/>
+over&#160;the&#160;phenotype&#160;distribution&#160;of&#160;the&#160;focal&#160;species:<br/>
+R<br/>
+�<br/>
+<i>W</i><br/>
+¼&#160;<i>W</i><br/>
+<i>�&#160;</i>ð<i>x</i>Þ&#160;<i>dx</i><br/>
+ð5Þ<br/>
+<i>T;X;j</i><br/>
+<i>T;X;j</i><br/>
+<i>x;j</i><br/>
+R<br/>
+�<br/>
+<i>W</i><br/>
+¼&#160;<i>W</i><br/>
+<i>�&#160;</i>ð<i>y</i>Þ&#160;<i>dy</i><br/>
+<i>T;Y;j</i><br/>
+<i>T;Y;j</i><br/>
+<i>y;j</i><br/>
+Total&#160;lifetime&#160;fitness&#160;(4)&#160;and&#160;population&#160;mean&#160;fitness&#160;(5)&#160;can&#160;then&#160;be&#160;used&#160;together&#160;to&#160;pre-<br/>
+dict&#160;the&#160;frequency&#160;distribution&#160;of&#160;phenotypes&#160;within&#160;each&#160;species&#160;and&#160;population&#160;following<br/>selection:<br/>
+<i>W</i><br/>
+<i>�</i>0&#160;ð<i>x</i>Þ&#160;¼&#160;<i>�&#160;</i>ð<i>x</i>Þ<br/>
+<i>T;X;j</i><br/>
+ð6Þ<br/>
+<i>x;j</i><br/>
+<i>x;j</i><br/>
+�<br/>
+<i>W&#160;T;X;j</i><br/>
+<i>W</i><br/>
+<i>�</i>0&#160;ð<i>y</i>Þ&#160;¼&#160;<i>�&#160;</i>ð<i>y</i>Þ<br/>
+<i>T;Y;j</i><br/>
+<i>y;j</i><br/>
+<i>y;j</i><br/>
+�<br/>
+<i>WT;Y;j</i><br/>
+where&#160;the&#160;primes&#160;indicate&#160;the&#160;next&#160;step&#160;in&#160;the&#160;life-cycle.&#160;The&#160;post-selection&#160;population&#160;mean<br/>phenotypes&#160;can&#160;then&#160;be&#160;calculated&#160;for&#160;each&#160;species&#160;and&#160;population&#160;by&#160;integrating&#160;the&#160;product<br/>of&#160;the&#160;trait&#160;value&#160;and&#160;post-selection&#160;phenotype&#160;frequency&#160;(6):<br/>
+R<br/>
+�<br/>
+<i>x</i>0&#160;¼&#160;<i>x&#160;�</i>0&#160;ð<i>x</i>Þ<i>dx</i><br/>
+ð7Þ<br/>
+<i>j</i><br/>
+<i>x;j</i><br/>
+R<br/>
+�<br/>
+<i>y</i>0&#160;¼&#160;<i>y&#160;�</i>0&#160;ð<i>y</i>Þ<i>dy</i><br/>
+<i>j</i><br/>
+<i>y;j</i><br/>
+Random&#160;genetic&#160;drift–After&#160;selection,&#160;we&#160;assume&#160;a&#160;sample&#160;of&#160;individuals&#160;from&#160;species&#160;i<br/>
+equal&#160;to&#160;the&#160;local&#160;effective&#160;population&#160;size,&#160;<i>ni</i>,&#160;survives.&#160;The&#160;population&#160;mean&#160;phenotypes&#160;after<br/>this&#160;sampling&#160;process&#160;are&#160;then&#160;given&#160;by:<br/>
+�<br/>
+<i>x</i>00&#160;¼&#160;�<br/>
+<i>x</i>0&#160;þ&#160;x<br/>
+ð8Þ<br/>
+<i>j</i><br/>
+<i>j</i><br/>
+<i>x</i><br/>
+�<br/>
+<i>y</i>00&#160;¼&#160;�<br/>
+<i>y</i>0&#160;þ&#160;x<br/>
+<i>j</i><br/>
+<i>j</i><br/>
+<i>y</i><br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+5&#160;/&#160;21<br/>
+<hr/>
+<a name=6></a><img src="nuismer2019-6_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+where&#160;<i>ξi&#160;</i>is&#160;a&#160;random&#160;variable&#160;drawn&#160;from&#160;a&#160;gaussian&#160;distribution&#160;with&#160;mean&#160;zero&#160;and&#160;variance<br/>equal&#160;to&#160;<i>Vi</i>/<i>ni&#160;</i>in&#160;species&#160;i.<br/>
+Movement–We&#160;assume&#160;individuals&#160;move&#160;among&#160;populations&#160;at&#160;random,&#160;with&#160;the&#160;probabil-<br/>
+ity&#160;of&#160;movement&#160;between&#160;pairs&#160;of&#160;populations&#160;in&#160;species&#160;i&#160;defined&#160;by&#160;the&#160;migration&#160;matrix&#160;<b>M</b>.<br/>With&#160;this&#160;assumption,&#160;the&#160;population&#160;mean&#160;phenotype&#160;for&#160;species&#160;X&#160;in&#160;population&#160;j&#160;following<br/>movement&#160;among&#160;populations&#160;is:<br/>
+P<br/>
+�<br/>
+<i>x</i>000&#160;¼<br/>
+<i>N</i><br/>
+<i>m</i><br/>
+�<br/>
+<i>x</i>00<br/>
+ð9Þ<br/>
+<i>j</i><br/>
+<i>k</i>¼1<br/>
+<i>x;j;k&#160;k</i><br/>
+and&#160;the&#160;population&#160;mean&#160;phenotype&#160;for&#160;species&#160;Y&#160;in&#160;population&#160;j&#160;following&#160;movement&#160;is:<br/>
+P<br/>
+�<br/>
+<i>y</i>000&#160;¼<br/>
+<i>N</i><br/>
+<i>m</i><br/>
+�<br/>
+<i>y</i>00<br/>
+<i>j</i><br/>
+<i>k</i>¼1<br/>
+<i>y;j;k&#160;k</i><br/>
+In&#160;these&#160;expressions,&#160;<i>mi</i>,<i>j</i>,<i>k&#160;</i>represents&#160;the&#160;entry&#160;in&#160;the&#160;migration&#160;matrix,&#160;<b>M</b>,&#160;measuring&#160;the<br/>
+probability&#160;an&#160;individual&#160;of&#160;species&#160;i&#160;moves&#160;from&#160;population&#160;k&#160;to&#160;population&#160;j.&#160;For&#160;the&#160;special<br/>case&#160;of&#160;the&#160;island&#160;model&#160;we&#160;focus&#160;on&#160;here&#160;where&#160;gene&#160;flow&#160;occurs&#160;at&#160;an&#160;equal&#160;rate&#160;among&#160;all<br/>populations,&#160;(9)&#160;reduces&#160;to:<br/>
+<i>m</i><br/>
+P<br/>
+�<br/>
+<i>x</i>000&#160;¼&#160;ð1<br/>
+<i>m&#160;</i>Þ�<br/>
+<i>x</i>00&#160;þ<br/>
+<i>x</i><br/>
+<i>N</i><br/>
+�<br/>
+<i>x</i>00<br/>
+ð10Þ<br/>
+<i>j</i><br/>
+<i>x</i><br/>
+<i>j</i><br/>
+<i>N</i><br/>
+1<br/>
+<i>k&#160;</i>¼&#160;1&#160;<i>k</i><br/>
+<i>k&#160;</i>6¼&#160;<i>j</i><br/>
+�<br/>
+�<br/>
+<i>m</i><br/>
+P<br/>
+�<br/>
+<i>y</i>000&#160;¼&#160;1<br/>
+<i>m&#160;</i>�<br/>
+<i>y</i>00&#160;þ<br/>
+<i>y</i><br/>
+<i>N</i><br/>
+�<br/>
+<i>y</i>00<br/>
+<i>j</i><br/>
+<i>y</i><br/>
+<i>j</i><br/>
+<i>N</i><br/>
+1<br/>
+<i>k&#160;</i>¼&#160;1&#160;<i>k</i><br/>
+<i>k&#160;</i>6¼&#160;<i>j</i><br/>
+where&#160;<i>mi&#160;</i>is&#160;the&#160;proportion&#160;of&#160;individuals&#160;within&#160;each&#160;population&#160;composed&#160;of&#160;immigrants<br/>from&#160;other&#160;populations&#160;and&#160;<i>N&#160;</i>is&#160;the&#160;number&#160;of&#160;populations&#160;for&#160;which&#160;phenotypic&#160;data&#160;is<br/>available.<br/>
+Random&#160;mating&#160;and&#160;inheritance–Following&#160;movement&#160;among&#160;populations,&#160;individuals<br/>
+mate&#160;at&#160;random&#160;and&#160;reproduce.&#160;Assuming&#160;the&#160;traits&#160;mediating&#160;the&#160;interaction&#160;are&#160;heritable,<br/>the&#160;change&#160;in&#160;the&#160;mean&#160;phenotype&#160;of&#160;species&#160;X&#160;and&#160;Y&#160;within&#160;population&#160;j&#160;is&#160;given&#160;by:<br/>
+D�<br/>
+<i>x&#160;</i>¼&#160;<i>h</i>2ð�<br/>
+<i>x</i>000<br/>
+�<br/>
+<i>x&#160;</i>Þ<br/>
+ð11Þ<br/>
+<i>j</i><br/>
+<i>x</i><br/>
+<i>j</i><br/>
+<i>j</i><br/>
+D�<br/>
+<i>y&#160;</i>¼&#160;<i>h</i>2ð�<br/>
+<i>y</i>000<br/>
+�<br/>
+<i>y&#160;</i>Þ<br/>
+<i>j</i><br/>
+<i>y</i><br/>
+<i>j</i><br/>
+<i>j</i><br/>
+where&#160;the&#160;heritability,&#160;<i>h</i>2,&#160;is&#160;assumed&#160;to&#160;be&#160;constant&#160;over&#160;both&#160;time&#160;and&#160;space.<br/>
+<i>i</i><br/>
+<b>Approximate&#160;Bayesian&#160;Computation</b><br/>
+Approximate&#160;Bayesian&#160;Computation&#160;is&#160;a&#160;conceptually&#160;simple&#160;rejection&#160;algorithm&#160;that&#160;imple-<br/>ments&#160;the&#160;following&#160;steps:&#160;1)&#160;Draw&#160;parameters&#160;of&#160;the&#160;model&#160;from&#160;prior&#160;distributions,&#160;2)&#160;Simu-<br/>late&#160;data&#160;for&#160;the&#160;selected&#160;parameters&#160;and&#160;calculate&#160;summary&#160;statistics,&#160;3)&#160;If&#160;the&#160;summary<br/>statistics&#160;calculated&#160;from&#160;the&#160;simulated&#160;data&#160;are&#160;sufficiently&#160;close&#160;to&#160;their&#160;values&#160;in&#160;the&#160;real<br/>data,&#160;include&#160;the&#160;parameters&#160;in&#160;the&#160;posterior&#160;distribution&#160;and&#160;return&#160;to&#160;Step&#160;1.&#160;Otherwise,&#160;do<br/>not&#160;include&#160;the&#160;parameters&#160;in&#160;the&#160;posterior&#160;distribution&#160;and&#160;return&#160;to&#160;Step&#160;1.&#160;For&#160;well-chosen<br/>summary&#160;statistics&#160;and&#160;appropriate&#160;thresholds&#160;for&#160;acceptance&#160;into&#160;the&#160;posterior,&#160;this&#160;algorithm<br/>converges&#160;on&#160;an&#160;accurate&#160;approximation&#160;of&#160;the&#160;posterior&#160;distribution&#160;[<a href="nuismer2019s.html#21">48].&#160;</a>Approximate<br/>Bayesian&#160;Computation&#160;has&#160;now&#160;been&#160;applied&#160;to&#160;a&#160;wide&#160;range&#160;of&#160;problems&#160;in&#160;ecology&#160;and&#160;evo-<br/>lution,&#160;and&#160;its&#160;strengths&#160;and&#160;weaknesses&#160;are&#160;well-understood&#160;<a href="nuismer2019s.html#20">[41,&#160;42</a>,&#160;<a href="nuismer2019s.html#21">49</a>].&#160;Here,&#160;we&#160;rely&#160;on&#160;pre-<br/>vious&#160;work&#160;demonstrating&#160;that&#160;the&#160;bivariate&#160;distribution&#160;describing&#160;population&#160;mean<br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+6&#160;/&#160;21<br/>
+<hr/>
+<a name=7></a><img src="nuismer2019-7_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+<a href="nuismer2019s.html#7"><b>Table&#160;2.&#160;</b></a><b>Distributions&#160;for&#160;simulation&#160;parameters&#160;and&#160;prior&#160;distributions.</b><br/>
+<i><b>Model&#160;Parameter</b></i><br/>
+<i><b>Simulation&#160;Distribution</b></i><br/>
+<i><b>Prior&#160;Distribution</b></i><br/>
+<i>γi</i><br/>
+Gamma&#160;(0.1,10)<br/>
+Uniform&#160;(0,&#160;0.2)<br/>
+<i>μθ</i>,<i>i</i><br/>
+Gamma&#160;(5.0,&#160;20.0)<br/>
+Gamma&#160;(5.0,&#160;20.0)<br/>
+s2<br/>
+Gamma(0.01×<i>μ</i><br/>
+y<i>;i</i><br/>
+<i>θ</i>,<i>i</i>,&#160;1.5)<br/>
+Gamma(0.01×<i>μθ</i>,<i>i</i>,&#160;1.5)<br/>
+<i>ρθ</i><br/>
+Uniform&#160;(-0.1,&#160;0.1)<br/>
+Uniform&#160;(-0.1,&#160;0.1)<br/>
+<i>αi</i><br/>
+Uniform&#160;(0.0,&#160;2.0)1<br/>
+Uniform&#160;(0.0,&#160;2.0)<br/>
+<i>h</i>2<br/>
+Uniform&#160;(0.2,&#160;0.8)<br/>
+Uniform&#160;(0.2,&#160;0.8)<br/>
+<i>i</i><br/>
+<i>Vi</i><br/>
+1.0<br/>
+1.0<br/>
+<i>mi</i><br/>
+Gamma&#160;(0.001,&#160;10.0)<br/>
+Gamma&#160;(0.001,&#160;10.0)<br/>
+<i>ni</i><br/>
+Gamma&#160;(1000.0,&#160;10.0)<br/>
+Gamma&#160;(1000.0,&#160;10.0)<br/>
+1&#160;When&#160;simulating&#160;data,&#160;<i>αi&#160;</i>was&#160;drawn&#160;from&#160;this&#160;distribution&#160;only&#160;after&#160;first&#160;clearing&#160;a&#160;hurdle&#160;value&#160;of&#160;0.25.&#160;Failure&#160;to<br/>clear&#160;the&#160;hurdle&#160;resulted&#160;in&#160;<i>αi&#160;</i>being&#160;equal&#160;to&#160;zero.<br/>
+<a href="https://doi.org/10.1371/journal.pcbi.1006988.t002">https://doi.org/10.1371/journal.pcbi.1006988.t002</a><br/>
+phenotypes&#160;of&#160;coevolving&#160;species&#160;within&#160;a&#160;metapopulation&#160;can&#160;be&#160;accurately&#160;described&#160;using<br/>only&#160;five&#160;statistical&#160;moments&#160;to&#160;select&#160;our&#160;summary&#160;statistics&#160;[<a href="nuismer2019s.html#21">46</a>].&#160;Specifically,&#160;we&#160;summarize<br/>both&#160;simulated&#160;and&#160;real&#160;data&#160;using&#160;the&#160;average&#160;population&#160;mean&#160;phenotype&#160;of&#160;each&#160;species<br/>over&#160;the&#160;metapopulation,&#160;<i>μx&#160;</i>and&#160;<i>μy</i>,&#160;the&#160;standard&#160;deviation&#160;of&#160;population&#160;mean&#160;phenotypes&#160;for<br/>each&#160;species&#160;over&#160;the&#160;metapopulation,&#160;<i>σx&#160;</i>and&#160;<i>σy</i>,&#160;and&#160;the&#160;correlation&#160;between&#160;the&#160;population<br/>mean&#160;phenotypes&#160;of&#160;the&#160;two&#160;species&#160;over&#160;the&#160;metapopulation,&#160;<i>ρxy</i>.&#160;If&#160;the&#160;values&#160;of&#160;these&#160;five<br/>summary&#160;statistics&#160;are&#160;sufficiently&#160;similar&#160;in&#160;simulated&#160;and&#160;real&#160;data,&#160;the&#160;parameters&#160;generat-<br/>ing&#160;the&#160;simulated&#160;data&#160;are&#160;added&#160;to&#160;the&#160;posterior&#160;distribution.&#160;The&#160;result&#160;is&#160;multivariate<br/>posterior&#160;distribution&#160;for&#160;the&#160;17&#160;model&#160;parameters&#160;described&#160;in&#160;Tables&#160;<a href="nuismer2019s.html#7">2&#160;</a>and&#160;<a href="nuismer2019s.html#7">3.&#160;</a>Detailed<br/>descriptions&#160;of&#160;prior&#160;distributions&#160;and&#160;thresholds&#160;for&#160;acceptance&#160;into&#160;the&#160;posterior&#160;are<br/>described&#160;in&#160;subsequent&#160;sections.<br/>
+<b>Results</b><br/>
+<b>Evaluating&#160;performance&#160;using&#160;simulated&#160;data</b><br/>
+To&#160;evaluate&#160;the&#160;performance&#160;of&#160;our&#160;approach,&#160;we&#160;applied&#160;it&#160;to&#160;a&#160;large&#160;number&#160;of&#160;simulated<br/>data&#160;sets.&#160;Specifically,&#160;we&#160;drew&#160;the&#160;parameters&#160;described&#160;in&#160;<a href="nuismer2019s.html#4">Table&#160;1&#160;</a>at&#160;random&#160;and&#160;simulated<br/>evolution&#160;within&#160;metapopulations&#160;consisting&#160;of&#160;5,&#160;10,&#160;and&#160;20&#160;populations.&#160;Each&#160;simulation<br/>
+<a href="nuismer2019s.html#7"><b>Table&#160;3.&#160;</b></a><b>Distributions&#160;for&#160;simulation&#160;parameters&#160;and&#160;refined&#160;prior&#160;distributions.</b><br/>
+<i><b>Model&#160;Parameter</b></i><br/>
+<i><b>Simulation&#160;Distribution</b></i><br/>
+<i><b>Prior&#160;Distribution</b></i><br/>
+<i>γi</i><br/>
+Gamma&#160;(0.05,&#160;5.0)<br/>
+Gamma&#160;(<i>γi</i>,&#160;200.0)<br/>
+<i>μθ</i>,<i>i</i><br/>
+Gamma&#160;(5.0,&#160;20.0)<br/>
+Gamma&#160;(<i>μθ</i>,<i>i</i>,&#160;500.0)<br/>
+s2<br/>
+Gamma&#160;(0.01�<i>μ</i><br/>
+,&#160;1.5)<br/>
+y<i>;i</i><br/>
+<i>θ</i>,<i>i</i>,&#160;1.5)<br/>
+Gamma&#160;(s2y<i>;i</i><br/>
+<i>ρθ</i><br/>
+Uniform&#160;(-0.1,&#160;0.1)<br/>
+Uniform&#160;(-0.1,&#160;0.1)<br/>
+<i>αi</i><br/>
+Uniform&#160;(0.0,&#160;2.0)1<br/>
+Uniform&#160;(0.0,&#160;2.0)<br/>
+<i>h</i>2<br/>
+Uniform&#160;(0.2,&#160;0.8)<br/>
+Uniform&#160;(<i>h</i>2<br/>
+0<i>:</i>1<i>;&#160;h</i>2&#160;þ&#160;0<i>:</i>1)<br/>
+<i>i</i><br/>
+<i>i</i><br/>
+<i>i</i><br/>
+<i>Vi</i><br/>
+1.0<br/>
+1.0<br/>
+<i>mi</i><br/>
+Gamma&#160;(0.001,&#160;10.0)<br/>
+Gamma&#160;(<i>mi</i>,&#160;100.0)<br/>
+<i>ni</i><br/>
+Gamma&#160;(1000.0,&#160;10.0)<br/>
+Gamma&#160;(<i>ni</i>,&#160;100.0)<br/>
+1&#160;When&#160;simulating&#160;data,&#160;<i>αi&#160;</i>was&#160;drawn&#160;from&#160;this&#160;distribution&#160;only&#160;after&#160;first&#160;clearing&#160;a&#160;hurdle&#160;value&#160;of&#160;0.25.&#160;Failure&#160;to<br/>clear&#160;the&#160;hurdle&#160;resulted&#160;in&#160;<i>αi&#160;</i>being&#160;equal&#160;to&#160;zero.<br/>
+<a href="https://doi.org/10.1371/journal.pcbi.1006988.t003">https://doi.org/10.1371/journal.pcbi.1006988.t003</a><br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+7&#160;/&#160;21<br/>
+<hr/>
+<a name=8></a><img src="nuismer2019-8_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+assumed&#160;migration&#160;followed&#160;an&#160;island&#160;model&#160;and&#160;continued&#160;until&#160;the&#160;metapopulation&#160;reached<br/>an&#160;approximate&#160;equilibrium&#160;where&#160;the&#160;statistical&#160;moments&#160;describing&#160;the&#160;multivariate&#160;distri-<br/>bution&#160;of&#160;population&#160;mean&#160;phenotypes&#160;remained&#160;approximately&#160;constant&#160;over&#160;time.&#160;If&#160;an<br/>equilibrium&#160;was&#160;not&#160;reached&#160;within&#160;500&#160;generations,&#160;the&#160;simulation&#160;was&#160;halted&#160;and&#160;parameters<br/>drawn&#160;again&#160;at&#160;random.&#160;At&#160;the&#160;completion&#160;of&#160;each&#160;simulation,&#160;the&#160;summary&#160;statistics,&#160;<i>μx</i>,&#160;<i>μy</i>,<br/><i>σx</i>,&#160;<i>σy</i>,&#160;and&#160;<i>ρxy&#160;</i>were&#160;recorded.&#160;Once&#160;data&#160;had&#160;been&#160;simulated,&#160;we&#160;used&#160;our&#160;ABC&#160;method&#160;to<br/>develop&#160;posterior&#160;distributions&#160;for&#160;the&#160;parameters&#160;in&#160;<a href="nuismer2019s.html#4">Table&#160;1,&#160;</a>focusing&#160;our&#160;assessment&#160;of&#160;accu-<br/>racy&#160;on&#160;the&#160;coevolutionary&#160;sensitivity&#160;in&#160;each&#160;species,&#160;<i>αi</i>,&#160;and&#160;a&#160;composite&#160;index&#160;for&#160;the<br/>
+pffiffiffiffiffiffiffiffi<br/>
+strength&#160;of&#160;coevolution&#160;equal&#160;to<br/>
+a&#160;a&#160;.&#160;We&#160;studied&#160;the&#160;performance&#160;of&#160;our&#160;method&#160;for&#160;two<br/>
+<i>x&#160;y</i><br/>
+different&#160;scenarios.&#160;In&#160;the&#160;first,&#160;we&#160;assumed&#160;little&#160;independent&#160;biological&#160;information&#160;was<br/>available&#160;to&#160;inform&#160;prior&#160;distributions&#160;of&#160;background&#160;parameters&#160;(e.g.,&#160;rates&#160;of&#160;gene&#160;flow,&#160;effec-<br/>tive&#160;population&#160;sizes,&#160;etc.)&#160;such&#160;that&#160;prior&#160;distributions&#160;for&#160;these&#160;parameters&#160;were&#160;broad&#160;and<br/>restricted&#160;only&#160;by&#160;biological&#160;plausibility.&#160;In&#160;the&#160;second,&#160;we&#160;assumed&#160;independent&#160;biological<br/>information&#160;(e.g.,&#160;molecular&#160;studies,&#160;experiments,&#160;etc.)&#160;was&#160;available&#160;and&#160;could&#160;be&#160;used&#160;to<br/>refine&#160;prior&#160;distributions&#160;for&#160;background&#160;parameters.<br/>
+<i>Unrefined&#160;priors–</i>We&#160;first&#160;considered&#160;the&#160;power&#160;and&#160;performance&#160;of&#160;our&#160;method&#160;when<br/>
+applied&#160;to&#160;a&#160;biological&#160;system&#160;where&#160;only&#160;the&#160;trait&#160;means&#160;of&#160;the&#160;interacting&#160;species&#160;are&#160;known<br/>across&#160;populations.&#160;In&#160;such&#160;situations,&#160;prior&#160;distributions&#160;for&#160;the&#160;background&#160;parameters<br/>required&#160;by&#160;our&#160;method&#160;are&#160;constrained&#160;only&#160;by&#160;biological&#160;intuition&#160;and&#160;plausibility.&#160;Conse-<br/>quently,&#160;the&#160;modes&#160;of&#160;prior&#160;distributions&#160;could&#160;be&#160;very&#160;far&#160;from&#160;the&#160;actual&#160;parameters&#160;used&#160;to<br/>generate&#160;simulated&#160;data.&#160;To&#160;evaluate&#160;performance&#160;under&#160;this&#160;worst-case&#160;scenario,&#160;prior&#160;distri-<br/>butions&#160;were&#160;assumed&#160;to&#160;be&#160;identical&#160;to&#160;the&#160;distributions&#160;from&#160;which&#160;parameters&#160;used&#160;to&#160;simu-<br/>late&#160;data&#160;were&#160;drawn&#160;with&#160;two&#160;exceptions.&#160;First,&#160;prior&#160;distributions&#160;for&#160;parameters&#160;defining&#160;the<br/>strength&#160;of&#160;stabilizing&#160;selection&#160;(<i>γx</i>,&#160;<i>γy</i>)&#160;were&#160;assumed&#160;to&#160;follow&#160;uniform&#160;distributions&#160;informed<br/>by&#160;meta-analyses&#160;<a href="nuismer2019s.html#21">[50</a>,&#160;<a href="nuismer2019s.html#21">51</a>].&#160;Second,&#160;distributions&#160;from&#160;which&#160;the&#160;coevolution&#160;parameters&#160;were<br/>drawn&#160;for&#160;simulation&#160;differed&#160;from&#160;the&#160;prior&#160;distributions&#160;by&#160;including&#160;a&#160;“hurdle”.&#160;Specifically,<br/>the&#160;simulations&#160;drew&#160;the&#160;coevolution&#160;parameters&#160;from&#160;uniform&#160;hurdle&#160;distributions&#160;that<br/>enriched&#160;the&#160;probability&#160;of&#160;drawing&#160;parameters&#160;uniquely&#160;equal&#160;to&#160;zero.&#160;Using&#160;hurdle&#160;distribu-<br/>tions&#160;allowed&#160;us&#160;to&#160;calculate&#160;Type&#160;I&#160;error&#160;rates&#160;for&#160;our&#160;method&#160;by&#160;guaranteeing&#160;“control”&#160;simu-<br/>lations&#160;were&#160;performed&#160;where&#160;biotic&#160;selection&#160;was&#160;absent&#160;for&#160;one&#160;or&#160;both&#160;of&#160;the&#160;species.&#160;A<br/>detailed&#160;description&#160;of&#160;the&#160;distributions&#160;used&#160;to&#160;draw&#160;parameters&#160;for&#160;the&#160;simulations&#160;and&#160;the<br/>prior&#160;distributions&#160;can&#160;be&#160;found&#160;in&#160;<a href="nuismer2019s.html#7">Table&#160;2.</a><br/>
+For&#160;each&#160;simulated&#160;data&#160;set,&#160;the&#160;ABC&#160;method&#160;was&#160;run&#160;until&#160;200&#160;points&#160;were&#160;in&#160;the&#160;posterior<br/>
+distribution.&#160;Although&#160;200&#160;points&#160;is&#160;far&#160;too&#160;few&#160;to&#160;achieve&#160;a&#160;reliable&#160;estimate&#160;for&#160;any&#160;individual<br/>simulated&#160;data&#160;set,&#160;it&#160;allowed&#160;us&#160;to&#160;explore&#160;a&#160;much&#160;greater&#160;diversity&#160;of&#160;simulated&#160;data&#160;sets&#160;in&#160;a<br/>reasonable&#160;amount&#160;of&#160;time.&#160;Because&#160;so&#160;few&#160;points&#160;were&#160;included&#160;in&#160;the&#160;posterior,&#160;it&#160;is&#160;likely<br/>our&#160;results&#160;represent&#160;the&#160;worst-case&#160;scenario&#160;for&#160;the&#160;performance&#160;of&#160;our&#160;method.&#160;Later,&#160;when<br/>we&#160;apply&#160;our&#160;method&#160;to&#160;real&#160;data,&#160;we&#160;vastly&#160;increase&#160;the&#160;number&#160;of&#160;points&#160;in&#160;the&#160;posterior.<br/>Acceptance&#160;into&#160;the&#160;posterior&#160;distribution&#160;required&#160;that&#160;the&#160;spatial&#160;averages&#160;of&#160;population<br/>mean&#160;phenotypes&#160;be&#160;within&#160;0.1+15%&#160;of&#160;their&#160;observed&#160;values,&#160;that&#160;the&#160;spatial&#160;standard&#160;devia-<br/>tions&#160;of&#160;population&#160;mean&#160;phenotypes&#160;be&#160;within&#160;0.1+20%&#160;of&#160;their&#160;observed&#160;values,&#160;and&#160;that&#160;the<br/>spatial&#160;correlation&#160;between&#160;population&#160;mean&#160;phenotypes&#160;be&#160;within&#160;25%&#160;of&#160;its&#160;observed&#160;value.<br/>These&#160;thresholds&#160;were&#160;chosen&#160;to&#160;balance&#160;the&#160;competing&#160;demands&#160;of&#160;acceptance&#160;rate&#160;and&#160;accu-<br/>racy&#160;in&#160;a&#160;way&#160;that&#160;allowed&#160;us&#160;to&#160;explore&#160;the&#160;performance&#160;of&#160;our&#160;method&#160;over&#160;a&#160;large&#160;number&#160;of<br/>simulated&#160;data&#160;sets.&#160;For&#160;each&#160;simulated&#160;data&#160;set,&#160;we&#160;calculated&#160;the&#160;estimated&#160;values&#160;for&#160;the<br/>coevolutionary&#160;sensitivities,&#160;<i>αi</i>,&#160;by&#160;identifying&#160;the&#160;modes&#160;of&#160;their&#160;marginal&#160;posterior&#160;distribu-<br/>
+ffiffiffiffiffiffiffi<br/>
+p<br/>
+ffi<br/>
+tions.&#160;We&#160;also&#160;calculated&#160;a&#160;composite&#160;strength&#160;of&#160;coevolution,<br/>
+a&#160;a&#160;,&#160;that&#160;integrates&#160;the&#160;coevo-<br/>
+<i>x&#160;y</i><br/>
+lutionary&#160;sensitives&#160;of&#160;each&#160;species&#160;into&#160;a&#160;single&#160;numeric&#160;score.&#160;Ninety&#160;five&#160;percent&#160;credible<br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+8&#160;/&#160;21<br/>
+<hr/>
+<a name=9></a><img src="nuismer2019-9_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+intervals&#160;were&#160;calculated&#160;for&#160;these&#160;quantities&#160;as&#160;the&#160;interval&#160;of&#160;highest&#160;posterior&#160;density&#160;(HPD)<br/>in&#160;the&#160;marginal&#160;posterior&#160;distribution.&#160;Although&#160;relying&#160;on&#160;the&#160;marginal&#160;distributions&#160;for<br/>these&#160;key&#160;parameters&#160;(rather&#160;than&#160;the&#160;full&#160;multivariate&#160;distribution)&#160;could,&#160;in&#160;principle,&#160;be<br/>problematic,&#160;initial&#160;simulations&#160;suggested&#160;the&#160;posterior&#160;distributions&#160;for&#160;these&#160;key&#160;parameters<br/>are&#160;approximately&#160;independent&#160;in&#160;most&#160;cases.&#160;Focusing&#160;on&#160;only&#160;the&#160;marginal&#160;distributions<br/>allowed&#160;us&#160;to&#160;get&#160;more&#160;reliable&#160;estimates&#160;with&#160;fewer&#160;points&#160;in&#160;the&#160;posterior,&#160;and&#160;thus&#160;allowed<br/>us&#160;to&#160;study&#160;a&#160;larger&#160;number&#160;of&#160;simulated&#160;data&#160;sets.<br/>
+We&#160;applied&#160;our&#160;ABC&#160;method&#160;to&#160;155&#160;simulated&#160;data&#160;sets&#160;where&#160;5&#160;populations&#160;were&#160;sampled,<br/>
+166&#160;simulated&#160;data&#160;sets&#160;where&#160;10&#160;populations&#160;were&#160;sampled,&#160;and&#160;162&#160;simulated&#160;data&#160;sets&#160;where<br/>20&#160;populations&#160;were&#160;sampled.&#160;Performance&#160;was&#160;evaluated&#160;in&#160;two&#160;ways.&#160;First,&#160;we&#160;compared&#160;the<br/>true&#160;values&#160;of&#160;the&#160;coevolutionary&#160;sensitivities&#160;to&#160;their&#160;values&#160;estimated&#160;by&#160;the&#160;modes&#160;of&#160;their<br/>marginal&#160;posterior&#160;distributions&#160;(<a href="nuismer2019s.html#10">Fig&#160;1</a>).&#160;This&#160;comparison&#160;revealed&#160;that&#160;our&#160;method&#160;did&#160;a&#160;rea-<br/>sonable&#160;job&#160;of&#160;estimating&#160;the&#160;coevolutionary&#160;sensitivities&#160;for&#160;each&#160;species,&#160;and&#160;the&#160;composite<br/>strength&#160;of&#160;coevolutionary&#160;selection&#160;(<a href="nuismer2019s.html#10">Fig&#160;1</a>).&#160;Next,&#160;we&#160;calculated&#160;the&#160;percentage&#160;of&#160;cases&#160;in<br/>which&#160;the&#160;true&#160;values&#160;of&#160;the&#160;coevolutionary&#160;sensitivities&#160;fell&#160;outside&#160;their&#160;95%&#160;credible&#160;intervals<br/><a href="nuismer2019s.html#11">(Fig&#160;2</a>).&#160;This&#160;demonstrated&#160;that&#160;the&#160;error&#160;rates&#160;of&#160;our&#160;estimates&#160;were&#160;slightly&#160;inflated,&#160;with<br/>between&#160;4%-8%&#160;of&#160;estimates&#160;lying&#160;outside&#160;the&#160;95%&#160;credible&#160;interval&#160;<a href="nuismer2019s.html#11">(Fig&#160;2).&#160;</a>Similarly,&#160;analysis<br/>of&#160;Type&#160;I&#160;error&#160;rates&#160;demonstrated&#160;positive&#160;values&#160;of&#160;the&#160;coevolutionary&#160;sensitivities&#160;were&#160;erro-<br/>neously&#160;inferred&#160;in&#160;between&#160;4%-30%&#160;of&#160;cases,&#160;although&#160;when&#160;twenty&#160;populations&#160;were&#160;sam-<br/>pled&#160;the&#160;Type&#160;I&#160;error&#160;rates&#160;fall&#160;to&#160;more&#160;reasonable&#160;values&#160;between&#160;8%-17%.<br/>
+<i>Refined&#160;priors–</i>In&#160;some&#160;cases,&#160;such&#160;as&#160;the&#160;Camellia-Weevil&#160;interaction&#160;we&#160;will&#160;apply&#160;our<br/>
+method&#160;to&#160;in&#160;the&#160;next&#160;section,&#160;independent&#160;estimates&#160;for&#160;background&#160;parameters&#160;are&#160;avail-<br/>able,&#160;allowing&#160;for&#160;increased&#160;refinement&#160;of&#160;prior&#160;distributions.&#160;We&#160;studied&#160;such&#160;scenarios&#160;by<br/>centering&#160;the&#160;prior&#160;distributions&#160;for&#160;the&#160;background&#160;parameters&#160;on&#160;the&#160;values&#160;used&#160;to&#160;gen-<br/>erate&#160;the&#160;simulated&#160;data&#160;(<a href="nuismer2019s.html#7">Table&#160;3).&#160;</a>This&#160;analysis&#160;proceeded&#160;identically&#160;to&#160;that&#160;described&#160;in<br/>the&#160;previous&#160;section&#160;except&#160;that&#160;the&#160;method&#160;was&#160;tested&#160;using&#160;136&#160;simulated&#160;data&#160;sets&#160;with&#160;5<br/>populations&#160;sampled,&#160;172&#160;simulated&#160;data&#160;sets&#160;with&#160;10&#160;populations&#160;sampled,&#160;and&#160;177&#160;simu-<br/>lated&#160;data&#160;sets&#160;with&#160;20&#160;populations&#160;sampled.&#160;Not&#160;surprisingly,&#160;when&#160;background&#160;parameters<br/>have&#160;been&#160;estimated&#160;independently&#160;and&#160;accurately,&#160;the&#160;performance&#160;of&#160;our&#160;method&#160;is&#160;sub-<br/>stantially&#160;improved&#160;(Figs&#160;<a href="nuismer2019s.html#12">3&#160;</a>and&#160;<a href="nuismer2019s.html#13">4).&#160;</a>Specifically,&#160;sampling&#160;from&#160;ten&#160;or&#160;more&#160;populations&#160;now<br/>guarantees&#160;the&#160;true&#160;values&#160;of&#160;the&#160;coevolutionary&#160;sensitivities&#160;reside&#160;within&#160;their&#160;95%&#160;credi-<br/>ble&#160;intervals&#160;in&#160;at&#160;least&#160;95%&#160;of&#160;simulations&#160;as&#160;desired&#160;(<a href="nuismer2019s.html#13">Fig&#160;4</a>).&#160;Similarly,&#160;as&#160;long&#160;as&#160;ten&#160;or<br/>more&#160;populations&#160;are&#160;sampled,&#160;the&#160;Type&#160;I&#160;error&#160;rates&#160;for&#160;the&#160;coevolutionary&#160;sensitivities<br/>remain&#160;below&#160;5%&#160;(<a href="nuismer2019s.html#13">Fig&#160;4</a>).<br/>
+<b>Application:&#160;Armament&#160;escalation&#160;between&#160;plant&#160;and&#160;seed&#160;predator</b><br/>
+The&#160;interaction&#160;between&#160;the&#160;Japanese&#160;camellia,&#160;<i>Camellia&#160;japonica</i>,&#160;and&#160;its&#160;obligate&#160;seed&#160;preda-<br/>tor,&#160;<i>Curculio&#160;camelliae</i>,&#160;is&#160;a&#160;textbook&#160;example&#160;of&#160;a&#160;coevolutionary&#160;arms&#160;race&#160;[<a href="nuismer2019s.html#20">34].&#160;</a>Japanese<br/>camellias&#160;defend&#160;against&#160;weevil&#160;attack&#160;using&#160;a&#160;thickened&#160;pericarp&#160;that&#160;defends&#160;the&#160;seeds&#160;inside<br/>from&#160;the&#160;weevil’s&#160;attempts&#160;to&#160;drill&#160;through&#160;the&#160;defensive&#160;pericarp&#160;using&#160;its&#160;elongated&#160;rostrum.<br/>Key&#160;features&#160;of&#160;this&#160;interaction&#160;include&#160;striking&#160;exaggeration&#160;of&#160;the&#160;traits&#160;mediating&#160;the&#160;inter-<br/>action&#160;(rostrum&#160;length&#160;in&#160;the&#160;weevil&#160;and&#160;pericarp&#160;thickness&#160;in&#160;the&#160;camellia)&#160;and&#160;a&#160;strong&#160;statis-<br/>tical&#160;association&#160;between&#160;plant&#160;and&#160;weevil&#160;traits&#160;over&#160;the&#160;geographic&#160;range&#160;of&#160;the&#160;interaction.<br/>Through&#160;a&#160;lengthy&#160;series&#160;of&#160;field&#160;studies,&#160;elegant&#160;experiments,&#160;and&#160;genetic&#160;work,&#160;coevolution<br/>has&#160;been&#160;established&#160;as&#160;the&#160;most&#160;likely&#160;explanation&#160;for&#160;these&#160;unusual&#160;features&#160;of&#160;the&#160;interaction<br/><a href="nuismer2019s.html#20">[32</a>,&#160;<a href="nuismer2019s.html#21">52–55</a>].&#160;Despite&#160;the&#160;extensive&#160;research&#160;effort&#160;devoted&#160;to&#160;this&#160;system,&#160;however,&#160;we&#160;lack<br/>quantitative&#160;estimates&#160;for&#160;the&#160;strength&#160;of&#160;coevolution,&#160;other&#160;than&#160;those&#160;we&#160;have&#160;recently<br/>derived&#160;using&#160;maximum&#160;likelihood&#160;(Week&#160;and&#160;Nuismer,&#160;2019).&#160;In&#160;this&#160;section,&#160;we&#160;apply&#160;our<br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+9&#160;/&#160;21<br/>
+<hr/>
+<a name=10></a><img src="nuismer2019-10_1.jpg"/><br/>
+<img src="nuismer2019-10_2.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+<a href="nuismer2019s.html#9"><b>Fig&#160;1.&#160;The&#160;</b></a><b>relationship&#160;between&#160;the&#160;coevolutionary&#160;sensitivities&#160;used&#160;to&#160;simulate&#160;data&#160;(X&#160;axis)&#160;and&#160;the&#160;values&#160;of&#160;these&#160;parameters&#160;estimated&#160;by&#160;our&#160;ABC&#160;method&#160;(Y<br/>axis)&#160;for&#160;scenarios&#160;where&#160;independent&#160;estimates&#160;of&#160;background&#160;parameters&#160;are&#160;unavailable,&#160;necessitating&#160;the&#160;use&#160;of&#160;relatively&#160;broad&#160;prior&#160;distributions.&#160;</b>The&#160;left-<br/>hand&#160;column&#160;shows&#160;results&#160;for&#160;cases&#160;where&#160;only&#160;5&#160;populations&#160;have&#160;been&#160;sampled,&#160;the&#160;center&#160;column&#160;cases&#160;where&#160;10&#160;populations&#160;have&#160;been&#160;sampled,&#160;and&#160;the&#160;right&#160;column<br/>cases&#160;where&#160;20&#160;populations&#160;have&#160;been&#160;sampled.&#160;Red&#160;points&#160;indicate&#160;parameter&#160;estimates&#160;for&#160;which&#160;the&#160;associated&#160;credible&#160;interval&#160;did&#160;not&#160;include&#160;zero.&#160;Black&#160;points<br/>indicate&#160;parameter&#160;estimates&#160;with&#160;credible&#160;intervals&#160;overlapping&#160;zero.&#160;The&#160;solid&#160;black&#160;line&#160;is&#160;the&#160;best&#160;linear&#160;fit&#160;and&#160;the&#160;dashed&#160;gray&#160;line&#160;is&#160;the&#160;perfect&#160;one&#160;to&#160;one<br/>relationship&#160;expected&#160;if&#160;all&#160;estimates&#160;were&#160;equal&#160;to&#160;their&#160;true&#160;values.<br/>
+<a href="https://doi.org/10.1371/journal.pcbi.1006988.g001">https://doi.org/10.1371/journal.pcbi.1006988.g001</a><br/>
+ABC&#160;method&#160;to&#160;this&#160;system,&#160;capitalizing&#160;on&#160;the&#160;extensive&#160;body&#160;of&#160;existing&#160;research&#160;to&#160;define<br/>prior&#160;distributions&#160;for&#160;key&#160;background&#160;parameters.<br/>
+Trait&#160;data–The&#160;phenotypic&#160;data&#160;we&#160;analyze&#160;comes&#160;from&#160;studies&#160;of&#160;this&#160;interaction&#160;that&#160;esti-<br/>
+mated&#160;population&#160;mean&#160;pericarp&#160;thickness&#160;and&#160;population&#160;mean&#160;rostrum&#160;lengths&#160;across&#160;17<br/>populations&#160;in&#160;Japan&#160;<a href="nuismer2019s.html#20">[34</a>].&#160;Because&#160;our&#160;method&#160;assumes&#160;an&#160;island&#160;model&#160;of&#160;migration,&#160;we<br/>restricted&#160;our&#160;analysis&#160;to&#160;the&#160;subset&#160;of&#160;these&#160;populations&#160;that&#160;formed&#160;a&#160;single&#160;cluster&#160;within<br/>population&#160;genetic&#160;analyses&#160;<a href="nuismer2019s.html#21">[56].&#160;</a>This&#160;resulted&#160;in&#160;a&#160;final&#160;data&#160;set&#160;consisting&#160;of&#160;estimates&#160;for<br/>population&#160;mean&#160;phenotypes&#160;in&#160;13&#160;populations&#160;<a href="nuismer2019s.html#18">(S1&#160;Table).</a><br/>
+Prior&#160;distributions–Previous&#160;research&#160;in&#160;this&#160;system&#160;provides&#160;a&#160;solid&#160;grounding&#160;for&#160;prior<br/>
+distributions&#160;of&#160;most&#160;background&#160;parameters.&#160;For&#160;instance,&#160;effective&#160;population&#160;sizes&#160;(<i>ni</i>)&#160;and<br/>rates&#160;of&#160;gene&#160;flow&#160;(<i>mi</i>)&#160;have&#160;been&#160;estimated&#160;for&#160;both&#160;camellia&#160;and&#160;weevil&#160;[<a href="nuismer2019s.html#21">54,&#160;55].&#160;</a>Heritability<br/>(<i>h</i>2)&#160;has&#160;been&#160;estimated&#160;for&#160;pericarp&#160;thickness&#160;directly&#160;[<a href="nuismer2019s.html#21">53</a>]&#160;and&#160;can&#160;be&#160;at&#160;least&#160;crudely&#160;guessed<br/>
+<i>i</i><br/>
+and&#160;bounded&#160;for&#160;rostrum&#160;length&#160;using&#160;estimates&#160;for&#160;related&#160;species&#160;<a href="nuismer2019s.html#21">[54</a>].&#160;The&#160;phenotypic<br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+10&#160;/&#160;21<br/>
+<hr/>
+<a name=11></a><img src="nuismer2019-11_1.jpg"/><br/>
+<img src="nuismer2019-11_2.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+<a href="nuismer2019s.html#9"><b>Fig&#160;2.&#160;</b></a>The&#160;proportion&#160;of&#160;simulations&#160;where&#160;the&#160;true&#160;value&#160;of&#160;the&#160;parameter&#160;fell&#160;outside&#160;of&#160;the&#160;95%&#160;credible&#160;interval&#160;of&#160;its&#160;posterior<br/>distribution&#160;(top&#160;panel)&#160;and&#160;the&#160;proportion&#160;of&#160;simulations&#160;where&#160;the&#160;true&#160;value&#160;of&#160;the&#160;parameter&#160;was&#160;equal&#160;to&#160;zero,&#160;but&#160;the&#160;credible<br/>interval&#160;did&#160;not&#160;include&#160;zero&#160;(bottom&#160;panel).&#160;Inference&#160;was&#160;performed&#160;using&#160;very&#160;broad&#160;priors&#160;restricted&#160;only&#160;by&#160;biological<br/>feasibility.<br/>
+<a href="https://doi.org/10.1371/journal.pcbi.1006988.g002">https://doi.org/10.1371/journal.pcbi.1006988.g002</a><br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+11&#160;/&#160;21<br/>
+<hr/>
+<a name=12></a><img src="nuismer2019-12_1.jpg"/><br/>
+<img src="nuismer2019-12_2.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+<a href="nuismer2019s.html#9"><b>Fig&#160;3.&#160;</b></a><b>The&#160;relationship&#160;between&#160;the&#160;coevolutionary&#160;sensitivities&#160;used&#160;to&#160;simulate&#160;data&#160;(X&#160;axis)&#160;and&#160;the&#160;values&#160;of&#160;these&#160;parameters&#160;estimated&#160;by&#160;our&#160;ABC&#160;method<br/>(Y&#160;axis)&#160;for&#160;scenarios&#160;where&#160;prior&#160;distributions&#160;for&#160;background&#160;parameters&#160;have&#160;been&#160;refined&#160;using&#160;independent&#160;estimates.&#160;</b>The&#160;left-hand&#160;column&#160;shows&#160;results&#160;for<br/>cases&#160;where&#160;only&#160;5&#160;populations&#160;have&#160;been&#160;sampled,&#160;the&#160;center&#160;column&#160;cases&#160;where&#160;10&#160;populations&#160;have&#160;been&#160;sampled,&#160;and&#160;the&#160;right&#160;column&#160;cases&#160;where&#160;20&#160;populations<br/>have&#160;been&#160;sampled.&#160;Red&#160;points&#160;indicate&#160;parameter&#160;estimates&#160;for&#160;which&#160;the&#160;associated&#160;credible&#160;interval&#160;did&#160;not&#160;include&#160;zero.&#160;Black&#160;points&#160;indicate&#160;parameter&#160;estimates<br/>with&#160;credible&#160;intervals&#160;overlapping&#160;zero.&#160;The&#160;solid&#160;black&#160;line&#160;is&#160;the&#160;best&#160;linear&#160;fit&#160;and&#160;the&#160;dashed&#160;gray&#160;line&#160;is&#160;the&#160;perfect&#160;one&#160;to&#160;one&#160;relationship&#160;expected&#160;if&#160;all&#160;estimates<br/>were&#160;equal&#160;to&#160;their&#160;true&#160;values.<br/>
+<a href="https://doi.org/10.1371/journal.pcbi.1006988.g003">https://doi.org/10.1371/journal.pcbi.1006988.g003</a><br/>
+optima&#160;favored&#160;by&#160;stabilizing&#160;selection&#160;(<i>μθ</i>,<i>i</i>)&#160;can&#160;also&#160;be&#160;estimated&#160;independently&#160;from&#160;previ-<br/>ous&#160;work.&#160;Specifically,&#160;the&#160;optimum&#160;trait&#160;value&#160;for&#160;the&#160;weevil&#160;can&#160;be&#160;at&#160;least&#160;crudely&#160;estimated<br/>using&#160;rostrum&#160;lengths&#160;of&#160;male&#160;weevils,&#160;because&#160;male&#160;weevils&#160;do&#160;not&#160;use&#160;their&#160;rostra&#160;in&#160;interac-<br/>tions&#160;with&#160;the&#160;plant&#160;<a href="nuismer2019s.html#21">[53</a>].&#160;Thus,&#160;as&#160;long&#160;as&#160;male&#160;and&#160;female&#160;rostrum&#160;lengths&#160;are&#160;not&#160;genetically<br/>correlated&#160;(or&#160;the&#160;population&#160;is&#160;at&#160;equilibrium),&#160;male&#160;rostrum&#160;length&#160;should&#160;serve&#160;as&#160;a&#160;reason-<br/>able&#160;proxy&#160;for&#160;the&#160;optimum&#160;rostrum&#160;length&#160;in&#160;the&#160;absence&#160;of&#160;interaction&#160;with&#160;the&#160;Camellia.<br/>Unfortunately,&#160;the&#160;optimum&#160;trait&#160;value&#160;for&#160;the&#160;camellia&#160;must&#160;be&#160;estimated&#160;using&#160;populations<br/>outside&#160;the&#160;range&#160;of&#160;the&#160;weevil,&#160;and&#160;such&#160;estimates&#160;could&#160;easily&#160;be&#160;confounded&#160;by&#160;spatial&#160;varia-<br/>tion&#160;[<a href="nuismer2019s.html#21">53].&#160;</a>Consequently,&#160;we&#160;use&#160;rather&#160;broad&#160;parameters&#160;for&#160;these&#160;parameters&#160;to&#160;capture&#160;this<br/>uncertainty.&#160;Similarly,&#160;the&#160;spatial&#160;variance&#160;in&#160;these&#160;phenotypic&#160;optima&#160;can&#160;be&#160;crudely&#160;esti-<br/>mated&#160;as&#160;the&#160;variance&#160;in&#160;rostrum&#160;length&#160;in&#160;male&#160;weevils&#160;from&#160;different&#160;populations&#160;and&#160;the<br/>variance&#160;in&#160;pericarp&#160;thickness&#160;from&#160;different&#160;populations&#160;outside&#160;the&#160;range&#160;of&#160;the&#160;weevil&#160;[<a href="nuismer2019s.html#21">53].<br/></a>Phenotypic&#160;variance&#160;(<i>Vi</i>)&#160;can&#160;be&#160;estimated&#160;for&#160;each&#160;species&#160;by&#160;averaging&#160;the&#160;within&#160;population<br/>phenotypic&#160;variance&#160;for&#160;each&#160;trait&#160;over&#160;all&#160;thirteen&#160;populations&#160;included&#160;in&#160;our&#160;analysis.<br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+12&#160;/&#160;21<br/>
+<hr/>
+<a name=13></a><img src="nuismer2019-13_1.jpg"/><br/>
+<img src="nuismer2019-13_2.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+<a href="nuismer2019s.html#9"><b>Fig&#160;4.&#160;</b></a>The&#160;proportion&#160;of&#160;simulations&#160;where&#160;the&#160;true&#160;value&#160;of&#160;the&#160;parameter&#160;fell&#160;outside&#160;of&#160;the&#160;95%&#160;credible&#160;interval&#160;of&#160;its&#160;posterior<br/>distribution&#160;(top&#160;panel)&#160;and&#160;the&#160;proportion&#160;of&#160;simulations&#160;where&#160;the&#160;true&#160;value&#160;of&#160;the&#160;parameter&#160;was&#160;equal&#160;to&#160;zero,&#160;but&#160;the&#160;credible<br/>interval&#160;did&#160;not&#160;include&#160;zero&#160;(bottom&#160;panel).&#160;Inference&#160;was&#160;performed&#160;assuming&#160;independent&#160;estimates&#160;for&#160;background&#160;parameters<br/>were&#160;available,&#160;allowing&#160;narrower&#160;prior&#160;distributions&#160;to&#160;be&#160;used&#160;than&#160;in&#160;<a href="nuismer2019s.html#11">Fig&#160;2</a>.<br/>
+<a href="https://doi.org/10.1371/journal.pcbi.1006988.g004">https://doi.org/10.1371/journal.pcbi.1006988.g004</a><br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+13&#160;/&#160;21<br/>
+<hr/>
+<a name=14></a><img src="nuismer2019-14_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+Unfortunately,&#160;the&#160;strengths&#160;of&#160;stabilizing&#160;selection&#160;(<i>γi</i>)&#160;have&#160;not&#160;been&#160;independently&#160;esti-<br/>mated,&#160;forcing&#160;us&#160;to&#160;rely&#160;on&#160;broad&#160;priors&#160;for&#160;these&#160;parameters&#160;informed&#160;only&#160;by&#160;previous<br/>meta-analyses&#160;of&#160;the&#160;strength&#160;of&#160;stabilizing&#160;selection&#160;across&#160;studies&#160;and&#160;taxonomic&#160;groups&#160;<a href="nuismer2019s.html#21">[50,<br/>51</a>].&#160;Prior&#160;distributions&#160;for&#160;all&#160;model&#160;parameters&#160;are&#160;described&#160;in&#160;<a href="nuismer2019s.html#14">Table&#160;4.</a><br/>
+Posterior&#160;distributions&#160;and&#160;coevolutionary&#160;inference–The&#160;ABC&#160;algorithm&#160;was&#160;run&#160;until<br/>
+there&#160;were&#160;7,513&#160;points&#160;in&#160;the&#160;posterior&#160;distribution,&#160;using&#160;acceptance&#160;thresholds&#160;somewhat<br/>more&#160;restrictive&#160;than&#160;those&#160;used&#160;in&#160;method&#160;performance&#160;evaluations.&#160;Specifically,&#160;parameter<br/>combinations&#160;were&#160;passed&#160;to&#160;the&#160;posterior&#160;distribution&#160;only&#160;when&#160;the&#160;spatial&#160;average&#160;popula-<br/>tion&#160;mean&#160;phenotypes&#160;were&#160;within&#160;1.120mm&#160;and&#160;0.887mm&#160;of&#160;their&#160;values&#160;in&#160;the&#160;empirical<br/>data&#160;for&#160;weevil&#160;and&#160;camellia,&#160;respectively,&#160;the&#160;standard&#160;deviations&#160;among&#160;population&#160;mean<br/>phenotypes&#160;were&#160;within&#160;0.327mm&#160;and&#160;0.553mm&#160;of&#160;their&#160;values&#160;for&#160;weevil&#160;and&#160;camellia,&#160;and<br/>the&#160;correlation&#160;between&#160;weevil&#160;and&#160;camellia&#160;mean&#160;phenotypes&#160;was&#160;within&#160;0.224&#160;of&#160;its&#160;value&#160;in<br/>the&#160;data.&#160;The&#160;modal&#160;values&#160;of&#160;the&#160;coevolutionary&#160;sensitivities&#160;were&#160;then&#160;identified,&#160;as&#160;were<br/>their&#160;95%&#160;credible&#160;intervals&#160;(HPD).&#160;Posterior&#160;distributions&#160;are&#160;reported&#160;in&#160;<a href="nuismer2019s.html#16">Fig&#160;5.&#160;</a>The&#160;results<br/>demonstrate&#160;that&#160;the&#160;mode&#160;for&#160;weevil&#160;coevolutionary&#160;sensitivity&#160;(<i>αW</i>)&#160;is&#160;equal&#160;to&#160;2.37&#160;with&#160;a<br/>95%&#160;credible&#160;interval&#160;between&#160;0.60&#160;and&#160;2.94.&#160;Thus,&#160;our&#160;results&#160;support&#160;the&#160;idea&#160;that&#160;Camellia<br/>pericarp&#160;thickness&#160;exerts&#160;selection&#160;on&#160;weevil&#160;rostrum&#160;length.&#160;For&#160;the&#160;Camellia,&#160;our&#160;results<br/>demonstrate&#160;the&#160;mode&#160;for&#160;Camellia&#160;coevolutionary&#160;sensitivity&#160;(<i>αC</i>)&#160;is&#160;equal&#160;to&#160;0.21&#160;with&#160;a&#160;95%<br/>credible&#160;interval&#160;between&#160;0&#160;and&#160;2.40.&#160;Thus,&#160;our&#160;results&#160;are&#160;consistent&#160;with&#160;the&#160;hypothesis&#160;that<br/>weevil&#160;rostrum&#160;length&#160;exerts&#160;selection&#160;on&#160;Camellia&#160;pericarp&#160;thickness,&#160;but&#160;cannot&#160;rule&#160;out&#160;the<br/>possibility&#160;that&#160;pericarp&#160;thickness&#160;evolves&#160;independently&#160;of&#160;weevil&#160;rostrum&#160;length.&#160;In&#160;sum-<br/>mary,&#160;the&#160;results&#160;of&#160;our&#160;ABC&#160;analysis&#160;point&#160;to&#160;reciprocal&#160;selection&#160;and&#160;coevolution&#160;as&#160;the&#160;most<br/>likely&#160;scenario,&#160;but&#160;do&#160;not&#160;preclude&#160;the&#160;possibility&#160;that&#160;evolution&#160;is&#160;unilateral,&#160;with&#160;weevil&#160;ros-<br/>trum&#160;length&#160;tracking&#160;independently&#160;evolving&#160;Camellia&#160;pericarp&#160;thickness.<br/>
+Validation&#160;against&#160;independent&#160;estimates&#160;of&#160;selection–&#160;Although&#160;estimates&#160;of&#160;population<br/>
+mean&#160;phenotypes&#160;are&#160;not&#160;available&#160;from&#160;enough&#160;populations&#160;for&#160;standard&#160;methods&#160;of&#160;cross-<br/>validation&#160;to&#160;be&#160;useful&#160;[e.g.,&#160;<a href="nuismer2019s.html#21">57],&#160;</a>previous&#160;work&#160;estimating&#160;selection&#160;gradients&#160;acting&#160;on&#160;peri-<br/>carp&#160;thickness&#160;within&#160;a&#160;number&#160;of&#160;populations&#160;<a href="nuismer2019s.html#20">[34]&#160;</a>allows&#160;independent&#160;validation&#160;of&#160;our&#160;esti-<br/>mates&#160;for&#160;the&#160;coevolutionary&#160;sensitivities.&#160;Specifically,&#160;using&#160;the&#160;coevolutionary&#160;sensitivities<br/>estimated&#160;by&#160;our&#160;ABC&#160;method,&#160;we&#160;can&#160;predict&#160;the&#160;standardized&#160;biotic&#160;selection&#160;gradient&#160;for<br/>any&#160;population&#160;where&#160;trait&#160;means&#160;are&#160;known.&#160;Applying&#160;this&#160;approach&#160;to&#160;the&#160;five&#160;populations<br/>for&#160;which&#160;significant&#160;selection&#160;gradients&#160;acting&#160;on&#160;pericarp&#160;thickness&#160;have&#160;been&#160;previously<br/>reported&#160;<a href="nuismer2019s.html#20">[34</a>]&#160;resulted&#160;in&#160;a&#160;correlation&#160;of&#160;0.97&#160;between&#160;predicted&#160;and&#160;observed&#160;values&#160;<a href="nuismer2019s.html#16">(Fig&#160;6).<br/></a>Although&#160;strongly&#160;correlated,&#160;our&#160;simulated&#160;selection&#160;gradients&#160;consistently&#160;overestimated&#160;val-<br/>ues&#160;measured&#160;directly&#160;from&#160;the&#160;data.&#160;This&#160;discrepancy&#160;may&#160;arise&#160;because&#160;our&#160;mathematical<br/>
+<a href="nuismer2019s.html#14"><b>Table&#160;4.&#160;</b></a><b>Prior&#160;distributions&#160;for&#160;camellia&#160;and&#160;weevil&#160;parameters.</b><br/>
+<i><b>Model&#160;Parameter</b></i><br/>
+<i><b>Weevil&#160;Distribution</b></i><br/>
+<i><b>Camellia&#160;Distribution</b></i><br/>
+<i>γi</i><br/>
+Gamma&#160;(0.05,&#160;2.0)<br/>
+Gamma&#160;(0.05,&#160;2.0)<br/>
+<i>μθ</i>,<i>i</i><br/>
+Gamma&#160;(5.912,&#160;8.0)<br/>
+Gamma&#160;(6.248,&#160;8.0)<br/>
+s2<br/>
+Gamma&#160;(0.15,&#160;1.05)<br/>
+Gamma&#160;(1.27,&#160;1.3)<br/>
+y<i>;i</i><br/>
+<i>ρθ</i><br/>
+Uniform&#160;(-0.1,&#160;0.1)<br/>
+<i>αi</i><br/>
+Uniform&#160;(0.0,&#160;3.0)<br/>
+Uniform&#160;(0.0,&#160;3.0)<br/>
+<i>h</i>2<br/>
+Uniform&#160;(0.312,&#160;0.512)<br/>
+Uniform&#160;(0.6375,&#160;0.8375)<br/>
+<i>i</i><br/>
+<i>Vi</i><br/>
+Gamma&#160;(0.71,&#160;50.0)<br/>
+Gamma&#160;(3.72,&#160;50.0)<br/>
+<i>mi</i><br/>
+Gamma&#160;(3.07×10−6,&#160;2.0)<br/>
+Gamma&#160;(1.00×10−6,&#160;2.0)<br/>
+<i>ni</i><br/>
+Gamma&#160;(30870,&#160;200.0)<br/>
+Gamma&#160;(1818,&#160;100.0)<br/>
+<a href="https://doi.org/10.1371/journal.pcbi.1006988.t004">https://doi.org/10.1371/journal.pcbi.1006988.t004</a><br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+14&#160;/&#160;21<br/>
+<hr/>
+<a name=15></a><img src="nuismer2019-15_1.jpg"/><br/>
+<img src="nuismer2019-15_2.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+15&#160;/&#160;21<br/>
+<hr/>
+<a name=16></a><img src="nuismer2019-16_1.jpg"/><br/>
+<img src="nuismer2019-16_2.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+<a href="nuismer2019s.html#14"><b>Fig&#160;5.&#160;</b></a>Posterior&#160;probability&#160;densities&#160;for&#160;weevil&#160;coevolutionary&#160;sensitivity&#160;(top&#160;panel),&#160;camellia&#160;coevolutionary<br/>sensitivity&#160;(middle&#160;panel),&#160;and&#160;the&#160;composite&#160;index&#160;of&#160;reciprocal&#160;selection&#160;(bottom&#160;panel).&#160;Modal&#160;values&#160;were&#160;2.37,<br/>0.21,&#160;0.81&#160;respectively,&#160;and&#160;95%&#160;credible&#160;intervals&#160;were&#160;{0.60,&#160;2.94},&#160;{0,&#160;2.40},&#160;{0.15,&#160;2.20}&#160;respectively.<br/>
+<a href="https://doi.org/10.1371/journal.pcbi.1006988.g005">https://doi.org/10.1371/journal.pcbi.1006988.g005</a><br/>
+model&#160;fails&#160;to&#160;capture&#160;some&#160;of&#160;the&#160;nuanced&#160;functional&#160;relationship&#160;between&#160;weevil&#160;rostrum<br/>length&#160;and&#160;camellia&#160;pericarp&#160;thickness.&#160;It&#160;is&#160;also&#160;possible,&#160;however,&#160;that&#160;this&#160;apparent&#160;discrep-<br/>ancy&#160;is&#160;nothing&#160;more&#160;than&#160;noise&#160;stemming&#160;from&#160;the&#160;small&#160;sample&#160;sizes&#160;used&#160;in&#160;the&#160;empirical<br/>study&#160;and&#160;the&#160;small&#160;number&#160;of&#160;populations&#160;for&#160;which&#160;significant&#160;estimates&#160;of&#160;selection&#160;are<br/>available.&#160;Resolving&#160;this&#160;apparent&#160;discrepancy&#160;will&#160;require&#160;data&#160;from&#160;a&#160;larger&#160;number&#160;of&#160;popu-<br/>lations&#160;and&#160;exploration&#160;of&#160;alternative&#160;mathematical&#160;formulations.&#160;As&#160;a&#160;whole,&#160;however,&#160;we<br/>take&#160;the&#160;general&#160;agreement&#160;between&#160;our&#160;predicted&#160;selection&#160;gradients&#160;and&#160;those&#160;directly&#160;and<br/>independently&#160;estimated&#160;through&#160;phenotypic&#160;selection&#160;analysis&#160;as&#160;support&#160;for&#160;the&#160;validity&#160;of<br/>our&#160;approach.<br/>
+<b>Discussion</b><br/>
+We&#160;have&#160;developed&#160;an&#160;approximate&#160;Bayesian&#160;methodology&#160;(<i>ABC&#160;Coevolution</i>)&#160;for&#160;estimating<br/>the&#160;strength&#160;of&#160;coevolutionary&#160;selection&#160;using&#160;the&#160;spatial&#160;distribution&#160;of&#160;trait&#160;means.&#160;Our<br/>approach&#160;relaxes&#160;key&#160;assumptions&#160;of&#160;an&#160;existing&#160;maximum&#160;likelihood&#160;technique&#160;and&#160;performs<br/>reliably&#160;when&#160;population&#160;mean&#160;trait&#160;values&#160;are&#160;sampled&#160;from&#160;ten&#160;or&#160;more&#160;populations&#160;and<br/>independent&#160;information&#160;is&#160;available&#160;to&#160;refine&#160;prior&#160;distributions&#160;for&#160;background&#160;parameters.<br/>Specifically,&#160;when&#160;priors&#160;are&#160;broad&#160;and&#160;informed&#160;only&#160;by&#160;biological&#160;plausibility,&#160;the&#160;true&#160;values<br/>of&#160;the&#160;coevolutionary&#160;sensitivities&#160;lie&#160;outside&#160;of&#160;their&#160;95%&#160;credible&#160;intervals&#160;in&#160;up&#160;to&#160;8%&#160;of<br/>
+<a href="nuismer2019s.html#14"><b>Fig&#160;6.&#160;</b></a><b>Standardized&#160;biotic&#160;selection&#160;gradients&#160;acting&#160;on&#160;pericarp&#160;thickness&#160;predicted&#160;by&#160;our&#160;ABC&#160;method&#160;plotted&#160;against<br/>their&#160;independently&#160;measured&#160;values.&#160;</b>Predicted&#160;selection&#160;gradients&#160;were&#160;calculated&#160;for&#160;the&#160;five&#160;populations&#160;for&#160;which&#160;Toju<br/>and&#160;Sota&#160;[<a href="nuismer2019s.html#20">34</a>]&#160;reported&#160;significant&#160;selection&#160;gradients&#160;and&#160;which&#160;belonged&#160;to&#160;a&#160;single&#160;clade.&#160;Predicted&#160;selection&#160;gradients&#160;were<br/>calculated&#160;by&#160;conducting&#160;a&#160;simulated&#160;phenotypic&#160;selection&#160;analysis&#160;in&#160;each&#160;population&#160;based&#160;on&#160;the&#160;modal&#160;parameter&#160;values<br/>of&#160;the&#160;posterior&#160;distributions.<br/>
+<a href="https://doi.org/10.1371/journal.pcbi.1006988.g006">https://doi.org/10.1371/journal.pcbi.1006988.g006</a><br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+16&#160;/&#160;21<br/>
+<hr/>
+<a name=17></a><img src="nuismer2019-17_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+simulated&#160;data&#160;sets&#160;<a href="nuismer2019s.html#11">(Fig&#160;2).&#160;</a>In&#160;contrast,&#160;when&#160;independent&#160;estimates&#160;of&#160;background&#160;parameters<br/>can&#160;be&#160;used&#160;to&#160;refine&#160;priors,&#160;the&#160;true&#160;values&#160;of&#160;the&#160;coevolutionary&#160;sensitivities&#160;lie&#160;outside&#160;their<br/>95%&#160;credible&#160;interval&#160;in&#160;fewer&#160;than&#160;5%&#160;of&#160;cases,&#160;as&#160;long&#160;as&#160;10&#160;or&#160;more&#160;populations&#160;are&#160;sampled<br/><a href="nuismer2019s.html#13">(Fig&#160;4</a>).&#160;Applying&#160;our&#160;method&#160;to&#160;the&#160;well-studied&#160;interaction&#160;between&#160;the&#160;plant,&#160;<i>Camellia<br/>japonica</i>,&#160;and&#160;its&#160;seed&#160;predator,&#160;<i>Curculio&#160;camelliae</i>,&#160;provides&#160;support&#160;for&#160;the&#160;hypothesis&#160;of&#160;a<br/>coevolutionary&#160;arms&#160;race&#160;between&#160;armament&#160;and&#160;defense,&#160;but&#160;fails&#160;to&#160;unequivocally&#160;rule&#160;out<br/>the&#160;possibility&#160;of&#160;unilateral&#160;trait&#160;escalation.<br/>
+Comparing&#160;the&#160;estimates&#160;for&#160;coevolutionary&#160;selection&#160;in&#160;the&#160;<i>C</i>.&#160;<i>camellia–C</i>.&#160;<i>japonica&#160;</i>derived<br/>
+here&#160;with&#160;those&#160;we&#160;previously&#160;derived&#160;using&#160;a&#160;maximum&#160;likelihood&#160;approach&#160;(Week&#160;and&#160;Nuis-<br/>mer,&#160;2019)&#160;reveals&#160;qualitative&#160;similarity&#160;(i.e.,&#160;coevolution&#160;is&#160;the&#160;best&#160;supported&#160;hypothesis)&#160;but<br/>quantitative&#160;discrepancy.&#160;Specifically,&#160;the&#160;estimates&#160;of&#160;coevolutionary&#160;selection&#160;we&#160;derive&#160;here<br/>are&#160;much&#160;larger&#160;than&#160;those&#160;inferred&#160;using&#160;maximum&#160;likelihood,&#160;even&#160;after&#160;transforming&#160;the<br/>previous&#160;estimates&#160;to&#160;the&#160;same&#160;scale&#160;of&#160;measurement.&#160;There&#160;are&#160;at&#160;least&#160;three&#160;reasons&#160;the&#160;ABC<br/>approach&#160;infers&#160;a&#160;greater&#160;magnitude&#160;of&#160;coevolutionary&#160;selection&#160;than&#160;the&#160;maximum&#160;likelihood<br/>approach.&#160;First,&#160;the&#160;two&#160;approaches&#160;assume&#160;different&#160;functional&#160;forms&#160;of&#160;interaction&#160;between<br/>the&#160;species.&#160;Second,&#160;the&#160;maximum&#160;likelihood&#160;approach&#160;assumes&#160;only&#160;random&#160;genetic&#160;drift<br/>generates&#160;spatial&#160;variation&#160;in&#160;trait&#160;means.&#160;Because&#160;drift&#160;is&#160;a&#160;weak&#160;force&#160;in&#160;all&#160;but&#160;the&#160;smallest&#160;of<br/>populations,&#160;spatial&#160;variation&#160;can&#160;be&#160;maintained&#160;only&#160;when&#160;stabilizing&#160;selection&#160;and&#160;coevolu-<br/>tionary&#160;selection&#160;are&#160;also&#160;very&#160;weak.&#160;If&#160;this&#160;were&#160;not&#160;the&#160;case,&#160;stabilizing&#160;and&#160;coevolutionary<br/>selection&#160;would&#160;overwhelm&#160;drift&#160;and&#160;erode&#160;spatial&#160;variation.&#160;By&#160;allowing&#160;the&#160;optimal&#160;trait&#160;val-<br/>ues&#160;favored&#160;by&#160;stabilizing&#160;selection&#160;to&#160;vary&#160;across&#160;space,&#160;the&#160;ABC&#160;approach&#160;avoids&#160;this&#160;trap&#160;and<br/>can&#160;maintain&#160;spatial&#160;variation&#160;even&#160;when&#160;stabilizing&#160;and&#160;coevolutionary&#160;selection&#160;become<br/>strong.&#160;Third,&#160;the&#160;maximum&#160;likelihood&#160;approach&#160;assumes&#160;the&#160;outcome&#160;of&#160;interactions&#160;does<br/>not&#160;depend&#160;too&#160;strongly&#160;on&#160;the&#160;traits&#160;of&#160;the&#160;interacting&#160;individuals,&#160;allowing&#160;analytical&#160;approx-<br/>imations&#160;for&#160;evolutionary&#160;change&#160;to&#160;be&#160;derived.&#160;Although&#160;mathematically&#160;convenient,&#160;this<br/>assumption&#160;guarantees&#160;the&#160;maximum&#160;likelihood&#160;approach&#160;will&#160;underestimate&#160;the&#160;true&#160;magni-<br/>tude&#160;of&#160;coevolutionary&#160;selection.&#160;In&#160;contrast,&#160;the&#160;ABC&#160;approach&#160;developed&#160;here&#160;avoids&#160;this<br/>assumption&#160;by&#160;relying&#160;on&#160;brute&#160;force&#160;simulation&#160;and&#160;so&#160;can&#160;return&#160;estimates&#160;of&#160;coevolutionary<br/>selection&#160;that&#160;are&#160;much&#160;greater&#160;in&#160;magnitude.&#160;In&#160;short,&#160;the&#160;maximum&#160;likelihood&#160;approach&#160;is<br/>faster&#160;and&#160;more&#160;computationally&#160;efficient&#160;but&#160;will&#160;underestimate&#160;the&#160;strength&#160;of&#160;coevolution-<br/>ary&#160;selection&#160;in&#160;cases&#160;where&#160;its&#160;true&#160;value&#160;is&#160;strong.<br/>
+Although&#160;the&#160;Bayesian&#160;approach&#160;we&#160;develop&#160;here&#160;relaxes&#160;several&#160;important&#160;assumptions&#160;of<br/>
+our&#160;earlier&#160;maximum&#160;likelihood&#160;approach&#160;(e.g.,&#160;weak&#160;coevolutionary&#160;selection,&#160;absence&#160;of<br/>gene&#160;flow,&#160;spatially&#160;homogenous&#160;abiotic&#160;optima),&#160;it&#160;still&#160;makes&#160;important&#160;assumptions&#160;that<br/>may&#160;not&#160;be&#160;satisfied&#160;in&#160;all&#160;systems.&#160;For&#160;instance,&#160;as&#160;currently&#160;implemented,&#160;our&#160;approach&#160;does<br/>not&#160;allow&#160;the&#160;strength&#160;of&#160;coevolutionary&#160;selection&#160;to&#160;vary&#160;over&#160;space,&#160;and&#160;thus&#160;ignores&#160;the<br/>potential&#160;for&#160;selection&#160;mosaics&#160;<a href="nuismer2019s.html#21">[58–60</a>].&#160;An&#160;obvious,&#160;and&#160;relatively&#160;straightforward,&#160;extension<br/>of&#160;the&#160;Bayesian&#160;methodology&#160;developed&#160;here&#160;would&#160;include&#160;such&#160;selection&#160;mosaics.&#160;However,<br/>initial&#160;explorations&#160;of&#160;this&#160;possibility&#160;suggested&#160;accurate&#160;inference&#160;will&#160;require&#160;sampling&#160;trait<br/>means&#160;from&#160;many&#160;more&#160;populations&#160;than&#160;what&#160;is&#160;generally&#160;available,&#160;even&#160;in&#160;very&#160;well-studied<br/>interactions&#160;like&#160;those&#160;between&#160;<i>C</i>.&#160;<i>camellia&#160;</i>and&#160;<i>C</i>.&#160;<i>japonica</i>.&#160;In&#160;addition,&#160;just&#160;as&#160;with&#160;our&#160;previ-<br/>ous&#160;likelihood-based&#160;method,&#160;the&#160;approach&#160;developed&#160;here&#160;assumes&#160;the&#160;metapopulation&#160;has<br/>reached&#160;an&#160;evolutionary&#160;equilibrium,&#160;at&#160;least&#160;with&#160;respect&#160;to&#160;the&#160;statistical&#160;moments&#160;we&#160;use&#160;as<br/>summary&#160;statistics.&#160;In&#160;cases&#160;where&#160;time&#160;series&#160;information&#160;on&#160;traits&#160;is&#160;available,&#160;or&#160;it&#160;is&#160;possible<br/>to&#160;establish&#160;times&#160;of&#160;divergence,&#160;developing&#160;non-equilibrium&#160;approaches&#160;may&#160;offer&#160;promising<br/>alternatives.&#160;Our&#160;approach&#160;also&#160;relies&#160;upon&#160;the&#160;temporal&#160;constancy&#160;of&#160;key&#160;parameters&#160;such&#160;as<br/>heritabilities,&#160;phenotypic&#160;variances,&#160;abiotic&#160;optima,&#160;and&#160;strengths&#160;of&#160;stabilizing&#160;and&#160;coevolu-<br/>tionary&#160;selection.&#160;Although&#160;allowing&#160;these&#160;parameters&#160;to&#160;vary&#160;over&#160;time&#160;is&#160;relatively&#160;straight-<br/>forward&#160;from&#160;a&#160;programming/computational&#160;standpoint,&#160;doing&#160;so&#160;seems&#160;wildly&#160;premature<br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+17&#160;/&#160;21<br/>
+<hr/>
+<a name=18></a><img src="nuismer2019-18_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+given&#160;we&#160;lack&#160;sufficient&#160;data&#160;to&#160;establish&#160;even&#160;ballpark&#160;priors&#160;for&#160;how&#160;these&#160;parameters&#160;change<br/>over&#160;time&#160;in&#160;natural&#160;systems.&#160;Finally,&#160;we&#160;focus&#160;here&#160;on&#160;the&#160;special&#160;case&#160;of&#160;an&#160;island&#160;model<br/>where&#160;gene&#160;flow&#160;occurs&#160;equally&#160;among&#160;all&#160;populations.&#160;Extending&#160;our&#160;approach&#160;to&#160;cases&#160;that<br/>generate&#160;isolation&#160;by&#160;distance,&#160;such&#160;as&#160;stepping&#160;stone&#160;models,&#160;will&#160;allow&#160;application&#160;to&#160;a<br/>broader&#160;range&#160;of&#160;biological&#160;systems.<br/>
+In&#160;summary,&#160;we&#160;have&#160;presented&#160;a&#160;novel&#160;Bayesian&#160;methodology&#160;for&#160;estimating&#160;the&#160;strength<br/>
+of&#160;coevolutionary&#160;selection&#160;driving&#160;putative&#160;arms&#160;races&#160;between&#160;pairs&#160;of&#160;interacting&#160;species.<br/>Although&#160;we&#160;have&#160;restricted&#160;our&#160;attention&#160;to&#160;arms&#160;races&#160;between&#160;species,&#160;adapting&#160;our<br/>approach&#160;to&#160;arms&#160;races&#160;within&#160;species,&#160;such&#160;as&#160;putative&#160;cases&#160;of&#160;runaway&#160;sexual&#160;selection&#160;or<br/>conflict&#160;between&#160;sexes&#160;or&#160;groups&#160;within&#160;a&#160;species&#160;[e.g.,&#160;<a href="nuismer2019s.html#19">15</a>,&#160;<a href="nuismer2019s.html#21">61</a>,&#160;<a href="nuismer2019s.html#21">62</a>],&#160;is&#160;a&#160;straightforward&#160;matter.<br/>Similarly,&#160;adapting&#160;our&#160;approach&#160;to&#160;other&#160;forms&#160;of&#160;ecological&#160;interactions&#160;such&#160;as&#160;mutualism<br/>or&#160;competition&#160;or&#160;to&#160;other&#160;mechanisms&#160;such&#160;as&#160;phenotype&#160;matching,&#160;is&#160;extremely&#160;straightfor-<br/>ward&#160;and&#160;requires&#160;only&#160;minor&#160;modifications&#160;to&#160;the&#160;source&#160;code.&#160;Implementing&#160;these&#160;and&#160;other<br/>options&#160;in&#160;our&#160;inference&#160;package&#160;(<i>ABC&#160;coevolution</i>)&#160;will&#160;be&#160;a&#160;central&#160;goal&#160;of&#160;future&#160;develop-<br/>ment.&#160;Broad&#160;application&#160;of&#160;the&#160;approach&#160;developed&#160;here&#160;provides&#160;an&#160;opportunity&#160;to&#160;better<br/>understand&#160;the&#160;distribution&#160;of&#160;coevolutionary&#160;selection&#160;across&#160;interactions,&#160;communities,&#160;and<br/>ecosystems,&#160;and&#160;to&#160;answer&#160;long-standing&#160;debates&#160;such&#160;as&#160;the&#160;importance&#160;of&#160;reciprocity&#160;in&#160;the<br/>evolutionary&#160;process&#160;[<a href="nuismer2019s.html#21">63,&#160;64].</a><br/>
+<b>Supporting&#160;information</b><br/>
+<a href="http://journals.plos.org/ploscompbiol/article/asset?unique&id=info:doi/10.1371/journal.pcbi.1006988.s001"><b>S1&#160;Table.&#160;</b></a><b>Trait&#160;data&#160;for&#160;Camellia&#160;japonica&#160;and&#160;<i>Curculio&#160;camelliae</i></b><b>.&#160;</b>Taken&#160;from&#160;<a href="nuismer2019s.html#4">Table&#160;1&#160;</a>in<br/>Toju&#160;and&#160;Sota&#160;(2006a).<br/>(DOCX)<br/>
+<b>Author&#160;Contributions</b><br/>
+<b>Conceptualization:&#160;</b>Scott&#160;L.&#160;Nuismer.<br/>
+<b>Formal&#160;analysis:&#160;</b>Scott&#160;L.&#160;Nuismer.<br/>
+<b>Funding&#160;acquisition:&#160;</b>Scott&#160;L.&#160;Nuismer.<br/>
+<b>Investigation:&#160;</b>Scott&#160;L.&#160;Nuismer,&#160;Bob&#160;Week.<br/>
+<b>Methodology:&#160;</b>Scott&#160;L.&#160;Nuismer.<br/>
+<b>Project&#160;administration:&#160;</b>Scott&#160;L.&#160;Nuismer.<br/>
+<b>Software:&#160;</b>Scott&#160;L.&#160;Nuismer.<br/>
+<b>Supervision:&#160;</b>Scott&#160;L.&#160;Nuismer.<br/>
+<b>Validation:&#160;</b>Scott&#160;L.&#160;Nuismer,&#160;Bob&#160;Week.<br/>
+<b>Writing&#160;–&#160;original&#160;draft:&#160;</b>Scott&#160;L.&#160;Nuismer.<br/>
+<b>Writing&#160;–&#160;review&#160;&amp;&#160;editing:&#160;</b>Scott&#160;L.&#160;Nuismer,&#160;Bob&#160;Week.<br/>
+<b>References</b><br/>
+<a href="nuismer2019s.html#2"><b>1.</b></a><br/>
+Dawkins&#160;R,&#160;Krebs&#160;JR.&#160;Arms&#160;races&#160;between&#160;and&#160;within&#160;species.&#160;Proceedings&#160;of&#160;the&#160;Royal&#160;Society&#160;Series<br/>B-Biological&#160;Sciences.&#160;1979;&#160;205(1161):489–511.&#160;<a href="https://doi.org/10.1098/rspb.1979.0081">https://doi.org/10.1098/rspb.1979.0081&#160;</a>WOS:<br/>A1979HN99900005.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/42057">42057</a><br/>
+<a href="nuismer2019s.html#2"><b>2.</b></a><br/>
+Benkman&#160;CW,&#160;Parchman&#160;TL,&#160;Favis&#160;A,&#160;Siepielski&#160;AM.&#160;Reciprocal&#160;selection&#160;causes&#160;a&#160;coevolutionary<br/>arms&#160;race&#160;between&#160;crossbills&#160;and&#160;lodgepole&#160;pine.&#160;American&#160;Naturalist.&#160;2003;&#160;162(2):182–94.&#160;<a href="https://doi.org/10.1086/376580">https://<br/>doi.org/10.1086/376580&#160;</a>WOS:000184446500005.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/12858263">12858263</a><br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+18&#160;/&#160;21<br/>
+<hr/>
+<a name=19></a><img src="nuismer2019-19_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+<a href="nuismer2019s.html#2"><b>3.</b></a><br/>
+Brodie&#160;ED,&#160;Feldman&#160;CR,&#160;Hanifin&#160;CT,&#160;Motychak&#160;JE,&#160;Mulcahy&#160;DG,&#160;Williams&#160;BL,&#160;et&#160;al.&#160;Parallel&#160;arms&#160;races<br/>between&#160;garter&#160;snakes&#160;and&#160;newts&#160;involving&#160;tetrodotoxin&#160;as&#160;the&#160;phenotypic&#160;interface&#160;of&#160;coevolution.<br/>Journal&#160;of&#160;Chemical&#160;Ecology.&#160;2005;&#160;31(2):343–56.&#160;<a href="https://doi.org/10.1007/s10886-005-1345-x">https://doi.org/10.1007/s10886-005-1345-x<br/></a>WOS:000227444700009.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/15856788">15856788</a><br/>
+<a href=""><b>4.</b></a><br/>
+Carrillo-Bustamante&#160;P,&#160;Kesmir&#160;C,&#160;de&#160;Boer&#160;RJ.&#160;A&#160;Coevolutionary&#160;Arms&#160;Race&#160;between&#160;Hosts&#160;and&#160;Viruses<br/>Drives&#160;Polymorphism&#160;and&#160;Polygenicity&#160;of&#160;NK&#160;Cell&#160;Receptors.&#160;Molecular&#160;Biology&#160;and&#160;Evolution.&#160;2015;<br/>32(8):2149–60.&#160;<a href="https://doi.org/10.1093/molbev/msv096">https://doi.org/10.1093/molbev/msv096&#160;</a>WOS:000360586500019.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/25911231">25911231</a><br/>
+<a href=""><b>5.</b></a><br/>
+Coffin&#160;JM.&#160;Virions&#160;at&#160;the&#160;Gates:&#160;Receptors&#160;and&#160;the&#160;Host-Virus&#160;Arms&#160;Race.&#160;Plos&#160;Biology.&#160;2013;&#160;11(5).<br/><a href="https://doi.org/10.1371/journal.pbio.1001574">https://doi.org/10.1371/journal.pbio.1001574&#160;</a>WOS:000319669800008.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/23723739">23723739</a><br/>
+<a href=""><b>6.</b></a><br/>
+de&#160;Castro&#160;ECP,&#160;Zagrobelny&#160;M,&#160;Cardoso&#160;MZ,&#160;Bak&#160;S.&#160;The&#160;arms&#160;race&#160;between&#160;heliconiine&#160;butterflies&#160;and<br/>Passiflora&#160;plants—new&#160;insights&#160;on&#160;an&#160;ancient&#160;subject.&#160;Biological&#160;Reviews.&#160;2018;&#160;93(1):555–73.&#160;<a href="https://doi.org/10.1111/brv.12357">https://<br/>doi.org/10.1111/brv.12357&#160;</a>WOS:000419965700028.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/28901723">28901723</a><br/>
+<a href=""><b>7.</b></a><br/>
+Dobata&#160;S.&#160;Arms&#160;race&#160;between&#160;selfishness&#160;and&#160;policing:&#160;Two-trait&#160;quantitative&#160;genetic&#160;model&#160;for&#160;caste<br/>fate&#160;conflict&#160;in&#160;eusocial&#160;hymenoptera.&#160;Evolution.&#160;2012;&#160;66(12):3754–64.&#160;<a href="https://doi.org/10.1111/j.1558-5646.2012.01745.x">https://doi.org/10.1111/j.1558-<br/>5646.2012.01745.x&#160;</a>WOS:000312218200010.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/23206134">23206134</a><br/>
+<a href=""><b>8.</b></a><br/>
+Friberg&#160;U,&#160;Lew&#160;TA,&#160;Byrne&#160;PG,&#160;Rice&#160;WR.&#160;Assessing&#160;the&#160;potential&#160;for&#160;an&#160;ongoing&#160;arms&#160;race&#160;within&#160;and<br/>between&#160;the&#160;sexes:&#160;Selection&#160;and&#160;heritable&#160;variation.&#160;Evolution.&#160;2005;&#160;59(7):1540–51.<br/>WOS:000230975600015.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/16153039">16153039</a><br/>
+<a href=""><b>9.</b></a><br/>
+Gomez&#160;P,&#160;Ashby&#160;B,&#160;Buckling&#160;A.&#160;Population&#160;mixing&#160;promotes&#160;arms&#160;race&#160;host-parasite&#160;coevolution.&#160;Pro-<br/>ceedings&#160;of&#160;the&#160;Royal&#160;Society&#160;B-Biological&#160;Sciences.&#160;2015;&#160;282(1798).&#160;<a href="https://doi.org/10.1098/rspb.2014.2297">https://doi.org/10.1098/rspb.<br/>2014.2297&#160;</a>WOS:000347160800013.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/25429018">25429018</a><br/>
+<a href=""><b>10.</b></a><br/>
+Hayashi&#160;M,&#160;Nomura&#160;M,&#160;Kageyama&#160;D.&#160;Rapid&#160;comeback&#160;of&#160;males:&#160;evolution&#160;of&#160;male-killer&#160;suppression&#160;in<br/>a&#160;green&#160;lacewing&#160;population.&#160;Proceedings&#160;of&#160;the&#160;Royal&#160;Society&#160;B-Biological&#160;Sciences.&#160;2018;&#160;285<br/>(1877).&#160;<a href="https://doi.org/10.1098/rspb.2018.0369">https://doi.org/10.1098/rspb.2018.0369&#160;</a>WOS:000430868100015.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/29669904">29669904</a><br/>
+<a href=""><b>11.</b></a><br/>
+Iseki&#160;N,&#160;Sasaki&#160;A,&#160;Toju&#160;H.&#160;Arms&#160;race&#160;between&#160;weevil&#160;rostrum&#160;length&#160;and&#160;camellia&#160;pericarp&#160;thickness:<br/>Geographical&#160;cline&#160;and&#160;theory.&#160;Journal&#160;of&#160;Theoretical&#160;Biology.&#160;2011;&#160;285(1):1–9.&#160;<a href="https://doi.org/10.1016/j.jtbi.2011.05.033">https://doi.org/10.<br/>1016/j.jtbi.2011.05.033&#160;</a>WOS:000294508600001.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/21651915">21651915</a><br/>
+<a href=""><b>12.</b></a><br/>
+Kobayashi&#160;C,&#160;Matsuo&#160;K,&#160;Watanabe&#160;K,&#160;Nagata&#160;N,&#160;Suzuki-Ohno&#160;Y,&#160;Kawata&#160;M,&#160;et&#160;al.&#160;Arms&#160;race&#160;between<br/>leaf&#160;rollers&#160;and&#160;parasitoids:&#160;diversification&#160;of&#160;plant-manipulation&#160;behavior&#160;and&#160;its&#160;consequences.&#160;Eco-<br/>logical&#160;Monographs.&#160;2015;&#160;85(2):253–68.&#160;<a href="https://doi.org/10.1890/14-0280.1">https://doi.org/10.1890/14-0280.1&#160;</a>WOS:000353845900006.<br/>
+<a href="nuismer2019s.html#2"><b>13.</b></a><br/>
+Kuntner&#160;M,&#160;Coddington&#160;JA,&#160;Schneider&#160;JM.&#160;Intersexual&#160;arms&#160;race?&#160;Genital&#160;coevolution&#160;in&#160;nephilid&#160;spi-<br/>ders&#160;(araneae,&#160;nephilidae).&#160;Evolution.&#160;2009;&#160;63(6):1451–63.&#160;<a href="https://doi.org/10.1111/j.1558-5646.2009.00634.x">https://doi.org/10.1111/j.1558-5646.2009.<br/>00634.x&#160;</a>WOS:000266268000006.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/19492993">19492993</a><br/>
+<a href=""><b>14.</b></a><br/>
+Oien&#160;IJ,&#160;Moksnes&#160;A,&#160;Roskaft&#160;E.&#160;Evolution&#160;of&#160;variation&#160;in&#160;egg&#160;color&#160;and&#160;marking&#160;pattern&#160;in&#160;european&#160;pas-<br/>serines—adaptations&#160;in&#160;a&#160;coevolutionary&#160;arms-race&#160;with&#160;the&#160;cuckoo,&#160;cuculus-canorus.&#160;Behavioral&#160;Ecol-<br/>ogy.&#160;1995;&#160;6(2):166–74.&#160;<a href="https://doi.org/10.1093/beheco/6.2.166">https://doi.org/10.1093/beheco/6.2.166&#160;</a>WOS:A1995RD05100009.<br/>
+<a href="nuismer2019s.html#18"><b>15.</b></a><br/>
+Perry&#160;JC,&#160;Garroway&#160;CJ,&#160;Rowe&#160;L.&#160;The&#160;role&#160;of&#160;ecology,&#160;neutral&#160;processes&#160;and&#160;antagonistic&#160;coevolution&#160;in<br/>an&#160;apparent&#160;sexual&#160;arms&#160;race.&#160;Ecology&#160;Letters.&#160;2017;&#160;20(9):1107–17.&#160;<a href="https://doi.org/10.1111/ele.12806">https://doi.org/10.1111/ele.<br/>12806&#160;</a>WOS:000407391900002.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/28683517">28683517</a><br/>
+<a href=""><b>16.</b></a><br/>
+Persoons&#160;A,&#160;Hayden&#160;KJ,&#160;Fabre&#160;B,&#160;Frey&#160;P,&#160;De&#160;Mita&#160;S,&#160;Tellier&#160;A,&#160;et&#160;al.&#160;The&#160;escalatory&#160;Red&#160;Queen:&#160;Popu-<br/>lation&#160;extinction&#160;and&#160;replacement&#160;following&#160;arms&#160;race&#160;dynamics&#160;in&#160;poplar&#160;rust.&#160;Molecular&#160;Ecology.<br/>2017;&#160;26(7):1902–18.&#160;<a href="https://doi.org/10.1111/mec.13980">https://doi.org/10.1111/mec.13980&#160;</a>WOS:000399639200017.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/28012228">28012228</a><br/>
+<a href=""><b>17.</b></a><br/>
+Rosenheim&#160;JA.&#160;Short-&#160;and&#160;long-term&#160;evolution&#160;in&#160;our&#160;arms&#160;race&#160;with&#160;cancer:&#160;Why&#160;the&#160;war&#160;on&#160;cancer&#160;is<br/>winnable.&#160;Evolutionary&#160;Applications.&#160;2018;&#160;11(6):845–52.&#160;<a href="https://doi.org/10.1111/eva.12612">https://doi.org/10.1111/eva.12612<br/></a>WOS:000435084900003.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/29928294">29928294</a><br/>
+<a href=""><b>18.</b></a><br/>
+Sheath&#160;DJ,&#160;Dick&#160;JTA,&#160;Dickey&#160;JWE,&#160;Guo&#160;ZQ,&#160;Andreou&#160;D,&#160;Britton&#160;JR.&#160;Winning&#160;the&#160;arms&#160;race:&#160;host—para-<br/>site&#160;shared&#160;evolutionary&#160;history&#160;reduces&#160;infection&#160;risks&#160;in&#160;fish&#160;final&#160;hosts.&#160;Biology&#160;Letters.&#160;2018;&#160;14(7).<br/><a href="https://doi.org/10.1098/rsbl.2018.0363">https://doi.org/10.1098/rsbl.2018.0363&#160;</a>WOS:000440138500016.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/30045905">30045905</a><br/>
+<a href="nuismer2019s.html#2"><b>19.</b></a><br/>
+Spottiswoode&#160;CN,&#160;Stevens&#160;M.&#160;Host-Parasite&#160;Arms&#160;Races&#160;and&#160;Rapid&#160;Changes&#160;in&#160;Bird&#160;Egg&#160;Appearance.<br/>American&#160;Naturalist.&#160;2012;&#160;179(5):633–48.&#160;<a href="https://doi.org/10.1086/665031">https://doi.org/10.1086/665031&#160;</a>WOS:000302859600010.<br/>PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/22504545">22504545</a><br/>
+<a href=""><b>20.</b></a><br/>
+ter&#160;Hofstede&#160;HM,&#160;Ratcliffe&#160;JM.&#160;Evolutionary&#160;escalation:&#160;the&#160;bat-moth&#160;arms&#160;race.&#160;Journal&#160;of&#160;Experimental<br/>Biology.&#160;2016;&#160;219(11):1589–602.&#160;<a href="https://doi.org/10.1242/jeb.086686">https://doi.org/10.1242/jeb.086686&#160;</a>WOS:000376878000009.&#160;PMID:<br/><a href="http://www.ncbi.nlm.nih.gov/pubmed/27252453">27252453</a><br/>
+<a href="nuismer2019s.html#2"><b>21.</b></a><br/>
+Thompson&#160;JN.&#160;Coevolution:&#160;The&#160;geographic&#160;mosaic&#160;of&#160;coevolutionary&#160;arms&#160;races.&#160;Current&#160;Biology.&#160;2005;<br/>15(24):R992–R4.&#160;ISI:000234330300010.&#160;<a href="https://doi.org/10.1016/j.cub.2005.11.046">https://doi.org/10.1016/j.cub.2005.11.046&#160;</a>PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/16360677">16360677</a><br/>
+<a href="nuismer2019s.html#2"><b>22.</b></a><br/>
+Pavlidis&#160;P,&#160;Alachiotis&#160;N.&#160;A&#160;survey&#160;of&#160;methods&#160;and&#160;tools&#160;to&#160;detect&#160;recent&#160;and&#160;strong&#160;positive&#160;selection.<br/>Journal&#160;of&#160;Biological&#160;Research-Thessaloniki.&#160;2017;&#160;24.&#160;<a href="https://doi.org/10.1186/s40709-017-0064-0">https://doi.org/10.1186/s40709-017-0064-0<br/></a>WOS:000405144000001.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/28405579">28405579</a><br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+19&#160;/&#160;21<br/>
+<hr/>
+<a name=20></a><img src="nuismer2019-20_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+<a href="nuismer2019s.html#2"><b>23.</b></a><br/>
+Stahl&#160;EA,&#160;Bishop&#160;JG.&#160;Plant-pathogen&#160;arms&#160;races&#160;at&#160;the&#160;molecular&#160;level.&#160;Current&#160;Opinion&#160;in&#160;Plant&#160;Biol-<br/>ogy.&#160;2000;&#160;3(4):299–304.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/10873849">10873849</a><br/>
+<a href="nuismer2019s.html#2"><b>24.</b></a><br/>
+Baumiller&#160;TK,&#160;Gahn&#160;FJ.&#160;Testing&#160;predator-driven&#160;evolution&#160;with&#160;paleozoic&#160;crinoid&#160;arm&#160;regeneration.&#160;Sci-<br/>ence.&#160;2004;&#160;305(5689):1453–5.&#160;<a href="https://doi.org/10.1126/science.1101009">https://doi.org/10.1126/science.1101009&#160;</a>WOS:000223761900045.<br/>PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/15353799">15353799</a><br/>
+<a href=""><b>25.</b></a><br/>
+Vermeij&#160;GJ.&#160;The&#160;evolutionary&#160;interaction&#160;among&#160;species—selection,&#160;escalation,&#160;and&#160;coevolution.<br/>Annual&#160;Review&#160;of&#160;Ecology&#160;and&#160;Systematics.&#160;1994;&#160;25:219–36.&#160;<a href="https://doi.org/10.1146/annurev.es.25.110194.001251">https://doi.org/10.1146/annurev.es.25.<br/>110194.001251&#160;</a>WOS:A1994PU88300009.<br/>
+<a href="nuismer2019s.html#2"><b>26.</b></a><br/>
+Vermeij&#160;GJ,&#160;Schindel&#160;DE,&#160;Zipser&#160;E.&#160;Predation&#160;through&#160;geological&#160;time—evidence&#160;from&#160;gastropod&#160;shell<br/>repair.&#160;Science.&#160;1981;&#160;214(4524):1024–6.&#160;<a href="https://doi.org/10.1126/science.214.4524.1024">https://doi.org/10.1126/science.214.4524.1024&#160;</a>WOS:<br/>A1981MQ49300023.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/17808668">17808668</a><br/>
+<a href="nuismer2019s.html#2"><b>27.</b></a><br/>
+Agrawal&#160;AA,&#160;Lajeunesse&#160;MJ,&#160;Fishbein&#160;M.&#160;Evolution&#160;of&#160;latex&#160;and&#160;its&#160;constituent&#160;defensive&#160;chemistry&#160;in<br/>milkweeds&#160;(Asclepias):&#160;a&#160;phylogenetic&#160;test&#160;of&#160;plant&#160;defense&#160;escalation.&#160;Entomologia&#160;Experimentalis&#160;Et<br/>Applicata.&#160;2008;&#160;128(1):126–38.&#160;<a href="https://doi.org/10.1111/j.1570-7458.2008.00690.x">https://doi.org/10.1111/j.1570-7458.2008.00690.x<br/></a>WOS:000256721900017.<br/>
+<a href="nuismer2019s.html#2"><b>28.</b></a><br/>
+Agrawal&#160;AA,&#160;Fishbein&#160;M.&#160;Phylogenetic&#160;escalation&#160;and&#160;decline&#160;of&#160;plant&#160;defense&#160;strategies.&#160;Proceedings<br/>of&#160;the&#160;National&#160;Academy&#160;of&#160;Sciences&#160;of&#160;the&#160;United&#160;States&#160;of&#160;America.&#160;2008;&#160;105(29):10057–60.&#160;<a href="https://doi.org/10.1073/pnas.0802368105">https://<br/>doi.org/10.1073/pnas.0802368105&#160;</a>WOS:000257913200039.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/18645183">18645183</a><br/>
+<a href="nuismer2019s.html#2"><b>29.</b></a><br/>
+Decaestecker&#160;E,&#160;Gaba&#160;S,&#160;Raeymaekers&#160;JAM,&#160;Stoks&#160;R,&#160;Van&#160;Kerckhoven&#160;L,&#160;Ebert&#160;D,&#160;et&#160;al.&#160;Host-parasite<br/>’Red&#160;Queen’&#160;dynamics&#160;archived&#160;in&#160;pond&#160;sediment.&#160;Nature.&#160;2007;&#160;450(7171):870–U16.&#160;<a href="https://doi.org/10.1038/nature06291">https://doi.org/<br/>10.1038/nature06291&#160;</a>WOS:000251394900054.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/18004303">18004303</a><br/>
+<a href=""><b>30.</b></a><br/>
+Benkman&#160;CW.&#160;The&#160;selection&#160;mosaic&#160;and&#160;diversifying&#160;coevolution&#160;between&#160;crossbills&#160;and&#160;lodgepole<br/>pine.&#160;American&#160;Naturalist.&#160;1999;&#160;153(Supplement):S75–S91.<br/>
+<a href=""><b>31.</b></a><br/>
+Brodie&#160;ED,&#160;Brodie&#160;ED.&#160;Costs&#160;of&#160;exploiting&#160;poisonous&#160;prey:&#160;evolutionary&#160;trade-offs&#160;in&#160;a&#160;predator-prey<br/>arms&#160;race.&#160;Evolution.&#160;1999;&#160;53(2):626–31.&#160;<a href="https://doi.org/10.1111/j.1558-5646.1999.tb03798.x">https://doi.org/10.1111/j.1558-5646.1999.tb03798.x&#160;</a>PMID:<br/><a href="http://www.ncbi.nlm.nih.gov/pubmed/28565425">28565425</a><br/>
+<a href="nuismer2019s.html#2"><b>32.</b></a><br/>
+Toju&#160;H.&#160;Weevils&#160;and&#160;camellias&#160;in&#160;a&#160;Darwin’s&#160;race:&#160;model&#160;system&#160;for&#160;the&#160;study&#160;of&#160;eco-evolutionary&#160;inter-<br/>actions&#160;between&#160;species.&#160;Ecol&#160;Res.&#160;2011;&#160;26(2):239–51.&#160;<a href="https://doi.org/10.1007/s11284-011-0807-6">https://doi.org/10.1007/s11284-011-0807-6<br/></a>WOS:000288552900002.<br/>
+<a href="nuismer2019s.html#2"><b>33.</b></a><br/>
+Week&#160;B,&#160;Nuismer&#160;SL.&#160;The&#160;measurement&#160;of&#160;coevolution&#160;in&#160;the&#160;wild.&#160;Ecology&#160;Letters.&#160;2019;&#160;22:717–25.<br/><a href="https://doi.org/10.1111/ele.13231">https://doi.org/10.1111/ele.13231&#160;</a>PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/30775838">30775838</a><br/>
+<a href="nuismer2019s.html#3"><b>34.</b></a><br/>
+Toju&#160;H,&#160;Sota&#160;T.&#160;Imbalance&#160;of&#160;Predator&#160;and&#160;Prey&#160;Armament:&#160;Geographic&#160;Clines&#160;in&#160;Phenotypic&#160;Interface<br/>and&#160;Natural&#160;Selection.&#160;American&#160;Naturalist.&#160;2006;&#160;167(1):105–17.&#160;<a href="https://doi.org/10.1086/498277">https://doi.org/10.1086/498277<br/></a>PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/16475103">16475103</a><br/>
+<a href="nuismer2019s.html#3"><b>35.</b></a><br/>
+Brodie&#160;ED,&#160;Ridenhour&#160;BJ,&#160;Brodie&#160;ED.&#160;The&#160;evolutionary&#160;response&#160;of&#160;predators&#160;to&#160;dangerous&#160;prey:&#160;Hot-<br/>spots&#160;and&#160;coldspots&#160;in&#160;the&#160;geographic&#160;mosaic&#160;of&#160;coevolution&#160;between&#160;garter&#160;snakes&#160;and&#160;newts.&#160;Evolu-<br/>tion.&#160;2002;&#160;56(10):2067–82.&#160;ISI:000179241700018.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/12449493">12449493</a><br/>
+<a href="nuismer2019s.html#3"><b>36.</b></a><br/>
+Anderson&#160;B,&#160;Johnson&#160;SD.&#160;Geographical&#160;covariation&#160;and&#160;local&#160;convergence&#160;of&#160;flower&#160;depth&#160;in&#160;a&#160;guild&#160;of<br/>fly-pollinated&#160;plants.&#160;New&#160;Phytologist.&#160;2009;&#160;182(2):533–40.&#160;<a href="https://doi.org/10.1111/j.1469-8137.2009.02764.x">https://doi.org/10.1111/j.1469-8137.2009.<br/>02764.x&#160;</a>ISI:000264635400025.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/19210717">19210717</a><br/>
+<a href="nuismer2019s.html#3"><b>37.</b></a><br/>
+Anderson&#160;B,&#160;Terblanche&#160;JS,&#160;Ellis&#160;AG.&#160;Predictable&#160;patterns&#160;of&#160;trait&#160;mismatches&#160;between&#160;interacting<br/>plants&#160;and&#160;insects.&#160;Bmc&#160;Evolutionary&#160;Biology.&#160;2010;&#160;10.&#160;204&#160;<a href="https://doi.org/10.1186/1471-2148-10-204">https://doi.org/10.1186/1471-2148-10-204<br/></a>WOS:000282745400001.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/20604973">20604973</a><br/>
+<a href=""><b>38.</b></a><br/>
+Berenbaum&#160;MR,&#160;Zangerl&#160;AR.&#160;Chemical&#160;phenotype&#160;matching&#160;between&#160;a&#160;plant&#160;and&#160;its&#160;insect&#160;herbivore.<br/>Proceedings&#160;of&#160;the&#160;National&#160;Academy&#160;of&#160;Sciences&#160;USA.&#160;1998;&#160;95:13743–8.<br/>
+<a href=""><b>39.</b></a><br/>
+Pauw&#160;A,&#160;Stofberg&#160;J,&#160;Waterman&#160;RJ.&#160;Flies&#160;and&#160;flowers&#160;in&#160;darwin’s&#160;race.&#160;Evolution.&#160;2009;&#160;63(1):268–79.<br/><a href="https://doi.org/10.1111/j.1558-5646.2008.00547.x">https://doi.org/10.1111/j.1558-5646.2008.00547.x&#160;</a>ISI:000262469600021.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/19146595">19146595</a><br/>
+<a href="nuismer2019s.html#3"><b>40.</b></a><br/>
+Steiner&#160;KE,&#160;Whitehead&#160;VB.&#160;Pollinator&#160;Adaptation&#160;to&#160;Oil-Secreting&#160;Flowers—Rediviva&#160;and&#160;Diascia.&#160;Evo-<br/>lution.&#160;1990;&#160;44(6):1701–7.&#160;<a href="https://doi.org/10.1111/j.1558-5646.1990.tb03857.x">https://doi.org/10.1111/j.1558-5646.1990.tb03857.x&#160;</a>PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/28564320">28564320</a><br/>
+<a href="nuismer2019s.html#3"><b>41.</b></a><br/>
+Beaumont&#160;MA.&#160;Approximate&#160;Bayesian&#160;Computation&#160;in&#160;Evolution&#160;and&#160;Ecology.&#160;Annual&#160;Review&#160;of&#160;Ecol-<br/>ogy,&#160;Evolution,&#160;and&#160;Systematics,&#160;Vol&#160;41.&#160;Annual&#160;Review&#160;of&#160;Ecology&#160;Evolution&#160;and&#160;Systematics.<br/>412010.&#160;p.&#160;379–406.<br/>
+<a href="nuismer2019s.html#3"><b>42.</b></a><br/>
+Csillery&#160;K,&#160;Blum&#160;MGB,&#160;Gaggiotti&#160;OE,&#160;Francois&#160;O.&#160;Approximate&#160;Bayesian&#160;Computation&#160;(ABC)&#160;in&#160;prac-<br/>tice.&#160;Trends&#160;in&#160;Ecology&#160;&amp;&#160;Evolution.&#160;2010;&#160;25(7):410–8.&#160;<a href="https://doi.org/10.1016/j.tree.2010.04.001">https://doi.org/10.1016/j.tree.2010.04.001<br/></a>ISI:000279531700007.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/20488578">20488578</a><br/>
+<a href=""><b>43.</b></a><br/>
+Lopes&#160;JS,&#160;Beaumont&#160;MA.&#160;ABC:&#160;A&#160;useful&#160;Bayesian&#160;tool&#160;for&#160;the&#160;analysis&#160;of&#160;population&#160;data.&#160;Infection<br/>Genetics&#160;and&#160;Evolution.&#160;10(6):826–33.&#160;<a href="https://doi.org/10.1016/j.meegid.2009.10.010">https://doi.org/10.1016/j.meegid.2009.10.010<br/></a>ISI:000280116400019.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/19879976">19879976</a><br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+20&#160;/&#160;21<br/>
+<hr/>
+<a name=21></a><img src="nuismer2019-21_1.png"/><br/>
+Bayesian&#160;arms&#160;races<br/>
+<a href="nuismer2019s.html#3"><b>44.</b></a><br/>
+Joyce&#160;P,&#160;Marjoram&#160;P.&#160;Approximately&#160;sufficient&#160;statistics&#160;and&#160;Bayesian&#160;computation.&#160;Statistical&#160;Applica-<br/>tions&#160;in&#160;Genetics&#160;and&#160;Molecular&#160;Biology.&#160;2008;&#160;7(1).&#160;ISI:000258878300004.<br/>
+<a href="nuismer2019s.html#4"><b>45.</b></a><br/>
+Nuismer&#160;SL.&#160;Introduction&#160;to&#160;coevolutionary&#160;theory.&#160;New&#160;York:&#160;W.H.&#160;Freeman;&#160;2017.&#160;395&#160;p.<br/>
+<a href="nuismer2019s.html#4"><b>46.</b></a><br/>
+Nuismer&#160;SL,&#160;Gomulkiewicz&#160;R,&#160;Ridenhour&#160;BJ.&#160;When&#160;Is&#160;Correlation&#160;Coevolution?&#160;American&#160;Naturalist.<br/>2010;&#160;175(5):525–37.&#160;<a href="https://doi.org/10.1086/651591">https://doi.org/10.1086/651591&#160;</a>ISI:000276104400004.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/20307203">20307203</a><br/>
+<a href="nuismer2019s.html#4"><b>47.</b></a><br/>
+Nuismer&#160;SL,&#160;Ridenhour&#160;BJ,&#160;Oswald&#160;BP.&#160;Antagonistic&#160;coevolution&#160;mediated&#160;by&#160;phenotypic&#160;differences<br/>between&#160;quantitative&#160;traits.&#160;Evolution.&#160;2007;&#160;61(8):1823–34.&#160;ISI:000248600300004.&#160;<a href="https://doi.org/10.1111/j.1558-5646.2007.00158.x">https://doi.org/10.<br/>1111/j.1558-5646.2007.00158.x&#160;</a>PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/17683426">17683426</a><br/>
+<a href="nuismer2019s.html#6"><b>48.</b></a><br/>
+Marjoram&#160;P,&#160;Tavare&#160;S.&#160;Modern&#160;computational&#160;approaches&#160;for&#160;analysing&#160;molecular&#160;genetic&#160;variation<br/>data.&#160;Nature&#160;Reviews&#160;Genetics.&#160;2006;&#160;7(10):759–70.&#160;<a href="https://doi.org/10.1038/nrg1961">https://doi.org/10.1038/nrg1961<br/></a>ISI:000241158700012.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/16983372">16983372</a><br/>
+<a href="nuismer2019s.html#6"><b>49.</b></a><br/>
+Bertorelle&#160;G,&#160;Benazzo&#160;A,&#160;Mona&#160;S.&#160;ABC&#160;as&#160;a&#160;flexible&#160;framework&#160;to&#160;estimate&#160;demography&#160;over&#160;space<br/>and&#160;time:&#160;some&#160;cons,&#160;many&#160;pros.&#160;Molecular&#160;Ecology.&#160;2010;&#160;19(13):2609–25.&#160;<a href="https://doi.org/10.1111/j.1365-294X.2010.04690.x">https://doi.org/10.1111/j.<br/>1365-294X.2010.04690.x&#160;</a>ISI:000279407400004.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/20561199">20561199</a><br/>
+<a href="nuismer2019s.html#8"><b>50.</b></a><br/>
+Kingsolver&#160;JG,&#160;Hoekstra&#160;H,&#160;Hoekstra&#160;J,&#160;Berrigan&#160;D,&#160;Vignieri&#160;S,&#160;Hill&#160;C,&#160;et&#160;al.&#160;The&#160;strength&#160;of&#160;phenotypic<br/>selection&#160;in&#160;natural&#160;populations.&#160;American&#160;Naturalist.&#160;2001;&#160;157:245–61.&#160;<a href="https://doi.org/10.1086/319193">https://doi.org/10.1086/<br/>319193&#160;</a>PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/18707288">18707288</a><br/>
+<a href="nuismer2019s.html#8"><b>51.</b></a><br/>
+Stinchcombe&#160;JR,&#160;Agrawal&#160;AF,&#160;Hohenlohe&#160;PA,&#160;Arnold&#160;SJ,&#160;Blows&#160;MW.&#160;Estimating&#160;nonlinear&#160;selection<br/>gradients&#160;using&#160;quadratic&#160;regression&#160;coefficients:&#160;Double&#160;or&#160;nothing?&#160;Evolution.&#160;2008;&#160;62(9):2435–40.<br/><a href="https://doi.org/10.1111/j.1558-5646.2008.00449.x">https://doi.org/10.1111/j.1558-5646.2008.00449.x&#160;</a>WOS:000259210300023.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/18616573">18616573</a><br/>
+<a href="nuismer2019s.html#9"><b>52.</b></a><br/>
+Toju&#160;H.&#160;Fine-scale&#160;local&#160;adaptation&#160;of&#160;weevil&#160;mouthpart&#160;length&#160;and&#160;camellia&#160;pericarp&#160;thickness:&#160;Altitudi-<br/>nal&#160;gradient&#160;of&#160;a&#160;putative&#160;arms&#160;race.&#160;Evolution.&#160;2008;&#160;62(5):1086–102.&#160;<a href="https://doi.org/10.1111/j.1558-5646.2008.00341.x">https://doi.org/10.1111/j.1558-<br/>5646.2008.00341.x&#160;</a>WOS:000255532900008.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/18266990">18266990</a><br/>
+<a href="nuismer2019s.html#10"><b>53.</b></a><br/>
+Toju&#160;H,&#160;Abe&#160;H,&#160;Ueno&#160;S,&#160;Miyazawa&#160;Y,&#160;Taniguchi&#160;F,&#160;Sota&#160;T,&#160;et&#160;al.&#160;Climatic&#160;Gradients&#160;of&#160;Arms&#160;Race<br/>Coevolution.&#160;American&#160;Naturalist.&#160;2011;&#160;177(5):562–73.&#160;<a href="https://doi.org/10.1086/659624">https://doi.org/10.1086/659624<br/></a>WOS:000290151500004.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/21508604">21508604</a><br/>
+<a href="nuismer2019s.html#10"><b>54.</b></a><br/>
+Toju&#160;H,&#160;Sota&#160;T.&#160;Do&#160;arms&#160;races&#160;punctuate&#160;evolutionary&#160;stasis?&#160;Unified&#160;insights&#160;from&#160;phylogeny,&#160;phylo-<br/>geography&#160;and&#160;microevolutionary&#160;processes.&#160;Molecular&#160;Ecology.&#160;2009;&#160;18(18):3940–54.&#160;<a href="https://doi.org/10.1111/j.1365-294X.2009.04340.x">https://doi.<br/>org/10.1111/j.1365-294X.2009.04340.x&#160;</a>WOS:000269731400016.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/19732333">19732333</a><br/>
+<a href="nuismer2019s.html#9"><b>55.</b></a><br/>
+Toju&#160;H,&#160;Ueno&#160;S,&#160;Taniguchi&#160;F,&#160;Sota&#160;T.&#160;Metapopulation&#160;structure&#160;of&#160;a&#160;seed-predator&#160;weevil&#160;and&#160;its&#160;host<br/>plant&#160;in&#160;arms&#160;race&#160;coevolution.&#160;Evolution.&#160;2011;&#160;65(6):1707–22.&#160;<a href="https://doi.org/10.1111/j.1558-5646.2011.01243.x">https://doi.org/10.1111/j.1558-5646.<br/>2011.01243.x&#160;</a>WOS:000291270300015.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/21644958">21644958</a><br/>
+<a href="nuismer2019s.html#10"><b>56.</b></a><br/>
+Toju&#160;H,&#160;Sota&#160;T.&#160;Phylogeography&#160;and&#160;the&#160;geographic&#160;cline&#160;in&#160;the&#160;armament&#160;of&#160;a&#160;seed-predatory&#160;weevil:<br/>effects&#160;of&#160;historical&#160;events&#160;vs.&#160;natural&#160;selection&#160;from&#160;the&#160;host&#160;plant.&#160;Molecular&#160;Ecology.&#160;2006;&#160;15<br/>(13):4161–73.&#160;<a href="https://doi.org/10.1111/j.1365-294X.2006.03088.x">https://doi.org/10.1111/j.1365-294X.2006.03088.x&#160;</a>ISI:000241388800022.&#160;PMID:<br/><a href="http://www.ncbi.nlm.nih.gov/pubmed/17054510">17054510</a><br/>
+<a href="nuismer2019s.html#14"><b>57.</b></a><br/>
+Gelman&#160;A,&#160;Carlin&#160;JB,&#160;Stern&#160;HS,&#160;Dunson&#160;DB,&#160;Vehtari&#160;A,&#160;Rubin&#160;DB.&#160;Bayesian&#160;Data&#160;Analysis.&#160;3’rd&#160;ed.<br/>Boca&#160;Raton,&#160;Florida:&#160;Taylor&#160;and&#160;Francis;&#160;2013.<br/>
+<a href="nuismer2019s.html#17"><b>58.</b></a><br/>
+Gandon&#160;S,&#160;Nuismer&#160;SL.&#160;Interactions&#160;between&#160;Genetic&#160;Drift,&#160;Gene&#160;Flow,&#160;and&#160;Selection&#160;Mosaics&#160;Drive<br/>Parasite&#160;Local&#160;Adaptation.&#160;American&#160;Naturalist.&#160;2009;&#160;173(2):212–24.&#160;<a href="https://doi.org/10.1086/593706">https://doi.org/10.1086/593706<br/></a>ISI:000262704600008.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/20374141">20374141</a><br/>
+<a href=""><b>59.</b></a><br/>
+Nuismer&#160;SL.&#160;Parasite&#160;local&#160;adaptation&#160;in&#160;a&#160;geographic&#160;mosaic.&#160;Evolution.&#160;2006;&#160;60(1):83–8.<br/>
+<a href="nuismer2019s.html#17"><b>60.</b></a><br/>
+Thompson&#160;JN.&#160;The&#160;geographic&#160;mosaic&#160;of&#160;coevolution.&#160;Chicago:&#160;University&#160;of&#160;Chicago&#160;Press;&#160;2005.<br/>
+<a href="nuismer2019s.html#18"><b>61.</b></a><br/>
+Arnqvist&#160;G,&#160;Rowe&#160;L.&#160;Correlated&#160;evolution&#160;of&#160;male&#160;and&#160;female&#160;morphologies&#160;in&#160;water&#160;striders.&#160;Evolution.<br/>2002;&#160;56(5):936–47.&#160;WOS:000176078600007.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/12093029">12093029</a><br/>
+<a href="nuismer2019s.html#18"><b>62.</b></a><br/>
+Dougherty&#160;LR,&#160;van&#160;Lieshout&#160;E,&#160;McNamara&#160;KB,&#160;Moschilla&#160;JA,&#160;Arnqvist&#160;G,&#160;Simmons&#160;LW.&#160;Sexual&#160;conflict<br/>and&#160;correlated&#160;evolution&#160;between&#160;male&#160;persistence&#160;and&#160;female&#160;resistance&#160;traits&#160;in&#160;the&#160;seed&#160;beetle&#160;Cal-<br/>losobruchus&#160;maculatus.&#160;Proceedings&#160;of&#160;the&#160;Royal&#160;Society&#160;B-Biological&#160;Sciences.&#160;2017;&#160;284(1855).<br/><a href="https://doi.org/10.1098/rspb.2017.0132">https://doi.org/10.1098/rspb.2017.0132&#160;</a>WOS:000405148800024.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/28539510">28539510</a><br/>
+<a href="nuismer2019s.html#18"><b>63.</b></a><br/>
+Queller&#160;DC,&#160;Strassmann&#160;JE.&#160;Evolutionary&#160;conflict.&#160;Annual&#160;Review&#160;of&#160;Ecology,&#160;Evolution,&#160;and&#160;Systemat-<br/>ics.&#160;2018;&#160;49:73–93.<br/>
+<a href="nuismer2019s.html#18"><b>64.</b></a><br/>
+Svensson&#160;EI.&#160;On&#160;Reciprocal&#160;Causation&#160;in&#160;the&#160;Evolutionary&#160;Process.&#160;Evolutionary&#160;Biology.&#160;2018;&#160;45<br/>(1):1–14.&#160;<a href="https://doi.org/10.1007/s11692-017-9431-x">https://doi.org/10.1007/s11692-017-9431-x&#160;</a>WOS:000425304900001.&#160;PMID:&#160;<a href="http://www.ncbi.nlm.nih.gov/pubmed/29497217">29497217</a><br/>
+PLOS&#160;Computational&#160;Biology&#160;|&#160;<a href="https://doi.org/10.1371/journal.pcbi.1006988">https://doi.org/10.1371/journal.pcbi.1006988</a><br/>
+April&#160;15,&#160;2019<br/>
+21&#160;/&#160;21<br/>
+<hr/>
+</body>
+</html>
