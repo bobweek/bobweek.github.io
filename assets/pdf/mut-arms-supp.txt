@@ -1,0 +1,933 @@
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Online Supplement:
+Coevolutionary arms races and the conditions for the
+maintenance of mutualism,
+The American Naturalist
+Bob Week1,∗
+Scott L. Nuismer2,†
+
+1. Program in Bioinformatics and Computational Biology, University of Idaho, Moscow, Idaho
+83844;
+2. Department of Biological Sciences, University of Idaho, Moscow, Idaho 83844;
+
+∗ Corresponding author; e-mail: bobweek@gmail.com.
+
+1
+
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Supplement to “Conditions for Mutualism,” Am. Nat.
+
+Additional Methods
+§A: Derivation of evolutionary dynamics from individual-based models
+Our approach to deriving models of evolutionary dynamics follows three main steps. First we
+introduce the individual fitness functions for the trait-differences and offset-matching interaction
+mechanisms. Second, we derive the continuous-time growth rates of trait values using diffusion
+limits. Averaging these growth rates over phenotypic distributions returns population growth
+rates. Third, following Week et al. (2020), we apply the Stochastic Asexual Gaussian allelic
+model with Abundance dynamics (abbreviated SAGA), a continuous time stochastic model of
+trait dynamics that generalizes the well-known breeders equation (Lande, 1976) by accounting
+for demographic dynamics and arbitrary trait distributions. Assuming normally distributed
+traits, we use SAGA to derive mean trait dynamics in terms of growth rate gradients. We then
+assume infinitely large abundances to remove stochastic effects.
+
+Individual fitness
+Trait-matching.
+
+For simplicity, we begin by formulating fitness under trait-matching. Letting x
+
+denote the trait value for the individual of species X and y for species Y, we can model the
+effect of trait-matching on fitness for individuals of species X by the concave down quadratic
+polynomial − B2X ( x − y)2 . Since we assume both species interact via the same mechanism, the
+formula determining their dynamics will be of the same form. Hence, we focus on species X
+without losing any generality in our conclusions. We call the parameter BX ≥ 0 the strength of
+biotic selection (introduced in Week and Nuismer, 2019). Denote by R X > 0 the number offspring
+produced by individuals in species X in the absence of ecological interactions and EX > 0 the
+multiplicative effect on R X due to the interspecific interaction when BX = 0. We call EX the
+baseline effect of the interspecific interaction. Suppose each individual of species X interacts
+with a single individual of species Y with trait value denoted by y. Then, under trait-matching,
+
+2
+
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Supplement to “Conditions for Mutualism,” Am. Nat.
+we model the number of offspring produced when BX > 0 by
+
+BX
+
+2
+
+wX ( x, y) = R X EX e− 2 (x−y) .
+BX
+
+(S1)
+BX
+
+2
+
+2
+
+Note if EX e− 2 (x−y) < 1, the interaction is antagonistic and if EX e− 2 (x−y) > 1, species X
+benefits from the interaction. Following the same approach for species Y, we have
+
+BY
+
+2
+
+wY (y, x ) = RY EY e− 2 (x−y) .
+Trait-differences.
+
+(S2)
+
+Following the approach taken to formulate individual fitness for the trait-matching
+
+mechanism, we replace the concave quadratic polynomial with the linear term BX ( x − y), yielding
+
+wX ( x, y) = R X EX e BX (x−y) ,
+
+(S3)
+
+wY (y, x ) = RY EY e BY (y− x) .
+
+(S4)
+
+Under this model, the interaction is antagonistic if EX e BX (x−y) < 1 or EY e BY (y− x) < 1, and is a
+mutualism if EX e BX (x−y) , EY e BY (y− x) > 1.
+Offset-matching.
+
+Offset-matching is just a slight modification of trait-matching, summarized by
+
+BX
+
+2
+
+BY
+
+2
+
+wX ( x, y) = R X EX e− 2 (y+δX − x) ,
+wY (y, x ) = RY EY e− 2 (x+δY −y) .
+
+(S5)
+(S6)
+
+Here we have assumed the optimal offset δX of species X is distinct from the optimal offset
+δY of species Y. This seems more likely to occur in nature rather than identical offsets between
+the two species. However, we can always reduce such asymmetry via the change of variables
+δY
+δY
+δX
+0
+0
+δ = δX +
+2 , x = x + 2 and y = y + 2 . Thus, from hereon we assume the common optimal offset
+
+δ for both species.
+
+3
+
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Supplement to “Conditions for Mutualism,” Am. Nat.
+
+§B: Deriving growth rates
+To derive the dynamical equations of the main text starting with individual fitness we begin by
+taking a diffusion limit. Our approach follows a special case of the framework developed by
+Week et al. (2020), which we now summarize.
+
+Outline of diffusion limits.
+
+In the special case treated here, a diffusion limit implies that we begin
+
+with a population at the initial time t = 0 of n discrete individuals and rescale their ”mass” by
+N0 /n for some continuously-valued positive number N0 > 0. We then consider the limit n → ∞.
+The total mass of the population, which is interpreted as the initial abundance N (0), is computed
+as the sum of individual masses and hence remains equal to
+n
+
+N0
+= N0
+n
+i =1
+
+N (0) = ∑
+
+(S7)
+
+as we send n → ∞. Once the diffusion limit is taken, we arrive at a model for the dynamics
+of the abundance N (t). When taken appropriately, this diffusion limit results in a continuoustime, continuous-state stochastic process where the magnitude of stochasticity is modulated by
+the variance in reproductive output and rates of birth and death. Here assume constant rates of
+birth and death to prevent noise-induced selection. We also assume offspring number follows a
+Poisson distribution with expectation w( x ) for parents carrying trait value x.
+Starting with individual-based models of discrete individuals allows us to formulate mechanistic models of fitness and, by taking their diffusion limits, we formally derive models at the
+population level. In particular, these diffusion limits track the dynamics of abundance and phenotypic distribution instead of tracking the dynamics of a discrete set of individuals. Week
+et al. (2020) showed these dynamics can be summarized by a set of stochastic differential equation tracking the dynamics of abundance and phenotypic moments. Under the assumption of
+normally distributed phenotypes, the population can be completely described by abundance
+N (t), mean trait x̄ (t) and trait variance σ2 (t). Since the dynamics of abundance and phenotypic
+
+4
+
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Supplement to “Conditions for Mutualism,” Am. Nat.
+moments are interwoven via the expected reproductive output as a function of phenotype (ie.,
+individual fitness) w( x ), the crux component for deriving the dynamics of N (t), x̄ (t) and σ2 (t)
+is calculating a rescaled limit of w( x ). There are many ways to compute this limit, as formally
+demonstrated by Méléard and Roelly (1992, 1993). To translate their result, the rescaling used
+must ensure rates of reproduction and mortality increase sufficiently fast, the mass of individuals
+decreases sufficiently quickly, expected lifetime reproductive output converges to unity and the
+variance of reproductive output converges to a finite number. For simplicity, we rescale rates
+of reproduction and mortality by n, individual mass by N0 /n as above and expected offspring
+number to w( x )1/n . Under this rescaling, the result of Méléard and Roelly (1992, 1993) proves
+the growth rate can be found using the limit
+
+
+
+m( x ) = lim n w( x )1/n − 1 .
+n→∞
+
+(S8)
+
+When fitness is constant with respect to trait value (ie., w( x ) ≡ w), then this limit converges
+to m( x ) = ln w for each x. When this limit converges in general, m( x ) is the Malthusian (ie.,
+continuous time) growth rate associated with trait value x. The average of m( x ) across all trait
+values in the population, denoted m̄, is the growth rate of the population as a whole. Week
+et al. (2020) showed, under the assumption of normally distributed phenotypes, the dynamics of
+mean trait can be derived by taking partial derivatives of m̄ and m( x ) with respect to x̄. While
+the partial derivative ∂∂m̄x̄ represents the effect of frequency independent selection on mean trait
+evolution, the partial derivative
+
+∂m( x )
+∂ x̄ represents the effect of frequency dependent selection on
+
+mean trait evolution. Week et al. (2020) extended this observation by noting, again under normally distributed phenotypes, the action of selection on the evolution of phenotypic variance can
+∂m̄
+be summarized by the partial derivatives ∂σ
+2,
+
+∂m( x )
+which again represent frequency independent
+∂σ2
+
+and frequency dependent selection respectively. The resulting stochastic differential equations
+describing the dynamics of N (t) and the evolution of x̄ (t) and σ2 (t) are provided below in the
+section titled Deriving evolution equations.
+
+5
+
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Supplement to “Conditions for Mutualism,” Am. Nat.
+Diffusion limits for trait-differences and offset-matching. Following the main text, we isolate the
+effect of interaction mechanism by assuming each individual of species X interacts with a single
+individual of species Y and each individual of species Y interacts with a single individual of
+species X. To formally justify this assumption we require identical abundances for each species
+(n X = nY = n). Although this will clearly never hold in the wild, this assumption acts as a
+mere stepping stone in our derivation as eventually we take n X , nY , n → ∞. In particular, for any
+continuously positive numbers NX , NY > 0, we rescale individual mass by NX /n X for individuals
+in species X and by NY /nY for individuals in species Y. Hence, in the diffusion limit, the initial
+abundances for species X and Y are given by
+nX
+
+NX
+= NX
+n X →∞
+n
+i =1 X
+lim ∑
+
+(S9a)
+
+nY
+
+NY
+= NY .
+n
+i =1 Y
+
+lim ∑
+
+nY → ∞
+
+(S9b)
+
+In particular, since this holds for any NX , NY , we can choose NX 6= NY in spite of setting
+n X = nY = n. To picture why this is so, consider a specific case such as n = 4. Since we have
+exactly n individuals in each species, we can pair each individual of species X with a unique
+individual of species Y, forming n distinct pairs of interacting individuals. However, individuals
+in species X are weighted by NX /n and individuals in species Y are weighted by NY /n and,
+since we can freely choose NX and NY , these weights can be different. Hence, the ”total mass” of
+species X at time t = 0, which is interpreted as the initial abundance of X, is NX for any n. By
+the same argument, the initial abundance of species Y is NY for any n.
+Following Week et al. (2020), we derive the growth rates for traits x and y respectively as
+
+
+
+m X ( x, y) = lim n wX ( x, y)1/n − 1 ,
+
+(S10a)
+
+
+
+mY (y, x ) = lim n wY (y, x )1/n − 1 .
+
+(S10b)
+
+n→∞
+n→∞
+
+We now we apply these limits to derive the continuous time growth rates for species X and Y
+under trait-differences and offset-matching.
+6
+
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Supplement to “Conditions for Mutualism,” Am. Nat.
+Trait-differences.
+
+For the trait-differences mechanism, equation (S10a) becomes
+
+m X ( x, y) = lim n
+n→∞
+
+
+
+wX ( x, y)
+
+1/n
+
+
+
+−1
+
+
+
+= lim n ( R X EX )
+
+1/n
+
+n→∞
+
+
+exp
+
+
+
+BX
+( x − y) − 1 .
+n
+
+(S11)
+
+For large n we have
+
+
+
+
+
+BX
+n ( R X EX )1/n exp
+( x − y) − 1
+n
+
+
+
+
+
+B
+≈ n ( R X EX )1/n 1 + X ( x − y) − 1
+n
+
+
+= n ( R X EX )1/n − 1 + ( R X EX )1/n BX ( x − y). (S12)
+
+Since n ( R X EX )1/n − 1 → ln( R X EX ) and ( R X EX )1/n → 1, we find
+
+m X ( x, y) = r X + eX + BX ( x − y),
+
+(S13)
+
+where r X = ln R X and eX = ln EX . Applying the same limit to equation (S10b) returns
+
+mY (y, x ) = rY + eY + BY (y − x ).
+
+(S14)
+
+Recall that we assumed individuals interact at random with each other. This implies the growth
+rates m X ( x, ·) and mY (y, ·) are random variables with means
+
+Ex (m X ) = r X + eX + BX ( x − ȳ),
+
+(S15a)
+
+Ey (mY ) = rY + eY + BY (y − x̄ ),
+
+(S15b)
+
+2 2
+V x ( m X ) = BX
+σY ,
+
+(S16a)
+
+and variances
+
+7
+
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Supplement to “Conditions for Mutualism,” Am. Nat.
+Vy (mY ) = BY2 σX2 .
+
+(S16b)
+
+However, by formally following our assumption that individuals interact with a single individual
+of the other species, averaging m X ( x, y) across species X requires us to simultaneously average
+m X ( x, y) across species Y as well and vice versa for average mY (y, x ) across species Y. Hence, we
+find the population growth rates
+
+m̄ X = r X + eX + BX ( x̄ − ȳ),
+
+(S17)
+
+m̄Y = rY + eY + BY (ȳ − x̄ ),
+
+(S18)
+
+where x̄, ȳ are the mean traits for species X and Y respectively.
+Offset-matching.
+
+For the offset-matching mechanism, equation (S10a) becomes
+
+m X ( x, y) = lim n
+
+
+
+n→∞
+
+wX ( x, y)
+
+1/n
+
+
+
+−1
+
+
+= lim n ( R X EX )
+n→∞
+
+1/n
+
+
+
+BX
+exp − (y + δ − x )2
+2n
+
+
+
+
+
+− 1 . (S19)
+
+For large n we have
+
+
+n ( R X EX )
+
+1/n
+
+
+
+BX
+exp − (y + δ − x )2
+2n
+
+
+
+
+
+−1
+
+
+
+
+
+B
+≈ n ( R X EX )1/n 1 − X (y + δ − x )2 − 1
+2n
+
+
+B
+= n ( R X EX )1/n − 1 − ( R X EX )1/n X (y + δ − x )2 . (S20)
+2
+Hence,
+
+m X ( x, y) = r X + eX −
+8
+
+BX
+( δ + y − x )2 .
+2
+
+(S21)
+
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Supplement to “Conditions for Mutualism,” Am. Nat.
+Applying the same limit to equation (S10b) returns
+
+mY (y, x ) = rY + eY −
+
+BY
+( x + δ − y )2 .
+2
+
+(S22)
+
+Then, following the same argument made in deriving growth rates under trait-differences, we
+find the population growth rates
+
+B
+BX
+(ȳ + δ − x̄ )2 − X (σX2 + σY2 ),
+2
+2
+BY
+B
+m̄Y = rY + eY −
+( x̄ + δ − ȳ)2 − Y (σX2 + σY2 ),
+2
+2
+
+m̄ X = r X + eX −
+
+(S23)
+(S24)
+
+where σX2 , σY2 are the trait variances for species X and Y respectively.
+
+§C: Deriving evolution equations
+With the growth rates for each mechanism derived, we apply a general formula for the dynamics of abundances NX , NY , mean traits x̄, ȳ and additive genetic variances GX , GY following
+the Stochastic Asexual Gaussian allelic model with Abundance dynamics introduced in Week
+et al. (2020). We also assume a simple model of inheritance where expressed traits are normally
+distributed around genotypic values (ie., breeding values). This implies σX2 = ηX + GX and
+σX2 = ηX + GX where ηX , ηY capture developmental noise (Walsh and Lynch, 2018). In particular,
+assuming normally distributed trait values, normally distributed offspring breeding values, and
+normally distributed mutational effects, the dynamics of abundances, mean traits and additive
+genetic variances are given by the stochastic differential equations;
+
+p
+dWNX
+dNX
+= m̄ X NX + NX
+,
+dt
+dt
+p dWN
+dNY
+Y
+= m̄Y NY + NY
+,
+dt
+dt
+! s
+d x̄
+∂m̄ X
+∂m X
+GX dWx̄
+= GX
+−
++
+,
+dt
+∂ x̄
+∂ x̄
+NX dt
+
+9
+
+(S25a)
+(S25b)
+(S25c)
+
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Supplement to “Conditions for Mutualism,” Am. Nat.
+! s
+∂m̄Y
+dȳ
+∂mY
+GY dWȳ
++
+= GY
+−
+,
+(S25d)
+dt
+∂ȳ
+∂ȳ
+NY dt
+"
+!
+#
+r
+dGX
+∂
+m̄
+G
+∂m
+2 dWGX
+X
+X
+X
+2
+= 2GX
++ µX −
++ GX
+,
+(S25e)
+−
+dt
+∂GX
+∂GX
+NX
+NX dt
+s
+"
+!
+#
+dGY
+∂m̄Y
+∂mY
+GY
+2 dWGY
+2
+= 2GY
+−
++ µY −
++ GY
+.
+(S25f)
+dt
+∂GY
+∂GY
+NY
+NY dt
+Here µ X , µY ≥ 0 are rates of mutation, terms of the form
+
+dWQ
+dt
+
+represent independent white
+
+∂mY
+X
+noise processes driving the stochastic component of variable Q and the terms ∂m
+∂Q and ∂Q are
+∂mY
+X
+averages of the partial derivatives ∂m
+∂Q and ∂Q with respect trait distributions of species X and
+
+Y respectively. As noted above, these partial derivatives capture frequency dependent selection.
+With respect to both trait-differences and offset-matching mechanisms, we find
+
+∂m X
+∂mY
+∂m X
+∂mY
+=
+=
+=
+= 0.
+∂ x̄
+∂ȳ
+∂GX
+∂GY
+
+(S26)
+
+Hence, frequency dependent selection is absent in our models of trait evolution. In contrast,
+frequency independent selection is summarized by;
+
+D
+
+
+
+∂m̄ X
+
+
+
+∂ x̄ = BX ,
+
+
+
+
+ ∂m̄Y = BY ,
+∂ȳ
+
+∂m̄ X
+
+
+
+∂GX = 0,
+
+
+
+
+ ∂m̄Y = 0.
+∂GY
+
+O
+
+
+
+∂m̄ X
+
+
+
+∂ x̄ = BX ( ȳ + δ − x̄ ),
+
+
+
+
+ ∂m̄Y = BY ( x̄ + δ − ȳ),
+∂ȳ
+
+
+
+
+
+
+
+
+
+
+∂m̄ X
+∂GX = BX /2,
+
+(S27)
+
+(S28)
+
+∂m̄Y
+∂GY = BY /2.
+
+Taking the limits NX , NY → ∞ and incorporating the growth rate gradients above, equations
+(S25) return the ordinary differential equations;
+
+10
+
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Supplement to “Conditions for Mutualism,” Am. Nat.
+
+D
+
+
+
+d x̄
+
+
+
+dt = GX BX ,
+
+
+
+
+ dȳ = GY BY ,
+dt
+
+dGX
+
+
+
+dt = µ X ,
+
+
+
+
+ dGY = µY ,
+dt
+
+O
+
+
+
+d x̄
+
+
+
+dt = GX BX ( ȳ + δ − x̄ ),
+
+
+
+
+ dȳ = GY BY ( x̄ + δ − ȳ),
+dt
+
+
+
+
+
+
+
+
+
+
+dGX
+2
+dt = µ X − GX BX ,
+
+(S29)
+
+(S30)
+
+dGY
+2
+dt = µY − GY BY .
+
+Then, to further simplify our models, for trait-differences we set µ X = µY = 0 and for offsetp
+p
+matching we set GX = µ X /BX and GY = µY /BY so that additive genetic variances remain
+fixed. This reduces each of our models to a pair of ordinary differential equations describing
+mean trait dynamics.
+
+§D: Weak selection approximations
+Here we show how various interaction mechanisms can be related through weak selection and/or
+large offset approximations.
+
+Exponential trait-differences approximates logistic trait-differences under weak selection
+Under the logistic trait-differences mechanism traditionally employed (Nuismer et. al., 2006;
+Nuismer 2017), fitness for an individual of species X that engages in a single interaction is
+captured by
+
+wX ( x, y) =
+
+R X EX
+,
+1 + e2BX (y− x)
+
+(S31)
+
+where, as above, R X and EX denote the intrinsic fitness and the baseline effect on fitness due to
+an interaction and the variable BX is the strength of biotic selection. We take a weak selection
+approximation by Taylor expanding around BX ≈ 0. To leading order this returns
+11
+
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Supplement to “Conditions for Mutualism,” Am. Nat.
+
+wX ( x, y) ≈
+
+R X EX
+(1 + BX ( x − y)) .
+2
+
+(S32)
+
+Following the approach taken above, we calculate the continuous-time growth rate of individuals
+of species X with trait value x via m X ( x, y) = limn→∞ n((wX ( x, y))1/n − 1). This provides
+
+m X ( x, y) = r X + eX + ln (1 + BX ( x − y)) ,
+
+(S33)
+
+where r X = ln R X and eX = ln EX − ln 2. Following through again with our weak selection
+approximation, we have
+
+m X ( x, y) ≈ r X + eX + BX ( x − y).
+
+(S34)
+
+This approximation coincides with the growth rate we found using the exponential version of
+the trait-differences mechanism above. Hence, an exponential fitness curve provides an approximation for the logistic fitness curve when selection is weak.
+
+Offset-matching approximates trait-differences under weak selection and a large offset
+As mentioned in the main text, the offset-matching model is formally connected to the traitdifferences model via a combined weak selection, large offset approximation. Recall individual
+fitness for species X under offset-matching is given by
+
+
+BX
+wX ( x, y) = R X EX exp − (y + δ − x )2 ,
+2
+
+(S35)
+
+Under the substitution BX = ε3 and δ = 1/ε, equation (S35) simplifies to
+
+wX ( x, y) = R X EX exp −ε
+
+3 (y − x )
+
+2
+
+2
+
+ε
+− ε (y − x ) +
+2
+2
+
+
+,
+
+(S36)
+
+Hence, a second order Taylor expansion around ε ≈ 0 leads to
+
+
+ε
+wX ( x, y) ≈ R X EX 1 + ε2 ( x − y) +
+.
+2
+12
+
+(S37)
+
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Supplement to “Conditions for Mutualism,” Am. Nat.
+This approximation of fitness has the same form as the approximation of the logistic traitdifferences mechanism derived above. Thus, the offset-matching mechanism produces an approximation of trait-differences for weak selection and large offset.
+
+13
+
+Supplemental Material (not copyedited or formatted) for: Bob Week, Scott L. Nuismer. 2021. "Coevolutionary Arms Races and the
+Conditions for the Maintenance of Mutualism." The American Naturalist 198(2). DOI: https://doi.org/10.1086/714274.
+
+Supplement to “Conditions for Mutualism,” Am. Nat.
+
+References
+Lande, R. 1976. Natural selection and random genetic drift in phenotypic evolution. Evolution
+30:314–334.
+Méléard, M., and S. Roelly. 1992. Interacting branching measure processes. Stochastic Partial
+Differential Equations and Applications (G. Da Prato and L. Tubaro, eds.) pages 246–256.
+———. 1993. Interacting measure branching processes. some bounds for the support. Stochastics
+and Stochastic Reports 44:103–121.
+Walsh, B., and M. Lynch. 2018. Evolution and Selection of Quantitative Traits. OUP Oxford.
+Week, B., and S. L. Nuismer. 2019. The measurement of coevolution in the wild. Ecology Letters
+22:717–725.
+Week, B., S. L. Nuismer, L. J. Harmon, and S. M. Krone. 2020. A white noise approach to
+evolutionary ecology .
+
+14
+
+
