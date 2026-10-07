@@ -43,3 +43,13 @@
               rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.90) 55%,
               rgba(255, 255, 255, 0.00) 100%);
 }
+
+/* the Thanks slide: supporters' logos in one row; current support larger, earlier support smaller */
+.reveal .logos { margin-top: 10px; }
+.reveal .logos p { display: flex; align-items: center; gap: 30px; margin: 0; }
+.reveal .logos img { height: 50px; width: auto; max-width: none; margin: 0; border: 0;
+                     border-radius: 0; box-shadow: none; }
+.reveal .logos img.past { height: 32px; opacity: 0.92; }
+.reveal .logos .gap { flex: 1; }
+.reveal section .thanks .faces img { width: 70px; height: 70px; }
+.reveal section .thanks .tgroup { margin-bottom: 6px; }
