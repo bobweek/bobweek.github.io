@@ -106,7 +106,7 @@ Opening [schematic]{.badge .con}
 ::::
 
 ::: {.notes}
-4:30. The route. Start with pairwise coevolution and the interface that decides what happens when two individuals meet. Then the community such interactions are embedded in. Then the spatial patterns that result. A pit stop to put those pieces together for inference. Then carry the lessons into host–microbiome evolution, and end with prospects for inference.
+4:30. The route. Start with classical pairwise coevolution and the interface that decides what happens when two individuals meet. Then the community such interactions are embedded in. Then the spatial patterns that result. A pit stop to put those pieces together for inference. Then carry the lessons into host–microbiome evolution, and end with prospects for inference.
 :::
 
 ## Part I: Coevolution {.p2}
@@ -250,7 +250,7 @@ Part I · community [schematic]{.badge .con}
 ::::
 
 ::: {.notes}
-15:00. The plant row becomes a resource axis; each species has a utilisation curve; overlap sets competition. This is the set-up of the many-species model.
+15:00. The plant row becomes a resource axis; each species has a utilisation curve; overlap is competition. And competition is selection, of two kinds. Linear selection, beta, shifts where a niche sits; quadratic selection, gamma, changes how broad it is. Two pairs of this guild up close: both are pushed apart; the partly overlapping pair is selected to narrow, the nearly coincident pair to broaden. This is the set-up of the many-species model.
 :::
 
 ## What can we learn without tracking every interaction? {.p2}
@@ -493,6 +493,22 @@ Midpoint [schematic]{.badge .con}
 34:00. Interface, community, space. Not three projects: three recurring determinants of coevolved variation.
 :::
 
+## Part II: Hosts and their microbiomes {.p1}
+
+::: {.eyebrow}
+Part II [schematic]{.badge .con}
+:::
+
+:::: {.body}
+::: {.fig}
+![](figures/s21b_part2.png)
+:::
+::::
+
+::: {.notes}
+A pause. Part II: hosts and their microbiomes. The same three, interface, community and space, stay central; this is where they meet.
+:::
+
 ## Host–microbiome evolution combines all three {.p1}
 
 ::: {.eyebrow}
@@ -666,7 +682,7 @@ Looking forward [planned]{.badge .hyp}
 ::::
 
 ::: {.notes}
-46:00. How can we combine these ingredients (a description of variation, what is inherited, a mechanistic model, a reduction that scales) to identify the signatures of host–microbiome interactions? We will need models that account for spurious associations and background processes: where hosts live, and host social structure (with Aura Raulo and Guilhem Sommeria-Klein). Social transmission and geography together determine how microbiomes are inherited. And similarly for coevolution: how do we account for background selection and shared dispersal history while searching for its signature? Two species that spread along the same route end up with allele frequencies that covary across places, with no selection between them: movement alone can look like coevolution in genetic data.
+46:00. How can we combine these ingredients (a description of variation, what is inherited, a mechanistic model, a reduction that scales) to identify the signatures of host–microbiome interactions? We will need models that account for spurious associations and background processes: where hosts live, and host social structure (with Aura Raulo and Guilhem Sommeria-Klein). Social transmission and geography together determine how microbiomes are inherited. And similarly for coevolution: how do we account for background selection and shared dispersal history while searching for its signature? Two species that spread from one refuge along the same routes: each founding step shifts allele frequencies, so places on the same branch end up alike in both species. Their genetic structure matches with no selection between them: movement alone can look like coevolution in genetic data.
 :::
 
 ## Can we read interaction history from spatial molecular data? {.p1}
@@ -701,7 +717,7 @@ Close [schematic]{.badge .con}
 48:00. Two ways to close. (1) The map as a summary: we started with a pair and an interface, added a community, then space; the same three reappeared inside a host with its microbes, joined by inheritance and timescale. Wherever we stood on this map, the question was the same: which structure decides what an interaction leaves behind, and can we read it back from data? (2) The map as an invitation: most of this chart is still coastline. The systems studied here in Lyon sit at particular places on it; I would like to know which of these coordinates matter in yours.
 :::
 
-## Thanks, and Questions? {.p1 visibility="uncounted"}
+## Thanks {.p1 visibility="uncounted"}
 
 :::: {.body .top}
 ::: {.w50}

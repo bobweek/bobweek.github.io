@@ -53,3 +53,7 @@
 .reveal .logos .gap { flex: 1; }
 .reveal section .thanks .faces img { width: 70px; height: 70px; }
 .reveal section .thanks .tgroup { margin-bottom: 6px; }
+/* one label column of fixed width, so the portraits line up down the slide */
+.reveal section .thanks .tgroup > p { flex: 0 0 178px; margin: 0; }
+.reveal section .thanks .tgroup .lbl { display: block; line-height: 1.5; }
+.reveal section .thanks .tgroup .faces { flex: 1 1 auto; flex-wrap: nowrap; }
