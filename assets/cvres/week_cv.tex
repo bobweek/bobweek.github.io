@@ -1,0 +1,381 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Developer CV
+% LaTeX Class
+% Version 2.0 (12/10/23)
+%
+% This class originates from:
+% http://www.LaTeXTemplates.com
+%
+% Authors:
+% Omar Roldan
+% Based on a template by  Jan Vorisek (jan@vorisek.me)
+% Based on a template by Jan Küster (info@jankuester.com)
+% Modified for LaTeX Templates by Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% The MIT License (see included LICENSE file)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[9pt]{developercv} % Default font size, values from 8-12pt are recommended
+\usepackage{multicol}
+\setlength{\columnsep}{0mm}
+%----------------------------------------------------------------------------------------
+\usepackage{lipsum}  
+\usepackage{outlines}
+
+% \usepackage{xcolor}
+% \pagecolor[rgb]{0.25,0.25,0.25}
+% \color[rgb]{1,1,1}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE AND CONTACT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}[t]{0.5\textwidth} 
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+	
+	{ \fontsize{16}{20} \textcolor{black}{\textbf{\MakeUppercase{Bob Week}}}} % First name
+	
+	\vspace{6pt}
+	
+	{\Large Curriculum Vitae} % Career or current job title
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.2\textwidth} % 20% of the page width for the first row of icons
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+	
+	% The first parameter is the FontAwesome icon name, the second is the box size and the third is the text
+	\icon{Globe}{11}{\href{https://bobweek.github.io}{bobweek.github.io}}\\
+    \icon{Phone}{11}{\small{+1 360 216 9074}}\\
+    \icon{MapMarker}{11}{Kiel, Germany}\\
+	
+\end{minipage}
+\begin{minipage}[t]{0.27\textwidth} % 27% of the page width for the second row of icons
+	\vspace{-\baselineskip} % Required for vertically aligning minipages
+	
+	\icon{Envelope}{11}{\href{mailto:bweek@uoregon.edu}{bweek.ecoevo@proton.me}}\\
+    \orcid{11}{\href{https://orcid.org/0000-0001-7687-4757}{0000-0001-7687-4757}}\\
+    \icon{Github}{11}{\href{https://github.com/bobweek}{github.com/bobweek}}\\
+\end{minipage}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION
+%----------------------------------------------------------------------------------------
+\vspace{-0 pt}
+\cvsect{Education}
+\begin{entrylist}
+    \entry
+		{2020}
+		{PhD Bioinformatics \& Computational Biology}
+		{\href{https://www.leeef.org/}{S.L. Nuismer Lab}, \href{https://www.iids.uidaho.edu/about.php}{IBEST, University of Idaho}}
+		{Dissertation focused on modeling eco-evolutionary processes and developing statistical methods}
+    \entry
+		{2015}
+		{BS Mathematics}
+		{\href{https://www.uidaho.edu/sci/mathstat}{University of Idaho}}
+		{Traditional math degree with electives in electrical engineering}
+\end{entrylist}
+
+%----------------------------------------------------------------------------------------
+%	Publications
+%----------------------------------------------------------------------------------------
+\vspace{-5 pt}
+\cvsect{Peer-Reviewed Publications}
+\begin{publist}
+    \pub{2023}
+		{Host-Parasite Coevolution in Continuous Space\\ Leads to Variation in Local Adaptation Across Spatial Scales}
+		{The American Naturalist}
+		{\emph{Week, B.}; Bradburd, G.S.}
+        {10.1086/727470}
+    \pub{2022}
+		{Uncovering Cryptic Coevolution}
+		{The American Naturalist}
+		{Nuismer, S.L.; \emph{Week, B.}; Harmon, L.J.}
+        {10.1086/717436}
+    \pub{2021}
+		{A White Noise Approach to Evolutionary Ecology}
+		{Journal of Theoretical Biology}
+		{\emph{Week, B.}; Nuismer, S.L.; Harmon, L.J.; Krone, S.M.}
+        {10.1016/j.jtbi.2021.110660}
+    \pub{2021}
+		{Coevolutionary Arms Races\\ and the Conditions for the Maintenance of Mutualism}
+		{The American Naturalist}
+		{\emph{Week, B.}; Nuismer, S.L.}
+        {10.1086/714274}
+    \pub{2021}
+        {A Unified Model of Species Abundance, Genetic Diversity, and Functional Diversity\\ Reveals the Mechanisms Structuring Ecological Communities}
+        {Molecular Ecology Resources}
+        {Overcast, I.; Ruffley, M.; Rosindell, J.; Harmon, L.; Borges, P.; Emerson, B.; Etienne, R.S.; Gillespie,
+        R.; Krehenwinkel, H.; Mahler, L.; Massol, F.; Parent, K.; Patiño, J.; Peter, B.; \emph{Week, B.}; Wagner,
+        C.; Hickerson, M.J.; Rominger, A.}
+        {10.1111/1755-0998.13514}
+    \pub{2019}
+        {Identifying Models of Trait-Mediated Community Assembly\\ using Random Forests and Approximate Bayesian Computation}
+        {Ecology and Evolution}
+        {Ruffley, M.; Peterson, K.; \emph{Week, B.}; Tank, D.; Harmon, L.J.}
+        {10.1002/ece3.5773}
+    \pub{2019}
+        {Approximate Bayesian Estimation of Coevolutionary Arms Races}
+        {PLOS Computational Biology}
+        {Nuismer, S.L.; \emph{Week, B.}}
+        {10.1371/journal.pcbi.1006988}
+    \pub
+    {2019}
+    {The Measurement of Coevolution in the Wild}
+    {Ecology Letters}
+    {\emph{Week, B.}; Nuismer, S.L.}
+    {10.1111/ele.13231}
+    \pub
+    {2018}
+    {Coevolution Slows the Disassembly of Mutualistic Communities}
+    {The American Naturalist}
+    {Nuismer, S.L.; \emph{Week, B.}; Aizen, M.}
+    {10.1086/699218}
+\end{publist}
+
+%----------------------------------------------------------------------------------------
+%	Preprints
+%----------------------------------------------------------------------------------------
+\vspace{-5 pt}
+\cvsect{Preprints}
+\begin{publist}
+    \pub{2024}
+		{Quantitative Genetics of Microbiome Mediated Traits}
+		{bioRxiv}
+		{\emph{Week, B.}; Ralph, P.L.; Tavalire, H.F.; Cresko, W.A.; Bohannan, B.J.M.}
+        {10.1101/2024.12.16.628599}
+    \pub{2024}
+		{The Evolution of Microbiome-Mediated Traits}
+		{bioRxiv}
+		{\emph{Week, B.}; Morris, A.H.; Bohannan, B.J.M.}
+        {10.1101/2024.03.29.587374}
+\end{publist}
+
+
+%----------------------------------------------------------------------------------------
+%	AWARDS
+%----------------------------------------------------------------------------------------
+\vspace{-10 pt}
+\cvsect{Awards}
+\begin{entrylist}
+    \entry
+        {2024 -- 2027}
+        {EU/DFG Postdoctoral Fellowship}
+        {\href{https://www.uni-kiel.de/en/research/early-career-researchers/kite}{KiTE, Kiel University}}
+        {The “Kiel Training for Excellence” programme is cofunded by the Marie Sklodowska-Curie Actions from the European Commission's Horizon Europe programme (project number: 101081480) and by Kiel University}
+    \entry
+        {2018 -- 2019}
+        {Bioinformatics \& Computational Biology Fellowship}
+        {\href{https://www.iids.uidaho.edu/about.php}{IBEST, University of Idaho}}
+        {Project aimed to model the duration of coevolutionary associations}
+    \entry
+        {2017-2018}
+        {Bioinformatics \& Computational Biology Fellowship}
+        {\href{https://www.iids.uidaho.edu/about.php}{IBEST, University of Idaho}}
+        {Project aimed to develop a statistical method to measure coevolution in continuous space}
+    \entry
+        {2017}
+        {Paul Joyce Memorial BCB Fellowship Endowment}
+        {\href{https://www.iids.uidaho.edu/about.php}{IBEST, University of Idaho}}
+        {Nominated by Professor Scott Nuismer because of my “love for mathematics and helping others to appreciate how it can be used to understand biological processes”}
+    \entry
+        {2013-2015}
+        {Undergraduate Research in Biology \& Mathematics}
+        {\href{https://www.iids.uidaho.edu/about.php}{IBEST, University of Idaho}}
+        {Efforts focused on developing a statistical method to measure coevolution in metapopulations}
+\end{entrylist}
+
+%----------------------------------------------------------------------------------------
+%	PROFESSIONAL EXPERIENCE
+%----------------------------------------------------------------------------------------
+\vspace{-0 pt}
+\cvsect{Professional Experience}
+\begin{entrylist}
+	\entry
+        {2024 -- 2027}
+        {KiTE Postdoctoral Research Fellow}
+        {\href{https://evoecogen-kiel.de/}{H. Schulenburg Lab, Kiel University}}
+        {Establishing theoretical foundations for the study of microbiome mediated trait dynamics}
+        \entry
+        {2022 -- 2024}
+        {Postdoctoral Research Fellow}
+        {\href{https://pages.uoregon.edu/bohannanlab/}{B.J.M. Bohannan Lab, University of Oregon}}
+        {Extended evolutionary theory for traits jointly determined by host genotype and host microbiome}
+        \entry
+        {2020 -- 2022}
+		{Postdoctoral Researcher}
+		{\href{http://www.genescape.org/people.html}{G.S. Bradburd Lab, Michigan State University}}
+		{Developed mathematical and computational approaches to understand coevolution in continuous space}
+        \entry
+        {2018}
+		{Visiting Scientist}
+		{\href{http://paulcaradonna.weebly.com/}{P.J. CaraDonna Lab, Rocky Mountain Biological Laboratory}}
+		{Field ecology training on estimating floral abundance and phenology, recording plant-pollinator interactions and estimating percent cover}
+\end{entrylist}
+
+%----------------------------------------------------------------------------------------
+%	TEACHING EXPERIENCE
+%----------------------------------------------------------------------------------------
+\vspace{-5 pt}
+\cvsect{Teaching Experience}
+\begin{entrylist}
+	\entry
+        {2017}
+		{Teaching Assistant}
+		{\href{https://www.uidaho.edu/sci/biology}{University of Idaho, Department of Biological Sciences}}
+        {Taught the lab portion of a 300-level ecology and population biology course}
+        \entry
+        {2012 -- 2014}
+		{Mathematics Tutor}
+		{\href{https://www.clark.edu/academics/programs/dept/mathematics/}{Clark Community College, Mathematics Department}}
+        {Part-time work at tutoring center supporting students taking a wide-range of coursework}
+\end{entrylist}
+
+%----------------------------------------------------------------------------------------
+%	PRESENTATIONS
+%----------------------------------------------------------------------------------------
+\vspace{-10 pt}
+\cvsect{Presentations}
+\begin{preslist}
+    \pres
+    {2024}
+    {Host-Parasite Coevolution\\ \& Microbiome-Mediated Adaptation}
+    {Seminar}
+    {TransEvo Core Seminar - Kiel, Germany}
+    \pres
+    {2023}
+    {The Evolution of Microbiome-Mediated Traits}
+    {Talk}
+    {Symbiosis Theory Workshop - Eugene, Oregon}
+    \pres
+    {2023}
+    {Modeling Adaptation of Microbiome-Mediated Traits}
+    {Talk}
+    {EvoWibo - Port Townsend, Washington}
+    \pres
+    {2022}
+    {Host-Parasite Coevolution in Continuous Space}
+    {Poster}
+    {PEQG2022 - Pacific Grove, California}
+    \pres
+    {2021}
+    {Coevolutionary Arms Races\\ and The Conditions for The Maintenance of Mutualism}
+    {Talk}
+    {AmNat2021 - Virtual}
+    \pres
+    {2020}
+    {A Bayesian Methodology for Estimating\\ the Distribution of Coevolution within Ecological Communities}
+    {Talk}
+    {AmNat2020 - Pacific Grove, California}
+    \pres
+    {2018}
+    {The Measurement of Coevolution in Nature}
+    {Poster}
+    {EvoWibo - Port Townsend, Washington}
+    \pres
+    {2017}
+    {The Measurement of Coevolution in Mutualisms}
+    {Talk}
+    {Evolution - Portland, Oregon}
+\end{preslist}
+
+%----------------------------------------------------------------------------------------
+%	SERVICE & LEADERSHIP
+%----------------------------------------------------------------------------------------
+\vspace{-10 pt}
+\cvsect{Service \& Leadership}
+\begin{publist}
+    \pub
+    {2022}
+    {Code Contributer}
+    {SLiM 4.0}
+    {Developed a nucleotide-based model of coevolution for SLiM. See §19.7 \href{https://github.com/MesserLab/SLiM/releases/download/v4.0.1/SLiM_Manual.pdf}{\emph{here}}.}
+    {10.1086/723601}
+    \entry
+    {2018-2019}
+    {Graduate Student Representative}
+    {\href{https://www.iids.uidaho.edu/about.php}{IBEST, University of Idaho}}
+    {Represented graduate students in the Bioinformatics \& Computational Biology program at institutional meetings}
+    \entry
+    {\rule{0.6cm}{0.1pt}}
+    {Manuscript Reviewer}
+    {}
+    {The American Naturalist, Ecology, Evolution, PCI Evol Biol, Population Ecology, Proceedings of The Royal Society B, Theoretical Population Biology}
+\end{publist}
+
+%----------------------------------------------------------------------------------------
+%	SOCIETIES
+%----------------------------------------------------------------------------------------
+\vspace{-10 pt}
+\cvsect{Societies}
+\begin{entrylist}
+    \vspace{-10 pt}
+    \entry
+    {2021-Present}
+    {The International Society of Nonbinary Scientists}
+    {\href{https://isnbs.org/}{isnbs.org}}
+    {}
+    \vspace{-10 pt}
+    \entry
+    {2020-Present}
+    {The American Society of Naturalists}
+    {\href{https://www.amnat.org/home.html}{amnat.org}}
+    {}
+\end{entrylist}
+
+%----------------------------------------------------------------------------------------
+%	SUMMARY, SKILLS AND TECHNOLOGIES
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}[t]{0.46\textwidth}
+    \cvsect{Interests}
+	\vspace{-6pt}
+
+	I am broadly interested in collaborating on any scientific topic where my skills are useful. I am particularly interested in developing and formalizing models to clarify conceptual issues in population biology and community ecology. \\
+
+\end{minipage}
+\hfill % Whitespace between
+\begin{minipage}[t]{0.465\textwidth}
+    \cvsect{Skills}
+    \vspace{-6pt}
+    
+    \begin{minipage}[t]{0.2\textwidth}
+        \textbf{Software:}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.75\textwidth}
+      \LaTeX, Python, R, Linux, Julia, Mathematica, SLURM, SLiM, C/C++
+    \end{minipage}
+    \vspace{4mm}
+
+    \vspace{-5 pt}
+    \begin{minipage}[t]{0.2\textwidth}
+        \textbf{Statistics:}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.75\textwidth}
+      Modeling, Analysis, Inference, Methods Development
+    \end{minipage}
+    \vspace{4mm}
+
+    \vspace{-5 pt}
+    \begin{minipage}[t]{0.2\textwidth}
+        \textbf{Math:}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.75\textwidth}
+      Linear Algebra, Dynamical Systems,\newline Functional Analysis, Stochastic Processes
+    \end{minipage}
+
+\end{minipage}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

@@ -1,0 +1,1028 @@
+vol. 203, no. 1
+
+the american naturalist
+
+january 2024
+
+Host-Parasite Coevolution in Continuous Space Leads to
+Variation in Local Adaptation across Spatial Scales
+Bob Week1,* and Gideon Bradburd2
+1. University of Oregon, Eugene, Oregon 97403; 2. University of Michigan, Ann Arbor, Michigan 48109
+Submitted June 30, 2022; Accepted June 20, 2023; Electronically published November 9, 2023
+Online enhancements: supplemental PDF.
+abstract: Previous host-parasite coevolutionary theory has focused
+on understanding the determinants of local adaptation using spatially
+discrete models. However, these studies fall short of describing patterns of host-parasite local adaptation across spatial scales. In contrast, empirical work demonstrates that patterns of adaptation depend on the scale at which they are measured. Here, we propose a
+mathematical model of host-parasite coevolution in continuous space
+that naturally leads to a scale-dependent deﬁnition of local adaptation. In agreement with empirical research, we ﬁnd that patterns of
+adaptation vary across spatial scales. In some cases, not only the magnitude of local adaptation but also the identity of the locally adapted
+species will depend on the spatial scale at which measurements are
+taken. Building on our results, we suggest a way to consistently measure parasite local adaptation when continuous space is the driver of
+cross-scale variation. We also describe a way to test whether continuous space is driving cross-scale variation. Taken together, our results
+provide a new perspective that can be used to understand empirical
+observations previously unexplained by theoretical expectations and
+deepens our understanding of the mechanics of host-parasite local
+adaptation.
+Keywords: host-parasite coevolution, local adaptation, continuous
+space, spatial scale.
+
+Introduction
+Interactions between hosts and parasites have shaped patterns of diversity across all scales of biological organization.
+For example, coevolution with parasites can alter epidemiological dynamics (Best et al. 2010; Débarre et al. 2012;
+Lion and Gandon 2015), promote the evolution of sexual
+reproduction (Otto and Nuismer 2004; Lively 2010), yield
+novel mutualisms (Yamamura 1993), and inﬂuence patterns
+of speciation across a broad range of taxa (Agrawal and
+Zhang 2021). In each of these examples, the geography of
+* Corresponding author; email: bweek.ecoevo@proton.me.
+ORCIDs: Week, https://orcid.org/0000-0001-7687-4757; Bradburd, https://
+orcid.org/0000-0001-8009-0154.
+
+the interspeciﬁc interactions plays a critical role in determining ecological and evolutionary outcomes. Previous theoretical studies of host-parasite coevolution have incorporated geography using models in which dispersal occurs
+between spatially discrete locations (Gandon et al. 1996;
+Boots and Sasaki 1999; Nuismer et al. 2000; Gandon 2002;
+Gandon and Michalakis 2002; Nuismer 2006; Ridenhour
+and Nuismer 2007; Gandon and Nuismer 2009; Débarre
+et al. 2012; Lion and Gandon 2015). However, because most
+species disperse in continuous space (Nathan et al. 2008)
+and because the consequences of spatially continuous systems may only be poorly approximated by discrete space
+models, there is a need for models that help us understand
+the drivers of host-parasite local adaptation in spatially continuous systems.
+A theoretical model of coevolution in continuous space
+may also explain empirically observed variation in spatial
+patterns of host-parasite adaptation across spatial scales.
+Researchers often document a spatial pattern in which
+greater support for parasite local adaptation is found at
+larger spatial scales and little to no support is found at
+shorter spatial scales (Hanks and Denno 1994; Kaltz et al.
+1999; Thrall et al. 2002; Schönrogge et al. 2006; Tack et al.
+2014). We lack a mechanistic explanation for why this pattern should emerge because previous theory has not explicitly related parasite local adaptation to the geographic
+distances that measurements are taken at. Furthermore,
+these studies rely on indices of local adaptation that do not
+explicitly account for geographic distance. Therefore, there
+is a need to further integrate theoretical predictions and empirical observations of spatial patterns of coevolution. In this
+article, we aim to close this gap by analyzing the interaction
+among host-parasite coevolution, random genetic drift, and
+gene ﬂow in a continuous two-dimensional habitat by introducing a novel quantitative genetic model and an index
+of local adaptation that explicitly accounts for the geographic distance measurements are taken at.
+
+American Naturalist, volume 203, number 1, January 2024. q 2023 The University of Chicago. All rights reserved. Published by The University of Chicago Press for
+The American Society of Naturalists. https://doi.org/10.1086/727470
+
+000
+
+The American Naturalist
+
+We begin by introducing our model, which is a twospecies generalization of Slatkin’s (1978) model of quantitative trait evolution in continuous space. We then introduce our novel measure of local adaptation that explicitly
+accounts for geographic distance. Analysis of our model
+yields an interspeciﬁc spatial covariance function, called the
+cross-covariance function, that allows us to calculate the
+covariance of traits for host and parasite populations as a
+function of the geographic distance separating those populations. In particular, the cross-covariance function accounts
+for spatial autocorrelation of trait values in each species,
+which occurs when traits measured at different locations
+tend to look more similar the closer they are geographically. Combining our model of host-parasite coevolution
+with our continuous space index of local adaptation, we
+ﬁnd that parasite local adaptation can be expressed in terms
+of the cross-covariance function. Our main ﬁnding is that
+parasite local adaptation depends on the spatial scale measurements are taken at relative to the spatial scales of phenotypic autocorrelation for both species. In some cases, not
+only the magnitude of local adaptation but also the identity
+of the locally adapted species can vary across spatial scales
+because of spatially autocorrelated traits. Building on our
+theoretical results, we make a suggestion for obtaining a consistent measurement of parasite local adaptation when crossscale variation is due to spatial autocorrelation. In the discussion section, we also suggest an approach to test whether
+cross-scale variation is due to spatial autocorrelation and
+describe two directions for generalizing our model.
+
+Methods
+The Model
+Our model tracks the evolution of local mean traits for
+a pair of species codistributed across a continuous twodimensional geographic landscape. For each species, the
+genomic architecture of their traits is based on an inﬁnitesimal approximation such that the trait of an individual can be thought of as the sum of an inﬁnite number of
+allelic effects (with no epistasis or dominance), each of inﬁnitesimal size (reviewed in Barton et al. 2017). The primary components of our model (selection, reproduction,
+and dispersal) can be thought of as different stages in the
+life cycle of an individual. We assume the life cycle begins by determining ﬁtness in response to selective forces,
+including interspeciﬁc interactions, followed by the production of offspring that disperse to new locations, inherit
+trait values that are normally distributed around parental trait values, and repeat the cycle of life. However, instead of explicitly tracking individuals, our model focuses on
+the dynamics of mean traits averaged across individuals at
+each location in a two-dimensional geographic landscape.
+
+In this section, we begin by outlining our approach to
+account for biotic and abiotic selection. We then discuss
+our model of dispersal and random genetic drift before combining these components into our working model. Model
+parameters are summarized in table 1. A more thorough
+and technically detailed introduction to and justiﬁcation
+for our model is presented in sections S1 and S2 of the supplemental PDF, respectively.
+Selection. We assume that ﬁtness consequences for interactions between hosts and parasites are mediated by the
+difference in quantitative traits z H 2 zP , where zS is the trait
+value of an individual in species S p H, P for host and
+parasite, respectively. More precisely, we assume that the
+probability of infection increases the more similar traits are
+and decreases with trait mismatch. Given a successful infection, we assume that the host incurs a ﬁtness cost and the
+parasite receives a ﬁtness beneﬁt. As a consequence, the host
+trait will evolve to evade the parasite trait in response to
+biotic selection, while the parasite trait evolves to match the
+host trait.
+To draw biologically meaningful conclusions, we analyze our model at equilibrium. Then, to ensure our model
+has an equilibrium, we also account for abiotic selection
+that is stabilizing with strengths AH, AP. As our equilibrium
+analysis of the model is agnostic to globally averaged trait
+values, without loss of generality we assume that stabilizing selection pulls both traits toward zero. Additionally,
+our approach to computing spatial covariance functions
+(outlined in sec. S3 of the supplemental PDF) requires that
+biotic selection be weak relative to abiotic stabilizing selection for both species (BS ≪ AS , S p H, P).
+Following classical quantitative genetics, we assume that
+trait distributions of local populations are normal with mean
+zS (x) for species S at the two-coordinate location x p
+(x1 , x2 ). Although this assumption may be violated as dispersal can lead to skewed trait distributions (Débarre et al.
+2015), this effect does not occur when dispersal distance
+is short relative to the spatial scale of trait variation. As
+will be shown in the results section, we ﬁnd that dispersal
+distances are always short relative to spatial scales of trait
+variation when selection is weak.
+Table 1: Model parameters
+Symbol
+AH
+AP
+BH
+BP
+jH
+jP
+DH
+DP
+
+Description
+Host abiotic stabilizing selection
+Parasite abiotic stabilizing selection
+Host biotic selection
+Parasite biotic selection
+Host dispersal distance
+Parasite dispersal distance
+Rate of host (phenotypic) drift
+Rate of parasite (phenotypic) drift
+
+Host-Parasite Coevolution in Continuous Space
+Drift. Random genetic drift can lead to variation in evolutionary trajectories across spatial locations. In our model,
+drift provides the ultimate source of geographic variation
+in phenotypes; this geographic variation then interacts with
+gene ﬂow and selection to yield distinct spatial patterns. The
+classic model for the response of a quantitative character to
+random genetic drift is given by Lande (1976). This model
+states that the change in mean trait in response to drift between consecutive, nonoverlapping generations follows a
+normal distribution with variance equal to the ratio of additive genetic variance to effective population size. The continuous time analog of this model is trait evolution following Brownian motion, which has been widely applied as
+a phenomenological model in the ﬁeld of phylogenetic comparative methods (Felsenstein 1973; Manceau et al. 2016).
+Mechanistically, this result has been formalized in continuous time by Week et al. (2021). In our continuous space
+setting, we extend this model so that different locations
+experience uncorrelated effects of drift (see sec. S1 of the
+supplemental PDF for mathematical details), with rate DS
+for species S. We denote the spatial noise process capturing drift for species S by yS(x), which is normalized to have
+unit rate. That is, DSyS(x) is the instantaneous evolutionary response to drift for species S at location x.
+Dispersal. We assume that displacement between parental
+and offspring birthplaces follows a bivariate Gaussian distribution centered on zero with displacement in each direction
+drawn independently. These assumptions prevent any net
+directionality in dispersal. For species S, we assume that displacements in the two directions are drawn with a standard
+deviation jS, which we refer to as the dispersal distance.
+Gaussian dispersal leads to change in zS (x) toward a
+local average, where the scale of “local” is determined by jS.
+The local mean trait will increase or decrease depending
+on the concavity of the spatial mean trait surface. As the
+concavity of a surface is quantiﬁed by a second spatial derivative, the effect of Gaussian dispersal on the instantaneous
+rate of change in local mean trait value is related to the second spatial derivative.
+Selection, Dispersal, and Drift. We combine the evolutionary forces described in the previous sections to obtain our
+working model as
+abiotic
+selection
+
+ð1bÞ
+ð1bÞ
+
+where AS is the strength of abiotic stabilizing selection, BS
+is the strength of biotic selection, jS is the dispersal distance, and DS is the rate of random genetic drift for species S.
+A full technical description of our model can be found
+in section S1 of the supplemental PDF. The system of equations (1) forms a pair of linear stochastic partial differential
+equations (Khoshnevisan 2008; Hairer 2009). In the absence
+of coevolution, the well-studied equilibrium solution to this
+model is a Gaussian random ﬁeld (Whittle 1954; Whittle
+1963; Lindgren et al. 2011; Lindgren 2012). Background
+on Gaussian random ﬁelds is provided in section S2 of the
+supplemental PDF. As our model of coevolution implies a
+linear interaction between two ﬁelds, the methods used by
+Whittle (1954, 1963) to study the case of no interaction
+can be extended to show that the equilibrium solution of
+equations (1) is also a Gaussian random ﬁeld. To illustrate
+our model, a single realization of mean trait values across
+space for the two species is provided in ﬁgure 1.
+Equilibrium solutions to our model are completely characterized by ﬁve quantities: (1) the expected host mean
+trait at each location mH, (2) the expected parasite mean
+trait at each location mP, (3) the covariance between host
+mean traits sampled at any displacement CH(x), (4) the
+covariance between parasite mean traits sampled at any
+displacement CP(x), and (5) the cross-covariance between
+host and parasite mean traits sampled at any displacement CHP(x). As our primary interest is in the spatial covariances of mean traits, we ignore the expected values mH,
+mP. In fact, the key quantity derived from our model for
+drawing conclusions on host-parasite local adaptation is
+the interspeciﬁc cross-covariance between traits CHP(x).
+We describe our analytical approach to approximating this
+cross-covariance function in section S3 of the supplemental PDF. To make use of this cross-covariance function for
+understanding cross-scale variation in patterns of local adaptation, we introduce a new index of local adaptation in the
+following section that explicitly accounts for the effects of geographic scale.
+Local Adaptation in Continuous Space
+
+biotic
+selection
+
+zﬄﬄﬄﬄﬄﬄﬄﬄ}|ﬄﬄﬄﬄﬄﬄﬄﬄ{
+zﬄ}|ﬄ{
+∂z H
+p 2AH z H 2 BH (z P 2 z H )
+∂t
+dispersal
+zﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄ}|ﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄﬄ{
+drift
+
+
+zﬄ }|ﬄ {
+j2H ∂2 zH
+∂2 zH
+1
+1
+1 DH y H ,
+2 ∂x21
+∂x22
+
+∂z P
+p 2AP zP 1 BP (z H 2 zP )
+∂t
+
+
+j2P ∂2 zP
+∂2 zP
+1
+1 2 1 DP y P ,
+2 ∂x21
+∂x2
+
+000
+
+ð1aÞ
+
+There are two popular deﬁnitions of local adaptation at
+the population level (Kawecki and Ebert 2004; Blanquart
+et al. 2013; but for a third deﬁnition, see Nuismer and
+Gandon 2008). The ﬁrst, known as “home versus away,”
+is the mean ﬁtness of a population (where mean ﬁtness
+of a population is deﬁned as the average ﬁtness among
+
+000
+
+The American Naturalist
+
+Figure 1: A single realization of our model. Shown are local mean trait values zH (x), zP (x), given by equations (1a) and (1b), respectively,
+across geographic space x p (x1 , x2 ), where x1 quantiﬁes eastings and x2 quantiﬁes northings, for the host (left) and parasite (right). Local
+mean trait values are colored according to the scale on the right. Here we have made the dispersal distance of the host to be ﬁve times that of
+the parasite, with all other pairs of parameters equal.
+
+all individuals in that population) in its local environment
+minus the average mean ﬁtness of that population when
+transplanted to any other location. An alternative deﬁnition, known as “local versus foreign,” is the mean ﬁtness
+of a population in its local environment minus the average mean ﬁtness of populations transplanted from any
+other location to that local environment. These deﬁnitions
+are particularly well suited for metapopulations, composed
+of a ﬁnite number K of discrete locations, because a randomly drawn foreign location (for home versus away) or
+population (for local versus foreign, but from here on we
+simply write location) occurs with probability 1=K. However, this deﬁnition fails to account for the effects of geographic scale on measurements of local adaptation. Therefore, we introduce a deﬁnition that explicitly accounts for
+the geographic scale at which measurements are taken.
+To obtain an index of local adaptation for species distributed continuously in space that accounts for geographic
+scale, we compute the population growth rate (referred to
+as a Malthusian growth rate in Crow and Kimura 1970) for
+a population in its local environment (say at location x)
+minus the growth rate for the focal population when transplanted to a different location y. This deﬁnition corresponds to a home versus away deﬁnition of local adaptation, as described above. Although classical indices of local
+adaptation are deﬁned in terms of ﬁtness as lifetime expected number of offspring, we chose population growth
+rate because it leads to relatively simple mathematical expressions. However, given the close correspondence between growth rate and ﬁtness, conclusions drawn using either one should be qualitatively similar.
+
+We denote by mH (z, x) the population growth rate of
+hosts with trait z encountering parasites located at x. Similarly, mP (z, x) is the growth rate of parasites with trait z
+encountering hosts located at x. Expressions for these growth
+rates are given by equations (S33) in section S4 of the supplemental PDF. The population growth rate for individuals of species S transplanted from location x to location
+y, written 
+m S (x, y), is then the average of mS (z, y) across
+trait values of individuals in species S at location x.
+As our model considers mean traits as random variables,
+ P (x, y)
+ H (x, y), m
+the averaged population growth rates m
+are also random variables. We therefore deﬁne local adaptation in terms of expectations of these growth rates. The
+measure of local adaptation we propose, ℓS (x, y), allows
+us to calculate the expected difference between population growth rates for individuals of species S drawn from
+location x reared locally compared with individuals transplanted to location y. Therefore, this deﬁnition explicitly
+accounts for the spatial distance between locations x and y.
+Mathematically, our deﬁnition of local adaptation is expressed as
+ S (x, x) 2 
+m S (x, y)]:
+ℓS (x, y) p E[m
+
+ð2Þ
+
+Following this notation, a local versus foreign deﬁnition of local adaptation (as described above) would cor S (x, x) 2 m
+ S (y, x)]. However,
+respond to ℓS (x, y) p E[m
+ S (y, x)] p E[m
+ S (x, y)], and
+under our model we ﬁnd E[m
+thus the two deﬁnitions coincide. This is a consequence
+of solutions to our model being spatially isotropic, which
+is deﬁned in section S2 of the supplemental PDF. Although
+
+Host-Parasite Coevolution in Continuous Space
+the index of local adaptation we introduce here can be
+applied to quantify both host and parasite local adaptation,
+in practice most empirical researchers focus on measuring parasite local adaptation only. For clarity and brevity,
+we then discuss only parasite local adaptation below, but
+note here that this index applies equally well to host local
+adaptation.
+In the results section, we combine this deﬁnition of
+local adaptation with the population growth rates found
+in section S4 of the supplemental PDF to uncover patterns
+of local adaptation between hosts and parasites coevolving
+in continuous space.
+Results
+Spatial Covariance Functions
+Intraspeciﬁc Spatial Covariance. Taking our approach
+outlined in section S3 of the supplemental PDF, we obtain
+analytic approximations for the (intraspeciﬁc) spatial covariance and (interspeciﬁc) spatial cross-covariance functions of host and parasite mean trait values at equilibrium.
+
+We ﬁnd spatial covariance functions for the host and parasite respectively take the forms
+
+
+pﬃﬃ kxk
+pﬃﬃ kxk
+2
+K1
+,
+C H (x) p 2V H
+lH
+lH
+C P (x) p
+
+
+
+pﬃﬃ kxk
+pﬃﬃ kxk
+,
+2
+2V P
+K1
+lP
+lP
+
+0.2
+
+0.25
+
+0.0
+
+0.00
+
+1.0
+
+1.00
+
+−2
+−4
+
+0.1
+
+0.75
+
+0.4
+
+0.50
+
+O
+
+Latitude
+
+0.6
+
+0.2
+
+0.25
+
+0.0
+
+0.00
+
+1.0
+
+1.00
+
+0.8
+
+Covariance
+
+0
+
+0.50
+
+O
+
+0.4
+
+2
+
+0.75
+
+0.01
+
+0.6
+
+4
+
+ð3bÞ
+
+1.00
+
+0.8
+
+0.8
+
+ð3aÞ
+
+where kxk is the geographic distance between sampled
+locations; VH, VP are the colocated variances (i.e., V S p
+CS (0)); lH, lP are the spatial scales of autocorrelation in
+each species; and K1 is the modiﬁed Bessel function of the
+second kind, order 1 (Abramowitz and Stegun 1965). These
+spatial covariance functions belong to the class of Matérn
+covariance functions that have been widely employed in
+the ﬁelds of spatial statistics (Stein 1999; Lindgren et al.
+2011) and machine learning (Rasmussen and Williams
+2006). In ﬁgure 2, we illustrate the relationship between
+patterns of phenotypic spatial variation and associated spatial covariance functions.
+
+1.0
+
+Trait
+Value
+
+000
+
+0.75
+
+1
+
+0.6
+
+0.50
+
+O
+
+0.4
+
+0.25
+
+0.2
+0.0
+
+0.00
+0.0 0.2 0.4 0.6 0.8 1.0
+
+Longitude
+
+0.00
+
+0.25
+
+0.50
+
+0.75
+
+1.00
+
+Geographic Distance
+
+Figure 2: Mean trait surfaces z(x) (left), given by equations (1), and associated intraspeciﬁc covariance functions C(x) (right), given by
+equations (3), across three different spatial scales of autocorrelation l p 0:01, 0:1, 1, with colocated variance V p 1. This illustrates the
+relationship between the spatial scale of phenotypic autocorrelation and the variance of trait values across a ﬁxed region. More precisely,
+increasing the spatial scale of autocorrelation l (due to either increased dispersal distance or relaxed selection strengths; see eqq. [4]) leads
+to decreased trait variation in a ﬁxed region.
+
+000
+
+The American Naturalist
+
+Our results also demonstrate that the spatial scales of
+phenotypic isolation by distance in the host and parasite
+can be expressed in terms of model parameters respectively as
+
+source of spatial differentiation in our model, increases with
+additive genetic variance and decreases with effective population size (Lande 1976; Week et al. 2021).
+
+jH
+l H p pﬃﬃﬃﬃﬃﬃ ,
+AH
+
+Interspeciﬁc Spatial Cross-Covariance. In contrast to the
+intraspeciﬁc spatial covariance functions above, the spatial cross-covariance function, which quantiﬁes interspeciﬁc trait covariance measured at two potentially different
+locations, does not yield a closed-form expression. Speciﬁcally, we ﬁnd that the cross-covariance function is approximated by
+ð
+BP K 0 (kyk=l P )
+C HP (x) p
+C H (x 2 y)
+2
+l 2P
+R AP
+ð6Þ
+BH K 0 (kyk=l H )
+2
+C P (x 2 y)dy:
+AH
+l 2H
+
+ð4aÞ
+
+jP
+l P p pﬃﬃﬃﬃﬃ :
+AP
+
+ð4bÞ
+
+From these expressions, we see that these spatial scales
+are proportional to the dispersal distances in the respective
+species; the farther individuals tend to move, the larger the
+spatial scales one must observe to ﬁnd signiﬁcant phenotypic variation. We also see that increased abiotic stabilizing selection decreases these spatial scales in each species.
+Under the assumption of weak abiotic stabilizing selection
+(which would imply AH , AP ≪ 1 and which is required in
+our justiﬁcation of population growth rates; see section S4
+of the supplemental PDF), our expression for the spatial
+scale of phenotypic variation coincides with that found by
+Slatkin (1978).
+The colocated phenotypic variances, VH and VP, represent uncertainty in mean trait value at a particular location due to different possible realizations of drift. This
+should not be confused with the typical notion of phenotypic variance, which represents the variance of trait values
+among individuals in a population. As solutions to our
+model are spatially homogeneous random ﬁelds (i.e., they
+have the same statistical properties at any given spatial
+location), mean traits of individuals of species S sampled
+at locations separated by distances much greater than lS
+escape the effects of spatial autocorrelation and return essentially independent and identically distributed random
+variables with variances equal to the colocated variance VS.
+That is, the colocated variances also provide measures of
+global diversity of mean traits across space. In terms of
+our model parameters, the colocated variances can be expressed as
+VH p
+
+D2H
+,
+AH j2H
+
+VP p
+
+D2P
+:
+AP j2P
+
+ð5Þ
+
+From the expressions for VH and VP, we can identify
+relationships between global diversity of mean traits in
+each species and the different evolutionary processes of
+selection, dispersal, and drift. First, increased dispersal distance jS decreases VS because, in the limit of inﬁnite dispersal
+distance, our model collapses to a panmictic population of
+inﬁnite size. Additionally, because abiotic selection is stabilizing around spatially homogeneous optima, increased AS
+decreases VS. Last, the variance due to drift DS, the ultimate
+
+Although the expression for CHP(x) is quite technical,
+we can still draw some basic conclusions. For one, we
+see that interspeciﬁc cross-covariance can occur in the
+absence of coevolution. For example, in the case where
+BH p 0 and BP 1 0, the host trait evolves only in response
+to abiotic selection, dispersal, and drift, but the parasite
+trait continues to evolve in response to the host trait. In this
+case, interspeciﬁc cross-covariance is maintained only by the
+parasite tracking the host. We can also use this expression to see that interspeciﬁc cross-covariance requires intraspeciﬁc autocovariance in at least one species (if C H (x) p
+CP (x) p 0, then C HP (x) p 0). Consequently, because both
+CH (x), CP (x) → 0 in the limit of large geographic distance
+(i.e., kxk → ∞), CHP(x) also goes to zero in the limit of
+large distances. That is, interspeciﬁc cross-covariance disappears at distances large enough that intraspeciﬁc autocovariance is negligible in both species.
+Patterns of Local Adaptation across Spatial Scales
+Analytical Results. Combining our model with our deﬁnition of local adaptation in continuous space (see eq. [2]),
+we ﬁnd
+~H ðC HP (x 2 y) 2 CHP (0)Þ,
+ð7aÞ
+ℓH (x, y) p B
+ℓP (x, y) p B~P ðC HP (0) 2 C HP (x 2 y)Þ,
+
+ð7bÞ
+
+where B~S is BS divided by additive genetic variance in species S (see sec. S1 of the supplemental PDF). As all of the
+functions involved with this result depend only on spatial distance d ≥ 0, we simplify our notation by writing
+ℓS (d) p ℓS (x, y) when d p kx 2 yk. Similarly, we write
+CH(d), CP(d), and CHP(d) for the spatial covariance functions evaluated at geographic distance d. In ﬁgure 3, we
+present our index of parasite local adaptation as a function of geographic distance across nine combinations of
+lH and lP, with all other parameter pairs made equal.
+
+Host-Parasite Coevolution in Continuous Space
+O
+
+O
+
+000
+
+O
+
+O
+O
+O
+
+Figure 3: Parasite local adaptation ℓP , given by equation (7b), as a function of the geographic distance d between local parasite populations
+and the populations of hosts they are confronted with, scaled by biotic selection and colocated variances across nine combinations of
+l H , l P p 1, 10, 20, with V H p V P p 1 and BH =AH p BP =AP p 1=250. In the cases where l H p l P , we have ℓH (d) p ℓP (d) p 0 for all
+d ≥ 0. In general, when all parameters are made equal between the two species, local adaptation does not emerge at any spatial scale.
+
+Spatial Scale Dependency of Local Adaptation. As shown
+in ﬁgure 3, the magnitude of parasite local adaptation depends on the spatial scale measurements are taken at. More
+precisely, ﬁgure 3 suggests that local adaptation will be
+underestimated for study designs that deﬁne allopatric populations to be within the range of spatial autocorrelation for
+either species. In addition, if we allow for asymmetric background parameter values, which we might expect for realistic systems, our model predicts the potential for not only
+the magnitude of local adaptation to depend on the spatial
+scale measurements are taken, but also the identity of the
+locally adapted species. We present two such cases in ﬁgure 4. This result demonstrates that to obtain consistent
+estimates of local adaptation, measurements need to be taken
+at sufﬁciently large spatial scales.
+A Consistent Estimate for Parasite Local Adaptation. The
+most rigorous way to estimate parasite local adaptation
+would be to confront parasites from a focal population
+with hosts sampled at populations from many different locations in a large provenance trial (Blanquart et al. 2013).
+However, such an experiment would be incredibly labor
+intensive and prone to variable results as predicted by our
+model. Fortunately, our model suggests an efﬁcient way
+to consistently measure parasite local adaptation. Namely,
+when measurements are taken at sufﬁciently large spatial
+
+scales, C HP (d) ≈ 0 so that parasite local adaptation ℓP (d) is
+proportional to CHP(0) (see eqq. [7]). That is, parasite
+local adaptation can be consistently measured by computing the interspeciﬁc spatial covariance of sympatric
+mean traits across locations separated by distances that
+are large relative to both spatial scales of intraspeciﬁc autocorrelation lH and lP. Importantly, this approach, similar
+to previous approaches based on spatial covariance of allele
+frequencies (Blanquart et al. 2013), requires only information on host and parasite mean traits sampled across space
+(rather than the outcome of a manipulative experiment)
+and is thus much more feasible. Museum and herbarium
+collections may offer a vital resource for characterizing host/
+parasite phenotypic diversity across space (e.g., Rabosky
+et al. 2016). With a geographic map of host and parasite
+phenotypes in hand, a researcher could determine the spatial scale at which intraspeciﬁc phenotypic autocorrelation
+becomes negligible and thus the spatial scale at which interspeciﬁc spatial covariance of mean traits should be calculated to estimate local adaptation.
+Discussion
+Here, we have developed a model that tracks the evolution of local mean traits of coevolving species distributed
+in two-dimensional continuous space. This model accounts
+
+000
+
+The American Naturalist
+
+Figure 4: Parasite local adaptation ℓP , given by equation (7b), as a function of geographic distance d between local parasite populations and
+the populations of hosts they are confronted with, for two cases where the identity of the locally adapted species depends on the spatial scale
+at which measurements are taken. The horizontal dotted line marks a measurement of zero parasite local adaptation. Vertical lines mark
+spatial scales of intraspeciﬁc autocorrelation in the host (dashed vertical lines) and parasite (dotted vertical lines).
+
+for host-parasite interactions mediated by a trait-matching/
+mismatching mechanism, abiotic stabilizing selection, Gaussian dispersal, and random genetic drift. Solutions to this
+model are Gaussian random ﬁelds that are characterized
+by two intraspeciﬁc spatial autocovariance functions along
+with an interspeciﬁc spatial cross-covariance function. We
+have also introduced a novel index of local adaptation that
+explicitly accounts for the geographic distance separating
+allopatric populations. Combining our novel index of local
+adaptation in continuous space with the cross-covariance
+function obtained from our model, we found that variation
+in measurements of parasite local adaptation across spatial
+scales can be explained by intraspeciﬁc spatial autocorrelation that emerges when species disperse in continuous
+space. More precisely, ﬁgure 3 demonstrates that measurements taken within the range of spatial autocorrelation for
+either species will underestimate the magnitude of parasite
+local adaptation or maladaptation. Building on this result,
+we suggest taking measurements at spatial scales for which
+intraspeciﬁc autocorrelation is negligible for both species
+to obtain consistent estimates for parasite local adaptation.
+The mathematical model we propose may help shed
+light on several cases where estimates of parasite local adaptation may have been dependent on the spatial scales at
+which they were measured. For example, Tack et al. (2014)
+showed that maladaptation of the parasitic powdery mildew Podosphaera plantaginis on the invasive weed Plantago
+lanceolata was strong at scales of 6–200 km but weak at
+scales of less than 6 km. In another study, Thrall et al.
+
+(2002) found evidence of local adaptation of the autoecious
+rust pathogen Melampsora lini on its herbaceous perennial herb host Linum marginale to be more apparent at
+scales of 5–10 km than at scales of 200–400 m. Hanks and
+Denno (1994) investigated local adaptation of the phytophagous armored scale insect Pseudaulacaspis pentagon on individual mulberry trees of the species Morus alba and found
+stronger evidence of local adaptation for insects transplanted
+to distant trees (≥300 m) than for insects transplanted to
+nearby trees (!5 m). Schönrogge et al. (2006) found the
+hoverﬂy Microdon mutabilis to be extremely locally adapted
+to its host ant Formica lemani when confronted with host
+individuals separated by distances of 3–20 km, moderately
+locally adapted at distances of 0.1–3 km, and not locally
+adapted at !100 m. Last, Kaltz et al. (1999) studied local
+adaptation of the insect-transmitted fungal pathogen Microbotryum violaceum to its host plant Silene latifolia and found
+weak parasite local maladaptation when confronted with
+nearby populations (!10 km), strong parasite maladaptation when confronted with populations at intermediate
+distances (!30 km), and variation in maladaptation for remote populations (!170 km) ranging from strong to weak
+maladaptation.
+These empirical studies demonstrate the key ﬁnding of
+our model: that there can be variation in the magnitude of
+local adaptation across spatial scales in naturally occurring
+systems. For example, in all of the studies referenced in the
+preceding paragraph, the estimated strength of local adaptation is a function of the geographic distance between the
+
+Host-Parasite Coevolution in Continuous Space
+populations for which it is assessed. A second useful prediction from our model is that because of the phenotypic
+spatial autocorrelation within each species, measurements
+of local adaptation taken at larger distances will provide
+more consistent estimates. Therefore, in each of the cases
+referenced above (in which local adaptation varies as a
+function of the spatial scale at which it is measured) we
+would recommend summarizing local adaptation in the
+system using comparisons between the most distant population pairs. However, because our model includes stochasticity (due to random genetic drift), it also predicts that
+there should be some amount of variation in individual
+measurements of local adaptation, even at large spatial scales.
+Kaltz et al. (1999) highlight this variation, ﬁnding high variance in infection success of the Microbotryum parasite on
+Silene hosts at the largest spatial distances. These infection
+success measurements do appear to increase, on average,
+with distance, and given the second prediction above, the
+model would support summarizing these results using the
+mean measurements at the largest spatial lags.
+In addition to providing a theoretical explanation for
+the observation of spatial variation in host-parasite local
+adaptation, our model predicts that the shorter-dispersing
+species should be locally adapted to the farther-dispersing
+species, assuming that all other parameters are equal (see
+ﬁg. 3). Of the ﬁve studies listed above (by no means an
+exhaustive list), two (Hanks and Denno 1994; Tack et al.
+2014) ﬁt this prediction. In Hanks and Denno (1994) the
+parasite disperses a shorter distance than its host and is locally adapted, and in Tack et al. (2014) the parasite disperses a longer distance than its host and is locally maladapted. Deviations from this prediction may then imply
+interspeciﬁc asymmetry of model parameters other than
+dispersal distances. Equation (S13) in section S3 of the supplemental PDF shows that the identity of the locally adapted
+species depends on symmetry of each pair of model parameters (abiotic selection strengths AH, AP; biotic selection
+strengths BH, BP; dispersal distances jH, jP; and rates of drift
+DH, DP). Consequently, our model suggests that the identity
+of the locally adapted species in the other three studies
+(Kaltz et al. 1999; Thrall et al. 2002; Schönrogge et al. 2006),
+in each of which the locally adapted species disperses farther than its partner, is mediated by differential selection
+strengths or differential rates of drift.
+Our suggested approach for obtaining consistent measurements of parasite local adaptation rests on the hypothesis that intraspeciﬁc spatial autocorrelation explains
+variation in measurements of coadaptation across spatial
+scales. This hypothesis, implied by our theoretical ﬁndings, can be tested using geographically referenced phenotypic data. More precisely, standard methods applied
+in the analysis of spatial data (e.g., Dale and Fortin 2014)
+may be used to determine the distances for which spatial
+
+000
+
+autocorrelation is negligible in each species. In turn, these
+estimates can be compared to the geographical distances
+between allopatric populations deﬁned in previous empirical studies. Our hypothesis would be rejected if variation in measurements of local adaptation occurs across
+several spatial scales that are larger than both of the spatial scales of autocorrelation in the host and parasite species. In this case, additional theoretical studies would be
+required to explain such cross-scale variation.
+Additional hypotheses for the cross-scale variation in
+spatial patterns of adaptation can be developed by extending our model in several directions. For example, heavytailed dispersal kernels, which are likely common in nature (Houtan et al. 2007; Bullock et al. 2016; García and
+Borda-de-Água 2016; Jordano 2016), can be incorporated
+into our model by replacing the dispersal operator with
+fractional spatial derivatives (for mathematical details, see
+Laskin 2000; Bayın 2016). As fractional derivatives are deﬁned in terms of spectral representations, our approach,
+which recovers covariance functions from spectral representations, is particularly well suited to this generalization
+of our model. Such a generalization of our model may
+then be used to predict variation in patterns of adaptation
+as a consequence of dispersal mode. Another direction this
+work can be taken is to consider spatial variation of the
+abiotic environment by modeling abiotic optima as additional Gaussian random ﬁelds (making for four random
+ﬁelds in total; one for the host trait, one for the parasite
+trait, one for the host abiotic optimum, and one for the
+parasite abiotic optimum). This second direction would
+allow for theoretical predictions of spatial variation in local adaptation based on spatial scales of abiotic environmental variation. Hu et al. (2013) provides further information on the mathematical details involved with both of
+these extensions.
+Although there is already a large body of theory on
+geographically structured host-parasite coevolution (e.g.,
+Gandon et al. 1996; Nuismer et al. 2000; Gandon 2002;
+Gandon and Michalakis 2002; Nuismer et al. 2003; Nuismer
+2006; Ridenhour and Nuismer 2007; Gandon and Nuismer
+2009; Débarre et al. 2012; Lion and Gandon 2015), these
+studies are limited in their ability to explain variation in
+patterns of host-parasite adaptation across spatial scales
+because they depend on indices of local adaptation that
+do not explicitly account for geographic distance. In contrast, empirical studies have emphasized that such crossscale variation is common (Hanks and Denno 1994; Kaltz
+et al. 1999; Thrall et al. 2002; Schönrogge et al. 2006; Tack
+et al. 2014). Our model, combined with our novel index of
+local adaptation, is, to our knowledge, the ﬁrst to provide a
+mechanistic explanation for measurements of parasite local
+adaptation that vary across spatial scales. Furthermore, it is
+consistent with empirical observations that local adaptation
+
+000
+
+The American Naturalist
+
+in host-parasite systems tends to be stronger at larger spatial scales relative to shorter spatial scales.
+In addition to the geographically explicit index of local adaptation we have introduced here, our mathematical
+model of continuous space coevolution has several novel
+features. In comparison to previous models of coevolution
+in continuous space (Nuismer et al. 2000, 2003), our model
+differs in three major ways. First, whereas previous continuous space models have focused on interspeciﬁc interactions mediated by allelic variation at genetic loci, our model
+focuses on coevolution of a pair of quantitative traits that
+determine the outcomes of interactions. Second, while previous work has focused on a single continuous spatial axis,
+our model accounts for the more biologically relevant case
+of two continuous spatial axes. Last, our model accounts for
+the stochastic dynamics of random genetic drift, which rarely
+yields tractable evolutionary models in two-dimensional
+continuous space (Felsenstein 1975; Etheridge 2004; Barton
+et al. 2010). It is therefore likely that investigations relaxing important assumptions of our model, such as spatially
+homogeneous abundance densities and weak biotic selection, will require the study of individual-based simulations.
+
+Conclusion
+In summary, our work here provides initial steps toward
+understanding coevolution and local adaptation in continuous space using an analytically tractable mathematical
+model. Our theoretical ﬁndings form testable hypotheses
+for previously unexplained variation observed in empirical
+host-parasite systems and suggest an approach to consistently measure parasite local adaptation in the wild. Taken
+together, this work establishes a novel theoretical approach
+to model spatial coevolution and lends a new perspective for
+understanding spatial patterns of interspeciﬁc coadaptation.
+
+Acknowledgments
+We thank Anurag Agrawal, Ailene MacPherson, Scott
+Nuismer, Peter Ralph, and Victoria Caudill for their thoughtful and detailed feedback on the manuscript, which greatly
+improved this project. We also thank Associate Editor Greg
+Dwyer for proposing a reframing of our article focused on
+spatial scale dependency and two anonymous reviewers for
+their insightful comments, the culmination of which has
+lead to a much more impactful contribution. Research reported was supported by the National Institute of General
+Medical Sciences of the National Institutes of Health
+(NIH) under award R35GM137919 (awarded to G.B.).
+The content is solely the responsibility of the authors and
+does not necessarily represent the ofﬁcial views of the NIH.
+
+Statement of Authorship
+B.W. contributed to conceptualization, model development/
+analysis, visualization, coding simulation, writing—original draft, and writing—review and editing. G.B. contributed
+to conceptualization, supervision, writing—original draft,
+writing—review and editing, and funding acquisition.
+
+Data and Code Availability
+Data and code for reproducing each of the ﬁgures in this
+article and for deriving some key analytical results have
+been collected in a Zenodo repository (https://doi.org/10
+.5281/zenodo.8008017; Week and Bradburd 2023).
+Literature Cited
+Abramowitz, M., and I. A. Stegun. 1965. Handbook of mathematical functions with formulas, graphs, and mathematical tables.
+Dover, Mineola, NY.
+Agrawal, A. A., and X. Zhang. 2021. The evolution of coevolution
+in the study of species interactions. Evolution 75:1594–1606.
+Barton, N. H., A. M. Etheridge, and A. Véber. 2010. A new model
+for evolution in a spatial continuum. Electronic Journal of Probability 15:162–216.
+———. 2017. The inﬁnitesimal model: deﬁnition, derivation, and
+implications. Theoretical Population Biology 118:50–73.
+Bayın, S. Ş. 2016. Deﬁnition of the Riesz derivative and its application to space fractional quantum mechanics. Journal of Mathematical Physics 57:123501.
+Best, A., S. Webb, A. White, and M. Boots. 2010. Host resistance
+and coevolution in spatially structured populations. Proceedings
+of the Royal Society B 278:2216–2222.
+Blanquart, F., O. Kaltz, S. L. Nuismer, and S. Gandon. 2013. A
+practical guide to measuring local adaptation. Ecology Letters
+16:1195–1205.
+Boots, M., and A. Sasaki. 1999. “Small worlds” and the evolution of
+virulence: infection occurs locally and at a distance. Proceedings
+of the Royal Society B 266:1933–1938.
+Bullock, J. M., L. M. González, R. Tamme, L. Götzenberger, S. M.
+White, M. Pärtel, and D. A. P. Hooftman. 2016. A synthesis of
+empirical plant dispersal kernels. Journal of Ecology 105:6–19.
+Crow, J. F., and M. Kimura. 1970. An introduction to population
+genetics theory. Harper & Row, New York.
+Dale, M., and M.-J. Fortin. 2014. Spatial analysis. 2nd ed. Cambridge
+University Press, Cambridge.
+Débarre, F., S. Lion, M. van Baalen, and S. Gandon. 2012. Evolution
+of host life-history traits in a spatially structured host-parasite
+system. American Naturalist 179:52–63.
+Débarre, F., S. Yeaman, and F. Guillaume. 2015. Evolution of quantitative traits under a migration-selection balance: when does skew
+matter? American Naturalist 186:S37–S47.
+Etheridge, A. M. 2004. Survival and extinction in a locally regulated
+population. Annals of Applied Probability 14:188–214.
+Felsenstein, J. 1973. Maximum-likelihood estimation of evolutionary
+trees from continuous characters. American Journal of Human
+Genetics 25:471–492.
+
+Host-Parasite Coevolution in Continuous Space
+———. 1975. A pain in the torus: some difﬁculties with models of
+isolation by distance. American Naturalist 109:359–368.
+Gandon, S. 2002. Local adaptation and the geometry of host-parasite
+coevolution. Ecology Letters 5:246–256.
+Gandon, S., Y. Capowiez, Y. Dubois, Y. Michalakis, and I. Olivieri.
+1996. Local adaptation and gene-for-gene coevolution in a metapopulation model. Proceedings of the Royal Society B 263:1003–1009.
+Gandon, S., and Y. Michalakis. 2002. Local adaptation, evolutionary
+potential and host-parasite coevolution: interactions between migration, mutation, population size and generation time. Journal
+of Evolutionary Biology 15:451–462.
+Gandon, S., and S. L. Nuismer. 2009. Interactions between genetic
+drift, gene ﬂow, and selection mosaics drive parasite local adaptation. American Naturalist 173:212–224.
+García, C., and L. Borda-de-Água. 2016. Extended dispersal
+kernels in a changing world: insights from statistics of extremes.
+Journal of Ecology 105:63–74.
+Hairer, M. 2009. An introduction to stochastic PDEs. arXiv, https://
+doi.org/10.48550/arXiv.0907.4178.
+Hanks, L. M., and R. F. Denno. 1994. Local adaptation in the armored
+scale insect Pseudaulacaspis pentagona (Homoptera: Diaspididae).
+Ecology 75:2301–2310.
+Houtan, K. S. V., S. L. Pimm, J. M. Halley, R. O. Bierregaard, and
+T. E. Lovejoy. 2007. Dispersal of amazonian birds in continuous
+and fragmented forest. Ecology Letters 10:219–229.
+Hu, X., D. Simpson, F. Lindgren, and H. Rue. 2013. Multivariate
+Gaussian random ﬁelds using systems of stochastic partial differential equations. arXiv, https://doi.org/10.48550/arXiv.1307.1379.
+Jordano, P. 2016. What is long-distance dispersal? and a taxonomy
+of dispersal events. Journal of Ecology 105:75–84.
+Kaltz, O., S. Gandon, Y. Michalakis, and J. A. Shykoff. 1999. Local
+maladaptation in the anther-smut fungus Microbotryum violaceum
+to its host plant Silene latifolia: evidence from a cross-inoculation
+experiment. Evolution 53:395–407.
+Kawecki, T. J., and D. Ebert. 2004. Conceptual issues in local adaptation. Ecology Letters 7:1225–1241.
+Khoshnevisan, D. 2008. A primer on stochastic partial differential
+equations. Pages 1–38 in Lecture notes in mathematics. Springer,
+Berlin.
+Lande, R. 1976. Natural selection and random genetic drift in phenotypic evolution. Evolution 30:314–334.
+Laskin, N. 2000. Fractional quantum mechanics. Physical Review
+E 62:3135–3145.
+Lindgren, F., H. Rue, and J. Lindström. 2011. An explicit link
+between Gaussian ﬁelds and Gaussian Markov random ﬁelds:
+the stochastic partial differential equation approach. Journal of
+the Royal Statistical Society B 73:423–498.
+Lion, S., and S. Gandon. 2015. Evolution of spatially structured hostparasite interactions. Journal of Evolutionary Biology 28:10–28.
+Lively, C. M. 2010. Antagonistic coevolution and sex. Evolution:
+Education and Outreach 3:19–25.
+Manceau, M., A. Lambert, and H. Morlon. 2016. A unifying comparative phylogenetic framework including traits coevolving across
+interacting lineages. Systematic Biology 66:551–568.
+Nathan, R., W. M. Getz, E. Revilla, M. Holyoak, R. Kadmon,
+D. Saltz, and P. E. Smouse. 2008. A movement ecology paradigm
+for unifying organismal movement research. Proceedings of the
+National Academy of Sciences of the USA 105:19052–19059.
+Nuismer, S. L. 2006. Parasite local adaptation in a geographic mosaic.
+Evolution 60:24–30.
+
+000
+
+Nuismer, S. L., and S. Gandon. 2008. Moving beyond commongarden and transplant designs: insight into the causes of local
+adaptation in species interactions. American Naturalist 171:658–668.
+Nuismer, S. L., J. N. Thompson, and R. Gomulkiewicz. 2000. Coevolutionary clines across selection mosaics. Evolution 54:1102–1115.
+———. 2003. Coevolution between hosts and parasites with partially overlapping geographic ranges. Journal of Evolutionary Biology 16:1337–1345.
+Otto, S. P., and S. L. Nuismer. 2004. Species interactions and the
+evolution of sex. Science 304:1018–1020.
+Rabosky, A. R. D., C. L. Cox, D. L. Rabosky, P. O. Title, I. A.
+Holmes, A. Feldman, and J. A. McGuire. 2016. Coral snakes
+predict the evolution of mimicry across new world snakes. Nature Communications 7:11484.
+Rasmussen, C. E., and C. K. Williams. 2006. Gaussian processes
+for machine learning. MIT Press, Cambridge, MA.
+Ridenhour, B. J., and S. L. Nuismer. 2007. Polygenic traits and parasite local adaptation. Evolution 61:368–376.
+Schönrogge, K., M. G. Gardner, G. W. Elmes, E. K. V. Napper,
+D. J. Simcox, J. C. Wardlaw, J. Breen, et al. 2006. Host propagation permits extreme local adaptation in a social parasite of ants.
+Ecology Letters 9:1032–1040.
+Slatkin, M. 1978. Spatial patterns in the distributions of polygenic
+characters. Journal of Theoretical Biology 70:213–228.
+Stein, M. L. 1999. Interpolation of spatial data. Springer, New York.
+Tack, A. J. M., F. Horns, and A.-L. Laine. 2014. The impact of spatial scale and habitat conﬁguration on patterns of trait variation
+and local adaptation in a wild plant parasite. Evolution 68:176–189.
+Thrall, P. H., J. J. Burdon, and J. D. Bever. 2002. Local adaptation in
+the Linum marginale–Melampsora lini host-pathogen interaction.
+Evolution 56:1340–1351.
+Week, B., and G. Bradburd. 2023. Data from: Host-parasite coevolution in continuous space leads to variation in local adaptation
+across spatial scales. American Naturalist, Zenodo, https://doi.org
+/10.5281/zenodo.8008017.
+Week, B., S. L. Nuismer, L. J. Harmon, and S. M. Krone. 2021. A
+white noise approach to evolutionary ecology. Journal of Theoretical Biology 521:110660.
+Whittle, P. 1954. On stationary processes in the plane. Biometrika
+41:434–449.
+———. 1963. Stochastic-processes in several dimensions. Bulletin
+of the International Statistical Institute 40:974–994.
+Yamamura, N. 1993. Vertical transmission and evolution of mutualism from parasitism. Theoretical Population Biology 44:95–109.
+
+References Cited Only in the Online Enhancements
+Bolker, B., and S. W. Pacala. 1997. Using moment equations to understand stochastically driven spatial pattern formation in ecological systems. Theoretical Population Biology 52:179–197.
+Da Prato, G., and J. Zabczyk. 2014. Stochastic equations in inﬁnite
+dimensions. Cambridge University Press, Cambridge.
+Evans, L. C. 2010. Partial differential equations. Vol. 19. American
+Mathematical Society, Providence, RI.
+Lindgren, G. 2012. Stationary stochastic processes: theory and applications. CRC Press, Boca Raton, FL.
+Méléard, S., and S. Roelly. 1993. Interacting measure branching
+processes: some bounds for the support. Stochastics and Stochastic
+Reports 44:103–121.
+
+000
+
+The American Naturalist
+
+Rue, H., and L. Held. 2005. Gaussian Markov random ﬁelds: theory
+and applications. CRC Press, Boca Raton, FL.
+Walsh, J. B. 1986. An introduction to stochastic partial differential
+equations. Pages 265–439 in École d’Été de probabilités de saint
+ﬂour XIV-1984. Springer, Berlin.
+
+Week, B., and S. L. Nuismer. 2021. Coevolutionary arms races and
+the conditions for the maintenance of mutualism. American Naturalist 198:195–205.
+Associate Editor: Greg Dwyer
+Editor: Erol Akçay
+
+“New species of Brugmansia, of the family of the Rafﬂesiaceæ.” From the review of Forbes’ A Naturalist’s Wanderings in the Eastern
+Archipelago (The American Naturalist, 1885, 19:975–977).
+
+

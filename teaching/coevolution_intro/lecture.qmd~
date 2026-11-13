@@ -1,0 +1,215 @@
+---
+title: "The Ecology and Geography of Coevolution"
+subtitle: "Concepts + case studies"
+author: "Guest lecture — Kiel University"
+format:
+  revealjs:
+    theme: none
+    css: custom.css
+    transition: fade
+    background-transition: none
+    slide-number: true
+    controls: true
+    progress: true
+    center: false
+    navigation-mode: linear
+    width: 1280
+    height: 720
+execute:
+  echo: false
+---
+
+## What you should be able to do after this
+
+- Define **coevolution** precisely (and say what it is *not*)
+- Explain why **ecology + space** shape coevolutionary outcomes
+- Recognize how coevolution can maintain **genetic diversity**
+- Contrast **antagonistic** vs **mutualistic** coevolution with case studies
+
+Notes:
+- Aim: one coherent mental model + a few anchor systems.
+
+---
+
+# Act I — What coevolution is (and is not)
+
+## Definition (operational)
+
+> Coevolution is reciprocal evolutionary change in interacting species, driven by natural selection imposed by each on the other.
+
+**Not coevolution:**
+- one-sided adaptation
+- correlated change due to shared environment
+- ecological fitting / pre-adaptation without reciprocal response
+
+Notes:
+- Spend ~10–12 minutes here.
+- Immediately give a “false positive” example (correlation ≠ coevolution).
+
+---
+
+## The phenotypic interface
+
+The *traits that actually interact* determine:
+- selection gradients
+- constraints (tradeoffs, genetic architecture)
+- what gets locally adapted vs not
+
+**Key idea:** coevolution is often trait-specific, not organism-wide.
+
+---
+
+## Quote slide (styled callout)
+
+> “In many cases, the strongest claim is not coevolution — it is diffuse selection or sequential adaptation.”
+
+(Use this kind of slide to slow the tempo and reset attention.)
+
+---
+
+# Act II — Antagonistic coevolution + space
+
+## The backbone question
+
+Why does antagonistic coevolution so often generate:
+- cycling
+- escalation
+- persistent polymorphism
+- spatial mosaics of outcomes?
+
+---
+
+## Geographic mosaic (concept slide)
+
+Coevolution is often **patchy**:
+
+- **hotspots:** reciprocal selection is strong
+- **coldspots:** interaction weak/absent or selection is one-sided
+- trait distributions can be mismatched across geography
+
+Notes:
+- You can name John Thompson here without going deep.
+
+---
+
+## Image example
+
+![](images/snake-newt.jpg)
+
+**Snake–newt arms race** as a spatially structured system:
+- local escalation in some regions
+- mismatch elsewhere
+
+Notes:
+- Put 2–3 bullets only, talk over the image.
+
+---
+
+## Link slide (clean)
+
+Case study reading (optional):
+- Snake–newt system overview: https://en.wikipedia.org/wiki/Rough-skinned_newt
+- Geographic mosaic theory: https://en.wikipedia.org/wiki/Geographic_mosaic_theory_of_coevolution
+
+Notes:
+- Replace with primary sources later if you want.
+
+---
+
+## Host–parasite: Red Queen in one sentence
+
+If “common” genotypes are targeted, **rarity becomes an advantage**, which can maintain diversity.
+
+From here:
+- gene-for-gene vs matching-alleles (high level)
+- diversity signatures as consequences (not definitions)
+
+---
+
+## Two-column slide (built-in layout)
+
+::: columns
+::: column
+### Gene-for-gene (idea)
+- resistance and infectivity loci
+- “universal” virulence often costly
+- can produce balancing selection or sweeps depending on costs + ecology
+:::
+
+::: column
+### Matching-alleles (idea)
+- success depends on “match”
+- strong frequency dependence
+- often more cycling / polymorphism-friendly
+:::
+:::
+
+Notes:
+- Don’t formalize unless your audience is unusually pop-gen fluent.
+
+---
+
+## Local video (offline-safe)
+
+<video src="media/fly-flower-fynbos.mp4" controls width="1000"></video>
+
+Notes:
+- Local mp4 is the most reliable in lecture halls.
+
+---
+
+## YouTube embed (internet-dependent)
+
+<iframe width="1000" height="560"
+src="https://www.youtube.com/embed/0l9prp9ebYk"
+title="YouTube video"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen></iframe>
+
+Notes:
+- Use this only if you trust the room Wi-Fi.
+
+---
+
+# Act III — Mutualism as constrained coevolution
+
+## Frame shift
+
+Antagonism: escalation / chasing  
+Mutualism: **alignment under conflict**
+
+Core problems:
+- cheating / overexploitation
+- partner choice, sanctions, rewards
+- ecological context changes stability
+
+---
+
+## Example image
+
+![](images/fly-flower.jpg)
+
+**Fly–flower mutualisms** (or your preferred system):
+- trait matching at the interface
+- dependence on community/ecology
+- local context can flip costs/benefits
+
+---
+
+## “Where this goes next” (do not expand)
+
+- Coevolution can reshape communities (pollination networks, mutualistic webs)
+- But that’s another lecture
+
+**Take-home:** ecology + geography shape whether coevolution cycles, escalates, stabilizes, or collapses.
+
+---
+
+## Final slide (clean summary)
+
+**One model to keep:**
+1) coevolution is about reciprocal selection  
+2) selection acts at phenotypic interfaces  
+3) space fragments dynamics into mosaics  
+4) antagonism maintains diversity more readily than mutualism  
+5) mutualism needs constraints + ecology to persist

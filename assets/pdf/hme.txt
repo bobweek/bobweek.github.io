@@ -1,0 +1,1512 @@
+nature ecology & evolution
+Perspective
+
+https://doi.org/10.1038/s41559-025-02846-w
+
+Applying evolutionary theory to understand
+host–microbiome evolution
+Received: 25 November 2024
+Accepted: 5 August 2025
+Published online: 8 September 2025
+Check for updates
+
+Bob Week 1,2,3, Shelbi L. Russell4,5, Hinrich Schulenburg
+Brendan J. M. Bohannan 1 & Marjolein Bruijning 6
+
+,
+
+2,3
+
+All plants and animals are host to a community of microorganisms,
+their microbiotas, which have crucial influences on the life history and
+performance of their hosts. Despite the importance of such host–microbiota
+relationships, relatively little is known about the role microbiotas have in
+mediating evolution of the host and entire host–microbe assemblages.
+This knowledge gap is partly due to the lack of theoretical frameworks
+that generate testable predictions on the evolutionary dynamics of host–
+microbiota systems. In this Perspective, we argue that the foundation for
+such frameworks exists in evolutionary theory. We highlight four examples
+of theoretical models—niche construction, indirect genetic effects, maternal
+effects and multilevel selection—that capture important aspects of host–
+microbiome evolution. We outline how each of these frameworks can
+provide key insights into the evolution of host–microbiota systems while also
+suggesting expansions of current theory to incorporate processes unique to
+host–microbe assemblages; for instance, focusing on nuances in microbiota
+transmission and ecological microbial community dynamics. Expanding
+evolutionary theory to accommodate host–microbiota associations is key
+for a more integrative understanding of evolution, and the approach outlined
+here can guide future empirical research on the function and evolution of
+these ubiquitous interactions.
+
+All multicellular organisms have long-standing, intimate relationships
+with microorganisms. These host-associated microbial communities
+(including bacteria, archaea, viruses, protists and fungi—together
+termed the microbiota) are crucial for host performance, affecting
+host traits related to metabolism1, pathogen resistance2, immune
+development3, disease4 and behaviour5, among many others. Beyond
+its fundamental interest, the potential applications of the microbiota
+vary widely, ranging from human health6 to sustainable agriculture7,
+conservation biology8 and adaptation to climate change9.
+There is no doubt that host-associated microbiotas can influence host performance. There is also increasing evidence that the
+association of host and microbiota can facilitate adaptation to new
+
+environmental conditions, either through changes in the microbiota,
+the host or both10–13. There is probably variation among host systems
+in the exact processes mediating such host–microbiome evolution,
+including host–microbe coevolutionary interactions, as proposed
+by the hologenome theory of evolution14, or less strict coevolutionary interactions12,15–22. Fidelity of microbiota transmission (Box 1),
+the multiple levels of selection and evolutionary interests possible
+in host–microbe associations22 are all key determinants shaping the
+evolutionary dynamics of the association.
+An in-depth appreciation of the exact characteristics of host–
+microbiota systems and their evolution greatly benefits from theoretical approaches23. Although previous theoretical work has established
+
+Institute of Ecology and Evolution, Department of Biology, University of Oregon, Eugene, OR, USA. 2Zoological Institute, Kiel University, Kiel, Germany.
+Max-Planck Institute for Evolutionary Biology, Plön, Germany. 4Department of Biomolecular Engineering, University of California Santa Cruz, Santa Cruz,
+CA, USA. 5Genomics Institute, University of California Santa Cruz, Santa Cruz, CA, USA. 6Institute for Biodiversity and Ecosystem Dynamics, University of
+Amsterdam, Amsterdam, the Netherlands.
+e-mail: m.bruijning@uva.nl
+1
+
+3
+
+Nature Ecology & Evolution | Volume 9 | October 2025 | 1769–1780
+
+1769
+
+Perspective
+
+https://doi.org/10.1038/s41559-025-02846-w
+
+BOX 1
+
+Mechanisms of microbiome inheritance
+The fidelity of the microbiota across host generations is the most
+critical factor that determines whether microorganisms share the
+same evolutionary interests as their hosts, thus generally favouring
+beneficial interactions. Different mechanisms favour fidelity or
+infidelity in microbiota transmission across host generations (see the
+figure below and figure 2 in ref. 52).
+One process that results in cross-generational host–microbiota
+fidelity is the vertical transmission of microorganisms from parents
+to offspring. Strict vertical transmission, akin to genetic inheritance,
+occurs through intracellular infection of germ cells as observed,
+for example, in aphid–Buchnera102 or carpenter ant–Blochmannia
+interactions103 and in more complex associations between sponges
+and part of their microbiota104. However, even in the absence of such
+strict vertical transmission, ‘intimate neighbourhood transmission’105
+may result in the transmission from parents to offspring; for
+instance, through the covering of eggs with microorganisms106,
+through mode of delivery in humans107, or through hosts shaping
+microbial community composition of their environment as a form
+of niche construction108. Further, vertical microbiota transmission
+goes beyond direct transmission from parents to offspring: living
+in proximity (for example, sharing the same household with
+relatives) can produce a so-called social microbiota that ultimately
+promotes microbiota fidelity54. However, vertical transmission can
+be incomplete in complex associations, such as between sponges
+and their microbiota104. Even in the absence of vertical transmission,
+host genotypes might directly influence the types of microorganism
+that can be taken up and establish in a particular host, shaping
+microbiota composition and increasing cross-generational fidelity109.
+
+Environmental transmission can also result in host–microbe fidelity
+across generations, whenever hosts faithfully acquire the same
+microorganisms from the environment every generation, as found in
+the bobtail squid–Vibrio110 and stinkbug–Burkholderia associations111.
+Whenever the environmental microbial pool responds to selection on
+hosts, environmental acquisition alone can lead to cross-generational
+microbiota fidelity, through ‘collective inheritance’26. A combination of
+these different processes can shape microbiota fidelity in single host
+systems, as shown in wood mice (vertical and social transmission)55
+and sponges (direct and indirect vertical transmission)104.
+Despite all these different biological processes that may bolster
+microbiota fidelity, many host-associated microorganisms were
+proposed to lack cross-generational fidelity22, and the exact degree
+of microbiota fidelity is often unknown for most host species. In other
+cases, certain interventions may compromise vertical microorganism
+transmission. Examples include antibiotic therapy on newborns112,113
+or Caesarean section (that is, delivery mode), which seems to
+have a transient effect on microbiota composition in newborns
+and is then further shaped by breastfeeding (or its absence) and
+early life exposure to microorganisms114–116. To quantify the fidelity
+of microbiota transmission, one can estimate the heritability of
+microbiota composition, which is the proportion of microbiota
+variance (for example, variance in relative abundance of a microbial
+taxon across hosts in a population) attributable to host genotypic
+variance. Microbiota heritability has been estimated for only a
+limited number of plant and animal host species117, suggesting low
+microbiota heritabilities in general, although some were on par with
+heritabilities of important host traits.
+
+Inheritance of microorganisms
+Shedding
+
+Direct
+vertical
+Social
+
+Environmental
+
+Three primary modes of microbial inheritance. The left mode indicates cross-generational transmission of microorganisms as a
+consequence of social acquisition of microorganisms. The middle mode indicates cross-generational transmission of microorganisms due
+to direct parent–offspring transmission. The right mode indicates microbial inheritance mediated by the environment, where host offspring
+acquire environmental microorganisms that descend from microorganisms shed by hosts in a previous generation. Additional transmission
+routes via the environment can also ensure fidelity, as previously described.
+
+new frameworks to study host–microbe systems24–27, the full breadth
+of well-established evolutionary theory has not been applied to understand the evolution of host–microbe associations.
+We propose taking advantage of existing theory in evolutionary
+biology to explore and dissect the evolution of host–microbiota systems. We highlight four existing frameworks that address key characteristics of host–microbiome evolutionary dynamics. We discuss how
+Nature Ecology & Evolution | Volume 9 | October 2025 | 1769–1780
+
+we may borrow useful elements from each of these frameworks, while
+also highlighting fundamental differences between host–microbe
+evolutionary dynamics and existing frameworks, pinpointing features
+of host–microbiome evolution that require the development of new
+theory. We point to important directions for future theoretical work,
+while emphasizing the importance of integrating theory and empirical work.
+1770
+
+Perspective
+
+Niche construction
+The framework of niche construction is centred on the reciprocal
+dynamics of populations and their environment. Niche construction
+considers the indirect effects of organismal activity on their own or
+descendants’ fitness through environmental modification, and it has
+been considered an evolutionary process in its own right41. There are
+two interpretations of niche construction, both applicable to host–
+microbiota systems (Fig. 1): (1) environmental modification by organismal activity (which may or may not have evolutionary consequences
+Nature Ecology & Evolution | Volume 9 | October 2025 | 1769–1780
+
+1
+2
+
+4
+
+3
+Host modification of the environment
+1 Host activity and traits shape
+the host’s microbiota
+
+2 Host activity and traits shape
+environmental microbial
+communities
+
+Ecological inheritance
+3 The microbiota changes
+selection on host genetic variation
+=
+z
+
++
+g
+
+)
+,W
+v(z
+co
+
+z
+
+=
+
+4 Environmental microbial communities
+shape selection on host traits
+
+)
+,W
+v(g
+co
+
+g
+
+=
+m
+
++
+
+)
+,W
+v(m
+co
+
+m
+
+×
+
+W
+
+z
+
+mE
+
+Parental
+generation
+
+Offspring
+generation
+
+mE
+
+m'E
+
+W
+
+We define host–microbiome evolution as changes in allele frequencies
+in the host population and/or in associated microbial communities
+(through shifts in allele frequencies within microbial lineages or in
+the relative abundances of microbial taxa) occurring within or across
+host generations. When host trait variation is explained by genetic
+variation across either hosts or microbiotas, then host–microbiome
+evolution can result in changes of host traits over time. A few important
+processes contributing to host–microbiome evolution include microbial meta-community dynamics28, microbe–microbe coevolution and
+host–microbe coevolution29, and host dispersal. In general, we lack an
+understanding of the consequences of natural selection on host–microbiota systems and the inheritance of selected host trait variation that
+is mediated by the inheritance of host-associated microbiotas. In the
+next sections, we explore how four existing evolutionary frameworks
+may enhance our understanding of host–microbiome evolution over
+the timescale in which host microevolutionary dynamics occur (for
+example, from a single to possibly thousands of host generations),
+each addressing different aspects of the evolution of host–microbiota
+systems, and where the choice of framework will depend on the study
+question. These frameworks are as follows: (1) niche construction,
+(2) indirect genetic effects (IGEs), (3) maternal effects (MEs), and (4)
+multilevel selection (MLS).
+Each framework considers how microbiotas interact with the
+evolution of host traits, and treats host-associated microbiotas
+essentially as a form of non-genetic inheritance (NGI). NGI involves
+the transmission of factors other than the DNA (for example, epigenetic patterns, cytoplasmic transmission, nutrient provisioning
+and cultural inheritance), from parents (or other conspecifics) to
+offspring. Depending on how these non-genetic factors covary and
+interact with genetic, environmental and/or stochastic factors, NGI
+can manifest itself as, for instance, MEs30, ecological inheritance31,
+IGEs32 or possibly some combination of these effects. There exists
+a large body of literature on the implications of NGI for plant and
+animal evolution33. The fourth framework, MLS describes how composites of individuals respond to selection that jointly acts on various
+scales of biological organization, and also considers the evolution
+of microbial traits.
+To illustrate concepts, we consider host traits that are jointly mediated by host genomes and host-associated microbiotas. More precisely,
+we build on previous quantitative genetic approaches by assuming
+host traits can be additively decomposed into genetic and microbial
+components34,35. Here, microbiotas are summarized by their additive
+effect on a host trait, measured by a linear model that explains host trait
+variation in terms of microbiota composition35–39. This is analogous to
+classical quantitative genetic methods for summarizing genomes by
+their additive genetic effects on traits40.
+Our focal frameworks are not mutually exclusive. In addition,
+we introduce the concepts with mathematical terms to organize the
+main underlying principles, to enhance clarity of key relationships or
+dependencies within the frameworks, and to stimulate further theoretical work. Our symbolic representation can and should be extended
+to account for additional factors contributing to host–microbiome
+evolution.
+
+Niche construction
+
+Fitness (W)
+
+Adapting evolutionary frameworks for host–
+microbiota systems
+
+https://doi.org/10.1038/s41559-025-02846-w
+
+z
+
+z
+
+Fig. 1 | Conceptual overview for applying niche construction to host–
+microbiome evolution. Numbers (1) and (2) focus on niche construction simply
+as environmental modification, and numbers (3) and (4) consider niche
+construction as an evolutionary process with ecological inheritance. (1)
+Interpretation of a host’s microbiota as a component of the host environment
+modified by host activity (such as diet and immune response). (2) Interpretation
+of the microbiota in the host’s immediate surroundings as the host environment
+is modified by activity such as shedding and priming. (3) Selection on microbiotamediated host traits (quantified by the relationship between fitness W and
+phenotype z, as illustrated at the bottom of number (3)) decomposes into
+selection on genetic g and microbial m components. Even when selection
+consistently favours certain values of the host trait z, the resulting selection on
+host genetic variation depends critically on how microbiota variation is
+structured. (4) Microbiotas of the host’s immediate environment can shape
+selection on host traits (for example, by competing with soil pathogens or
+altering nutrient availability). Here the slope of host fitness in relation to host
+trait is determined by the environmental microbiota mE. In this example, host
+offspring encounter an environment with a steeper m′E and consequently
+experience stronger directional selection.
+
+for either the host or associated microorganisms), and (2) an evolutionary process involving feedback between environmental change and
+organismal evolution.
+
+Niche construction as an environmental modification
+Niche construction as environmental modification by organismal activity applies to host–microbiota systems in at least two ways. First, the
+microbiota of a host (such as microbiotas associated with the host’s
+skin or gut) can be considered a part of the host’s environment (Fig. 1,
+number (1)). Host activity and host traits that result in microorganism acquisition (for example, through feeding, social behaviour or
+morphology), and host immune responses that result in selection of
+microorganisms, provide mechanisms of niche construction.
+Second, the microbiota of a host’s immediate surroundings
+(for example, microbial communities associated with different food
+sources or with surfaces the host comes into contact with) can be
+considered a part of the host’s environment (Fig. 1, number (2)). Niche
+construction then occurs when host activity alters the environmental
+microbiota composition; for instance, by shedding microorganisms
+into the surroundings, by host-mediated structuring of the environment (for example, nest building)42 or the construction of other types
+of built environment43, by nutrient provisioning (for example, ‘priming’
+of soil microorganisms by plant roots)44 and by ‘farming’ activities
+(for example, the cultivation of fungi by insects)45. Resulting altered
+1771
+
+Perspective
+microbiota composition or microbial activity may consequently affect
+host fitness, for example, by increasing nutrient availability or suppressing pathogens, as has been observed in soil surrounding plant
+roots46,47. Furthermore, if host genotypes show differential fitness in
+response to such environmental modifications, then niche construction can establish an evolutionary process, as discussed next.
+
+Niche construction as an evolutionary process
+The interpretation of niche construction as an evolutionary process
+is more stringent as it requires the maintenance of natural selection
+pressures across generations (Fig. 1, numbers (3) and (4)). This process,
+called ecological inheritance, requires that the activity of a particular
+organism modifies the environment, and that these environmental
+modifications influence selection on this organism in subsequent
+generations31,41. Host-associated microbiotas can establish modes of
+ecological inheritance in at least two ways.
+First, by contributing to host trait variation, microbiotas can facilitate the inheritance of natural selection pressures on host genetic variation associated with that trait (Fig. 1, number (3)). Consider a host trait z
+that is additively determined by a genetic component g and a microbiota
+component m, such that z = g + m. This model of host trait architecture
+has previously been applied theoretically by ref. 34, and expanded on by
+ref. 35. Writing W(z) for host fitness as a function of host trait, selection
+on the host trait is defined as the covariance of fitness and phenotype:
+Sz = cov(W, z). This covariance can be partitioned into selection on host
+trait components g and m, given by Sg = cov(W, g) and Sm = cov(W, m), such
+that Sz = Sg + Sm (Fig. 1; number (3)). This illustrates that selection at the
+level of host trait results in indirect selection at the levels of host genotype
+and host microbiota. Rearranging these components shows that selection on host genotype is mediated by selection on host microbiota (that
+is, Sg = Sz − Sm). Hence, in this case, the inheritance of microbiota variation
+across host generations establishes a mode of ecological inheritance.
+Second, microbiotas can modify selection pressures on host variation by altering the host environment, such as resource availability and
+habitat quality (Fig. 1, number (4)). These modified selection pressures
+can have long-term evolutionary consequences on host traits, such as
+immunological profiles, tissue structures and physiological processes
+that influence specific microbial functions18. Summarizing the effect of
+the environmental microbiota on host fitness as mE, we can include it as
+a parameter of the fitness function: W(z ∣ mE). Then, the correlation of mE
+between host generations maintained by host activity (such as shedding)
+results in the maintenance of selection pressures on host trait variation,
+and therefore establishes a second mode of ecological inheritance. We
+note that the focal host trait does not need to be mediated by the host
+microbiota. Empirically, mE can be measured as the effect of the microbiota in the host’s immediate environment on host fitness obtained from
+a linear model that explains the variance of host fitness, both in terms of
+host traits and in terms of the environmental microbiota composition.
+
+IGEs
+IGEs are the influence of an individual’s genotype on the phenotype
+of another (typically conspecific) individual32. As IGEs contribute to
+the expression and inheritance of phenotypic variation, they have
+important evolutionary consequences. A major application of IGEs is
+to understand the evolutionary consequences of social interactions
+in social insects48–51.
+Host-associated microbiotas establish IGEs between host individuals when three conditions are met: (1) host genes determine microbiota
+composition, (2) microbiota composition is transmissible between
+individuals, and (3) microbiotas mediate a host trait. When these conditions are met, microbiota transmission (which may occur during
+social encounters52) forms the mechanism for the genes of one host
+to influence the phenotype of another host (Fig. 2a).
+To illustrate this, consider microbiota composition as a host trait
+z1 that is mediated by host genotype g1, such that z1 = g1 + e1, where e1 is
+Nature Ecology & Evolution | Volume 9 | October 2025 | 1769–1780
+
+https://doi.org/10.1038/s41559-025-02846-w
+
+an environmental effect. Now consider another host trait that is mediated by host genes and microbiota composition: z2 = g2 + e2 + z1. In this
+scenario, z2 is a quantitative host character that is partially mediated by
+its microbiota such that z1 and g2 are obtained as the additive microbiota
+and genetic effects given by a linear model, with e2 taken as a standard
+error term40. Furthermore, with measurements of z1 across hosts in
+hand, g1 and e1 can then be obtained as the host additive genetic effect
+and error term, respectively, for a lineal model of z1. This IGE model is
+similar to the starting point taken by ref. 53 to derive their model for
+interactions with non-reciprocal effects.
+Assuming that each individual engages in a single interaction with
+another randomly chosen individual, we denote by z′1 , g′1 , e′1 the microbiota trait and trait components for the non-focal interacting individual. Suppose that the social interaction results in an exchange of
+microorganisms, so that their microbiota composition traits become
+similar by 0 ≤ ψ ≤ 1. Writing z∗1 as the microbiota composition of the
+focal individual after the interaction, we then have z∗1 = (1 − ψ)z1 + ψz′1.
+Assuming z2 is expressed after microorganism exchange, we can write
+z2 = g2 + e2 + (1 − ψ)z1 + ψz′1 . The coefficient ψ measures microbial
+transmission via social contact, quantifying an indirect genetic effect
+of the interacting partner’s additive genetic value g′1 on the expression
+of the focal individual’s trait value z2.
+The IGE framework has applications for understanding host–
+microbiome evolution, particularly for systems where social transmission of microorganisms (either through direct contact or through
+spatial proximity) between unrelated individuals has an important
+role. For instance, because conspecific social interactions are known to
+structure gut microbiotas in baboons54 and wood mice55, the IGE framework may provide important insights into the roles that host genetics
+and microbiotas have in mediating host traits for these systems. As the
+IGE framework considers interactions between arbitrary individuals
+and only incorporates non-random interactions mediated by trait
+covariances, and not necessarily relatedness32, it requires additional
+assumptions to apply to systems with substantial parent–offspring
+microorganism transmission. To model this complementary scenario
+more directly, the related framework of MEs has greater utility.
+
+MEs
+An ME is the influence of a parental phenotype on an offspring phenotype, controlling for genetic variation, mediated by parent–offspring
+interactions such as maternal care56. Host-associated microbiotas establish MEs between host parents and host offspring when a host trait is
+mediated by its microbiota, and part of the host’s microbiota is inherited
+from direct or indirect parent–offspring transmission (Box 1 and Fig. 2b).
+For instance, the composition of mammalian milk is mediated by host
+microbiotas and is transmitted directly from parent to offspring57.
+Assume a host trait decomposes as z = g + m, where g is the additive
+host genetic effect and m is the additive effect of host microbiota
+composition. Just as with the niche construction framework, m can be
+measured as the additive effect of microbiota composition on host
+trait obtained from a linear model35,40. To account for microbiota transmission directly from parents to offspring, we model the offspring
+microbiota m′ as depicted in Fig. 2b, where ι is the proportion of the
+offspring microbiota inherited from its parent, and (1 − ι) is the proportion acquired from the environment and unrelated hosts, together
+having the average composition ξ. δ is an ontogenetic differential of
+the microbiota that is independent of m.
+With this, we can model microbiota-mediated MEs for a wide range
+of maternal care patterns (Box 1 for examples). The microbiota’s contribution to an ME is measured as the partial regression coefficient of
+offspring trait on maternal trait, holding genetic variation constant30.
+Then, writing the trait variance as var(z), and var(m) as the component
+of var(z) explained by microbiota variation, the ME is then ω = ι (var(m)/
+var(z)), which is the slope obtained from regressing the offspring trait
+z′ on the parental trait z after controlling for genetic variation (Fig. 2b).
+1772
+
+Perspective
+
+https://doi.org/10.1038/s41559-025-02846-w
+
+a IGEs
+
+b MEs
+
+Genotypes of one host affect another host through their microbiota
+
+Microbiota establishes MEs
+
+=
+
++
+g1
+
+z1
+
+Microbiota
+exchange
+
+=
+e1
+
+= (1 − Ψ)
+
+z'1
+
+Parent microbiota
+
++
+g'1
+
+m
+
++
+z1*
+
+m'
+
++
+g2
+
+Offspring microbiota
+m' = ιm + (1 – ι) ξ + δ
+
+1–ι
+ξ
+
+=
+z2
+
+Development
+δ
+
++ Ψ
+
+z1*
+Microbiota
+affects host
+trait
+
+Inheritance
+
+ι
+e'1
+
++
+
+=
+z
+
+e2
+
+g
+
+ω = ι (var(m)/var(z))
+
+z'g
+
+Genotype affects
+microbiota
+composition
+
+m
+
+zg
+
+Fig. 2 | A model of microbiota-mediated IGEs and MEs. a, Microbiota
+composition of a focal host and interacting partner (z1 and z′1, respectively) are
+mediated by host genetic effects (g1, g′1) and environmental effects (e1, e′1).
+Updated compositions after microorganisms are exchanged via social contact,
+quantified by ψ, are denoted by z∗1 . Then a second trait z2, mediated by microbiota
+composition z∗1 (in addition to genetic effect g2 and environmental effect e2), is
+affected by the genetic factor g′1 in the interacting partner. b, At birth the host
+
+offspring acquires a proportion ι of its microbiota from the parent, and the
+remaining proportion 1 − ι from the environment (with composition ξ). The
+offspring microbiota subsequently shifts by an amount δ throughout
+development. Quantification of the microbiota-mediated MEs is illustrated in the
+bottom section as the slope ω of the relationship between offspring trait value z′g
+and parental trait value zg, where the subscript g indicates host genetic variation is
+held constant.
+
+This shows that host-associated microbiotas can be modelled as
+maternal characters. The application is limited to microbiome inheritance resulting from strict parent–offspring transmission. Furthermore,
+MEs on microbiota composition will probably depend on organism age
+and diminish as offspring acquire microorganisms from their environment and unrelated conspecifics58 and as within-host microbiota
+dynamics unfold25. By contrast, estimates of MEs on some microbially
+mediated traits may actually become stronger with age as the early
+microbiota has an important role in development59.
+
+where hosts control the composition of functionally important internal
+microbiotas. For instance, in mammals, intestinal microbiota composition is shaped by within-host selection pressures due to the host
+immune system65 or the epithelial environment66. These within-host
+filters generate microbiota variation among hosts, creating potential
+for selection to operate at both within-host and among-host levels. In
+Box 2, we illustrate a design for an experimental test of MLS1.
+
+MLS
+This last framework applies to host–microbiota systems in which either
+microbiota-mediated host traits or microbial traits are heritable and
+subject to natural selection. Heritable variation in the host and microbiota fidelity across generations are essential for the host–microbe
+system to collectively respond to natural selection (Box 1). In other
+words, Lewontin’s conditions60 must be met. Given these restrictive
+conditions, most host–microbiota systems are not considered evolutionary individuals.
+Host–microbiota systems show natural selection at the levels of
+individuals, kin and as groups of unrelated organisms61, all explicitly
+captured by MLS models. As these models do not make a priori assumptions about inheritance, they are useful for understanding when a given
+inheritance mechanism establishes selection at higher levels of organization. MLS models have been categorized into two types: MLS1 explains
+differences among groups in their respective rates of production of
+contained individuals, while MLS2 explains differences among groups
+in their respective rates of production of distinct new groups62,63.
+By testing different MLS models, we can ascertain whether individual, kin, or group selection, or a combination, is the predominant
+force in the evolution of emergent host–microbe phenotypes. For
+instance, Hermsen64 recently introduced a framework for measuring
+MLS1 and MLS2 to analyse simulated data. Next, we describe how this
+general framework may be operationalized for the measurement of
+MLS1 and MLS2 in the context of host–microbe systems.
+So far, MLS in host–microbiota systems has not yet been empirically measured. However, MLS may be especially relevant in systems
+Nature Ecology & Evolution | Volume 9 | October 2025 | 1769–1780
+
+MLS2
+Due to its relative simplicity, we begin with MLS2 (Fig. 3), which
+focuses on the reproduction of groups. MLS2 occurs when host birth
+and death rates depend on microbiota composition. Focusing on a
+microbiota-mediated host trait z, the change in mean traits between
+parental and offspring generations can be expressed using the Price
+equation as
+Δz ̄ = S + T,
+′
+
+(1)
+′
+
+where Δz ̄ = z ̄ − z ̄ is the difference between offspring mean trait z ̄
+and parental mean trait z ̄ ; host-level selection is captured by
+S = cov(W, z)/W , with W (W̄ ) host individual fitness (host mean fitness) and the covariance is taken across host parents. The term
+T = WΔz/W is called transmission bias, and here accounts for trait
+differences resulting from within-host microbiota dynamics and
+differential colonization abilities of microorganisms. More precisely,
+Δz is the average ontogenetic differential across offspring of a given
+host parent so that WΔz is the average ontogenetic differential across
+all offspring67. Following Hermsen’s64 interpretation, in the context
+of host–microbiota systems, T captures within-host selection on
+microbial variation. As one could measure microbiota-mediated
+host traits and host fitness, at least in principle, this approach is
+particularly amenable to empirical study. In particular, for cases in
+which the mean trait differential Δz ̄ and host-level selection S are
+directly measurable, the transmission bias term can be inferred as
+T = Δz ̄ − S . This provides an explicit method to partition host trait
+dynamics into components due to selection among hosts and selection within hosts.
+1773
+
+Perspective
+
+https://doi.org/10.1038/s41559-025-02846-w
+
+BOX 2
+
+Testing theory using the Daphnia host system
+The water flea Daphnia (see the figure below), a freshwater
+crustacean, is a model organism in many biological fields, such as
+ecotoxicology118, epidemiology119 and eco-evolutionary dynamics120.
+Increasingly, it is also used to study host–microbiota evolution121.
+Several features make the Daphnia–microbiota system uniquely
+suited to test theoretical predictions:
+• Its gut microbiota is relatively simple, has distinct core members and
+is clearly separated from the surrounding aquatic microbiota122.
+• Microbiota composition is shaped by both environmental
+conditions (for example, temperature123) and host genotype124.
+• The microbiota influences host fitness125,126 and may mediate
+plastic responses to the environment127.
+• Many phenotypic traits—such as defence induction128—are well
+characterized and may be partly microbiota mediated.
+
+a
+
+b
+
+• Both horizontal and vertical microbiota transmission occur129,130.
+• Experimental manipulations (for example, gnotobiotic rearing and
+microbiota transplants) are feasible, and host genotypes can be
+controlled via clonal lineages126,131.
+These advantages enable rigorous tests of theoretical frameworks.
+We next outline two illustrative experimental designs:
+Testing niche construction
+Daphnia–microbiota associations can be evolved in mesocosms
+under three treatments (right-hand side of the figure below):
+1. Environmental microbiota inheritance: hosts and their microbial
+environment are maintained together, allowing microbial shaping
+of the environment and ecological inheritance via environmental
+modification.
+
+Testing for microbiota-mediated niche construction
+
+Testing for MLS on the microbiota
+Ecological inheritance via
+environmental microbiota
+modification and vertical
+transmission
+Select hosts with high
+reproductive output
+
+Ecological inheritance via
+vertical microbiota
+transmission only
+
+No ecological inheritance
+
+Select hosts with low
+reproductive output
+
+Microbiota
+transplantation
+
+Common garden experiment to test for the effects of
+host level selection on the presence of beneficial
+host–microbe associations
+
+Expose populations to stressor to test how niche construction
+affects adaptive potential
+
+Experimental approaches for testing MLS1 and evolutionary niche construction using the water flea Daphnia system. a, MLS1 can be
+tested by maintaining two treatments: microorganisms from the hosts with highest fitness are isolated and transplanted into the subsequent
+host generation (left) and microorganisms from hosts with the lowest fitness are isolated and transplanted into the subsequent host generation
+(right). b, Evolutionary niche construction can be tested by maintaining three treatments: mesocosms are maintained including host-associated
+and environmental microorganisms (left), host-associated microorganisms are included but environmental microorganisms are excluded
+(middle), and both host-associated and environmental microorganisms are excluded (right). Subsequently, host populations are exposed to a
+stressor to test whether ecological inheritance via environmental modification (left) or vertical transmission (middle) promote host adaptation
+compared with the absence of ecological inheritance (right). Photograph credit: Héléne Vanvelk and Maxime Fajgenblat (KU Leuven).
+
+Nature Ecology & Evolution | Volume 9 | October 2025 | 1769–1780
+
+1774
+
+Perspective
+
+https://doi.org/10.1038/s41559-025-02846-w
+
+(continued from previous page)
+2. Vertical microbiota transmission only: hosts are transferred to
+fresh environments regularly, preserving vertical transmission but
+preventing environmental shaping.
+3. No ecological inheritance: both host-associated and environmental microorganisms are excluded at each transfer; microbiotas are
+provided via inoculum from naive Daphnia.
+Each treatment is subjected to an environmental stressor (for
+example, toxins or elevated temperature) to:
+• Evaluate whether niche construction promotes adaptation (via
+host reproduction or population growth)
+• Investigate ecological and molecular changes (for example,
+microbiota dynamics, or host or metatranscriptomic responses)
+A follow-up transplant experiment can assess whether evolved
+hosts benefit specifically from shaped microbial environments.
+
+MLS1
+MLS1, in this context, takes a microorganism-centric approach and
+occurs when microorganism strains or species show differential fitness64. It considers traits of different microorganism taxa (for example,
+strains or species), which we write as αi for microorganism taxon i. These
+traits may be any phenotype of the microorganism, such as growth
+rates on different carbon sources or the additive effect on a host trait.
+Selection at different levels is then quantified using covariances that
+involve the microbial trait and a notion of microorganism fitness (wi for
+microorganism i). Here we focus on two measures of microorganism
+fitness: host colonization rates and within-host proliferation rates.
+First, we can quantify microorganism colonization fitness for a
+given host by comparing the relative abundances of microorganisms
+in the immediate environment of the host (for example, the substrate
+and other hosts) to the relative abundances of microorganisms inhabiting the host (Fig. 4; top). The relative abundance of microorganism i
+in the host can be written as κ′i = wi κi , with κi being the relative abundance of microorganism i within the immediate environment of the
+host. As κi and κ′i are, at least in principle, measurable, we can quantify
+(κ)
+microorganism colonization fitness as wi = κi /κ′i , where (κ) emphasizes that colonization is used as a fitness measure.
+Second, we can quantify microorganism growth fitness within a
+given host by comparing the relative abundances of microorganisms
+at host adolescence to relative abundances at host maturity. We write
+γi for the relative abundance of microorganism i in an adolescent host,
+and γ′i for its relative abundance when that same host has matured
+(Fig. 4; bottom). Growth fitness of microorganism i can be quantified
+(γ)
+as wi = γi /γ′i .
+Regardless of the exact fitness measure, MLS1 suggests that selection on microorganism trait α (across the entire host–microbiota system) can be partitioned into two components: within- and among-host
+selection. Within-host selection (Swithin) is found by first calculating the
+covariance of fitness and phenotypes across microorganisms within
+each host j separately (covj(w, α)), and then this covariance is averaged
+across hosts so that
+Swithin = cov(w, α).
+
+(2)
+
+Among-host selection (Samong) is found by first averaging fitness and
+microorganism traits across microorganism taxa within each host
+separately (which we write as w̄ and ᾱ , respectively, for a given host)
+before computing their covariance across hosts such that
+Samong = cov(w,̄ ̄
+α).
+
+(3)
+
+This approach allows us to connect levels of selection occurring
+simultaneously across distinct scales of biological organization.
+Nature Ecology & Evolution | Volume 9 | October 2025 | 1769–1780
+
+Testing MLS1
+To test MLS1, microbiotas can be evolved under two selection
+regimes (left-hand side of the figure below):
+1. Among-host selection: microorganisms are transferred from
+the most reproductively successful hosts, favouring mutualistic
+strains that benefit both host and microorganism.
+2. Within-host selection: microorganisms are transferred from hosts
+with low reproductive output, favouring strains that enhance their
+own replication at a potential cost to the host.
+After experimental evolution, microbial communities are
+introduced to a standardized host population. Differences in host
+fitness and microbial load can reveal the relative strength and
+outcome of different levels of selection.
+
+More than two levels of organization can be considered by generalizing Hermsen’s64 framework, allowing for structured populations of
+host–microbe groups and within-host microorganism groups, which
+is crucial for the application of MLS to real-world systems.
+
+Discussion
+
+Limitations of existing frameworks
+Each of the discussed pre-existing frameworks is useful for understanding specific cases of host–microbiome evolution, and one useful
+strategy is to select the framework that fits best to the study question and model system used. At the same time, some fundamental
+properties of host–microbiota systems necessitate expanding these
+frameworks. Further, these frameworks are not mutually exclusive
+and, in real-world scenarios where multiple processes and mechanisms
+act simultaneously, different frameworks will probably interact. For
+example, niche construction has clear applications for understanding
+the relationship between host and environmental microbiotas, and
+consequential selection of host–microbiota systems. Modification of
+the social environment via microbiota transmission may be considered
+a form of niche construction but this framework does not focus on
+microbiota transmission. The frameworks of IGEs and MEs are particularly useful for understanding the evolutionary consequences of such
+social and parent–offspring transmission, respectively. In systems with
+mixed modes of microbiota transmission, both IGEs and MEs jointly
+affect the dynamics and could be combined to account for such mixed
+transmission. Still, IGEs and MEs treat the consequences of microbiota
+transmission as fixed effects, limiting their ability to incorporate microbiota community dynamics, host immune response and variation of
+transmission other than what is explained by trait covariances.
+MLS is useful as an overarching framework for understanding
+selection on complex host–microbiota systems. However, it is still
+under debate whether MLS1 and MLS2 are inequivalent, as the Price
+equation has supported their equivalency since the 1970s63,68–70. Further, although some group-level phenotypes may have relevance at the
+individual level, not all will. For example, metabolic complementation
+between deep sea clams and their chemosynthetic gill endosymbionts
+for haemoglobin-transported sulfur-based carbon fixation is selected
+for in the host–microbe assemblage, but not in the individual organisms, because the individual bivalve and bacterial genomes lack genes
+to complete the pathway71.
+
+Opportunities for developing new frameworks
+Host–microbiota systems provide a number of exciting opportunities
+for extending and developing theoretical approaches to describe features that are not sufficiently captured by our focal frameworks, as is also
+apparent from the previously described limitations of these frameworks.
+1775
+
+Perspective
+
+https://doi.org/10.1038/s41559-025-02846-w
+MLS2
+Decompose host trait changes into among- and within-host selection
+
+Parental host
+population
+
+z
++
+
+Host selection
+
+Juvenile host
+offspring
+Transmission bias
+
+S = cov(W,z)/W
+
++
+
+T = W∆z/W
+=
+
+Mature host
+offspring
+
+z'
+
+Fig. 3 | MLS2 in the context of host–microbiota systems. The top row represents
+the parent population with mean trait z ̄. Selection among hosts occurs via
+differential reproduction, forming host offspring in the middle row. Host-level
+selection is quantified by S = cov(W, z)/W̄ , where W is host fitness and W̄ is mean
+fitness in the parental population. Subsequently, while offspring develop,
+transmission bias occurs due to within-host microbiota dynamics, and this leads
+′
+to the mature offspring population (bottom row) with mean trait z ̄ .
+
+Transmission bias, capturing within-host selection, is quantified by T = WΔz/W̄ ,
+where Δz is the average ontogenetic differential (due to within-host microbiota
+dynamics) across offspring of a host parent and WΔz is the average of the
+product WΔz across host parents. Note that transmission bias is depicted as
+differential microorganism abundance, but it could also arise from
+compositional divergence.
+
+For example, microbiota composition varies over the course of a host’s
+life72,73. Here, theory on ontogenetic changes in maternal and genetic
+contributions to host phenotypic variation74 may provide useful insights
+to microbiota changes during host development and its implications
+for responses to selection. For instance, a maternal signal in microbiota
+composition that diminishes with host age25,75 could be captured by a
+negative relationship between host age and the contribution of MEs.
+Further, host microbiota composition is shaped by fluctuating microbial abundances resulting in within-host ecological interactions, but
+such interactions are ignored in the NGI and MLS frameworks that we
+discussed. Further, microbiota vary across host organs75–77 but the frameworks we present do not account for this within-host spatial variation.
+These frameworks can be extended to account for such ecological details by integrating models of microbial community dynamics
+into host trait architecture. These biotic interactions are even further
+complicated by the existence of multiple trophic levels within a microbiota community (for example, interactions of bacteria with phages
+or predatory bacteria)78–80. Microorganisms can also show context
+dependence in their contributions to host fitness, where they act as
+mutualists in one environment but as pathogens in another81–84. Theory
+on fluctuating selection85 could be used to assess host–microbiome
+evolution in such a case.
+In addition, there are many opportunities to expand the theory
+of MLS. For example, stochastic simulation of MLS processes could
+enable the development of new MLS models and theories to pinpoint
+the conditions required for cooperation among microorganisms and
+hosts to evolve86. Spatial structure shapes the formation of groups
+that can respond to selection pressures64,69,87,88, emphasizing the need
+to incorporate environmental parameters in MLS models. Genetic
+models for mapping trait selection onto the complex genetic basis
+for that trait89 could be used to map group-level phenotypic selection
+onto individual genotypes. Incorporating genetic parameters into
+MLS models will enable the use of genome-wide datasets. Further, the
+effect of host versus symbiont population size and generation time on
+the rates of coevolution should be considered26,90.
+Lastly, it may be useful to consider microbiota-mediated host traits
+as a form of phenotypic plasticity, with host microbiota composition
+
+as the environmental factor. However, as microbiota are transmissible
+between host individuals within a generation, and because theoretical
+approaches to study reaction norm evolution have not focused on
+transmissible factors91–95, there is a need to extend reaction norm
+theory to account for the complexity of host–microbiota systems.
+Microbiota transmission, either directly from parent to offspring as
+in the case of maternal characters or socially as in the case of IGE, can
+explain patterns of microbiota variation that then feed back on host–
+microbiome evolution52. Moreover, microbiota-mediated plasticity can
+act at different levels and timescales96. For example, a new environmental challenge can be accommodated fastest by ecological changes in
+microbiota community composition, followed by evolutionary genetic
+changes in single microbial lineages. Such microbiota plasticity can
+further selectively favour hosts that either select the beneficial microorganisms from the environment or ensure their vertical transmission,
+as a kind of microbiota-mediated Baldwin effect96. Hence, application
+of the phenotypic plasticity framework to host–microbiome evolution
+would need to be extended to account for environmental factors that
+are transmissible between hosts within and across generations. Doing
+so will be useful for understanding microbiota-mediated adaptation
+to new environments11 and microbiota-mediated local adaptation10.
+
+Nature Ecology & Evolution | Volume 9 | October 2025 | 1769–1780
+
+The need for ‘empirically friendly’ theory
+We feel that it is important to recognize that existing theoretical frameworks were often developed with biological systems in mind other than
+host–microbiota systems97. Not only has this resulted in frameworks
+that lack key aspects of the biology of host–microbiota systems (as we
+discuss in the previous section) but it has also limited the application
+of these frameworks to host–microbiota systems in the laboratory and
+the field. To make these frameworks maximally useful, it is important
+that the validity of the underlying assumptions of these frameworks
+is determined empirically. It is also crucial that these frameworks are
+constructed in a way that makes their predictions empirically testable,
+given the technical limitations of empirical microbiota research. For
+example, for many host–microbiota systems, empiricists are limited to
+surveying relative abundance or presence versus absence of microbial
+taxa, and for theory to be maximally useful it must generate predictions
+1776
+
+Perspective
+
+https://doi.org/10.1038/s41559-025-02846-w
+
+MLS1
+Decompose microbial selection into among and within-host selection
+1 Colonization as a measure of microorganism fitness
+
+cov1(w(k), α)
+
+cov3(w(k), α)
+
+cov2(w(k), α)
+
+cov(w(k), α)
+
+We envision that the initial result will be a mosaic of theoretical frameworks, each tuned to the set of processes considered and questions
+asked, with the initial goal of clarifying concepts. Such a mosaic could
+eventually lead to the identification of general principles underlying
+the interactions between microorganisms and their animal and plant
+hosts, greatly expanding our understanding of the evolutionary consequences of the host–microbe associations omnipresent across the
+tree of life.
+
+References
+1.
+
+w1(k), α1
+
+w2(k), α2
+
+w3(k), α3
+
+cov(w(k), α)
+
+2 Proliferation as a measure of microorganism fitness
+
+Juvenile hosts
+
+cov1(w(γ), α)
+
+cov2(w(γ), α)
+
+cov3(w(γ), α)
+
+cov(w(γ), α)
+
+w1(γ), α1
+
+w2(γ), α2
+
+w3(γ), α3
+
+cov(w(γ), α)
+
+Adult hosts
+Within-host selection
+
+Among-host selection
+
+Fig. 4 | MLS1 in the context of host–microbiota systems. Circles represent host
+individuals. Microorganism individuals are represented by capsule shapes, and
+their trait values α are indicated by colour (red, blue or green). Top: number (1)
+illustrates how selection at the levels of host and microorganisms can be
+measured when microbial fitness w is taken as the colonization fitness w(κ) (see
+main text). Here microorganisms in the immediate host environment (depicted
+by the grass and soil at the top of the figure) differentially colonize hosts
+(represented by arrows following microorganisms from the environment into
+host individuals). Microorganism-level selection resulting from these differential
+colonization abilities for the jth host is quantified by covj (w(κ) , α), and these
+selection indices are then averaged across hosts to obtain a global measure of
+microorganism-level selection cov(w(κ) , α) (highlighted in beige). Host-level
+selection is quantified by first averaging microorganism fitness and trait values
+within each host (respectively, w̄ i and ᾱi in host i) before taking their covariance
+(κ)
+across hosts cov(w̄ , α)̄ (highlighted in purple). Bottom: number (2) illustrates
+how these levels of selection may be quantified when using proliferation as a
+measure of microbial fitness. Juvenile hosts are represented by the top row, and
+vertical arrows connect them to their matured selves. Here, changes in host
+microbiotas are presumed to be a consequence of within-host microbiota
+dynamics, quantified by the growth fitness w(γ) (see main text).
+
+for these microbiota attributes. Tailoring theory in this way will probably require direct collaborations between theoretical and empirical
+microbiota scientists to enable an iterative refinement of theory with
+information from actual host–microbiota systems. This requires host–
+microbiota systems that are sufficiently tractable to measure relevant
+quantities, such as correlations among microbiota composition, host
+traits and host fitness. Example systems include the water flea Daphnia
+(Box 2), the nematode Caenorhabditis elegans13,98, the zebrafish Danio
+rerio99, the bobtail squid Euprymna scolopes100 or insect–Wolbachia
+associations101.
+
+Conclusion
+We presented four frameworks developed in the fields of evolutionary biology that help to generate new insights into host–microbiome
+evolution. To capture the biological diversity of such host–microbe systems and produce empirically testable predictions, these frameworks
+require thoughtful expansion and, in some cases, the development of
+new theory, in close collaboration with empirical microbiota scientists.
+Nature Ecology & Evolution | Volume 9 | October 2025 | 1769–1780
+
+Cox, T. O., Lundgren, P., Nath, K. & Thaiss, C. A. Metabolic control
+by the microbiome. Genome Med. 14, 80 (2022).
+2. Buffie, C. G. et al. Precision microbiome reconstitution restores
+bile acid mediated resistance to Clostridium difficile. Nature 517,
+205–208 (2014).
+3. Hooper, L. V., Littman, D. R. & Macpherson, A. J. Interactions
+between the microbiota and the immune system. Science 336,
+1268–1273 (2012).
+4. Caballero-Flores, G., Pickard, J. M. & Núñez, G.
+Microbiota-mediated colonization resistance: mechanisms and
+regulation. Nat. Rev. Microbiol. 21, 347–360 (2023).
+5. Bercik, P. et al. The intestinal microbiota affect central levels
+of brain-derived neurotropic factor and behavior in mice.
+Gastroenterology 141, 599–609.e3 (2011).
+6. Wilkinson, J. E. et al. A framework for microbiome science in
+public health. Nat. Med. 27, 766–774 (2021).
+7. Singh, B. K., Trivedi, P., Egidi, E., Macdonald, C. A. &
+Delgado-Baquerizo, M. Crop microbiome and sustainable
+agriculture. Nat. Rev. Microbiol. 18, 601–602 (2020).
+8. Biggs, E., Taylor, M. W. & Middleton, D. M. R. L. Beyond the theory:
+from holobiont concept to microbiome engineering. Environ.
+Microbiol. 25, 832–835 (2023).
+9. Silverstein, M. R., Segrè, D. & Bhatnagar, J. M. Environmental
+microbiome engineering for the mitigation of climate change.
+Glob. Change Biol. 29, 2050–2066 (2023).
+10. Suzuki, T. A. & Ley, R. E. The role of the microbiota in human
+genetic adaptation. Science 370, eaaz6827 (2020).
+11. Carmody, R. N., Sarkar, A. & Reese, A. T. Gut microbiota through
+an evolutionary lens. Science 372, 462–463 (2021).
+12. Henry, L. P., Bruijning, M., Forsberg, S. K. G. & Ayroles, J. F. The
+microbiome extends host evolutionary potential. Nat. Commun.
+12, 5141 (2021).
+13. Petersen, C. et al. Host and microbiome jointly contribute to
+environmental adaptation. ISME J. 17, 1953–1965 (2023).
+14. Zilber-Rosenberg, I. & Rosenberg, E. Role of microorganisms in
+the evolution of animals and plants: the hologenome theory of
+evolution. FEMS Microbiol. Rev. 32, 723–735 (2008).
+15. Aldana, M. & Robeva, R. New challenges in systems biology:
+understanding the holobiont. Front. Physiol. 12, 662878
+(2021).
+16. Bordenstein, S. R. & Theis, K. R. Host biology in light of the
+microbiome: ten principles of holobionts and hologenomes. PLoS
+Biol. 13, e1002226 (2015).
+17. Theis, K. R. et al. Getting the hologenome concept right: an
+eco-evolutionary framework for hosts and their microbiomes.
+mSystems 1, e00028-16 (2016).
+18. McFall-Ngai, M. et al. Animals in a bacterial world, a new
+imperative for the life sciences. Proc. Natl Acad. Sci. USA 110,
+3229–3236 (2013).
+19. Rosenberg, E. & Zilber-Rosenberg, I. The hologenome concept of
+evolution after 10 years. Microbiome 6, 78 (2018).
+20. Morris, J. J. What is the hologenome concept of evolution?
+F1000Research 7, 1664 (2018).
+21. Moran, N. A. & Sloan, D. B. The hologenome concept: helpful or
+hollow? PLoS Biol. 13, e1002311 (2015).
+1777
+
+Perspective
+22. Douglas, A. E. & Werren, J. H. Holes in the hologenome: why
+host-microbe symbioses are not holobionts. mBio 7, e02099
+(2016).
+23. Egan, S., Fukatsu, T. & Francino, M. P. Opportunities and
+challenges to microbial symbiosis research in the microbiome
+era. Front. Microbiol 11, 1150 (2020).
+24. Zeng, Q., Sukumaran, J., Wu, S. & Rodrigo, A. Neutral models of
+microbiome evolution. PLoS Comput. Biol. 11, e1004365 (2015).
+25. van Vliet, S. & Doebeli, M. The role of multilevel selection in host
+microbiome evolution. Proc. Natl Acad. Sci. USA 116, 20591–
+20597 (2019).
+26. Roughgarden, J. Holobiont evolution: population theory for the
+hologenome. Am. Nat. 201, 763–778 (2023).
+27. Daybog, I. & Kolodny, O. A computational framework for resolving
+the microbiome diversity conundrum. Nat. Commun. 14, 7977
+(2023).
+28. Miller, E. T., Svanbäck, R. & Bohannan, B. J. M. Microbiomes as
+metacommunities: understanding host-associated microbes
+through metacommunity ecology. Trends Ecol. Evol. 33, 926–935
+(2018).
+29. Janzen, D. H. When is it coevolution? Evolution 34, 611–612 (1980).
+30. Kirkpatrick, M. & Lande, R. The evolution of maternal characters.
+Evolution 43, 485–503 (1989).
+31. Odling-Smee, F. J., Lala, K. N. & Feldman, M. Niche Construction:
+The Neglected Process in Evolution Monographs in Population
+Biology (Princeton Univ. Press, 2013).
+32. Wolf, J. B., Brodie III, E. D. & Moore, A. J. Interacting phenotypes
+and the evolutionary process. II. Selection resulting from social
+interactions. Am. Nat. 153, 254–266 (1999).
+33. Bonduriansky, R. & Day, T. Nongenetic inheritance and its
+evolutionary implications. Annu. Rev. Ecol. Evol. Syst. 40, 103–125
+(2009).
+34. Bruijning, M., Henry, L. P., Forsberg, S. K. G., Metcalf, C. J. E. &
+Ayroles, J. F. Natural selection for imprecise vertical transmission
+in host-microbiota systems. Nat. Ecol. Evol. 6, 77–87 (2021).
+35. Week, B., Ralph, P. L., Tavalire, H. F., Cresko, W. A. & Bohannan,
+B. J. M. Quantitative genetics of microbiome mediated traits.
+Preprint at bioRxiv https://doi.org/10.1101/2024.12.16.628599
+(2024).
+36. van Opstal, E. J. & Bordenstein, S. R. Rethinking heritability of the
+microbiome. Science 349, 1172–1173 (2015).
+37. Rothschild, D. et al. Environment dominates over host genetics in
+shaping human gut microbiota. Nature 555, 210–215 (2018).
+38. Aliakbari, A. Microbiability and microbiome-wide association
+analyses of feed efficiency and performance traits in pigs. Genet.
+Sel. Evol. 54, 29 (2022).
+39. He, Y. et al. Exploring methods to summarize gut microbiota
+composition for microbiability estimation and phenotypic
+prediction in swine. J. Anim. Sci. 100, skac231 (2022).
+40. Lynch, M. & Walsh, B. Genetics and Analysis of Quantitative Traits
+Vol. 1 (Sinauer Sunderland, 1998).
+41. Odling-Smee, J., Erwin, D. H., Palkovacs, E. P., Feldman, M. W.
+& Laland, K. N. Niche construction theory: a practical guide for
+ecologists. Q. Rev. Biol. 88, 3–28 (2013).
+42. Campos-Cerda, F. & Bohannan, B. J. M. The nidobiome: a
+framework for understanding microbiome assembly in neonates.
+Trends Ecol. Evol. 35, 573–582 (2020).
+43. Bosch, T. C. G. et al. The potential importance of the
+built-environment microbiome and its impact on human health.
+Proc. Natl Acad. Sci. USA 121, e2313971121 (2024).
+44. Zhu, B. et al. Rhizosphere priming effects on soil carbon and
+nitrogen mineralization. Soil Biol. Biochem. 76, 183–192 (2014).
+45. Mueller, U. G. & Gerardo, N. Fungus-farming insects: multiple
+origins and diverse evolutionary histories. Proc. Natl Acad. Sci. 99,
+15247–15249 (2002).
+Nature Ecology & Evolution | Volume 9 | October 2025 | 1769–1780
+
+https://doi.org/10.1038/s41559-025-02846-w
+46. Finzi, A. C. et al. Rhizosphere processes are quantitatively
+important components of terrestrial carbon and nutrient cycles.
+Glob. Change Biol. 21, 2082–2094 (2015).
+47. Mendes, R. et al. Deciphering the rhizosphere microbiome for
+disease-suppressive bacteria. Science 332, 1097–1100 (2011).
+48. Linksvayer, T. A. Direct, maternal, and sibsocial genetic effects on
+individual and colony traits in an ant. Evolution 60, 2552 (2006).
+49. Sokolowski, M. B. Honey bee colony aggression and indirect
+genetic effects. Proc. Natl Acad. Sci. USA 117, 18148–18150 (2020).
+50. Piekarski, P. K., Valdés-Rodríguez, S. & Kronauer, D. J. C.
+Conditional indirect genetic effects of caregivers on brood in the
+clonal raider ant. Behav. Ecol. 34, 642–652 (2023).
+51. Carter, M. J., Wilson, A. J., Moore, A. J. & Royle, N. J. The role
+of indirect genetic effects in the evolution of interacting
+reproductive behaviors in the burying beetle, Nicrophorus
+vespilloides. Ecol. Evol. 9, 998–1009 (2019).
+52. Sarkar, A. et al. Microbial transmission in animal social networks
+and the social microbiome. Nat. Ecol. Evol. 4, 1020–1035
+(2020).
+53. Moore, A. J., Brodie, E. D. & Wolf, J. B. Interacting phenotypes and
+the evolutionary process: I. Direct and indirect genetic effects of
+social interactions. Evolution 51, 1352–1362 (1997).
+54. Tung, J. et al. Social networks predict gut microbiome
+composition in wild baboons. eLife 4, e05224 (2015).
+55. Wanelik, K. M., Raulo, A., Troitsky, T., Husby, A. & Knowles, S. C.
+L.Maternal transmission gives way to social transmission during
+gut microbiota assembly in wild mice. Anim. Microbiome 5, 29
+(2023).
+56. Mousseau, T. A. & Fox, C. W. Maternal Effects as Adaptations
+(Oxford Univ. Press, 1998).
+57. Kijner, S., Kolodny, O. & Yassour, M. Human milk oligosaccharides
+and the infant gut microbiome from an eco-evolutionary
+perspective. Curr. Opin. Microbiol. 68, 102156 (2022).
+58. Wagner, M. R. et al. Host genotype and age shape the leaf and
+root microbiomes of a wild perennial plant. Nat. Commun. 7, 12151
+(2016).
+59. Morais, L. H. et al. Enduring behavioral effects induced by birth
+by caesarean section in the mouse. Curr. Biol. 30, 3761–3774.e6
+(2020).
+60. Lewontin, R. C. The units of selection. Annu. Rev. Ecol. Syst. 1, 1–18
+(1970).
+61. Provorov, N. A. & Vorobyov, N. I. Macroevolution of symbiosis as
+self-organization of superspecies system controlled by natural
+selection. Biol. Bull. Rev. 3, 274–285 (2013).
+62. Mayo, D. G. & Gilinsky, N. L. Models of group selection. Philos. Sci.
+54, 515–538 (1987).
+63. Bourrat, P. Multilevel selection 1, multilevel selection 2, and the
+price equation: a reappraisal. Synthese 202, 72 (2023).
+64. Hermsen, R. Emergent multilevel selection in a simple spatial
+model of the evolution of altruism. PLoS Comput. Biol. 18,
+e1010612 (2022).
+65. Brown, E. M., Sadarangani, M. & Finlay, B. B. The role of the
+immune system in governing host-microbe interactions in the
+intestine. Nat. Immunol. 14, 660–667 (2013).
+66. Schluter, J. & Foster, K. R. The evolution of mutualism in gut
+microbiota via host epithelial selection. PLoS Biol. 10, e1001424
+(2012).
+67. Frank, S. A. Natural selection. IV. The Price equation. J. Evolut. Biol.
+25, 1002–1019 (2012).
+68. van Veelen, M., García, J., Sabelis, M. W. & Egas, M. Group
+selection and inclusive fitness are not equivalent; the Price
+equation vs. models and statistics. J. Theor. Biol. 299, 64–80
+(2012).
+69. Simon, B., Fletcher, J. A. & Doebeli, M. Towards a general theory of
+group selection. Evolution 67, 1561–1572 (2012).
+1778
+
+Perspective
+70. Lehtonen, J. Multilevel selection in kin selection language. Trends
+Ecol. Evol. 31, 752–762 (2016).
+71. Ip, J. C.-H. et al. Host–endosymbiont genome integration in a
+deep-sea chemosymbiotic clam. Mol. Biol. Evol. 38, 502–518
+(2020).
+72. Moore, R. E. & Townsend, S. D. Temporal development of the
+infant gut microbiome. Open Biol. 9, 190128 (2019).
+73. Zimmermann, J. et al. Gut-associated functions are favored during
+microbiome assembly across a major part of C. elegans life. mBio
+15, e0001224 (2024).
+74. Wilson, A. J. & Réale, D. Ontogeny of additive and maternal
+genetic effects: lessons from domestic mammals. Am. Nat. 167,
+E23 (2006).
+75. Ferretti, P. et al. Mother-to-infant microbial transmission from
+different body sites shapes the developing infant gut microbiome.
+Cell Host Microbe 24, 133–145.e5 (2018).
+76. The Human Microbiome Project Consortium Structure, function
+and diversity of the healthy human microbiome. Nature 486,
+207–214 (2012).
+77. Janssens, L. et al. Evolution of pesticide tolerance and associated
+changes in the microbiome in the water flea Daphnia magna.
+Ecotoxicol. Environ. Saf. 240, 113697 (2022).
+78. Kirsch, J. M. et al. Bacteriophage-bacteria interactions in the gut:
+from invertebrates to mammals. Annu. Rev. Virol. 8, 95–113 (2021).
+79. Shkoporov, A. N., Turkington, C. J. & Hill, C. Mutualistic interplay
+between bacteriophages and bacteria in the human gut. Nat. Rev.
+Microbiol. 20, 737–749 (2022).
+80. Johnke, J., Fraune, S., Bosch, ThomasC. G., Hentschel, U. &
+Schulenburg, H. Bdellovibrio and like organisms are predictors
+of microbiome diversity in distinct host groups. Microb. Ecol. 79,
+252–257 (2019).
+81. VORBURGER, C. & GOUSKOV, A. Only helpful when required: a
+longevity cost of harbouring defensive symbionts. J. Evolut. Biol.
+24, 1611–1617 (2011).
+82. Drew, G. C., Stevens, E. J. & King, K. C. Microbial evolution and
+transitions along the parasite–mutualist continuum. Nat. Rev.
+Microbiol. 19, 623–638 (2021).
+83. Couret, J., Huynh-Griffin, L., Antolic-Soban, I., Acevedo-Gonzalez,
+TarikSalam & Gerardo, N. M. Even obligate symbioses show signs
+of ecological contingency: impacts of symbiosis for an invasive
+stinkbug are mediated by host plant context. Ecol. Evol. 9,
+9087–9099 (2019).
+84. Griem-Krey, H., Petersen, C., Hamerich, I. K. & Schulenburg, H.
+The intricate triangular interaction between protective microbe,
+pathogen and host determines fitness of the metaorganism. Proc.
+R. Soc. B 290, 20232193 (2023).
+85. Gillespie, J. H. Natural selection with varying selection
+coefficients—a haploid model. Genet. Res. 21, 115–120 (1973).
+86. Daybog, I. & Kolodny, O. Simplified model assumptions artificially
+constrain the parameter range in which selection at the holobiont
+level can occur. Proc. Natl Acad. Sci. USA 117, 11862–11863
+(2020).
+87. Henriques, G. J. B., van Vliet, S. & Doebeli, M. Multilevel
+selection favors fragmentation modes that maintain cooperative
+interactions in multispecies communities. PLoS Comput. Biol. 17,
+e1008896 (2021).
+88. Doekes, H. M. & Hermsen, R. Multiscale selection in spatially
+structured populations. Proc. R. Soc. B 291, 20232559 (2024).
+89. Kimura, M. & Crow, J. F. The number of alleles that can be
+maintained in a finite population. Genetics 49, 725–738 (1964).
+90. Lynch, M. Mutation pressure, drift, and the pace of molecular
+coevolution. Proc. Natl Acad. Sci USA 120, e2306741120 (2023).
+91. Gavrilets, S. & Scheiner, S. M. The genetics of phenotypic
+plasticity. V. Evolution of reaction norm shape. J. Evolut. Biol. 6,
+31–48 (1993).
+Nature Ecology & Evolution | Volume 9 | October 2025 | 1769–1780
+
+https://doi.org/10.1038/s41559-025-02846-w
+92. Gomulkiewicz, R. & Kirkpatrick, M. Quantitative genetics and the
+evolution of reaction norms. Evolution 46, 390–411 (1992).
+93. Lande, R. Adaptation to an extraordinary environment by
+evolution of phenotypic plasticity and genetic assimilation. J.
+Evolut. Biol. 22, 1435–1446 (2009).
+94. Via, S. & Lande, R. Genotype–environment interaction and the
+evolution of phenotypic plasticity. Evolution 39, 505–522 (1985).
+95. Gomulkiewicz, R. & Stinchcombe, J. R. Phenotypic plasticity
+made simple, but not too simple. Am. J. Bot. 109, 1519 (2022).
+96. Kolodny, O. & Schulenburg, H. Microbiome-mediated plasticity
+directs host evolution along several distinct time scales. Philos.
+Trans. R. Soc. B 375, 20190589 (2020).
+97. Koskella, B., Hall, L. J. & Metcalf, C. JessicaE. The microbiome
+beyond the horizon of ecological and evolutionary theory. Nat.
+Ecol. Evol. 1, 1606–1615 (2017).
+98. Dirksen, P. et al. CeMbio—the Caenorhabditis elegans microbiome
+resource. G3 10, 3025–3039 (2020).
+99. Stagaman, K., Sharpton, T. J. & Guillemin, K. Zebrafish
+microbiome studies make waves. Lab Anim. 49, 201–207 (2020).
+100. Visick, K. L., Stabb, E. V. & Ruby, E. G. A lasting symbiosis: how
+vibrio fischeri finds a squid partner and persists within its natural
+host. Nat. Rev. Microbiol. 19, 654–665 (2021).
+101. Mirchandani, C. et al. Mixed Wolbachia infections resolve rapidly
+during in vitro evolution. PLoS Pathog. 20, e1012149 (2024).
+102. Koga, R., Meng, X.-Y., Tsuchida, T. & Fukatsu, T. Cellular
+mechanism for selective vertical transmission of an obligate
+insect symbiont at the bacteriocyte–embryo interface. Proc. Natl
+Acad. Sci. USA 109, E1230-7 (2012).
+103. Sauer, C., Dudaczek, D., Hölldobler, B. & Gross, R. Tissue
+localization of the endosymbiotic bacterium ‘Candidatus
+Blochmannia floridanus’ in adults and larvae of the carpenter ant
+Camponotus floridanus. Appl. Environ. Microbiol. 68, 4187–4193
+(2002).
+104. Björk, J. R., Díez-Vives, C., Astudillo-García, C., Archie, E. A. &
+Montoya, J. M. Vertical transmission of sponge microbiota is
+inconsistent and unfaithful. Nat. Ecol. Evol. 3, 1172–1183 (2019).
+105. Roughgarden, J., Gilbert, S. F., Rosenberg, E., Zilber-Rosenberg, I.
+& Lloyd, E. A. Holobionts as units of selection and a model of their
+population dynamics and evolution. Biol. Theory 13, 44–65 (2017).
+106. Fukatsu, T. & Hosokawa, T. Capsule-transmitted gut symbiotic
+bacterium of the Japanese common plataspid stinkbug,
+Megacopta punctatissima. Appl. Environ. Microbiol. 68, 389–396
+(2002).
+107. Dominguez-Bello, M. G. et al. Delivery mode shapes the
+acquisition and structure of the initial microbiota across multiple
+body habitats in newborns. Proc. Natl Acad. Sci. USA 107,
+11971–11975 (2010).
+108. Degans, H., Zöllner, E., Gucht, K., Meester, L. & Jürgens, K. Rapid
+Daphnia-mediated changes in microbial community structure: an
+experimental study. FEMS Microbiol. Ecol. 42, 137–149 (2002).
+109. Weinstein, S. B. et al. Microbiome stability and structure is
+governed by host phylogeny over diet and geography in woodrats
+(Neotoma spp.). Proc. Natl Acad. Sci. USA 118, e2108787118 (2021).
+110. Nyholm, S. V. & McFall-Ngai, M. The winnowing: establishing the
+squid-vibrio symbiosis. Nat. Rev. Microbiol. 2, 632–642 (2004).
+111. Kikuchi, Y., Hosokawa, T. & Fukatsu, T. Insect–microbe mutualism
+without vertical transmission: a stinkbug acquires a beneficial gut
+symbiont from the environment every generation. Appl. Environ.
+Microbiol. 73, 4308–4316 (2007).
+112. Zhou, P. et al. Perinatal antibiotic exposure affects the
+transmission between maternal and neonatal microbiota and is
+associated with early-onset sepsis. mSphere 5, e00984-19 (2020).
+113. Xu, Y. et al. Antibiotic exposure prevents acquisition of beneficial
+metabolic functions in the preterm infant gut microbiome.
+Microbiome 10, 103 (2022).
+1779
+
+Perspective
+114. Zhu, J. et al. Shaping oral and intestinal microbiota and the
+immune system during the first 1, 000 days of life. Front. Pediatr.
+13, 1471743 (2025).
+115. Heidrich, V., Valles-Colomer, M. & Segata, N. Human microbiome
+acquisition and transmission. Nat. Rev. Microbiol. 23, 568–584
+(2025).
+116. Selma-Royo, M. et al. Birthmode and environment-dependent
+microbiota transmission dynamics are complemented by
+breastfeeding during the first year. Cell Host Microbe 32,
+996–1010.e4 (2024).
+117. Morris, A. H. & Bohannan, B. J. M. Estimates of microbiome
+heritability across hosts. Nat. Microbiol. 9, 3110–3119 (2024).
+118. Tkaczyk, A., Bownik, A., Dudka, J., Kowal, K. & Ślaska, B. Daphnia
+magna model in the toxicity assessment of pharmaceuticals: a
+review. Sci. Total Environ. 763, 143038 (2021).
+119. Ebert, D. Ecology, Epidemiology, and Evolution of Parasitism in
+Daphnia (National Library of Medicine, 2005).
+120. Ebert, D. Daphnia as a versatile model system in ecology and
+evolution. EvoDevo 13, 16 (2022).
+121. Akbar, S. et al. Understanding host–microbiome–environment
+interactions: insights from Daphnia as a model organism. Sci.
+Total Environ. 808, 152093 (2022).
+122. Freese, H. M. & Schink, B. Composition and stability of the
+microbial community inside the digestive tract of the aquatic
+crustacean Daphnia magna. Microb. Ecol. 62, 882–894 (2011).
+123. Frankel-Bricker, J., Song, M. J., Benner, M. J. & Schaack, S.
+Variation in the microbiota associated with daphnia magna across
+genotypes, populations, and temperature. Microb. Ecol. 79,
+731–742 (2019).
+124. Sison-Mangus, M. P., Metzger, C. M. J. A. & Ebert, D. Host
+genotype-specific microbiota do not influence the susceptibility
+of D. magna to a bacterial pathogen. Sci. Rep. 8, 9407 (2018).
+125. Gurung, A., Mukherjee, S., Declercq, M., Souffreau, C. & De
+Meester, L. Strain-dependent and host genotype-dependent
+priority effects in gut microbiome assembly affect host fitness in
+Daphnia. Limnol. Oceanogr. 69, 1782–1796 (2024).
+126. Sison-Mangus, M. P., Mushegian, A. A. & Ebert, D. Water fleas
+require microbiota for survival, growth and reproduction. ISME J.
+9, 59–67 (2014).
+127. Macke, E., Callens, M., De Meester, L. & Decaestecker, E.
+Host-genotype dependent gut microbiota drives zooplankton
+tolerance to toxic cyanobacteria. Nat. Commun. 8, 1608 (2017).
+128. Liu, Q. et al. Fish predation risk alters the microbiota of daphnia in
+the process of inducing its life-history defence traits. Freshw. Biol.
+69, 591–605 (2024).
+129. Callens, M., Watanabe, H., Kato, Y., Miura, J. & Decaestecker, E.
+Microbiota inoculum composition affects holobiont assembly and
+host growth in Daphnia. Microbiome 6, 56 (2018).
+130. Mushegian, A. A., Walser, Jean-Claude, Sullam, K. E. & Ebert, D.
+The microbiota of diapause: how host–microbe associations are
+formed after dormancy in an aquatic crustacean. J. Anim. Ecol. 87,
+400–413 (2017).
+
+Nature Ecology & Evolution | Volume 9 | October 2025 | 1769–1780
+
+https://doi.org/10.1038/s41559-025-02846-w
+131. Houwenhuyse, S., Stoks, R., Mukherjee, S. & Decaestecker, E.
+Locally adapted gut microbiomes mediate host stress tolerance.
+ISME J. 15, 2401–2414 (2021).
+
+Acknowledgements
+
+This paper was initiated at the 2023 Symbiosis Theory Workshop. We
+thank the Gordon and Betty Moore Foundation for their support of
+this workshop, and to the workshop participants for their stimulating
+discussion. M.B. is supported by NWO Veni grant VI.Veni.222.344.
+B.W. and B.J.M.B. are supported by a grant from the Gordon and
+Betty Moore Foundation (https://doi.org/10.37807/GBMF10001). B.W.
+is further funded through KiTE (that is, Kiel Training for Excellence),
+which is part of the European Union’s Horizon Europe research
+and innovation programme under the Marie Sklodowska-Curie
+grant agreement number 101081480. B.J.M.B. is grateful for the
+support of the NIH (P01GM125576). B.J.M.B. and H.S. are grateful for
+financial support from the German Science Foundation within the
+collaborative research centre CRC 1182 on the Origin and Function of
+Metaorganisms (Mercator fellowship to B.J.M.B.; projects A1.1 and A4.3
+to H.S.). H.S. further thanks the Max-Planck Society for a Max-Planck
+fellowship. S.L.R. thanks the NIH (R00GM135583) for financial support.
+
+Author contributions
+
+B.W., S.L.R., H.S., B.J.M.B. and M.B. conceived the ideas. B.W.
+developed the methodology. M.B. created the visualizations.
+B.W., S.L.R. and M.B. wrote the first draft of the paper. All authors
+contributed substantially to revisions.
+
+Competing interests
+
+The authors declare no competing interests.
+
+Additional information
+
+Correspondence should be addressed to Marjolein Bruijning.
+Peer review information Nature Ecology & Evolution thanks Richard
+Fuller and the other, anonymous, reviewer(s) for their contribution to
+the peer review of this work.
+Reprints and permissions information is available at
+www.nature.com/reprints.
+Publisher’s note Springer Nature remains neutral with regard
+to jurisdictional claims in published maps and institutional
+affiliations.
+Springer Nature or its licensor (e.g. a society or other partner) holds
+exclusive rights to this article under a publishing agreement with
+the author(s) or other rightsholder(s); author self-archiving of the
+accepted manuscript version of this article is solely governed by the
+terms of such publishing agreement and applicable law.
+© Springer Nature Limited 2025
+
+1780
+
+

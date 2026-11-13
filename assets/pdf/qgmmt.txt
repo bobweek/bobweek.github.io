@@ -1,0 +1,1791 @@
+Evolution, 2025, 79(11), 2487–2502
+https://doi.org/10.1093/evolut/qpaf171
+Advance access publication 29 August 2025
+Original Article
+
+Quantitative genetics of microbiome-mediated traits
+Bob Week 1 ,2 ,3 , Peter L. Ralph
+Brendan J.M. Bohannan1
+
+1
+
+, Hannah F. Tavalire1 ,4 , William A. Cresko1 ,5 ,
+
+1
+
+Corresponding author: Institute of Ecology and Evolution, University of Oregon, Eugene, United States. Email: bweek.ecoevo@proton.me
+Present address: B.W. is now at the Zoological Institute, Kiel University Am Botanischen Garten 9 24118 Kiel, Germany.
+
+Abstract
+Multicellular organisms host a rich assemblage of associated microorganisms, collectively known as their “microbiomes.” Microbiomes have the
+capacity to influence their hosts’ fitnesses, but the conditions under which such influences contribute to evolution are not clear. This is due in part
+to a lack of a comprehensive theoretical framework for describing the combined effects of host and associated microbes on phenotypic variation.
+Here, we address this gap by extending the foundations of quantitative genetic theory to include host-associated microbes, as well as alleles
+of hosts, as factors that explain quantitative host trait variation. We introduce a way to partition host-associated microbiomes into components
+relevant for predicting a microbiome-mediated response to selection. We then apply our general framework to a simulation model of microbiome
+inheritance to illustrate principles for predicting host trait dynamics, and to generalize classical narrow- and broad-sense heritabilities to account
+for microbial effects. We demonstrate that microbiome-mediated responses to host-level selection can arise from various transmission modes,
+not solely vertical, but that the contribution of non-vertical modes can depend strongly on host life history. Our work lays a foundation for
+integrating microbiome-mediated host variation and adaptation into our understanding of natural variation.
+Keywords: host–microbiome, heritability, genetics, transmission, genomics
+
+Introduction
+Overview
+Nearly every lineage of multicellular organisms has a complex assemblage of associated microorganisms. This “microbiome” can contribute important physiological and developmental functions to their hosts (Burns et al., 2017;
+Goodrich et al., 2016; McFall-Ngai, 2007; Spor et al., 2011).
+Indeed, evidence that microbiomes play a vital role in shaping host fitness across a broad range of taxa is rapidly
+emerging (Argaw-Denboba et al., 2024; Gould et al., 2018;
+Houwenhuyse et al., 2021; O’Brien et al., 2023; Petersen
+et al., 2023; Rosshart et al., 2017). Although recent work
+has greatly expanded our understanding of the dynamics and
+function of host-associated microbiomes (Bruijning et al.,
+2021; Rosenberg & Zilber-Rosenberg, 2018; Roughgarden,
+2023; Sandoval-Motta et al., 2017a; Theis, 2018), it is
+still unclear the extent to which microbiomes contribute to
+host evolution, and how such contributions depend on the
+mode of microbial transmission (Russell, 2019; Wendling
+& Wegner, 2015; Zilber-Rosenberg & Rosenberg, 2008).
+This knowledge gap is due in part to the lack of a comprehensive theoretical framework for modeling how host–
+microbiome system-level traits emerge from the interactions
+of host genes, microbiome, and environment (Martiny et al.,
+2015; Roughgarden et al., 2017; Theis, 2018; van Vliet &
+Doebeli, 2019; Zilber-Rosenberg & Rosenberg, 2008).
+
+Recently, there have been calls to develop such a theoretical framework by incorporating microbiomes into quantitative genetics (Awany & Chimusa, 2020; Benson et al., 2010;
+Henry et al., 2021; Mueller & Linksvayer, 2022; Wang et al.,
+2018), a rich mathematical theory that models the inheritance and evolution of complex traits (Lynch & Walsh,
+1998; Mackay et al., 2009; Rice, 2004; Walsh & Lynch,
+2018). While microbiomes have sometimes been treated as
+traits influenced by host genetics (Camarinha-Silva et al.,
+2017; Knights et al., 2014; Opstal & Bordenstein, 2015),
+they have only recently been considered as inherited contributors to variation of emergent host–microbiome phenotypes (Org et al., 2015; Sandoval-Motta et al., 2017a). This
+shift has encouraged the use of microbiome-wide association studies (MWAS) by analogy to genome-wide association studies (GWAS) (Camarinha-Silva et al., 2017; Difford
+et al., 2018; Pérez-Enciso et al., 2021; Qin et al., 2012).
+However, caution is warranted: microbiomes are dynamic
+ecological assemblages obeying different rules of inheritance
+than genomes, and so uncritical application of methods designed for GWAS may produce misleading results. Microbiomes are especially challenging to incorporate into quantitative genetics because their inheritance is not Mendelian,
+and microbes need not be vertically transmitted (Bruijning
+et al., 2021; Roughgarden, 2023; Uller & Helanterä, 2013;
+van Vliet & Doebeli, 2019). Taken together, a careful extension of quantitative genetics is needed that accounts for the
+
+Received January 1, 2025; revisions received July 28, 2025; accepted August 10, 2025
+Associate Editor: Katrina McGuigan; Handling Editor: Jason Wolf
+© The Author(s) 2025. Published by Oxford University Press on behalf of The Society for the Study of Evolution (SSE).
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (https://creativecommons.org/licenses/by/4.0/),
+which permits unrestricted reuse, distribution, and reproduction in any medium, provided the original work is properly cited.
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+Institute of Ecology and Evolution, University of Oregon, Eugene, United States
+Zoological Institute, Kiel University, Kiel, Germany
+3
+Department of Theoretical Biology, Max-Planck Institute for Evolutionary Biology, Plön, Germany
+4
+Advocate Aurora Research Institute, Advocate Health, Milwaukee, United States
+5
+Knight Campus for Accelerating Scientific Impact, University of Oregon, Eugene, United States
+2
+
+2488
+
+together, these limitations point to the need for a framework
+that quantifies microbiome-mediated trait variance and links
+it to host–microbe ancestry relationships that underlie patterns of microbial inheritance.
+In this study, we aim to complement prior work by (i)
+formally partitioning host trait variance into components
+attributable to host genetics and the microbiome, extending the classical approach of Fisher (1918); (ii) introducing
+retrospective, microbe-centered criteria to classify microbes
+based on concordance of their ancestry with host ancestry,
+complementing the inheritance concepts of Roughgarden
+(2023); and (iii) combining these tools to further decompose the microbiome component of host trait variance and
+to derive novel quantitative predictions for the response of
+microbiome-mediated traits to host-level selection. By categorizing microbes based on patterns of shared ancestry,
+our framework is independent of specific mechanistic assumptions on the modes of microbiome transmission. Given
+that patterns of microbe-–host ancestral concordance are
+potentially measurable, this provides a unique approach to
+predict microbiome-mediated host adaptation without detailed knowledge of the underlying transmission mechanism.
+Additionally, our framework is flexible with respect to input data, accommodating coarse indices of microbial taxon
+presence/absence or relative abundances to fine-scale microbial single nucleotide polymorphisms (SNPs). Our variance
+decomposition naturally generalizes additive genetic variance, separating contributions from host genetics, distinct
+microbiome components, and their covariances. Using simulations, we explore the conditions under which different
+components of the microbiome are expected to mediate a
+response to selection, and propose extensions of narrowand broad-sense heritabilities that quantify microbiomemediated contributions to host-level evolutionary change.
+The remainder of the paper proceeds as follows. We begin
+by reviewing foundational principles from quantitative genetics, which ground our theoretical development. We then
+introduce our framework for partitioning host trait variance
+and classifying microbial ancestry, followed by simulations
+that explore the conditions under which different components of the microbiome are expected to mediate a response
+to selection. Finally, we extend classical heritability concepts
+by defining microbially informed analogues of narrow- and
+broad-sense heritability, and introduce associated transmissibility indices that quantify the evolutionary impact of distinct microbial components.
+
+Quantitative genetic foundational principles
+Quantitative genetics developed in the late 19th century
+through the development of statistical models to describe
+how continuous phenotypic variation depended on heritable and environmental components and to predict the phenotypic response to selection (Walsh & Lynch, 2018). Even
+after the rediscovery of Mendel’s laws in 1904, debate continued as to how continuous variation could emerge from
+discrete genes (Provine, 2001). R.A. Fisher settled the issue
+in a foundational paper (Fisher, 1918), showing that distributions of continuous phenotypes arise when alleles at multiple loci are considered. Following this, Fisher then introduced the concepts of average excess and average effect of
+allele substitutions in order to associate an additive quantity with each allele that best predicts the response to se-
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+fundamental differences between host genetic and microbial
+sources of variation. Such an extension will allow theoretical
+investigations into how different modes of microbial transmission influence the evolution of host and microbial joint
+phenotypes, and will help clarify the degree to which these
+processes can affect long-term evolutionary trajectories.
+Another body of theoretical work that considers hostassociated microbiomes is the broad framework of inclusive inheritance (Bonduriansky & Day, 2009; Danchin et al.,
+2011; David & Ricard, 2019; Day & Bonduriansky, 2011;
+Helanterä & Uller, 2010; Uller & Helanterä, 2013). In this
+view, direct parent–offspring microbiome transmission can
+be treated as a maternal effect (Kirkpatrick & Lande, 1989),
+social transmission as an indirect genetic effect (Bijma et al.,
+2007; Moore et al., 1997), and environmental acquisition
+as a form of ecological inheritance (Odling-Smee et al.,
+2013). These perspectives have been explored in recent work
+(Week et al., 2025), which emphasizes that while each captures important aspects of microbiome-mediated evolution,
+none provides a complete account of microbiome inheritance dynamics. The unified framework introduced by Day
+and Bonduriansky (2011) offers a powerful theoretical foundation for integrating multiple inheritance modes into a
+single process-based model. However, this approach relies
+on explicit assumptions about transmission mechanisms, fidelity, and mutability parameters that remain poorly characterized or system-specific in many microbiome contexts,
+limiting its usefulness as a general foundation for studying
+host–microbiome evolution. This underscores the need for
+statistical frameworks that characterize patterns of microbiome inheritance, quantify their contribution to host trait
+variation, and predict microbiome-mediated responses to selection without presupposing detailed transmission rules.
+Previous theoretical work focusing on host–microbiome
+evolution has yielded valuable insights, yet important gaps
+remain in our understanding of how such interactions contribute to complex host phenotypes and adaptation. For instance, Henry et al. (2021) emphasize that host trait variance can, in principle, be partitioned into components attributable to host genetics and the host-associated microbiome. However, this partitioning has not been formally defined, nor are quantitative predictions provided. At the other
+end of the spectrum, Zeng et al. (2017) introduce a mechanistic metacommunity model that integrates microbiome
+dynamics with host evolution. While this work offers valuable insights into the ecological foundations of microbiome
+inheritance, it focuses on host fitness rather than arbitrary
+traits, assumes all host variance arises from the microbiome,
+and considers only direct parent–offspring and environmental transmission. Roughgarden (2023) has proposed a general conceptual framework for microbiome inheritance, introducing the notions of lineal and collective inheritance.
+Lineal inheritance maintains correlations between parents
+and offspring at the individual level (e.g., via direct or intimate neighborhood transmission), whereas collective inheritance maintains correlations between generations at the population level (e.g., via social or indirect environmental transmission). However, this framework adopts a population genetic perspective and does not provide a means to partition
+host trait variation, and linking patterns of host–microbe
+ancestral overlap to the microbiome-mediated component
+of host trait variance is essential for predicting microbiomemediated responses to selection on host populations. Taken
+
+Week et al.
+
+2489
+
+Evolution (2025), Vol. 79, No. 11
+Table 1. Summary of key notation.
+
+Meaning
+
+Symbol
+
+Meaning
+
+g
+
+Host genotype
+
+z̄
+
+m
+zgm
+
+β
+h2
+
+δgm
+
+Host microbiome
+Genotypic–microbic value of
+(g, m )
+Average excess of zgm
+
+γg
+
+Additive effect of g on δgm
+
+t2
+
+γi
+
+Additive effect of locus i
+
+H2
+
+ωm
+
+Additive effect of m
+
+B2
+
+ωj
+
+Additive effect of taxa j
+
+T2
+
+GA
+MA
+
+Additive genetic variance
+Additive microbial variance
+
+ML
+MN
+
+CA
+
+Additive gene–microbe
+covariance
+Selective microbial variance
+
+MV
+
+Response to selection in host
+mean trait
+Selection gradient
+Narrow-sense genetic
+heritability
+Narrow-sense microbial
+transmissibility
+Narrow-sense total
+transmissibility
+Broad-sense genetic
+heritability
+Broad-sense microbial
+transmissibility
+Broad-sense total
+transmissibility
+Lineal microbial variance
+Non-lineal microbial
+variance
+Novel microbial variance
+
+MψA
+
+lection (Bürger, 2000; Fisher, 1941). This general approach
+follows the widely used theory of multivariate linear models, a perspective we use in extending the theory to account
+for microbial factors. Because these concepts are at the core
+of theoretical quantitative genetics, we summarize the basic
+principles here.
+For a given host genotype g, write zg as the host trait associated with g averaged over all other trait-mediating factors (including environmental factors and host microbiome
+composition). The quantity zg is referred to as a genotypic
+value. Then, writing pg for the frequency at which host
+genotype g occurs in the population, we have that z̄ = g pgzg
+is the average of zg over all host genotypes (equivalent to
+the population mean trait since all other factors have already been averaged over), and the quantity δg = zg − z̄ is
+the average excess associated with host genotype g. Fisher
+decomposed the average excess into an additive effect αg (defined to be the sum of additive effects associated with each
+allele in host genotype g) and a residual deviation ρg such
+that δg = αg + ρg.
+The definition of genotypic values implies the total host
+phenotypic 
+variation P can be decomposed as P = G + E,
+where G = g pg (zg − z̄ )2 is the variance of genotypic values across the population (called the genetic variance). Although E is often referred to as the environmental variance, it is more precisely defined as E = P − G, the remaining variance left unexplained by genotypic values. 
+Furthermore, defining the additive genetic variance GA = g pgαg2
+
+and residual variance GR = g pgρg2 , and defining the additive effects αg to be chosen to minimize GR (subject to
+the additivity constraint); with this choice the genetic variance decomposes as G = GA + GR (Bürger, 2000). Although
+(Fisher, 1918) assumed Hardy–Weinberg equilibrium, which
+allowed derivation of more specific results, the overall approach only depends on the identification of the genotypic
+values zg.
+This definition of GA turns out to be useful for accurately predicting the response of a trait to selection. For
+
+b2
+
+CAψ
+
+Selective gene–microbe
+covariance
+
+instance, GA is more useful than G in predicting the response to selection because parents transmit alleles, not entire genotypes. In particular, the classical breeders equation
+takes the form z̄ = GA β, where z̄ = z̄ − z̄ is the difference between offspring mean trait z̄ and parent mean trait z̄,
+and β = Cov(w, z )/P is the correlation coefficient of fitness
+(w) with phenotype (Lande, 1976).
+These definitions are also used to define heritability of a
+trait as a measure of parent–offspring resemblance. In particular, the quantities h2 = GA /P and H 2 = G/P are referred
+to as the narrow- and broad-sense heritabilities, respectively
+(reviewed by Visscher et al., 2008). With this notation, we
+note that the breeders equation was initially introduced by
+Lush (1937) in the form R = h2 S, where R = z̄ is the response to selection and S is the selection differential (see
+Walsh & Lynch, 2018). Key notation used throughout our
+paper is summarized in Table 1.
+In what follows we build on these foundations to incorporate the effects of host-associated microbiomes. By generalizing the above approach, we naturally arrive at a generalization of additive genetic variance, the breeders equation, and
+narrow-sense and broad-sense heritabilities for microbiomemediated traits. Before we introduce our framework, we
+discuss some initial assumptions for incorporating microbiomes in the following section.
+
+Perspectives on incorporating microbes into host
+evolution
+By building on quantitative genetics theory, we are admittedly using a very host-centric framework that leads to several constraining assumptions. In particular, we focus on a
+single trait that is an emergent property of the host–microbe
+system, such as the ability of the host to acquire energy from
+food that first must be processed by components of the host
+gut microbiome. For example, termites and their associated
+gut microbiomes together can process high amounts of cellulose to acquire energy (Ali et al., 2019; Arora et al., 2022;
+Maurice & Erdei, 2018).
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+Symbol
+
+2490
+
+Materials and methods
+Analysis of variance of microbiome-mediated traits
+The partitioning of variance reviewed in the Quantitative
+genetic foundational principles section is not restricted to
+genetic material, but can be applied to any collection of
+trait-mediating factors (e.g., soil salinity, local rainfall, temperature, oxygen concentration, and pH). In particular, for
+a microbiome-mediated host trait, relevant factors include
+the host genotype g and host microbiome m. The overall
+approach is sufficiently general to accommodate any summary of host genotype and host microbiome, such as presence/absence of microbial taxa and microbial SNPs obtained
+from 16s data or shotgun metagenomes. However, for the
+sake of clarity, we describe our framework focusing on host
+allele counts and relative abundances of microbe taxa.
+We consider diploid host populations with L biallelic
+loci. We denote by gi ∈ {0, 1, 2} the number of alleles at locus i ∈ {1, . . . , L} (the choice of allele counted is arbitrary).
+Turning to the host microbiome, we assume microbiomes
+may be summarized by the relative abundances of S microbial taxa (relative to the total microbiome abundance),
+with m j being the relative abundance of microbe taxon
+j ∈ {1, . . . , S}. Vectors of allele counts and relative microbial
+abundances are, respectively, written as g = (g1 , . . . , gL )†
+and m = (m1 , . . . , mS )† , where † denotes matrix transposition.
+We write zgm as the expected trait value for hosts carrying the genotype–microbiome pair (g, m ) averaged across
+all other trait-mediating factors, and refer to zgm as the
+genotypic–microbic value of (g, m ). Additionally, we write
+z̄ as the mean genotypic–microbic
+value across all hosts in
+
+the population so that z̄ = gm pgm zgm , where pgm is the
+frequency of hosts carrying the genotype–microbiome pair
+(g, m ) and the sum is taken over all possible combinations
+of (g, m ). By definition, z̄ is also the mean trait of the host
+population.
+The average excess of the pair (g, m ) is then δgm = zgm − z̄,
+and we consider the decomposition δgm = αgm + ρgm , where
+αgm is an additive component that decomposes into additive genetic and additive microbial effects of the pair (g, m )
+on δgm , and ρgm is the residual deviation. In particular, following Fisher’s general approach, we assume αgm = γg + ωm ,
+where γg is the additive genetic effect and ωm is the additive
+microbial effect on the average excess δgm .
+Finally, using our assumptions for summarizing host
+genotype and host microbiome, the definition of additive effects implies that they can be written as
+γg = γ0 +
+
+L
+
+i=1
+
+γi g i ,
+
+ωm = ω0 +
+
+S
+
+
+ω jm j,
+
+(1)
+
+j=1
+
+where γi is the per count additive allelic effect of locus
+i ∈ {1, . . . , L} on δgm and ω j is the additive effect of the relative abundance of taxon j ∈ {1, . . . , S} on δgm . To be clear,
+γg is distinguished from γi because g is a vector and i is an
+integer. A similar distinction holds for ωm and ωi . Lastly, the
+sum α0 = γ0 + ω0 acts as an intercept for the linear model,
+and the components γ0 and ω0 will be determined by our
+decomposition of PA below.
+Following the general scheme outlined in the Quantitative
+genetic foundational principles section, we can write the additive component of host trait variation explained by host
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+We also consider contributions from both host genes
+and individual microbes to this trait as potentially heritable
+units, meaning that they can be transmitted from a donor
+to a recipient, and influence the value of the emergent phenotype. Traditional quantitative genetics defines the donor
+and recipients solely as parents and offspring through the
+transmission of alleles. In sexually reproducing diploid populations, the process of gametogenesis and syngamy leads to
+Mendelian segregation.
+In contrast, microbes can be transmitted among hosts
+in a variety of ways. In particular, a microbial parent
+(donor) and microbial offspring (recipient) may not be genetically related. Additionally, unlike the transmission of
+alleles via sexual reproduction, microbial recipients can
+have more than two donors, depending on the microbial taxa considered and mode of transmission. In some
+cases, the donor and receiver of transmitted host genetic
+and microbial units will be the same, which has been described as lineal transmission (Roughgarden, 2023) and copropagation (Mueller & Linksvayer, 2022). In these cases,
+narrow-sense heritability of microbiome-mediated traits
+may be confounded by microbiome inheritance, possibly
+inflating estimates of heritability based on pedigree compared to estimates based on SNPs (Sandoval-Motta et al.,
+2017b).
+We must also take into account that microbiome composition is governed by community assembly and not Mendelian
+processes, and microbial abundances can vary dynamically
+throughout the life of the host. These have been termed
+the fidelity of transmission and persistence fidelity of microbes (Mueller & Linksvayer, 2022), with the idea that
+microbe persistence is often less than that of an allele.
+Based on this consideration, one possible path forward is
+to study models of metacommunity dynamics as the basis of microbiome inheritance and fidelity from the lens of
+an extended framework of quantitative genetics (Koskella
+et al., 2017; Leibold et al., 2004; Miller et al., 2018; Zeng
+et al., 2017). Here, we focus on beginning this extension
+of quantitative genetics. Analysis of metacommunity models of microbiome inheritance using this framework is outside the scope of this paper, but it is likely microbiome dynamics will alter indices of microbiome-mediated host trait
+inheritance.
+Several authors have recently attempted to extend heritability to include microbial contributions, and have proposed novel terminology such as microbiability and holobiontability. However, we follow the convention established
+by Rothschild et al. (2018) and clarified by Mueller and
+Linksvayer (2022), who use H 2 and h2 for broad- and
+narrow-sense genetic heritability, and B2 and b2 for what
+they term microbiome heritability. To avoid conflating genetic and microbial sources of variation, we refer to the latter
+as microbial “transmissibility.” As Mueller and Linksvayer
+(2022) make clear, B2 and b2 refer to microbial contributions to the emergent host phenotype, not to be confused
+with the genetic heritability of microbiomes as host traits in
+and of themselves (Morris & Bohannan, 2024). Here, we
+propose a more precise usage of this terminology to refer
+specifically to the proportion of host trait variance mediated
+by the component of host microbiome that is both transmitted across host generations and in some cases mediates a response to host-level selection (see section titled Heritabilities
+and transmissibilities).
+
+Week et al.
+
+2491
+
+Evolution (2025), Vol. 79, No. 11
+
+
+2
+genetic and host microbiome factors as PA = gm pgm αgm
+.
+The definition of PA is formalized by 
+solving the least2
+squares problem of minimizing PR = gm pgm ρgm
+with
+respect to α0 , γ1 , . . . , γL , ω1 , . . . , ωS , where ρgm = δgm −
+αgm . In Supplementary Section 1, we show that setting Cov(zgm , g) to the vector with ith entry Cov(zgm , gi ),
+Cov(zgm , m ) to the vector with jth entry Cov(zgm , m j ), to
+the matrix with i jth entry Cov(gi , g j ), to the matrix with
+i jth entry Cov(mi , m j ), and to the matrix with i jth entry
+Cov(gi , m j ), the least-squares problem reduces to solving the
+linear system
+γ+
+
+ω,
+
+Cov(zgm , m ) =
+
+†
+
+γ+
+
+ω
+(2)
+
+for γ = (γ1 , . . . , γL )† and ω = (ω1 , . . . , ωS )† , where † denotes
+matrix transposition. The solution is then given by
+α=
+
+−1
+
+Cov(zgm , f )
+
+(3)
+†
+
+with
+α = (γ1 , . . . , γL , ω1 , . . . , ωS ) ,
+
+(g1 , . . . , gL , m1 , . . . , mS )† , α0 = − i αi f¯i ,
+the vector with ith entry Cov(zgm , fi ), and
+matrix
+
+
+.
+=
+†
+
+f =
+Cov(zgm , f )
+the block
+(4)
+
+Similar to the case for additive genetic effects reviewed in
+the Quantitative genetic foundational principles section, this
+solution is unique so long as has an inverse. This means
+that if the allele counts at any pair of loci, or if the relative
+abundances of any pair of microbes, or if an abundance of
+a microbe and an allele count of a locus perfectly correlate,
+the solution is no longer unique.
+Since we have centered the trait (the average of δg is
+zero), itturns out
+that with α0 , γ , and ω as above, that
+α0 = − i γi ḡi − i ωi m̄i , where ḡi is the average number of
+alleles at locus i (which is twice the allele frequency due to
+host genotypes being diploid) and m̄i is the average relative
+abundance
+ of microbe taxon
+i. Then, it is convenient to set
+γ0 = − i γi ḡi and ω0 = − i ωi m̄i . With these choices for
+γ0 and ω0 , the additive components of host trait variance can
+be expressed in terms of allele counts and relative microbe
+abundances as
+GA =
+MA =
+
+L
+
+
+γi2 Var(gi ) + 2
+
+L
+−1
+ i
+
+i=1
+
+i=1 j=1
+
+S
+
+
+S 
+i−1
+
+
+ωi2 Var(mi ) + 2
+
+i=1
+
+CA = 2
+
+γi γ j Cov(gi , g j ),
+
+A model of gene–microbe interactions
+The approach to analysis of variance above establishes a statistical model. We can then apply this model either to empirical or simulated data. As a demonstration, we examine what
+the statistical model tells us when applied to a mechanistic
+model involving pairwise interactions between host loci and
+microbial taxa. Considering zgm = ϕ(g, m ) as a function of
+the genotype–microbiome pair (g, m ), we analyze the model
+zgm = z̊0 +
+
+S
+
+
+ω̊ j m j +
+
+L 
+S
+
+
+χ̊i j gi m j ,
+
+(6)
+
+i=1 j=1
+
+j=1
+
+where z̊0 , γ̊i , ω̊ j , χ̊i j are the mechanistic model parameters,
+and γ̊i , ω̊ j are not necessarily equivalent to the additive effects γi , ω j as we now show.
+Using the approach outlined in the previous section, the
+additive genetic and microbial effects from model (6) depend
+on Cov(zgm , gk ) and Cov(zgm , mk ), which are given by
+L
+
+
+Cov(zgm , gk ) =
+
+γ̊i Cov(gi , gk ) +
+
+i=1
+
+S
+
+
+ω̊ j Cov(m j , gk )
+
+j=1
+
++
+
+L
+ S
+
+
+χ̊i j Cov(gi m j , gk ),
+
+(7a)
+
+i=1 j=1
+
+Cov(zgm , mk ) =
+
+L
+
+
+γ̊i Cov(gi , mk ) +
+
+i=1
+
++
+(5a)
+
+S
+
+
+ω̊ j Cov(m j , mk )
+
+j=1
+L 
+S
+
+
+χ̊i j Cov(gi m j , mk ).
+
+(7b)
+
+i=1 j=1
+
+Writing
+
+ωi ω j Cov(mi , m j ), (5b)
+
+γi ω j Cov(gi , m j ),
+
+γ̊i gi +
+
+i=1
+
+vk =
+
+i=1 j=1
+L 
+S
+
+
+L
+
+
+L 
+S
+
+
+χ̊i j Cov(gi m j , gk ), k = 1, . . . , L,
+
+(8a)
+
+i=1 j=1
+
+(5c)
+
+i=1 j=1
+
+
+where we use the convention that an empty sum 0j=1 x j = 0
+is zero.
+More pragmatically, these expressions can be obtained
+from a least-squares fit of a multivariate linear model that
+predicts a sample of traits ζ = (z1 , . . . , zn )† from associated samples of host gene sequences and microbiome compositions (collected into the data matrix X, which, for its
+ith row, has allele counts at L loci and relative microbe
+abundances across S taxa associated with the ith sample)
+
+vk =
+
+L 
+S
+
+
+χ̊i j Cov(gi m j , mk−L ), k = L + 1, . . . , L + S,
+
+i=1 j=1
+
+(8b)
+the additive genetic and microbial effects are given by α =
+α̊ + −1 v, where α = (γ1 , . . . , γL , ω1 , . . . , ωS ) are the additive genetic and microbial effects,
+is defined at the end
+of the previous section, and α̊ = (γ̊1 , . . . , γ̊L , ω̊1 , . . . , ω̊S ) are
+mechanistic model parameters.
+In the absence of gene–microbe interactions, so that χ̊i j =
+0 for all i = 1, . . . , L and j = 1, . . . , S, we have v = 0 and the
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+Cov(zgm , g) =
+
+such that ζ = X α + ε, with ε = (ε1 , . . . , εn )† being the error terms for each sample. Various algorithms exist for efficiently finding a least-squares solution for the additive effects
+α, such as pivoted QR decomposition (Strang, 2019).
+This overall approach holds for genotypic–microbic
+values occurring as arbitrary functions of genotype–
+microbiome pairs; zgm = ϕ(g, m ) for any function ϕ. That is,
+this approach accounts for any kind of interaction among
+genes, among microbes, and between genes and microbes
+on the expression of host traits. To illustrate, we apply this
+approach to a model of genotypic–microbic values that includes interactions between genes and microbes in the following section.
+
+2492
+
+Microbiome-mediated response to host-level
+selection
+Because the transmission of microbes is not necessarily direct
+from parent to offspring, nor does it occur with high fidelity
+relative to genetic transmission (e.g., microbiome composition exhibits significant variation between related individuals, see Tavalire et al., 2021; Tierney et al., 2019), we cannot
+transfer many of the important simplifying assumptions of
+classical quantitative genetics regarding inheritance to the
+study of microbiome-mediated traits. These simplifying assumptions have also been central to the power of the classical quantitative genetic approach, such as the use of pedigree
+analysis in the animal model (Wilson et al., 2009). Additionally, the degree to which additive host trait variation explained by microbes mediates an inter-generational response
+to selection on host individuals is not obvious. To overcome
+these issues, and identify components of host microbiomes
+that contribute host population-level selection responses, we
+propose a classification scheme to account for different patterns of ancestral concordance between microbes and the
+hosts that carry them. We then apply a set of simplifying
+assumptions to clarify our initial analysis, and consider consequences for a microbially mediated heritable response to
+selection on host individuals. This analysis motivates def-
+
+initions of microbial heritabilities and host trait transmissibilities that we introduce below in the Heritabilities and
+transmissibilities section.
+Classifying microbes by concordance with host ancestry
+As a first step in addressing the challenge described above,
+we classify host-associated microbes according to the ancestral relationship between their lineages and those of the hosts
+they inhabit. Specifically, we consider the degree to which
+microbial lineages are associated with host lineages. A lineage is a chain of (genetic) parent–offspring relationships,
+and so the distinction regards the degree to which transmission of microbes matches transmission of genetic material.
+These definitions make no assumptions about transmission
+mode (e.g., social, environmental, and parent–offspring).
+This leads to the following partition:
+
+(1) Lineal ancestry: Microbes are classified as lineal if
+their lineages have historically remained associated
+with the same host lineage across multiple generations (Figure 1, left panel). In other words, if the ancestor of a given microbe within an individual host at
+some point back in time can be found in a host who
+is a direct (genealogical) ancestor of that individual.
+These microbes are most likely to have co-diverged,
+co-adapted, or co-transmitted with their host lineage
+and are therefore most likely to contribute to selection responses at the host population level.
+(2) Non-lineal ancestry: Microbes are classified as nonlineal if their lineages have been associated with host
+lineages but do not consistently follow host lineages
+(Figure 1, center panel). For instance, these microbes
+may frequently disperse horizontally between related
+hosts such as siblings, or between less related conspecific hosts, or may move back and forth between hosts
+and the environment. Their ancestry is partially concordant with host ancestry, and their contribution to
+host adaptation may vary depending on transmission
+routes and patterns of host association.
+(3) Novel ancestry: Microbes are classified as novel if
+their ancestral lineages have not spent any time with
+host ancestors (Figure 1, right panel). These microbes
+originate from sources external to the host population (e.g., biotic or abiotic environmental reservoirs)
+and represent recently acquired microbial lineages
+with no history of host association. By definition,
+novel microbes are not inherited through host lineages and are unlikely to have experienced selection
+aligned with host reproductive success. All novel microbes are by definition environmentally acquired,
+but not all environmentally acquired microbes are
+novel.
+These definitions, formulated at the scale of microbial individuals, are illustrated in Figure 1. The goal of this scheme
+is to partition host microbiomes into components that are
+(1) unlikely to contribute to host population–level selection
+responses (novel microbes), (2) most likely to do so (lineal
+microbes), or (3) of uncertain contribution (non-lineal microbes). For some host–microbiome systems, it may be necessary to add additional categories, for instance, between
+non-lineal and novel for microbes that are nearly novel, but
+with ancestral lineages that have spent significant time in
+the host population. This partitioning of host microbiomes
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+additive effects formally defined above become equivalent to
+the additive effects of the model; γi = γ̊i , ω j = ω̊ j . However,
+if χ̊i j = 0 for any host locus i and any microbial taxon j,
+the formal additive effects and model additive effects are in
+general no longer equivalent (γi = γ̊i , ω j = ω̊ j ) because the
+formal additive effects will also include terms due to gene–
+microbe interactions.
+To unpack this more, consider the example where the
+effect of a microbe only occurs in the presence of an allele at a haploid biallelic locus such that neither the allele
+nor the microbe has an effect on the host trait in the absence of the other. In this case, the above model simplifies to
+zgm = z̊0 + χ̊gm, where g = 0, 1 determines the presence of
+the allele, m = 0, 1 determines the presence of the microbe,
+and χ̊ quantifies the effect of their interaction. Writing pgm
+as the frequency of hosts carrying the pair (g = 1, m = 1),
+pg the frequency of hosts with the allele (so the marginal frequency of g = 1), and pm the frequency of hosts with the microbe (so the marginal frequency of m = 1), then the additive
+effect of the allele is γ ∝ (pm − pgm )(1 − pm ), and the additive effect of the microbe is ω ∝ (pg − pgm )(1 − pg ), where
+∝ means proportional to and the constant of proportionality for both quantities is χ̊ pgm /(pg pm (1 − pg )(1 − pm ) −
+(pgm − pg pm )2 ). Hence, even in the absence of any underlying additive effects in the mechanistic model, the formally
+defined additive effects of the statistical model are non-zero.
+Additionally, each of these effects depends on the frequency
+of the other factor.
+The observation that non-additive mechanistic effects can
+contribute to additive components of trait variance directly
+extends the recognition that epistasis contributes to additive genetic variance (Barton & Turelli, 2004; Cheverud &
+Routman, 1996). In Supplementary Section 2, we provide
+expressions for additive genetic and additive microbial effects, given a model that includes all possible pairwise interactions between genes and microbes explained by products
+of allele counts and microbial abundances.
+
+Week et al.
+
+2493
+
+Evolution (2025), Vol. 79, No. 11
+
+is conceptually similar to the notions of lineal and collective inheritance introduced by Roughgarden (2023). Indeed,
+a lineal microbe in our framework would be considered lineally inherited in Roughgarden’s framework. The primary
+distinction is that Roughgarden’s concepts focus on inheritance processes, but our partitioning focuses on categorizing
+microbes by their tendency to be inherited (possibly lineally,
+collectively, or not at all). For instance, the class of non-lineal
+microbes spans a broad spectrum of associations with the
+host; many may be transient and therefore have limited capacity to contribute to collective inheritance.
+To leverage this approach for understanding how microbiomes mediate responses to selection, we next quantify the
+degree to which signals of novel, lineal, and non-lineal ancestry are reflected in each microbial taxon within a host
+individual. These values can be averaged across host individuals to obtain a summary measure of ancestral concordance
+for each microbial taxon. Assessing host–microbe ancestral
+concordance at the level of microbial taxa is especially useful in our framework, as it aligns with the scale at which we
+quantify microbial effects on host traits.
+Partitioning host trait variance by ancestral concordance
+Although many microbial taxa likely exhibit several patterns
+of ancestral concordance, for this initial inquiry we consider a simplified scenario where each taxon consists of individuals that are either entirely novel, lineal, or non-lineal.
+This simplifies the further partitioning host trait variance according to the partitioning of microbiomes proposed above,
+and this simplicity allows us to highlight the consequences
+for host population-level selection responses. More realistic
+models that account for the complexity of microbial transmission could be studied in future work. In particular, assuming the S microbial taxa in the host microbiome can be
+subdivided into SL lineal taxa, SN non-lineal taxa, and SV
+novel taxa (so that S = SL + SN + SV ), we can rewrite the
+additive microbial effect on the average excess δgm = zgm − z̄
+as ωm = m + nm + vm , where
+
+m = 0 +
+
+S
+L
+
+
+i mL,i ,
+
+i=1
+
+vm = v0 +
+
+SV
+
+
+nm = n0 +
+
+S
+N
+
+
+ni mN,i ,
+
+i=1
+
+vi mV,i ,
+
+(9)
+
+i=1
+
+where the additional subscripts indicate the pattern of ancestral concordance (Lineal, Non-lineal, NoV el) each group of
+taxa has with its host. Taking this partitioning a step further,
+
+we can write the additive microbial variance as
+MA = ML + MN + ME + CLN + CLE + CNE ,
+
+(10)
+
+
+where ML = g,m pgm 2m is the component of additive variance due to lineal microbes
+ (which we refer to as the additive
+lineal variance), MN = g,m pgm n2m is the component due to
+non-lineal
+microbes (the additive non-lineal variance), MV =
+
+2
+to novel microbes (the additive novel
+g,m pgm vm is due
+variance), CLN = 2 g,m pgm m nm is due to non-random associations between lineal and non-lineal microbes
+ (the additive lineal–non-lineal covariance), CLV = 2 g,m pgm m vm
+is due to non-random associations between the abundances
+of lineal and novel microbes
+ (the additive lineal–novel
+covariance), and CNV = 2 g,m pgm nm vm is due to nonrandom associations between the abundances of non-lineal
+and novel microbes (the additive non-lineal–novel covariance). For later use, we 
+also introduce the additive gene–
+lineal covariance CL = 2 g,m pgm γg m as the component of
+additive gene–microbe covariance due to lineal
+microbes, the
+additive gene-non–lineal covariance CN = 2 g,m pgm γg nm
+as the component due to non-lineal microbes,
+and the ad
+ditive gene–novel covariance CV = 2 g,m pgm γg vm as the
+component due to novel microbes.
+
+Results
+Interactions between host-level selection and
+ancestral concordance
+By definition, novel microbes cannot contribute to a
+microbiome-mediated response of the host trait to selection on hosts. In contrast, lineal microbes will likely make
+the most reliable contributions to a microbiome-mediated
+response to host-level selection. The degree to which nonlineal microbes contribute to a microbiome-mediated response depends on the stage in host life history that selection occurs relative to the stage in host life history that nonlineal microbes are transmitted. For instance, if non-lineal
+microbes are first shed into the environment before the host
+parental population experiences host-level selection (so selection does not shape the set of non-lineal sources), then
+non-lineal microbes will not contribute to a microbiomemediated response. On the other hand, if non-lineal sources
+include only the microbiomes of host parents that, for
+example, survived an episode of viability-based selection,
+then non-lineal microbes may contribute significantly to a
+microbiome-mediated response.
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+Figure 1. Illustration of our partitioning of host microbiomes by ancestral concordance. Each panel shows a different pattern of host–microbe ancestral
+concordance. Rows represent host generations (most recent at the bottom), with squares indicating the environment. Circular nodes are host
+individuals; green lines and circles trace the focal host’s ancestry, while dashed lines and tomato-colored circles trace the focal microbe’s lineage. Left: A
+lineal microbe whose ancestry closely tracks the host lineage: inheritance of microbes (dotted line) always follows genetic ancestry (green lines).
+Middle: A non-lineal microbe with ancestry mostly among hosts but not following genetic ancestry, and occasionally entering the environment. Right: A
+novel microbe whose ancestry lies entirely outside the host population.
+
+2494
+
+Simulation description
+Our simulation model assumes that host traits follow an
+additive model equivalent to that analyzed in the A model
+of gene–microbe interactions section, except without any
+gene–microbe interactions (so χ̊i j = 0 for each i, j). As a
+function of phenotype, host fitness is set to W (z ) = exp(sz ),
+which leads to directional selection for larger host traits
+when s > 0 (we set s = 10−3 ). We simulate 100 freely recombining host genetic loci. The abundances of lineal mi-
+
+crobes in host offspring are Poisson distributed around the
+mid-parents of those taxa. For non-lineal microbes, we consider two models: 1) each host offspring chooses a single host
+individual uniformly from the broader unselected parental
+population as its non-lineal source and 2) each host offspring chooses a single host individual from the selected
+parental population with probability proportional to its fitness. Once the non-lineal donor is chosen, the host offspring inherits non-lineal abundances that are Poisson distributed around the abundances of non-lineal taxa in the
+donor. Finally, novel microbe abundances are drawn independently and identically from a Poisson distribution for
+each taxon in each host in each host generation. We assume
+100 microbial taxa in each microbiome component, with
+each taxon having an average abundance of 50 in each host
+parent. This model of microbial inheritance is illustrated in
+Figure 2.
+Results are obtained by first drawing normally distributed
+additive effects, and then observed and predicted responses
+to selection are averaged over randomly drawn genotype–
+microbiome pairs for host parents, repeated selection experiments, and repeated formation of offspring from selected
+parents. Figure 3 illustrates mean trait dynamics under our
+model when different combinations of factors mediate traits,
+and when non-lineal microbes are sourced from pre-selected
+or post-selected parents. In addition, time series of correlations between host allele counts and microbe abundances are
+shown in Figure 4. Parameter values used for simulating data
+presented in Figures 3 and 4 are provided in Supplementary
+Table 1. Parameter values used for simulating data presented
+in Figure 5 are provided in Supplementary Table 2. Code to
+reproduce these results (written in Julia) is provided at the
+Zenodo repository: https://zenodo.org/records/16793112.
+
+Simulation results
+Our simulation results (summarized in Figure 5) demonstrate that when a host trait is significantly mediated by
+heritable microbes (such as lineal and possibly non-lineal
+microbes), then the classical breeders equation, which only
+accounts for genetic factors, severely underestimates the response to selection. In particular, for microbiome-mediated
+traits, we find that the observed response to selection
+exceeds predictions based solely on host allele counts: z̄ ≥
+GA β.
+Conversely, our model shows that including all traitmediating microbes in the additive variance substantially
+overestimates the selection response. This result occurs because many microbes will be novel and thus not transmitted across host generations (which explains why the lines
+associated with GLNV and GLN coincide for both panels
+of Figure 3). More precisely, including trait-mediating microbial taxa that are not transmitted across host generations (especially novel microbes, but possibly also non-lineal
+microbes) inflates the additive microbial variance, which
+leads to observations that are exceeded by predictions: z̄ ≤
+(GA + MA + CA ) β.
+In general, results from our simulations agree with our
+expectations described above. That is, by including only
+the transmissible microbes that contribute to an intergenerational response to selection on host individuals, we
+obtain the heuristic z̄ = (GA + MψA + CAψ ) β.
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+Based on the above reasoning, to obtain an accurate
+model for predicting a microbiome-mediated response to selection, novel microbes must first be identified and culled
+from the set of factors considered, and their abundances
+should be averaged over when calculating zgm . Additionally,
+it must be determined whether or not non-lineal microbes
+are sourced from selected parents or from the broader population of unselected parents, because this is likely associated
+with whether or not they contribute to a response to selection. Having identified the microbial taxa that contribute to
+a response to selection, we write MψA (CAψ ) for the additive microbial variance (gene–microbe covariance) calculated using
+only the abundances of those taxa, and refer to this quantity
+as the selective additive microbial variance (gene–microbe
+covariance). Building on this logic, we anticipate three basic
+conclusions.
+First, if we summarize the abundances of lineal microbes
+using presence/absence, and assume host offspring inherit
+these binary values for each taxon independently, then the
+inheritance of these microbes is structurally equivalent to
+the inheritance of genetic alleles at freely recombining loci.
+Hence, in this case, it is clear that lineal microbes can contribute to a response to selection. This clearly still holds
+when presence/absence is replaced with higher-resolution
+summaries of microbial abundances such as approximated
+relative abundances. In particular, we expect the selective additive microbial variance MψA to always include the additive
+lineal variance ML , and the selective additive gene–microbe
+covariance CAψ to always include the additive gene-lineal covariance CL (defined at the end of the Partitioning host trait
+variance by ancestral concordance section).
+Second, if non-lineal microbes are sourced from the
+broader population of “unselected” parents (i.e., if the
+source of non-lineal microbes is independent of fitness), then
+we anticipate non-lineal microbes to not contribute to a response to selection. In this case, the selective additive microbial variance would still simplify to the additive lineal
+variance, MψA = ML , and the selective additive gene–microbe
+covariance would also still simplify as CAψ = CL .
+However, as a third conclusion, if non-lineal microbes
+are sourced from selected parents, or more generally, values of the selected trait are correlated with probability of being a non-lineal source of microbes, we anticipate that their abundances will also contribute to a response to selection. In this case, selective additive microbial variation would become MψA = ML + MN + CLN and
+selective additive gene–microbe covariance becomes CAψ =
+CL + CN . To test our expectations described above, we implemented a simulation model based on the general setup
+described at the beginning of the Analysis of variance
+of microbiome-mediated traits section, which we now
+describe.
+
+Week et al.
+
+2495
+
+Evolution (2025), Vol. 79, No. 11
+
+Figure 3. Time-series plots of average simulated host trait dynamics. Different colors correspond to different combinations of factors. Pink corresponds
+to only host genes mediating a response to selection (G). Green corresponds to only host genes and lineal microbes (GL). Blue corresponds to host
+genes, lineal, and non-lineal microbes (GLN). Mustard corresponds to host genes, lineal, non-lineal, and novel microbes (GLNV) (mostly hidden by blue
+lines/areas). For each combination of factors, simulations were repeated 20 times. Solid lines are averages across these repeated runs, and shaded
+regions correspond to standard deviations across repeated runs. The panels are divided by non-lineal microbes acquired from post-selected parents (left)
+and pre-selected parents (right).
+
+The dichotomy of whether non-lineal microbes contribute
+to a selection response is artificial by design. More realistically, because different microbe individuals of the same
+taxon in a given host microbiome may have different patterns of ancestral associations with their hosts, microbial
+taxa cannot be neatly categorized by ancestral concordance
+as done here. Additionally, non-lineal microbe individuals
+may vary in the degree to which they contribute to a selection response because they may be transmitted either before
+or after the parental population experiences selection depending on the life histories of the hosts and microbes. Such
+within-taxon variation could be captured in future work
+by modeling individual microbes’ ancestral concordance as
+drawn from a taxon-specific distribution. Lastly, it is also
+possible that microbes can be transmitted beyond consecutive generations, but under our simulation model we expect
+the response to selection to be further attenuated in such
+cases.
+
+Heritabilities and transmissibilities
+Results from the previous sections provide insights into formulating a definition of microbial transmissibility. In particular, the indices we introduce here assume only microbes
+acquired from sources that contribute to a response to hostlevel selection (such as the lineal and possibly non-lineal
+microbes, see the Interactions between host-level selection
+and ancestral concordance section) are included as traitmediating factors while calculating components of additive
+trait variation. Then, just as the narrow-sense genetic heritability, defined as h2 = GA /P, is useful for predicting the
+response to selection and can be measured using parent–
+offspring correlations, we define the narrow-sense microbial
+transmissibility as b2 = MψA /P, which is also useful for predicting the response to selection. However, unlike h2 , only
+the lineal component of b2 will be measurable from parent–
+offspring correlations. If non-lineal microbes contribute to a
+response to selection, then their contribution to b2 may be
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+Figure 2. Graphical representation for the two models of microbiome inheritance used in our simulations. In the left panel, non-lineal microbes for a given
+offspring are acquired from a randomly chosen individual in the pre-selected parental population. In the right panel, non-lineal microbes are acquired
+from a randomly chosen individual in the post-selected population. Circles represent hosts and rectangles within hosts the lineal (black), non-lineal (gray),
+and novel (white) microbiome components. The green circles at the top of each panel represent the parental population before an episode of viability
+selection, and the mustard circles represent the parental population after an episode of viability selection (with vertical straight arrows indicating the
+trajectories of host individuals). The vertical rectangle on the right represents an environmental reservoir that novel microbes are sampled from. Hosts
+highlighted with dashed concentric circles are the parents of the focal offspring (the blue circle at the bottom). The plus symbol joining the lineal
+components of the parental microbiomes indicates taking an average. Arrows pointing toward offspring brackets represent microbiome transmission.
+
+2496
+
+Week et al.
+
+Figure 5. Comparison of change in host mean trait over a single consecutive generation (z̄ ) observed from simulations (x-axis) to that predicted by
+including different components of the host microbiome (y-axis). Each dot corresponds to an average over repeated runs for a given set of randomly
+drawn additive effects. Colors and column labels follow the same pairing described in the caption for Figure 3. Diagonal lines have unit slope and zero
+intercept. This figure demonstrates that z̄ is overestimated when including either novel microbes (GLNV in top and bottom rows) or non-lineal
+microbes acquired from pre-selected parents (GLN in the top row), is underestimated when excluding either all microbes (G in top and bottom rows) or
+non-lineal microbes acquired from post-selected parents (GL in the bottom row). Predictions match observations on average when including host genes
+and lineal microbes, but excluding non-lineal microbes acquired from pre-selected parents and novel microbes (GL in the top row), and when including
+only host genes, lineal microbes, and non-lineal microbes acquired from post-selected parents (GLN in the bottom row).
+
+quantified by first identifying the non-lineal donor–recipient
+pairs between the parent and offspring populations, and
+then measure correlations between donors and recipients. Of
+course, this approach to estimating b2 depends on our simplifying assumptions on the partitioning of host microbiome
+into lineal, non-lineal, and novel components. Because each
+taxon may consist of a mixture of lineal, non-lineal, and
+novel microbes, estimates of b2 will likely require a more
+sophisticated correlational analysis.
+On their own, the narrow-sense heritability and narrowsense microbial transmissibility are only useful for predict-
+
+ing a response to selection when the host trait is either entirely genetically mediated or entirely microbially mediated.
+To obtain accurate predictions for the response to selection
+when host traits are partially genetically mediated and partially microbially mediated, we introduce notions of total
+transmissibility. These quantities are meant to capture all
+components of host trait variation explained by factors that
+facilitate a host response to selection (which we refer to as
+selective factors from hereon). Writing PAψ as the component
+of host trait variation explained only by additive effects of
+selective factors, we define the narrow-sense total transmis-
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+Figure 4. Time-series plots of absolute values of correlations between host allele counts and microbe abundances. Correlations between allele counts
+and abundances of lineal microbes (left plots) increase faster when non-lineal microbes are sourced from the pre-selected host parental population in
+comparison to when non-lineal microbes are sourced from the post-selected host parental population. In contrast, correlations with abundances of
+non-lineal microbes and novel microbes remain at neutral levels (right plots).
+
+2497
+
+Evolution (2025), Vol. 79, No. 11
+
+sibility as t 2 = PAψ /P. By focusing on additive effects, we can
+use the same general approach outlined in the Analysis of
+variance of microbiome-mediated traits section to quantify
+PAψ . Here, because we assume the only selective factors are
+host genes and microbes, the narrow-sense total transmissibility becomes
+t2 =
+
+GA + MψA + CAψ
+.
+P
+
+(11)
+
+H2 =
+
+GA + GR
+,
+P
+
+B2 =
+
+MψA + MψR
+.
+P
+
+(12)
+
+In general, the sum of these broad-sense heritabilities does
+not capture all of host trait variation explained by host
+genotype–microbiome pairs (g, m ) because they do not account for covariances between allele counts and microbe
+abundances (quantified by CAψ ) or for residual variation left
+unexplained by genotypic values and microbic values (quantified by PRψ − GR − MψR , where PRψ = P − PAψ ). More generally, if the host trait is mediated by the selective factors
+f = ( f1 , . . . , fN ), and z f is the average trait value among
+hosts carrying factors f , then we define the broad-sense
+total transmissibility as the proportion of phenotypic variance explained by selective factors: T 2 = Var(z f )/P. Because
+we assume the only selective factors are host genes and
+microbes, we have z f = zgm , the genotypic–microbic value.
+Then, defining the symbol KHB = (CAψ + PRψ − GR − MψR )/P,
+we obtain an expression for the broad-sense transmissibility
+
+T 2 = H 2 + KHB + B2 .
+
+(13)
+
+Again, we can intuitively think about calculating the expression for T 2 by expanding the square (H + B )2 , with
+KHB taking the place of the undefined symbol 2HB. Because
+GR + MψR ≤ PRψ , the component of KHB due to differences
+in residual variation will always be non-negative. However,
+because CAψ may be negative, KHB will be negative when
+CAψ < GR + MψR − PRψ . As a result, excluding KHB from calculating T 2 can positively or negatively bias estimates for
+the proportion of host trait variation explained by genetic
+and selective microbial factors.
+The utility of the definition of narrow-sense total transmissibility introduced in this section for predicting a response to selection relies on a set of assumptions that simplify the process of microbial inheritance. Future work is
+needed to test their utility, given the complexity of withinhost dynamics (Gerber, 2014), the microbiome assembly
+process (Costello et al., 2012), and host–host transmission
+(Sarkar et al., 2024).
+
+Discussion
+There is growing evidence that microbes can be integral to the form, function, and fitness of larger organisms (Bordenstein & Theis, 2015). Microbes associated with
+plant and animal hosts have been shown to contribute to
+fundamental organismal processes, including development
+(McFall-Ngai et al., 2013), nutrition (David et al., 2013),
+pathogen protection (Koch & Schmid-Hempel, 2011), and
+even behavior (Cryan & Dinan, 2012). Microbes have been
+suggested to provide their plant and animal hosts with
+the capacity for rapid evolution (Bisschop et al., 2022;
+Rosenberg & Zilber-Rosenberg, 2016) and perhaps even to
+contribute to the evolutionary rescue of larger organisms
+from rapid environmental change (Lennon et al., 2019; Pillai
+et al., 2016).
+This increasing interest in host–microbe interactions has
+led to a crucial need for a deeper understanding of how
+host-associated microbes influence the phenotypes of their
+hosts, and ultimately their evolution. But developing this
+understanding has been hampered by the lack of a comprehensive theoretical framework for considering the combined influences of host genetics, host-associated microbes
+and the surrounding environment on traits that emerge
+from such host–microbe systems, and corresponding statistical frameworks to disentangle these influences. Quantitative genetics is uniquely positioned to provide this foundation because it is focused on understanding the inheritance and evolution of the complex traits that result from
+multiple interacting sources of variation. While quantitative genetics was initially developed with genetic factors as the sole heritable units, it has since been extended to include factors subject to non-genetic inheritance, such as epigenetic alleles and cultural memes (CavalliSforza & Feldman, 1981; David & Ricard, 2019; Day &
+Bonduriansky, 2011). Here, we extend quantitative genetics
+by formally incorporating microbiomes as potentially heritable units that are similar to, but distinct from, host genetic
+factors.
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+Hence, in general t 2 = h2 + b2 . Instead, writing khb = CAψ /P,
+we can heuristically think of expanding the square (h + b)2
+to arrive at t 2 = h2 + khb + b2 , where khb takes the place
+of the undefined symbol 2hb. Because khb is a covariance,
+it can be positive or negative. So ignoring khb while calculating t 2 can positively or negatively bias predictions for a
+microbiome-mediated response to selection. Our work then
+suggests the form of the breeders equation introduced by
+Lush (1937), R = h2 S (where R = z̄ is the response to selection and S is the selection differential), naturally generalizes to R = t 2 S = (h2 + khb + b2 )S. This reduces to the original expression in the absence of microbiome-mediated effects.
+In our framework, broad-sense genetic heritability retains the same definition from classical quantitative genetics. In particular, the genotypic value zg is the genotypic–
+microbic value zgm averaged over host microbiomes. Then
+the broad-sense genetic heritability is defined as the proportion of host trait variance explained by genotypic variation: H 2 = Var(zg )/P. In analogy, the microbic value zm is
+the genotypic–microbic value zgm averaged over host genotypes. To clarify that we are focusing specifically on host trait
+variation explained by microbes that contribute to a selection response, we propagate the superscript ψ . In particular, zψm is zgm averaged over host genotypes and components
+of host microbiomes that do not contain selective factors.
+This suggests that the broad-sense microbial transmissibility
+should be defined as the proportion of host trait variation explained by selective microbic variation: B2 = Var(zψm )/P. Setting GR = Var(zg ) − GA and MψR = Var(zψm ) − MψA , the residual variances left unexplained by additive genetic and selective additive microbial effects, respectively, the broad-sense
+heritabilities can then be expressed as
+
+as
+
+2498
+
+tured and exhibits random genetic drift. Furthermore, it is
+worth considering the degree to which processes analogous
+to classical random genetic drift emerge from microbiomemediated host trait dynamics.
+
+Implications for association studies
+Both of the conclusions in the preceding paragraph—that
+not all evolutionary important microbes correlate with host
+genes and not all microbes that correlate with host genes
+contribute to host trait variation—have important implications for how we study host–microbe interactions and their
+impact on host phenotype. The approaches commonly used
+for identifying the genes or microbes underlying a particular phenotype (e.g., GWAS or MWAS) require an understanding of how statistical associations form among phenotypes, genes, and microbes (Camarinha-Silva et al., 2017;
+Difford et al., 2018; Pérez-Enciso et al., 2021; Qin et al.,
+2012). Because these associations are not necessarily causal,
+and because causal pathways may not be detected via statistical associations, there is a need for a more comprehensive
+theoretical foundation to guide approaches such as GWAS
+and MWAS. Importantly, microbiomes are dynamic ecological assemblages obeying different rules of inheritance than
+genomes, and so uncritical application of methods designed
+for GWAS may produce misleading results. The framework
+we introduce addresses this issue by clarifying when analogies between genes and microbes hold and when they break
+down, helping to replace false equivalences with a more accurate foundation for interpreting host–microbe trait associations. Furthermore, this framework offers a conceptual
+guide for interpreting MWAS results and for identifying microbial associations that are more likely to reflect biologically meaningful or evolutionarily relevant effects. Rather
+than assuming causality from variance explained, our framework points to ways of prioritizing microbial taxa based on
+patterns of shared ancestry with host lineages and association with host-level selection response, providing a clearer
+path for future empirical and statistical work.
+In addition to extending the theoretical foundations of
+quantitative genetics, a key challenge moving forward will
+be to develop inference methods capable of estimating the
+host and microbial parameters defined in our framework.
+An interesting approach for future work will be to expand
+genomic regression approaches to include microbiomes for
+inferring parameters such as T 2 and b2 (Xavier et al., 2019).
+As with classical quantitative genetics, inference will require
+statistical models that account for relatedness among hosts
+and microbial lineages, and that distinguish causal from
+merely associated components. Importantly, as shown in recent work, failure to account for differences between causal
+loci and observed markers in genomic regression can lead
+to misleading heritability estimates (de los Campos et al.,
+2015). Analogous pitfalls are likely to occur in microbiomebased studies, underscoring the need for explicit statistical theory to accompany any expanded quantitative genetic
+framework.
+
+Implications for agriculture and wild populations
+In livestock research, several studies have estimated the
+contribution of the gut microbiota to feed efficiency traits
+(Déru et al., 2022; Martinez-Boggio et al., 2024; Zhang
+et al., 2024) and in crops to stress tolerance and yield-
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+Importantly, microbes are not merely their host’s second genome; there are fundamental differences between microbes in a microbiome and genes in a genome. These differences make applying quantitative genetic approaches directly to host microbiomes problematic. As a consequence,
+there is a need to expand theory of quantitative genetics
+to incorporate unique aspects of microbiome biology, as
+we have attempted to do here. We have built on previous efforts to establish quantitative genetic frameworks for
+microbiome-mediated traits (Henry et al., 2021) by generalizing the foundations of quantitative genetic theory. Our
+approach provides a formal definition for the component of
+phenotypic variation explained by additive effects of host genetic and microbial factors (PA ), and shows how to partition
+this additive variance into additive genetic variance (GA ) and
+the newly defined additive microbial variance (MA , the component of host trait variance explained by additive effects of
+microbe factors) and additive gene–microbe covariance (CA ,
+which quantifies additive effects due to covariances between
+allele counts and microbe abundances across host individuals) such that PA = GA + MA + CA .
+Furthermore, to make accurate predictions for
+microbiome-mediated responses to selection on hosts,
+we found it necessary to introduce additional partitioning
+of host trait variation explained by host microbiomes. In
+particular, we suggest host microbiomes may be decomposed into three components: the lineal component, which
+contains microbes passed along host lineages, the novel
+component, which contains microbes acquired from the
+environment that have no previous associations with the
+host species, and the non-lineal component, which contains
+all remaining microbes. We anticipate that whether or
+not microbes facilitate a response to selection depends on
+the microbiome component to which they belong. When
+microbial taxa that contribute to a selection response have
+been identified, we suggest quantifying MψA as the component of host trait variance explained only by the additive
+effects of those taxa. Using a simulation model, we find
+support for a generalized breeders equation taking the
+form z̄ = (GA + MψA + CAψ ) β. Building on this, we suggest
+definitions that generalize narrow-sense and broad-sense
+heritabilities to account for microbes that contribute to a
+selection response.
+From this initial expansion, we can make a number of
+conclusions that are worth further theoretical and experimental exploration. For instance, Figures 3 and 4 together
+demonstrate that not all evolutionarily important microbes
+significantly correlate with host genes. This finding therefore negates a requirement of lineal transmission. In particular, Figure 3 shows that non-lineal microbes sourced from
+post-selected parents significantly contribute to a sustained
+response to selection over several host generations. In addition, Figure 4 shows that the within-host abundances of
+these same microbes do not significantly correlate with host
+allele counts (where significant here means to have greater
+magnitudes of correlations than novel microbe abundances).
+Another conclusion is in the converse direction: that not all
+microbes with abundances that significantly correlate with
+host allele counts contribute significantly to host trait variation. This result underscores the possibility that microbes
+transmitted across host generations do not necessarily mediate a response to host-level selection. For example, such
+correlations may occur when the host population is struc-
+
+Week et al.
+
+2499
+
+Evolution (2025), Vol. 79, No. 11
+
+the effects of a novel inheritance mechanism on the dynamics of a microbiome-mediated quantitative character, and to
+identify the conditions under which distinct classes of microbes contribute to selection responses at the host level.
+Future work is needed to study models in which these assumptions are relaxed, and to apply our general framework
+of phenotypic variance analysis to both simulated and empirical data. More specifically, given the ecological nature of
+microbiomes, a fruitful avenue forward would be to interface our extension of quantitative genetics with metacommunity models of microbiome dynamics (Koskella et al.,
+2017; Leibold et al., 2004; Miller et al., 2018; Zeng et al.,
+2017). Such work can shed light on microbial ecological
+mechanisms that explain microbiome inheritance.
+
+Conclusion
+Microbes can be integral to the functioning of their animal and plant hosts, yet it is not well understood how
+microbiomes contribute to host fitness and evolution. This
+knowledge gap is due at least in part to the lack of a comprehensive theoretical framework for modeling how host–
+microbiome system-level traits emerge from the interactions
+of host genes, microbiome, and environment. We provide
+one such framework, by expanding theoretical quantitative
+genetics to include unique aspects of host-associated microbiomes, including multiple forms of Mendelian and nonMendelian inheritance. This expansion leads to a formalization of several important concepts, including microbial
+heritabilities and transmissibilities, as well as fundamental
+quantities such as additive gene–microbe covariances. In addition, our framework provides an approach to partitioning
+quantitative trait variation into host-genetic and microbial
+components, allowing the theoretical exploration of how the
+joint contribution of host and microbiome to trait variation influences the evolution of host–microbiome systems.
+We consider our theoretical expansion as a first step toward
+a comprehensive incorporation of host-associated microbes
+into quantitative genetics.
+
+Supplementary material
+Limitations and future directions
+The framework presented throughout this paper has both
+general components that are independent of model assumptions and specific components that are obtained by applying
+simplifying assumptions. In particular, both the approach to
+analysis of phenotypic variance in the Analysis of variance
+of microbiome-mediated traits section and our approach to
+partition host microbiomes by ancestral concordance in the
+Classifying microbes by concordance with host ancestry section are independent of model assumptions. However, our
+results on the response of a microbiome-mediated trait to
+selection (illustrated by Figure 5 and equations presented in
+the thesimulation results section) were obtained following
+a series of simplifying assumptions. These include independence of microbiome components (see the Partitioning host
+trait variance by ancestral concordance section) and assumptions regarding the inheritance of microbiomes (summarized
+in Figure 2). In effect, our simulation model ignores withinhost microbiome dynamics, the assembly process, and host–
+host microbe transmission, which has allowed us to focus on
+
+Supplementary material is available online at Evolution.
+
+Data availability
+Code for reproducing Figures 1 and 3–5 has been archived
+on Zenodo, available at: https://zenodo.org/records/16793
+112.
+
+Author contributions
+Conceptualization: B.J.M.B., P.L.R., W.A.C., H.F.T., and
+B.W.; methodology and formal analysis: B.W. and P.L.R.;
+software, validation, investigation, data curation, and visualization: B.W.; resources: B.J.M.B.; writing – original draft:
+H.F.T., B.J.M.B., P.L.R., and W.A.C.; writing – review and
+editing: B.W., B.J.M.B., P.L.R., and W.A.C.; supervision and
+funding acquisition: B.J.M.B., P.L.R., and W.A.C.; project
+administration: B.J.M.B. and B.W.; and senior authorship:
+B.J.M.B. and W.A.C. are co-senior authors.
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+related traits (Dwivedi et al., 2025; Mueller & Linksvayer,
+2022), often by modeling microbial variation as an independent random effect alongside host genetic effects in
+linear mixed models. Unlike these empirical approaches,
+which frequently reduce dimensionality without biological interpretation (e.g., via principal components or operational taxanomic unit filtering thresholds), our framework provides biologically grounded decompositions based
+on patterns of host–microbe ancestral concordance. These
+decompositions may be estimated from lineage-traced or
+metagenomic data, and in doing so, provide a principled means of attributing trait variation to distinct classes
+of microbes. This allows our framework to complement
+and systematize empirical models used in breeding applications, while also offering a unified quantitative structure for comparing microbiome-mediated effects to other
+extended inheritance mechanisms. By explicitly modeling
+classes of microbial effects in parallel to classical host genetic effects, our approach can help disentangle microbiome
+contributions from confounded influences such as maternal effects, indirect genetic effects, and ecological inheritance, thereby clarifying their relative roles in shaping host
+phenotypes.
+Beyond its relevance to agriculture, the framework we
+present here may also offer insights into how wild populations respond to natural selection. Long-term studies in
+wild systems have frequently documented cases where evolutionary change falls short of predictions based on observed
+heritability and directional selection (Kruuk et al., 2002;
+Pemberton, 2010; Pujol et al., 2018). Microbiome inheritance and its influence on host traits may contribute to this
+mismatch, but the mechanisms involved are likely complex
+and remain poorly understood. Different modes of microbial
+transmission and ecological dynamics could interact with
+host genetics in ways that violate standard quantitative genetic assumptions. Future work is needed to clarify how microbially mediated traits shape evolutionary predictions in
+natural populations. By formally integrating host-associated
+microbiomes into the foundations of quantitative genetic
+theory, our framework offers a potentially fruitful direction
+for addressing this challenge.
+
+2500
+
+Funding
+
+Conflict of interest
+The authors declare no conflict of interest.
+
+Acknowledgments
+We thank Professor Patrick Phillips for his insightful discussions, which have significantly enhanced this manuscript.
+
+References
+Ali, H. R. K., Hemeda, N. F., & Abdelaliem, Y. F. (2019). Symbiotic cellulolytic bacteria from the gut of the subterranean termite psammotermes hypostoma desneux and their role in cellulose digestion. AMB
+Express, 9(1), 111. https://doi.org/10.1186/s13568- 019- 0830- 5
+Argaw-Denboba, A., Schmidt, T. S. B., Di Giacomo, M., Ranjan, B.,
+Devendran, S., Mastrorilli, E., Lloyd, C. T., Pugliese, D., Paribeni,
+V., Dabin, J., Pisaniello, A., Espinola, S., Crevenna, A., Ghosh, S.,
+Humphreys, N., Boruc, O., Sarkies, P., Zimmermann, M., Bork, P.,
+& Hackett, J. A. (2024). Paternal microbiome perturbations impact
+offspring fitness. Nature, 629, 652–659. https://doi.org/10.1038/s4
+1586- 024- 07336- w
+Arora, J., Kinjo, Y., Šobotník, J., Buček, A., Clitheroe, C., Stiblik, P.,
+Roisin, Y., Žifčáková, L., Park, Y. C., Kim, K. Y., Sillam-Dussès, D.,
+Hervé, V., Lo, N., Tokuda, G., Brune, A., & Bourguignon, T. (2022).
+The functional evolution of termite gut microbiota. Microbiome,
+10(1), 78. https://doi.org/10.1186/s40168- 022- 01258- 3
+Awany, D., & Chimusa, E. R. (2020). Heritability jointly explained
+by host genotype and microbiome: Will improve traits prediction?
+Briefings in Bioinformatics, 22(3), bbaa175. https://doi.org/10.109
+3/bib/bbaa175
+Barton, N., & Turelli, M. (2004). Effects of genetic drift on variance components under a general model of epistasis. Evolution, 58,
+2111–2132. https://doi.org/10.1111/j.0014-3820.2004.tb01591.x
+Benson, A. K., Kelly, S. A., Legge, R., Ma, F., Low, S. J., Kim, J., Zhang,
+M., Oh, P. L., Nehrenberg, D., Hua, K., Kachman, S. D., Moriyama,
+E. N., Walter, J., Peterson, D. A., & Pomp, D. (2010). Individuality
+in gut microbiota composition is a complex polygenic trait shaped
+by multiple environmental and host genetic factors. Proceedings of
+the National Academy of Sciences of the United States of America,
+107, 18933–18938. https://doi.org/10.1073/pnas.1007028107
+Bijma, P., Muir, W. M., & Van Arendonk, J. A. M. (2007). Multilevel
+selection 1: Quantitative genetics of inheritance and response to selection. Genetics, 175, 277–288. https://doi.org/10.1534/genetics.1
+06.062711
+Bisschop, K., Kortenbosch, H. H., van Eldijk, T. J. B., Mallon, C. A.,
+Salles, J. F., Bonte, D., & Etienne, R. S. (2022). Microbiome heritability and its role in adaptation of hosts to novel resources. Frontiers
+in Microbiology, 13, 703183. https://doi.org/10.3389/fmicb.2022.7
+03183
+
+Bonduriansky, R., & Day, T. (2009). Nongenetic inheritance and its evolutionary implications. Annual Review of Ecology, Evolution, and
+Systematics, 40, 103–125. https://doi.org/10.1146/annurev.ecolsys.
+39.110707.173441
+Bordenstein, S. R., & Theis, K. R. (2015). Host biology in light of the
+microbiome: Ten principles of holobionts and hologenomes. PLOS
+Biology, 13, e1002226. https://doi.org/10.1371/journal.pbio.10022
+26
+Bruijning, M., Henry, L. P., Forsberg, S. K. G., Metcalf, C. J. E., & Ayroles, J. F. (2021). Natural selection for imprecise vertical transmission in host–microbiota systems. Nature Ecology and Evolution, 6,
+77–87. https://doi.org/10.1038/s41559- 021- 01593- y
+Bürger, R. (2000). The mathematical theory of selection, recombination,
+and mutation. John Wiley and Sons.
+Burns, A. R., Miller, E., Agarwal, M., Rolig, A. S., Milligan-Myhre, K.,
+Seredick, S., Guillemin, K., & Bohannan, B. J. M. (2017). Interhost
+dispersal alters microbiome assembly and can overwhelm host innate immunity in an experimental zebrafish model. Proceedings of
+the National Academy of Sciences of the United States of America,
+114, 11181–11186. https://doi.org/10.1073/pnas.1702511114
+Camarinha-Silva, A., Maushammer, M., Wellmann, R., Vital, M., Preuss,
+S., & Bennewitz, J. (2017). Host genome influence on gut microbial composition and microbial prediction of complex traits in pigs.
+Genetics, 206, 1637–1644. https://doi.org/10.1534/genetics.117.2
+00782
+Cavalli-Sforza, L. L., & Feldman, M. W. (1981). Cultural transmission
+and evolution: A quantitative approach, no. 16. Princeton University
+Press.
+Cheverud, J. M., & Routman, E. J. (1996). Epistasis as a source of increased additive genetic variance at population bottlenecks. Evolution, 50, 1042–1051. https://doi.org/10.1111/j.1558-5646.1996.t
+b02345.x
+Costello, E. K., Stagaman, K., Dethlefsen, L., Bohannan, B. J. M., &
+Relman, D. A. (2012). The application of ecological theory toward
+an understanding of the human microbiome. Science, 336, 1255–
+1262. https://doi.org/10.1126/science.1224203
+Cryan, J. F., & Dinan, T. G. (2012). Mind-altering microorganisms:
+The impact of the gut microbiota on brain and behaviour. Nature
+Reviews Neuroscience, 13, 701–712. https://doi.org/10.1038/nrn3
+346
+Danchin, E., Charmantier, A., Champagne, F. A., Mesoudi, A., Pujol, B.,
+& Blanchet, S. (2011). Beyond DNA: Integrating inclusive inheritance into an extended theory of evolution. Nature Reviews Genetics, 12, 475–486. https://doi.org/10.1038/nrg3028
+David, I., & Ricard, A. (2019). A unified model for inclusive inheritance
+in livestock species. Genetics, 212, 1075–1099. https://doi.org/10.1
+534/genetics.119.302375
+David, L. A., Maurice, C. F., Carmody, R. N., Gootenberg, D. B., Button,
+J. E., Wolfe, B. E., Ling, A. V., Devlin, A. S., Varma, Y., Fischbach, M.
+A., Biddinger, S. B., Dutton, R. J., & Turnbaugh, P. J. (2013). Diet
+rapidly and reproducibly alters the human gut microbiome. Nature,
+505, 559–563. https://doi.org/10.1038/nature12820
+Day, T., & Bonduriansky, R. (2011). A unified approach to the evolutionary consequences of genetic and nongenetic inheritance. The
+American Naturalist, 178, E18–E36. https://doi.org/10.1086/6609
+11
+de los Campos, G., Sorensen, D., & Gianola, D. (2015). Genomic heritability: What is it? PLOS Genetics, 11, e1005048. https://doi.org/
+10.1371/journal.pgen.1005048
+Déru, V., Tiezzi, F., Carillier-Jacquin, C., Blanchet, B., Cauquil, L., Zemb,
+O., Bouquet, A., Maltecca, C., & Gilbert, H. (2022). Gut microbiota
+and host genetics contribute to the phenotypic variation of digestive
+and feed efficiency traits in growing pigs fed a conventional and a
+high fiber diet. Genetics Selection Evolution, 54(1), 55. https://doi.
+org/10.1186/s12711- 022- 00742- 6
+Difford, G. F., Plichta, D. R., Løvendahl, P., Lassen, J., Noel, S. J.,
+Højberg, O., Wright, A. D. G., Zhu, Z., Kristensen, L., Nielsen, H.
+B. r., Guldbrandtsen, B., & Sahana, G. (2018). Host genetics and
+the rumen microbiome jointly associate with methane emissions in
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+B.W. and B.J.M.B. are supported by grant number 10001
+from the Gordon and Betty Moore Foundation. B.W. is
+further funded through KiTE (i.e., Kiel Training for Excellence), which is part of the European Union’s Horizon
+Europe research and innovation program under the Marie
+Sklodowska-Curie grant agreement number 101081480.
+B.J.M.B. and H.F.T. are grateful for the support of the National Institutes of Health (NIH, grant P01GM125576).
+H.F.T. is also thankful for support from NIH grant UH3
+OD023389. P.L.R. is supported by NIH grants HG01273
+and HG010774 from the National Institute of General Medical Sciences. W.A.C. is supported by National Science Foundation grant OPP-2015301.
+
+Week et al.
+
+Evolution (2025), Vol. 79, No. 11
+
+Lennon, J. T., Mueller, E. A., Wisnoski, N. I., & Peralta, A. L. (2019).
+Microbial rescue effects: How microbiomes can save hosts from extinction. https://doi.org/10.31219/osf.io/snr49
+Lush, J. (1937). Animal breeding plans. Collegiate Press, Incorporated.
+Lynch, M., & Walsh, B. (1998). Genetics and analysis of quantitative
+traits(Vol. 1). Sinauer.
+Mackay, T. F. C., Stone, E. A., & Ayroles, J. F. (2009). The genetics of
+quantitative traits: Challenges and prospects. Nature Reviews Genetics, 10, 565–577. https://doi.org/10.1038/nrg2612
+Martinez-Boggio, G., Monteiro, H. F., Lima, F. S., Figueiredo, C. C.,
+Bisinotto, R. S., Santos, J. E. P., Mion, B., Schenkel, F. S., Ribeiro, E.
+S., Weigel, K. A., Rosa, G. J. M., & Peñagaricano, F. (2024). Revealing host genome–microbiome networks underlying feed efficiency
+in dairy cows. Scientific Reports, 14. 26060. https://doi.org/10.103
+8/s41598- 024- 77782- z
+Martiny, J. B. H., Jones, S. E., Lennon, J. T., & Martiny, A. C. (2015).
+Microbiomes in light of traits: A phylogenetic perspective. Science,
+350, aac9323. https://doi.org/10.1126/science.aac9323
+Maurice, N., & Erdei, L. (2018). Termite gut microbiome(pp. 69–99).
+Springer International Publishing.
+McFall-Ngai, M. (2007). Care for the community. Nature, 445, 153–
+153. https://doi.org/10.1038/445153a
+McFall-Ngai, M., Hadfield, M. G., Bosch, T. C. G., Carey, H.
+V., Domazet-Lošo, T., Douglas, A. E., Dubilier, N., Eberl, G.,
+Fukami, T., Gilbert, S. F., Hentschel, U., King, N., Kjelleberg,
+S., Knoll, A. H., Kremer, N., Mazmanian, S. K., Metcalf, J. L.,
+Nealson, K., Pierce, N. E., & Wernegreen, J. J. (2013). Animals in a bacterial world, a new imperative for the life sciences.
+Proceedings of the National Academy of Sciences of the United
+States of America, 110, 3229–3236. https://doi.org/10.1073/pnas.1
+218525110
+Miller, E. T., Svanbäck, R., & Bohannan, B. J. (2018). Microbiomes as
+metacommunities: Understanding host-associated microbes through
+metacommunity ecology. Trends in Ecology and Evolution, 33, 926–
+935. https://doi.org/10.1016/j.tree.2018.09.002
+Moore, A. J., Brodie, E. D., & Wolf, J. B. (1997). Interacting phenotypes
+and the evolutionary process: I. Direct and indirect genetic effects
+of social interactions. Evolution, 51, 1352–1362. https://doi.org/10
+.1111/j.1558-5646.1997.tb01458.x
+Morris, A. H., & Bohannan, B. J. M. (2024). Estimates of microbiome
+heritability across hosts. Nature Microbiology, 9, 3110–3119. https:
+//doi.org/10.1038/s41564- 024- 01865- w
+Mueller, U. G., & Linksvayer, T. A. (2022). Microbiome breeding: Conceptual and practical issues. Trends in Microbiology, 30, 997–1011.
+https://doi.org/10.1016/j.tim.2022.04.003
+O’Brien, A. M., Laurich, J. R., & Frederickson, M. E. (2023). Evolutionary consequences of microbiomes for hosts: Impacts on host fitness,
+traits, and heritability. Evolution, 78, 237–252. https://doi.org/10.1
+093/evolut/qpad183
+Odling-Smee, J., Erwin, D. H., Palkovacs, E. P., Feldman, M. W., & Laland, K. N. (2013). Niche construction theory: A practical guide
+for ecologists. The Quarterly Review of Biology, 88, 3–28. https:
+//doi.org/10.1086/669266
+Opstal, E. J. v., & Bordenstein, S. R. (2015). Rethinking heritability of
+the microbiome. Science, 349, 1172–1173. https://doi.org/10.1126/
+science.aab3958
+Org, E., Parks, B. W., Joo, J. W. J., Emert, B., Schwartzman, W., Kang, E.
+Y., Mehrabian, M., Pan, C., Knight, R., Gunsalus, R., Drake, T. A.,
+Eskin, E., & Lusis, A. J. (2015). Genetic and environmental control
+of host-gut microbiota interactions. Genome Research, 25, 1558–
+1569. https://doi.org/10.1101/gr.194118.115
+Pemberton, J. M. (2010). Evolution of quantitative traits in the wild:
+Mind the ecology. Philosophical Transactions of the Royal Society
+B: Biological Sciences, 365, 2431–2438. https://doi.org/10.1098/rs
+tb.2010.0108
+Pérez-Enciso, M., Zingaretti, L. M., Ramayo-Caldas, Y., & de
+los Campos, G. (2021). Opportunities and limits of combining microbiome and genome data for complex trait prediction.
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+dairy cows. PLOS Genetics, 14, e1007580. https://doi.org/10.1371/
+journal.pgen.1007580
+Dwivedi, S. L., Vetukuri, R. R., Kelbessa, B. G., Gepts, P., HeslopHarrison, P., Araujo, A. S., Sharma, S., & Ortiz, R. (2025). Exploitation of rhizosphere microbiome biodiversity in plant breeding.
+Trends in Plant Science, 30(9), 1033–1045. https://doi.org/10.1016/
+j.tplants.2025.04.004
+Fisher, R. A. (1918). XV.—the correlation between relatives on the supposition of mendelian inheritance. Transactions of the Royal Society
+of Edinburgh, 52, 399–433. https://doi.org/10.1017/s00804568000
+12163
+Fisher, R. A. (1941). Average excess and average effect of a gene substitution. Annals of Eugenics, 11, 53–63. https://doi.org/10.1111/j.14
+69-1809.1941.tb02272.x
+Gerber, G. K. (2014). The dynamic microbiome. FEBS Letters, 588,
+4131–4139. https://doi.org/10.1016/j.febslet.2014.02.037
+Goodrich, J. K., Davenport, E. R., Waters, J. L., Clark, A. G., & Ley,
+R. E. (2016). Cross-species comparisons of host genetic associations
+with the microbiome. Science, 352, 532–535. https://doi.org/10.112
+6/science.aad9379
+Gould, A. L., Zhang, V., Lamberti, L., Jones, E. W., Obadia, B., Korasidis,
+N., Gavryushkin, A., Carlson, J. M., Beerenwinkel, N., & Ludington,
+W. B. (2018). Microbiome interactions shape host fitness. Proceedings of the National Academy of Sciences of the United States of
+America, 115(51), E11951–E11960. https://doi.org/10.1073/pnas.1
+809349115
+Helanterä, H., & Uller, T. (2010). The price equation and extended inheritance. Philosophy and Theory in Biology, 2. https://doi.org/10.3
+998/ptb.6959004.0002.001
+Henry, L. P., Bruijning, M., Forsberg, S. K. G., & Ayroles, J. F. (2021).
+The microbiome extends host evolutionary potential. Nature Communications, 12. 5141https://doi.org/10.1038/s41467- 021- 25315
+-x
+Houwenhuyse, S., Stoks, R., Mukherjee, S., & Decaestecker, E. (2021).
+Locally adapted gut microbiomes mediate host stress tolerance. The
+ISME Journal, 15, 2401–2414. https://doi.org/10.1038/s41396-021
+- 00940- y
+Kirkpatrick, M., & Lande, R. (1989). The evolution of maternal characters. Evolution, 43, 485–503. https://doi.org/10.1111/j.1558-564
+6.1989.tb04247.x
+Knights, D., Silverberg, M. S., Weersma, R. K., Gevers, D., Dijkstra, G.,
+Huang, H., Tyler, A. D., van Sommeren, S., Imhann, F., Stempak,
+J. M., Huang, H., Vangay, P., Al-Ghalith, G. A., Russell, C., Sauk,
+J., Knight, J., Daly, M. J., Huttenhower, C., & Xavier, R. J. (2014).
+Complex host genetics influence the microbiome in inflammatory
+bowel disease. Genome Medicine, 6, 107. https://doi.org/10.1186/
+s13073- 014- 0107- 1
+Koch, H., & Schmid-Hempel, P. (2011). Socially transmitted gut microbiota protect bumble bees against an intestinal parasite. Proceedings of the National Academy of Sciences of the United States of
+America, 108, 19288–19292. https://doi.org/10.1073/pnas.11104
+74108
+Koskella, B., Hall, L. J., & Metcalf, C. J. E. (2017). The microbiome
+beyond the horizon of ecological and evolutionary theory. Nature
+Ecology and Evolution, 1, 1606–1615. https://doi.org/10.1038/s415
+59- 017- 0340- 2
+Kruuk, L. E. B., Slate, J., Pemberton, J. M., Brotherstone, S., Guinness,
+F., & Clutton-Brock, T. (2002). Antler size in red deer: Heritability
+and selection but no evolution. Evolution, 56, 1683–1695. https:
+//doi.org/10.1111/j.0014-3820.2002.tb01480.x
+Lande, R. (1976). Natural selection and random genetic drift in phenotypic evolution. Evolution, 30, 314–334.
+Leibold, M. A., Holyoak, M., Mouquet, N., Amarasekare, P., Chase,
+J. M., Hoopes, M. F., Holt, R. D., Shurin, J. B., Law, R., Tilman,
+D., Loreau, M., & Gonzalez, A. (2004). The metacommunity concept: A framework for multi-scale community ecology. Ecology
+Letters, 7, 601–613. https://doi.org/10.1111/j.1461-0248.2004.006
+08.x
+
+2501
+
+2502
+
+Sarkar, A., McInroy, C. J., Harty, S., Raulo, A., Ibata, N. G., VallesColomer, M., Johnson, K. V. A., Brito, I. L., Henrich, J., Archie, E. A.,
+Barreiro, L. B., Gazzaniga, F. S., Finlay, B. B., Koonin, E. V., Carmody,
+R. N., & Moeller, A. H. (2024). Microbial transmission in the social
+microbiome and host health and disease. Cell, 187, 17–43. https:
+//doi.org/10.1016/j.cell.2023.12.014
+Spor, A., Koren, O., & Ley, R. (2011). Unravelling the effects of the environment and host genotype on the gut microbiome. Nature Reviews
+Microbiology, 9, 279–290. https://doi.org/10.1038/nrmicro2540
+Strang, G. (2019). Linear algebra and learning from data(Vol. 4).
+Wellesley-Cambridge Press.
+Tavalire, H. F., Christie, D. M., Leve, L. D., Ting, N., Cresko, W. A., &
+Bohannan, B. J. M. (2021). Shared environment and genetics shape
+the gut microbiome after infant adoption. mBio, 12, 10–1128. https:
+//doi.org/10.1128/mbio.00548-21
+Theis, K. R. (2018). Hologenomics: Systems-level host biology. mSystems, 3, 10–1128. https://doi.org/10.1128/msystems.00164-17
+Tierney, B. T., Yang, Z., Luber, J. M., Beaudin, M., Wibowo, M. C., Baek,
+C., Mehlenbacher, E., Patel, C. J., & Kostic, A. D. (2019). The landscape of genetic content in the gut and oral human microbiome. Cell
+Host and Microbe, 26, 283–295. https://doi.org/10.1016/j.chom.2
+019.07.008
+Uller, T., & Helanterä, H. (2013). Non-genetic inheritance in evolutionary theory: A primer. Non-Genetic Inheritance, 1, 27–32. https:
+//doi.org/10.2478/ngi- 2013- 0003
+van Vliet, S., & Doebeli, M. (2019). The role of multilevel selection in
+host microbiome evolution. Proceedings of the National Academy of
+Sciences of the United States of America, 116, 20591–20597. https:
+//doi.org/10.1073/pnas.1909790116
+Visscher, P. M., Hill, W. G., & Wray, N. R. (2008). Heritability in the
+genomics era—concepts and misconceptions. Nature Reviews Genetics, 9, 255–266. https://doi.org/10.1038/nrg2322
+Walsh, B., & Lynch, M. (2018). Evolution and selection of quantitative
+traits. Oxford University Press.
+Wang, J., Chen, L., Zhao, N., Xu, X., Xu, Y., & Zhu, B. (2018). Of genes
+and microbes: Solving the intricacies in host genomes. Protein and
+Cell, 9, 446–461. https://doi.org/10.1007/s13238- 018- 0532- 9
+Week, B., Russel, S., Schulenburg, H., Bohannan, B., & Bruijning,
+M. (2025). Applying evolutionary theory to understand host–
+microbiome evolution. Nature Ecology & Evolution, Sep 8, 1–12.
+https://doi.org/10.1038/s41559- 025- 02846- w
+Wendling, C. C., & Wegner, K. M. (2015). Adaptation to enemy shifts:
+Rapid resistance evolution to local vibrio spp. in invasive pacific oysters. Proceedings of the Royal Society B: Biological Sciences, 282,
+20142244. https://doi.org/10.1098/rspb.2014.2244
+Wilson, A. J., Réale, D., Clements, M. N., Morrissey, M. M., Postma, E.,
+Walling, C. A., Kruuk, L. E. B., & Nussey, D. H. (2009). An ecologist’s guide to the animal model. Journal of Animal Ecology, 79,
+13–26. https://doi.org/10.1111/j.1365-2656.2009.01639.x
+Xavier, A., Muir, W. M., & Rainey, K. M. (2019). bwgr: Bayesian wholegenome regression. Bioinformatics, 36, 1957–1959. https://doi.org/
+10.1093/bioinformatics/btz794
+Zeng, Q., Wu, S., Sukumaran, J., & Rodrigo, A. (2017). Models of microbiome evolution incorporating host and microbial selection. Microbiome, 5. 127https://doi.org/10.1186/s40168- 017- 0343- x
+Zhang, W., Lan, F., Zhou, Q., Gu, S., Li, X., Wen, C., Yang, N., & Sun,
+C. (2024). Host genetics and gut microbiota synergistically regulate feed utilization in egg-type chickens. Journal of Animal Science
+and Biotechnology, 15, 123. https://doi.org/10.1186/s40104- 024- 0
+1076-7
+Zilber-Rosenberg, I., & Rosenberg, E. (2008). Role of microorganisms
+in the evolution of animals and plants: The hologenome theory of
+evolution. FEMS Microbiology Reviews, 32, 723–735. https://doi.
+org/10.1111/j.1574-6976.2008.00123.x
+
+Received January 1, 2025; revisions received July 28, 2025; accepted August 10, 2025
+Associate Editor: Katrina McGuigan; Handling Editor: Jason Wolf
+© The Author(s) 2025. Published by Oxford University Press on behalf of The Society for the Study of Evolution (SSE).
+This is an Open Access article distributed under the terms of the Creative Commons Attribution License (https://creativecommons.org/licenses/by/4.0/),
+which permits unrestricted reuse, distribution, and reproduction in any medium, provided the original work is properly cited.
+
+Downloaded from https://academic.oup.com/evolut/article/79/11/2487/8244151 by UB Kiel user on 13 December 2025
+
+Genetics Selection Evolution, 53, 65. https://doi.org/10.1186/s127
+11- 021- 00658- 7
+Petersen, C., Hamerich, I. K., Adair, K. L., Griem-Krey, H., Torres Oliva,
+M., Hoeppner, M. P., Bohannan, B. J. M., & Schulenburg, H. (2023).
+Host and microbiome jointly contribute to environmental adaptation. The ISME Journal, 17, 1953–1965. https://doi.org/10.1038/s4
+1396- 023- 01507- 9
+Pillai, P., Gouhier, T. C., & Vollmer, S. V. (2016). Ecological
+rescue of host-microbial systems under environmental change.
+Theoretical Ecology, 10, 51–63. https://doi.org/10.1007/s12080-0
+16- 0310- 3
+Provine, W. B. (2001). The origins of theoretical population genetics:
+With a new afterword. University of Chicago Press.
+Pujol, B., Blanchet, S., Charmantier, A., Danchin, E., Facon, B., Marrot, P., Roux, F., Scotti, I., Teplitsky, C., Thomson, C. E., & Winney,
+I. (2018). The missing response to selection in the wild. Trends in
+Ecology and Evolution, 33, 337–346. https://doi.org/10.1016/j.tree
+.2018.02.007
+Qin, J., Li, Y., Cai, Z., Li, S., Zhu, J., Zhang, F., Liang, S., Zhang, W.,
+Guan, Y., Shen, D., Peng, Y., Zhang, D., Jie, Z., Wu, W., Qin, Y., Xue,
+W., Li, J., Han, L., Lu, D., & Wang, J. (2012). A metagenome-wide
+association study of gut microbiota in type 2 diabetes. Nature, 490,
+55–60. https://doi.org/10.1038/nature11450
+Rice, S. (2004). Evolutionary theory: Mathematical and conceptual
+foundations. Sinauer.
+Rosenberg, E., & Zilber-Rosenberg, I. (2016). Microbes drive evolution
+of animals and plants: The hologenome concept. mBio, 7, 10–1128.
+https://doi.org/10.1128/mbio.01395-15
+Rosenberg, E., & Zilber-Rosenberg, I. (2018). The hologenome concept
+of evolution after 10 years. Microbiome, 6, 78.https://doi.org/10.1
+186/s40168- 018- 0457- 9
+Rosshart, S. P., Vassallo, B. G., Angeletti, D., Hutchinson, D. S., Morgan,
+A. P., Takeda, K., Hickman, H. D., McCulloch, J. A., Badger, J. H.,
+Ajami, N. J., Trinchieri, G., Pardo-Manuel de Villena, F., Yewdell,
+J. W., & Rehermann, B. (2017). Wild mouse gut microbiota promotes host fitness and improves disease resistance. Cell, 171, 1015–
+1028.e13. https://doi.org/10.1016/j.cell.2017.09.016
+Rothschild, D., Weissbrod, O., Barkan, E., Kurilshikov, A., Korem, T.,
+Zeevi, D., Costea, P. I., Godneva, A., Kalka, I. N., Bar, N., Shilo,
+S., Lador, D., Vila, A. V., Zmora, N., Pevsner-Fischer, M., Israeli,
+D., Kosower, N., Malka, G., Wolf, B. C., & Segal, E. (2018). Environment dominates over host genetics in shaping human gut
+microbiota. Nature, 555, 210–215. https://doi.org/10.1038/nature
+25973
+Roughgarden, J. (2023). Holobiont evolution: Population theory for the
+hologenome. The American Naturalist, 201, 763–778. https://doi.or
+g/10.1086/723782
+Roughgarden, J., Gilbert, S. F., Rosenberg, E., Zilber-Rosenberg,
+I., & Lloyd, E. A. (2017). Holobionts as units of selection and a model of their population dynamics and evolution.
+Biological Theory, 13, 44–65. https://doi.org/10.1007/s13752-017
+- 0287- 1
+Russell, S. L. (2019). Transmission mode is associated with environment
+type and taxa across bacteria-eukaryote symbioses: A systematic review and meta-analysis. FEMS Microbiology Letters, 366, fnz013.
+https://doi.org/10.1093/femsle/fnz013
+Sandoval-Motta, S., Aldana, M., & Frank, A. (2017a). Evolving ecosystems: Inheritance and selection in the light of the microbiome.
+Archives of Medical Research, 48, 780–789. https://doi.org/10.101
+6/j.arcmed.2018.01.002
+Sandoval-Motta, S., Aldana, M., Martínez-Romero, E., & Frank, A.
+(2017b). The human microbiome and the missing heritability problem. Frontiers in Genetics, 8, 80. https://doi.org/10.3389/fgene.20
+17.00080
+
+Week et al.
+
+

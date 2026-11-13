@@ -1,0 +1,615 @@
+/* ==========================================================================
+   research vignettes — deck.css
+   --------------------------------------------------------------------------
+   Layout contract (this is what fixes the "can't advance past a slide" bug):
+
+     * every slide is a flex COLUMN with a fixed height and border-box padding
+     * exactly one child of that column is allowed to grow (.body)
+     * figures live inside height-bounded wells and are constrained by HEIGHT,
+       never by width, so nothing can push past the bottom edge
+
+   Reveal only refuses to advance when content overflows the slide box, so the
+   rule is: no slide is ever allowed to be taller than 720px. Everything below
+   exists to enforce that.
+
+   Companion setting in the YAML: `auto-stretch: false`. Quarto otherwise
+   silently wraps a lone image in `.r-stretch` and sizes it to fill, which
+   overflows the moment there is anything else on the slide.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap");
+
+/* ---------------------------------------------------------------- palette */
+:root {
+  --ink:        #151a1f;
+  --ink-soft:   #3b454e;
+  --muted:      #5f6a73;
+  --faint:      #9aa3ab;
+  --line:       #dde2e7;
+  --line-soft:  #eef1f4;
+  --paper:      #ffffff;
+  --page:       #f5f7f9;
+
+  /* per-part accents — set on the section, inherited by everything in it */
+  --accent:      #0f7d8c;
+  --accent-deep: #0a4f59;
+  --accent-soft: #e6f2f4;
+  --accent-alt:  #c2185b;
+
+  --display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --body:    "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+
+.reveal section.p1 { --accent: #0b6f9c; --accent-deep: #07495f; --accent-soft: #e0eff7; --accent-alt: #c2185b; }
+.reveal section.p2 { --accent: #5a4cc7; --accent-deep: #382c8f; --accent-soft: #ebe9fb; --accent-alt: #d2691e; }
+.reveal section.p3 { --accent: #a8123f; --accent-deep: #6d0a28; --accent-soft: #f9dee6; --accent-alt: #1b6ea8; }
+.reveal section.p4 { --accent: #5d7a10; --accent-deep: #3c5108; --accent-soft: #f0f4de; --accent-alt: #b3123f; }
+
+* , *::before, *::after { box-sizing: border-box; }
+
+/* ------------------------------------------------------------ foundations */
+.reveal {
+  font-family: var(--body);
+  color: var(--ink);
+  font-size: 31px;
+  background: var(--page);
+  -webkit-font-smoothing: antialiased;
+}
+.reveal .slides { text-align: left; }
+
+/* THE layout rule. Every slide is a bounded flex column.
+   The deck uses no vertical stacks, so every direct child of .slides is a
+   slide; the second selector is belt-and-braces if one is ever added. */
+.reveal .slides > section,
+.reveal .slides > section > section {
+  background: var(--paper);
+  height: 100%;
+  padding: 40px 58px 46px;
+  display: flex !important;
+  flex-direction: column;
+  overflow: hidden;               /* a slide can never scroll */
+}
+.reveal .slides > section:has(> section) {
+  background: transparent; padding: 0; display: block !important;
+}
+
+/* Only .body may grow. Everything else keeps its natural height. */
+.reveal section > * { flex: 0 0 auto; min-height: 0; }
+.reveal section > .body { flex: 1 1 auto; }
+
+/* --------------------------------------------------------------- headings */
+.reveal h2 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.24em;
+  line-height: 1.12;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  margin: 0 0 0.02em;
+  text-transform: none;
+  text-wrap: balance;
+}
+.reveal h2::after {
+  content: "";
+  display: block;
+  width: 62px;
+  height: 4px;
+  margin-top: 0.34em;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.reveal h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.86em;
+  color: var(--accent-deep);
+  margin: 0 0 0.30em;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+/* .ct — a card/tile title.
+   These used to be `###` headings. Pandoc promotes a fenced div that BEGINS
+   with a heading into a <section>, and a nested <section> is a reveal.js
+   vertical stack — which is what broke navigation after the inheritance
+   slide. Styling a span sidesteps the problem entirely. */
+.reveal .ct {
+  display: block;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.86em;
+  line-height: 1.16;
+  color: var(--accent-deep);
+  margin: 0 0 0.30em;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.reveal .card .ct { font-size: 0.80em; }
+.reveal .tile .ct { color: var(--ink); font-size: 0.82em; margin: 0.16em 0 0.28em; }
+
+/* Project marker — the audience needs to know when a new project starts.
+   Each project slide carries `.proj`, which draws a numbered chip and a
+   full-width hairline under the eyebrow. */
+.reveal .proj { margin: 0 0 0.34em; }
+/* Pandoc wraps the spans in a paragraph, so the flex container has to be
+   that paragraph — putting it on the div leaves the spans inline and the
+   gap and the growing rule both collapse to nothing. */
+.reveal .proj > p {
+  display: flex; align-items: center; gap: 12px;
+  margin: 0; width: 100%;
+}
+.reveal .proj .dot {
+  font-family: var(--mono); font-size: 0.44em; font-weight: 600;
+  color: var(--paper); background: var(--accent);
+  border-radius: 999px; padding: 3px 11px 4px; letter-spacing: 0.08em;
+  flex: 0 0 auto;
+}
+.reveal .proj .nm {
+  font-family: var(--display); font-size: 0.60em; font-weight: 600;
+  color: var(--accent-deep); letter-spacing: -0.01em; flex: 0 0 auto;
+}
+.reveal .proj .rule {
+  flex: 1 1 auto; height: 2px; background: var(--accent-soft);
+  border-radius: 1px;
+}
+.reveal .proj + .eyebrow { margin-top: -0.16em; }
+
+/* .proj.start — the wake-up call on the opening slide of a project.
+   The quiet chip above is a reminder; this is an announcement. */
+.reveal .proj.start {
+  background: var(--accent);
+  border-radius: 8px;
+  padding: 5px 18px 6px;
+  margin: 0 0 0.24em;
+}
+.reveal .proj.start > p { gap: 26px; }
+.reveal .proj.start .dot { display: none; }
+.reveal .proj.start .nm {
+  color: var(--paper);
+  font-size: 0.70em;
+  letter-spacing: -0.012em;
+}
+.reveal .proj.start .rule {
+  background: rgba(255, 255, 255, 0.32); height: 3px; min-width: 48px;
+}
+.reveal .proj.start .new {
+  font-family: var(--mono); font-size: 0.54em; font-weight: 600;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--paper); flex: 0 0 auto;
+}
+
+/* eyebrow: the small mono label above a title */
+.reveal .eyebrow {
+  font-family: var(--mono);
+  font-size: 0.56em;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.55em;
+}
+.reveal .eyebrow .sep { color: var(--faint); margin: 0 0.45em; }
+.reveal .eyebrow .status { color: var(--muted); }
+
+/* ------------------------------------------------------------------- body */
+.reveal p, .reveal li { font-size: 0.74em; line-height: 1.36; }
+.reveal ul { margin: 0.30em 0 0; padding-left: 1.05em; list-style: none; }
+.reveal ul > li { position: relative; margin-bottom: 0.42em; padding-left: 0.1em; }
+.reveal ul > li::before {
+  content: "";
+  position: absolute;
+  left: -0.85em;
+  top: 0.56em;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.reveal ol { margin: 0.3em 0 0; padding-left: 1.3em; }
+.reveal strong { font-weight: 650; color: var(--ink); }
+.reveal em { font-style: normal; color: var(--accent-deep); font-weight: 550; }
+.reveal a, .reveal a:hover { color: var(--accent-deep); text-decoration: none; border-bottom: 1px solid var(--accent-soft); }
+
+/* --------------------------------------------------------- the body region
+   .body is a flex row. Children take width from .w** classes. Nothing here
+   is allowed to exceed the row height. */
+.reveal .body {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  width: 100%;
+  padding-top: 14px;
+  min-height: 0;
+}
+.reveal .body.top    { align-items: flex-start; }
+.reveal .body.stack  { flex-direction: column; align-items: stretch; gap: 14px; }
+.reveal .body > *    { min-width: 0; min-height: 0; }
+/* Figure columns stretch to the row height regardless of align-items. */
+.reveal .body > .fig,
+.reveal .body > .w25.fig, .reveal .body > .w30.fig, .reveal .body > .w34.fig,
+.reveal .body > .w38.fig, .reveal .body > .w42.fig, .reveal .body > .w46.fig,
+.reveal .body > .w50.fig, .reveal .body > .w54.fig, .reveal .body > .w58.fig,
+.reveal .body > .w62.fig, .reveal .body > .w66.fig, .reveal .body > .w70.fig {
+  align-self: stretch;
+}
+/* A bare .fig with no width class fills the row. */
+.reveal .body > .fig:only-child { flex: 1 1 100%; width: 100%; }
+/* Inside a stacked body, the figure absorbs the slack. */
+.reveal .body.stack > .fig.grow { flex: 1 1 auto; width: 100%; align-self: stretch; }
+
+.reveal .w25 { flex: 0 0 25%; } .reveal .w30 { flex: 0 0 30%; }
+.reveal .w34 { flex: 0 0 34%; } .reveal .w38 { flex: 0 0 38%; }
+.reveal .w42 { flex: 0 0 42%; } .reveal .w46 { flex: 0 0 46%; }
+.reveal .w50 { flex: 0 0 50%; } .reveal .w54 { flex: 0 0 54%; }
+.reveal .w58 { flex: 0 0 58%; } .reveal .w62 { flex: 0 0 62%; }
+.reveal .w66 { flex: 0 0 66%; } .reveal .w70 { flex: 0 0 70%; }
+.reveal .w32 { flex: 0 0 32%; }
+.reveal .w68 { flex: 0 0 68%; }
+.reveal .w72 { flex: 0 0 72%; }
+.reveal .w28 { flex: 0 0 28%; }
+.reveal .w14 { flex: 0 0 14%; }
+.reveal .w26 { flex: 0 0 26%; }
+.reveal .w74 { flex: 0 0 74%; }
+.reveal .w86 { flex: 0 0 86%; }
+.reveal .w16 { flex: 0 0 16%; }
+.reveal .w84 { flex: 0 0 84%; }
+.reveal .grow { flex: 1 1 0; }
+
+/* --------------------------------------------------------------- figures
+   The critical bit. A .fig is a bounded box; the image is capped by the box
+   height, so adding text elsewhere shrinks the figure instead of overflowing
+   the slide. */
+.reveal .fig {
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+.reveal .fig img,
+.reveal .fig p { margin: 0; max-height: 100%; }
+.reveal .fig img {
+  max-width: 100%;
+  width: auto; height: auto;
+  object-fit: contain;
+  border: none; border-radius: 0; box-shadow: none;
+  background: transparent;
+}
+.reveal .fig p { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; }
+
+/* a framed figure, for photographs and renders rather than plots */
+.reveal .fig.framed img {
+  border-radius: 12px;
+  box-shadow: 0 1px 0 var(--line), 0 10px 26px rgba(21, 26, 31, 0.10);
+}
+.reveal .figcap {
+  font-size: 0.50em; color: var(--muted); text-align: center;
+  margin: 0.4em 0 0;
+}
+
+/* Neutralise Quarto's auto-stretch if it ever slips through. */
+.reveal .r-stretch, .reveal .stretch { max-height: 100% !important; height: auto !important; }
+
+/* ---------------------------------------------------------------- takeaway */
+.reveal .tk {
+  margin-top: 14px;
+  padding: 0.46em 0.8em 0.5em;
+  background: var(--accent-soft);
+  border-left: 5px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.68em;
+  line-height: 1.32;
+  font-weight: 500;
+  color: var(--ink);
+}
+.reveal .tk p { font-size: 1em; margin: 0; }
+.reveal .tk strong { color: var(--accent-deep); }
+
+/* ------------------------------------------------------------------- cards */
+.reveal .card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.60em 0.75em 0.66em;
+  background: #fbfcfd;
+  height: 100%;
+}
+.reveal .card.accent { border-color: var(--accent); background: var(--accent-soft); }
+.reveal .card p, .reveal .card li { font-size: 0.70em; }
+.reveal .card p:last-child { margin-bottom: 0; }
+
+.reveal .grid2, .reveal .grid3, .reveal .grid4 {
+  display: grid; gap: 16px; width: 100%; align-content: center;
+}
+.reveal .grid2 { grid-template-columns: repeat(2, 1fr); }
+.reveal .grid3 { grid-template-columns: repeat(3, 1fr); }
+.reveal .grid4 { grid-template-columns: repeat(4, 1fr); }
+
+/* numbered direction tiles, used on the map slide */
+.reveal .tile {
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--tile, var(--accent));
+  border-radius: 12px;
+  padding: 0.62em 0.75em 0.7em;
+  background: #fbfcfd;
+  height: 100%;
+}
+.reveal .tile .n {
+  font-family: var(--mono); font-size: 0.50em; font-weight: 600;
+  color: var(--tile, var(--accent)); letter-spacing: 0.10em;
+}
+.reveal .tile p { font-size: 0.66em; color: var(--muted); margin: 0; }
+.reveal .t1 { --tile: #0b6f9c; } .reveal .t2 { --tile: #5a4cc7; }
+.reveal .t3 { --tile: #a8123f; } .reveal .t4 { --tile: #5d7a10; }
+
+/* ------------------------------------------------------------- who chips
+   A collaborator is a small chip, not a column-eating circle. */
+.reveal .who {
+  display: flex; align-items: center; gap: 11px;
+  padding: 0 18px 0 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  width: max-content; max-width: 100%;
+  min-height: 52px;
+}
+.reveal .who img {
+  width: 96px; height: 96px; flex: 0 0 96px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--line);
+  /* the portrait overflows the pill, so the background bubble reads as a
+     flatter band behind it — the effect the paired chip already had */
+  margin: -22px 0;
+}
+.reveal .who .n  { font-size: 0.62em; font-weight: 650; color: var(--ink); line-height: 1.18; display: block; white-space: nowrap; }
+.reveal .who .r  { font-size: 0.52em; color: var(--muted); line-height: 1.22; display: block; white-space: nowrap; }
+.reveal .who-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+/* the portrait overflows the pill top and bottom, so a stacked row needs
+   clearance or it collides with the takeaway box beneath */
+.reveal .body.stack .who-row { margin-top: 26px; margin-bottom: 20px; }
+/* a narrow portrait column beside a figure: chip goes vertical */
+.reveal .who-col .who {
+  flex-direction: column; text-align: center; border-radius: 16px;
+  padding: 10px 10px 12px; gap: 8px; width: 100%; min-height: 0;
+}
+.reveal .who-col .who img {
+  width: 88px; height: 88px; flex: 0 0 88px; margin: 0;
+}
+/* the vertical chips wrap normally — they have the width for it */
+.reveal .who-col .who .n,
+.reveal .who-col .who .r { white-space: normal; }
+
+/* a two-portrait chip in a narrow column has to stack as well, or its
+   max-content width pushes the names off the slide */
+.reveal .who-col .who-pair {
+  flex-direction: column; text-align: center; border-radius: 16px;
+  padding: 10px 8px 12px; gap: 6px; width: 100%; min-height: 0;
+}
+.reveal .who-col .who-pair > p:last-child { max-width: none; }
+.reveal .who-col .who-pair img {
+  width: 66px; height: 66px; flex: 0 0 66px; margin: 0;
+}
+.reveal .who-col .who-pair img + img { margin-left: -18px; }
+.reveal .who-col .who-pair .n,
+.reveal .who-col .who-pair .r { white-space: normal; }
+
+/* two collaborators, portraits slightly overlapped */
+.reveal .who-pair {
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 18px 0 6px; min-height: 52px; max-width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  width: max-content; max-width: 100%;
+}
+.reveal .who-pair > p { margin: 0; }
+
+.reveal .who-pair > p:first-child { display: flex; flex: 0 0 auto; }
+.reveal .who-pair img {
+  width: 96px; height: 96px; flex: 0 0 96px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--line);
+  margin: -22px 0;
+}
+.reveal .who-pair img + img { margin-left: -30px; }
+.reveal .who-pair .n { white-space: nowrap; font-size: 0.60em; font-weight: 650; color: var(--ink); line-height: 1.18; display: block; }
+.reveal .who-pair .r { white-space: nowrap; font-size: 0.52em; color: var(--muted); line-height: 1.22; display: block; }
+
+/* a bigger, portrait-led variant for a single named collaborator */
+.reveal .who.lg img { width: 96px; height: 96px; flex-basis: 96px; }
+.reveal .who.lg .n { font-size: 0.56em; }
+
+
+/* ------------------------------------------------- the coevolution lineage
+   Three stacked horizontal bars: portrait, paper, what it established. */
+.reveal .lineage { display: flex; flex-direction: column; gap: 14px; width: 100%; }
+.reveal .lin {
+  display: flex; align-items: center; gap: 16px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--accent);
+  border-radius: 10px;
+  padding: 9px 16px 9px 12px;
+  background: #fbfcfd;
+}
+.reveal .lin img {
+  width: 106px; height: 106px; flex: 0 0 106px;
+  border-radius: 50%; object-fit: cover; margin: 0;
+  border: 2px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--line);
+}
+.reveal .lin .yr {
+  font-family: var(--mono); font-size: 0.58em; font-weight: 600;
+  color: var(--accent); flex: 0 0 106px; letter-spacing: 0.02em;
+}
+.reveal .lin .yr b { display: block; font-size: 1.22em; color: var(--ink); font-weight: 650; letter-spacing: 0; }
+.reveal .lin .txt { flex: 1 1 auto; }
+.reveal .lin .q { font-size: 0.76em; font-weight: 600; color: var(--ink); line-height: 1.24; display: block; }
+.reveal .lin .a { font-size: 0.66em; color: var(--muted); line-height: 1.28; display: block; margin-top: 2px; }
+
+/* ------------------------------------------------------------- equations */
+.reveal .eq {
+  text-align: center;
+  margin: 0.30em 0 0.22em;
+  padding: 0.40em 0.5em;
+  background: var(--accent-soft);
+  border-radius: 10px;
+  font-size: 0.88em;
+}
+.reveal .eq.plain { background: transparent; padding: 0.1em; }
+
+/* .eq.deflist — one box holding symbol/definition rows, so a slide needs a
+   single notation unit rather than an equation box plus a bullet list. */
+.reveal .eq.deflist {
+  text-align: left;
+  padding: 0.55em 0.75em 0.6em;
+  border-radius: 12px;
+}
+.reveal .eq.deflist p {
+  margin: 0.26em 0;
+  font-size: 0.62em;
+  line-height: 1.34;
+}
+.reveal mjx-container { font-size: 96% !important; }
+.reveal mjx-container[display="true"] { margin: 0.18em 0 !important; }
+
+/* a pull-quote / framing question */
+.reveal .q {
+  font-family: var(--display);
+  font-size: 0.90em; font-weight: 500; line-height: 1.22;
+  color: var(--accent-deep);
+  margin: 0 0 0.34em;
+  text-wrap: balance;
+}
+
+/* --------------------------------------------------- epistemic status pill
+   The deck distinguishes what is published, what is a real in-progress
+   result, what is a schematic, and what is a mocked-up expectation. The
+   figures carry a matching stamp. */
+.reveal .eyebrow .badge {
+  font-family: var(--mono); font-size: 0.86em; font-weight: 600;
+  letter-spacing: 0.08em; padding: 2px 8px 3px; border-radius: 999px;
+  margin-left: 0.5em; vertical-align: 0.06em;
+}
+.reveal .badge.pub  { background: var(--accent-soft); color: var(--accent-deep); }
+.reveal .badge.res  { background: #e8f2e9; color: #2f6b3a; }
+.reveal .badge.con  { background: #eef1f4; color: var(--muted); }
+.reveal .badge.hyp  { background: #fdeee6; color: #b1521f; }
+.reveal .eyebrow .badge { font-size: 0.80em; }
+
+/* ------------------------------------------------------------- citations */
+.reveal .cite {
+  font-size: 0.50em; color: var(--muted); margin-top: 10px; line-height: 1.35;
+}
+.reveal .cite em { color: var(--muted); font-weight: 400; font-style: italic; }
+
+.reveal section.p4 { background: #fdfefa; }
+
+/* -------------------------------------------------------- section dividers */
+.reveal section.divider {
+  justify-content: center;
+  background: var(--accent-soft);
+  padding-left: 74px;
+}
+.reveal section.divider h2 { font-size: 1.85em; max-width: 20ch; }
+.reveal section.divider h2::after { width: 96px; height: 5px; background: var(--accent); }
+.reveal section.divider .eyebrow { font-size: 0.56em; }
+.reveal section.divider .lead {
+  font-size: 0.82em; color: var(--ink-soft); max-width: 42ch; margin-top: 0.7em;
+  line-height: 1.36;
+}
+.reveal section.divider .rail {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 16px;
+  background: var(--accent);
+}
+
+/* ------------------------------------------------------------ title slide */
+.reveal section.titleslide { justify-content: center; }
+.reveal section.titleslide h2 {
+  font-family: var(--display); font-weight: 700; font-size: 2.05em;
+  letter-spacing: -0.028em; line-height: 1.04; margin: 0 0 0.26em;
+  color: var(--ink); text-transform: none;
+}
+.reveal section.titleslide h2::after {
+  width: 118px; height: 6px; margin-top: 0.30em;
+  background: linear-gradient(90deg, #0b6f9c 0 25%, #5a4cc7 25% 50%,
+                              #a8123f 50% 75%, #5d7a10 75% 100%);
+}
+.reveal section.titleslide .sub {
+  font-size: 0.80em; color: var(--ink-soft); max-width: 46ch; line-height: 1.34;
+}
+.reveal section.titleslide .byline {
+  font-family: var(--mono); font-size: 0.54em; letter-spacing: 0.08em;
+  color: var(--muted); margin-top: 1.5em; text-transform: uppercase;
+}
+.reveal section.titleslide .swatches { display: flex; gap: 6px; margin-top: 1.1em; }
+.reveal section.titleslide .swatches i { width: 44px; height: 6px; border-radius: 3px; display: block; }
+
+/* --------------------------------------------------------------- closing */
+.reveal section.closing .lead {
+  font-family: var(--display); font-size: 1.02em; font-weight: 500;
+  line-height: 1.30; color: var(--ink); max-width: 30ch;
+}
+.reveal .ties { display: flex; flex-direction: column; gap: 7px; }
+.reveal .ties div {
+  font-size: 0.68em; line-height: 1.26; padding-left: 13px;
+  border-left: 3px solid var(--tie, var(--line));
+}
+.reveal .ties div b { font-weight: 650; }
+
+/* ---------------------------------------------------------- thanks slide */
+.reveal .thanks { display: flex; flex-direction: column; gap: 16px; width: 100%; }
+.reveal .tgroup { display: flex; align-items: center; gap: 16px; }
+.reveal .tgroup .lbl {
+  font-family: var(--mono); font-size: 0.44em; font-weight: 600;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted);
+  flex: 0 0 150px; line-height: 1.3;
+}
+.reveal .faces { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; }
+.reveal .faces > p { display: contents; margin: 0; }
+.reveal .faces img {
+  width: 96px; height: 96px; border-radius: 50%; object-fit: cover;
+  margin: 0; border: 2.5px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--line);
+}
+.reveal .faces .nm {
+  font-size: 0.46em; color: var(--muted); line-height: 1.32;
+  align-self: center; max-width: 26ch;
+}
+
+/* the Kiel group: one overlapping crowd, like a family photo */
+.reveal .family { width: 100%; }
+.reveal .family > p {
+  display: flex; flex-wrap: wrap; align-content: center;
+  margin: 0; padding-left: 26px;
+}
+.reveal .family img {
+  width: 86px; height: 86px; border-radius: 50%; object-fit: cover;
+  margin: 0 0 -12px -26px; border: 3px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--line);
+}
+.reveal .family img:hover { z-index: 20; }
+.reveal .kiel-lbl {
+  font-family: var(--mono); font-size: 0.44em; font-weight: 600;
+  letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent);
+  margin-bottom: 0.5em;
+}
+
+/* --------------------------------------------------------------- chrome */
+.reveal .slide-number {
+  font-family: var(--mono); font-size: 17px; font-weight: 500;
+  background: transparent; color: var(--faint); right: 20px; bottom: 14px;
+}
+.reveal .progress { color: var(--accent); height: 3px; }
+.reveal .controls { color: var(--faint); }
+
+/* Small-type escape hatch for the reference slide. */
+.reveal .smaller p, .reveal .smaller li { font-size: 0.66em; line-height: 1.36; }
+.reveal .smaller ul > li::before { top: 0.48em; width: 5px; height: 5px; }
+.reveal .cols2 { column-count: 2; column-gap: 40px; }
+
+/* Print / PDF export: keep the paper background rather than the page grey. */
+@media print {
+  .reveal .slides > section { background: #fff !important; }
+}
