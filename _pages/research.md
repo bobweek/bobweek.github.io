@@ -7,9 +7,9 @@ nav: true
 nav_order: 0
 ---
 
-## Stochastic foundations of evolutionary theory
-
 ## Coevolution
+
+
 
 ## Host-microbiome interactions and evolution
 
@@ -119,3 +119,13 @@ Current interests include:
 - [Applying Evolutionary Theory to Understand Host-Microbiome Evolution](https://doi.org/10.1038/s41559-025-02846-w)
 - [Microbially Assisted Rescue of Host Populations](https://doi.org/10.64898/2026.10.15.759220)
  -->
+
+
+## Stochastic foundations of evolutionary quantitative genetics
+
+Quantitative genetics has been central to my studies of species interactions. The breeders equation $\Delta\bar{\bf z}={\bf G}\beta$ is a foundational tool for deriving models of evolutionary dynamics, and a massive body of theoretical results exists on this topic. However, this approach has lacked a rigorous mathematical foundation that connects various results and offers a foundation to address gaps in our quantitative understanding of evolutionary quantitative genetics. My work contributes to establishing this foundation by applying formal stochastic process theory. In particular, results on measure-valued processes and their martingale-problem characterizations are ideally suited for tackling this challenge. This allows for very general diffusion-limits, where we can specify the details at the individual-level, and then formally derive dynamics at the population level. The key challenge here is to balance biological detail with analytical tractability. 
+
+**Selected work:**
+
+- [Stochastic Eco-Evolutionary Dynamics of Multivariate Traits](https://doi.org/10.1016/j.jtbi.2026.112428)
+- [A White Noise Approach to Evolutionary Ecology](https://doi.org/10.1016/j.jtbi.2021.110660)
